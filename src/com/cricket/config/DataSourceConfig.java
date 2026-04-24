@@ -1,0 +1,73 @@
+package com.cricket.config;
+
+import java.util.Properties;
+import javax.sql.DataSource;
+import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.*;
+import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
+import org.springframework.core.env.Environment;
+import org.springframework.jdbc.datasource.DriverManagerDataSource;
+import org.springframework.orm.hibernate5.*;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
+
+@Configuration
+@PropertySource("classpath:db.properties")
+@EnableTransactionManagement
+@EnableAspectJAutoProxy(proxyTargetClass = false)
+@ComponentScan({
+        "com.cricket.service",
+        "com.cricket.service.impl",
+        "com.cricket.dao",
+        "com.cricket.dao.impl"
+})
+public class DataSourceConfig {
+
+    private static final String PROPERTY_NAME_DATABASE_DRIVER = "hibernate.connection.driver_class";
+    private static final String PROPERTY_NAME_DATABASE_URL = "hibernate.connection.local.url";
+
+    @Autowired
+    private Environment env;
+
+    @Bean
+    public DataSource dataSource() {
+        DriverManagerDataSource dataSource = new DriverManagerDataSource();
+        dataSource.setDriverClassName(env.getRequiredProperty(PROPERTY_NAME_DATABASE_DRIVER));
+        dataSource.setUrl(env.getRequiredProperty(PROPERTY_NAME_DATABASE_URL));
+        return dataSource;
+    }
+
+    @Bean
+    public LocalSessionFactoryBean sessionFactory() {
+        LocalSessionFactoryBean sessionFactory = new LocalSessionFactoryBean();
+        sessionFactory.setDataSource(dataSource());
+        sessionFactory.setPackagesToScan("com.cricket.model");
+        sessionFactory.setHibernateProperties(getHibernateProperties());
+        return sessionFactory;
+    }
+
+    @Bean
+    public static PropertySourcesPlaceholderConfigurer propertyConfig() {
+        return new PropertySourcesPlaceholderConfigurer();
+    }
+
+    private Properties getHibernateProperties() {
+        Properties prop = new Properties();
+        prop.put("hibernate.show_sql", "true");
+        prop.put("hibernate.format_sql", "true");
+        prop.put("hibernate.hbm2ddl.auto", "none");
+        prop.put("hibernate.dialect", "org.hibernate.dialect.SQLServerDialect");
+        prop.put("hibernate.current_session_context_class",
+                "org.springframework.orm.hibernate5.SpringSessionContext");
+        prop.put("hibernate.temp.use_jdbc_metadata_defaults", "false");
+
+        return prop;
+    }
+
+    @Bean
+    public HibernateTransactionManager transactionManager(SessionFactory sessionFactory) {
+        HibernateTransactionManager txManager = new HibernateTransactionManager();
+        txManager.setSessionFactory(sessionFactory);
+        return txManager;
+    }
+}
