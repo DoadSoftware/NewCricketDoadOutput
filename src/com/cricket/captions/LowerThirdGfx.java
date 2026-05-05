@@ -182,7 +182,7 @@ public class LowerThirdGfx
 	
 	public void checkForImpactPlayer(String whatToProcess, int whichSide, int playerId,MatchAllData matchAllData) {
 		switch(config.getBroadcaster()) {
-		case Constants.NPL:
+		case Constants.NPL: case Constants.APL:
 			switch(whatToProcess.split(",")[0]) {
 			case "F5": case "F9": case "Control_F5": case "Control_F9": case "Shift_F5": case "Shift_F9": case "F6": case "Control_F6": case "Shift_F6":
 			case "F8": case "Alt_F8": case "F7": case "F11": case "Control_s": case "Control_f":
@@ -233,9 +233,9 @@ public class LowerThirdGfx
 		}
 		
 		CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$LT_Weather$Logo_Grp$Logo$img_Logo_Shadow*TEXTURE*IMAGE SET " 
-				+ Constants.NPL_LOGO_PATH + "TLogo" + " \0", print_writers);
+				+ (config.getBroadcaster().equalsIgnoreCase(Constants.APL)?Constants.APL_LOGO_PATH:Constants.NPL_LOGO_PATH) + "TLogo" + " \0", print_writers);
 		CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$LT_Weather$Logo_Grp$Logo$img_Logo*TEXTURE*IMAGE SET " 
-				+ Constants.NPL_LOGO_PATH + "TLogo" + " \0", print_writers);
+				+ (config.getBroadcaster().equalsIgnoreCase(Constants.APL)?Constants.APL_LOGO_PATH:Constants.NPL_LOGO_PATH) + "TLogo" + " \0", print_writers);
 		
 		for(VariousText vt : VariousText) {
 			if(vt.getVariousType().equalsIgnoreCase("WEATHER") && vt.getUseThis().equalsIgnoreCase(CricketUtil.YES)) {
@@ -259,9 +259,11 @@ public class LowerThirdGfx
 				+ weatherData.getWindSpeed() + "\0", print_writers);
 		
 		CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$LT_Weather$Data_Grp$Icon_GRP$Icon*TEXTURE*IMAGE SET " 
-				+ Constants.NPL_WEATHER_PATH + "Icon_" + weatherData.getIconType() + " \0", print_writers);
+				+ (config.getBroadcaster().equalsIgnoreCase(Constants.APL)?Constants.APL_WEATHER_PATH:Constants.NPL_WEATHER_PATH) 
+				+ "Icon_" + weatherData.getIconType() + " \0", print_writers);
 		CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$LT_Weather$Data_Grp$Icon_GRP$Icon_Shadow*TEXTURE*IMAGE SET " 
-				+ Constants.NPL_WEATHER_PATH + "Icon_" + weatherData.getIconType() + " \0", print_writers);
+				+ (config.getBroadcaster().equalsIgnoreCase(Constants.APL)?Constants.APL_WEATHER_PATH:Constants.NPL_WEATHER_PATH) 
+				+ "Icon_" + weatherData.getIconType() + " \0", print_writers);
 		
 		return Constants.OK;
 	}
@@ -279,7 +281,7 @@ public class LowerThirdGfx
 		                         (pointers.getText4()==null ? "":pointers.getText4())};
 		
 		switch (config.getBroadcaster().toUpperCase()) {
-		case Constants.NPL:
+		case Constants.NPL: case Constants.APL:
 			lowerThird = new LowerThird("", (pointers.getHeader()==null?"":pointers.getHeader()), "",(pointers.getSubheader()==null?"":pointers.getSubheader()),
 					"", "",subline,"",(pointers.getTeam() != null?pointers.getTeam():"TLogo"), null ,null,arr,null,null);
 			break;
@@ -443,7 +445,7 @@ public class LowerThirdGfx
 				HideAndShowL3rdSubStrapContainers(whichSide);
 				setPositionOfLT(whatToProcess,whichSide,config,lowerThird.getNumberOfSubLines());
 				break;
-			case Constants.NPL:
+			case Constants.NPL: case Constants.APL:
 				checkForImpactPlayer(whatToProcess, whichSide, 0, matchAllData);
 				break;
 			}
@@ -483,7 +485,7 @@ public class LowerThirdGfx
 									inning_comparison_stats.get(1).split(",")[3],inning_comparison_stats.get(1).split(",")[4],inning_comparison_stats.get(1).split(",")[6]},
 					new String[] {inning.getBowling_team().getTeamName4(),inning.getBatting_team().getTeamName4()},new String[] {"50.0","95.0","140.0","185.0","230.0","275.0"});
 			break;
-		case Constants.T20_MUMBAI: case Constants.NPL:
+		case Constants.T20_MUMBAI: case Constants.NPL: case Constants.APL:
 			String phaseWiseScore =IndexController.MatchStats.getHomeFirstPowerPlay().getTotalRuns()+","+IndexController.MatchStats.getHomeFirstPowerPlay().getTotalWickets()+"_"+
 					 IndexController.MatchStats.getHomeSecondPowerPlay().getTotalRuns()+","+IndexController.MatchStats.getHomeSecondPowerPlay().getTotalWickets()+"_"
 					 +IndexController.MatchStats.getHomeThirdPowerPlay().getTotalRuns()+","+IndexController.MatchStats.getHomeThirdPowerPlay().getTotalWickets();	
@@ -549,7 +551,7 @@ public class LowerThirdGfx
 						new String[]{matchAllData.getSetup().getHomeTeam().getTeamName4(), PP1, PP2, PP3}, new String[] {matchAllData.getSetup().getAwayTeam().getTeamName4(),PP21, PP22, PP23},
 						null,new String[]{"220","440","660"});
 				break;
-			case Constants.NPL:
+			case Constants.NPL: case Constants.APL:
 				lowerThird = new LowerThird("COMPARISON", "", "", "", "", "", 3, "", "TLogo", new String[] {" ", "OVERS 1-6", "OVERS 7-15", "OVERS 16-20"},
 						new String[]{matchAllData.getSetup().getHomeTeam().getTeamName1(), PP1, PP2, PP3}, new String[] {matchAllData.getSetup().getAwayTeam().getTeamName1(),PP21, PP22, PP23},
 						null,null);
@@ -565,7 +567,8 @@ public class LowerThirdGfx
 			
 			if(config.getBroadcaster().toUpperCase().equalsIgnoreCase(Constants.MPL)) {
 				setStartLogoOfLT(whichSide, config);
-			}else if(config.getBroadcaster().toUpperCase().equalsIgnoreCase(Constants.NPL)) {
+			}else if(config.getBroadcaster().toUpperCase().equalsIgnoreCase(Constants.NPL)||
+						config.getBroadcaster().toUpperCase().equalsIgnoreCase(Constants.APL)) {
 				checkForImpactPlayer(whatToProcess, whichSide, 0, matchAllData);
 			}
 			
@@ -595,7 +598,8 @@ public class LowerThirdGfx
 			
 			if(config.getBroadcaster().toUpperCase().equalsIgnoreCase(Constants.MPL)) {
 				setStartLogoOfLT(whichSide, config);
-			}else if(config.getBroadcaster().equalsIgnoreCase(Constants.NPL)) {
+			}else if(config.getBroadcaster().equalsIgnoreCase(Constants.NPL)||
+					config.getBroadcaster().equalsIgnoreCase(Constants.APL)) {
 				checkForImpactPlayer(whatToProcess, whichSide, 0, matchAllData);
 			}
 			
@@ -658,11 +662,11 @@ public class LowerThirdGfx
 					+ "$img_Logo*TEXTURE*IMAGE SET " + Constants.MPL_LOGO_PATH + 
 					matchAllData.getMatch().getInning().get(WhichInning - 1).getBatting_team().getTeamBadge() + logoCategory + "\0", print_writers);
 		}else {
-			CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$LT_Man$Logo_Grp"
-					+ "$img_Logo_Shadow*TEXTURE*IMAGE SET " + Constants.NPL_LOGO_PATH + 
+			CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$LT_Man$Logo_Grp$img_Logo_Shadow*TEXTURE*IMAGE SET " 
+					+ (config.getBroadcaster().equalsIgnoreCase(Constants.APL)?Constants.APL_LOGO_PATH:Constants.NPL_LOGO_PATH) + 
 					matchAllData.getMatch().getInning().get(WhichInning - 1).getBatting_team().getTeamBadge() + "\0", print_writers);
-			CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$LT_Man$Logo_Grp"
-					+ "$img_Logo*TEXTURE*IMAGE SET " + Constants.NPL_LOGO_PATH + 
+			CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$LT_Man$Logo_Grp$img_Logo*TEXTURE*IMAGE SET " 
+					+ (config.getBroadcaster().equalsIgnoreCase(Constants.APL)?Constants.APL_LOGO_PATH:Constants.NPL_LOGO_PATH) + 
 					matchAllData.getMatch().getInning().get(WhichInning - 1).getBatting_team().getTeamBadge() + "\0", print_writers);
 		}
 		
@@ -962,7 +966,8 @@ public class LowerThirdGfx
 					
 					if(config.getBroadcaster().toUpperCase().equalsIgnoreCase(Constants.MPL)) {
 						setStartLogoOfLT(whichSide, config);
-					}else if(config.getBroadcaster().equalsIgnoreCase(Constants.NPL)) {
+					}else if(config.getBroadcaster().equalsIgnoreCase(Constants.NPL)||
+							config.getBroadcaster().equalsIgnoreCase(Constants.APL)) {
 						checkForImpactPlayer(whatToProcess, whichSide, 0, matchAllData);
 					}
 					
@@ -1004,7 +1009,8 @@ public class LowerThirdGfx
 			
 			if(config.getBroadcaster().toUpperCase().equalsIgnoreCase(Constants.MPL)) {
 				setStartLogoOfLT(whichSide, config);
-			}else if(config.getBroadcaster().equalsIgnoreCase(Constants.NPL)) {
+			}else if(config.getBroadcaster().equalsIgnoreCase(Constants.NPL)||
+					config.getBroadcaster().equalsIgnoreCase(Constants.APL)) {
 				checkForImpactPlayer(whatToProcess, whichSide, 0, matchAllData);
 			}
 			
@@ -1062,7 +1068,7 @@ public class LowerThirdGfx
 		}
 		
 		switch (config.getBroadcaster()) {
-		case Constants.MPL: case Constants.NPL: case Constants.BENGAL_T20:
+		case Constants.MPL: case Constants.NPL: case Constants.BENGAL_T20: case Constants.APL:
 			if(whatToProcess.split(",")[5].equalsIgnoreCase("WITH_PHOTO")) {
 				impact_photo = "YES";
 			}else {
@@ -1081,7 +1087,8 @@ public class LowerThirdGfx
 		else if(config.getBroadcaster().equalsIgnoreCase(Constants.ISPL)) {
 			return googlyImpactPlayerIspl(whatToProcess, WhichSide);
 		}
-		else if(config.getBroadcaster().toUpperCase().equalsIgnoreCase(Constants.NPL)) {
+		else if(config.getBroadcaster().toUpperCase().equalsIgnoreCase(Constants.NPL)||
+				config.getBroadcaster().equalsIgnoreCase(Constants.APL)) {
 			checkForImpactPlayer(whatToProcess, WhichSide, 0, matchAllData);
 			return PopulateL3rdBody(WhichSide, whatToProcess.split(",")[0]);
 		}
@@ -1144,7 +1151,8 @@ public class LowerThirdGfx
 			
 			if(config.getBroadcaster().toUpperCase().equalsIgnoreCase(Constants.MPL)) {
 				setStartLogoOfLT(WhichSide, config);
-			}else if(config.getBroadcaster().equalsIgnoreCase(Constants.NPL)) {
+			}else if(config.getBroadcaster().equalsIgnoreCase(Constants.NPL)||
+					config.getBroadcaster().equalsIgnoreCase(Constants.APL)) {
 				checkForImpactPlayer(whatToProcess, WhichSide, 0, matchAllData);
 			}
 			
@@ -1212,7 +1220,8 @@ public class LowerThirdGfx
 			
 			if(config.getBroadcaster().toUpperCase().equalsIgnoreCase(Constants.MPL)) {
 				setStartLogoOfLT(WhichSide, config);
-			}else if(config.getBroadcaster().equalsIgnoreCase(Constants.NPL)) {
+			}else if(config.getBroadcaster().equalsIgnoreCase(Constants.NPL)||
+					config.getBroadcaster().equalsIgnoreCase(Constants.APL)) {
 				checkForImpactPlayer(whatToProcess, WhichSide, 0, matchAllData);
 			}
 			
@@ -1308,7 +1317,8 @@ public class LowerThirdGfx
 
 			if(config.getBroadcaster().toUpperCase().equalsIgnoreCase(Constants.MPL)) {
 				setStartLogoOfLT(WhichSide, config);
-			}else if(config.getBroadcaster().equalsIgnoreCase(Constants.NPL)) {
+			}else if(config.getBroadcaster().equalsIgnoreCase(Constants.NPL)||
+					config.getBroadcaster().equalsIgnoreCase(Constants.APL)) {
 				checkForImpactPlayer(whatToProcess, WhichSide, 0, matchAllData);
 			}
 			
@@ -1420,7 +1430,8 @@ public class LowerThirdGfx
 
 			if(config.getBroadcaster().toUpperCase().equalsIgnoreCase(Constants.MPL)) {
 				setStartLogoOfLT(WhichSide, config);
-			}else if(config.getBroadcaster().equalsIgnoreCase(Constants.NPL)) {
+			}else if(config.getBroadcaster().equalsIgnoreCase(Constants.NPL)||
+					config.getBroadcaster().equalsIgnoreCase(Constants.APL)) {
 				checkForImpactPlayer(whatToProcess, WhichSide, 0, matchAllData);
 			}
 			
@@ -1480,7 +1491,8 @@ public class LowerThirdGfx
 
 			if(config.getBroadcaster().toUpperCase().equalsIgnoreCase(Constants.MPL)) {
 				setStartLogoOfLT(WhichSide, config);
-			}else if(config.getBroadcaster().equalsIgnoreCase(Constants.NPL)) {
+			}else if(config.getBroadcaster().equalsIgnoreCase(Constants.NPL)||
+					config.getBroadcaster().equalsIgnoreCase(Constants.APL)) {
 				checkForImpactPlayer(whatToProcess, WhichSide, 0, matchAllData);
 			}
 			
@@ -1529,7 +1541,8 @@ public class LowerThirdGfx
 
 			if(config.getBroadcaster().toUpperCase().equalsIgnoreCase(Constants.MPL)) {
 				setStartLogoOfLT(WhichSide, config);
-			}else if(config.getBroadcaster().equalsIgnoreCase(Constants.NPL)) {
+			}else if(config.getBroadcaster().equalsIgnoreCase(Constants.NPL)||
+					config.getBroadcaster().equalsIgnoreCase(Constants.APL)) {
 				checkForImpactPlayer(whatToProcess, WhichSide, 0, matchAllData);
 			}
 			
@@ -1577,7 +1590,8 @@ public class LowerThirdGfx
 
 			if(config.getBroadcaster().toUpperCase().equalsIgnoreCase(Constants.MPL)) {
 				setStartLogoOfLT(WhichSide, config);
-			}else if(config.getBroadcaster().equalsIgnoreCase(Constants.NPL)) {
+			}else if(config.getBroadcaster().equalsIgnoreCase(Constants.NPL)||
+					config.getBroadcaster().equalsIgnoreCase(Constants.APL)) {
 				checkForImpactPlayer(whatToProcess, WhichSide, 0, matchAllData);
 			}
 			
@@ -1628,7 +1642,8 @@ public class LowerThirdGfx
 
 			if(config.getBroadcaster().toUpperCase().equalsIgnoreCase(Constants.MPL)) {
 				setStartLogoOfLT(WhichSide, config);
-			}else if(config.getBroadcaster().equalsIgnoreCase(Constants.NPL)) {
+			}else if(config.getBroadcaster().equalsIgnoreCase(Constants.NPL)||
+					config.getBroadcaster().equalsIgnoreCase(Constants.APL)) {
 				checkForImpactPlayer(whatToProcess, WhichSide, 0, matchAllData);
 			}
 			return PopulateL3rdBody(WhichSide, whatToProcess.split(",")[0]);
@@ -1685,7 +1700,8 @@ public class LowerThirdGfx
 
 			if(config.getBroadcaster().toUpperCase().equalsIgnoreCase(Constants.MPL)) {
 				setStartLogoOfLT(WhichSide, config);
-			}else if(config.getBroadcaster().equalsIgnoreCase(Constants.NPL)) {
+			}else if(config.getBroadcaster().equalsIgnoreCase(Constants.NPL)||
+					config.getBroadcaster().equalsIgnoreCase(Constants.APL)) {
 				checkForImpactPlayer(whatToProcess, WhichSide, 0, matchAllData);
 			}
 			
@@ -1758,7 +1774,8 @@ public class LowerThirdGfx
 
 			if(config.getBroadcaster().toUpperCase().equalsIgnoreCase(Constants.MPL)) {
 				setStartLogoOfLT(WhichSide, config);
-			}else if(config.getBroadcaster().equalsIgnoreCase(Constants.NPL)) {
+			}else if(config.getBroadcaster().equalsIgnoreCase(Constants.NPL)||
+					config.getBroadcaster().equalsIgnoreCase(Constants.APL)) {
 				checkForImpactPlayer(whatToProcess, WhichSide, 0, matchAllData);
 			}
 			
@@ -1829,7 +1846,8 @@ public class LowerThirdGfx
 
 			if(config.getBroadcaster().toUpperCase().equalsIgnoreCase(Constants.MPL)) {
 				setStartLogoOfLT(WhichSide, config);
-			}else if(config.getBroadcaster().equalsIgnoreCase(Constants.NPL)) {
+			}else if(config.getBroadcaster().equalsIgnoreCase(Constants.NPL)||
+					config.getBroadcaster().equalsIgnoreCase(Constants.APL)) {
 				checkForImpactPlayer(whatToProcess, WhichSide, 0, matchAllData);
 			}
 			
@@ -1931,7 +1949,8 @@ public class LowerThirdGfx
 
 			if(config.getBroadcaster().toUpperCase().equalsIgnoreCase(Constants.MPL)) {
 				setStartLogoOfLT(WhichSide, config);
-			}else if(config.getBroadcaster().equalsIgnoreCase(Constants.NPL)) {
+			}else if(config.getBroadcaster().equalsIgnoreCase(Constants.NPL)||
+					config.getBroadcaster().equalsIgnoreCase(Constants.APL)) {
 				checkForImpactPlayer(whatToProcess, WhichSide, 0, matchAllData);
 			}
 			
@@ -1982,7 +2001,8 @@ public class LowerThirdGfx
 
 			if(config.getBroadcaster().toUpperCase().equalsIgnoreCase(Constants.MPL)) {
 				setStartLogoOfLT(WhichSide, config);
-			}else if(config.getBroadcaster().equalsIgnoreCase(Constants.NPL)) {
+			}else if(config.getBroadcaster().equalsIgnoreCase(Constants.NPL)||
+					config.getBroadcaster().equalsIgnoreCase(Constants.APL)) {
 				checkForImpactPlayer(whatToProcess, WhichSide, 0, matchAllData);
 			}
 			
@@ -2034,7 +2054,8 @@ public class LowerThirdGfx
 
 			if(config.getBroadcaster().toUpperCase().equalsIgnoreCase(Constants.MPL)) {
 				setStartLogoOfLT(WhichSide, config);
-			}else if(config.getBroadcaster().equalsIgnoreCase(Constants.NPL)) {
+			}else if(config.getBroadcaster().equalsIgnoreCase(Constants.NPL)||
+					config.getBroadcaster().equalsIgnoreCase(Constants.APL)) {
 				checkForImpactPlayer(whatToProcess, WhichSide, 0, matchAllData);
 			}
 			
@@ -2077,7 +2098,7 @@ public class LowerThirdGfx
 		}
 		
 		switch (config.getBroadcaster().toUpperCase()) {
-		case Constants.NPL: case Constants.MPL: 
+		case Constants.NPL: case Constants.MPL:  case Constants.APL:
 			lowerThird = new LowerThird("", inning.getBatting_team().getTeamName2(), inning.getBatting_team().getTeamName3(),"PROJECTED SCORES", String.valueOf(inning.getTotalRuns() + "-" + inning.getTotalWickets()), 
 					String.valueOf(CricketFunctions.OverBalls(inning.getTotalOvers(), inning.getTotalBalls())),3,"",inning.getBatting_team().getTeamBadge(),new String[]{"@CRR (" + this_data_str.get(0) + ")",this_data_str.get(2) + " RPO"
 					,this_data_str.get(4) + " RPO",this_data_str.get(6) + " RPO"},new String[]{this_data_str.get(1),this_data_str.get(3),this_data_str.get(5),this_data_str.get(7)},
@@ -2120,7 +2141,7 @@ public class LowerThirdGfx
 				HideAndShowL3rdSubStrapContainers(WhichSide);
 				//setStatsPositionOfLT(4, 2, WhichSide,whatToProcess.split(",")[0], print_writers, config);
 				break;
-			case Constants.NPL:
+			case Constants.NPL: case Constants.APL:
 				checkForImpactPlayer(whatToProcess, WhichSide, 0, matchAllData);
 				break;
 			}
@@ -2186,7 +2207,8 @@ public class LowerThirdGfx
 
 			if(config.getBroadcaster().toUpperCase().equalsIgnoreCase(Constants.MPL)) {
 				setStartLogoOfLT(WhichSide, config);
-			}else if(config.getBroadcaster().equalsIgnoreCase(Constants.NPL)) {
+			}else if(config.getBroadcaster().equalsIgnoreCase(Constants.NPL)||
+					config.getBroadcaster().equalsIgnoreCase(Constants.APL)) {
 				checkForImpactPlayer(whatToProcess, WhichSide, 0, matchAllData);
 			}
 			
@@ -2240,7 +2262,8 @@ public class LowerThirdGfx
 
 			if(config.getBroadcaster().toUpperCase().equalsIgnoreCase(Constants.MPL)) {
 				setStartLogoOfLT(WhichSide, config);
-			}else if(config.getBroadcaster().equalsIgnoreCase(Constants.NPL)) {
+			}else if(config.getBroadcaster().equalsIgnoreCase(Constants.NPL)||
+					config.getBroadcaster().equalsIgnoreCase(Constants.APL)) {
 				checkForImpactPlayer(whatToProcess, WhichSide, 0, matchAllData);
 			}
 			
@@ -2300,7 +2323,7 @@ public class LowerThirdGfx
 					inning.getBatting_team().getTeamBadge(),null,null,new String[]{CricketFunctions.getbattingstyle(player.getBattingStyle(),
 						CricketUtil.FULL, true, false).toUpperCase()},null,null);
 			break;
-		case Constants.NPL: case Constants.MPL: 
+		case Constants.NPL: case Constants.MPL: case Constants.APL:
 			lowerThird = new LowerThird(inning.getBatting_team().getTeamName1(), player.getFirstname(), surName,CricketFunctions.getbattingstyle(player.getBattingStyle(),
 					CricketUtil.FULL, true, false).toUpperCase(), null, null, 1,"",
 					inning.getBatting_team().getTeamBadge(),null,null,null,null,null);
@@ -2321,7 +2344,7 @@ public class LowerThirdGfx
 				HideAndShowL3rdSubStrapContainers(WhichSide);
 				setPositionOfLT(whatToProcess,WhichSide,config,lowerThird.getNumberOfSubLines());
 				break;
-			case Constants.NPL:
+			case Constants.NPL: case Constants.APL:
 				checkForImpactPlayer(whatToProcess, WhichSide, Integer.valueOf(whatToProcess.split(",")[2]), matchAllData);
 				break;
 			}
@@ -2378,7 +2401,7 @@ public class LowerThirdGfx
 					new String[]{whatToProcess.split(",")[3]},null);
 			break;
 
-		case Constants.NPL: case Constants.MPL: 
+		case Constants.NPL: case Constants.MPL: case Constants.APL:
 			lowerThird = new LowerThird(team.getTeamName1(), player.getFirstname(), surName,CricketFunctions.getbowlingstyle(player.getBowlingStyle()).toUpperCase(), null, null,
 					1,"",team.getTeamBadge(),null,null,null,new String[]{whatToProcess.split(",")[3]},null);
 			break;
@@ -2405,7 +2428,7 @@ public class LowerThirdGfx
 				HideAndShowL3rdSubStrapContainers(WhichSide);
 				setPositionOfLT(whatToProcess,WhichSide,config,lowerThird.getNumberOfSubLines());
 				break;
-			case Constants.NPL:
+			case Constants.NPL: case Constants.APL:
 				checkForImpactPlayer(whatToProcess, WhichSide, Integer.valueOf(whatToProcess.split(",")[2]),matchAllData);
 				break;
 			}
@@ -2457,7 +2480,8 @@ public class LowerThirdGfx
 
 				if(config.getBroadcaster().toUpperCase().equalsIgnoreCase(Constants.MPL)) {
 					setStartLogoOfLT(WhichSide, config);
-				}else if(config.getBroadcaster().equalsIgnoreCase(Constants.NPL)) {
+				}else if(config.getBroadcaster().equalsIgnoreCase(Constants.NPL)||
+						config.getBroadcaster().equalsIgnoreCase(Constants.APL)) {
 					checkForImpactPlayer(whatToProcess, WhichSide, 0, matchAllData);
 				}
 				
@@ -2649,7 +2673,7 @@ public class LowerThirdGfx
 					Count[0],String.valueOf(battingCard.getFours()),String.valueOf(battingCard.getSixes()),String.valueOf(battingCard.getNines()),striktRate},null,null,
 					new String[] {"-520","-300","-80","140","360","580"});
 			break;
-		case Constants.NPL: case Constants.MPL: 
+		case Constants.NPL: case Constants.MPL: case Constants.APL:
 			lowerThird = new LowerThird("", battingCard.getPlayer().getFirstname(), surName,outOrNot, String.valueOf(battingCard.getRuns()),
 					String.valueOf(battingCard.getBalls()), 4, "",inning.getBatting_team().getTeamBadge(),new String[] {"DOTS","FOURS","SIXES","S/R"},new String[] {
 					Count[0],String.valueOf(battingCard.getFours()),String.valueOf(battingCard.getSixes()),striktRate},null,new String[] {"WITHOUT"},new String[] {"134","318","512","684"});
@@ -2671,7 +2695,7 @@ public class LowerThirdGfx
 				setPositionOfLT(whatToProcess,WhichSide,config,lowerThird.getNumberOfSubLines());
 //				setPositionOfLT(lowerThird.getNumberOfSubLines(), WhichSide, 4,print_writers, config);
 				break;
-			case Constants.NPL: case Constants.MPL: 
+			case Constants.NPL: case Constants.MPL: case Constants.APL:
 				checkForImpactPlayer(whatToProcess, WhichSide, Integer.valueOf(whatToProcess.split(",")[2]), matchAllData);
 				setPositionOfLT(whatToProcess,WhichSide,config,lowerThird.getNumberOfSubLines());
 				break;
@@ -2872,7 +2896,7 @@ public class LowerThirdGfx
 					,null,null,new String[] {"-259.0","-77.0","109.0","312.0","533.0"});
 			break;
 
-		case Constants.NPL: case Constants.MPL: 
+		case Constants.NPL: case Constants.MPL: case Constants.APL:
 			
 			if(bowlingCard.getOvers() == 0 && bowlingCard.getBalls() >= 0) {
 				plural = "OVERS";
@@ -2901,7 +2925,7 @@ public class LowerThirdGfx
 //				setPositionOfLT(lowerThird.getNumberOfSubLines(), WhichSide, 4,print_writers, config);
 				break;
 
-			case Constants.NPL: case Constants.MPL:
+			case Constants.NPL: case Constants.MPL: case Constants.APL:
 				checkForImpactPlayer(whatToProcess, WhichSide, Integer.valueOf(whatToProcess.split(",")[2]), matchAllData);
 				setPositionOfLT(whatToProcess,WhichSide,config,lowerThird.getNumberOfSubLines());
 				setStartLogoOfLT(WhichSide, config);
@@ -2977,7 +3001,8 @@ public class LowerThirdGfx
 
 			if(config.getBroadcaster().toUpperCase().equalsIgnoreCase(Constants.MPL)) {
 				setStartLogoOfLT(WhichSide, config);
-			}else if(config.getBroadcaster().equalsIgnoreCase(Constants.NPL)) {
+			}else if(config.getBroadcaster().equalsIgnoreCase(Constants.NPL)||
+					config.getBroadcaster().equalsIgnoreCase(Constants.APL)) {
 				checkForImpactPlayer(whatToProcess, WhichSide, 0, matchAllData);
 			}
 			
@@ -3061,7 +3086,7 @@ public class LowerThirdGfx
 			}
 			
 			switch (config.getBroadcaster().toUpperCase()) {
-			case Constants.NPL: case Constants.MPL: 
+			case Constants.NPL: case Constants.MPL: case Constants.APL:
 				lowerThird = new LowerThird("FALL OF WICKET", inning.getBatting_team().getTeamName2(), inning.getBatting_team().getTeamName3(),
 						CricketFunctions.OverBalls(inning.getTotalOvers(), inning.getTotalBalls()), String.valueOf(inning.getTotalRuns()), String.valueOf(inning.getTotalWickets()),
 						10,"",inning.getBatting_team().getTeamBadge(),fowNumber,fowData,new String[]{"WKTS","SCORE"},new String[] {"WITH_TITLE"},
@@ -3108,7 +3133,7 @@ public class LowerThirdGfx
 					HideAndShowL3rdSubStrapContainers(WhichSide);
 					setPositionOfLT(whatToProcess,WhichSide,config,lowerThird.getNumberOfSubLines());
 					break;
-				case Constants.NPL: case Constants.MPL:
+				case Constants.NPL: case Constants.MPL: case Constants.APL:
 					checkForImpactPlayer(whatToProcess, WhichSide, 0, matchAllData);
 					setPositionOfLT(whatToProcess,WhichSide,config,lowerThird.getNumberOfSubLines());
 					setStartLogoOfLT(WhichSide, config);
@@ -3165,7 +3190,7 @@ public class LowerThirdGfx
 			if(Integer.valueOf(whatToProcess.split(",")[2]) == 30) {
 				whichSplit = "BALLS PER THIRTY";
 				switch (config.getBroadcaster().toUpperCase()) {
-				case Constants.NPL: case Constants.MPL: 
+				case Constants.NPL: case Constants.MPL: case Constants.APL:
 					lowerThird = new LowerThird("", matchAllData.getSetup().getAwayTeam().getTeamName2(), matchAllData.getSetup().getAwayTeam().getTeamName3(),
 							whichSplit, String.valueOf(inning.getTotalRuns() + "-" + inning.getTotalWickets()), CricketFunctions.OverBalls(inning.getTotalOvers(), inning.getTotalBalls()),
 							10,"",matchAllData.getSetup().getAwayTeam().getTeamBadge(),splitNumber,splitData,new String[]{"THIRTIES","BALLS"},new String[]{"WITH_TITLE"},
@@ -3201,7 +3226,7 @@ public class LowerThirdGfx
 			}else {
 				whichSplit = "BALLS PER FIFTY";
 				switch (config.getBroadcaster().toUpperCase()) {
-				case Constants.NPL: case Constants.MPL: 
+				case Constants.NPL: case Constants.MPL: case Constants.APL:
 					lowerThird = new LowerThird("", matchAllData.getSetup().getAwayTeam().getTeamName2(), matchAllData.getSetup().getAwayTeam().getTeamName3(),
 							whichSplit, String.valueOf(inning.getTotalRuns() + "-" + inning.getTotalWickets()), CricketFunctions.OverBalls(inning.getTotalOvers(), inning.getTotalBalls()),
 							10,"",matchAllData.getSetup().getAwayTeam().getTeamBadge(),splitNumber,splitData,new String[]{"FIFTIES","BALLS"},new String[]{"WITH_TITLE"},
@@ -3247,7 +3272,7 @@ public class LowerThirdGfx
 			if(Integer.valueOf(whatToProcess.split(",")[2]) == 30) {
 				whichSplit = "BALLS PER THIRTY";
 				switch (config.getBroadcaster().toUpperCase()) {
-				case Constants.NPL: case Constants.MPL: 
+				case Constants.NPL: case Constants.MPL: case Constants.APL:
 					lowerThird = new LowerThird("", matchAllData.getSetup().getHomeTeam().getTeamName2(), matchAllData.getSetup().getHomeTeam().getTeamName3(),
 							whichSplit, String.valueOf(inning.getTotalRuns() + "-" + inning.getTotalWickets()), CricketFunctions.OverBalls(inning.getTotalOvers(), inning.getTotalBalls()),
 							10,"",matchAllData.getSetup().getHomeTeam().getTeamBadge(),splitNumber,splitData,new String[]{"THIRTIES","BALLS"},new String[]{"WITH_TITLE"},
@@ -3283,7 +3308,7 @@ public class LowerThirdGfx
 			}else {
 				whichSplit = "BALLS PER FIFTY";
 				switch (config.getBroadcaster().toUpperCase()) {
-				case Constants.NPL: case Constants.MPL: 
+				case Constants.NPL: case Constants.MPL: case Constants.APL:
 					lowerThird = new LowerThird("", matchAllData.getSetup().getHomeTeam().getTeamName2(), matchAllData.getSetup().getHomeTeam().getTeamName3(),
 							whichSplit, String.valueOf(inning.getTotalRuns() + "-" + inning.getTotalWickets()), CricketFunctions.OverBalls(inning.getTotalOvers(), inning.getTotalBalls()),
 							10,"",matchAllData.getSetup().getHomeTeam().getTeamBadge(),splitNumber,splitData,new String[]{"FIFTIES","BALLS"},new String[]{"WITH_TITLE"},
@@ -3333,7 +3358,8 @@ public class LowerThirdGfx
 
 			if(config.getBroadcaster().toUpperCase().equalsIgnoreCase(Constants.MPL)) {
 				setStartLogoOfLT(WhichSide, config);
-			}else if(config.getBroadcaster().equalsIgnoreCase(Constants.NPL)) {
+			}else if(config.getBroadcaster().equalsIgnoreCase(Constants.NPL)||
+					config.getBroadcaster().equalsIgnoreCase(Constants.APL)) {
 				checkForImpactPlayer(whatToProcess, WhichSide, 0, matchAllData);
 			}
 			
@@ -3629,7 +3655,8 @@ public class LowerThirdGfx
 
 			if(config.getBroadcaster().toUpperCase().equalsIgnoreCase(Constants.MPL)) {
 				setStartLogoOfLT(WhichSide, config);
-			}else if(config.getBroadcaster().equalsIgnoreCase(Constants.NPL)) {
+			}else if(config.getBroadcaster().equalsIgnoreCase(Constants.NPL)||
+					config.getBroadcaster().equalsIgnoreCase(Constants.APL)) {
 				checkForImpactPlayer(whatToProcess, WhichSide, 0, matchAllData);
 			}
 			
@@ -3726,7 +3753,8 @@ public class LowerThirdGfx
 
 			if(config.getBroadcaster().toUpperCase().equalsIgnoreCase(Constants.MPL)) {
 				setStartLogoOfLT(WhichSide, config);
-			}else if(config.getBroadcaster().equalsIgnoreCase(Constants.NPL)) {
+			}else if(config.getBroadcaster().equalsIgnoreCase(Constants.NPL)||
+					config.getBroadcaster().equalsIgnoreCase(Constants.APL)) {
 				checkForImpactPlayer(whatToProcess, WhichSide, 0, matchAllData);
 			}
 			
@@ -3903,7 +3931,8 @@ public class LowerThirdGfx
 
 			if(config.getBroadcaster().toUpperCase().equalsIgnoreCase(Constants.MPL)) {
 				setStartLogoOfLT(WhichSide, config);
-			}else if(config.getBroadcaster().equalsIgnoreCase(Constants.NPL)) {
+			}else if(config.getBroadcaster().equalsIgnoreCase(Constants.NPL)||
+					config.getBroadcaster().equalsIgnoreCase(Constants.APL)) {
 				checkForImpactPlayer(whatToProcess, WhichSide, 0, matchAllData);
 			}
 			
@@ -3957,7 +3986,7 @@ public class LowerThirdGfx
 		summary = teamNameAsCity + " NEED " + CricketFunctions.GetTargetData(matchAllData).getRemaningRuns();
 		
 		switch (config.getBroadcaster().toUpperCase()) {
-		case Constants.NPL: case Constants.MPL: case Constants.T20_MUMBAI:
+		case Constants.NPL: case Constants.MPL: case Constants.T20_MUMBAI: case Constants.APL:
 			
 			if(CricketFunctions.GetTargetData(matchAllData).getRemaningRuns() < 2) {
 				summary = summary + " RUN" + CricketFunctions.Plural(CricketFunctions.GetTargetData(matchAllData).getRemaningRuns()).toUpperCase() + " TO WIN";
@@ -4027,7 +4056,8 @@ public class LowerThirdGfx
 
 			if(config.getBroadcaster().toUpperCase().equalsIgnoreCase(Constants.MPL)) {
 				setStartLogoOfLT(WhichSide, config);
-			}else if(config.getBroadcaster().equalsIgnoreCase(Constants.NPL)) {
+			}else if(config.getBroadcaster().equalsIgnoreCase(Constants.NPL)||
+					config.getBroadcaster().equalsIgnoreCase(Constants.APL)) {
 				checkForImpactPlayer(whatToProcess, WhichSide, 0, matchAllData);
 			}
 			
@@ -4092,7 +4122,7 @@ public class LowerThirdGfx
 			case Constants.ICC_U19_2023:
 				setPositionOfLT(whatToProcess,WhichSide,config,lowerThird.getNumberOfSubLines());
 				break;	
-			case Constants.NPL:
+			case Constants.NPL: case Constants.APL:
 				checkForImpactPlayer(whatToProcess, WhichSide, Integer.valueOf(whatToProcess.split(",")[2]), matchAllData);
 				break;
 			}
@@ -4127,6 +4157,7 @@ public class LowerThirdGfx
 		
 		switch (config.getBroadcaster().toUpperCase()) {
 		case Constants.ICC_U19_2023: case Constants.ISPL: case Constants.NPL: case Constants.MPL: case Constants.T20_MUMBAI:
+		case Constants.APL:
 			if(namesuper.getSponsor()!= null && namesuper.getFlag()!= null && namesuper.getSubLine() != null) {
 				lowerThird = new LowerThird("", namesuper.getFirstname(), surName,"", "", "", 1, namesuper.getSponsor() ,namesuper.getFlag(),
 						null,null,new String[]{namesuper.getSubLine()},null,null);
@@ -4220,7 +4251,8 @@ public class LowerThirdGfx
 
 			if(config.getBroadcaster().toUpperCase().equalsIgnoreCase(Constants.MPL)) {
 				setStartLogoOfLT(WhichSide, config);
-			}else if(config.getBroadcaster().equalsIgnoreCase(Constants.NPL)) {
+			}else if(config.getBroadcaster().equalsIgnoreCase(Constants.NPL)||
+					config.getBroadcaster().equalsIgnoreCase(Constants.APL)) {
 				checkForImpactPlayer(whatToProcess, WhichSide, 0, matchAllData);
 			}
 			
@@ -4264,7 +4296,8 @@ public class LowerThirdGfx
 
 			if(config.getBroadcaster().toUpperCase().equalsIgnoreCase(Constants.MPL)) {
 				setStartLogoOfLT(WhichSide, config);
-			}else if(config.getBroadcaster().equalsIgnoreCase(Constants.NPL)) {
+			}else if(config.getBroadcaster().equalsIgnoreCase(Constants.NPL)||
+					config.getBroadcaster().equalsIgnoreCase(Constants.APL)) {
 				checkForImpactPlayer(whatToProcess, WhichSide, 0, matchAllData);
 			}
 			
@@ -4329,7 +4362,8 @@ public class LowerThirdGfx
 
 			if(config.getBroadcaster().toUpperCase().equalsIgnoreCase(Constants.MPL)) {
 				setStartLogoOfLT(WhichSide, config);
-			}else if(config.getBroadcaster().equalsIgnoreCase(Constants.NPL)) {
+			}else if(config.getBroadcaster().equalsIgnoreCase(Constants.NPL)||
+					config.getBroadcaster().equalsIgnoreCase(Constants.APL)) {
 				checkForImpactPlayer(whatToProcess, WhichSide, 0, matchAllData);
 			}
 			
@@ -4475,7 +4509,7 @@ public class LowerThirdGfx
 //        }
 		
 		switch (config.getBroadcaster().toUpperCase()) {
-		case Constants.NPL: case Constants.MPL: 
+		case Constants.NPL: case Constants.MPL: case Constants.APL:
 			lowerThird = new LowerThird("SPEEDS THIS OVER",bowlingCard.getPlayer().getFirstname(), bowlingCard.getPlayer().getSurname(),
 					CricketFunctions.OverBalls(bowlingCard.getOvers(), bowlingCard.getBalls()), String.valueOf(bowlingCard.getWickets()), String.valueOf(bowlingCard.getRuns()),
 					10,"",team.getTeamBadge(),speedNumber,speedData,new String[]{"BALLS","SPEED"},new String[] {"WITH_TITLE"},
@@ -4538,7 +4572,8 @@ public class LowerThirdGfx
 
 			if(config.getBroadcaster().toUpperCase().equalsIgnoreCase(Constants.MPL)) {
 				setStartLogoOfLT(WhichSide, config);
-			}else if(config.getBroadcaster().equalsIgnoreCase(Constants.NPL)) {
+			}else if(config.getBroadcaster().equalsIgnoreCase(Constants.NPL)||
+					config.getBroadcaster().equalsIgnoreCase(Constants.APL)) {
 				checkForImpactPlayer(whatToProcess, WhichSide, 0, matchAllData);
 			}
 			
@@ -4578,7 +4613,8 @@ public class LowerThirdGfx
 
 			if(config.getBroadcaster().toUpperCase().equalsIgnoreCase(Constants.MPL)) {
 				setStartLogoOfLT(WhichSide, config);
-			}else if(config.getBroadcaster().equalsIgnoreCase(Constants.NPL)) {
+			}else if(config.getBroadcaster().equalsIgnoreCase(Constants.NPL)||
+					config.getBroadcaster().equalsIgnoreCase(Constants.APL)) {
 				checkForImpactPlayer(whatToProcess, WhichSide, 0, matchAllData);
 			}
 			
@@ -4633,7 +4669,8 @@ public class LowerThirdGfx
 
 			if(config.getBroadcaster().toUpperCase().equalsIgnoreCase(Constants.MPL)) {
 				setStartLogoOfLT(WhichSide, config);
-			}else if(config.getBroadcaster().equalsIgnoreCase(Constants.NPL)) {
+			}else if(config.getBroadcaster().equalsIgnoreCase(Constants.NPL)||
+					config.getBroadcaster().equalsIgnoreCase(Constants.APL)) {
 				checkForImpactPlayer(whatToProcess, WhichSide, 0, matchAllData);
 			}
 			
@@ -4803,7 +4840,8 @@ public class LowerThirdGfx
 
 			if(config.getBroadcaster().toUpperCase().equalsIgnoreCase(Constants.MPL)) {
 				setStartLogoOfLT(WhichSide, config);
-			}else if(config.getBroadcaster().equalsIgnoreCase(Constants.NPL)) {
+			}else if(config.getBroadcaster().equalsIgnoreCase(Constants.NPL)||
+					config.getBroadcaster().equalsIgnoreCase(Constants.APL)) {
 				checkForImpactPlayer(whatToProcess, WhichSide, 0, matchAllData);
 			}
 			
@@ -4922,7 +4960,7 @@ public class LowerThirdGfx
 		}
 		
 		switch (config.getBroadcaster().toUpperCase()) {
-		case Constants.BENGAL_T20: case Constants.NPL: case Constants.MPL:
+		case Constants.BENGAL_T20: case Constants.NPL: case Constants.MPL: case Constants.APL:
 			lowerThird = new LowerThird("", battingCard.getPlayer().getFirstname(), surName,"", 
 					String.valueOf(battingCard.getRuns()), String.valueOf(battingCard.getBalls()),2,"",inning.getBatting_team().getTeamBadge(),
 					null,null,new String[]{howOut,String.valueOf(battingCard.getFours()),String.valueOf(battingCard.getSixes()),Count[0]},
@@ -4964,7 +5002,7 @@ public class LowerThirdGfx
 				HideAndShowL3rdSubStrapContainers(WhichSide);
 				setPositionOfLT(whatToProcess,WhichSide,config,lowerThird.getNumberOfSubLines());
 				break;
-			case Constants.NPL:
+			case Constants.NPL: case Constants.APL:
 				checkForImpactPlayer(whatToProcess, WhichSide, Integer.valueOf(whatToProcess.split(",")[2]), matchAllData);
 				break;
 			}
@@ -5039,7 +5077,7 @@ public class LowerThirdGfx
 				"-", matchAllData.getEventFile().getEvents()).split("-");
 		
 		switch (config.getBroadcaster().toUpperCase()) {
-		case Constants.BENGAL_T20: case Constants.NPL: case Constants.MPL:
+		case Constants.BENGAL_T20: case Constants.NPL: case Constants.MPL: case Constants.APL:
 			lowerThird = new LowerThird("", battingCard.getPlayer().getFirstname(), surName,"", 
 					String.valueOf(battingCard.getRuns()), String.valueOf(battingCard.getBalls() + 1),1,"",inning.getBatting_team().getTeamBadge(),
 					null,null,new String[]{String.valueOf(battingCard.getFours()),String.valueOf(battingCard.getSixes()),Count[0]},
@@ -5079,7 +5117,7 @@ public class LowerThirdGfx
 				HideAndShowL3rdSubStrapContainers(WhichSide);
 				setPositionOfLT(whatToProcess,WhichSide,config,lowerThird.getNumberOfSubLines());
 				break;
-			case Constants.NPL:
+			case Constants.NPL: case Constants.APL:
 				checkForImpactPlayer(whatToProcess, WhichSide, Integer.valueOf(whatToProcess.split(",")[2]), matchAllData);
 				break;
 			}
@@ -5209,7 +5247,7 @@ public class LowerThirdGfx
 				battingCardList.get(battingCardList.size()-1).getPlayerId(),"-", matchAllData.getEventFile().getEvents()).split("-");
 		
 		switch (config.getBroadcaster().toUpperCase()) {
-		case Constants.BENGAL_T20: case Constants.NPL: case Constants.MPL:
+		case Constants.BENGAL_T20: case Constants.NPL: case Constants.MPL: case Constants.APL:
 			lowerThird = new LowerThird("", battingCardList.get(battingCardList.size()-1).getPlayer().getFirstname(), surName,"", 
 					String.valueOf(battingCardList.get(battingCardList.size()-1).getRuns()), 
 					String.valueOf(battingCardList.get(battingCardList.size()-1).getBalls()),2,"",inning.getBatting_team().getTeamBadge(),
@@ -5258,7 +5296,7 @@ public class LowerThirdGfx
 				HideAndShowL3rdSubStrapContainers(WhichSide);
 				setPositionOfLT(whatToProcess,WhichSide,config,lowerThird.getNumberOfSubLines());
 				break;
-			case Constants.NPL:
+			case Constants.NPL: case Constants.APL:
 				checkForImpactPlayer(whatToProcess, WhichSide, battingCardList.get(battingCardList.size()-1).getPlayerId(), matchAllData);
 				break;
 			}
@@ -5334,7 +5372,8 @@ public class LowerThirdGfx
 
 			if(config.getBroadcaster().toUpperCase().equalsIgnoreCase(Constants.MPL)) {
 				setStartLogoOfLT(WhichSide, config);
-			}else if(config.getBroadcaster().equalsIgnoreCase(Constants.NPL)) {
+			}else if(config.getBroadcaster().equalsIgnoreCase(Constants.NPL)||
+					config.getBroadcaster().equalsIgnoreCase(Constants.APL)) {
 				checkForImpactPlayer(whatToProcess, WhichSide, 0, matchAllData);
 			}
 			
@@ -5360,7 +5399,7 @@ public class LowerThirdGfx
 		}
 		
 		switch (config.getBroadcaster()) {
-		case Constants.BENGAL_T20: //case Constants.NPL:
+		case Constants.BENGAL_T20: //case Constants.NPL: case Constants.APL:
 			addPastDataToCurr = CricketFunctions.extractTournamentData("CURRENT_MATCH_DATA", false, headToHead,cricketService, matchAllData, past_tournament_stats);
 			break;
 
@@ -5473,7 +5512,7 @@ public class LowerThirdGfx
 						new String[]{String.valueOf(tournament.getMatches()), String.format("%,d\n", tournament.getRuns()),
 							fifties + "/" + hundred, bat_sr, best},null,null,new String[] {"20","200","380","560","720"});
 				break;
-			case Constants.NPL: case Constants.MPL:
+			case Constants.NPL: case Constants.MPL: case Constants.APL:
 				if(hundred != "-") {
 					lowerThird = new LowerThird(CricketFunctions.getbattingstyle(player.getBattingStyle(),
 							CricketUtil.FULL, true, false).toUpperCase(), tournament.getPlayer().getFirstname(), surName,"THIS SEASON", "", "", 6,"",teamName,
@@ -5555,7 +5594,7 @@ public class LowerThirdGfx
 						new String[]{String.valueOf(tournament.getMatches()),String.valueOf(tournament.getWickets()),economy,best},null,null,
 						new String[] {"60","290","520","730"});
 				break;
-			case Constants.NPL: case Constants.MPL:
+			case Constants.NPL: case Constants.MPL: case Constants.APL:
 				lowerThird = new LowerThird(CricketFunctions.getbowlingstyle(player.getBowlingStyle()).toUpperCase(), tournament.getPlayer().getFirstname(), 
 						surName,"THIS SEASON", "", "", 5,"",teamName,new String[]{"MATCHES", "WICKETS", "AVERAGE", "ECONOMY", "BEST"},
 						new String[]{String.valueOf(tournament.getMatches()),String.valueOf(tournament.getWickets()),Data,economy,best},null,null,
@@ -5572,7 +5611,8 @@ public class LowerThirdGfx
 
 			if(config.getBroadcaster().toUpperCase().equalsIgnoreCase(Constants.MPL)) {
 				setStartLogoOfLT(WhichSide, config);
-			}else if(config.getBroadcaster().toUpperCase().equalsIgnoreCase(Constants.NPL)) {
+			}else if(config.getBroadcaster().toUpperCase().equalsIgnoreCase(Constants.NPL)||
+					config.getBroadcaster().equalsIgnoreCase(Constants.APL)) {
 				checkForImpactPlayer(whatToProcess, WhichSide, Integer.valueOf(whatToProcess.split(",")[2]), matchAllData);
 			}
 			
@@ -5638,7 +5678,8 @@ public class LowerThirdGfx
 
 			if(config.getBroadcaster().toUpperCase().equalsIgnoreCase(Constants.MPL)) {
 				setStartLogoOfLT(WhichSide, config);
-			}else if(config.getBroadcaster().equalsIgnoreCase(Constants.NPL)) {
+			}else if(config.getBroadcaster().equalsIgnoreCase(Constants.NPL)||
+					config.getBroadcaster().equalsIgnoreCase(Constants.APL)) {
 				checkForImpactPlayer(whatToProcess, WhichSide, 0, matchAllData);
 			}
 			
@@ -5687,7 +5728,8 @@ public class LowerThirdGfx
 
 			if(config.getBroadcaster().toUpperCase().equalsIgnoreCase(Constants.MPL)) {
 				setStartLogoOfLT(WhichSide, config);
-			}else if(config.getBroadcaster().equalsIgnoreCase(Constants.NPL)) {
+			}else if(config.getBroadcaster().equalsIgnoreCase(Constants.NPL)||
+					config.getBroadcaster().equalsIgnoreCase(Constants.APL)) {
 				checkForImpactPlayer(whatToProcess, WhichSide, 0, matchAllData);
 			}
 			
@@ -5754,7 +5796,7 @@ public class LowerThirdGfx
 		}
 		
 		switch (config.getBroadcaster().toUpperCase()) {
-		case Constants.NPL: case Constants.MPL:
+		case Constants.NPL: case Constants.MPL: case Constants.APL:
 			lowerThird = new LowerThird("", battingCard.getPlayer().getFirstname(), surName,outOrNot, String.valueOf(battingCard.getRuns()), 
 					String.valueOf(battingCard.getBalls()), 6, "", inning.getBatting_team().getTeamBadge(),new String[] {"0s", "1s", "2s", "3s", "4s", "6s"},
 					new String[]{Count[0],Count[1],Count[2],Count[3],Count[4],Count[6]},null,new String[] {"WITHOUT_TITLE"},new String[] {"123","236.8","350.6","464.4","578.2","692"});
@@ -5789,7 +5831,7 @@ public class LowerThirdGfx
 			case Constants.BENGAL_T20: case Constants.ICC_U19_2023: case Constants.ISPL: case Constants.LEGENDS:
 				HideAndShowL3rdSubStrapContainers(WhichSide);
 				break;
-			case Constants.NPL:
+			case Constants.NPL: case Constants.APL:
 				checkForImpactPlayer(whatToProcess, WhichSide, Integer.valueOf(whatToProcess.split(",")[2]), matchAllData);
 				break;
 			}
@@ -5882,7 +5924,7 @@ public class LowerThirdGfx
 		}
 		
 		switch (config.getBroadcaster().toUpperCase()) {
-		case Constants.NPL: case Constants.MPL:
+		case Constants.NPL: case Constants.MPL: case Constants.APL:
 			lowerThird = new LowerThird("", bowlingCard.getPlayer().getFirstname(), surName,over_text, String.valueOf(bowlingCard.getWickets()) + "-" + String.valueOf(bowlingCard.getRuns()), 
 					String.valueOf(CricketFunctions.OverBalls(bowlingCard.getOvers(), bowlingCard.getBalls())), 6, "", inning.getBowling_team().getTeamBadge(),new String[] {"0s", "1s", "2s", "3s", "4s", "6s"},
 					new String[]{Count[0],Count[1],Count[2],Count[3],Count[4],Count[6]},null,new String[] {"WITHOUT_TITLE"},new String[] {"123","236.8","350.6","464.4","578.2","692"});
@@ -5917,7 +5959,7 @@ public class LowerThirdGfx
 			case Constants.BENGAL_T20: case Constants.ICC_U19_2023: case Constants.ISPL: case Constants.LEGENDS:
 				HideAndShowL3rdSubStrapContainers(WhichSide);
 				break;
-			case Constants.NPL:
+			case Constants.NPL: case Constants.APL:
 				checkForImpactPlayer(whatToProcess, WhichSide, Integer.valueOf(whatToProcess.split(",")[2]), matchAllData);
 				break;
 			}
@@ -5962,7 +6004,7 @@ public class LowerThirdGfx
 				"-", matchAllData.getEventFile().getEvents()).split("-");
 		
 		switch (config.getBroadcaster().toUpperCase()) {
-		case Constants.NPL: case Constants.MPL:
+		case Constants.NPL: case Constants.MPL: case Constants.APL:
 			lowerThird = new LowerThird("", inning.getBatting_team().getTeamName2(), inning.getBatting_team().getTeamName3(),"", String.valueOf(inning.getTotalRuns()) + "-" + String.valueOf(inning.getTotalWickets()), 
 					CricketFunctions.OverBalls(inning.getTotalOvers(), inning.getTotalBalls()), 6, "", inning.getBatting_team().getTeamBadge(),
 					new String[] {"0s", "1s", "2s", "3s", "4s", "6s"},new String[]{Count[0],Count[1],Count[2],Count[3],String.valueOf(inning.getTotalFours()),
@@ -6012,7 +6054,8 @@ public class LowerThirdGfx
 
 			if(config.getBroadcaster().toUpperCase().equalsIgnoreCase(Constants.MPL)) {
 				setStartLogoOfLT(WhichSide, config);
-			}else if(config.getBroadcaster().equalsIgnoreCase(Constants.NPL)) {
+			}else if(config.getBroadcaster().equalsIgnoreCase(Constants.NPL)||
+					config.getBroadcaster().equalsIgnoreCase(Constants.APL)) {
 				checkForImpactPlayer(whatToProcess, WhichSide, 0, matchAllData);
 			}
 			
@@ -6066,7 +6109,8 @@ public class LowerThirdGfx
 
 			if(config.getBroadcaster().toUpperCase().equalsIgnoreCase(Constants.MPL)) {
 				setStartLogoOfLT(WhichSide, config);
-			}else if(config.getBroadcaster().equalsIgnoreCase(Constants.NPL)) {
+			}else if(config.getBroadcaster().equalsIgnoreCase(Constants.NPL)||
+					config.getBroadcaster().equalsIgnoreCase(Constants.APL)) {
 				checkForImpactPlayer(whatToProcess, WhichSide, 0, matchAllData);
 			}
 			
@@ -6263,7 +6307,8 @@ public class LowerThirdGfx
 
 				if(config.getBroadcaster().toUpperCase().equalsIgnoreCase(Constants.MPL)) {
 					setStartLogoOfLT(WhichSide, config);
-				}else if(config.getBroadcaster().equalsIgnoreCase(Constants.NPL)) {
+				}else if(config.getBroadcaster().equalsIgnoreCase(Constants.NPL)||
+						config.getBroadcaster().equalsIgnoreCase(Constants.APL)) {
 					checkForImpactPlayer(whatToProcess, WhichSide, 0, matchAllData);
 				}
 				
@@ -6372,7 +6417,8 @@ public class LowerThirdGfx
 
 				if(config.getBroadcaster().toUpperCase().equalsIgnoreCase(Constants.MPL)) {
 					setStartLogoOfLT(WhichSide, config);
-				}else if(config.getBroadcaster().equalsIgnoreCase(Constants.NPL)) {
+				}else if(config.getBroadcaster().equalsIgnoreCase(Constants.NPL)||
+						config.getBroadcaster().equalsIgnoreCase(Constants.APL)) {
 					checkForImpactPlayer(whatToProcess, WhichSide, 0, matchAllData);
 				}
 				
@@ -6468,7 +6514,8 @@ public class LowerThirdGfx
 
 				if(config.getBroadcaster().toUpperCase().equalsIgnoreCase(Constants.MPL)) {
 					setStartLogoOfLT(WhichSide, config);
-				}else if(config.getBroadcaster().equalsIgnoreCase(Constants.NPL)) {
+				}else if(config.getBroadcaster().equalsIgnoreCase(Constants.NPL)||
+						config.getBroadcaster().equalsIgnoreCase(Constants.APL)) {
 					checkForImpactPlayer(whatToProcess, WhichSide, 0, matchAllData);
 				}
 				
@@ -6946,7 +6993,8 @@ public class LowerThirdGfx
 
 				if(config.getBroadcaster().toUpperCase().equalsIgnoreCase(Constants.MPL)) {
 					setStartLogoOfLT(WhichSide, config);
-				}else if(config.getBroadcaster().equalsIgnoreCase(Constants.NPL)) {
+				}else if(config.getBroadcaster().equalsIgnoreCase(Constants.NPL)||
+						config.getBroadcaster().equalsIgnoreCase(Constants.APL)) {
 					checkForImpactPlayer(whatToProcess, WhichSide, 0, matchAllData);
 				}
 				
@@ -7031,7 +7079,8 @@ public class LowerThirdGfx
 
 			if(config.getBroadcaster().toUpperCase().equalsIgnoreCase(Constants.MPL)) {
 				setStartLogoOfLT(WhichSide, config);
-			}else if(config.getBroadcaster().equalsIgnoreCase(Constants.NPL)) {
+			}else if(config.getBroadcaster().equalsIgnoreCase(Constants.NPL)||
+					config.getBroadcaster().equalsIgnoreCase(Constants.APL)) {
 				checkForImpactPlayer(whatToProcess, WhichSide, 0, matchAllData);
 			}
 			
@@ -7143,7 +7192,8 @@ public class LowerThirdGfx
 
 			if(config.getBroadcaster().toUpperCase().equalsIgnoreCase(Constants.MPL)) {
 				setStartLogoOfLT(WhichSide, config);
-			}else if(config.getBroadcaster().equalsIgnoreCase(Constants.NPL)) {
+			}else if(config.getBroadcaster().equalsIgnoreCase(Constants.NPL)||
+					config.getBroadcaster().equalsIgnoreCase(Constants.APL)) {
 				checkForImpactPlayer(whatToProcess, WhichSide, 0, matchAllData);
 			}
 			
@@ -7235,7 +7285,8 @@ public class LowerThirdGfx
 
 			if(config.getBroadcaster().toUpperCase().equalsIgnoreCase(Constants.MPL)) {
 				setStartLogoOfLT(WhichSide, config);
-			}else if(config.getBroadcaster().equalsIgnoreCase(Constants.NPL)) {
+			}else if(config.getBroadcaster().equalsIgnoreCase(Constants.NPL)||
+					config.getBroadcaster().equalsIgnoreCase(Constants.APL)) {
 				checkForImpactPlayer(whatToProcess, WhichSide, 0, matchAllData);
 			}
 			
@@ -7274,7 +7325,8 @@ public class LowerThirdGfx
 
 			if(config.getBroadcaster().toUpperCase().equalsIgnoreCase(Constants.MPL)) {
 				setStartLogoOfLT(WhichSide, config);
-			}else if(config.getBroadcaster().equalsIgnoreCase(Constants.NPL)) {
+			}else if(config.getBroadcaster().equalsIgnoreCase(Constants.NPL)||
+					config.getBroadcaster().equalsIgnoreCase(Constants.APL)) {
 				checkForImpactPlayer(whatToProcess, WhichSide, 0, matchAllData);
 			}
 			
@@ -7311,7 +7363,8 @@ public class LowerThirdGfx
 
 			if(config.getBroadcaster().toUpperCase().equalsIgnoreCase(Constants.MPL)) {
 				setStartLogoOfLT(WhichSide, config);
-			}else if(config.getBroadcaster().equalsIgnoreCase(Constants.NPL)) {
+			}else if(config.getBroadcaster().equalsIgnoreCase(Constants.NPL)||
+					config.getBroadcaster().equalsIgnoreCase(Constants.APL)) {
 				checkForImpactPlayer(whatToProcess, WhichSide, 0, matchAllData);
 			}
 			
@@ -7350,7 +7403,8 @@ public class LowerThirdGfx
 
 				if(config.getBroadcaster().toUpperCase().equalsIgnoreCase(Constants.MPL)) {
 					setStartLogoOfLT(WhichSide, config);
-				}else if(config.getBroadcaster().equalsIgnoreCase(Constants.NPL)) {
+				}else if(config.getBroadcaster().equalsIgnoreCase(Constants.NPL)||
+						config.getBroadcaster().equalsIgnoreCase(Constants.APL)) {
 					checkForImpactPlayer(whatToProcess, WhichSide, 0, matchAllData);
 				}
 				
@@ -7406,7 +7460,8 @@ public class LowerThirdGfx
 
 			if(config.getBroadcaster().toUpperCase().equalsIgnoreCase(Constants.MPL)) {
 				setStartLogoOfLT(WhichSide, config);
-			}else if(config.getBroadcaster().equalsIgnoreCase(Constants.NPL)) {
+			}else if(config.getBroadcaster().equalsIgnoreCase(Constants.NPL)||
+					config.getBroadcaster().equalsIgnoreCase(Constants.APL)) {
 				checkForImpactPlayer(whatToProcess, WhichSide, 0, matchAllData);
 			}
 			
@@ -7446,7 +7501,8 @@ public class LowerThirdGfx
 
 			if(config.getBroadcaster().toUpperCase().equalsIgnoreCase(Constants.MPL)) {
 				setStartLogoOfLT(WhichSide, config);
-			}else if(config.getBroadcaster().equalsIgnoreCase(Constants.NPL)) {
+			}else if(config.getBroadcaster().equalsIgnoreCase(Constants.NPL)||
+					config.getBroadcaster().equalsIgnoreCase(Constants.APL)) {
 				checkForImpactPlayer(whatToProcess, WhichSide, 0, matchAllData);
 			}
 			
@@ -7481,7 +7537,7 @@ public class LowerThirdGfx
 			String in_data= CricketFunctions.compareInning_Data(matchAllData, ",", 1, matchAllData.getEventFile().getEvents());
 			
 			switch (config.getBroadcaster().toUpperCase()) {
-			case Constants.NPL: case Constants.MPL:
+			case Constants.NPL: case Constants.MPL: case Constants.APL:
 				lowerThird = new LowerThird("AFTER",  inning.getBowling_team().getTeamBadge(), inning.getBatting_team().getTeamBadge(),inning.getBowling_team().getTeamName2(), 
 						inning.getBowling_team().getTeamName3(),CricketFunctions.OverBalls(inning.getTotalOvers(), inning.getTotalBalls()), 
 						2, inning.getBatting_team().getTeamName2() ,inning.getBatting_team().getTeamName3(),new String[]{"FOURS" + "," + String.valueOf(in_data.split(",")[3]), String.valueOf(inning.getTotalFours()),
@@ -7549,7 +7605,8 @@ public class LowerThirdGfx
 
 				if(config.getBroadcaster().toUpperCase().equalsIgnoreCase(Constants.MPL)) {
 					setStartLogoOfLT(WhichSide, config);
-				}else if(config.getBroadcaster().equalsIgnoreCase(Constants.NPL)) {
+				}else if(config.getBroadcaster().equalsIgnoreCase(Constants.NPL)||
+						config.getBroadcaster().equalsIgnoreCase(Constants.APL)) {
 					checkForImpactPlayer(whatToProcess, WhichSide, 0, matchAllData);
 				}
 				
@@ -7612,7 +7669,7 @@ public class LowerThirdGfx
 			}
 			
 			switch (config.getBroadcaster().toUpperCase()) {
-			case Constants.NPL:
+			case Constants.NPL: case Constants.APL:
 				switch (WhichProfile.toUpperCase()) {
 				case "NPL_CAREER":
 					statsType = statsTypes.stream().filter(st -> st.getStats_short_name().equalsIgnoreCase("NPL S1")).findAny().orElse(null);
@@ -7816,6 +7873,7 @@ public class LowerThirdGfx
 				
 				switch (config.getBroadcaster().toUpperCase()) {
 				case Constants.BENGAL_T20: case Constants.NPL: case Constants.ISPL: case Constants.LEGENDS: case Constants.MPL:
+				case Constants.APL:
 					if(WhichProfile.equalsIgnoreCase("DT20")) {
 						short_name =  "T20 CAREER";
 					}else if(WhichProfile.equalsIgnoreCase("IPL")) {
@@ -7852,7 +7910,7 @@ public class LowerThirdGfx
 								new String[] {"-3.0","51.0","103.0","155.0","207.0","259.0"});
 						break;
 
-					case Constants.NPL: case Constants.MPL:
+					case Constants.NPL: case Constants.MPL: case Constants.APL:
 						lowerThird = new LowerThird(CricketFunctions.getbattingstyle(player.getBattingStyle(),
 								CricketUtil.FULL, true, false).toUpperCase(), player.getFirstname(), surName,short_name, "", "", 6,"",team.getTeamBadge(),
 								new String[]{"MATCHES", "RUNS", "50s/100s", "BEST", "S/R"},
@@ -7950,7 +8008,7 @@ public class LowerThirdGfx
 							"", "", 2,"",team.getTeamBadge(),new String[]{"MATCHES", "WICKETS", "BEST", "ECONOMY"},new String[]{String.valueOf(stat.getMatches()), 
 							String.valueOf(stat.getWickets()), stat.getBest_figures(),economy},null,null, new String[] {"-500","-160","210","550"});
 					break;
-				case Constants.NPL: case Constants.MPL:
+				case Constants.NPL: case Constants.MPL: case Constants.APL:
 					if(WhichProfile.equalsIgnoreCase("DT20")) {
 						short_name =  "T20 CAREER";
 					}else if(WhichProfile.equalsIgnoreCase("IPL")) {
@@ -7999,7 +8057,7 @@ public class LowerThirdGfx
 					HideAndShowL3rdSubStrapContainers(WhichSide);
 //					setStatsPositionOfLT(5, 2, WhichSide,whatToProcess.split(",")[0], print_writers, config);
 					break;
-				case Constants.NPL:
+				case Constants.NPL: case Constants.APL:
 					checkForImpactPlayer(whatToProcess, WhichSide, FirstPlayerId, matchAllData);
 					break;
 				}
@@ -8080,11 +8138,11 @@ public class LowerThirdGfx
 				}
 				
 				switch (config.getBroadcaster().toUpperCase()) {
-				case Constants.NPL:
-					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$LT_PlayingXI$Logo_Grp$Side" + WhichSide + 
-							"$Single$img_Logo_Shadow*TEXTURE*IMAGE SET " + Constants.NPL_LOGO_PATH + lowerThird.getWhichTeamFlag() + "\0", print_writers);
-					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$LT_PlayingXI$Logo_Grp$Side" + WhichSide + 
-							"$Single$img_Logo*TEXTURE*IMAGE SET " + Constants.NPL_LOGO_PATH + lowerThird.getWhichTeamFlag() + "\0", print_writers);
+				case Constants.NPL: case Constants.APL:
+					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$LT_PlayingXI$Logo_Grp$Side" + WhichSide + "$Single$img_Logo_Shadow*TEXTURE*IMAGE SET " 
+							+ (config.getBroadcaster().equalsIgnoreCase(Constants.APL)?Constants.APL_LOGO_PATH:Constants.NPL_LOGO_PATH) + lowerThird.getWhichTeamFlag() + "\0", print_writers);
+					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$LT_PlayingXI$Logo_Grp$Side" + WhichSide + "$Single$img_Logo*TEXTURE*IMAGE SET " 
+							+ (config.getBroadcaster().equalsIgnoreCase(Constants.APL)?Constants.APL_LOGO_PATH:Constants.NPL_LOGO_PATH) + lowerThird.getWhichTeamFlag() + "\0", print_writers);
 					break;
 				case Constants.MPL:
 					
@@ -8101,11 +8159,11 @@ public class LowerThirdGfx
 						"$Select*FUNCTION*Omo*vis_con SET 0\0", print_writers);
 				
 				switch (config.getBroadcaster().toUpperCase()) {
-				case Constants.NPL:
-					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$LowerThird$Logo_Grp$Side" + WhichSide + 
-							"$Single$img_Logo_Shadow*TEXTURE*IMAGE SET " + Constants.NPL_LOGO_PATH + lowerThird.getWhichTeamFlag() + "\0", print_writers);
-					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$LowerThird$Logo_Grp$Side" + WhichSide + 
-							"$Single$img_Logo*TEXTURE*IMAGE SET " + Constants.NPL_LOGO_PATH + lowerThird.getWhichTeamFlag() + "\0", print_writers);
+				case Constants.NPL: case Constants.APL:
+					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$LowerThird$Logo_Grp$Side" + WhichSide + "$Single$img_Logo_Shadow*TEXTURE*IMAGE SET " 
+							+ (config.getBroadcaster().equalsIgnoreCase(Constants.APL)?Constants.APL_LOGO_PATH:Constants.NPL_LOGO_PATH) + lowerThird.getWhichTeamFlag() + "\0", print_writers);
+					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$LowerThird$Logo_Grp$Side" + WhichSide + "$Single$img_Logo*TEXTURE*IMAGE SET " 
+							+ (config.getBroadcaster().equalsIgnoreCase(Constants.APL)?Constants.APL_LOGO_PATH:Constants.NPL_LOGO_PATH) + lowerThird.getWhichTeamFlag() + "\0", print_writers);
 					
 					break;
 				case Constants.MPL:
@@ -8129,8 +8187,8 @@ public class LowerThirdGfx
 	{
 		
 		switch (config.getBroadcaster().toUpperCase()) {
-		case Constants.NPL:
-			logo_data = Constants.NPL_LOGO_PATH;
+		case Constants.NPL: case Constants.APL:
+			logo_data = (config.getBroadcaster().equalsIgnoreCase(Constants.APL)?Constants.APL_LOGO_PATH:Constants.NPL_LOGO_PATH);
 			logoCategory = "";
 			break;
 		case Constants.MPL:
@@ -8139,7 +8197,7 @@ public class LowerThirdGfx
 		}
 		
 		switch (config.getBroadcaster().toUpperCase()) {
-		case Constants.MPL: case Constants.NPL:
+		case Constants.MPL: case Constants.NPL: case Constants.APL:
 			switch(whatToProcess) {
 			case "Control_Shift_O":
 				
@@ -8152,11 +8210,11 @@ public class LowerThirdGfx
 				}
 				
 				switch (config.getBroadcaster().toUpperCase()) {
-				case Constants.NPL:
-					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$LT_PlayingXI$Logo_Grp$Side" + WhichSide + 
-							"$Single$img_Logo_Shadow*TEXTURE*IMAGE SET " + Constants.NPL_LOGO_PATH + lowerThird.getWhichTeamFlag() + "\0", print_writers);
-					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$LT_PlayingXI$Logo_Grp$Side" + WhichSide + 
-							"$Single$img_Logo*TEXTURE*IMAGE SET " + Constants.NPL_LOGO_PATH + lowerThird.getWhichTeamFlag() + "\0", print_writers);
+				case Constants.NPL: case Constants.APL:
+					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$LT_PlayingXI$Logo_Grp$Side" + WhichSide + "$Single$img_Logo_Shadow*TEXTURE*IMAGE SET " 
+							+ (config.getBroadcaster().equalsIgnoreCase(Constants.APL)?Constants.APL_LOGO_PATH:Constants.NPL_LOGO_PATH) + lowerThird.getWhichTeamFlag() + "\0", print_writers);
+					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$LT_PlayingXI$Logo_Grp$Side" + WhichSide + "$Single$img_Logo*TEXTURE*IMAGE SET " 
+							+ (config.getBroadcaster().equalsIgnoreCase(Constants.APL)?Constants.APL_LOGO_PATH:Constants.NPL_LOGO_PATH) + lowerThird.getWhichTeamFlag() + "\0", print_writers);
 					break;
 				case Constants.MPL:
 					
@@ -8173,19 +8231,17 @@ public class LowerThirdGfx
 						"$Select*FUNCTION*Omo*vis_con SET 0\0", print_writers);
 				
 				switch (config.getBroadcaster().toUpperCase()) {
-				case Constants.NPL:
-					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$LowerThird$Logo_Grp$Side" + WhichSide + 
-							"$Single$img_Logo_Shadow*TEXTURE*IMAGE SET " + Constants.NPL_LOGO_PATH + lowerThird.getWhichTeamFlag() + "\0", print_writers);
-					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$LowerThird$Logo_Grp$Side" + WhichSide + 
-							"$Single$img_Logo*TEXTURE*IMAGE SET " + Constants.NPL_LOGO_PATH + lowerThird.getWhichTeamFlag() + "\0", print_writers);
-					
+				case Constants.NPL: case Constants.APL:
+					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$LowerThird$Logo_Grp$Side" + WhichSide + "$Single$img_Logo_Shadow*TEXTURE*IMAGE SET " 
+							+ (config.getBroadcaster().equalsIgnoreCase(Constants.APL)?Constants.APL_LOGO_PATH:Constants.NPL_LOGO_PATH) + lowerThird.getWhichTeamFlag() + "\0", print_writers);
+					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$LowerThird$Logo_Grp$Side" + WhichSide + "$Single$img_Logo*TEXTURE*IMAGE SET " 
+							+ (config.getBroadcaster().equalsIgnoreCase(Constants.APL)?Constants.APL_LOGO_PATH:Constants.NPL_LOGO_PATH) + lowerThird.getWhichTeamFlag() + "\0", print_writers);
 					break;
 				case Constants.MPL:
 					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$LowerThird$Logo_Grp$Side" + WhichSide + 
 							"$Single$img_Logo_Shadow*TEXTURE*IMAGE SET " + Constants.MPL_LOGO_PATH + lowerThird.getWhichTeamFlag() + logoCategory + "\0", print_writers);
 					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$LowerThird$Logo_Grp$Side" + WhichSide + 
 							"$Single$img_Logo*TEXTURE*IMAGE SET " + Constants.MPL_LOGO_PATH + lowerThird.getWhichTeamFlag() + logoCategory + "\0", print_writers);
-					
 					break;	
 				}
 				break;
@@ -8194,8 +8250,8 @@ public class LowerThirdGfx
 						"$Select*FUNCTION*Omo*vis_con SET 0\0", print_writers);
 				
 				switch (config.getBroadcaster().toUpperCase()) {
-				case Constants.NPL:
-					logo_data = Constants.NPL_LOGO_PATH;
+				case Constants.NPL: case Constants.APL:
+					logo_data = (config.getBroadcaster().equalsIgnoreCase(Constants.APL)?Constants.APL_LOGO_PATH:Constants.NPL_LOGO_PATH);
 					logoCategory = "";
 					break;
 				case Constants.MPL:
@@ -8214,8 +8270,8 @@ public class LowerThirdGfx
 						"$Select*FUNCTION*Omo*vis_con SET 0\0", print_writers);
 				
 				switch (config.getBroadcaster().toUpperCase()) {
-				case Constants.NPL:
-					logo_data = Constants.NPL_LOGO_PATH;
+				case Constants.NPL: case Constants.APL:
+					logo_data = (config.getBroadcaster().equalsIgnoreCase(Constants.APL)?Constants.APL_LOGO_PATH:Constants.NPL_LOGO_PATH);
 					logoCategory = "";
 					break;
 				case Constants.MPL:
@@ -8231,17 +8287,16 @@ public class LowerThirdGfx
 				break;
 			case "Control_Shift_L":
 				switch (config.getBroadcaster().toUpperCase()) {
-				case Constants.NPL:
-					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$LT_MatchID$Logo_Grp$Side" + WhichSide + "$HomeLogo" + 
-							"$img_Logo_Shadow*TEXTURE*IMAGE SET " + Constants.NPL_LOGO_PATH + lowerThird.getSubTitle() + " \0", print_writers);
-					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$LT_MatchID$Logo_Grp$Side" + WhichSide + "$HomeLogo" + 
-							"$img_Logo*TEXTURE*IMAGE SET " + Constants.NPL_LOGO_PATH + lowerThird.getSubTitle() + " \0", print_writers);
+				case Constants.NPL: case Constants.APL:
+					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$LT_MatchID$Logo_Grp$Side" + WhichSide + "$HomeLogo$img_Logo_Shadow*TEXTURE*IMAGE SET " 
+							+ (config.getBroadcaster().equalsIgnoreCase(Constants.APL)?Constants.APL_LOGO_PATH:Constants.NPL_LOGO_PATH) + lowerThird.getSubTitle() + " \0", print_writers);
+					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$LT_MatchID$Logo_Grp$Side" + WhichSide + "$HomeLogo$img_Logo*TEXTURE*IMAGE SET " 
+							+ (config.getBroadcaster().equalsIgnoreCase(Constants.APL)?Constants.APL_LOGO_PATH:Constants.NPL_LOGO_PATH) + lowerThird.getSubTitle() + " \0", print_writers);
 					
-					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$LT_MatchID$Logo_Grp$Side" + WhichSide + "$AwayLogo" + 
-							"$img_Logo_Shadow*TEXTURE*IMAGE SET " + Constants.NPL_LOGO_PATH + lowerThird.getScoreText() + " \0", print_writers);
-					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$LT_MatchID$Logo_Grp$Side" + WhichSide + "$AwayLogo" + 
-							"$img_Logo*TEXTURE*IMAGE SET " + Constants.NPL_LOGO_PATH + lowerThird.getScoreText() + " \0", print_writers);
-					
+					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$LT_MatchID$Logo_Grp$Side" + WhichSide + "$AwayLogo$img_Logo_Shadow*TEXTURE*IMAGE SET " 
+							+ (config.getBroadcaster().equalsIgnoreCase(Constants.APL)?Constants.APL_LOGO_PATH:Constants.NPL_LOGO_PATH) + lowerThird.getScoreText() + " \0", print_writers);
+					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$LT_MatchID$Logo_Grp$Side" + WhichSide + "$AwayLogo$img_Logo*TEXTURE*IMAGE SET " 
+							+ (config.getBroadcaster().equalsIgnoreCase(Constants.APL)?Constants.APL_LOGO_PATH:Constants.NPL_LOGO_PATH) + lowerThird.getScoreText() + " \0", print_writers);
 					break;
 				case Constants.MPL:
 					
@@ -8295,8 +8350,8 @@ public class LowerThirdGfx
 				break;
 			case "Control_Shift_M":
 				switch (config.getBroadcaster().toUpperCase()) {
-				case Constants.NPL:
-					logo_data = Constants.NPL_LOGO_PATH;
+				case Constants.NPL: case Constants.APL:
+					logo_data = (config.getBroadcaster().equalsIgnoreCase(Constants.APL)?Constants.APL_LOGO_PATH:Constants.NPL_LOGO_PATH);
 					logoCategory = "";
 					break;
 				case Constants.MPL:
@@ -8679,6 +8734,7 @@ public class LowerThirdGfx
 		case Constants.LEGENDS:
 			return PopulateL3rdHeaderLegend(whatToProcess, WhichSide);
 		case Constants.ICC_U19_2023: case Constants.ISPL: case Constants.BENGAL_T20: case Constants.NPL: case Constants.MPL:
+		case Constants.APL:
 			switch(whatToProcess) {
 			case "Alt_Shift_B":	case "Alt_Shift_O":
 				switch (config.getBroadcaster().toUpperCase()) {
@@ -8699,13 +8755,13 @@ public class LowerThirdGfx
 					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_LowerThirds$Top_Line$Data$Side_" + WhichSide 
 							+ "$Name" + containerName + "$Score$txt_Not_Out*GEOM*TEXT SET " + "" + "\0", print_writers);
 					break;
-				case Constants.NPL: case Constants.MPL:
+				case Constants.NPL: case Constants.MPL: case Constants.APL:
 					LtThisOverSpeedHeader(whatToProcess, WhichSide);
 				}
 				break;
 			case "Alt_Shift_F5":
 				switch (config.getBroadcaster().toUpperCase()) {
-				case Constants.NPL:
+				case Constants.NPL: case Constants.APL:
 					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$LT_Pointers$Logo_Grp$Side" + WhichSide 
 							+ "$img_Logo_Shadow*TEXTURE*IMAGE SET " + Constants.LEGENDS_LOGO_PATH + lowerThird.getWhichTeamFlag() + "\0", print_writers);
 					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$LT_Pointers$Logo_Grp$Side" + WhichSide 
@@ -9145,7 +9201,7 @@ public class LowerThirdGfx
 				
 			case "Shift_F3":
 				switch (config.getBroadcaster().toUpperCase()) {
-				case Constants.NPL: case Constants.MPL:
+				case Constants.NPL: case Constants.MPL: case Constants.APL:
 					
 					PopulateL3rdMainLogo(whatToProcess, WhichSide);
 					
@@ -9292,7 +9348,7 @@ public class LowerThirdGfx
 				break;	
 			case "u":
 				switch (config.getBroadcaster().toUpperCase()) {
-				case Constants.NPL: case Constants.MPL:
+				case Constants.NPL: case Constants.MPL: case Constants.APL:
 					
 					PopulateL3rdMainLogo(whatToProcess, WhichSide);
 					
@@ -9485,7 +9541,7 @@ public class LowerThirdGfx
 				break;
 			case "Control_Shift_M":
 				switch (config.getBroadcaster().toUpperCase()) {
-				case Constants.NPL: case Constants.MPL:
+				case Constants.NPL: case Constants.MPL: case Constants.APL:
 					
 					PopulateL3rdMainLogo(whatToProcess, WhichSide);
 					
@@ -9617,11 +9673,11 @@ public class LowerThirdGfx
 					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_LowerThirds$Top_Line$Data$Side_" + WhichSide 
 							+ "$Name" + containerName + "$Score$txt_Not_Out*GEOM*TEXT SET \0", print_writers);
 					break;
-				case Constants.NPL: case Constants.MPL:
-					
+				case Constants.NPL: case Constants.MPL: case Constants.APL:
+					 
 					switch (config.getBroadcaster().toUpperCase()) {
-					case Constants.NPL:
-						logo_data = Constants.NPL_LOGO_PATH;
+					case Constants.NPL: case Constants.APL:
+						logo_data = (config.getBroadcaster().equalsIgnoreCase(Constants.APL)?Constants.APL_LOGO_PATH:Constants.NPL_LOGO_PATH);
 						logoCategory = "";
 						break;
 					case Constants.MPL:
@@ -9687,11 +9743,11 @@ public class LowerThirdGfx
 				
 			case "Control_a":
 				switch (config.getBroadcaster().toUpperCase()) {
-				case Constants.NPL: case Constants.MPL:
+				case Constants.NPL: case Constants.MPL: case Constants.APL:
 					
 					switch (config.getBroadcaster().toUpperCase()) {
-					case Constants.NPL:
-						logo_data = Constants.NPL_LOGO_PATH;
+					case Constants.NPL: case Constants.APL:
+						logo_data = (config.getBroadcaster().equalsIgnoreCase(Constants.APL)?Constants.APL_LOGO_PATH:Constants.NPL_LOGO_PATH);
 						logoCategory = "";
 						break;
 					case Constants.MPL:
@@ -9856,11 +9912,11 @@ public class LowerThirdGfx
 				
 			case "Control_F3":
 				switch (config.getBroadcaster().toUpperCase()) {
-				case Constants.NPL: case Constants.MPL:
+				case Constants.NPL: case Constants.MPL: case Constants.APL:
 					
 					switch (config.getBroadcaster().toUpperCase()) {
-					case Constants.NPL:
-						logo_data = Constants.NPL_LOGO_PATH;
+					case Constants.NPL: case Constants.APL:
+						logo_data = (config.getBroadcaster().equalsIgnoreCase(Constants.APL)?Constants.APL_LOGO_PATH:Constants.NPL_LOGO_PATH);
 						logoCategory = "";
 						break;
 					case Constants.MPL:
@@ -10157,13 +10213,13 @@ public class LowerThirdGfx
 							 + "$txt_Not_Out*GEOM*TEXT SET " + lowerThird.getBallsFacedText() + " OVERS" + "\0", print_writers);
 					
 					break;	
-				case Constants.NPL: case Constants.MPL:
+				case Constants.NPL: case Constants.MPL: case Constants.APL:
 					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$LowerThird$Logo_Grp$Side"+ WhichSide + 
 							"$Select*FUNCTION*Omo*vis_con SET 0\0", print_writers);
 					
 					switch (config.getBroadcaster().toUpperCase()) {
-					case Constants.NPL:
-						logo_data = Constants.NPL_LOGO_PATH;
+					case Constants.NPL: case Constants.APL:
+						logo_data = (config.getBroadcaster().equalsIgnoreCase(Constants.APL)?Constants.APL_LOGO_PATH:Constants.NPL_LOGO_PATH);
 						logoCategory = "";
 						break;
 					case Constants.MPL:
@@ -10401,14 +10457,14 @@ public class LowerThirdGfx
 					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_LowerThirds$Top_Line$Data$Side_" + WhichSide 
 							+ "$Logo" + containerName + "$img_TeamLogo" + "*TEXTURE*IMAGE SET " + Constants.ISPL_LOGOS_PATH + logo_name + "\0", print_writers);
 					break;
-				case Constants.NPL: case Constants.MPL:
+				case Constants.NPL: case Constants.MPL: case Constants.APL:
 					
 					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$LowerThird$Logo_Grp$Side"+ WhichSide + 
 							"$Select*FUNCTION*Omo*vis_con SET 0\0", print_writers);
 					
 					switch (config.getBroadcaster().toUpperCase()) {
-					case Constants.NPL:
-						logo_data = Constants.NPL_LOGO_PATH;
+					case Constants.NPL: case Constants.APL:
+						logo_data = (config.getBroadcaster().equalsIgnoreCase(Constants.APL)?Constants.APL_LOGO_PATH:Constants.NPL_LOGO_PATH);
 						logoCategory = "";
 						break;
 					case Constants.MPL:
@@ -10460,7 +10516,7 @@ public class LowerThirdGfx
 				
 			case "F8": case "Alt_F8":
 				switch (config.getBroadcaster().toUpperCase()) {
-				case Constants.NPL: case Constants.MPL:
+				case Constants.NPL: case Constants.MPL: case Constants.APL:
 					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$LowerThird$Logo_Grp$Side" + WhichSide + "$Select"
 							+ "*FUNCTION*Omo*vis_con SET 0\0", print_writers);
 					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$LowerThird$Data_Grp$Header_Grp$Side" + WhichSide + "$Select"
@@ -10475,8 +10531,8 @@ public class LowerThirdGfx
 					if(lowerThird.getWhichTeamFlag() != null) {
 						
 						switch (config.getBroadcaster().toUpperCase()) {
-						case Constants.NPL:
-							logo_data = Constants.NPL_LOGO_PATH;
+						case Constants.NPL: case Constants.APL:
+							logo_data = (config.getBroadcaster().equalsIgnoreCase(Constants.APL)?Constants.APL_LOGO_PATH:Constants.NPL_LOGO_PATH);
 							logoCategory = "";
 							break;
 						case Constants.MPL:
@@ -10714,13 +10770,13 @@ public class LowerThirdGfx
 							+ "$Name" + containerName + "$Score$txt_Not_Out*GEOM*TEXT SET " + lowerThird.getSubTitle() + "\0", print_writers);
 					
 					break;
-				case Constants.NPL: case Constants.MPL:
+				case Constants.NPL: case Constants.MPL: case Constants.APL:
 					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$LowerThird$Logo_Grp$Side"+ WhichSide + 
 							"$Select*FUNCTION*Omo*vis_con SET 0\0", print_writers);
 					
 					switch (config.getBroadcaster().toUpperCase()) {
-					case Constants.NPL:
-						logo_data = Constants.NPL_LOGO_PATH;
+					case Constants.NPL: case Constants.APL:
+						logo_data = (config.getBroadcaster().equalsIgnoreCase(Constants.APL)?Constants.APL_LOGO_PATH:Constants.NPL_LOGO_PATH);
 						logoCategory = "";
 						break;
 					case Constants.MPL:
@@ -10843,13 +10899,13 @@ public class LowerThirdGfx
 					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_LowerThirds$Top_Line$Data$Side_" + WhichSide 
 							+ "$Name" + containerName + "$Score$txt_Not_Out*GEOM*TEXT SET " + "" + "\0", print_writers);
 					break;	
-				case Constants.NPL: case Constants.MPL:
+				case Constants.NPL: case Constants.MPL: case Constants.APL:
 					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$LowerThird$Logo_Grp$Side"+ WhichSide + 
 							"$Select*FUNCTION*Omo*vis_con SET 0\0", print_writers);
 					
 					switch (config.getBroadcaster().toUpperCase()) {
-					case Constants.NPL:
-						logo_data = Constants.NPL_LOGO_PATH;
+					case Constants.NPL: case Constants.APL:
+						logo_data = (config.getBroadcaster().equalsIgnoreCase(Constants.APL)?Constants.APL_LOGO_PATH:Constants.NPL_LOGO_PATH);
 						logoCategory = "";
 						break;
 					case Constants.MPL:
@@ -10950,7 +11006,7 @@ public class LowerThirdGfx
 							 + "$txt_Not_Out*GEOM*TEXT SET " + "" + "\0", print_writers);
 					
 					break;
-				case Constants.NPL: case Constants.MPL:
+				case Constants.NPL: case Constants.MPL: case Constants.APL:
 					
 					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$LowerThird$Logo_Grp$Side" + WhichSide + "$Select"
 							+ "*FUNCTION*Omo*vis_con SET 0\0", print_writers);
@@ -10964,8 +11020,8 @@ public class LowerThirdGfx
 							+ "*FUNCTION*Omo*vis_con SET 0\0", print_writers);
 					
 					switch (config.getBroadcaster().toUpperCase()) {
-					case Constants.NPL:
-						logo_data = Constants.NPL_LOGO_PATH;
+					case Constants.NPL: case Constants.APL:
+						logo_data = (config.getBroadcaster().equalsIgnoreCase(Constants.APL)?Constants.APL_LOGO_PATH:Constants.NPL_LOGO_PATH);
 						logoCategory = "";
 						break;
 					case Constants.MPL:
@@ -10991,7 +11047,7 @@ public class LowerThirdGfx
 					}else if(lowerThird.getWhichSponsor().isEmpty() && !lowerThird.getWhichTeamFlag().isEmpty()) {
 						
 						switch (config.getBroadcaster().toUpperCase()) {
-						case Constants.NPL:
+						case Constants.NPL: case Constants.APL:
 							CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$LowerThird$Logo_Grp$Side" + WhichSide + 
 									"$Single$img_Logo_Shadow*TEXTURE*IMAGE SET " + logo_data + lowerThird.getWhichTeamFlag() + logoCategory + "\0", print_writers);
 							CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$LowerThird$Logo_Grp$Side" + WhichSide + 
@@ -11029,7 +11085,7 @@ public class LowerThirdGfx
 						}
 					}else {
 						switch (config.getBroadcaster().toUpperCase()) {
-						case Constants.NPL:
+						case Constants.NPL: case Constants.APL:
 							CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$LowerThird$Logo_Grp$Side" + WhichSide + 
 									"$Single$img_Logo_Shadow*TEXTURE*IMAGE SET " + logo_data + "TLogo" + "\0", print_writers);
 							CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$LowerThird$Logo_Grp$Side" + WhichSide + 
@@ -11268,11 +11324,11 @@ public class LowerThirdGfx
 					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$All_LowerThirds$Top_Line$Side" + WhichSide 
 							 + "$txt_Not_Out*GEOM*TEXT SET " + "AFTER " +lowerThird.getBallsFacedText() +" OVERS" + "\0", print_writers);
 					break;
-				case Constants.NPL:
+				case Constants.NPL: case Constants.APL:
 					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$LT_PhaseComparison$Logo_Grp$Logo$img_Logo_Shadow*TEXTURE*IMAGE SET " 
-							+ Constants.NPL_LOGO_PATH + lowerThird.getWhichTeamFlag() + " \0", print_writers);
+							+ (config.getBroadcaster().equalsIgnoreCase(Constants.APL)?Constants.APL_LOGO_PATH:Constants.NPL_LOGO_PATH) + lowerThird.getWhichTeamFlag() + " \0", print_writers);
 					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$LT_PhaseComparison$Logo_Grp$Logo$img_Logo*TEXTURE*IMAGE SET " 
-							+ Constants.NPL_LOGO_PATH + lowerThird.getWhichTeamFlag() + " \0", print_writers);
+							+ (config.getBroadcaster().equalsIgnoreCase(Constants.APL)?Constants.APL_LOGO_PATH:Constants.NPL_LOGO_PATH) + lowerThird.getWhichTeamFlag() + " \0", print_writers);
 					
 					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$LT_PhaseComparison$Header$Header_Grp$txt_Header*GEOM*TEXT SET " 
 							+ lowerThird.getHeaderText() + "\0", print_writers);
@@ -11283,13 +11339,13 @@ public class LowerThirdGfx
 			
 			case "Shift_F5": case "Shift_F9":
 				switch (config.getBroadcaster().toUpperCase()) {
-				case Constants.NPL: case Constants.MPL:
+				case Constants.NPL: case Constants.MPL: case Constants.APL:
 					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$LowerThird$Logo_Grp$Side"+ WhichSide + 
 							"$Select*FUNCTION*Omo*vis_con SET 0\0", print_writers);
 					
 					switch (config.getBroadcaster().toUpperCase()) {
-					case Constants.NPL:
-						logo_data = Constants.NPL_LOGO_PATH;
+					case Constants.NPL: case Constants.APL:
+						logo_data = (config.getBroadcaster().equalsIgnoreCase(Constants.APL)?Constants.APL_LOGO_PATH:Constants.NPL_LOGO_PATH);
 						logoCategory = "";
 						break;
 					case Constants.MPL:
@@ -11396,7 +11452,7 @@ public class LowerThirdGfx
 					break;
 				case "Shift_F5":
 					switch (config.getBroadcaster().toUpperCase()) {
-					case Constants.NPL: case Constants.MPL:
+					case Constants.NPL: case Constants.MPL: case Constants.APL:
 						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$LowerThird$Data_Grp$Right_Info_ALL$Side" + WhichSide 
 								+ "$Data$Player_Score$txt_Runs*GEOM*TEXT SET " + lowerThird.getScoreText() + lowerThird.getSubTitle() + "\0", print_writers);
 						
@@ -11440,7 +11496,7 @@ public class LowerThirdGfx
 					break;
 				case "Shift_F9":
 					switch (config.getBroadcaster().toUpperCase()) {
-					case Constants.NPL: case Constants.MPL:
+					case Constants.NPL: case Constants.MPL: case Constants.APL:
 						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$LowerThird$Data_Grp$Sub_Info_Grp$Side" + WhichSide 
 								+ "$ExtremRight$txt_SubInfo*GEOM*TEXT SET \0", print_writers);
 						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$LowerThird$Data_Grp$Right_Info_ALL$Side" + WhichSide 
@@ -11475,13 +11531,13 @@ public class LowerThirdGfx
 				
 			case "Alt_F12":
 				switch (config.getBroadcaster().toUpperCase()) {
-				case Constants.NPL: case Constants.MPL:
+				case Constants.NPL: case Constants.MPL: case Constants.APL:
 					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$LowerThird$Logo_Grp$Side"+ WhichSide + 
 							"$Select*FUNCTION*Omo*vis_con SET 0\0", print_writers);
 					
 					switch (config.getBroadcaster().toUpperCase()) {
-					case Constants.NPL:
-						logo_data = Constants.NPL_LOGO_PATH;
+					case Constants.NPL: case Constants.APL:
+						logo_data = (config.getBroadcaster().equalsIgnoreCase(Constants.APL)?Constants.APL_LOGO_PATH:Constants.NPL_LOGO_PATH);
 						logoCategory = "";
 						break;
 					case Constants.MPL:
@@ -11654,7 +11710,7 @@ public class LowerThirdGfx
 				
 			case "F6": case "Control_F6": case "Shift_F6":
 				switch (config.getBroadcaster().toUpperCase()) {
-				case Constants.NPL: case Constants.MPL:
+				case Constants.NPL: case Constants.MPL: case Constants.APL:
 					
 					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$LowerThird$Logo_Grp$Side" + WhichSide + "$Select"
 							+ "*FUNCTION*Omo*vis_con SET 0\0", print_writers);
@@ -11673,8 +11729,8 @@ public class LowerThirdGfx
 					if(lowerThird.getWhichTeamFlag() != null) {
 						
 						switch (config.getBroadcaster().toUpperCase()) {
-						case Constants.NPL:
-							logo_data = Constants.NPL_LOGO_PATH;
+						case Constants.NPL: case Constants.APL:
+							logo_data = (config.getBroadcaster().equalsIgnoreCase(Constants.APL)?Constants.APL_LOGO_PATH:Constants.NPL_LOGO_PATH);
 							logoCategory = "";
 							break;
 						case Constants.MPL:
@@ -11906,13 +11962,13 @@ public class LowerThirdGfx
 					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_LowerThirds$Top_Line$Data$Side_" + WhichSide 
 							+ "$Name" + containerName + "$Score$txt_Not_Out*GEOM*TEXT SET \0", print_writers);
 					break;
-				case Constants.NPL: case Constants.MPL:
+				case Constants.NPL: case Constants.MPL: case Constants.APL:
 					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$LowerThird$Logo_Grp$Side"+ WhichSide + 
 							"$Select*FUNCTION*Omo*vis_con SET 0\0", print_writers);
 					
 					switch (config.getBroadcaster().toUpperCase()) {
-					case Constants.NPL:
-						logo_data = Constants.NPL_LOGO_PATH;
+					case Constants.NPL: case Constants.APL:
+						logo_data = (config.getBroadcaster().equalsIgnoreCase(Constants.APL)?Constants.APL_LOGO_PATH:Constants.NPL_LOGO_PATH);
 						logoCategory = "";
 						break;
 					case Constants.MPL:
@@ -12458,7 +12514,7 @@ public class LowerThirdGfx
 		switch (whatToProcess) {
 		case "Control_Shift_B":
 			switch (config.getBroadcaster().toUpperCase()) {
-			case Constants.NPL: case Constants.MPL:
+			case Constants.NPL: case Constants.MPL: case Constants.APL:
 				if(inning.getTotalWickets() >=7 ) {
 					containerName = "$4Bats";
 					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$LT_NextToBat$Side"+WhichSide+"$Select*FUNCTION*Omo*vis_con SET 1\0", print_writers);
@@ -12468,8 +12524,8 @@ public class LowerThirdGfx
 				}
 				
 				switch (config.getBroadcaster().toUpperCase()) {
-				case Constants.NPL:
-					logo_data = Constants.NPL_LOGO_PATH;
+				case Constants.NPL: case Constants.APL:
+					logo_data = (config.getBroadcaster().equalsIgnoreCase(Constants.APL)?Constants.APL_LOGO_PATH:Constants.NPL_LOGO_PATH);
 					logoCategory = "";
 					break;
 				case Constants.MPL:
@@ -12525,13 +12581,15 @@ public class LowerThirdGfx
 						
 						inAtPosition++;
 						switch (config.getBroadcaster().toUpperCase()) {
-						case Constants.NPL:
+						case Constants.NPL: case Constants.APL:
 							if(config.getPrimaryIpAddress().equalsIgnoreCase(Constants.LOCALHOST)) {
-								CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$LT_NextToBat$Side"+WhichSide+containerName+"$Data_All$"+rowId+"$Pic$img*TEXTURE*IMAGE SET " 
-										+ Constants.NPL_LOCAL_PHOTO_PATH+ inning.getBatting_team().getTeamName4()+"\\\\"+bc.getPlayer().getPhoto()+CricketUtil.PNG_EXTENSION + " \0", print_writers);
+								CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$LT_NextToBat$Side"+WhichSide+containerName+"$Data_All$"+rowId+"$Pic$img"
+										+ "*TEXTURE*IMAGE SET " + (config.getBroadcaster().equalsIgnoreCase(Constants.APL)?Constants.APL_LOCAL_PHOTO_PATH :Constants.NPL_LOCAL_PHOTO_PATH)
+										+ inning.getBatting_team().getTeamName4()+"\\\\"+bc.getPlayer().getPhoto()+CricketUtil.PNG_EXTENSION + " \0", print_writers);
 							}else {
-								CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$LT_NextToBat$Side"+WhichSide+containerName+"$Data_All$"+rowId+"$Pic$img*TEXTURE*IMAGE SET " 
-										+ "\\\\" + config.getPrimaryIpAddress()+ Constants.NPL_PHOTO_PATH+ inning.getBatting_team().getTeamName4()+"\\\\"+bc.getPlayer().getPhoto()+CricketUtil.PNG_EXTENSION + " \0", print_writers);
+								CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$LT_NextToBat$Side"+WhichSide+containerName+"$Data_All$"+rowId+"$Pic$img"
+										+ "*TEXTURE*IMAGE SET " + "\\\\" + config.getPrimaryIpAddress()+(config.getBroadcaster().equalsIgnoreCase(Constants.APL)?Constants.APL_PHOTO_PATH
+												:Constants.NPL_PHOTO_PATH)+ inning.getBatting_team().getTeamName4()+"\\\\"+bc.getPlayer().getPhoto()+CricketUtil.PNG_EXTENSION + " \0", print_writers);
 							}
 							break;
 						case Constants.MPL:
@@ -13048,13 +13106,13 @@ public class LowerThirdGfx
 					}else {
 						if (config.getPrimaryIpAddress().equalsIgnoreCase("LOCALHOST")) {
 							CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$LT_PlayingXI$Data_All$Side" + WhichSide + containerNam1 + "$" 
-									+ row_id + "$Pic$img*TEXTURE*IMAGE SET " + Constants.NPL_LOCAL_PHOTO_PATH + team.getTeamName4() + "\\" 
-									+ bc.getPhoto() + CricketUtil.PNG_EXTENSION + "\0", print_writers);
+									+ row_id + "$Pic$img*TEXTURE*IMAGE SET " + (config.getBroadcaster().equalsIgnoreCase(Constants.APL)?Constants.APL_LOCAL_PHOTO_PATH
+									:Constants.NPL_LOCAL_PHOTO_PATH)+team.getTeamName4() + "\\" + bc.getPhoto() + CricketUtil.PNG_EXTENSION + "\0", print_writers);
 						} else {
 							
-							CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$LT_PlayingXI$Data_All$Side" + WhichSide + containerNam1 + "$" 
-									+ row_id + "$Pic$img*TEXTURE*IMAGE SET " + "\\\\" + config.getPrimaryIpAddress() + "\\" + Constants.NPL_PHOTO_PATH + 
-									team.getTeamName4() + "\\" + bc.getPhoto() + CricketUtil.PNG_EXTENSION + "\0", print_writers);
+							CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$LT_PlayingXI$Data_All$Side" + WhichSide + containerNam1 + "$" + row_id + 
+									"$Pic$img*TEXTURE*IMAGE SET " + "\\\\" + config.getPrimaryIpAddress() + "\\" + (config.getBroadcaster().equalsIgnoreCase(Constants.APL)
+									?Constants.APL_PHOTO_PATH:Constants.NPL_PHOTO_PATH) + team.getTeamName4() + "\\" + bc.getPhoto() + CricketUtil.PNG_EXTENSION + "\0", print_writers);
 						}
 					}
 					
@@ -13218,13 +13276,13 @@ public class LowerThirdGfx
 					}else {
 						if (config.getPrimaryIpAddress().equalsIgnoreCase("LOCALHOST")) {
 							CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$LT_PlayingXI$Data_All$Side" + WhichSide + containerNam1 + "$" 
-									+ row_id + "$Pic$img*TEXTURE*IMAGE SET " + Constants.NPL_LOCAL_PHOTO_PATH + team.getTeamName4() + "\\" 
-									+ bc.getPlayer().getPhoto() + CricketUtil.PNG_EXTENSION + "\0", print_writers);
+									+ row_id + "$Pic$img*TEXTURE*IMAGE SET " + (config.getBroadcaster().equalsIgnoreCase(Constants.APL)?Constants.APL_LOCAL_PHOTO_PATH
+									:Constants.NPL_LOCAL_PHOTO_PATH) + team.getTeamName4() + "\\" + bc.getPlayer().getPhoto() + CricketUtil.PNG_EXTENSION + "\0", print_writers);
 						} else {
 							
-							CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$LT_PlayingXI$Data_All$Side" + WhichSide + containerNam1 + "$" 
-									+ row_id + "$Pic$img*TEXTURE*IMAGE SET " + "\\\\" + config.getPrimaryIpAddress() + "\\" + Constants.NPL_PHOTO_PATH + 
-									team.getTeamName4() + "\\" + bc.getPlayer().getPhoto() + CricketUtil.PNG_EXTENSION + "\0", print_writers);
+							CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$LT_PlayingXI$Data_All$Side" + WhichSide + containerNam1 + "$" + row_id + 
+									"$Pic$img*TEXTURE*IMAGE SET " + "\\\\" + config.getPrimaryIpAddress() + "\\" + (config.getBroadcaster().equalsIgnoreCase(Constants.APL)
+									?Constants.APL_PHOTO_PATH:Constants.NPL_PHOTO_PATH) + team.getTeamName4() + "\\" + bc.getPlayer().getPhoto() + CricketUtil.PNG_EXTENSION +"\0", print_writers);
 						}
 					}
 					
@@ -13330,7 +13388,7 @@ public class LowerThirdGfx
 			break;
 		case "Shift_F3":
 			switch (config.getBroadcaster().toUpperCase()) {
-			case Constants.NPL: case Constants.MPL:
+			case Constants.NPL: case Constants.MPL: case Constants.APL:
 				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$LowerThird$Data_Grp$Bottom_Grp$Side"+ WhichSide + 
 						"$Select*FUNCTION*Omo*vis_con SET 1\0", print_writers);
 				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$LowerThird$Data_Grp$Bottom_Grp$Side" + WhichSide 
@@ -13542,13 +13600,14 @@ public class LowerThirdGfx
 		case Constants.LEGENDS:
 			return PopulateL3rdBodyLegend(WhichSide, whatToProcess);
 		case Constants.ICC_U19_2023: case Constants.ISPL: case Constants.BENGAL_T20: case Constants.NPL: case Constants.MPL:
+		case Constants.APL:
 			switch (whatToProcess) {
 			case "Control_Shift_B":
 				PopulateBodyData(WhichSide, whatToProcess);
 				break;
 			case "Alt_Shift_F5":
 				switch (config.getBroadcaster().toUpperCase()) {
-				case Constants.NPL:
+				case Constants.NPL: case Constants.APL:
 					for(int i=0; i<lowerThird.getLeftText().length; i++) {
 						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$LT_Pointers$Data_Grp$Header_Grp$Side" + WhichSide 
 								+ "$Select$Pointers$txt_Info" + (i+1) + "*ACTIVE SET 1\0", print_writers);
@@ -13633,12 +13692,12 @@ public class LowerThirdGfx
 					}
 					
 					break;
-				case Constants.NPL:
+				case Constants.NPL: case Constants.APL:
 					
 					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$LowerThird$Logo_Grp$Side" + WhichSide + "$img_Logo_Shadow*TEXTURE*IMAGE SET " 
-							+ Constants.NPL_LOGO_PATH + lowerThird.getWhichTeamFlag() + "\0", print_writers);
+							+ (config.getBroadcaster().equalsIgnoreCase(Constants.APL)?Constants.APL_LOGO_PATH:Constants.NPL_LOGO_PATH) + lowerThird.getWhichTeamFlag() + "\0", print_writers);
 					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$LowerThird$Logo_Grp$Side" + WhichSide + "$img_Logo*TEXTURE*IMAGE SET " 
-							+ Constants.NPL_LOGO_PATH + lowerThird.getWhichTeamFlag() + "\0", print_writers);
+							+ (config.getBroadcaster().equalsIgnoreCase(Constants.APL)?Constants.APL_LOGO_PATH:Constants.NPL_LOGO_PATH) + lowerThird.getWhichTeamFlag() + "\0", print_writers);
 					
 					if(chnageOn) {
 						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$LowerThird$Data_Grp$Right_Info_ALL$Side"+ WhichSide + 
@@ -14028,7 +14087,7 @@ public class LowerThirdGfx
 				break;
 			case "Control_Shift_Q":
 				switch (config.getBroadcaster().toUpperCase()) {
-				case Constants.NPL: case Constants.MPL:
+				case Constants.NPL: case Constants.MPL: case Constants.APL:
 					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$LowerThird$Data_Grp$Bottom_Grp$Side"+ WhichSide + 
 							"$Select*FUNCTION*Omo*vis_con SET 2\0", print_writers);
 					
@@ -14109,7 +14168,7 @@ public class LowerThirdGfx
 				break;
 			case "Alt_Shift_O":
 				switch (config.getBroadcaster().toUpperCase()) {
-				case Constants.NPL: case Constants.MPL:
+				case Constants.NPL: case Constants.MPL: case Constants.APL:
 					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$LowerThird$Data_Grp$Bottom_Grp$Side"+ WhichSide + 
 							"$Select*FUNCTION*Omo*vis_con SET 1\0", print_writers);
 					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$LowerThird$Data_Grp$Bottom_Grp$Side" + WhichSide 
@@ -14375,7 +14434,7 @@ public class LowerThirdGfx
 			case "u":
 				
 				switch (config.getBroadcaster().toUpperCase()) {
-				case Constants.NPL: case Constants.MPL:
+				case Constants.NPL: case Constants.MPL: case Constants.APL:
 					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$LowerThird$Data_Grp$Bottom_Grp$Side"+ WhichSide + 
 							"$Select*FUNCTION*Omo*vis_con SET 1\0", print_writers);
 					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$LowerThird$Data_Grp$Bottom_Grp$Side" + WhichSide 
@@ -14535,7 +14594,7 @@ public class LowerThirdGfx
 				
 			case "Control_a":
 				switch (config.getBroadcaster().toUpperCase()) {
-				case Constants.NPL: case Constants.MPL:
+				case Constants.NPL: case Constants.MPL: case Constants.APL:
 					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$LowerThird$Data_Grp$Bottom_Grp$Side"+ WhichSide + 
 							"$Select*FUNCTION*Omo*vis_con SET 1\0", print_writers);
 					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$LowerThird$Data_Grp$Bottom_Grp$Side" + WhichSide 
@@ -14691,7 +14750,7 @@ public class LowerThirdGfx
 			case "Control_F3":
 				
 				switch (config.getBroadcaster().toUpperCase()) {
-				case Constants.NPL: case Constants.MPL:
+				case Constants.NPL: case Constants.MPL: case Constants.APL:
 					
 					if(Integer.valueOf(lowerThird.getLeftText()[2].split("-")[1]) >= 10) {
 						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$LT_Comparison$Logo_Grp$Side" + WhichSide + "$HomeScore" + 
@@ -14987,7 +15046,7 @@ public class LowerThirdGfx
 			case "Control_F5": case "Control_F9":
 				
 				switch (config.getBroadcaster().toUpperCase()) {
-				case Constants.NPL: case Constants.MPL:
+				case Constants.NPL: case Constants.MPL: case Constants.APL:
 					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$LowerThird$Data_Grp$Bottom_Grp$Side"+ WhichSide + 
 							"$Select*FUNCTION*Omo*vis_con SET 0\0", print_writers);
 					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$LowerThird$Data_Grp$Bottom_Grp$Side" + WhichSide 
@@ -15064,7 +15123,7 @@ public class LowerThirdGfx
 										"$1" + containerName + "$Data$Right$txt_1*GEOM*TEXT SET \0", print_writers);
 							}
 							break;
-						case Constants.NPL: case Constants.MPL:
+						case Constants.NPL: case Constants.MPL: case Constants.APL:
 							if(!lowerThird.getRightText()[0].equalsIgnoreCase("WITHOUTEND")) {
 								CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$LowerThird$Data_Grp$Bottom_Grp$Side" + WhichSide 
 										+ "$FreeText_Small$txt_Info*GEOM*TEXT SET " + lowerThird.getSubTitle()+"      "+lowerThird.getRightText()[0]+" END" + "\0", print_writers);
@@ -15216,7 +15275,7 @@ public class LowerThirdGfx
 							+ lowerThird.getLeftText()[4] + "                           S/R  " + lowerThird.getLeftText()[5].replace(".0", "") + "\0", print_writers);
 					
 					break;
-				case Constants.NPL: case Constants.MPL:
+				case Constants.NPL: case Constants.MPL: case Constants.APL:
 					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$LowerThird$Data_Grp$Bottom_Grp$Side" + WhichSide 
 							+ "$FreeText_Small$txt_Info*GEOM*TEXT SET " + lowerThird.getLeftText()[0] + "\0", print_writers);
 					break;
@@ -15275,7 +15334,7 @@ public class LowerThirdGfx
 							"$Select_Subline$1$Data$Right$txt_1*GEOM*TEXT SET " + "STRIKE RATE   " + lowerThird.getRightText()[0] + "\0", print_writers);
 					
 					break;
-				case Constants.NPL: case Constants.MPL:
+				case Constants.NPL: case Constants.MPL: case Constants.APL:
 					System.out.println("lowerThird = " + lowerThird);
 					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$LowerThird$Data_Grp$Bottom_Grp$Side" + WhichSide 
 							+ "$FreeText_Small$txt_Info*GEOM*TEXT SET " + "FOURS " + lowerThird.getLeftText()[0] + "      SIXES " + 
@@ -15391,7 +15450,7 @@ public class LowerThirdGfx
 						}
 					}
 					break;
-				case Constants.NPL: case Constants.MPL:
+				case Constants.NPL: case Constants.MPL: case Constants.APL:
 					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$LowerThird$Data_Grp$Bottom_Grp$Side"+ WhichSide + 
 							"$Select*FUNCTION*Omo*vis_con SET 1\0", print_writers);
 					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$LowerThird$Data_Grp$Bottom_Grp$Side" + WhichSide 
@@ -15499,7 +15558,7 @@ public class LowerThirdGfx
 							"$Select_Subline$2$Data$Stat$txt_" + (i+1) + "*GEOM*TEXT SET " + lowerThird.getStatsText()[i] + "\0", print_writers);
 					}
 					break;
-				case Constants.NPL: case Constants.MPL:
+				case Constants.NPL: case Constants.MPL: case Constants.APL:
 					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$LowerThird$Data_Grp$Bottom_Grp$Side"+ WhichSide + 
 							"$Select*FUNCTION*Omo*vis_con SET 1\0", print_writers);
 					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$LowerThird$Data_Grp$Bottom_Grp$Side" + WhichSide 
@@ -15579,7 +15638,7 @@ public class LowerThirdGfx
 						"$Select_Subline$3$Data$Left$txt_1*GEOM*TEXT SET " + lowerThird.getLeftText()[1] + "\0", print_writers);
 					
 					break;
-				case Constants.NPL: case Constants.MPL:
+				case Constants.NPL: case Constants.MPL: case Constants.APL:
 //					int oneToSixRuns = 0, oneToSixfWkt = 0, sevenToFifteenRuns = 0, sevenToFifteenWkt = 0, sixteenToTweentyRuns = 0, sixteenToTweentyWkt = 0;
 					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$LowerThird$Data_Grp$Bottom_Grp$Side"+ WhichSide + 
 							"$Select*FUNCTION*Omo*vis_con SET 1\0", print_writers);
@@ -15785,7 +15844,7 @@ public class LowerThirdGfx
 									containerName+"$Select_Subline$3" + "$Data$Stat$txt_"+(i+1)+"*GEOM*TEXT SET " + lowerThird.getLeftText()[i] + "\0", print_writers);
 					}
 					break;
-				case Constants.NPL:
+				case Constants.NPL: case Constants.APL:
 					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$LT_PhaseComparison$4Collumn$1$select_Highlight*FUNCTION*Omo*vis_con SET 1\0", print_writers);
 					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$LT_PhaseComparison$4Collumn$2$select_Highlight*FUNCTION*Omo*vis_con SET 0\0", print_writers);
 					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$LT_PhaseComparison$4Collumn$3$select_Highlight*FUNCTION*Omo*vis_con SET 0\0", print_writers);
@@ -15821,7 +15880,7 @@ public class LowerThirdGfx
 				break;
 			case "Shift_F5": case "Shift_F9": case "Alt_F12":
 				switch (config.getBroadcaster().toUpperCase()) {
-				case Constants.NPL: case Constants.MPL:
+				case Constants.NPL: case Constants.MPL: case Constants.APL:
 					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$LowerThird$Data_Grp$Bottom_Grp$Side"+ WhichSide + 
 							"$Select*FUNCTION*Omo*vis_con SET 1\0", print_writers);
 					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$LowerThird$Data_Grp$Bottom_Grp$Side" + WhichSide 
@@ -15961,7 +16020,7 @@ public class LowerThirdGfx
 					}
 					
 					break;
-				case Constants.NPL: case Constants.MPL:
+				case Constants.NPL: case Constants.MPL: case Constants.APL:
 					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$LowerThird$Data_Grp$Bottom_Grp$Side"+ WhichSide + 
 							"$Select*FUNCTION*Omo*vis_con SET 1\0", print_writers);
 					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$LowerThird$Data_Grp$Bottom_Grp$Side" + WhichSide 
@@ -16029,7 +16088,7 @@ public class LowerThirdGfx
 					}
 					
 					break;
-				case Constants.NPL: case Constants.MPL:
+				case Constants.NPL: case Constants.MPL: case Constants.APL:
 					if(lowerThird.getLeftText()[0].equalsIgnoreCase("Captain") || lowerThird.getLeftText()[0].equalsIgnoreCase("Captain Wicket-Keeper")) {
 						if(lowerThird.getLeftText()[0].equalsIgnoreCase("Captain Wicket-Keeper")) {
 							CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$LowerThird$Data_Grp$Bottom_Grp$Side" + WhichSide 
@@ -16105,7 +16164,7 @@ public class LowerThirdGfx
 					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_LowerThirds$Sublines$Side_" + WhichSide +
 							"$Select_Subline$1$Data$Left$txt_1*GEOM*TEXT SET " + lowerThird.getLeftText()[0].toUpperCase() + "\0", print_writers);
 					break;
-				case Constants.NPL: case Constants.MPL:
+				case Constants.NPL: case Constants.MPL: case Constants.APL:
 					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$LowerThird$Data_Grp$Bottom_Grp$Side" + WhichSide 
 							+ "$FreeText_Small$txt_Info*GEOM*TEXT SET " + lowerThird.getLeftText()[0].toUpperCase() + "\0", print_writers);
 					break;
@@ -16190,7 +16249,7 @@ public class LowerThirdGfx
 					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_LowerThirds$Sublines$Side_" + WhichSide 
 						+ "$Select_Subline$2$Data$Right$txt_1*GEOM*TEXT SET " + "\0", print_writers);
 					break;
-				case Constants.NPL: case Constants.MPL:
+				case Constants.NPL: case Constants.MPL: case Constants.APL:
 					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$LowerThird$Data_Grp$Bottom_Grp$Side"+ WhichSide + 
 							"$Select*FUNCTION*Omo*vis_con SET 3\0", print_writers);
 					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$LowerThird$Data_Grp$Bottom_Grp$Side" + WhichSide 
@@ -16239,7 +16298,7 @@ public class LowerThirdGfx
 					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_LowerThirds$Sublines$Side_" + WhichSide 
 						+ "$Select_Subline$1$Data$Left$txt_1*GEOM*TEXT SET " + "  " + lowerThird.getLeftText()[0] +  lowerThird.getLeftText()[1] + "\0", print_writers);
 					break;
-				case Constants.NPL: case Constants.MPL:
+				case Constants.NPL: case Constants.MPL: case Constants.APL:
 					
 					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$LowerThird$Data_Grp$Bottom_Grp$Side"+ WhichSide + 
 							"$Select*FUNCTION*Omo*vis_con SET 3\0", print_writers);

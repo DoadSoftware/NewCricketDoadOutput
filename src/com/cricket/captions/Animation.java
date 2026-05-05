@@ -137,7 +137,7 @@ public class Animation
 				return Constants.LOWER_THIRD;	
 			}
 			break;
-		case Constants.NPL: case Constants.MPL:
+		case Constants.NPL: case Constants.MPL: case Constants.APL:
 			switch (whatToProcess.split(",")[0]) {
 			case "Alt_1": case "Alt_2": case "Alt_3": case "Alt_4": case "Alt_5": case "Alt_6": case "Alt_7": case "Alt_8": 
 			case "Alt_9": case "Alt_0": case "Control_F12": case "Shift_F12": case "Control_Shift_(":
@@ -839,7 +839,7 @@ public class Animation
 				break;
 			}
 			break;
-		case Constants.NPL: case Constants.MPL:
+		case Constants.NPL: case Constants.MPL: case Constants.APL:
 			switch (whatToProcess.split(",")[0]) {
 			case "Control_F12":
 				if(this.infobar.isInfobar_on_screen() == true) {
@@ -1178,7 +1178,7 @@ public class Animation
 				processAnimation(Constants.BACK, print_writers, "Loop", "START");
 				
 				switch (config.getBroadcaster().toUpperCase()) {
-				case Constants.NPL: case Constants.MPL:
+				case Constants.NPL: case Constants.MPL: case Constants.APL:
 					
 					if(audioenabled.equalsIgnoreCase("TRUE")) {
 						processAnimation(Constants.BACK, print_writers, "Audio$In", "START");
@@ -1301,7 +1301,7 @@ public class Animation
 				AnimateIn("ArrowDown,", print_writers, config); // Push infobar
 				TimeUnit.MILLISECONDS.sleep(500);
 				switch (config.getBroadcaster().toUpperCase()) {
-				case Constants.NPL: case Constants.LEGENDS: case Constants.MPL:
+				case Constants.NPL: case Constants.LEGENDS: case Constants.MPL: case Constants.APL:
 					processAnimation(Constants.BACK, print_writers, "Anim_Ident", "START");
 					break;
 				default:
@@ -2775,7 +2775,7 @@ public class Animation
 				caption.captionWhichGfx = "";
 			}
 			break;
-		case Constants.NPL: case Constants.MPL:
+		case Constants.NPL: case Constants.MPL: case Constants.APL:
 			switch (whatToProcess.split(",")[0]) {
 			case "Control_F12":
 				processAnimation(Constants.FRONT, print_writers, "Anim_Ident$In_Out", "CONTINUE");
@@ -3030,7 +3030,7 @@ public class Animation
 			case "Alt_z": case "Shift_F8": case "Control_p": case "Control_F10": case "Shift_F10": case "Control_Shift_D": case "Alt_F11":
 			case "Control_Shift_E": case "Control_Shift_F": case "Control_Shift_I": case "Alt_Shift_J": case "Control_Alt_F1": case "Control_Alt_F2":
 				switch (config.getBroadcaster().toUpperCase()) {
-				case Constants.NPL: case Constants.LEGENDS: case Constants.MPL:
+				case Constants.NPL: case Constants.LEGENDS: case Constants.MPL: case Constants.APL:
 //					if(audioenabled.equalsIgnoreCase("TRUE")) {
 //						processAnimation(Constants.BACK, print_writers, "Audio$Out", "START");
 //					}
@@ -3154,7 +3154,7 @@ public class Animation
 				break;
 			case "m": case "Control_m":
 				switch (config.getBroadcaster().toUpperCase()) {
-				case Constants.NPL: case Constants.LEGENDS: case Constants.MPL:
+				case Constants.NPL: case Constants.LEGENDS: case Constants.MPL: case Constants.APL:
 //					if(audioenabled.equalsIgnoreCase("TRUE")) {
 //						processAnimation(Constants.BACK, print_writers, "Audio$Out", "START");
 //					}
@@ -4099,6 +4099,7 @@ public class Animation
 				case "Alt_1":
 					switch (config.getBroadcaster().toUpperCase()) {
 					case Constants.NPL: case Constants.ISPL: case Constants.LEGENDS: case Constants.MPL:
+					case Constants.APL:
 						processAnimation(Constants.FRONT, print_writers, "Anim_Infobar$Change_Bottom_Left", "START");
 						break;
 					}
@@ -4107,6 +4108,7 @@ public class Animation
 				case "Alt_2": case "Alt_3": case "Alt_4": case "Alt_5": case "Alt_6": case "Alt_9": case "Alt_0": case "Alt_c":
 					switch (config.getBroadcaster().toUpperCase()) {
 					case Constants.NPL:case Constants.ISPL: case Constants.LEGENDS: case Constants.MPL:
+					case Constants.APL:
 						processAnimation(Constants.FRONT, print_writers, "Anim_Infobar$Change_CenterInfo", "START");
 						TimeUnit.MILLISECONDS.sleep(300);
 						processAnimation(Constants.FRONT, print_writers, "Anim_Infobar$Change_Sixes", "SHOW 0.0");
@@ -4506,7 +4508,7 @@ public class Animation
 				break;
 			}
 			break;
-		case Constants.NPL: case Constants.MPL:
+		case Constants.NPL: case Constants.MPL: case Constants.APL:
 			
 			if(!whatToProcess.contains(",")) {
 				return CricketUtil.NO;
@@ -4522,7 +4524,7 @@ public class Animation
 				switch(whatToProcess.split(",")[0]) {
 				case "Alt_1":
 					switch (config.getBroadcaster().toUpperCase()) {
-					case Constants.NPL: case Constants.ISPL: case Constants.LEGENDS: case Constants.MPL:
+					case Constants.NPL: case Constants.ISPL: case Constants.LEGENDS: case Constants.MPL: case Constants.APL:
 						processAnimation(Constants.FRONT, print_writers, "Anim_Infobar$Change_Bottom_Left", "START");
 						break;
 					}
@@ -4531,7 +4533,7 @@ public class Animation
 				case "Alt_2": case "Alt_3": case "Alt_4": case "Alt_5": case "Alt_6": case "Alt_9": case "Alt_0": case "Alt_c":
 				case "Control_Shift_(":	
 					switch (config.getBroadcaster().toUpperCase()) {
-					case Constants.NPL:case Constants.ISPL: case Constants.LEGENDS:
+					case Constants.NPL:case Constants.ISPL: case Constants.LEGENDS: case Constants.APL:
 						processAnimation(Constants.FRONT, print_writers, "Anim_Infobar$Change_CenterInfo", "START");
 						TimeUnit.MILLISECONDS.sleep(300);
 						processAnimation(Constants.FRONT, print_writers, "Anim_Infobar$Change_Sixes", "SHOW 0.0");
@@ -4548,7 +4550,7 @@ public class Animation
 				case "Alt_7":
 
 					switch(config.getBroadcaster().toUpperCase()) {
-					case Constants.NPL: case Constants.ISPL: case Constants.LEGENDS: case Constants.MPL:
+					case Constants.NPL: case Constants.ISPL: case Constants.LEGENDS: case Constants.MPL: case Constants.APL:
 						processAnimation(Constants.FRONT, print_writers, "Anim_Infobar$Change_RightInfo_BottomRightPart", "START");
 						
 //						if(infobar.getRight_bottom() != null && !infobar.getRight_bottom().trim().isEmpty()) {
@@ -5936,7 +5938,7 @@ public class Animation
 				break;
 			case "Alt_1":
 				switch (config.getBroadcaster().toUpperCase()) {
-				case Constants.NPL:case Constants.ISPL: case Constants.MPL:
+				case Constants.NPL:case Constants.ISPL: case Constants.MPL: case Constants.APL:
 					processAnimation(Constants.FRONT, print_writers, "anim_Infobar$Section3_Change", "SHOW 0.0");
 					break;
 				}
@@ -5947,7 +5949,7 @@ public class Animation
 			case "Alt_2": case "Alt_3": case "Alt_4": case "Alt_5": case "Alt_6": case "Alt_9": case "Alt_0": case "Alt_c":
 				TimeUnit.MILLISECONDS.sleep(1000);
 				switch (config.getBroadcaster().toUpperCase()) {
-				case Constants.NPL:case Constants.ISPL: case Constants.MPL:
+				case Constants.NPL:case Constants.ISPL: case Constants.MPL: case Constants.APL:
 					processAnimation(Constants.FRONT, print_writers, "Anim_Infobar$Change_CenterInfo", "SHOW 0.0");
 					break;
 				}
@@ -5956,7 +5958,7 @@ public class Animation
 			case "Alt_7":
 				switch (config.getBroadcaster().toUpperCase()) {
 
-				case Constants.NPL:case Constants.ISPL: case Constants.MPL:
+				case Constants.NPL:case Constants.ISPL: case Constants.MPL: case Constants.APL:
 					processAnimation(Constants.FRONT, print_writers, "Anim_Infobar$Change_RightInfo_BottomRightPart", "SHOW 0.0");
 					break;
 				}
@@ -6305,6 +6307,7 @@ public class Animation
 			case "Alt_1":
 				switch (config.getBroadcaster().toUpperCase()) {
 				case Constants.NPL:case Constants.ISPL: case Constants.LEGENDS: case Constants.MPL:
+				case Constants.APL:
 					processAnimation(Constants.FRONT, print_writers, "anim_Infobar$Section3_Change", "SHOW 0.0");
 					break;
 				}
@@ -6315,7 +6318,7 @@ public class Animation
 			case "Alt_2": case "Alt_3": case "Alt_4": case "Alt_5": case "Alt_6": case "Alt_9": case "Alt_0": case "Alt_c":
 				TimeUnit.MILLISECONDS.sleep(1000);
 				switch (config.getBroadcaster().toUpperCase()) {
-				case Constants.NPL:case Constants.ISPL: case Constants.LEGENDS: case Constants.MPL:
+				case Constants.NPL:case Constants.ISPL: case Constants.LEGENDS: case Constants.MPL: case Constants.APL:
 					processAnimation(Constants.FRONT, print_writers, "Anim_Infobar$Change_CenterInfo", "SHOW 0.0");
 					break;
 				}
@@ -6325,7 +6328,7 @@ public class Animation
 				switch (config.getBroadcaster().toUpperCase()) {
 
 				case Constants.NPL:case Constants.ISPL: case Constants.LEGENDS: case Constants.MPL:
-					
+				case Constants.APL:
 					TimeUnit.MILLISECONDS.sleep(200);
 					TimeUnit.MILLISECONDS.sleep(300);
 					processAnimation(Constants.FRONT, print_writers, "Anim_Infobar$Change_RightInfo_BottomRightPart", "SHOW 0.0");
@@ -10934,7 +10937,7 @@ public class Animation
 			this.whichGraphicOnScreen = "";
 			this.specialBugOnScreen = "";
 			break;
-		case Constants.NPL: case Constants.MPL:
+		case Constants.NPL: case Constants.MPL: case Constants.APL:
 
 			processAnimation(Constants.MIDDLE, print_writers, "Plotter", "SHOW 0.0");
 			
@@ -11995,7 +11998,7 @@ public class Animation
 				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER PREVIEW SCENE*/Default/Fullframes " + 
 						"C:/Temp/Preview.tga " + previewCommand + "\0", print_writer);
 				break;
-			case Constants.NPL:
+			case Constants.NPL: case Constants.APL:
 				if(whichside == 1) {
 					switch (whatToProcess.split(",")[0]) {
 					case "Alt_m": case "Alt_n":
@@ -13297,7 +13300,7 @@ public class Animation
 				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER PREVIEW SCENE*/T20/Scenes/Ticker "
 				    	+ "C:/Temp/Preview.tga " + previewCommands + "\0", print_writer);
 				break;
-			case Constants.NPL:  case Constants.MPL:
+			case Constants.NPL:  case Constants.MPL: case Constants.APL:
 				if(whichside == 1) {
 					switch(whatToProcess.split(",")[0]) {
 					case "9": case "Alt_Shift_Q":
@@ -13778,7 +13781,7 @@ public class Animation
 				}
 				break;
 			
-			case Constants.NPL: case Constants.LEGENDS: case Constants.MPL:
+			case Constants.NPL: case Constants.LEGENDS: case Constants.MPL: case Constants.APL:
 				
 				switch (config.getBroadcaster().toUpperCase()) {
 				case Constants.MPL:
@@ -13823,7 +13826,7 @@ public class Animation
 				}
 				break;
 				
-			case Constants.ICC_U19_2023: case Constants.ISPL: //case Constants.NPL:
+			case Constants.ICC_U19_2023: case Constants.ISPL: //case Constants.NPL: case Constants.APL:
 				if(whatToProcess.contains(",")) {
 					if(whichside == 1) {
 						switch(whatToProcess.split(",")[0]) {
@@ -13912,7 +13915,7 @@ public class Animation
 				}
 				break;
 			case Constants.ICC_U19_2023: case Constants.ISPL: case Constants.NPL: case Constants.LEGENDS:
-			case Constants.MPL:	
+			case Constants.MPL:	 case Constants.APL:
 				
 				switch (config.getBroadcaster().toUpperCase()) {
 				case Constants.MPL:
@@ -13938,7 +13941,7 @@ public class Animation
 						break;
 					case "Alt_F7":
 						switch (config.getBroadcaster()) {
-						case Constants.NPL: case Constants.LEGENDS: case Constants.MPL:
+						case Constants.NPL: case Constants.LEGENDS: case Constants.MPL: case Constants.APL:
 							CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER PREVIEW SCENE*" 
 									+ "/Default/" + bugs_pre + " C:/Temp/Preview.tga Anim_Mini$In_Out 1.260 Anim_Mini$In_Out$In 1.240\0", print_writer);
 							break;

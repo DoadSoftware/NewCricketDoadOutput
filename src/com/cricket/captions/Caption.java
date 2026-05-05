@@ -176,6 +176,7 @@ public class Caption
 			case "Control_4":
 				switch (config.getBroadcaster().toUpperCase()) {
 				case Constants.NPL: case Constants.LEGENDS: case Constants.MPL: case Constants.T20_MUMBAI: case Constants.BENGAL_T20:
+				case Constants.APL:
 					status = this_bugsAndMiniGfx.populateFourCounter(whatToProcess, whichSide, matchAllData);
 					break;
 				case Constants.ISPL:
@@ -217,7 +218,8 @@ public class Caption
 				if(config.getBroadcaster().equalsIgnoreCase(Constants.MPL)||
 						config.getBroadcaster().equalsIgnoreCase(Constants.NPL)||
 						config.getBroadcaster().equalsIgnoreCase(Constants.LEGENDS) ||
-						config.getBroadcaster().equalsIgnoreCase(Constants.BENGAL_T20)) {
+						config.getBroadcaster().equalsIgnoreCase(Constants.BENGAL_T20) ||
+						config.getBroadcaster().equalsIgnoreCase(Constants.APL)) {
 					this_infobarGfx.containerName = " " + whatToProcess.split(",")[2];	
 				}
 				status = this_infobarGfx.populateLofDimension(print_writers, matchAllData);
@@ -240,7 +242,7 @@ public class Caption
 				break;
 			case "Control_Shift_E":
 				switch (config.getBroadcaster()) {
-				case Constants.NPL: case Constants.MPL:
+				case Constants.NPL: case Constants.MPL: case Constants.APL:
 					status = this_fullFramesGfx.populateBowlerVsAllBatsman(whatToProcess, whichSide, matchAllData);
 					break;
 
@@ -251,7 +253,7 @@ public class Caption
 				break;
 			case "Control_Shift_F":
 				switch (config.getBroadcaster().toUpperCase()) {
-				case Constants.NPL: case Constants.MPL:
+				case Constants.NPL: case Constants.MPL: case Constants.APL:
 					status = this_fullFramesGfx.populateBatVsAllBowlers(whatToProcess, whichSide, matchAllData);
 					break;
 				case Constants.ICC_U19_2023:
@@ -305,7 +307,7 @@ public class Caption
 					status = this_fullFramesGfx.PopulateBatPerformerFF(whichSide, whatToProcess.split(",")[0], matchAllData, 
 							Integer.valueOf(whatToProcess.split(",")[1]));
 					break;
-				case Constants.NPL: case Constants.MPL:
+				case Constants.NPL: case Constants.MPL: case Constants.APL:
 					if(!this_anim.whichGraphicOnScreen.equalsIgnoreCase("F1") && !this_anim.whichGraphicOnScreen.equalsIgnoreCase("Control_Shift_F1")) {
 						status = this_fullFramesGfx.PopulateScorecardFF(whichSide, "F1", matchAllData, Integer.valueOf(whatToProcess.split(",")[1]));
 					}
@@ -324,7 +326,8 @@ public class Caption
 				this_fullFramesGfx.FirstPlayerId = Integer.valueOf(whatToProcess.split(",")[2]);
 				this_fullFramesGfx.WhichType = whatToProcess.split(",")[3];
 				System.out.println("WHAT : "+captionWhichGfx);
-				if(config.getBroadcaster().equalsIgnoreCase(Constants.NPL) || config.getBroadcaster().equalsIgnoreCase(Constants.MPL)) {
+				if(config.getBroadcaster().equalsIgnoreCase(Constants.NPL) || config.getBroadcaster().equalsIgnoreCase(Constants.MPL) ||
+						config.getBroadcaster().equalsIgnoreCase(Constants.APL)) {
 					if(!this_anim.whichGraphicOnScreen.equalsIgnoreCase("F2") && !this_anim.whichGraphicOnScreen.equalsIgnoreCase("Control_Shift_F2")) {
 						status = this_fullFramesGfx.PopulateBowlingCardFF(whichSide, "F2", matchAllData, Integer.valueOf(whatToProcess.split(",")[1]));
 					}
@@ -410,6 +413,7 @@ public class Caption
 			case "Alt_F1": // BatGriff
 				switch (config.getBroadcaster().toUpperCase()) {
 				case Constants.BENGAL_T20: case Constants.NPL: case Constants.MPL:case Constants.LEGENDS:
+				case Constants.APL:
 					status = this_bugsAndMiniGfx.populateGriff(whatToProcess, whichSide, matchAllData);
 					break;
 				case Constants.ICC_U19_2023: case Constants.T20_MUMBAI:
@@ -526,28 +530,25 @@ public class Caption
 				break;
 			case "F12":// InfoBar
 				
-//				this_infobarGfx.infobar.setMiddle_section("");
-//				this_infobarGfx.infobar.setFull_section("");
-//				this_infobarGfx.infobar.setRight_bottom("");
-//				this_infobarGfx.infobar.setRight_section("");
-//				this_infobarGfx.infobar.setLast_right_section("");
-//				this_infobarGfx.infobar.setLast_right_bottom("");
-//				this_infobarGfx.infobar.setPowerplay_on_screen(false);
+				this_infobarGfx.infobar.setMiddle_section("");
+				this_infobarGfx.infobar.setFull_section("");
+				this_infobarGfx.infobar.setRight_bottom("");
+				this_infobarGfx.infobar.setRight_section("");
+				this_infobarGfx.infobar.setLast_right_section("");
+				this_infobarGfx.infobar.setLast_right_bottom("");
+				this_infobarGfx.infobar.setPowerplay_on_screen(false);
 				
-//				if(config.getWhichInfobar().equalsIgnoreCase("LOF_INFOBAR")) {
-//					status = this_lofInfobarGfx.populateInfobar(print_writers,whatToProcess,matchAllData,whichSide);
-//				}else {
-//					System.out.println("whatToProcess - " + whatToProcess);
-//					switch(config.getBroadcaster()) {
-//					case Constants.NPL: case Constants.LEGENDS: case Constants.ISPL:  case Constants.MPL:
-//						this_infobarGfx.infobar.setLeft_bottom(whatToProcess.split(",")[0]);
-//						break;
-//					}
-//					status = this_infobarGfx.populateInfobar(print_writers,whatToProcess,matchAllData);	
-//				}
-				System.out.println(print_writers.size());
-				status = this_infobarGfx.populateInfobar(print_writers, whatToProcess, matchAllData);
-				
+				if(config.getWhichInfobar().equalsIgnoreCase("LOF_INFOBAR")) {
+					status = this_lofInfobarGfx.populateInfobar(print_writers,whatToProcess,matchAllData,whichSide);
+				}else {
+					System.out.println("whatToProcess - " + whatToProcess);
+					switch(config.getBroadcaster()) {
+					case Constants.NPL: case Constants.LEGENDS: case Constants.ISPL:  case Constants.MPL: case Constants.APL:
+						this_infobarGfx.infobar.setLeft_bottom(whatToProcess.split(",")[0]);
+						break;
+					}
+					status = this_infobarGfx.populateInfobar(print_writers,whatToProcess,matchAllData);	
+				}
 				break;
 			case "Control_F1":// Photo ScoreCard
 				status = this_fullFramesGfx.PopulatePhotoScorecardFF(whichSide, whatToProcess.split(",")[0], matchAllData, 
@@ -596,7 +597,7 @@ public class Caption
 				break;
 			case "Control_Shift_P":
 				switch (config.getBroadcaster()) {
-				case Constants.NPL:
+				case Constants.NPL: case Constants.APL:
 					status = this_fullFramesGfx.populateFairPlayPointsTable(whatToProcess, whichSide, matchAllData);
 					break;
 				default:
@@ -646,7 +647,7 @@ public class Caption
 				break;
 			case "Control_F11": //MATCH SUMMARY
 				switch(config.getBroadcaster()) {
-				case Constants.BENGAL_T20: case Constants.NPL: case Constants.ISPL: case Constants.MPL:
+				case Constants.BENGAL_T20: case Constants.NPL: case Constants.ISPL: case Constants.MPL: case Constants.APL:
 					this_fullFramesGfx.WhichType = whatToProcess.split(",")[2];
 					break;
 				}
@@ -792,6 +793,7 @@ public class Caption
 			case "Control_h"://powerplay Summary
 				switch (config.getBroadcaster().toUpperCase()) {
 				case Constants.NPL: case Constants.LEGENDS: case Constants.MPL: case Constants.T20_MUMBAI: case Constants.BENGAL_T20:
+				case Constants.APL:
 					status = this_lowerThirdGfx.populateL3PhaseWise(whatToProcess,whichSide,matchAllData);
 					break;
 
@@ -954,7 +956,7 @@ public class Caption
 				case Constants.ISPL:
 					status = this_lowerThirdGfx.LtManhattanISPL(print_writers, matchAllData, Integer.valueOf(whatToProcess.split(",")[1]));
 					break;
-				case Constants.NPL: case Constants.MPL:
+				case Constants.NPL: case Constants.MPL: case Constants.APL:
 					status = this_lowerThirdGfx.InfobarManhattan(print_writers,matchAllData,Integer.valueOf(whatToProcess.split(",")[1]));
 					break;	
 				}
@@ -1025,8 +1027,10 @@ public class Caption
 			case "Alt_2": // Infobar Middle
 				switch (config.getBroadcaster().toUpperCase()) {
 				case Constants.ICC_U19_2023: case Constants.NPL: case Constants.LEGENDS: case Constants.T20_MUMBAI: case Constants.MPL:
+				case Constants.APL:
 					if(config.getBroadcaster().equalsIgnoreCase(Constants.NPL) || 
-							config.getBroadcaster().equalsIgnoreCase(Constants.MPL)) {
+							config.getBroadcaster().equalsIgnoreCase(Constants.MPL) ||
+							config.getBroadcaster().equalsIgnoreCase(Constants.APL)) {
 						this_infobarGfx.infobar.setLeft_bottom(whatToProcess.split(",")[0]);
 					}
 					System.out.println("whatToProcess = " + whatToProcess);
@@ -1208,7 +1212,7 @@ public class Caption
 			case "Control_6": case "Control_7": case "Control_8": case "Control_9": case "Control_0": case "Shift_@": case "Shift_$": case "Control_Shift_@": 
 			case "Control_Alt_5": case "Alt_Shift_@": case "Control_Alt_6": case "Control_Alt_9": case "Control_Alt_0": case "Control_Alt_7":
 				switch (config.getBroadcaster().toUpperCase()) {
-				case Constants.NPL:
+				case Constants.NPL: case Constants.APL:
 					switch (whatToProcess.split(",")[0]) {
 					case "Control_6": 
 						status = this_lowerThirdGfx.populateWeather(whatToProcess);
@@ -1314,7 +1318,7 @@ public class Caption
 					this_infobarGfx.lastXballs = Integer.valueOf(whatToProcess.split(",")[2]);
 					status = this_infobarGfx.populateVizInfobarRightSection(false,print_writers, matchAllData, whichSide, 1);
 					break;
-				case Constants.NPL: case Constants.LEGENDS: case Constants.ISPL: case Constants.MPL:
+				case Constants.NPL: case Constants.LEGENDS: case Constants.ISPL: case Constants.MPL: case Constants.APL:
 					if(config.getWhichInfobar().equalsIgnoreCase("LOF_INFOBAR")) {
 						if(whatToProcess.split(",")[3].equalsIgnoreCase("WITH")) {
 							this_lofInfobarGfx.infobar.setFull_section("LAST_X_BALLS");
@@ -1397,7 +1401,7 @@ public class Caption
 			case "Alt_7":
 				
 				switch (config.getBroadcaster().toUpperCase()) {
-				case Constants.NPL: case Constants.LEGENDS: case Constants.MPL:
+				case Constants.NPL: case Constants.LEGENDS: case Constants.MPL: case Constants.APL:
 //					if(this_infobarGfx.infobar.getMiddle_section().equalsIgnoreCase(CricketUtil.BATSMAN)) {
 //						this_infobarGfx.infobar.setRight_bottom(whatToProcess.split(",")[2]);
 //						status = this_infobarGfx.populateVizInfobarRightBottom(print_writers, matchAllData, 1, whichSide);
@@ -1486,7 +1490,7 @@ public class Caption
 						status = this_infobarGfx.populateVizInfobarBowler(print_writers, matchAllData, whichSide);
 					}
 					break;
-				case Constants.NPL: case Constants.LEGENDS: case Constants.MPL:
+				case Constants.NPL: case Constants.LEGENDS: case Constants.MPL: case Constants.APL:
 					if(this_infobarGfx.infobar.getRight_section().equalsIgnoreCase(CricketUtil.BOWLER) && 
 							whatToProcess.split(",")[2].equalsIgnoreCase(CricketUtil.BOWLER)) {
 						status = "IN Alt+8 Section BOWLER IS ALREADY SELECTED";
@@ -1624,6 +1628,7 @@ public class Caption
 			case "Alt_9":
 				switch (config.getBroadcaster().toUpperCase()) {
 				case Constants.ICC_U19_2023: case Constants.NPL: case Constants.ISPL: case Constants.LEGENDS: case Constants.MPL:
+				case Constants.APL:
 					if(config.getWhichInfobar().equalsIgnoreCase("LOF_INFOBAR")) {
 						if(this_lofInfobarGfx.infobar.getFull_section() != null && !this_lofInfobarGfx.infobar.getFull_section().isEmpty()) {
 							if(!this_lofInfobarGfx.infobar.getFull_section().equalsIgnoreCase("FREE_TEXT")) {
@@ -1676,6 +1681,7 @@ public class Caption
 			case "Alt_0":
 				switch (config.getBroadcaster().toUpperCase()) {
 				case Constants.ICC_U19_2023: case Constants.NPL: case Constants.ISPL: case Constants.LEGENDS: case Constants.MPL:
+				case Constants.APL:
 					if(config.getWhichInfobar().equalsIgnoreCase("LOF_INFOBAR")) {
 						if(this_lofInfobarGfx.infobar.getFull_section() != null && !this_lofInfobarGfx.infobar.getFull_section().isEmpty()) {
 							if(!this_lofInfobarGfx.infobar.getFull_section().equalsIgnoreCase("COMMENTATORS")) {

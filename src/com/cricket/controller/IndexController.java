@@ -54,6 +54,8 @@ import com.cricket.model.FieldersData;
 import com.cricket.model.Fixture;
 import com.cricket.model.Ground;
 import com.cricket.model.HeadToHead;
+import com.cricket.model.HeadToHeadPlayer;
+import com.cricket.model.HeadToHeadTeam;
 import com.cricket.model.InfobarStats;
 import com.cricket.model.Match;
 import com.cricket.model.MatchAllData;
@@ -356,18 +358,18 @@ public class IndexController
 			session_match.getSetup().setGenerateInteractiveFile(session_configuration.getGenerateInteractiveFile());
 			CricketFunctions.getInteractive(session_match, "FULL_WRITE");
 			
-//			if(headToHead.getH2hPlayer() == null) {
-//				headToHead.setH2hPlayer(new ArrayList<HeadToHeadPlayer>());
-//				headToHead.setH2hTeam(new ArrayList<HeadToHeadTeam>());
-//			}
-//			System.out.println("BEFORE headToHead.getH2hPlayer().size() = " + headToHead.getH2hPlayer().size());
-//			if(headToHead.getH2hPlayer().size() <= 0) {
-//				HeadToHead extractedH2H = CricketFunctions.extractHeadToHead(session_match, cricketService);
-//				headToHead.setH2hPlayer(extractedH2H.getH2hPlayer());
-//				headToHead.setH2hTeam(extractedH2H.getH2hTeam());
-//			}
-			//this_seriesPowerplay = CricketFunctions.PowerPlayTeamThisSeries(session_match, cricket_matches);
-			//past_tournament_stats = CricketFunctions.extractTournamentData("PAST_MATCHES_DATA", false, headToHead, cricketService, session_match, null);
+			if(headToHead.getH2hPlayer() == null) {
+				headToHead.setH2hPlayer(new ArrayList<HeadToHeadPlayer>());
+				headToHead.setH2hTeam(new ArrayList<HeadToHeadTeam>());
+			}
+			System.out.println("BEFORE headToHead.getH2hPlayer().size() = " + headToHead.getH2hPlayer().size());
+			if(headToHead.getH2hPlayer().size() <= 0) {
+				HeadToHead extractedH2H = CricketFunctions.extractHeadToHead(session_match, cricketService);
+				headToHead.setH2hPlayer(extractedH2H.getH2hPlayer());
+				headToHead.setH2hTeam(extractedH2H.getH2hTeam());
+			}
+//			this_seriesPowerplay = CricketFunctions.PowerPlayTeamThisSeries(session_match, cricket_matches);
+			past_tournament_stats = CricketFunctions.extractTournamentData("PAST_MATCHES_DATA", false, headToHead.getH2hPlayer(), cricketService, session_match, null);
 			session_match.getMatch().setMatchStats(MatchStats);
 			
 			switch (select_broadcaster) {
@@ -396,7 +398,7 @@ public class IndexController
 				}
 				break;
 			case Constants.ICC_U19_2023: case Constants.BENGAL_T20: case Constants.NPL: case Constants.LEGENDS:
-			case Constants.MPL:	
+			case Constants.MPL:	case Constants.APL:
 				if(session_configuration.getPrimaryVariousOptions().contains(Constants.FULL_FRAMER)) {
 					this_scene.LoadScene("FULL-FRAMERS", print_writers, session_configuration);
 				}
@@ -505,7 +507,7 @@ public class IndexController
 			}
 			if(session_configuration.getBroadcaster() != null) {
 				switch (session_configuration.getBroadcaster()) {
-				case Constants.T20_MUMBAI: case Constants.NPL:
+				case Constants.T20_MUMBAI: case Constants.NPL: case Constants.APL:
 					if(show_speed == true) {
 						if (speedFile.exists()) {
 							long currentTimestamp = speedFile.lastModified();
@@ -643,7 +645,8 @@ public class IndexController
 			return objectMapper.writeValueAsString(session_match);
 		default:
 			if(session_configuration.getBroadcaster().equalsIgnoreCase(Constants.NPL) || 
-					session_configuration.getBroadcaster().equalsIgnoreCase(Constants.MPL)) {
+					session_configuration.getBroadcaster().equalsIgnoreCase(Constants.MPL) ||
+					session_configuration.getBroadcaster().equalsIgnoreCase(Constants.APL)) {
 				if(whatToProcess.split(",")[0].toUpperCase().equalsIgnoreCase("highlightProfile") || 
 						whatToProcess.split(",")[0].toUpperCase().equalsIgnoreCase("highlightLeader")) {
 					
@@ -661,7 +664,7 @@ public class IndexController
 					this_animation.Lof_ISPL_CutBack(this_caption.this_lowerThirdGfx.impactPlayerData, print_writers, session_configuration);
 					this_caption.this_lowerThirdGfx.chnageOn = false;
 					break;
-				case Constants.NPL:
+				case Constants.NPL: case Constants.APL:
 					this_animation.ChangeOn(this_caption.this_lowerThirdGfx.impactPlayerData, print_writers, session_configuration);
 					this_caption.this_lowerThirdGfx.chnageOn = true;
 					TimeUnit.MILLISECONDS.sleep(3000);
@@ -751,7 +754,7 @@ public class IndexController
 				default:
 					switch (session_configuration.getBroadcaster()) {
 					case Constants.ICC_U19_2023: case Constants.ISPL: case Constants.BENGAL_T20: case Constants.NPL: case Constants.LEGENDS:
-					case Constants.MPL:	
+					case Constants.MPL:	case Constants.APL:
 						if(!session_configuration.getPrimaryVariousOptions().contains(Constants.FULL_FRAMER)
 							&& this_animation.getTypeOfGraphicsOnScreen(session_configuration, valueToProcess).contains(Constants.FULL_FRAMER)) {
 							this_caption.setStatus("Error: Full framers captions NOT selected on start-up");
@@ -1005,7 +1008,7 @@ public class IndexController
 	public void infobarAnimateOutAllSection(Configuration session_configuration, MatchAllData session_match, List<PrintWriter> print_writers, HeadToHead headToHead) 
 			throws Exception {
 		switch(session_configuration.getBroadcaster()) {
-		case Constants.NPL:
+		case Constants.NPL: case Constants.LEGENDS: case Constants.APL:
 			this_caption.whichSide = 2;
 			int Inn_Number = session_match.getMatch().getInning().stream().filter(inn -> inn.getIsCurrentInning()
 					.equalsIgnoreCase(CricketUtil.YES)).findAny().orElse(null).getInningNumber();
@@ -1511,7 +1514,7 @@ public class IndexController
 	{
 		switch (config.getBroadcaster()) {
 		case Constants.ICC_U19_2023: case Constants.ISPL: case Constants.BENGAL_T20: case Constants.NPL: case Constants.LEGENDS: 
-		case Constants.T20_MUMBAI: case Constants.MPL:
+		case Constants.T20_MUMBAI: case Constants.MPL: case Constants.APL:
 			
 			switch (typeOfUpdate) {
 			case "ONLY_DB":
@@ -1643,16 +1646,16 @@ public class IndexController
 						session_players, session_pott,session_playoff, session_teamChanges, session_performance_bug, new FullFramesGfx(),new LowerThirdGfx(), 
 						new InfobarGfx(), new LofInfobarGfx(), new BugsAndMiniGfx(), 1, "", "-", past_tournament_stats,past_tape,session_dls, headToHead.getH2hPlayer(), 
 						past_tournament_stats, cricketService);
-//					this_caption.this_infobarGfx.previous_sixes = String.valueOf(past_tournament_boundaries.getTournament_sixes());
-//					this_caption.this_infobarGfx.previous_fours = String.valueOf(past_tournament_boundaries.getTournament_fours());
-//					
-//					this_caption.this_lofInfobarGfx.previous_sixes = String.valueOf(past_tournament_boundaries.getTournament_sixes());
-//					this_caption.this_lofInfobarGfx.previous_fours = String.valueOf(past_tournament_boundaries.getTournament_fours());
-//					//extracttournamentFoursAndSixesData also have nines runs data also
-//					this_caption.this_lofInfobarGfx.previous_nines = String.valueOf(past_tournament_boundaries.getTournament_nines());
-//							
-//					this_caption.this_bugsAndMiniGfx.previous_sixes =  String.valueOf(past_tournament_boundaries.getTournament_sixes());
-//					this_caption.this_bugsAndMiniGfx.previous_fours =  String.valueOf(past_tournament_boundaries.getTournament_fours());
+					this_caption.this_infobarGfx.previous_sixes = String.valueOf(past_tournament_boundaries.getTournament_sixes());
+					this_caption.this_infobarGfx.previous_fours = String.valueOf(past_tournament_boundaries.getTournament_fours());
+					
+					this_caption.this_lofInfobarGfx.previous_sixes = String.valueOf(past_tournament_boundaries.getTournament_sixes());
+					this_caption.this_lofInfobarGfx.previous_fours = String.valueOf(past_tournament_boundaries.getTournament_fours());
+					//extracttournamentFoursAndSixesData also have nines runs data also
+					this_caption.this_lofInfobarGfx.previous_nines = String.valueOf(past_tournament_boundaries.getTournament_nines());
+							
+					this_caption.this_bugsAndMiniGfx.previous_sixes =  String.valueOf(past_tournament_boundaries.getTournament_sixes());
+					this_caption.this_bugsAndMiniGfx.previous_fours =  String.valueOf(past_tournament_boundaries.getTournament_fours());
 					break;
 					
 				case "UPDATE":
