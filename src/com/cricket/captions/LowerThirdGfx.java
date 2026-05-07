@@ -13056,7 +13056,7 @@ public class LowerThirdGfx
 			}else {
 				logoCategory = "";
 			}
-			
+			System.out.println("coming inside this ");
 			if(lowerThird.getHeaderText().equalsIgnoreCase("ROLES")) {
 				
 				Collections.sort(inning.getBattingCard());
@@ -13066,7 +13066,7 @@ public class LowerThirdGfx
 					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$LT_PlayingXI$Data_All$Side"+ WhichSide + 
 							"$" + row_id + "$Bottom$Select*FUNCTION*Omo*vis_con SET 0\0", print_writers);
 					
-					containerNam1 = "$Data_Grp";
+					containerNam1 = "$Data_Grp01";
 					offset = "146.0";
 					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$LT_PlayingXI$Data_All$Side"+ WhichSide + 
 							"$Select*FUNCTION*Omo*vis_con SET 0\0", print_writers);
@@ -13228,19 +13228,19 @@ public class LowerThirdGfx
 				Collections.sort(battingCardList);
 				for (BattingCard bc : battingCardList) {
 					row_id = row_id + 1;
-					
+					containerNam1 = "$Data_Grp02";
 					if(battingCardList.size() >= 12) {
-						containerNam1 = "$Data_Grp";
+					//	containerNam1 = "$Data_Grp";
 						offset = "133.0";
-						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$LT_PlayingXI$Data_All$Side"+ WhichSide + containerNam1 +
-								"$" + row_id + "$Select*FUNCTION*Omo*vis_con SET 1\0", print_writers);
+					
 					}else {
-						containerNam1 = "$Data_Grp";
+						
 						offset = "146.0";
-						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$LT_PlayingXI$Data_All$Side"+ WhichSide + containerNam1 +
-								"$" + row_id + "$Select*FUNCTION*Omo*vis_con SET 0\0", print_writers);
+						
 					}
 					
+					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$LT_PlayingXI$Data_All$Side"+ WhichSide  +
+							 	"$Select*FUNCTION*Omo*vis_con SET 1\0", print_writers);
 					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$LT_PlayingXI$Data_All$Side"+ WhichSide + containerNam1 
 							+ "*FUNCTION*Grid*col_offset SET " + offset + "\0", print_writers);
 					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$LT_PlayingXI$Data_All$Side"+ WhichSide + containerNam1 

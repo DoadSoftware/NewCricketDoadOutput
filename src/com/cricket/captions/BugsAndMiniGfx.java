@@ -6019,7 +6019,7 @@ public class BugsAndMiniGfx
 				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_Minis$Side" + WhichSide + "$Standings$Data"
 						+ "$Rows$TitleGrp$PointData$txt_Points*GEOM*TEXT SET PTS \0", print_writers);
 				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_Minis$Side" + WhichSide + "$Standings$Data"
-						+ "$Rows$TitleGrp$PointData$txt_NRR*GEOM*TEXT SET NRRR \0", print_writers);
+						+ "$Rows$TitleGrp$PointData$txt_NRR*GEOM*TEXT SET NRR \0", print_writers);
 				
 				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_Minis$Side" + WhichSide + "$Standings$Data"
 						+ "$Title$txt_TeamName*GEOM*TEXT SET " + "POINTS TABLE" + " \0", print_writers);
@@ -6091,7 +6091,7 @@ public class BugsAndMiniGfx
 							leagueTable.getLeagueTeams().get(i).getPoints() + " \0", print_writers);
 					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_Minis$Side" + WhichSide + "$Standings$Data"
 							+ "$Rows$" + rowId + "$Select_Highlight" + containerName + "$Data$txt_NRR*GEOM*TEXT SET " + 
-							String.format("%.2f", leagueTable.getLeagueTeams().get(i).getNRRR()) + " \0", print_writers);
+							String.format("%.2f", leagueTable.getLeagueTeams().get(i).getNetRunRate()) + " \0", print_writers);
 				}
 				break;
 			case "Shift_F1":

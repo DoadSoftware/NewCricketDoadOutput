@@ -1154,7 +1154,7 @@ public class Caption
 						this_infobarGfx.infobar.setMiddle_section("BAT_PROFILE_CAREER");
 						this_infobarGfx.FirstPlayerId = Integer.valueOf(whatToProcess.split(",")[2]);
 						this_infobarGfx.WhichProfile = whatToProcess.split(",")[3];
-						//status = this_infobarGfx.populateVizInfobarMiddleSection(print_writers, matchAllData, whichSide);
+						status = this_infobarGfx.populateVizInfobarMiddleSection(print_writers, matchAllData, whichSide);
 						break;
 					}
 				}
@@ -1183,7 +1183,7 @@ public class Caption
 						this_infobarGfx.infobar.setMiddle_section("BALL_PROFILE_CAREER");
 						this_infobarGfx.FirstPlayerId = Integer.valueOf(whatToProcess.split(",")[2]);
 						this_infobarGfx.WhichProfile = whatToProcess.split(",")[3];
-						//status = this_infobarGfx.populateVizInfobarMiddleSection(print_writers, matchAllData, whichSide);
+						status = this_infobarGfx.populateVizInfobarMiddleSection(print_writers, matchAllData, whichSide);
 						break;
 					}
 				}
@@ -1343,7 +1343,7 @@ public class Caption
 					}else {
 						this_infobarGfx.infobar.setMiddle_section("LAST_X_BALLS");
 						this_infobarGfx.lastXballs = Integer.valueOf(whatToProcess.split(",")[2]);
-						//status = this_infobarGfx.populateVizInfobarMiddleSection(print_writers,matchAllData, whichSide);
+						status = this_infobarGfx.populateVizInfobarMiddleSection(print_writers,matchAllData, whichSide);
 					}
 					break;
 				default:
@@ -1646,7 +1646,7 @@ public class Caption
 					}else {
 						this_infobarGfx.infobar.setMiddle_section("FREE_TEXT");
 						this_infobarGfx.infobarStatsId = Integer.valueOf(whatToProcess.split(",")[2]);
-						//status = this_infobarGfx.populateVizInfobarMiddleSection(print_writers, matchAllData, whichSide);
+						status = this_infobarGfx.populateVizInfobarMiddleSection(print_writers, matchAllData, whichSide);
 					}
 					break;
 				case Constants.T20_MUMBAI:
@@ -1684,6 +1684,8 @@ public class Caption
 				case Constants.ICC_U19_2023: case Constants.NPL: case Constants.ISPL: case Constants.LEGENDS: case Constants.MPL:
 				case Constants.APL:
 					if(config.getWhichInfobar().equalsIgnoreCase("LOF_INFOBAR")) {
+						
+						System.out.println("IF");
 						if(this_lofInfobarGfx.infobar.getFull_section() != null && !this_lofInfobarGfx.infobar.getFull_section().isEmpty()) {
 							if(!this_lofInfobarGfx.infobar.getFull_section().equalsIgnoreCase("COMMENTATORS")) {
 								whichSide = 2;
@@ -1699,9 +1701,10 @@ public class Caption
 						status = this_lofInfobarGfx.populateFullSection(print_writers, matchAllData, whichSide);
 						
 					}else {
+						System.out.println("else");
 						this_infobarGfx.infobar.setMiddle_section("COMMENTATORS");
 						this_infobarGfx.Comms_Name = whatToProcess;
-						//status = this_infobarGfx.populateVizInfobarMiddleSection(print_writers, matchAllData, whichSide);
+						status = this_infobarGfx.populateVizInfobarMiddleSection(print_writers, matchAllData, whichSide);
 					}
 					break;
 				case Constants.T20_MUMBAI:
