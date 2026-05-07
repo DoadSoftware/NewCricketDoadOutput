@@ -494,10 +494,10 @@ public class IndexController
 
 				last_match_time_stamp = new File(CricketUtil.CRICKET_DIRECTORY + CricketUtil.MATCHES_DIRECTORY 
 						+ session_match.getMatch().getMatchFileName()).lastModified();
-				//MatchStats = CricketFunctions.getAllEvents(session_match,session_configuration.getBroadcaster(), session_match.getEventFile().getEvents());
+				MatchStats = CricketFunctions.getAllEvents(session_match,session_configuration.getBroadcaster(), session_match.getEventFile().getEvents());
 				CricketFunctions.getInteractive(session_match, "FULL_WRITE");
 
-				//session_match.getMatch().setMatchStats(MatchStats);
+				session_match.getMatch().setMatchStats(MatchStats);
 				
 				if(session_configuration.getWhichInfobar().equalsIgnoreCase("LOF_INFOBAR")) {
 					this_caption.this_lofInfobarGfx.updateInfobar(print_writers, session_match);

@@ -750,7 +750,8 @@ public class Caption
 					this_fullFramesGfx.whichTeam = Integer.valueOf(whatToProcess.split(",")[4]);
 				}
 				
-				if(!config.getBroadcaster().equalsIgnoreCase(Constants.ISPL)) {
+				if(!config.getBroadcaster().equalsIgnoreCase(Constants.ISPL) && 
+						!config.getBroadcaster().equalsIgnoreCase(Constants.LEGENDS)) {
 					if(whatToProcess.split(",")[0].equalsIgnoreCase("Control_Shift_Z")){
 						this_fullFramesGfx.whichSponsor = whatToProcess.split(",")[3];
 					}else if(whatToProcess.split(",")[0].equalsIgnoreCase("Alt_Shift_W")){

@@ -12062,8 +12062,7 @@ public class InfobarGfx
 			
 			infoIdentSection(print_writers, whatToProcess, matchAllData, WhichSide);
 			break;
-		case Constants.NPL: case Constants.ISPL:  case Constants.LEGENDS: case Constants.MPL:
-		case Constants.APL:
+		case Constants.NPL: case Constants.ISPL:  case Constants.LEGENDS: case Constants.MPL: case Constants.APL:
 			String logoPath = "";
 			logoCategory = "";
 			if(config.getBroadcaster().equalsIgnoreCase(Constants.NPL)) {
@@ -12337,19 +12336,19 @@ public class InfobarGfx
 								
 								CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$SB_Ident$Data_Grp$Bottom_Grp$Stat_Head_GRP$Side" + WhichSide + "$txt1*GEOM*TEXT SET " 
 										+ inning.getBatting_team().getTeamName1()+ " NEED "+ CricketFunctions.GetTargetData(matchAllData).getTargetRuns() + " RUNS" + " TO WIN " + 
-										String.valueOf("FROM " + (Integer.valueOf(CricketFunctions.GetTargetData(matchAllData).getTargetOvers())*6)) + " BALLS" + "\0", print_writers);
+										String.valueOf("FROM " + CricketFunctions.GetTargetData(matchAllData).getTargetOvers()) + " OVERS" + "\0", print_writers);
 							}
 							if(matchAllData.getSetup().getTargetType().toUpperCase().equalsIgnoreCase("VJD")) {
 								
 								CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$SB_Ident$Data_Grp$Bottom_Grp$Stat_Head_GRP$Side" + WhichSide + "$txt1*GEOM*TEXT SET " 
 										+ inning.getBatting_team().getTeamName1()+ " NEED "+ CricketFunctions.GetTargetData(matchAllData).getTargetRuns() + " RUNS" + " TO WIN " + 
-										String.valueOf("FROM " + (Integer.valueOf(CricketFunctions.GetTargetData(matchAllData).getTargetOvers())*6)) + " BALLS (VJD)" + "\0", print_writers);
+										String.valueOf("FROM " + CricketFunctions.GetTargetData(matchAllData).getTargetOvers()) + " OVERS (VJD)" + "\0", print_writers);
 								
 							}else if(matchAllData.getSetup().getTargetType().toUpperCase().equalsIgnoreCase("DLS")) {
 								
 								CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$SB_Ident$Data_Grp$Bottom_Grp$Stat_Head_GRP$Side" + WhichSide + "$txt1*GEOM*TEXT SET " 
 										+ inning.getBatting_team().getTeamName1()+ " NEED "+ CricketFunctions.GetTargetData(matchAllData).getTargetRuns() + " RUNS" + " TO WIN " + 
-										String.valueOf("FROM " + (Integer.valueOf(CricketFunctions.GetTargetData(matchAllData).getTargetOvers())*6)) + " BALLS (DLS)" + "\0", print_writers);
+										String.valueOf("FROM " + CricketFunctions.GetTargetData(matchAllData).getTargetOvers()) + " OVERS (DLS)" + "\0", print_writers);
 							}
 							break;
 

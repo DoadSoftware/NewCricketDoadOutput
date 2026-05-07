@@ -7634,7 +7634,17 @@ function addItemsToList(whatToProcess,dataToProcess)
 						  select.appendChild(option);
 					});
 					break;
-				case 'NPL': case 'LEGENDS-90':  case 'MPL': case 'APL':
+				case 'LEGENDS-90':
+					[ { value: 'DT20', text: 'T20' },
+					 { value: 'IT20', text: 'T20i' }
+					].forEach(({ value, text }) => {
+						  option = document.createElement('option');
+						  option.value = value;
+						  option.text = text;
+						  select.appendChild(option);
+					});
+					break;
+				case 'NPL': case 'MPL': case 'APL':
 					option = document.createElement('option');
 					option.value = 'NPL S1';
 					option.text = 'NPL S1';
@@ -8561,7 +8571,17 @@ function addItemsToList(whatToProcess,dataToProcess)
 						  select.appendChild(option);
 					});
 					break;
-				case 'NPL': case 'LEGENDS-90':  case 'MPL': case 'APL':
+				case 'LEGENDS-90':
+					[ { value: 'DT20', text: 'T20' },
+					  { value: 'IT20', text: 'T20i' }
+					].forEach(({ value, text }) => {
+						  option = document.createElement('option');
+						  option.value = value;
+						  option.text = text;
+						  select.appendChild(option);
+					});
+					break;
+				case 'NPL': case 'MPL': case 'APL':
 					option = document.createElement('option');
 					option.value = 'NPL S1';
 					option.text = 'NPL S1';
