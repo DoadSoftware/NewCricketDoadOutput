@@ -7645,11 +7645,7 @@ function addItemsToList(whatToProcess,dataToProcess)
 					});
 					break;
 				case 'NPL': case 'MPL': case 'APL':
-					option = document.createElement('option');
-					option.value = 'NPL S1';
-					option.text = 'NPL S1';
-					select.appendChild(option);
-				
+					
 					option = document.createElement('option');
 					option.value = 'DT20';
 					option.text = 'DT20';
@@ -7667,6 +7663,11 @@ function addItemsToList(whatToProcess,dataToProcess)
 						select.appendChild(option);	
 					}else if($('#selected_broadcaster').val().toUpperCase()=='NPL'){
 						option = document.createElement('option');
+						option.value = 'NPL S1';
+						option.text = 'NPL S1';
+						select.appendChild(option);
+						
+						option = document.createElement('option');
 						option.value = 'NPL_CAREER';
 						option.text = 'NPL CAREER';
 						select.appendChild(option);
@@ -7682,8 +7683,8 @@ function addItemsToList(whatToProcess,dataToProcess)
 						select.appendChild(option);*/
 					}else if($('#selected_broadcaster').val().toUpperCase()=='APL'){
 						option = document.createElement('option');
-						option.value = 'NPL_CAREER';
-						option.text = 'NPL CAREER';
+						option.value = 'APL_CAREER';
+						option.text = 'APL CAREER';
 						select.appendChild(option);
 						
 						/*option = document.createElement('option');
@@ -8583,11 +8584,6 @@ function addItemsToList(whatToProcess,dataToProcess)
 					break;
 				case 'NPL': case 'MPL': case 'APL':
 					option = document.createElement('option');
-					option.value = 'NPL S1';
-					option.text = 'NPL S1';
-					select.appendChild(option);
-				
-					option = document.createElement('option');
 					option.value = 'DT20';
 					option.text = 'DT20';
 					select.appendChild(option);
@@ -8603,6 +8599,11 @@ function addItemsToList(whatToProcess,dataToProcess)
 						option.text = 'KCL';
 						select.appendChild(option);	
 					}else if($('#selected_broadcaster').val().toUpperCase()=='NPL'){
+						option = document.createElement('option');
+						option.value = 'NPL S1';
+						option.text = 'NPL S1';
+						select.appendChild(option);
+						
 						option = document.createElement('option');
 						option.value = 'NPL_CAREER';
 						option.text = 'NPL CAREER';
@@ -8620,8 +8621,8 @@ function addItemsToList(whatToProcess,dataToProcess)
 					}
 					else if($('#selected_broadcaster').val().toUpperCase()=='APL'){
 						option = document.createElement('option');
-						option.value = 'NPL_CAREER';
-						option.text = 'NPL CAREER';
+						option.value = 'APL_CAREER';
+						option.text = 'APL CAREER';
 						select.appendChild(option);
 						
 						/*option = document.createElement('option');

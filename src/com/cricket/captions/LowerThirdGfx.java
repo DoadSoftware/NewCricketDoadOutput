@@ -187,19 +187,23 @@ public class LowerThirdGfx
 			case "F5": case "F9": case "Control_F5": case "Control_F9": case "Shift_F5": case "Shift_F9": case "F6": case "Control_F6": case "Shift_F6":
 			case "F8": case "Alt_F8": case "F7": case "F11": case "Control_s": case "Control_f":
 				if(playerId > 0) {
+					System.out.println("playerId - "+playerId);
 					if(!CricketFunctions.checkBatAndBallImpactInOutPlayer(matchAllData.getEventFile().getEvents(), playerId).isEmpty()) {
+						System.out.println(CricketFunctions.checkBatAndBallImpactInOutPlayer(matchAllData.getEventFile().getEvents(), playerId));
 						switch(CricketFunctions.checkBatAndBallImpactInOutPlayer(matchAllData.getEventFile().getEvents(), playerId)) {
 						case "IMP_IN":
+							System.out.println("hello");
 							setImpact(true);
 							CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$LowerThird$Impact_Player$Side" + whichSide + "$Impact"
 									+ "*GEOM*TEXT SET IMPACT PLAYER\0", print_writers);
-							
+							CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$LowerThird$Impact_Player*ACTIVE SET 1\0", print_writers);
 							break;
 						}
 					}else {
 						setImpact(false);
 						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$LowerThird$Impact_Player$Side" + whichSide + "$Impact"
 								+ "*GEOM*TEXT SET \0", print_writers);
+						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$LowerThird$Impact_Player*ACTIVE SET 0\0", print_writers);
 					}
 				}else {
 					setImpact(false);
@@ -7656,7 +7660,8 @@ public class LowerThirdGfx
 				return "PopulateL3rdPlayerProfile: Team Id not found [" + player.getTeamId() + "]";
 			}
 			
-			if(!WhichProfile.equalsIgnoreCase("ISPL_CAREER") && !WhichProfile.equalsIgnoreCase("NPL_CAREER")) {
+			if(!WhichProfile.equalsIgnoreCase("ISPL_CAREER") && !WhichProfile.equalsIgnoreCase("NPL_CAREER")
+					&& !WhichProfile.equalsIgnoreCase("APL_CAREER")) {
 				statsType = statsTypes.stream().filter(stype -> stype.getStats_short_name().equalsIgnoreCase(WhichProfile)).findAny().orElse(null);
 				if(statsType == null) {
 					return "PopulateL3rdPlayerProfile: Stats Type not found for profile [" + WhichProfile + "]";
@@ -7696,6 +7701,23 @@ public class LowerThirdGfx
 					stat = CricketFunctions.updateTournamentWithH2h(stat, headToHead, matchAllData, CricketUtil.TEAMNAME_3);
 					stat = CricketFunctions.updateStatisticsWithMatchData(stat, matchAllData, CricketUtil.TEAMNAME_3);
 					break;
+				case "APL_CAREER":
+					statsType = statsTypes.stream().filter(st -> st.getStats_short_name().equalsIgnoreCase("APL_T20")).findAny().orElse(null);
+					if(statsType == null) {
+						return "InfoBarPlayerProfile: Stats Type not found for profile [" + WhichProfile + "]";
+					}
+					
+					stat = statistics.stream().filter(st -> st.getPlayer_id() == FirstPlayerId && statsType.getStats_id() == st.getStats_type_id()).findAny().orElse(null);
+					if(stat == null) {
+						return "InfoBarPlayerProfile: Stats not found for Player Id [" + FirstPlayerId + "]";
+					}
+					
+					statsType = statsTypes.stream().filter(st -> st.getStats_short_name().equalsIgnoreCase("DT20")).findAny().orElse(null);
+					stat.setStats_type(statsType);
+					
+					stat = CricketFunctions.updateTournamentWithH2h(stat, headToHead, matchAllData, CricketUtil.TEAMNAME_3);
+					stat = CricketFunctions.updateStatisticsWithMatchData(stat, matchAllData, CricketUtil.TEAMNAME_3);
+					break;
 				case "DT20":
 					statsType = statsTypes.stream().filter(st -> st.getStats_short_name().equalsIgnoreCase("DT20")).findAny().orElse(null);
 					if(statsType == null) {
@@ -7711,7 +7733,7 @@ public class LowerThirdGfx
 					stat.setStats_type(statsType);
 					
 					stat = CricketFunctions.updateTournamentWithH2h(stat, headToHead, matchAllData, CricketUtil.TEAMNAME_3);
-					stat = CricketFunctions.updateStatisticsWithMatchData(stat, matchAllData, CricketUtil.TEAMNAME_3);
+//					stat = CricketFunctions.updateStatisticsWithMatchData(stat, matchAllData, CricketUtil.TEAMNAME_3);
 					break;
 				}
 				break;
@@ -7902,6 +7924,8 @@ public class LowerThirdGfx
 						short_name =  "KCL CAREER";
 					}else if(WhichProfile.equalsIgnoreCase("NPL_CAREER")) {
 						short_name =  "NPL CAREER";
+					}else if(WhichProfile.equalsIgnoreCase("APL_CAREER")) {
+						short_name =  "APL CAREER";
 					}else if(WhichProfile.equalsIgnoreCase("NPL S1")) {
 						short_name =  "NPL SEASON 1";
 					}else if(WhichProfile.equalsIgnoreCase("IPL 2025")) {
@@ -8025,6 +8049,8 @@ public class LowerThirdGfx
 						short_name =  "IPL 2025";
 					}else if(WhichProfile.equalsIgnoreCase("NPL_CAREER")) {
 						short_name =  "NPL CAREER";
+					}else if(WhichProfile.equalsIgnoreCase("APL_CAREER")) {
+						short_name =  "APL CAREER";
 					}else if(WhichProfile.equalsIgnoreCase("KCL")) {
 						short_name =  "KCL CAREER";
 					}else if(WhichProfile.equalsIgnoreCase("NPL S1")) {
@@ -15345,8 +15371,8 @@ public class LowerThirdGfx
 				case Constants.NPL: case Constants.MPL: case Constants.APL:
 					System.out.println("lowerThird = " + lowerThird);
 					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$LowerThird$Data_Grp$Bottom_Grp$Side" + WhichSide 
-							+ "$FreeText_Small$txt_Info*GEOM*TEXT SET " + "FOURS " + lowerThird.getLeftText()[0] + "      SIXES " + 
-							lowerThird.getLeftText()[1] + "      STRIKE RATE " + lowerThird.getRightText()[0] + "\0", print_writers);
+							+ "$FreeText_Small$txt_Info*GEOM*TEXT SET " + "FOURS: " + lowerThird.getLeftText()[0] + "      SIXES: " + 
+							lowerThird.getLeftText()[1] + "      STRIKE RATE: " + lowerThird.getRightText()[0] + "\0", print_writers);
 					break;	
 				}
 				
