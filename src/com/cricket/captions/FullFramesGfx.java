@@ -7514,7 +7514,7 @@ public class FullFramesGfx
 								+ "*TEXTURE*IMAGE SET " + Constants.MPL_BASE2 + matchAllData.getMatch().getInning().get(1).getBatting_team().getTeamBadge()+ logoCategory +"\0", print_writers);
 						
 						
-						if(Integer.valueOf(matchAllData.getSetup().getReducedOvers()) > 0) {
+						if(matchAllData.getSetup().getReducedOvers() != null && !matchAllData.getSetup().getReducedOvers().isEmpty()) {
 							CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$AllGraphics$Side" + WhichSide + "$2_Teams$Team_1$txt_Balls"
 									+ "*GEOM*TEXT SET "+CricketFunctions.OverBalls(matchAllData.getMatch().getInning().get(0).getTotalOvers(), 
 											matchAllData.getMatch().getInning().get(0).getTotalBalls()) + " (" + matchAllData.getSetup().getReducedOvers() + ")" +"\0", print_writers);

@@ -7658,8 +7658,8 @@ function addItemsToList(whatToProcess,dataToProcess)
 				
 					if($('#selected_broadcaster').val().toUpperCase()=='MPL'){
 						option = document.createElement('option');
-						option.value = 'KCL';
-						option.text = 'KCL';
+						option.value = 'MPL';
+						option.text = 'MPL';
 						select.appendChild(option);	
 					}else if($('#selected_broadcaster').val().toUpperCase()=='NPL'){
 						option = document.createElement('option');

@@ -407,11 +407,11 @@ public class IndexController
 				break;
 			}
 			
-//			if(select_broadcaster.equalsIgnoreCase(Constants.MPL)) {
-//				this_caption.this_fullFramesGfx.setFullFrameBase(session_configuration);
-//			}else if(select_broadcaster.equalsIgnoreCase(Constants.BENGAL_T20)){
-//				this_caption.this_fullFramesGfx.PopulateFfFooter(0, "", session_match, 0);
-//			}
+			if(select_broadcaster.equalsIgnoreCase(Constants.MPL)) {
+				this_caption.this_fullFramesGfx.setFullFrameBase(session_configuration);
+			}else if(select_broadcaster.equalsIgnoreCase(Constants.BENGAL_T20)){
+				this_caption.this_fullFramesGfx.PopulateFfFooter(0, "", session_match, 0);
+			}
 			
 			if(session_match.getMatch().getInning() != null) {
 				model.addAttribute("which_inning", session_match.getMatch().getInning().stream().filter(inn -> inn.getIsCurrentInning()
