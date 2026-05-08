@@ -54,6 +54,7 @@ import com.fasterxml.jackson.core.exc.StreamReadException;
 import com.fasterxml.jackson.databind.DatabindException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 public class LofInfobarGfx 
 {
@@ -89,8 +90,11 @@ public class LofInfobarGfx
 	public List<Player> Players;
 	public List<HeadToHeadPlayer> headToHead;
 	public List<Tournament> past_tournament_stats;
+	
+	@JsonIgnore
 	public CricketService cricketService;
 
+	@JsonIgnore
 	public List<PrintWriter> print_writers; 
 	public List<BattingCard> battingCardList = new ArrayList<BattingCard>();
 	public BowlingCard bowlingCard = new BowlingCard();

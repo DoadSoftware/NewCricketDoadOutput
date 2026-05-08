@@ -37,6 +37,7 @@ import com.cricket.model.VariousText;
 import com.cricket.service.CricketService;
 import com.cricket.util.CricketFunctions;
 import com.cricket.util.CricketUtil;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.exc.StreamReadException;
 import com.fasterxml.jackson.core.type.TypeReference;
@@ -59,6 +60,8 @@ public class BugsAndMiniGfx
 	public static int  index_Player =0;
 	int rowId=0, omo_num=0;
 	String cont_name = "",text_name = "",stats_text="";
+	
+	@JsonIgnore
 	public List<PrintWriter> print_writers; 
 	public Configuration config;
 	public List<Bugs> bugs;
@@ -90,6 +93,8 @@ public class BugsAndMiniGfx
 	public List<StatsType> statsTypes;
 	public List<BattingCard> playerCards;
 	public LeagueTable leagueTable;
+	
+	@JsonIgnore
 	public CricketService cricketService;
 	
 	public Team team;

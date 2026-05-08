@@ -13432,7 +13432,7 @@ public class Animation
 				default:
 					switch (config.getBroadcaster().toUpperCase()) {
 					case Constants.MPL:
-						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER PREVIEW SCENE*/Default/Overlays "
+						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER PREVIEW SCENE*/Default/Overlays_New "
 						    	+ "C:/Temp/Preview.tga " + previewCommands + "\0", print_writer);
 						break;
 					default :

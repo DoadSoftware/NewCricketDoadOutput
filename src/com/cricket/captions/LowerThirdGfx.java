@@ -53,6 +53,7 @@ import com.cricket.model.Weather;
 import com.cricket.service.CricketService;
 import com.cricket.util.CricketFunctions;
 import com.cricket.util.CricketUtil;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.exc.StreamReadException;
 import com.fasterxml.jackson.databind.DatabindException;
@@ -64,6 +65,7 @@ public class LowerThirdGfx
 	public int SecondPlayerId;
 	public String WhichProfile, status = "",logo_data = "",impact_photo = "";
 	
+	@JsonIgnore
 	public List<PrintWriter> print_writers; 
 	public Configuration config;
 	public List<Statistics> statistics;
@@ -102,6 +104,8 @@ public class LowerThirdGfx
 	public Team team;
 	public L3Griff l3griff;
 	public VariousText variousText;
+	
+	@JsonIgnore
 	public CricketService cricketService;
 	public static List<VariousStats> PlayerList;
 	public VariousStats VariousStats;

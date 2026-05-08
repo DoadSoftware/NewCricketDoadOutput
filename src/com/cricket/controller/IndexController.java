@@ -1350,22 +1350,47 @@ public class IndexController
 		case "z": case "x": case "c": case "v": case "Control_Shift_Z": case "Control_Shift_Y": case "Shift_@": case "Shift_$": case "Control_Shift_@": case "Control_Alt_5":
 		case "Control_Alt_9": case "Control_Alt_0":	case "Alt_Shift_K": case "Alt_Shift_X": case "Alt_Shift_T": case "Alt_Shift_V": 
 			
-			List<Tournament> tournamentStats = CricketFunctions.extractTournamentData("CURRENT_MATCH_DATA", false, 
-				headToHead.getH2hPlayer(), cricketService, session_match, past_tournament_stats);
+			List<Tournament> tournamentStats = CricketFunctions.extractTournamentData(
+			        "CURRENT_MATCH_DATA",false, headToHead.getH2hPlayer(),
+			        cricketService,session_match, past_tournament_stats);
 
-			if (Constants.MPL.equalsIgnoreCase(session_configuration.getBroadcaster()) 
-				&& session_configuration.getCategory() != null && !session_configuration.getCategory().trim().isEmpty()) {
-				String gender = session_configuration.getCategory().trim();
-			    tournamentStats.removeIf(t -> t.getPlayer() == null || !gender.equalsIgnoreCase(t.getPlayer().getGender()));
+			if (Constants.MPL.equalsIgnoreCase(session_configuration.getBroadcaster())) {
+
+			    String category = session_configuration.getCategory();
+			    if (category != null && !category.trim().isEmpty()) {
+
+			        tournamentStats.removeIf(t ->
+					        t == null ||
+					        t.getPlayer() == null ||
+					        !genderMatches(category, t.getPlayer().getGender())
+					);
+			    }
 			}
-		
-		    Comparator<Tournament> comparator = SORT_MAP.get(whatToProcess);
 
-		    if (comparator != null) {
-		        tournamentStats.sort(comparator);
-		    }
-		    
+			Comparator<Tournament> comparator = SORT_MAP.get(whatToProcess);
+
+			if (comparator != null) {
+			    tournamentStats.sort(comparator);
+			}
+
 			return (List<T>) tournamentStats;
+			
+//			List<Tournament> tournamentStats = CricketFunctions.extractTournamentData("CURRENT_MATCH_DATA", false, 
+//				headToHead.getH2hPlayer(), cricketService, session_match, past_tournament_stats);
+//
+//			if (Constants.MPL.equalsIgnoreCase(session_configuration.getBroadcaster()) 
+//				&& session_configuration.getCategory() != null && !session_configuration.getCategory().trim().isEmpty()) {
+//				String gender = session_configuration.getCategory().trim();
+//			    tournamentStats.removeIf(t -> t.getPlayer() == null || !gender.equalsIgnoreCase(t.getPlayer().getGender()));
+//			}
+//		
+//		    Comparator<Tournament> comparator = SORT_MAP.get(whatToProcess);
+//
+//		    if (comparator != null) {
+//		        tournamentStats.sort(comparator);
+//		    }
+//		    
+//			return (List<T>) tournamentStats;
 			
 //			List<Tournament> gender_Specific_tournament_stats = new ArrayList<Tournament>();
 //			List<Tournament> tournament_stats = new ArrayList<Tournament>();
@@ -1746,5 +1771,28 @@ public class IndexController
 			}
 			break;
 		}
+	}
+	private static boolean genderMatches(
+	        String category,
+	        String playerGender) {
+
+	    if (category == null || playerGender == null) {
+	        return false;
+	    }
+
+	    category = category.trim().toUpperCase();
+	    playerGender = playerGender.trim().toUpperCase();
+
+	    switch (category) {
+
+	        case "MEN":
+	            return "MALE".equals(playerGender);
+
+	        case "WOMEN":
+	            return "FEMALE".equals(playerGender);
+
+	        default:
+	            return category.equals(playerGender);
+	    }
 	}
 }
