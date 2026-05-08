@@ -867,8 +867,14 @@ public class Animation
 				processAnimation(Constants.FRONT, print_writers, "Anim_Ident$Loop", "START");
 				processAnimation(Constants.FRONT, print_writers, "Anim_Infobar$In_Out", "START");
 				processAnimation(Constants.FRONT, print_writers, "Anim_Infobar$RightInfo_Bottom", "START");
-				//processAnimation(Constants.FRONT, print_writers, "Anim_Infobar$Impact_Bat", "START");
-				//processAnimation(Constants.FRONT, print_writers, "Anim_Infobar$Impact_Bowl", "START");
+				switch (config.getBroadcaster()) {
+				case Constants.NPL:  case Constants.APL: 
+					processAnimation(Constants.FRONT, print_writers, "Anim_Infobar$Impact_Bat", "START");
+					processAnimation(Constants.FRONT, print_writers, "Anim_Infobar$Impact_Bowl", "START");
+					break;
+				}
+				
+				
 				this.infobar.setInfobar_on_screen(true);
 				this.infobar.setInfobar_pushed(false);
 				this.infobar.setInfobar_status(Constants.TWO_LINER_INFOBAR);

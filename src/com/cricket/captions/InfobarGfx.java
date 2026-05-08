@@ -2181,6 +2181,14 @@ public class InfobarGfx
 			case Constants.NPL: case Constants.APL:
 				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Infobar$Right$Side_" + WhichSide 
 						+ infobar.getBatsmanAndBowlOrSponsor() + "$Bat_" + WhichBatsman + "_Impact$Select*FUNCTION*Omo*vis_con SET 0\0", print_writers);
+				if(!CricketFunctions.checkBatAndBallImpactInOutPlayer(matchAllData.getEventFile().getEvents(), battingCardList.get(WhichBatsman-1).getPlayerId()).isEmpty()) {
+					switch(CricketFunctions.checkBatAndBallImpactInOutPlayer(matchAllData.getEventFile().getEvents(), battingCardList.get(WhichBatsman-1).getPlayerId())) {
+					case "IMP_IN":
+						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Infobar$Right$Side_" + WhichSide 
+								+ infobar.getBatsmanAndBowlOrSponsor() + "$Bat_" + WhichBatsman + "_Impact$Select*FUNCTION*Omo*vis_con SET 1\0", print_writers);
+						break;
+					}
+				}
 				break;
 			case Constants.LEGENDS:
 				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Infobar$Right$Side_" + WhichSide +"$Bat_" + 
@@ -2891,19 +2899,17 @@ public class InfobarGfx
 			
 			switch (config.getBroadcaster()) {
 			case Constants.NPL: case Constants.APL:
-//				if(!CricketFunctions.checkBatAndBallImpactInOutPlayer(matchAllData.getEventFile().getEvents(), bowlingCard.getPlayerId()).isEmpty()) {
-//					switch(CricketFunctions.checkBatAndBallImpactInOutPlayer(matchAllData.getEventFile().getEvents(), bowlingCard.getPlayerId())) {
-//					case "IMP_IN":
-//						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Infobar$Right$Data_Right_Normal$Side_1$Style2$Bowl_Impact$" 
-//								+ "Select*FUNCTION*Omo*vis_con SET 1\0", print_writers);
-//						break;
-//					}
-//				}else {
-//					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Infobar$Right$Data_Right_Normal$Side_1$Style2$Bowl_Impact$" 
-//							+ "Select*FUNCTION*Omo*vis_con SET 0\0", print_writers);
-//				}
 				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Infobar$Right$Data_Right_Normal$Side_1" + infobar.getInfobar_photo() 
 						+ "$Bowl_Impact$Select*FUNCTION*Omo*vis_con SET 0\0", print_writers);
+				if(!CricketFunctions.checkBatAndBallImpactInOutPlayer(matchAllData.getEventFile().getEvents(), bowlingCard.getPlayerId()).isEmpty()) {
+					switch(CricketFunctions.checkBatAndBallImpactInOutPlayer(matchAllData.getEventFile().getEvents(), bowlingCard.getPlayerId())) {
+					case "IMP_IN":
+						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Infobar$Right$Data_Right_Normal$Side_1$Style2$Bowl_Impact$" 
+								+ "Select*FUNCTION*Omo*vis_con SET 1\0", print_writers);
+						break;
+					}
+				}
+				
 				break;
 			case Constants.LEGENDS:
 				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Infobar$Right$Data_Right_Normal$Side_1$Style2$Bowl_Impact$" 
