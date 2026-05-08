@@ -9076,9 +9076,9 @@ public class InfobarGfx
 						break;
 					default:
 						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Infobar$Right$Side_" + WhichSide + "$Analytics_1_Wide$txt_Top*GEOM*TEXT SET " + 
-								CricketFunctions.generateTossResult(matchAllData, CricketUtil.FULL, CricketUtil.FIELD, CricketUtil.FULL, CricketUtil.ELECTED).toUpperCase().split("WON")[0] + "\0", print_writers);
+								CricketFunctions.generateTossResult(matchAllData, CricketUtil.FULL, CricketUtil.FIELD, CricketUtil.FULL, CricketUtil.CHOSE).toUpperCase().split("WON")[0] + "\0", print_writers);
 						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Infobar$Right$Side_" + WhichSide + "$Analytics_1_Wide$txt_Bottom*GEOM*TEXT SET WON" + 
-								CricketFunctions.generateTossResult(matchAllData, CricketUtil.FULL, CricketUtil.FIELD, CricketUtil.FULL, CricketUtil.ELECTED).toUpperCase().split("WON")[1] + "\0", print_writers);
+								CricketFunctions.generateTossResult(matchAllData, CricketUtil.FULL, CricketUtil.FIELD, CricketUtil.FULL, CricketUtil.CHOSE).toUpperCase().split("WON")[1] + "\0", print_writers);
 						break;
 					}
 					break;	
@@ -9155,7 +9155,7 @@ public class InfobarGfx
 								CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Infobar$Right$Side_" + WhichSide + "$Analytics_1_Wide$"
 										+ "txt_Top*GEOM*TEXT SET " + matchAllData.getSetup().getMatchIdent() + "\0", print_writers);
 								CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Infobar$Right$Side_" + WhichSide + "$Analytics_1_Wide$"
-										+ "txt_Bottom*GEOM*TEXT SET SUPER OVER TIED\0", print_writers);
+										+ "txt_Bottom*GEOM*TEXT SET SUPER OVER TIED - ANOTHER SUPER OVER TO FOLLOW\0", print_writers);
 								
 							}else {
 								CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Infobar$Right$Side_" + WhichSide + "$Analytics_1_Wide$"
@@ -9611,7 +9611,17 @@ public class InfobarGfx
 					
 					switch (config.getBroadcaster()) {
 					case Constants.APL:
-						break;
+						switch (WhichProfile.toUpperCase()) {
+						case "APL_CAREER":
+							break;
+						default:
+							statsType = statsTypes.stream().filter(st -> st.getStats_short_name().equalsIgnoreCase("DT20")).findAny().orElse(null);
+							stat.setStats_type(statsType);
+							
+							stat = CricketFunctions.updateTournamentWithH2h(stat, headToHead, matchAllData, CricketUtil.TEAMNAME_3);
+							stat = CricketFunctions.updateStatisticsWithMatchData(stat, matchAllData, CricketUtil.TEAMNAME_3);
+							break;
+						}
 					case Constants.NPL:
 						switch (WhichProfile.toUpperCase()) {
 						case "NPL_CAREER":
@@ -9716,6 +9726,10 @@ public class InfobarGfx
 					case "NPL_CAREER":
 						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Infobar$Right$Side_" + WhichSide + "$Analytics_2_Wide$Top$txt_Subtitle"
 								+ "*GEOM*TEXT SET " + "NPL CAREER" + "\0", print_writers);
+						break;
+					case "APL_CAREER":
+						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Infobar$Right$Side_" + WhichSide + "$Analytics_2_Wide$Top$txt_Subtitle"
+								+ "*GEOM*TEXT SET " + "APL CAREER" + "\0", print_writers);
 						break;
 
 					default:

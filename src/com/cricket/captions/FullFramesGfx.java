@@ -4124,6 +4124,7 @@ public class FullFramesGfx
 			break;
 		
 		case Constants.NPL: case Constants.APL:
+			
 			switch (whatToProcess) {
 			case "F1": case "F2": case "Shift_K": case "Control_Shift_I":
 				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$Logo$StartLogoAll$Select_LogoType"
@@ -4440,7 +4441,8 @@ public class FullFramesGfx
 						+ "*FUNCTION*Omo*vis_con SET 1\0", print_writers);
 				
 				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$SudheaderGrp$Side" + WhichSide + "$txt_SubHeadText2"
-						+ "*GEOM*TEXT SET " + "SBL NEPAL PREMIER LEAGUE 2025" + "\0", print_writers);
+						+ "*GEOM*TEXT SET " + (config.getBroadcaster().equalsIgnoreCase(Constants.APL)?matchAllData.getSetup().getTournament():
+								"SBL NEPAL PREMIER LEAGUE 2025") + "\0", print_writers);
 //				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$SudheaderGrp$Side" + WhichSide + "$txt_SubHeadText2"
 //						+ "*GEOM*TEXT SET " + matchAllData.getSetup().getTournament() + "\0", print_writers);
 				break;
@@ -4734,7 +4736,9 @@ public class FullFramesGfx
 							"$Header_Style2$txt_HeaderText2*GEOM*TEXT SET " + "COMPARISON" + "\0", print_writers);
 					
 					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$SudheaderGrp$Side" + WhichSide +"$txt_SubHeadText2"
-							+ "*GEOM*TEXT SET " + "SBL NEPAL PREMIER LEAGUE 2025" + "\0", print_writers);
+							+ "*GEOM*TEXT SET " + (config.getBroadcaster().equalsIgnoreCase(Constants.APL)?matchAllData.getSetup().getTournament():
+								"SBL NEPAL PREMIER LEAGUE 2025")
+							 + "\0", print_writers);
 //					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$SudheaderGrp$Side" + WhichSide +"$txt_SubHeadText2"
 //						+ "*GEOM*TEXT SET " + matchAllData.getSetup().getTournament() + "\0", print_writers);
 					break;
@@ -4786,7 +4790,10 @@ public class FullFramesGfx
 				}
 				
 				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$SudheaderGrp$Side" + WhichSide +"$txt_SubHeadText2"
-						+ "*GEOM*TEXT SET " + "SBL NEPAL PREMIER LEAGUE 2025" + "\0", print_writers);
+						+ "*GEOM*TEXT SET " + (config.getBroadcaster().equalsIgnoreCase(Constants.APL)?matchAllData.getSetup().getTournament():
+								"SBL NEPAL PREMIER LEAGUE 2025")+ "\0", print_writers);
+				
+				
 //				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$SudheaderGrp$Side" + WhichSide +"$txt_SubHeadText2"
 //						+ "*GEOM*TEXT SET " + matchAllData.getSetup().getTournament() + "\0", print_writers);
 				break;
@@ -4868,7 +4875,8 @@ public class FullFramesGfx
 						+ "*FUNCTION*Omo*vis_con SET 0\0", print_writers);
 				
 				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$SudheaderGrp$Side" + WhichSide +"$txt_SubHeadText2"
-						+ "*GEOM*TEXT SET " + "SBL NEPAL PREMIER LEAGUE 2025" + "\0", print_writers);
+						+ "*GEOM*TEXT SET " + (config.getBroadcaster().equalsIgnoreCase(Constants.APL)?matchAllData.getSetup().getTournament():
+								"SBL NEPAL PREMIER LEAGUE 2025")+ "\0", print_writers);
 //				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$SudheaderGrp$Side" + WhichSide + "$txt_SubHeadText2"
 //						+ "*GEOM*TEXT SET " + matchAllData.getSetup().getTournament() + "\0", print_writers);
 				
@@ -4961,7 +4969,8 @@ public class FullFramesGfx
 				}
 				
 				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$SudheaderGrp$Side" + WhichSide +"$txt_SubHeadText2"
-						+ "*GEOM*TEXT SET " + "SBL NEPAL PREMIER LEAGUE 2025" + "\0", print_writers);
+						+ "*GEOM*TEXT SET " + (config.getBroadcaster().equalsIgnoreCase(Constants.APL)?matchAllData.getSetup().getTournament():
+								"SBL NEPAL PREMIER LEAGUE 2025") + "\0", print_writers);
 //				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$SudheaderGrp$Side" + WhichSide + "$txt_SubHeadText2"
 //						+ "*GEOM*TEXT SET " + matchAllData.getSetup().getTournament() + "\0", print_writers);
 				switch (whatToProcess) {
@@ -5066,7 +5075,8 @@ public class FullFramesGfx
 						+ "*GEOM*TEXT SET \0", print_writers);
 				
 				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$SudheaderGrp$Side" + WhichSide +"$txt_SubHeadText2"
-						+ "*GEOM*TEXT SET " + "SBL NEPAL PREMIER LEAGUE 2025" + "\0", print_writers);
+						+ "*GEOM*TEXT SET " + (config.getBroadcaster().equalsIgnoreCase(Constants.APL)?matchAllData.getSetup().getTournament():
+								"SBL NEPAL PREMIER LEAGUE 2025") + "\0", print_writers);
 //				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$SudheaderGrp$Side" + WhichSide + "$txt_SubHeadText2"
 //						+ "*GEOM*TEXT SET " + matchAllData.getSetup().getTournament() + "\0", print_writers);
 				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$All$HeaderGrp$Side" + WhichSide + "$Header_Style2$txt_HeaderText2"
@@ -5093,7 +5103,8 @@ public class FullFramesGfx
 				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$All$HeaderGrp$Side" + WhichSide + "$Header_Style2$txt_HeaderText1"
 						+ "*GEOM*TEXT SET \0", print_writers);
 				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$SudheaderGrp$Side" + WhichSide +"$txt_SubHeadText2"
-						+ "*GEOM*TEXT SET " + "SBL NEPAL PREMIER LEAGUE 2025" + "\0", print_writers);
+						+ "*GEOM*TEXT SET " + (config.getBroadcaster().equalsIgnoreCase(Constants.APL)?matchAllData.getSetup().getTournament():
+								"SBL NEPAL PREMIER LEAGUE 2025") + "\0", print_writers);
 //				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$SudheaderGrp$Side" + WhichSide + "$txt_SubHeadText2"
 //						+ "*GEOM*TEXT SET " + matchAllData.getSetup().getTournament() + "\0", print_writers);
 				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$All$HeaderGrp$Side" + WhichSide + "$Header_Style2$txt_HeaderText2"
@@ -8264,7 +8275,8 @@ public class FullFramesGfx
 								+ "*TEXTURE*IMAGE SET "+(config.getBroadcaster().equalsIgnoreCase(Constants.APL)?Constants.APL_LOGO_PATH:Constants.NPL_LOGO_PATH)
 								+ "TLogo_White"+"\0", print_writers);
 						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$SudheaderGrp$Side" + WhichSide +"$txt_SubHeadText2"
-								+ "*GEOM*TEXT SET " + "SBL NEPAL PREMIER LEAGUE 2025" + "\0", print_writers);
+								+ "*GEOM*TEXT SET " + (config.getBroadcaster().equalsIgnoreCase(Constants.APL)?matchAllData.getSetup().getTournament():
+										"SBL NEPAL PREMIER LEAGUE 2025") + "\0", print_writers);
 						
 //						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$SudheaderGrp$Side" + WhichSide + "$txt_SubHeadText2"
 //								+ "*GEOM*TEXT SET " + matchAllData.getSetup().getTournament() + "\0", print_writers);

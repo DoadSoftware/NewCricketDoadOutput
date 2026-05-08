@@ -4576,7 +4576,7 @@ public class Animation
 						infobar.setTarget_on_screen(false);
 						infobar.setRight_bottom_play(false);
 					}else if(whatToProcess.split(",")[2].equalsIgnoreCase(CricketUtil.BOWLER)) {
-						processAnimation(Constants.FRONT, print_writers, "Anim_Infobar$Bowl_All", "CONTINUE");
+						processAnimation(Constants.FRONT, print_writers, "Anim_Infobar$Bowl_All$In_Out", "CONTINUE");
 						infobar.setRight_section(whatToProcess.split(",")[2]);
 						TimeUnit.MILLISECONDS.sleep(700);
 						processAnimation(Constants.FRONT, print_writers, "Anim_Infobar$Bowl_All", "SHOW 0.0");
@@ -4592,7 +4592,7 @@ public class Animation
 					}else if(!infobar.getRight_section().equalsIgnoreCase(CricketUtil.BOWLER) && 
 							infobar.isTarget_on_screen() == true) {
 						processAnimation(Constants.FRONT, print_writers, "Anim_Infobar$Right_Bowl_Full_Over$In_Out", "CONTINUE");
-						processAnimation(Constants.FRONT, print_writers, "Anim_Infobar$Bowl_All", "CONTINUE");
+						processAnimation(Constants.FRONT, print_writers, "Anim_Infobar$Bowl_All$In_Out", "CONTINUE");
 						infobar.setRight_section(whatToProcess.split(",")[2]);
 						infobar.setRight_section_play(true);
 						infobar.setTarget_on_screen(false);
@@ -6294,7 +6294,7 @@ public class Animation
 			}
 			break;
 			
-		case Constants.NPL: case Constants.MPL:
+		case Constants.NPL: case Constants.MPL: case Constants.APL:
 
 			if(!whatToProcess.contains(",")) {
 				return CricketUtil.NO;

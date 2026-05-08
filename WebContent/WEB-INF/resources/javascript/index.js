@@ -3646,7 +3646,7 @@ function addItemsToList(whatToProcess,dataToProcess)
 					select.appendChild(option);
 					
 					switch($('#selected_broadcaster').val().toUpperCase()){
-						 case 'MPL': case 'NPL': case 'APL':
+						 case 'MPL': case 'NPL': //case 'APL':
 							option = document.createElement('option');
 							option.value = 'PHOTO BATSMAN';
 							option.text = 'Photo Batsman/Bowler';
@@ -3706,7 +3706,7 @@ function addItemsToList(whatToProcess,dataToProcess)
 					select.appendChild(option);
 					
 					switch($('#selected_broadcaster').val().toUpperCase()){
-					case 'MPL': case 'NPL': case 'APL':
+					case 'MPL': case 'NPL': //case 'APL':
 						option = document.createElement('option');
 						option.value = 'TIMELINE';
 						option.text = 'TIMELINE';
@@ -7975,10 +7975,10 @@ function addItemsToList(whatToProcess,dataToProcess)
 								option.text = 'KCL CAREER';
 								select.appendChild(option);
 							}else if($('#selected_broadcaster').val().toUpperCase()=='APL'){
-								option = document.createElement('option');
-								option.value = 'KCL';
-								option.text = 'KCL CAREER';
-								select.appendChild(option);
+								/*option = document.createElement('option');
+								option.value = 'APL_CAREER';
+								option.text = 'APL CAREER';
+								select.appendChild(option);*/
 							}
 							
 							option = document.createElement('option');
@@ -8350,10 +8350,10 @@ function addItemsToList(whatToProcess,dataToProcess)
 								select.appendChild(option);
 							}
 							else if($('#selected_broadcaster').val().toUpperCase()=='APL'){
-								option = document.createElement('option');
-								option.value = 'KCL';
-								option.text = 'KCL CAREER';
-								select.appendChild(option);
+								/*option = document.createElement('option');
+								option.value = 'APL_CAREER';
+								option.text = 'APL CAREER';
+								select.appendChild(option);*/
 							}
 							
 							option = document.createElement('option');
