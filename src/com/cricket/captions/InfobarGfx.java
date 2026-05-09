@@ -9782,8 +9782,8 @@ public class InfobarGfx
 							break;
 						default:
 							if(!config.getBroadcaster().equalsIgnoreCase(Constants.LEGENDS)) {
-								stat = CricketFunctions.updateTournamentWithH2h(stat, headToHead, matchAllData, CricketUtil.FULL);
-								matchAllData.getSetup().setMatchType("DT20");
+								//stat = CricketFunctions.updateTournamentWithH2h(stat, headToHead, matchAllData, CricketUtil.FULL);
+								//matchAllData.getSetup().setMatchType("DT20");
 							}
 							break;
 						}

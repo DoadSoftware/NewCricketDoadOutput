@@ -7679,12 +7679,6 @@ public class LowerThirdGfx
 			
 			switch (config.getBroadcaster().toUpperCase()) {
 			case Constants.LEGENDS:
-				switch (WhichProfile.toUpperCase()) {
-				case "DT20":
-					stat = CricketFunctions.updateTournamentWithH2h(stat, headToHead, matchAllData, CricketUtil.FULL);
-					stat = CricketFunctions.updateStatisticsWithMatchData(stat, matchAllData, CricketUtil.FULL);
-					break;
-				}
 				break;
 			case Constants.NPL: case Constants.APL:
 				switch (WhichProfile.toUpperCase()) {

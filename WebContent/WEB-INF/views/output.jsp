@@ -149,7 +149,7 @@
 			    <i class="fas fa-file-video"  style="font-size: 30px;"></i> <b>Match:</b> ${session_match.match.matchFileName.replace(".json"," ")}</label>
 			
 			<label class="col-sm-4 col-form-label text-left">
-			    <i class="fas fa-broadcast-tower"  style="font-size: 30px;"></i> <b>Broadcaster:</b> ${session_configuration.broadcaster.replace("_"," ")}
+			    <i class="fas fa-broadcast-tower"  style="font-size: 30px;"></i> <b>Broadcaster:</b> ${session_configuration.broadcaster.replace("_"," ").replace("LEGENDS-90","BPL")}
 			</label>
 			
 			<c:if test="${not empty session_configuration.secondaryBroadcaster}">
@@ -224,7 +224,8 @@
 	      	<c:if test="${(session_configuration.broadcaster == 'ISPL' || 
 	      					session_configuration.broadcaster == 'T20_MUMBAI' || 
 	      					session_configuration.broadcaster == 'NPL' ||
-	      					session_configuration.broadcaster == 'APL')}">
+	      					session_configuration.broadcaster == 'APL' ||
+	      					session_configuration.broadcaster == 'LEGENDS-90')}">
 			    <br>
 			   <div class="custom-toggle-wrapper">
 				    <div class="custom-toggle">
