@@ -5516,7 +5516,7 @@ public class LowerThirdGfx
 				break;
 			case Constants.LEGENDS:
 				lowerThird = new LowerThird(CricketFunctions.getbattingstyle(player.getBattingStyle(),CricketUtil.FULL, true, false).toUpperCase(), 
-						player.getFirstname(), surName,"THIS SERIES", "", "", 2,"",team.getTeamBadge(),new String[]{"MATCHES", "RUNS", "50s/100s", "S/R", "BEST"},
+						player.getFirstname(), surName,"THIS SEASON", "", "", 2,"",team.getTeamBadge(),new String[]{"MATCHES", "RUNS", "50s/100s", "S/R", "BEST"},
 						new String[]{String.valueOf(tournament.getMatches()), String.format("%,d\n", tournament.getRuns()),
 							fifties + "/" + hundred, bat_sr, best},null,null,new String[] {"20","200","380","560","720"});
 				break;

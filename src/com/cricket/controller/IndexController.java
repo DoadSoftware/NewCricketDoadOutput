@@ -1543,15 +1543,6 @@ public class IndexController
 			
 			switch (typeOfUpdate) {
 			case "ONLY_DB":
-				session_match = CricketFunctions.populateMatchVariables(CricketFunctions.readOrSaveMatchFile(CricketUtil.READ, 
-						CricketUtil.SETUP + "," + CricketUtil.MATCH + "," + CricketUtil.EVENT, session_match, config), session_players, session_team, session_ground);
-				session_match.getSetup().setGenerateInteractiveFile(config.getGenerateInteractiveFile());
-
-				MatchStats = CricketFunctions.getAllEvents(session_match, config.getBroadcaster(), session_match.getEventFile().getEvents());
-				CricketFunctions.getInteractive(session_match, "FULL_WRITE");
-
-				session_match.getMatch().setMatchStats(MatchStats);
-				
 				session_performance_bug = cricketService.getPerformanceBugs();
 				session_name_super =  cricketService.getNameSupers();
 				session_team =  cricketService.getTeams();
@@ -1608,7 +1599,6 @@ public class IndexController
 				this_caption.this_lowerThirdGfx.Potts = session_pott;
 				this_caption.this_lowerThirdGfx.fixTures = session_fixture;
 				
-				
 				//FullFrames
 				this_caption.this_fullFramesGfx.statistics = session_statistics;
 				this_caption.this_fullFramesGfx.statsTypes = cricketService.getAllStatsType();
@@ -1619,6 +1609,15 @@ public class IndexController
 				this_caption.this_fullFramesGfx.VariousText = session_variousText;
 				this_caption.this_fullFramesGfx.Potts = session_pott;
 				this_caption.this_fullFramesGfx.Playoffs = session_playoff;
+				
+				session_match = CricketFunctions.populateMatchVariables(CricketFunctions.readOrSaveMatchFile(CricketUtil.READ, 
+						CricketUtil.SETUP + "," + CricketUtil.MATCH + "," + CricketUtil.EVENT, session_match, config), session_players, session_team, session_ground);
+				session_match.getSetup().setGenerateInteractiveFile(config.getGenerateInteractiveFile());
+
+				MatchStats = CricketFunctions.getAllEvents(session_match, config.getBroadcaster(), session_match.getEventFile().getEvents());
+				CricketFunctions.getInteractive(session_match, "FULL_WRITE");
+
+				session_match.getMatch().setMatchStats(MatchStats);
 				break;
 			default:
 				session_statistics = cricketService.getAllStats();

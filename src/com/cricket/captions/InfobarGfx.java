@@ -2203,21 +2203,12 @@ public class InfobarGfx
 						WhichBatsman + "_Impact$Select*FUNCTION*Omo*vis_con SET 0\0", print_writers);
 				if(!CricketFunctions.checkBatAndBallImpactInOutPlayer(matchAllData.getEventFile().getEvents(), battingCardList.get(WhichBatsman-1).getPlayerId()).isEmpty()) {
 					switch(CricketFunctions.checkBatAndBallImpactInOutPlayer(matchAllData.getEventFile().getEvents(), battingCardList.get(WhichBatsman-1).getPlayerId())) {
-					case "IN":
+					case "IMP_IN":
 						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Infobar$Right$Side_" + WhichSide 
 								+ infobar.getBatsmanAndBowlOrSponsor() + "$Bat_" + WhichBatsman + "$Side" + WhichSubSide + "$Batsman$Select_Impact"
 								+ "*FUNCTION*Omo*vis_con SET 2\0", print_writers);
 						break;
-					case "OUT":
-						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Infobar$Right$Side_" + WhichSide 
-								+ infobar.getBatsmanAndBowlOrSponsor() + "$Bat_" + WhichBatsman + "$Side" + WhichSubSide + "$Batsman$Select_Impact"
-								+ "*FUNCTION*Omo*vis_con SET 1\0", print_writers);
-						break;
 					}
-				}else {
-					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Infobar$Right$Side_" + WhichSide 
-							+ infobar.getBatsmanAndBowlOrSponsor() + "$Bat_" + WhichBatsman + "$Side" + WhichSubSide + "$Batsman$Select_Impact"
-							+ "*FUNCTION*Omo*vis_con SET 0\0", print_writers);
 				}
 				break;
 			default:
@@ -2923,20 +2914,15 @@ public class InfobarGfx
 				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Infobar$Right$Data_Right_Normal$Side_1$Style2$Bowl_Impact$" 
 						+"Select*FUNCTION*Omo*vis_con SET 0\0", print_writers);
 				
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Infobar$Right$Data_Right_Normal$Side_1$Style2$Bowl_Part$" 
+						+ "Side"+ WhichSide + "$Bowler$Select_Impact*FUNCTION*Omo*vis_con SET 0\0", print_writers);
 				if(!CricketFunctions.checkBatAndBallImpactInOutPlayer(matchAllData.getEventFile().getEvents(), bowlingCard.getPlayerId()).isEmpty()) {
 					switch(CricketFunctions.checkBatAndBallImpactInOutPlayer(matchAllData.getEventFile().getEvents(), bowlingCard.getPlayerId())) {
-					case "IN":
+					case "IMP_IN":
 						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Infobar$Right$Data_Right_Normal$Side_1$Style2$Bowl_Part$" 
 								+ "Side"+ WhichSide + "$Bowler$Select_Impact*FUNCTION*Omo*vis_con SET 2\0", print_writers);
 						break;
-					case "OUT":
-						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Infobar$Right$Data_Right_Normal$Side_1$Style2$Bowl_Part$" 
-								+ "Side"+ WhichSide + "$Bowler$Select_Impact*FUNCTION*Omo*vis_con SET 1\0", print_writers);
-						break;
 					}
-				}else {
-					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Infobar$Right$Data_Right_Normal$Side_1$Style2$Bowl_Part$" 
-							+ "Side"+ WhichSide + "$Bowler$Select_Impact*FUNCTION*Omo*vis_con SET 0\0", print_writers);
 				}
 				break;
 
@@ -4824,7 +4810,7 @@ public class InfobarGfx
 									"$Style1$Bowl_Part_All$Side" + WhichSubSide + "$Boundaries$img_Base02*TEXTURE*IMAGE SET "+Constants.MPL_BASE2 + category+"\0", print_writers);
 						}
 						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Infobar$Right$Data_Right_Normal$Side_" + WhichSide + infobar.getInfobar_photo() 
-								+ "$Bowl_Part_All$Side" + WhichSubSide + "$Boundaries$Position$txt_Head*GEOM*TEXT SET " + "TEAM STANDING" + "\0", print_writers);
+								+ "$Bowl_Part_All$Side" + WhichSubSide + "$Boundaries$Position$txt_Head*GEOM*TEXT SET " + "STANDINGS" + "\0", print_writers);
 						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Infobar$Right$Data_Right_Normal$Side_" + WhichSide + infobar.getInfobar_photo() 
 								+ "$Bowl_Part_All$Side" + WhichSubSide + "$Select*FUNCTION*Omo*vis_con SET 0 \0", print_writers);
 						

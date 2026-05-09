@@ -3732,10 +3732,10 @@ function addItemsToList(whatToProcess,dataToProcess)
 						break;
 					}
 					
-					option = document.createElement('option');
+					/*option = document.createElement('option');
 					option.value = 'SPEED_THIS_OVER';
 					option.text = 'Speed This Over';
-					select.appendChild(option);
+					select.appendChild(option);*/
 					
 					option = document.createElement('option');
 					option.value = 'THIS_MATCH_FOURS';
