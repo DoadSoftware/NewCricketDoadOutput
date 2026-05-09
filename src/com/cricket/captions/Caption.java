@@ -755,7 +755,8 @@ public class Caption
 				}
 				
 				if(!config.getBroadcaster().equalsIgnoreCase(Constants.ISPL) && 
-						!config.getBroadcaster().equalsIgnoreCase(Constants.LEGENDS)) {
+						!config.getBroadcaster().equalsIgnoreCase(Constants.LEGENDS) &&
+						!config.getBroadcaster().equalsIgnoreCase(Constants.MPL)) {
 					if(whatToProcess.split(",")[0].equalsIgnoreCase("Control_Shift_Z")){
 						this_fullFramesGfx.whichSponsor = whatToProcess.split(",")[3];
 					}else if(whatToProcess.split(",")[0].equalsIgnoreCase("Alt_Shift_W")){

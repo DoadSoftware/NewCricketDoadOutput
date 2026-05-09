@@ -2519,11 +2519,11 @@ public class BugsAndMiniGfx
 				}
 
 				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Bugs_new$Side" + WhichSide 
-						+ "$PowerPlayBug$noname$Info01*GEOM*TEXT SET HIGHLIGHTS\0", print_writers);
+						+ "$PowerPlayBug$noname$Info01*GEOM*TEXT SET " + (config.getBroadcaster().equalsIgnoreCase(Constants.LEGENDS) ? inning.getBatting_team().getTeamName3() 
+					    	    : inning.getBatting_team().getTeamName1()) + "\0", print_writers);
 				
 				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Bugs_new$Side" + WhichSide 
-						+ "$PowerPlayBug$noname$Info02*GEOM*TEXT SET " + (config.getBroadcaster().equalsIgnoreCase(Constants.LEGENDS) ? inning.getBatting_team().getTeamName3() 
-					    	    : inning.getBatting_team().getTeamName1()) + "\0", print_writers);
+						+ "$PowerPlayBug$noname$Info02*GEOM*TEXT SET HIGHLIGHTS\0", print_writers);
 				
 				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Bugs_new$Side" + WhichSide 
 						+ "$PowerPlayBug$group$Info04*GEOM*TEXT SET "+CricketFunctions.OverBalls(inning.getTotalOvers(), inning.getTotalBalls()) +"\0", print_writers);

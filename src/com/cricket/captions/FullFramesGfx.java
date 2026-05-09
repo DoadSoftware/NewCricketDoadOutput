@@ -1265,7 +1265,7 @@ public class FullFramesGfx
 		}
 		
 		switch (config.getBroadcaster()) {
-		case Constants.T20_MUMBAI: case Constants.NPL: case Constants.ISPL: case Constants.APL:
+		case Constants.T20_MUMBAI: case Constants.NPL: case Constants.ISPL: case Constants.APL: case Constants.MPL:
 			if(config.getBroadcaster().equalsIgnoreCase(Constants.T20_MUMBAI)) {
 				inning = matchAllData.getMatch().getInning().stream().filter(inn -> inn.getIsCurrentInning().equalsIgnoreCase(CricketUtil.YES))
 						.findAny().orElse(null);
@@ -1938,9 +1938,16 @@ public class FullFramesGfx
 										matchAllData, null);
 								
 								for(int i = 0; i <= gender_Specific_tournament_stats.size()-1; i++) {
-									if(gender_Specific_tournament_stats.get(i).getPlayer().getGender().equalsIgnoreCase(config.getCategory())) {
-										tournament_stats.add(gender_Specific_tournament_stats.get(i));
+									if (genderMatches(
+									        config.getCategory(),
+									        gender_Specific_tournament_stats.get(i).getPlayer().getGender())) {
+
+									    tournament_stats.add(gender_Specific_tournament_stats.get(i));
 									}
+									
+//									if(gender_Specific_tournament_stats.get(i).getPlayer().getGender().equalsIgnoreCase(config.getCategory())) {
+//										tournament_stats.add(gender_Specific_tournament_stats.get(i));
+//									}
 								}
 							}
 							
@@ -1961,9 +1968,17 @@ public class FullFramesGfx
 										matchAllData, past_tournament_stats);
 								
 								for(int i = 0; i <= gender_Specific_tournament_stats.size()-1; i++) {
-									if(gender_Specific_tournament_stats.get(i).getPlayer().getGender().equalsIgnoreCase(config.getCategory())) {
-										tournament_stats.add(gender_Specific_tournament_stats.get(i));
+									
+									if (genderMatches(
+									        config.getCategory(),
+									        gender_Specific_tournament_stats.get(i).getPlayer().getGender())) {
+
+									    tournament_stats.add(gender_Specific_tournament_stats.get(i));
 									}
+									
+//									if(gender_Specific_tournament_stats.get(i).getPlayer().getGender().equalsIgnoreCase(config.getCategory())) {
+//										tournament_stats.add(gender_Specific_tournament_stats.get(i));
+//									}
 								}
 							}
 							
@@ -2041,9 +2056,17 @@ public class FullFramesGfx
 							matchAllData, past_tournament_stats);
 					
 					for(int i = 0; i <= gender_Specific_tournament_stats.size()-1; i++) {
-						if(gender_Specific_tournament_stats.get(i).getPlayer().getGender().equalsIgnoreCase(config.getCategory())) {
-							tournament_stats.add(gender_Specific_tournament_stats.get(i));
+						
+						if (genderMatches(
+						        config.getCategory(),
+						        gender_Specific_tournament_stats.get(i).getPlayer().getGender())) {
+
+						    tournament_stats.add(gender_Specific_tournament_stats.get(i));
 						}
+						
+//						if(gender_Specific_tournament_stats.get(i).getPlayer().getGender().equalsIgnoreCase(config.getCategory())) {
+//							tournament_stats.add(gender_Specific_tournament_stats.get(i));
+//						}
 					}
 				}
 			}else {
@@ -8774,11 +8797,16 @@ public class FullFramesGfx
 			newDate = "";
 			date_data = "";
 			
-			if(fixture.getMatchnumber() > 9) {
+			if(fixture.getMatchfilename().contains("SEMI")) {
 				match_name = fixture.getMatchfilename();
 			}else {
-				match_name = "MATCH " + fixture.getMatchnumber();
+				if(fixture.getMatchnumber() > 9) {
+					match_name = fixture.getMatchfilename();
+				}else {
+					match_name = "MATCH " + fixture.getMatchnumber();
+				}
 			}
+			
 			
 			switch (config.getBroadcaster().toUpperCase()) {
 			case Constants.T20_MUMBAI:
@@ -34077,7 +34105,7 @@ public class FullFramesGfx
 				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$ExtraData$Side" + WhichSide + "$Partnership$NameGrp$txt_Title2"
 						+ "*GEOM*TEXT SET PARTNERSHIP\0", print_writers);
 				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$ExtraData$Side" + WhichSide + "$Partnership$StatsAll$txt_Runs"
-						+ "*GEOM*TEXT SET "+inning.getPartnerships().get(inning.getPartnerships().size()-1).getTotalRuns()+"\0", print_writers);
+						+ "*GEOM*TEXT SET "+inning.getPartnerships().get(inning.getPartnerships().size()-1).getTotalRuns()+"*\0", print_writers);
 				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$ExtraData$Side" + WhichSide + "$Partnership$StatsAll$txt_Balls"
 						+ "*GEOM*TEXT SET "+inning.getPartnerships().get(inning.getPartnerships().size()-1).getTotalBalls()+"\0", print_writers);
 				
@@ -35967,6 +35995,30 @@ public class FullFramesGfx
 			break;
 		}
 		return Constants.OK;
+	}
+	
+	private static boolean genderMatches(
+	        String category,
+	        String playerGender) {
+
+	    if (category == null || playerGender == null) {
+	        return false;
+	    }
+
+	    category = category.trim().toUpperCase();
+	    playerGender = playerGender.trim().toUpperCase();
+
+	    switch (category) {
+
+	        case "MEN":
+	            return "MALE".equals(playerGender);
+
+	        case "WOMEN":
+	            return "FEMALE".equals(playerGender);
+
+	        default:
+	            return category.equals(playerGender);
+	    }
 	}
 	
 }
