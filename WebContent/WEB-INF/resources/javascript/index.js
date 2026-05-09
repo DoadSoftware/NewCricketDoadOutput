@@ -3744,6 +3744,10 @@ function addItemsToList(whatToProcess,dataToProcess)
 					option.text = 'Tournament Fours';
 					select.appendChild(option);
 					
+					option = document.createElement('option');
+					option.value = 'PHASE_WISE';
+					option.text = 'Phase Wise';
+					select.appendChild(option);
 					/*option = document.createElement('option');
 					option.value = 'REVIEWS_REMAINING';
 					option.text = 'REVIEWS REMAINING';
@@ -4665,6 +4669,11 @@ function addItemsToList(whatToProcess,dataToProcess)
 					option = document.createElement('option');
 					option.value = 'BOUNDARY';
 					option.text = 'Innings Boundaries';
+					select.appendChild(option);
+					
+					option = document.createElement('option');
+					option.value = 'TEAMS_STANDINGS';
+					option.text = 'Standings';
 					select.appendChild(option);
 					
 					option = document.createElement('option');
@@ -8181,6 +8190,11 @@ function addItemsToList(whatToProcess,dataToProcess)
 			option = document.createElement('option');
 			option.value = 'Player Of The Match';
 			option.text = 'Player Of The Match';
+			select.appendChild(option);
+			
+			option = document.createElement('option');
+			option.value = 'Player Of The Tournament';
+			option.text = 'Player Of The Tournament';
 			select.appendChild(option);
 			
 			option = document.createElement('option');

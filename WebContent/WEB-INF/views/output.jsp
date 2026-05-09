@@ -221,7 +221,10 @@
 				  </tr>
 				</table>
 			</div>
-	      	<c:if test="${(session_configuration.broadcaster == 'ISPL' || session_configuration.broadcaster == 'T20_MUMBAI' || session_configuration.broadcaster == 'NPL')}">
+	      	<c:if test="${(session_configuration.broadcaster == 'ISPL' || 
+	      					session_configuration.broadcaster == 'T20_MUMBAI' || 
+	      					session_configuration.broadcaster == 'NPL' ||
+	      					session_configuration.broadcaster == 'APL')}">
 			    <br>
 			   <div class="custom-toggle-wrapper">
 				    <div class="custom-toggle">
