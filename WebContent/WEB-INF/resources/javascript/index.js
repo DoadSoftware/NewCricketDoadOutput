@@ -2051,6 +2051,12 @@ function addItemsToList(whatToProcess,dataToProcess)
 				option.value = 'economy';
 				option.text = 'Economy';
 				select.appendChild(option);
+				
+				option = document.createElement('option');
+				option.value = 'Dot_percent';
+				option.text = 'Dot percent';
+				select.appendChild(option);
+								
 				break;
 				case 'Control_Shift_F2':
 				header_text.innerHTML = 'BALL PERFORMER';
@@ -2119,7 +2125,14 @@ function addItemsToList(whatToProcess,dataToProcess)
 				option.value = 'boundary';
 				option.text = 'Boundary';
 				select.appendChild(option);
+				
+				option = document.createElement('option');
+				option.value = 'boundary_percent';
+				option.text = 'Boundary Percent';
+				select.appendChild(option);
+								
 				break;
+				
 				case 'Control_Shift_F1':
 				header_text.innerHTML = 'BAT PERFORMER/PARTNERSHIP';
 				option = document.createElement('option');

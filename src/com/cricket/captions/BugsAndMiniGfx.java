@@ -1762,8 +1762,39 @@ public class BugsAndMiniGfx
 					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$PopUps$POP_UP$Side" + WhichSide + "$Balls"
 							+ "*GEOM*TEXT SET \0", print_writers);
 					break;
-				
-				case "BOUNDARY":
+					
+				case "BOUNDARY_PERCENT":
+
+				    int fours = battingCard.getFours();
+				    int sixes = battingCard.getSixes();
+				    int totalRuns = battingCard.getRuns();
+
+				    int boundaryRuns = (fours * 4) + (sixes * 6);
+
+				    double boundaryPercent = 0;
+
+				    if (totalRuns > 0) {
+				        boundaryPercent = (boundaryRuns * 100.0) / totalRuns;
+				    }
+
+				    CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$PopUps$POP_UP$Side" + WhichSide + "$StatHead1"
+				        + "*GEOM*TEXT SET B'DRY% - THIS MATCH \0",print_writers);
+				    
+//				    CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$PopUps$POP_UP$Side" + WhichSide + "$StatHead1"
+//					        + "*GEOM*TEXT SET MATCH BOUNDARY%\0",print_writers);
+
+				    CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$PopUps$POP_UP$Side" + WhichSide + "$Score"
+				        + "*GEOM*TEXT SET "+ String.format("%.0f", boundaryPercent)+ "\0",print_writers);
+
+				    CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$PopUps$POP_UP$Side" + WhichSide
+				        + "$Seperator*ACTIVE SET 0\0",print_writers);
+
+				    CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$PopUps$POP_UP$Side" + WhichSide + "$Balls"
+				        + "*GEOM*TEXT SET \0",print_writers);
+
+				    break;
+				    	
+				 case "BOUNDARY":
 					
 					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$PopUps$POP_UP$Side" + WhichSide + "$StatHead1"
 							+ "*GEOM*TEXT SET FOURS/SIXES \0", print_writers);
@@ -1820,6 +1851,56 @@ public class BugsAndMiniGfx
 				}
 				
 				switch (whatToProcess.split(",")[3].toUpperCase()) {
+				
+				case "DOT_PERCENT":
+
+				    String[] Count = CricketFunctions.getScoreTypeData(
+				            CricketUtil.BOWLER,
+				            matchAllData,
+				            inning.getInningNumber(),
+				            bowlingCard.getPlayerId(),
+				            "-",
+				            matchAllData.getEventFile().getEvents()
+				    ).split("-");
+
+				    int dotBalls = Integer.parseInt(Count[0]);
+
+				    int totalBallsBowled =
+				            (bowlingCard.getOvers() * 6) + bowlingCard.getBalls();
+
+				    double dotPercent = 0;
+
+				    if (totalBallsBowled > 0) {
+				        dotPercent = (dotBalls * 100.0) / totalBallsBowled;
+				    }
+
+				    CricketFunctions.DoadWriteCommandToAllViz(
+				            "-1 RENDERER*FRONT_LAYER*TREE*$PopUps$POP_UP$Side" + WhichSide + "$StatHead1"
+				            + "*GEOM*TEXT SET DOT % - THIS MATCH \0",
+				            print_writers
+				    );
+
+				    CricketFunctions.DoadWriteCommandToAllViz(
+				            "-1 RENDERER*FRONT_LAYER*TREE*$PopUps$POP_UP$Side" + WhichSide + "$Seperator*ACTIVE SET 0\0",
+				            print_writers
+				    );
+
+				    CricketFunctions.DoadWriteCommandToAllViz(
+				            "-1 RENDERER*FRONT_LAYER*TREE*$PopUps$POP_UP$Side" + WhichSide + "$Score"
+				            + "*GEOM*TEXT SET "
+				            + String.format("%.0f", dotPercent)
+				            + "\0",
+				            print_writers
+				    );
+
+				    CricketFunctions.DoadWriteCommandToAllViz(
+				            "-1 RENDERER*FRONT_LAYER*TREE*$PopUps$POP_UP$Side" + WhichSide + "$Balls"
+				            + "*GEOM*TEXT SET \0",
+				            print_writers
+				    );
+
+				    break;
+				    
 				case "FIGURE":
 					
 					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$PopUps$POP_UP$Side" + WhichSide + "$StatHead1"
