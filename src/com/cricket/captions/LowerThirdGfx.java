@@ -4689,7 +4689,7 @@ public class LowerThirdGfx
 		}
 	}
 	
-	public String populateGeneric(String whatToProcess,int WhichSide,MatchAllData matchAllData) throws InterruptedException
+	public String populateGeneric(String whatToProcess,int WhichSide,MatchAllData matchAllData) throws Exception
 	{
 		String data = "";
 		
@@ -4799,7 +4799,10 @@ public class LowerThirdGfx
 				return "populateGeneric: Partnership size is NULL/Zero";
 			}
 			
-			data = CricketFunctions.ordinal(inning.getPartnerships().get(inning.getPartnerships().size()-1).getPartnershipNumber()) + " WICKET PARTNERSHIP";
+			List<Partnership > part = CricketFunctions.ConcussedPartnership(matchAllData.getMatch(), inning.getInningNumber());
+			partnership = part.get(part.size()-1);
+			
+			data = CricketFunctions.ordinal(partnership.getPartnershipNumber()) + " WICKET PARTNERSHIP";
 			
 		}else if(whatToProcess.split(",")[2].equalsIgnoreCase("BOUNDARIES")) {
 			inning = matchAllData.getMatch().getInning().stream().filter(inn -> 
