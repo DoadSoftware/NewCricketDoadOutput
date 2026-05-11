@@ -8191,11 +8191,6 @@ function addItemsToList(whatToProcess,dataToProcess)
 			select.appendChild(option);
 			
 			option = document.createElement('option');
-			option.value = 'Man Of The Match';
-			option.text = 'Man Of The Match';
-			select.appendChild(option);
-			
-			option = document.createElement('option');
 			option.value = 'Gully to Glory Award';
 			option.text = 'Gully to Glory Award';
 			select.appendChild(option);
