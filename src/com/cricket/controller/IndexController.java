@@ -9,6 +9,8 @@ import java.io.PrintWriter;
 import java.lang.reflect.InvocationTargetException;
 import java.net.MalformedURLException;
 import java.net.URISyntaxException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
@@ -128,14 +130,14 @@ public class IndexController
 	private final ObjectMapper objectMapper = new ObjectMapper();
 	private long last_match_time_stamp = 0;
 	private boolean show_speed = false;
-//	private long plotter_match_time_stamp1 = 0;
-//	private long plotter_match_time_stamp2 = 0;
-//	private long plotter_match_time_stamp3 = 0;
-//	private long plotter_match_time_stamp4 = 0;
-//	private long plotter_match_time_stamp = 0;
+	private long plotter_match_time_stamp1 = 0;
+	private long plotter_match_time_stamp2 = 0;
+	private long plotter_match_time_stamp3 = 0;
+	private long plotter_match_time_stamp4 = 0;
+	private long plotter_match_time_stamp = 0;
 	private long speed_match_time_stamp = 0;
-//	private long speedfile_match_time_stamp = 0;
-//	private String plotterData, speedPath;
+	private long speedfile_match_time_stamp = 0;
+	private String plotterData, speedPath;
 	public boolean Plotter_file_change = false;
 	public String expiryDate = "";
 	
@@ -311,7 +313,7 @@ public class IndexController
 				
 			print_writers = CricketFunctions.processPrintWriter(session_configuration);
 
-			GetVariousDBData("NEW", session_configuration, headToHead);
+			GetVariousDBData("", session_configuration, headToHead);
 			
 			this_scene = new Scene();
 			this_animation = new Animation(new Infobar());
@@ -369,8 +371,9 @@ public class IndexController
 				headToHead.setH2hTeam(extractedH2H.getH2hTeam());
 			}
 //			this_seriesPowerplay = CricketFunctions.PowerPlayTeamThisSeries(session_match, cricket_matches);
-			past_tournament_stats = CricketFunctions.extractTournamentData("PAST_MATCHES_DATA", false, headToHead.getH2hPlayer(), cricketService, session_match, null);
 			session_match.getMatch().setMatchStats(MatchStats);
+			
+			GetVariousDBData("NEW", session_configuration, headToHead);
 			
 			switch (select_broadcaster) {
 			case Constants.ISPL:
@@ -550,16 +553,16 @@ public class IndexController
 
 						    // Use a tolerance for comparison
 						    if (Math.abs(speed_match_time_stamp - currentTimestamp) > 100) {
-//						    	if(this_animation.infobar.isInfobar_on_screen()) {
-//						    		switch(session_match.getEventFile().getEvents().get(session_match.getEventFile().getEvents().size() - 1).getEventType()) {
-//						    		case CricketUtil.CHANGE_BOWLER: case CricketUtil.END_OVER: case CricketUtil.NEW_BATSMAN: case CricketUtil.LOG_50_50:
-//						    		case CricketUtil.LOG_OVERWRITE_BATSMAN_HOWOUT: case "LOG_PP_DATA":
-//						    			break;
-//						    		default:
-//						    			this_caption.this_lofInfobarGfx.speed(CricketFunctions.processPrintWriter(session_configuration).get(0),session_match);
-//						    			break;
-//						    		}
-//						    	}
+						    	if(this_animation.infobar.isInfobar_on_screen()) {
+						    		switch(session_match.getEventFile().getEvents().get(session_match.getEventFile().getEvents().size() - 1).getEventType()) {
+						    		case CricketUtil.CHANGE_BOWLER: case CricketUtil.END_OVER: case CricketUtil.NEW_BATSMAN: case CricketUtil.LOG_50_50:
+						    		case CricketUtil.LOG_OVERWRITE_BATSMAN_HOWOUT: case "LOG_PP_DATA":
+						    			break;
+						    		default:
+						    			this_caption.this_lofInfobarGfx.speed(CricketFunctions.processPrintWriter(session_configuration).get(0),session_match);
+						    			break;
+						    		}
+						    	}
 						    	this_caption.this_lofInfobarGfx.speed(CricketFunctions.processPrintWriter(session_configuration).get(0),session_match);
 						        speed_match_time_stamp = currentTimestamp; // Update to the new timestamp
 						    }
@@ -584,64 +587,63 @@ public class IndexController
 				}
 			}			
 
-//			if(new File("C:\\Sports\\Cricket\\Fielder\\Fielder_Text\\" + 
-//		            "FieldPlotter.txt").exists()) {
-//				
-//				String data = new String(Files.readAllBytes(Paths.get("C:\\Sports\\Cricket\\Fielder\\Fielder_Text\\" + 
-//			            "FieldPlotter.txt")));
-//		        // Split the content by lines and print each line separately
-//		        String[] lines = data.split("\n");
-//		        
-//		        plotterData = lines[0].trim();
-//		        
-//		        if(lines.length > 0) {
-//					if(lines[1].trim().equalsIgnoreCase("true")) {
-//						fielderFormation = CricketFunctions.getFielderFormation(CricketUtil.CRICKET_DIRECTORY + "Fielder/" + lines[0].trim());
-//						if(fielderFormation.isCheckbox() == true) {
-//							if(lines[0].trim().equalsIgnoreCase("FielderFormation.JSON")) {
-//								if(plotter_match_time_stamp != new File(CricketUtil.CRICKET_DIRECTORY + "Fielder/" + lines[0].trim()).lastModified()) {
-//									plotter_match_time_stamp = new File(CricketUtil.CRICKET_DIRECTORY + "Fielder/" + lines[0].trim()).lastModified();
-//									//System.out.println("AfterCheckBox = " + fielderFormation.isCheckbox());
-//									Plotter_file_change = true;
-//								}
-//							}else if(lines[0].trim().equalsIgnoreCase("FielderFormation_1.JSON")) {
-//								if(plotter_match_time_stamp1 != new File(CricketUtil.CRICKET_DIRECTORY + "Fielder/" + lines[0].trim()).lastModified()) {
-//									plotter_match_time_stamp1 = new File(CricketUtil.CRICKET_DIRECTORY + "Fielder/" + lines[0].trim()).lastModified();
-//									//System.out.println("AfterCheckBox = " + fielderFormation.isCheckbox());
-//									Plotter_file_change = true;
-//								}
-//							}else if(lines[0].trim().equalsIgnoreCase("FielderFormation_2.JSON")) {
-//								if(plotter_match_time_stamp2 != new File(CricketUtil.CRICKET_DIRECTORY + "Fielder/" + lines[0].trim()).lastModified()) {
-//									plotter_match_time_stamp2 = new File(CricketUtil.CRICKET_DIRECTORY + "Fielder/" + lines[0].trim()).lastModified();
-//									//System.out.println("AfterCheckBox = " + fielderFormation.isCheckbox());
-//									Plotter_file_change = true;
-//								}
-//							}else if(lines[0].trim().equalsIgnoreCase("FielderFormation_3.JSON")) {
-//								if(plotter_match_time_stamp3 != new File(CricketUtil.CRICKET_DIRECTORY + "Fielder/" + lines[0].trim()).lastModified()) {
-//									plotter_match_time_stamp3 = new File(CricketUtil.CRICKET_DIRECTORY + "Fielder/" + lines[0].trim()).lastModified();
-//									//System.out.println("AfterCheckBox = " + fielderFormation.isCheckbox());
-//									Plotter_file_change = true;
-//								}
-//							}else if(lines[0].trim().equalsIgnoreCase("FielderFormation_4.JSON")) {
-//								if(plotter_match_time_stamp4 != new File(CricketUtil.CRICKET_DIRECTORY + "Fielder/" + lines[0].trim()).lastModified()) {
-//									plotter_match_time_stamp4 = new File(CricketUtil.CRICKET_DIRECTORY + "Fielder/" + lines[0].trim()).lastModified();
-//									//System.out.println("AfterCheckBox = " + fielderFormation.isCheckbox());
-//									Plotter_file_change = true;
-//								}
-//							}
-//						}
-//					}else if(lines[1].trim().equalsIgnoreCase("false")) {
-//						
-//					}
-//				}
-//			}
+			if(new File("C:\\Sports\\Cricket\\Fielder\\Fielder_Text\\FieldPlotter.txt").exists()) {
+				
+				String data = new String(Files.readAllBytes(Paths.get("C:\\Sports\\Cricket\\Fielder\\Fielder_Text\\" + 
+			            "FieldPlotter.txt")));
+		        // Split the content by lines and print each line separately
+		        String[] lines = data.split("\n");
+		        
+		        plotterData = lines[0].trim();
+		        
+		        if(lines.length > 0) {
+					if(lines[1].trim().equalsIgnoreCase("true")) {
+						fielderFormation = CricketFunctions.getFielderFormation(CricketUtil.CRICKET_DIRECTORY + "Fielder/" + lines[0].trim());
+						if(fielderFormation.isCheckbox() == true) {
+							if(lines[0].trim().equalsIgnoreCase("FielderFormation.JSON")) {
+								if(plotter_match_time_stamp != new File(CricketUtil.CRICKET_DIRECTORY + "Fielder/" + lines[0].trim()).lastModified()) {
+									plotter_match_time_stamp = new File(CricketUtil.CRICKET_DIRECTORY + "Fielder/" + lines[0].trim()).lastModified();
+									//System.out.println("AfterCheckBox = " + fielderFormation.isCheckbox());
+									Plotter_file_change = true;
+								}
+							}else if(lines[0].trim().equalsIgnoreCase("FielderFormation_1.JSON")) {
+								if(plotter_match_time_stamp1 != new File(CricketUtil.CRICKET_DIRECTORY + "Fielder/" + lines[0].trim()).lastModified()) {
+									plotter_match_time_stamp1 = new File(CricketUtil.CRICKET_DIRECTORY + "Fielder/" + lines[0].trim()).lastModified();
+									//System.out.println("AfterCheckBox = " + fielderFormation.isCheckbox());
+									Plotter_file_change = true;
+								}
+							}else if(lines[0].trim().equalsIgnoreCase("FielderFormation_2.JSON")) {
+								if(plotter_match_time_stamp2 != new File(CricketUtil.CRICKET_DIRECTORY + "Fielder/" + lines[0].trim()).lastModified()) {
+									plotter_match_time_stamp2 = new File(CricketUtil.CRICKET_DIRECTORY + "Fielder/" + lines[0].trim()).lastModified();
+									//System.out.println("AfterCheckBox = " + fielderFormation.isCheckbox());
+									Plotter_file_change = true;
+								}
+							}else if(lines[0].trim().equalsIgnoreCase("FielderFormation_3.JSON")) {
+								if(plotter_match_time_stamp3 != new File(CricketUtil.CRICKET_DIRECTORY + "Fielder/" + lines[0].trim()).lastModified()) {
+									plotter_match_time_stamp3 = new File(CricketUtil.CRICKET_DIRECTORY + "Fielder/" + lines[0].trim()).lastModified();
+									//System.out.println("AfterCheckBox = " + fielderFormation.isCheckbox());
+									Plotter_file_change = true;
+								}
+							}else if(lines[0].trim().equalsIgnoreCase("FielderFormation_4.JSON")) {
+								if(plotter_match_time_stamp4 != new File(CricketUtil.CRICKET_DIRECTORY + "Fielder/" + lines[0].trim()).lastModified()) {
+									plotter_match_time_stamp4 = new File(CricketUtil.CRICKET_DIRECTORY + "Fielder/" + lines[0].trim()).lastModified();
+									//System.out.println("AfterCheckBox = " + fielderFormation.isCheckbox());
+									Plotter_file_change = true;
+								}
+							}
+						}
+					}else if(lines[1].trim().equalsIgnoreCase("false")) {
+						
+					}
+				}
+			}
 			
-//			if(Plotter_file_change == true) {
-//				if(this_caption.this_infobarGfx!=null) {
-//					this_caption.this_infobarGfx.updateFieldPlotter(print_writers, session_match);
-//				}
-//				Plotter_file_change = false;
-//			}
+			if(Plotter_file_change == true) {
+				if(this_caption.this_infobarGfx!=null) {
+					this_caption.this_infobarGfx.updateFieldPlotter(print_writers, session_match);
+				}
+				Plotter_file_change = false;
+			}
 			return objectMapper.writeValueAsString(session_match);
 		default:
 			if(session_configuration.getBroadcaster().equalsIgnoreCase(Constants.NPL) || 
@@ -1610,26 +1612,18 @@ public class IndexController
 				this_caption.this_fullFramesGfx.Potts = session_pott;
 				this_caption.this_fullFramesGfx.Playoffs = session_playoff;
 				
-				session_match = CricketFunctions.populateMatchVariables(CricketFunctions.readOrSaveMatchFile(CricketUtil.READ, 
-						CricketUtil.SETUP + "," + CricketUtil.MATCH + "," + CricketUtil.EVENT, session_match, config), session_players, session_team, session_ground);
-				session_match.getSetup().setGenerateInteractiveFile(config.getGenerateInteractiveFile());
-
-				MatchStats = CricketFunctions.getAllEvents(session_match, config.getBroadcaster(), session_match.getEventFile().getEvents());
-				CricketFunctions.getInteractive(session_match, "FULL_WRITE");
-
-				session_match.getMatch().setMatchStats(MatchStats);
+//				session_match = CricketFunctions.populateMatchVariables(CricketFunctions.readOrSaveMatchFile(CricketUtil.READ, 
+//						CricketUtil.SETUP + "," + CricketUtil.MATCH + "," + CricketUtil.EVENT, session_match, config), session_players, session_team, session_ground);
+//				session_match.getSetup().setGenerateInteractiveFile(config.getGenerateInteractiveFile());
+//
+//				MatchStats = CricketFunctions.getAllEvents(session_match, config.getBroadcaster(), session_match.getEventFile().getEvents());
+//				CricketFunctions.getInteractive(session_match, "FULL_WRITE");
+//
+//				session_match.getMatch().setMatchStats(MatchStats);
 				break;
 			default:
+				
 				session_statistics = cricketService.getAllStats();
-				if(config.getBroadcaster().equalsIgnoreCase(Constants.ISPL)) {
-					past_tape = CricketFunctions.extractTapeData("PAST_MATCHES_DATA", cricketService, session_match, null, headToHead.getH2hPlayer());
-					past_tournament_stats = CricketFunctions.extractTournamentData("PAST_MATCHES_DATA", false, headToHead.getH2hPlayer(), cricketService, session_match, null);
-				}else {
-					past_tournament_stats = CricketFunctions.extractTournamentData("PAST_MATCHES_DATA", false, headToHead.getH2hPlayer(), cricketService, session_match, null);
-				}
-				
-				past_tournament_boundaries = CricketFunctions.extracttournamentFoursAndSixesData("PAST_MATCHES_DATA", headToHead.getH2hPlayer(), session_match, null);
-				
 				session_performance_bug = cricketService.getPerformanceBugs();
 				session_name_super =  cricketService.getNameSupers();
 				session_team =  cricketService.getTeams();
@@ -1665,6 +1659,16 @@ public class IndexController
 				
 				switch (typeOfUpdate) {
 				case "NEW":
+					if(config.getBroadcaster().equalsIgnoreCase(Constants.ISPL)) {
+						past_tape = CricketFunctions.extractTapeData("PAST_MATCHES_DATA", cricketService, session_match, null, headToHead.getH2hPlayer());
+						past_tournament_stats = CricketFunctions.extractTournamentData("PAST_MATCHES_DATA", false, headToHead.getH2hPlayer(), cricketService, session_match, null);
+					}else {
+						past_tournament_stats = CricketFunctions.extractTournamentData("PAST_MATCHES_DATA", false, headToHead.getH2hPlayer(), cricketService, session_match, null);
+					}
+					
+					past_tournament_boundaries = CricketFunctions.extracttournamentFoursAndSixesData("PAST_MATCHES_DATA", headToHead.getH2hPlayer(), session_match, null);
+					
+					
 					this_caption = new Caption(print_writers, config, session_statistics,cricketService.getAllStatsType(), session_name_super,
 						session_bugs,session_infoBarStats,session_fixture, session_team, session_ground,session_variousText, session_commentator, session_staff, 
 						session_players, session_pott,session_playoff, session_teamChanges, session_performance_bug, new FullFramesGfx(),new LowerThirdGfx(), 
@@ -1683,6 +1687,15 @@ public class IndexController
 					break;
 					
 				case "UPDATE":
+					
+					if(config.getBroadcaster().equalsIgnoreCase(Constants.ISPL)) {
+						past_tape = CricketFunctions.extractTapeData("PAST_MATCHES_DATA", cricketService, session_match, null, headToHead.getH2hPlayer());
+						past_tournament_stats = CricketFunctions.extractTournamentData("PAST_MATCHES_DATA", false, headToHead.getH2hPlayer(), cricketService, session_match, null);
+					}else {
+						past_tournament_stats = CricketFunctions.extractTournamentData("PAST_MATCHES_DATA", false, headToHead.getH2hPlayer(), cricketService, session_match, null);
+					}
+					
+					past_tournament_boundaries = CricketFunctions.extracttournamentFoursAndSixesData("PAST_MATCHES_DATA", headToHead.getH2hPlayer(), session_match, null);
 					
 					session_match = CricketFunctions.populateMatchVariables(CricketFunctions.readOrSaveMatchFile(CricketUtil.READ, 
 							CricketUtil.SETUP + "," + CricketUtil.MATCH + "," + CricketUtil.EVENT, session_match, config), session_players, session_team, session_ground);

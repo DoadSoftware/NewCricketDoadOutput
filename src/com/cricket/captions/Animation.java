@@ -4588,9 +4588,6 @@ public class Animation
 					
 					break;
 				case "Alt_8":
-					System.out.println("whatToProcess.split(\",\")[2] = " + whatToProcess.split(",")[2]);
-					System.out.println("infobar.isTarget_on_screen() = " + infobar.isTarget_on_screen());
-					System.out.println("infobar.getRight_section() = " + infobar.getRight_section());
 					if(whatToProcess.split(",")[2].equalsIgnoreCase(CricketUtil.BOWLER) && infobar.isTarget_on_screen() == true) {
 						processAnimation(Constants.FRONT, print_writers, "Anim_Infobar$Right_Bowl_Full_Over$In_Out", "CONTINUE");
 						infobar.setRight_section(whatToProcess.split(",")[2]);

@@ -108,56 +108,36 @@ function initialiseForm(whatToProcess,dataToProcess)
 				        ' [' + parseInt(dataToProcess.match.inning[1].totalOvers) + '.' + parseInt(dataToProcess.match.inning[1].totalBalls) + ']';
 				} else {
 				    document.getElementById('inning1_teamName').innerHTML = dataToProcess.match.inning[0].batting_team.teamName1;
-				    document.getElementById('inning1_teamScore_lbl').innerText = 
-				        parseInt(dataToProcess.match.inning[0].totalRuns) + 
-				        (parseInt(dataToProcess.match.inning[0].totalWickets) < 10 
-				            ? "-" + dataToProcess.match.inning[0].totalWickets 
-				            : "") + 
+				    document.getElementById('inning1_teamScore_lbl').innerText = parseInt(dataToProcess.match.inning[0].totalRuns) + 
+				        (parseInt(dataToProcess.match.inning[0].totalWickets) < 10 ? "-" + dataToProcess.match.inning[0].totalWickets : "") + 
 				        ' [' + parseInt(dataToProcess.match.inning[0].totalOvers) + '.' + parseInt(dataToProcess.match.inning[0].totalBalls) + ']';
 				
 				    document.getElementById('inning2_teamName').innerHTML = dataToProcess.match.inning[1].batting_team.teamName1;
-				    document.getElementById('inning2_teamScore_lbl').innerText = 
-				        parseInt(dataToProcess.match.inning[1].totalRuns) + 
-				        (parseInt(dataToProcess.match.inning[1].totalWickets) < 10 
-				            ? "-" + dataToProcess.match.inning[1].totalWickets 
-				            : "") + 
+				    document.getElementById('inning2_teamScore_lbl').innerText = parseInt(dataToProcess.match.inning[1].totalRuns) + 
+				        (parseInt(dataToProcess.match.inning[1].totalWickets) < 10 ? "-" + dataToProcess.match.inning[1].totalWickets : "") + 
 				        ' [' + parseInt(dataToProcess.match.inning[1].totalOvers) + '.' + parseInt(dataToProcess.match.inning[1].totalBalls) + ']';
 				}
 			 }else if (inn.inningNumber > 2 && inn.inningNumber <= 4 && inn.isCurrentInning=='YES') {
 				    document.getElementById('inning1_teamName').innerHTML = dataToProcess.match.inning[2].batting_team.teamName1;
 				    var team1 ; var team2 ;
-				   if(dataToProcess.match.inning[2].batting_team.teamName1==dataToProcess.match.inning[0].batting_team.teamName1){
-					  team1 = parseInt(dataToProcess.match.inning[0].totalRuns) + 
-				    	 (parseInt(dataToProcess.match.inning[0].totalWickets) < 10 
-				            ? "-" + dataToProcess.match.inning[0].totalWickets 
-				            : "") + " & ";
-				      team2 = parseInt(dataToProcess.match.inning[1].totalRuns) + 
-				    	 (parseInt(dataToProcess.match.inning[1].totalWickets) < 10 
-				            ? "-" + dataToProcess.match.inning[1].totalWickets 
-				            : "") + " & ";
-				   }else{
-					  team2 = parseInt(dataToProcess.match.inning[0].totalRuns) + 
-				    	 (parseInt(dataToProcess.match.inning[0].totalWickets) < 10 
-				            ? "-" + dataToProcess.match.inning[0].totalWickets 
-				            : "") + " & ";
-				      team1 = parseInt(dataToProcess.match.inning[1].totalRuns) + 
-				    	 (parseInt(dataToProcess.match.inning[1].totalWickets) < 10 
-				            ? "-" + dataToProcess.match.inning[1].totalWickets 
-				            : "") + " & ";
-				   }
-				    document.getElementById('inning1_teamScore_lbl').innerText = 
-				        team1 + parseInt(dataToProcess.match.inning[2].totalRuns) + 
-				        (parseInt(dataToProcess.match.inning[2].totalWickets) < 10 
-				            ? "-" + dataToProcess.match.inning[2].totalWickets 
-				            : "") + 
+				    if(dataToProcess.match.inning[2].batting_team.teamName1==dataToProcess.match.inning[0].batting_team.teamName1){
+					   team1 = parseInt(dataToProcess.match.inning[0].totalRuns) + (parseInt(dataToProcess.match.inning[0].totalWickets) < 10 
+					  				? "-" + dataToProcess.match.inning[0].totalWickets : "") + " & ";
+				       team2 = parseInt(dataToProcess.match.inning[1].totalRuns) + (parseInt(dataToProcess.match.inning[1].totalWickets) < 10 
+				            ? "-" + dataToProcess.match.inning[1].totalWickets : "") + " & ";
+				    }else{
+					   team2 = parseInt(dataToProcess.match.inning[0].totalRuns) + (parseInt(dataToProcess.match.inning[0].totalWickets) < 10 
+				            ? "-" + dataToProcess.match.inning[0].totalWickets : "") + " & ";
+				       team1 = parseInt(dataToProcess.match.inning[1].totalRuns) + (parseInt(dataToProcess.match.inning[1].totalWickets) < 10 
+				            ? "-" + dataToProcess.match.inning[1].totalWickets : "") + " & ";
+				    }
+				    document.getElementById('inning1_teamScore_lbl').innerText = team1 + parseInt(dataToProcess.match.inning[2].totalRuns) + 
+				        (parseInt(dataToProcess.match.inning[2].totalWickets) < 10 ? "-" + dataToProcess.match.inning[2].totalWickets : "") + 
 				        ' [' + parseInt(dataToProcess.match.inning[2].totalOvers) + '.' + parseInt(dataToProcess.match.inning[2].totalBalls) + ']';
 				
 				    document.getElementById('inning2_teamName').innerHTML = dataToProcess.match.inning[3].batting_team.teamName1;
-				    document.getElementById('inning2_teamScore_lbl').innerText = 
-				         team2 +  parseInt(dataToProcess.match.inning[3].totalRuns) + 
-				        (parseInt(dataToProcess.match.inning[3].totalWickets) < 10 
-				            ? "-" + dataToProcess.match.inning[3].totalWickets 
-				            : "") + 
+				    document.getElementById('inning2_teamScore_lbl').innerText = team2 +  parseInt(dataToProcess.match.inning[3].totalRuns) + 
+				        (parseInt(dataToProcess.match.inning[3].totalWickets) < 10 ? "-" + dataToProcess.match.inning[3].totalWickets : "") + 
 				        ' [' + parseInt(dataToProcess.match.inning[3].totalOvers) + '.' + parseInt(dataToProcess.match.inning[3].totalBalls) + ']';
 				}
 
@@ -3694,6 +3674,11 @@ function addItemsToList(whatToProcess,dataToProcess)
 					select.appendChild(option);
 					
 					option = document.createElement('option');
+					option.value = 'RECENT_FORM';
+					option.text = 'RECENT FORM';
+					select.appendChild(option);
+					
+					option = document.createElement('option');
 					option.value = 'CURR_PARTNERSHIP';
 					option.text = 'Current Partnership';
 					select.appendChild(option);
@@ -3738,6 +3723,11 @@ function addItemsToList(whatToProcess,dataToProcess)
 					select.appendChild(option);*/
 					
 					option = document.createElement('option');
+					option.value = 'THIS_MATCH_DOTS';
+					option.text = 'This Match Dots';
+					select.appendChild(option);
+					
+					option = document.createElement('option');
 					option.value = 'THIS_MATCH_FOURS';
 					option.text = 'This Match Fours';
 					select.appendChild(option);
@@ -3761,6 +3751,7 @@ function addItemsToList(whatToProcess,dataToProcess)
 					option.value = 'PHASE_WISE';
 					option.text = 'Phase Wise';
 					select.appendChild(option);
+					
 					/*option = document.createElement('option');
 					option.value = 'REVIEWS_REMAINING';
 					option.text = 'REVIEWS REMAINING';
@@ -4127,7 +4118,30 @@ function addItemsToList(whatToProcess,dataToProcess)
 					setDropdownOptionToSelectOptionArray($(scopeSelect), 1);
 					setDropdownOptionToSelectOptionArray($(teamSelect), 2);
 					setDropdownOptionToSelectOptionArray($(playerSelect), 3);
+				}else if(selectedValue === 'RECENT_FORM'){
+					// === 2. Team Dropdown ===
+					let teamSelect = document.createElement('select');
+					teamSelect.id = 'selectTeams';
+					teamSelect.name = teamSelect.id;
+			
+					let homeOption = document.createElement('option');
+					homeOption.value = session_match.setup.homeTeam.teamId;
+					homeOption.text = session_match.setup.homeTeam.teamName3;
+					teamSelect.appendChild(homeOption);
+			
+					let awayOption = document.createElement('option');
+					awayOption.value = session_match.setup.awayTeam.teamId;
+					awayOption.text = session_match.setup.awayTeam.teamName3;
+					teamSelect.appendChild(awayOption);
+			
+					row.insertCell(1).appendChild(teamSelect);
+					cellCount++;
+					// === Set onchange logic for each dropdown if needed ===1
+					teamSelect.setAttribute('onchange', "setDropdownOptionToSelectOptionArray(this, 1)");1
+			
+					setDropdownOptionToSelectOptionArray($(teamSelect), 1);
 				}
+				
 			});
 			break;
 		case 'Control_Shift_(':
@@ -7948,122 +7962,68 @@ function addItemsToList(whatToProcess,dataToProcess)
 					select.id = 'selectProfile';
 					select.name = select.id;
 					
-					switch($('#selected_broadcaster').val().toUpperCase()){
+					const broadcaster = $('#selected_broadcaster').val().toUpperCase();
+
+					const addOption = (value, text = value) => {
+						const option = document.createElement('option');
+						option.value = value;
+						option.text = text;
+						select.appendChild(option);
+					};
+
+					switch (broadcaster) {
+
 						case 'ICC-U19-2023':
-							option = document.createElement('option');
-							option.value = 'U19ODI';
-							option.text = 'U19 ODI';
-							select.appendChild(option);
-							
-							option = document.createElement('option');
-							option.value = 'LIST A';
-							option.text = 'LIST A';
-							select.appendChild(option);
-							
-							option = document.createElement('option');
-							option.value = 'ACCU19';
-							option.text = 'ACC U19';
-							select.appendChild(option);
-							
-							option = document.createElement('option');
-							option.value = 'SA TRI-NATION 2023-24';
-							option.text = 'SA TRI-NATION';
-							select.appendChild(option);
+							[['U19ODI', 'U19 ODI'],
+								['LIST A', 'LIST A'],
+								['ACCU19', 'ACC U19'],
+								['SA TRI-NATION 2023-24', 'SA TRI-NATION']
+							].forEach(([value, text]) => addOption(value, text));
 							break;
-						case 'NPL': case 'LEGENDS-90':  case 'MPL': case 'APL':
-							if($('#selected_broadcaster').val().toUpperCase()=='NPL'){
-								option = document.createElement('option');
-								option.value = 'NPL S1';
-								option.text = 'NPL S1';
-								select.appendChild(option);
-								
-								option = document.createElement('option');
-								option.value = 'NPL_CAREER';
-								option.text = 'NPL CAREER';
-								select.appendChild(option);
-								
-								/*option = document.createElement('option');
-								option.value = 'IPL';
-								option.text = 'IPL';
-								select.appendChild(option);
-								
-								option = document.createElement('option');
-								option.value = 'IPL 2025';
-								option.text = 'IPL 2025';
-								select.appendChild(option);*/
-							}else if($('#selected_broadcaster').val().toUpperCase()=='MPL'){
-								option = document.createElement('option');
-								option.value = 'KCL';
-								option.text = 'KCL CAREER';
-								select.appendChild(option);
-							}else if($('#selected_broadcaster').val().toUpperCase()=='APL'){
-								/*option = document.createElement('option');
-								option.value = 'APL_CAREER';
-								option.text = 'APL CAREER';
-								select.appendChild(option);*/
-							}
-							
-							option = document.createElement('option');
-							option.value = 'DT20';
-							option.text = 'DT20';
-							select.appendChild(option);
-							
-							option = document.createElement('option');
-							option.value = 'IT20';
-							option.text = 'IT20';
-							select.appendChild(option);
+
+						case 'NPL':
+							addOption('NPL S1');
+							addOption('NPL_CAREER', 'NPL CAREER');
+							addOption('DT20');
+							addOption('IT20');
 							break;
+
+						case 'MPL':
+							addOption('KCL', 'KCL CAREER');
+							addOption('DT20');
+							addOption('IT20');
+							break;
+
+						case 'APL':
+							addOption('DT20');
+							addOption('APL_CAREER', 'APL CAREER');
+							addOption('APL_MILESTONE_BAT', 'APL MILESTONE');
+							addOption('APL_BOUNDARY_CAREER', 'APL BOUNDARY CAREER');
+							addOption('APL_BOUNDARY', 'THIS SEASON BOUNDARY');
+							addOption('RECENT_FORM_BAT', 'RECENT FORM');
+							break;
+
+						case 'LEGENDS-90':
+							addOption('DT20');
+							addOption('IT20');
+							break;
+
 						case 'T20_MUMBAI':
-							option = document.createElement('option');
-							option.value = 'MCA T20s';
-							option.text = 'MCA T20 24-25';
-							select.appendChild(option);
-							
-							option = document.createElement('option');
-							option.value = 'DT20';
-							option.text = 'T20';
-							select.appendChild(option);
-							
-							option = document.createElement('option');
-							option.value = 'THIS_SERIES';
-							option.text = 'THIS SERIES';
-							select.appendChild(option);
-							
-							option = document.createElement('option');
-							option.value = 'IPL';
-							option.text = 'IPL';
-							select.appendChild(option);
-							
-							option = document.createElement('option');
-							option.value = 'IPL 2025';
-							option.text = 'IPL 2025';
-							select.appendChild(option);
+							[['MCA T20s', 'MCA T20 24-25'],
+								['DT20', 'T20'],
+								['THIS_SERIES', 'THIS SERIES'],
+								['IPL', 'IPL'],
+								['IPL 2025', 'IPL 2025']
+							].forEach(([value, text]) => addOption(value, text));
 							break;
-						case "ISPL":
-							option = document.createElement('option');
-							option.value = 'THIS_SERIES';
-							option.text = 'THIS SERIES';
-							select.appendChild(option);
-														
-							option = document.createElement('option');
-							option.value = 'SINGLE_DATA';
-							option.text = 'SINGLE DATA';
-							select.appendChild(option);
-						
-							option = document.createElement('option');
-							option.value = 'ISPL S2';
-							option.text = 'ISPL S2';
-							select.appendChild(option);
-						
-							option = document.createElement('option');
-							option.value = 'ISPL S1';
-							option.text = 'ISPL S1';
-							select.appendChild(option);
-							
-							option = document.createElement('option');
-							option.value = 'ISPL_CAREER';
-							option.text = 'ISPL CAREER';
-							select.appendChild(option);
+
+						case 'ISPL':
+							[['THIS_SERIES', 'THIS SERIES'],
+								['SINGLE_DATA', 'SINGLE DATA'],
+								['ISPL S2', 'ISPL S2'],
+								['ISPL S1', 'ISPL S1'],
+								['ISPL_CAREER', 'ISPL CAREER']
+							].forEach(([value, text]) => addOption(value, text));
 							break;
 					}
 					
@@ -8322,129 +8282,69 @@ function addItemsToList(whatToProcess,dataToProcess)
 					select.id = 'selectProfile';
 					select.name = select.id;
 					
-					switch($('#selected_broadcaster').val().toUpperCase()){
+					const broadcaster = $('#selected_broadcaster').val().toUpperCase();
+
+					const addOption = (value, text = value) => {
+						const option = document.createElement('option');
+						option.value = value;
+						option.text = text;
+						select.appendChild(option);
+					};
+
+					switch (broadcaster) {
+
 						case 'ICC-U19-2023':
-							option = document.createElement('option');
-							option.value = 'U19ODI';
-							option.text = 'U19 ODI';
-							select.appendChild(option);
-							
-							option = document.createElement('option');
-							option.value = 'LIST A';
-							option.text = 'LIST A';
-							select.appendChild(option);
-							
-							option = document.createElement('option');
-							option.value = 'ACCU19';
-							option.text = 'ACC U19';
-							select.appendChild(option);
-							
-							option = document.createElement('option');
-							option.value = 'SA TRI-NATION 2023-24';
-							option.text = 'SA TRI-NATION';
-							select.appendChild(option);
+							[
+								['U19ODI', 'U19 ODI'],
+								['LIST A', 'LIST A'],
+								['ACCU19', 'ACC U19'],
+								['SA TRI-NATION 2023-24', 'SA TRI-NATION']
+							].forEach(([value, text]) => addOption(value, text));
 							break;
-						case 'NPL': case 'LEGENDS-90':  case 'MPL': case 'APL':
-							if($('#selected_broadcaster').val().toUpperCase()=='NPL'){
-								option = document.createElement('option');
-								option.value = 'NPL S1';
-								option.text = 'NPL S1';
-								select.appendChild(option);
-								
-								option = document.createElement('option');
-								option.value = 'NPL_CAREER';
-								option.text = 'NPL CAREER';
-								select.appendChild(option);
-								
-								/*option = document.createElement('option');
-								option.value = 'IPL';
-								option.text = 'IPL';
-								select.appendChild(option);
-								
-								option = document.createElement('option');
-								option.value = 'IPL 2025';
-								option.text = 'IPL 2025';
-								select.appendChild(option);*/
-							}else if($('#selected_broadcaster').val().toUpperCase()=='MPL'){
-								option = document.createElement('option');
-								option.value = 'KCL';
-								option.text = 'KCL CAREER';
-								select.appendChild(option);
-							}
-							else if($('#selected_broadcaster').val().toUpperCase()=='APL'){
-								/*option = document.createElement('option');
-								option.value = 'APL_CAREER';
-								option.text = 'APL CAREER';
-								select.appendChild(option);*/
-							}
-							
-							option = document.createElement('option');
-							option.value = 'DT20';
-							option.text = 'DT20';
-							select.appendChild(option);
-							
-							option = document.createElement('option');
-							option.value = 'IT20';
-							option.text = 'IT20';
-							select.appendChild(option);
+
+						case 'NPL':
+							addOption('NPL S1');
+							addOption('NPL_CAREER', 'NPL CAREER');
+							addOption('DT20');
+							addOption('IT20');
 							break;
+
+						case 'MPL':
+							addOption('KCL', 'KCL CAREER');
+							addOption('DT20');
+							addOption('IT20');
+							break;
+						case 'APL':
+							addOption('APL CAREER');
+							addOption('DT20');
+							addOption('APL_MILESTONE_BALL', 'APL MILESTONE');
+							addOption('RECENT_FORM_BALL', 'RECENT FORM');
+							break;		
+
+						case 'LEGENDS-90':
+							addOption('DT20');
+							addOption('IT20');
+							break;
+
 						case 'T20_MUMBAI':
-							option = document.createElement('option');
-							option.value = 'MCA T20s';
-							option.text = 'MCA T20 24-25';
-							select.appendChild(option);
-							
-							option = document.createElement('option');
-							option.value = 'DT20';
-							option.text = 'T20';
-							select.appendChild(option);
-							
-							option = document.createElement('option');
-							option.value = 'THIS_SERIES';
-							option.text = 'THIS SERIES';
-							select.appendChild(option);
-							
-							option = document.createElement('option');
-							option.value = 'IPL';
-							option.text = 'IPL';
-							select.appendChild(option);
-							
-							option = document.createElement('option');
-							option.value = 'IPL 2025';
-							option.text = 'IPL 2025';
-							select.appendChild(option);
+							[
+								['MCA T20s', 'MCA T20 24-25'],
+								['DT20', 'T20'],
+								['THIS_SERIES', 'THIS SERIES'],
+								['IPL', 'IPL'],
+								['IPL 2025', 'IPL 2025']
+							].forEach(([value, text]) => addOption(value, text));
 							break;
-						case "ISPL":
-							option = document.createElement('option');
-							option.value = 'THIS_SERIES';
-							option.text = 'THIS SERIES';
-							select.appendChild(option);
-							
-							option = document.createElement('option');
-							option.value = 'THIS_SERIES_TAPE_BALL';
-							option.text = 'THIS SERIES ISPL BALL';
-							select.appendChild(option);	
-						
-							option = document.createElement('option');
-							option.value = 'SINGLE_DATA';
-							option.text = 'SINGLE DATA';
-							select.appendChild(option);
-							
-							option = document.createElement('option');
-							option.value = 'ISPL S2';
-							option.text = 'ISPL S2';
-							select.appendChild(option);
-							
-							option = document.createElement('option');
-							option.value = 'ISPL S1';
-							option.text = 'ISPL S1';
-							select.appendChild(option);
-							
-							option = document.createElement('option');
-							option.value = 'ISPL_CAREER';
-							option.text = 'ISPL CAREER';
-							select.appendChild(option);
-							
+
+						case 'ISPL':
+							[
+								['THIS_SERIES', 'THIS SERIES'],
+								['THIS_SERIES_TAPE_BALL', 'THIS SERIES ISPL BALL'],
+								['SINGLE_DATA', 'SINGLE DATA'],
+								['ISPL S2', 'ISPL S2'],
+								['ISPL S1', 'ISPL S1'],
+								['ISPL_CAREER', 'ISPL CAREER']
+							].forEach(([value, text]) => addOption(value, text));
 							break;
 					}
 					

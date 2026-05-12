@@ -1039,6 +1039,11 @@ public class Caption
 							config.getBroadcaster().equalsIgnoreCase(Constants.APL)) {
 						this_infobarGfx.infobar.setLeft_bottom(whatToProcess.split(",")[0]);
 					}
+					
+					if(whatToProcess.contains("RECENT_FORM")) {
+						this_infobarGfx.team_id = Integer.valueOf(whatToProcess.split(",")[3]);
+					}
+					
 					System.out.println("whatToProcess = " + whatToProcess);
 					this_infobarGfx.infobar.setMiddle_section(whatToProcess.split(",")[2]);
 					status = this_infobarGfx.populateVizInfobarMiddleSection(print_writers,matchAllData, whichSide);

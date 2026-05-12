@@ -1724,7 +1724,7 @@ public class BugsAndMiniGfx
 							+ "*TEXTURE*IMAGE SET " + Constants.LEGENDS_LOGO_PATH + inning.getBatting_team().getTeamBadge() + "\0", print_writers);
 					
 					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$PopUps$POP_UP$band$Side" + WhichSide + "$txt_Header"
-							+ "*GEOM*TEXT SET " + battingCard.getPlayer().getFull_name()+ "\0", print_writers);
+							+ "*GEOM*TEXT SET " + battingCard.getPlayer().getTicker_name() + " - THIS MATCH" + "\0", print_writers);
 					break;
 				}
 				
@@ -1838,7 +1838,7 @@ public class BugsAndMiniGfx
 							+ "*TEXTURE*IMAGE SET " + Constants.MPL_LOGO_PATH + inning.getBowling_team().getTeamBadge() + logoCategory + "\0", print_writers);
 					
 					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$PopUps$POP_UP$band$txt_Header"
-							+ "*GEOM*TEXT SET " + bowlingCard.getPlayer().getFull_name()+ "\0", print_writers);
+							+ "*GEOM*TEXT SET " + battingCard.getPlayer().getTicker_name() + " - THIS MATCH" + "\0", print_writers);
 					
 					break;	
 				case Constants.LEGENDS:
@@ -1868,7 +1868,7 @@ public class BugsAndMiniGfx
 				    }
 
 				    CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$PopUps$POP_UP$Side" + WhichSide + "$StatHead1"
-				            + "*GEOM*TEXT SET DOT % \0",print_writers);
+				            + "*GEOM*TEXT SET DOT BALL %\0",print_writers);
 				    CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$PopUps$POP_UP$Side" + WhichSide + "$Seperator"
 				    		+ "*ACTIVE SET 0\0",print_writers);
 
@@ -4911,7 +4911,40 @@ public class BugsAndMiniGfx
 									+ "$Batting$Row" + rowId + "$Select_Row_Type" + cont_name + "$In_Out*FUNCTION*Omo*vis_con SET 0\0", print_writers);
 						}
 						break;
-					case Constants.APL:
+					case Constants.LEGENDS:
+						if(!CricketFunctions.checkBatAndBallImpactInOutPlayer(matchAllData.getEventFile().getEvents(), bc.getPlayerId()).isEmpty()) {
+							switch(CricketFunctions.checkBatAndBallImpactInOutPlayer(matchAllData.getEventFile().getEvents(), bc.getPlayerId())) {
+							case "IMP_IN":
+								CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$minis$Side" + WhichSide + "$Batting$Row" 
+										+  rowId + "$Select_Row_Type$" + cont_name + "$ImpactGrp$Impact*GEOM*TEXT SET IMP\0", print_writers);
+								CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$minis$Side" + WhichSide 
+										+ "$Batting$Row" + rowId + "$Select_Row_Type" + cont_name + "$Select_Impact*FUNCTION*Omo*vis_con SET 2\0", print_writers);
+								break;
+							case "IMP_OUT":
+								CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$minis$Side" + WhichSide + "$Batting$Row" 
+										+  rowId + "$Select_Row_Type$" + cont_name + "$SubGrp$Impact*GEOM*TEXT SET SUB\0", print_writers);
+								CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$minis$Side" + WhichSide 
+										+ "$Batting$Row" + rowId + "$Select_Row_Type" + cont_name + "$Select_Impact*FUNCTION*Omo*vis_con SET 1\0", print_writers);
+								break;
+							case "CON_IN":
+								CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$minis$Side" + WhichSide + "$Batting$Row" 
+										+  rowId + "$Select_Row_Type$" + cont_name + "$ImpactGrp$Impact*GEOM*TEXT SET CON\0", print_writers);
+								CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$minis$Side" + WhichSide 
+										+ "$Batting$Row" + rowId + "$Select_Row_Type" + cont_name + "$Select_Impact*FUNCTION*Omo*vis_con SET 2\0", print_writers);
+								break;
+							case "CON_OUT":
+								CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$minis$Side" + WhichSide + "$Batting$Row" 
+										+  rowId + "$Select_Row_Type$" + cont_name + "$SubGrp$Impact*GEOM*TEXT SET CON\0", print_writers);
+								CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$minis$Side" + WhichSide 
+										+ "$Batting$Row" + rowId + "$Select_Row_Type" + cont_name + "$Select_Impact*FUNCTION*Omo*vis_con SET 1\0", print_writers);
+								break;
+							}
+						}else {
+							CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$minis$Side" + WhichSide 
+									+ "$Batting$Row" + rowId + "$Select_Row_Type" + cont_name + "$Select_Impact*FUNCTION*Omo*vis_con SET 0\0", print_writers);
+						}
+						break;
+					case Constants.APL: 
 						if(!CricketFunctions.checkBatAndBallImpactInOutPlayer(matchAllData.getEventFile().getEvents(), bc.getPlayerId()).isEmpty()) {
 							switch(CricketFunctions.checkBatAndBallImpactInOutPlayer(matchAllData.getEventFile().getEvents(), bc.getPlayerId())) {
 							case "IMP_IN":
@@ -4922,7 +4955,7 @@ public class BugsAndMiniGfx
 								break;
 							case "IMP_OUT":
 								CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$minis$Side" + WhichSide + "$Batting$Row" 
-										+  rowId + "$Select_Row_Type$" + cont_name + "$ImpactGrp$Impact$txt_BatterLastName*GEOM*TEXT SET SUB \0", print_writers);
+										+  rowId + "$Select_Row_Type$" + cont_name + "$ImpactGrp$Sub$txt_BatterLastName*GEOM*TEXT SET SUB \0", print_writers);
 								CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$minis$Side" + WhichSide 
 										+ "$Batting$Row" + rowId + "$Select_Row_Type" + cont_name + "$Select_Impact*FUNCTION*Omo*vis_con SET 2\0", print_writers);
 								break;
@@ -4934,7 +4967,7 @@ public class BugsAndMiniGfx
 								break;
 							case "CON_OUT":
 								CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$minis$Side" + WhichSide + "$Batting$Row" 
-										+  rowId + "$Select_Row_Type$" + cont_name + "$ImpactGrp$Impact$txt_BatterLastName*GEOM*TEXT SET CON \0", print_writers);
+										+  rowId + "$Select_Row_Type$" + cont_name + "$ImpactGrp$Sub$txt_BatterLastName*GEOM*TEXT SET CON \0", print_writers);
 								CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$minis$Side" + WhichSide 
 										+ "$Batting$Row" + rowId + "$Select_Row_Type" + cont_name + "$Select_Impact*FUNCTION*Omo*vis_con SET 2\0", print_writers);
 								break;
@@ -4985,8 +5018,15 @@ public class BugsAndMiniGfx
 				
 				switch (config.getBroadcaster().toUpperCase()) {
 				case Constants.NPL: case Constants.APL:
-					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$minis$Side" + WhichSide + "$Batting$img_Flag*TEXTURE*IMAGE SET " 
-							+ (config.getBroadcaster().equalsIgnoreCase(Constants.APL)?Constants.APL_LOGO_PATH:Constants.NPL_LOGO_PATH) + team.getTeamBadge() + " \0", print_writers);
+					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$minis$Side" + WhichSide + "$Batting$img_Flag*TEXTURE*IMAGE SET " + 
+							(config.getBroadcaster().equalsIgnoreCase(Constants.APL)?Constants.APL_LOGO_PATH:Constants.NPL_LOGO_PATH) + team.getTeamBadge() + " \0", print_writers);
+					
+					for(int i=1; i<=14; i++) {
+						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$minis$Side" + WhichSide + "$Batting$Row" + i + 
+								"$Players_Highlight$ImpactGrp$Select_Impact*FUNCTION*Omo*vis_con SET 0\0", print_writers);
+						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$minis$Side" + WhichSide + "$Batting$Row" + i + 
+								"$Players_Dehighlight$ImpactGrp$Select_Impact*FUNCTION*Omo*vis_con SET 0\0", print_writers);
+					}
 					break;
 				case Constants.MPL: 
 					
@@ -5013,11 +5053,6 @@ public class BugsAndMiniGfx
 						+ "*FUNCTION*Omo*vis_con SET 1 \0", print_writers);
 				
 				for(int i=1; i<=13; i++) {
-					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$minis$Side" + WhichSide + "$Batting$Row" 
-							+ rowId + "$Players_Highlight$Select_Impact*FUNCTION*Omo*vis_con SET 0\0", print_writers);
-					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$minis$Side" + WhichSide + "$Batting$Row" 
-							+ rowId + "$Players_Dehighlight$Select_Impact*FUNCTION*Omo*vis_con SET 0\0", print_writers);
-					
 					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$minis$Side" + WhichSide 
 							+ "$Batting$Row" + i + "*ACTIVE SET 0\0", print_writers);
 				}
@@ -5278,6 +5313,39 @@ public class BugsAndMiniGfx
 									+ "$Bowling$Row" + rowId + "$Select_Row_Type" + cont_name + "$In_Out*FUNCTION*Omo*vis_con SET 0\0", print_writers);
 						}
 						break;
+					case Constants.LEGENDS:
+						if(!CricketFunctions.checkBatAndBallImpactInOutPlayer(matchAllData.getEventFile().getEvents(), boc.getPlayerId()).isEmpty()) {
+							switch(CricketFunctions.checkBatAndBallImpactInOutPlayer(matchAllData.getEventFile().getEvents(), boc.getPlayerId())) {
+							case "IMP_IN":
+								CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$minis$Side" + WhichSide + "$Bowling$Row" 
+										+  rowId + "$Select_Row_Type$" + cont_name + "$ImpactGrp$Impact*GEOM*TEXT SET IMP\0", print_writers);
+								CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$minis$Side" + WhichSide 
+										+ "$Bowling$Row" + rowId + "$Select_Row_Type" + cont_name + "$Select_Impact*FUNCTION*Omo*vis_con SET 2\0", print_writers);
+								break;
+							case "IMP_OUT":
+								CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$minis$Side" + WhichSide + "$Bowling$Row" 
+										+  rowId + "$Select_Row_Type$" + cont_name + "$SubGrp$Impact*GEOM*TEXT SET SUB\0", print_writers);
+								CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$minis$Side" + WhichSide 
+										+ "$Bowling$Row" + rowId + "$Select_Row_Type" + cont_name + "$Select_Impact*FUNCTION*Omo*vis_con SET 1\0", print_writers);
+								break;
+							case "CON_IN":
+								CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$minis$Side" + WhichSide + "$Bowling$Row" 
+										+  rowId + "$Select_Row_Type$" + cont_name + "$ImpactGrp$Impact*GEOM*TEXT SET CON\0", print_writers);
+								CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$minis$Side" + WhichSide 
+										+ "$Bowling$Row" + rowId + "$Select_Row_Type" + cont_name + "$Select_Impact*FUNCTION*Omo*vis_con SET 2\0", print_writers);
+								break;
+							case "CON_OUT":
+								CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$minis$Side" + WhichSide + "$Bowling$Row" 
+										+  rowId + "$Select_Row_Type$" + cont_name + "$SubGrp$Impact*GEOM*TEXT SET CON\0", print_writers);
+								CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$minis$Side" + WhichSide 
+										+ "$Bowling$Row" + rowId + "$Select_Row_Type" + cont_name + "$Select_Impact*FUNCTION*Omo*vis_con SET 1\0", print_writers);
+								break;
+							}
+						}else {
+							CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$minis$Side" + WhichSide 
+									+ "$Bowling$Row" + rowId + "$Select_Row_Type" + cont_name + "$Select_Impact*FUNCTION*Omo*vis_con SET 0\0", print_writers);
+						}
+						break;
 					case Constants.APL:
 						if(!CricketFunctions.checkBatAndBallImpactInOutPlayer(matchAllData.getEventFile().getEvents(), boc.getPlayerId()).isEmpty()) {
 							switch(CricketFunctions.checkBatAndBallImpactInOutPlayer(matchAllData.getEventFile().getEvents(), boc.getPlayerId())) {
@@ -5349,9 +5417,9 @@ public class BugsAndMiniGfx
 					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$minis$Side" + WhichSide + "$Bowling$Header$headerBnd$img_Header"
 							+ "*TEXTURE*IMAGE SET IMAGE*/Default/Essentials/Textures/Color02\0", print_writers);
 					for(int i=1;i<=14;i++) {
-						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$minis$Side" + WhichSide + "$Bowling$Row" + rowId + 
+						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$minis$Side" + WhichSide + "$Bowling$Row" + i + 
 								"$Players_Highlight$Select_Impact*FUNCTION*Omo*vis_con SET 0\0", print_writers);
-						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$minis$Side" + WhichSide + "$Bowling$Row" + rowId + 
+						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$minis$Side" + WhichSide + "$Bowling$Row" + i + 
 								"$Players_Dehighlight$Select_Impact*FUNCTION*Omo*vis_con SET 0\0", print_writers);
 						
 						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$minis$Side" + WhichSide + "$Bowling$DataGrp$Row" + i + "$Players_Highlight$"
@@ -5371,6 +5439,12 @@ public class BugsAndMiniGfx
 							+ "$Bowling$img_Flag*TEXTURE*IMAGE SET " + Constants.MPL_LOGO_PATH + team.getTeamBadge() + logoCategory + " \0", print_writers);
 					break;	
 				case Constants.LEGENDS:
+					for(int i=1;i<=14;i++) {
+						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$minis$Side" + WhichSide + "$Bowling$Row" + rowId + 
+								"$Players_Highlight$Select_Impact*FUNCTION*Omo*vis_con SET 0\0", print_writers);
+						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$minis$Side" + WhichSide + "$Bowling$Row" + rowId + 
+								"$Players_Dehighlight$Select_Impact*FUNCTION*Omo*vis_con SET 0\0", print_writers);
+					}
 					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$minis$Side" + WhichSide 
 							+ "$Batting$img_Flag*TEXTURE*IMAGE SET " + Constants.LEGENDS_LOGO_PATH + team.getTeamBadge() + " \0", print_writers);
 					break;
