@@ -722,7 +722,12 @@ function processCricketProcedures(whatToProcess,dataToProcess)
 					if(valueToProcess.includes("Control_Shift_X") || valueToProcess.includes("Control_u")||
 						valueToProcess.includes("Shift_W")){
 						setPlayerDropdown(data)
-					}else{
+					}else if(valueToProcess.includes("Alt_2")){
+						if(valueToProcess.includes("PROMO")){
+							setPromoDropdown("PROMO",data);
+						}
+					}
+					else{
 						setPlayerInDropdown(data);
 					}
 				
@@ -790,6 +795,48 @@ function removeSelectDuplicates(select_id)
 	    }
 	});
 }
+
+function setPromoDropdown(type, data) {
+  if (type === "PROMO" && Array.isArray(data)) {
+	
+	const promoCells = [
+	      document.getElementById('Promo')
+	    ];
+
+    // Clear each cell and add a commentator dropdown
+    promoCells.forEach((cell, index) => {
+      if (!cell) {
+        console.warn(`Cell Player${index+1} not found`);
+        return;
+      }
+
+      cell.innerHTML = '';
+
+      const promoSelect = document.createElement('select');
+      promoSelect.id = `commentatorDropdown${index + 1}`;
+
+      // Use the passed data array here
+      data.forEach(pro1 => {
+        const option = document.createElement('option');
+          option.value = pro1.matchnumber;  
+          option.text = pro1.matchnumber + ' - ' +pro1.home_Team.teamName1 + ' Vs ' + pro1.away_Team.teamName1;
+          promoSelect.appendChild(option);
+      });
+      promoSelect.selectedIndex = 0;
+
+      $(promoSelect).on('change', function() {
+        setDropdownOptionToSelectOptionArray($(this), index + 1);
+      });
+
+      cell.appendChild(promoSelect);
+
+      // Initialize selection
+      setDropdownOptionToSelectOptionArray($(promoSelect), index + 1);
+      $(promoSelect).trigger('change');
+    });
+  }
+}
+
 function setPlayerInDropdown(dataToProcess) {
  	const playerCell = document.getElementById('Player');
  	playerCell.innerHTML = ''; 	
@@ -3674,6 +3721,11 @@ function addItemsToList(whatToProcess,dataToProcess)
 					select.appendChild(option);
 					
 					option = document.createElement('option');
+					option.value = 'PROMO';
+					option.text = 'Match Promo';
+					select.appendChild(option);
+					
+					option = document.createElement('option');
 					option.value = 'RECENT_FORM';
 					option.text = 'RECENT FORM';
 					select.appendChild(option);
@@ -3723,8 +3775,8 @@ function addItemsToList(whatToProcess,dataToProcess)
 					select.appendChild(option);*/
 					
 					option = document.createElement('option');
-					option.value = 'THIS_MATCH_DOTS';
-					option.text = 'This Match Dots';
+					option.value = 'INNING_DOTS';
+					option.text = 'Innings Dots';
 					select.appendChild(option);
 					
 					option = document.createElement('option');
@@ -3750,6 +3802,11 @@ function addItemsToList(whatToProcess,dataToProcess)
 					option = document.createElement('option');
 					option.value = 'PHASE_WISE';
 					option.text = 'Phase Wise';
+					select.appendChild(option);
+					
+					option = document.createElement('option');
+					option.value = 'PHASE_WISE_RUNRATE';
+					option.text = 'PhaseWise RunRate';
 					select.appendChild(option);
 					
 					/*option = document.createElement('option');
@@ -4035,7 +4092,7 @@ function addItemsToList(whatToProcess,dataToProcess)
 			select.addEventListener('change', function () {
 				const selectedValue = this.value;
 				// 🔁 Clean up any previously added special dropdowns
-				['selectScope', 'selectTeams', 'selectTeamids_in'].forEach(id => {
+				['selectScope', 'selectTeams', 'selectTeamids_in', 'Promo'].forEach(id => {
 					let existing = document.getElementById(id);
 					if (existing) existing.parentElement.remove();
 				});
@@ -4140,6 +4197,11 @@ function addItemsToList(whatToProcess,dataToProcess)
 					teamSelect.setAttribute('onchange', "setDropdownOptionToSelectOptionArray(this, 1)");1
 			
 					setDropdownOptionToSelectOptionArray($(teamSelect), 1);
+				}else if(selectedValue == 'PROMO'){
+					row.insertCell(1).id = 'Promo';
+		 			cellCount++;
+					processCricketProcedures("GRAPHICS-OPTIONS_DATA", whatToProcess + "," +
+    				(selectedValue || $(this).find('option').first().val()));
 				}
 				
 			});

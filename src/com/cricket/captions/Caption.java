@@ -1042,6 +1042,8 @@ public class Caption
 					
 					if(whatToProcess.contains("RECENT_FORM")) {
 						this_infobarGfx.team_id = Integer.valueOf(whatToProcess.split(",")[3]);
+					}else if(whatToProcess.contains("PROMO")) {
+						this_infobarGfx.fixtureid = Integer.valueOf(whatToProcess.split(",")[3]);
 					}
 					
 					System.out.println("whatToProcess = " + whatToProcess);

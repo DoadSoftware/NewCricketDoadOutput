@@ -683,7 +683,7 @@ public class IndexController
 			if(whatToProcess.toUpperCase().equalsIgnoreCase("PLAYING-XI-CHANGE-ON")) {
 				this_animation.AnimateIn("Shift_T", print_writers, session_configuration);
 			}
-			if(whatToProcess.contains("GRAPHICS-OPTIONS")||whatToProcess.contains("GRAPHICS-OPTIONS_DATA")) {
+			if(whatToProcess.contains("GRAPHICS-OPTIONS") || whatToProcess.contains("GRAPHICS-OPTIONS_DATA")) {
 				return objectMapper.writeValueAsString(GetGraphicOption(valueToProcess,session_configuration, headToHead));
 			}else if(whatToProcess.contains("POPULATE-GRAPHICS")) {
 				switch(this_animation.getTypeOfGraphicsOnScreen(session_configuration,valueToProcess)){
@@ -1281,6 +1281,15 @@ public class IndexController
 			return (List<T>) session_infoBarStats;
 		case "Alt_0":
 			return (List<T>) session_commentator;
+		case "Alt_2":
+			System.out.println("whatToProcess - " + whatToProcess);
+			if(whatToProcess.contains(",")) {
+	  			switch (whatToProcess.split(",")[1]) {
+	  			case "PROMO":
+	  				return (List<T>) CricketFunctions.processAllFixtures(cricketService);
+	  			}
+			 }
+			break;
 		case "Alt_a":
 			return (List<T>) CricketFunctions.processAllStaff(cricketService, session_match.getSetup().getHomeTeamId());
 		case "Alt_s":

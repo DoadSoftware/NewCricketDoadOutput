@@ -9623,21 +9623,25 @@ public class FullFramesGfx
 				}
 				
 				break;
-			case "Control_F7": case "Shift_T": case "Shift_F8": //PlayingXI
-				 
+			case "Control_F7": 
 				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$Footer*ACTIVE SET 1 \0", print_writers);
 				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$Footer$Side" + WhichSide + "$Select_FooterType"
 						+ "*FUNCTION*Omo*vis_con SET 3\0", print_writers);
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$Footer$Side"+WhichSide+"$Select_FooterType$InfoMiddle$txt_Info*GEOM*TEXT SET " 
+						+ CricketFunctions.generateTossResult(matchAllData, CricketUtil.FULL, CricketUtil.FIELD, CricketUtil.FULL, CricketUtil.CHOSE).toUpperCase() + "\0", print_writers);
+				break;
 				
-				switch(whatToProcess) {
-				case "Control_F7":
-					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$Footer$Side"+WhichSide+"$Select_FooterType$InfoMiddle$txt_Info*GEOM*TEXT SET " 
-							+ CricketFunctions.generateTossResult(matchAllData, CricketUtil.FULL, CricketUtil.FIELD, CricketUtil.FULL, CricketUtil.CHOSE).toUpperCase() + "\0", print_writers);
-					break;
-				case "Shift_T": case "Shift_F8":
-					String containerName_1 = "";
-					
-					containerName_1 = Players.stream().filter(player -> PlayerId.contains(player.getPlayerId())).map(Player::getTicker_name).collect(Collectors.joining(", "));
+			case "Shift_T": case "Shift_F8": //PlayingXI
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$Footer*ACTIVE SET 1 \0", print_writers);
+				String containerName_1 = "",inPlayerName = "";
+				containerName_1 = Players.stream().filter(player -> PlayerId.contains(player.getPlayerId())).map(Player::getTicker_name).collect(Collectors.joining(", "));
+				inPlayerName = PlayingXI.stream().filter(plyr -> PlayerIdIn.stream().noneMatch(id -> id == plyr.getPlayerId()) && !PlayerId.isEmpty())
+				        .map(Player::getTicker_name).collect(Collectors.joining(", "));
+				
+				switch (config.getBroadcaster().toUpperCase()) {
+				case Constants.NPL: case Constants.MPL:
+					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$Footer$Side" + WhichSide + "$Select_FooterType"
+							+ "*FUNCTION*Omo*vis_con SET 3\0", print_writers);
 					
 					if(!containerName_1.trim().isEmpty()) {
 						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$Footer$Side"+WhichSide+"$Select_FooterType$InfoMiddle$txt_Info"
@@ -9647,7 +9651,24 @@ public class FullFramesGfx
 								+ CricketFunctions.generateTossResult(matchAllData, CricketUtil.FULL, CricketUtil.FIELD, CricketUtil.FULL, CricketUtil.CHOSE).toUpperCase() + "\0", print_writers);
 					}
 					break;
+				case Constants.APL:
+					if(!containerName_1.trim().isEmpty()) {
+						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$Footer$Side" + WhichSide + "$Select_FooterType"
+								+ "*FUNCTION*Omo*vis_con SET 4\0", print_writers);
+						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$Footer$Side"+WhichSide+"$Select_FooterType$$In$txt_Info"
+								+ "*GEOM*TEXT SET " + inPlayerName + "\0", print_writers);
+						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$Footer$Side"+WhichSide+"$Select_FooterType$$Out$txt_Info"
+								+ "*GEOM*TEXT SET " + containerName_1 + "\0", print_writers);
+					}else {
+						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$Footer$Side" + WhichSide + "$Select_FooterType"
+								+ "*FUNCTION*Omo*vis_con SET 3\0", print_writers);
+						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$Footer$Side"+WhichSide+"$Select_FooterType$InfoMiddle$txt_Info*GEOM*TEXT SET " 
+								+ CricketFunctions.generateTossResult(matchAllData, CricketUtil.FULL, CricketUtil.FIELD, CricketUtil.FULL, CricketUtil.CHOSE).toUpperCase() + "\0", print_writers);
+					}
+					break;
 				}
+				
+				
 				break;
 			case "Control_d": case "Control_e": case "Shift_P": case "Shift_Q":
 				for(VariousText vt : VariousText) {
