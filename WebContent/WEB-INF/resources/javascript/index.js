@@ -8067,7 +8067,11 @@ function addItemsToList(whatToProcess,dataToProcess)
 
 						case 'LEGENDS-90':
 							addOption('DT20');
-							addOption('IT20');
+							addOption('BPL_CAREER', 'APL CAREER');
+							addOption('BPL_MILESTONE_BAT', 'APL MILESTONE');
+							addOption('BPL_BOUNDARY_CAREER', 'APL BOUNDARY CAREER');
+							addOption('BPL_BOUNDARY', 'THIS SEASON BOUNDARY');
+							addOption('RECENT_FORM_BAT', 'RECENT FORM');
 							break;
 
 						case 'T20_MUMBAI':
@@ -8384,8 +8388,10 @@ function addItemsToList(whatToProcess,dataToProcess)
 							break;		
 
 						case 'LEGENDS-90':
+							addOption('BPL CAREER');
 							addOption('DT20');
-							addOption('IT20');
+							addOption('BPL_MILESTONE_BALL', 'BPL MILESTONE');
+							addOption('RECENT_FORM_BALL', 'RECENT FORM');
 							break;
 
 						case 'T20_MUMBAI':
