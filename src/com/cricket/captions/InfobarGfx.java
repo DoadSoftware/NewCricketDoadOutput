@@ -15,7 +15,11 @@ import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
@@ -12476,41 +12480,56 @@ public class InfobarGfx
 					List<HeadToHeadPlayer> reversedHeadToHead = new ArrayList<>(headToHead);
 					Collections.reverse(reversedHeadToHead);
 					
+					Set<String> processedMatches = new HashSet<>();
+					Map<String, HeadToHeadPlayer> playerMatchData = new HashMap<>();
+
+					// FIRST PASS
 					for(HeadToHeadPlayer h2h : reversedHeadToHead) {
-						if(h2h.getPlayerId() == FirstPlayerId && h2h.getTeam().getTeamName4().equalsIgnoreCase(team.getTeamName4())) {
-							row_id++;
-							MatchNam = h2h.getMatchFileName().replace(".json", "");
-							matchName = (h2h.getMatchFileName().equalsIgnoreCase("ELIMINATOR")?"ELM":h2h.getMatchFileName().equalsIgnoreCase("QUALIFIER 1")?"Q1":
-								h2h.getMatchFileName().equalsIgnoreCase("QUALIFIER 2")?"Q2": MatchNam.replaceAll("MATCH 0([1-9])$", "M$1"));
-							
-							CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Infobar$Right$Side_" + WhichSide + "$Player_Stats_Wide$3_Stats$Stat_" + row_id
-									+ "$txt_Desig*GEOM*TEXT SET " + matchName + " v " + h2h.getOpponentTeam().getTeamName4() + "\0", print_writers);
-							
-							if(h2h.getInningStarted().contains("Y")) {
-								CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Infobar$Right$Side_" + WhichSide + "$Player_Stats_Wide$3_Stats$Stat_" + row_id
-										+ "$txt_Fig*GEOM*TEXT SET " + (h2h.getDismissed().contains("N")?h2h.getRuns() + "*" : h2h.getRuns()) + " (" + h2h.getBallsFaced() + ")\0", print_writers);										
+						if(h2h.getTeam() == null || h2h.getOpponentTeam() == null)
+							continue;
+						if(!h2h.getTeam().getTeamName4().equalsIgnoreCase(team.getTeamName4()))
+							continue;
+						if(h2h.getPlayerId() == FirstPlayerId) {
+							playerMatchData.put(h2h.getMatchFileName(), h2h);
+						}
+					}
+
+					// SECOND PASS
+					for(HeadToHeadPlayer h2h : reversedHeadToHead) {
+						if(h2h.getTeam() == null || h2h.getOpponentTeam() == null)
+							continue;
+						if(!h2h.getTeam().getTeamName4().equalsIgnoreCase(team.getTeamName4()))
+							continue;
+						String matchFile = h2h.getMatchFileName();
+
+						// AVOID DUPLICATE MATCHES
+						if(processedMatches.contains(matchFile))
+							continue;
+						processedMatches.add(matchFile);
+						row_id++;
+						MatchNam = matchFile.replace(".json", "");
+
+						matchName = (MatchNam.equalsIgnoreCase("ELIMINATOR") ? "ELM" : MatchNam.equalsIgnoreCase("QUALIFIER 1") ? "Q1"
+								: MatchNam.equalsIgnoreCase("QUALIFIER 2") ? "Q2" : MatchNam.replaceAll("MATCH 0([1-9])$", "M$1"));
+						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Infobar$Right$Side_" + WhichSide + "$Player_Stats_Wide$3_Stats$Stat_" 
+								+ row_id + "$txt_Desig*GEOM*TEXT SET " + matchName + " v " + h2h.getOpponentTeam().getTeamName4() + "\0", print_writers);
+
+						// PLAYER PLAYED
+						if(playerMatchData.containsKey(matchFile)) {
+							HeadToHeadPlayer ply = playerMatchData.get(matchFile);
+							if(ply.getInningStarted().contains("Y")) {
+								CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Infobar$Right$Side_" + WhichSide + "$Player_Stats_Wide$3_Stats$Stat_" 
+										+ row_id + "$txt_Fig*GEOM*TEXT SET " + (ply.getDismissed().contains("N")? ply.getRuns() + "*": ply.getRuns()) + " (" 
+										+ ply.getBallsFaced() + ")\0",print_writers);
 							}else {
-								CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Infobar$Right$Side_" + WhichSide + "$Player_Stats_Wide$3_Stats$Stat_" + row_id
-										+ "$txt_Fig*GEOM*TEXT SET " + "DNB" + "\0", print_writers);
+								CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Infobar$Right$Side_" + WhichSide + "$Player_Stats_Wide$3_Stats$Stat_" 
+										+ row_id + "$txt_Fig*GEOM*TEXT SET DNB\0",print_writers);
 							}
-							
-							counter = 0;
-							
-							
-						}else if(h2h.getTeam().getTeamName4().equalsIgnoreCase(team.getTeamName4())) {
-							if(MatchNam != null && !MatchNam.equalsIgnoreCase(h2h.getMatchFileName().replace(".json", "")) && counter <= 11) {
-								MatchNam = h2h.getMatchFileName().replace(".json", "");
-								counter = 1;
-							}else if(counter == 11) {
-									row_id++;
-									CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Infobar$Right$Side_" + WhichSide + "$Player_Stats_Wide$3_Stats$Stat_" + row_id
-											+ "$txt_Desig*GEOM*TEXT SET " + matchName + " v " + h2h.getOpponentTeam().getTeamName4() + "\0", print_writers);
-									CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Infobar$Right$Side_" + WhichSide + "$Player_Stats_Wide$3_Stats$Stat_" + row_id
-											+ "$txt_Fig*GEOM*TEXT SET " + "DNP" + "\0", print_writers);
-									counter = 0;
-							}else {
-								counter++;
-							}
+						}
+						// PLAYER DID NOT PLAY
+						else {
+							CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Infobar$Right$Side_" + WhichSide + "$Player_Stats_Wide$3_Stats$Stat_" 
+									+ row_id + "$txt_Fig*GEOM*TEXT SET DNP\0", print_writers);
 						}
 					}
 					break;
@@ -12578,48 +12597,61 @@ public class InfobarGfx
 					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Infobar$Right$Side_" + WhichSide + "$Player_Stats_Wide$Bottom$Select_Amount"
 							+ "*FUNCTION*Omo*vis_con SET 1\0",print_writers);
 					team = cricketService.getTeams().stream().filter(tm->tm.getTeamId() == player.getTeamId()).findAny().orElse(null);
+					
 					List<HeadToHeadPlayer> reversedHeadToHead = new ArrayList<>(headToHead);
 					Collections.reverse(reversedHeadToHead);
 					
-					for(HeadToHeadPlayer h2h : reversedHeadToHead) {
-						if(h2h.getPlayerId() == FirstPlayerId && h2h.getTeam().getTeamName4().equalsIgnoreCase(team.getTeamName4())) {
-							row_id++;
-							MatchNam = h2h.getMatchFileName().replace(".json", "");
-							matchName = (h2h.getMatchFileName().equalsIgnoreCase("ELIMINATOR")?"ELM":h2h.getMatchFileName().equalsIgnoreCase("QUALIFIER 1")?"Q1":
-								h2h.getMatchFileName().equalsIgnoreCase("QUALIFIER 2")?"Q2": MatchNam.replaceAll("MATCH 0([1-9])$", "M$1"));
-							
-							CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Infobar$Right$Side_" + WhichSide + "$Player_Stats_Wide$3_Stats$Stat_" + row_id
-									+ "$txt_Desig*GEOM*TEXT SET " + matchName + " v " + h2h.getOpponentTeam().getTeamName4() + "\0", print_writers);
-							
-							if(h2h.getBallsBowled() == 0) {
-								CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Infobar$Right$Side_" + WhichSide + "$Player_Stats_Wide$3_Stats$Stat_" + row_id
-										+ "$txt_Fig*GEOM*TEXT SET " + "DNB" + "\0", print_writers);							
-							}else {
-								CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Infobar$Right$Side_" + WhichSide + "$Player_Stats_Wide$3_Stats$Stat_" + row_id
-										+ "$txt_Fig*GEOM*TEXT SET " + h2h.getWickets() +"-"+h2h.getRunsConceded() + " (" + CricketFunctions.OverBalls(0, h2h.getBallsBowled()) + ")\0", print_writers);		
-							}
-							
-							counter = 0;
+					Set<String> processedMatches = new HashSet<>();
+					Map<String, HeadToHeadPlayer> playerMatchData = new HashMap<>();
 
-						}else if(h2h.getTeam().getTeamName4().equalsIgnoreCase(team.getTeamName4())) {
-							if(counter == 11) {
-								row_id++;
-								
-								CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Infobar$Right$Side_" + WhichSide + "$Player_Stats_Wide$3_Stats$Stat_" + row_id
-										+ "$txt_Desig*GEOM*TEXT SET " + matchName + " v " + h2h.getOpponentTeam().getTeamName4() + "\0", print_writers);
-								CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Infobar$Right$Side_" + WhichSide + "$Player_Stats_Wide$3_Stats$Stat_" + row_id
-										+ "$txt_Fig*GEOM*TEXT SET " + "DNP" + "\0", print_writers);	
-								
-								counter = 0;
-							}else if(MatchNam != null && !MatchNam.equalsIgnoreCase(h2h.getMatchFileName().replace(".json", "")) && counter < 11) {
-								MatchNam = h2h.getMatchFileName().replace(".json", "");
-								counter = 1;
+					// FIRST PASS
+					for(HeadToHeadPlayer h2h : reversedHeadToHead) {
+						if(h2h.getTeam() == null || h2h.getOpponentTeam() == null)
+							continue;
+						if(!h2h.getTeam().getTeamName4().equalsIgnoreCase(team.getTeamName4()))
+							continue;
+						if(h2h.getPlayerId() == FirstPlayerId) {
+							playerMatchData.put(h2h.getMatchFileName(), h2h);
+						}
+					}
+
+					// SECOND PASS
+					for(HeadToHeadPlayer h2h : reversedHeadToHead) {
+						if(h2h.getTeam() == null || h2h.getOpponentTeam() == null)
+							continue;
+						if(!h2h.getTeam().getTeamName4().equalsIgnoreCase(team.getTeamName4()))
+							continue;
+						String matchFile = h2h.getMatchFileName();
+						// AVOID DUPLICATE MATCHES
+						if(processedMatches.contains(matchFile))
+							continue;
+
+						processedMatches.add(matchFile);
+						row_id++;
+						MatchNam = matchFile.replace(".json", "");
+						matchName = (MatchNam.equalsIgnoreCase("ELIMINATOR") ? "ELM" : MatchNam.equalsIgnoreCase("QUALIFIER 1") ? "Q1"
+								: MatchNam.equalsIgnoreCase("QUALIFIER 2") ? "Q2" : MatchNam.replaceAll("MATCH 0([1-9])$", "M$1"));
+
+						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Infobar$Right$Side_" + WhichSide + "$Player_Stats_Wide$3_Stats$Stat_" 
+								+ row_id + "$txt_Desig*GEOM*TEXT SET " + matchName + " v " + h2h.getOpponentTeam().getTeamName4() + "\0", print_writers);
+
+						// PLAYER PLAYED
+						if(playerMatchData.containsKey(matchFile)) {
+							HeadToHeadPlayer ply = playerMatchData.get(matchFile);
+							// DID NOT BOWL
+							if(ply.getBallsBowled() == 0) {
+								CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Infobar$Right$Side_" + WhichSide+ "$Player_Stats_Wide$3_Stats$Stat_" 
+										+ row_id + "$txt_Fig*GEOM*TEXT SET DNB\0", print_writers);
 							}else {
-								if(counter==10) {
-									counter=0;
-								}
-								counter++;
+								CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Infobar$Right$Side_" + WhichSide + "$Player_Stats_Wide$3_Stats$Stat_" 
+										+ row_id + "$txt_Fig*GEOM*TEXT SET " + ply.getWickets() + "-" + ply.getRunsConceded() + " (" + CricketFunctions.OverBalls(0, ply.getBallsBowled())
+										+ ")\0",print_writers);
 							}
+						}
+						// PLAYER DID NOT PLAY
+						else {
+							CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Infobar$Right$Side_" + WhichSide + "$Player_Stats_Wide$3_Stats$Stat_" 
+									+ row_id + "$txt_Fig*GEOM*TEXT SET DNP\0", print_writers);
 						}
 					}
 					break;
@@ -12682,45 +12714,61 @@ public class InfobarGfx
 				case "RECENT_FORM_BAT":
 					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Infobar$Right$Side_" + WhichSide + "$Player_Stats_Wide$Bottom$Select_Amount"
 							+ "*FUNCTION*Omo*vis_con SET 1\0",print_writers);
-					
 					team = cricketService.getTeams().stream().filter(tm->tm.getTeamId() == player.getTeamId()).findAny().orElse(null);
 					
+					List<HeadToHeadPlayer> reversedHeadToHead = new ArrayList<>(headToHead);
+					Collections.reverse(reversedHeadToHead);
 					
-					for(HeadToHeadPlayer h2h : headToHead) {
-						if(h2h.getPlayerId() == FirstPlayerId && h2h.getTeam().getTeamName4().equalsIgnoreCase(team.getTeamName4())) {
-							row_id++;
-							MatchNam = h2h.getMatchFileName().replace(".json", "");
-							matchName = (h2h.getMatchFileName().equalsIgnoreCase("ELIMINATOR")?"ELM":h2h.getMatchFileName().equalsIgnoreCase("QUALIFIER 1")?"Q1":
-								h2h.getMatchFileName().equalsIgnoreCase("QUALIFIER 2")?"Q2": MatchNam.replaceAll("MATCH 0([1-9])$", "M$1"));
-							
-							CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Infobar$Right$Side_" + WhichSide + "$Player_Stats_Wide$3_Stats$Stat_" + row_id
-									+ "$txt_Desig*GEOM*TEXT SET " + matchName + " v " + h2h.getOpponentTeam().getTeamName4() + "\0", print_writers);
-							
-							if(h2h.getInningStarted().contains("Y")) {
-								CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Infobar$Right$Side_" + WhichSide + "$Player_Stats_Wide$3_Stats$Stat_" + row_id
-										+ "$txt_Fig*GEOM*TEXT SET " + (h2h.getDismissed().contains("N")?h2h.getRuns() + "*" : h2h.getRuns()) + " (" + h2h.getBallsFaced() + ")\0", print_writers);										
+					Set<String> processedMatches = new HashSet<>();
+					Map<String, HeadToHeadPlayer> playerMatchData = new HashMap<>();
+
+					// FIRST PASS
+					for(HeadToHeadPlayer h2h : reversedHeadToHead) {
+						if(h2h.getTeam() == null || h2h.getOpponentTeam() == null)
+							continue;
+						if(!h2h.getTeam().getTeamName4().equalsIgnoreCase(team.getTeamName4()))
+							continue;
+						if(h2h.getPlayerId() == FirstPlayerId) {
+							playerMatchData.put(h2h.getMatchFileName(), h2h);
+						}
+					}
+
+					// SECOND PASS
+					for(HeadToHeadPlayer h2h : reversedHeadToHead) {
+						if(h2h.getTeam() == null || h2h.getOpponentTeam() == null)
+							continue;
+						if(!h2h.getTeam().getTeamName4().equalsIgnoreCase(team.getTeamName4()))
+							continue;
+						String matchFile = h2h.getMatchFileName();
+
+						// AVOID DUPLICATE MATCHES
+						if(processedMatches.contains(matchFile))
+							continue;
+						processedMatches.add(matchFile);
+						row_id++;
+						MatchNam = matchFile.replace(".json", "");
+
+						matchName = (MatchNam.equalsIgnoreCase("ELIMINATOR") ? "ELM" : MatchNam.equalsIgnoreCase("QUALIFIER 1") ? "Q1"
+								: MatchNam.equalsIgnoreCase("QUALIFIER 2") ? "Q2" : MatchNam.replaceAll("MATCH 0([1-9])$", "M$1"));
+						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Infobar$Right$Side_" + WhichSide + "$Player_Stats_Wide$3_Stats$Stat_" 
+								+ row_id + "$txt_Desig*GEOM*TEXT SET " + matchName + " v " + h2h.getOpponentTeam().getTeamName4() + "\0", print_writers);
+
+						// PLAYER PLAYED
+						if(playerMatchData.containsKey(matchFile)) {
+							HeadToHeadPlayer ply = playerMatchData.get(matchFile);
+							if(ply.getInningStarted().contains("Y")) {
+								CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Infobar$Right$Side_" + WhichSide + "$Player_Stats_Wide$3_Stats$Stat_" 
+										+ row_id + "$txt_Fig*GEOM*TEXT SET " + (ply.getDismissed().contains("N")? ply.getRuns() + "*": ply.getRuns()) + " (" 
+										+ ply.getBallsFaced() + ")\0",print_writers);
 							}else {
-								CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Infobar$Right$Side_" + WhichSide + "$Player_Stats_Wide$3_Stats$Stat_" + row_id
-										+ "$txt_Fig*GEOM*TEXT SET " + "DNB" + "\0", print_writers);
+								CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Infobar$Right$Side_" + WhichSide + "$Player_Stats_Wide$3_Stats$Stat_" 
+										+ row_id + "$txt_Fig*GEOM*TEXT SET DNB\0",print_writers);
 							}
-							
-							counter = 0;
-							
-							
-						}else if(h2h.getTeam().getTeamName4().equalsIgnoreCase(team.getTeamName4())) {
-							if(MatchNam != null && !MatchNam.equalsIgnoreCase(h2h.getMatchFileName().replace(".json", "")) && counter <= 11) {
-								MatchNam = h2h.getMatchFileName().replace(".json", "");
-								counter = 1;
-							}else if(counter == 11) {
-									row_id++;
-									CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Infobar$Right$Side_" + WhichSide + "$Player_Stats_Wide$3_Stats$Stat_" + row_id
-											+ "$txt_Desig*GEOM*TEXT SET " + matchName + " v " + h2h.getOpponentTeam().getTeamName4() + "\0", print_writers);
-									CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Infobar$Right$Side_" + WhichSide + "$Player_Stats_Wide$3_Stats$Stat_" + row_id
-											+ "$txt_Fig*GEOM*TEXT SET " + "DNP" + "\0", print_writers);
-									counter = 0;
-							}else {
-								counter++;
-							}
+						}
+						// PLAYER DID NOT PLAY
+						else {
+							CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Infobar$Right$Side_" + WhichSide + "$Player_Stats_Wide$3_Stats$Stat_" 
+									+ row_id + "$txt_Fig*GEOM*TEXT SET DNP\0", print_writers);
 						}
 					}
 					break;
@@ -12787,49 +12835,62 @@ public class InfobarGfx
 				case "RECENT_FORM_BALL":
 					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Infobar$Right$Side_" + WhichSide + "$Player_Stats_Wide$Bottom$Select_Amount"
 							+ "*FUNCTION*Omo*vis_con SET 1\0",print_writers);
-					
 					team = cricketService.getTeams().stream().filter(tm->tm.getTeamId() == player.getTeamId()).findAny().orElse(null);
 					
+					List<HeadToHeadPlayer> reversedHeadToHead = new ArrayList<>(headToHead);
+					Collections.reverse(reversedHeadToHead);
 					
-					for(HeadToHeadPlayer h2h : headToHead) {
-						if(h2h.getPlayerId() == FirstPlayerId && h2h.getTeam().getTeamName4().equalsIgnoreCase(team.getTeamName4())) {
-							row_id++;
-							MatchNam = h2h.getMatchFileName().replace(".json", "");
-							matchName = (h2h.getMatchFileName().equalsIgnoreCase("ELIMINATOR")?"ELM":h2h.getMatchFileName().equalsIgnoreCase("QUALIFIER 1")?"Q1":
-								h2h.getMatchFileName().equalsIgnoreCase("QUALIFIER 2")?"Q2": MatchNam.replaceAll("MATCH 0([1-9])$", "M$1"));
-							
-							CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Infobar$Right$Side_" + WhichSide + "$Player_Stats_Wide$3_Stats$Stat_" + row_id
-									+ "$txt_Desig*GEOM*TEXT SET " + matchName + " v " + h2h.getOpponentTeam().getTeamName4() + "\0", print_writers);
-							
-							if(h2h.getBallsBowled() == 0) {
-								CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Infobar$Right$Side_" + WhichSide + "$Player_Stats_Wide$3_Stats$Stat_" + row_id
-										+ "$txt_Fig*GEOM*TEXT SET " + "DNB" + "\0", print_writers);							
-							}else {
-								CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Infobar$Right$Side_" + WhichSide + "$Player_Stats_Wide$3_Stats$Stat_" + row_id
-										+ "$txt_Fig*GEOM*TEXT SET " + h2h.getWickets() +"-"+h2h.getRunsConceded() + " (" + CricketFunctions.OverBalls(0, h2h.getBallsBowled()) + ")\0", print_writers);		
-							}
-							
-							counter = 0;
+					Set<String> processedMatches = new HashSet<>();
+					Map<String, HeadToHeadPlayer> playerMatchData = new HashMap<>();
 
-						}else if(h2h.getTeam().getTeamName4().equalsIgnoreCase(team.getTeamName4())) {
-							if(counter == 11) {
-								row_id++;
-								
-								CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Infobar$Right$Side_" + WhichSide + "$Player_Stats_Wide$3_Stats$Stat_" + row_id
-										+ "$txt_Desig*GEOM*TEXT SET " + matchName + " v " + h2h.getOpponentTeam().getTeamName4() + "\0", print_writers);
-								CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Infobar$Right$Side_" + WhichSide + "$Player_Stats_Wide$3_Stats$Stat_" + row_id
-										+ "$txt_Fig*GEOM*TEXT SET " + "DNP" + "\0", print_writers);	
-								
-								counter = 0;
-							}else if(MatchNam != null && !MatchNam.equalsIgnoreCase(h2h.getMatchFileName().replace(".json", "")) && counter < 11) {
-								MatchNam = h2h.getMatchFileName().replace(".json", "");
-								counter = 1;
+					// FIRST PASS
+					for(HeadToHeadPlayer h2h : reversedHeadToHead) {
+						if(h2h.getTeam() == null || h2h.getOpponentTeam() == null)
+							continue;
+						if(!h2h.getTeam().getTeamName4().equalsIgnoreCase(team.getTeamName4()))
+							continue;
+						if(h2h.getPlayerId() == FirstPlayerId) {
+							playerMatchData.put(h2h.getMatchFileName(), h2h);
+						}
+					}
+
+					// SECOND PASS
+					for(HeadToHeadPlayer h2h : reversedHeadToHead) {
+						if(h2h.getTeam() == null || h2h.getOpponentTeam() == null)
+							continue;
+						if(!h2h.getTeam().getTeamName4().equalsIgnoreCase(team.getTeamName4()))
+							continue;
+						String matchFile = h2h.getMatchFileName();
+						// AVOID DUPLICATE MATCHES
+						if(processedMatches.contains(matchFile))
+							continue;
+
+						processedMatches.add(matchFile);
+						row_id++;
+						MatchNam = matchFile.replace(".json", "");
+						matchName = (MatchNam.equalsIgnoreCase("ELIMINATOR") ? "ELM" : MatchNam.equalsIgnoreCase("QUALIFIER 1") ? "Q1"
+								: MatchNam.equalsIgnoreCase("QUALIFIER 2") ? "Q2" : MatchNam.replaceAll("MATCH 0([1-9])$", "M$1"));
+
+						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Infobar$Right$Side_" + WhichSide + "$Player_Stats_Wide$3_Stats$Stat_" 
+								+ row_id + "$txt_Desig*GEOM*TEXT SET " + matchName + " v " + h2h.getOpponentTeam().getTeamName4() + "\0", print_writers);
+
+						// PLAYER PLAYED
+						if(playerMatchData.containsKey(matchFile)) {
+							HeadToHeadPlayer ply = playerMatchData.get(matchFile);
+							// DID NOT BOWL
+							if(ply.getBallsBowled() == 0) {
+								CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Infobar$Right$Side_" + WhichSide+ "$Player_Stats_Wide$3_Stats$Stat_" 
+										+ row_id + "$txt_Fig*GEOM*TEXT SET DNB\0", print_writers);
 							}else {
-								if(counter==10) {
-									counter=0;
-								}
-								counter++;
+								CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Infobar$Right$Side_" + WhichSide + "$Player_Stats_Wide$3_Stats$Stat_" 
+										+ row_id + "$txt_Fig*GEOM*TEXT SET " + ply.getWickets() + "-" + ply.getRunsConceded() + " (" + CricketFunctions.OverBalls(0, ply.getBallsBowled())
+										+ ")\0",print_writers);
 							}
+						}
+						// PLAYER DID NOT PLAY
+						else {
+							CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Infobar$Right$Side_" + WhichSide + "$Player_Stats_Wide$3_Stats$Stat_" 
+									+ row_id + "$txt_Fig*GEOM*TEXT SET DNP\0", print_writers);
 						}
 					}
 					break;

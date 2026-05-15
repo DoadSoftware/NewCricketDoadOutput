@@ -1296,7 +1296,7 @@ public class IndexController
 			return (List<T>) CricketFunctions.processAllStaff(cricketService, session_match.getSetup().getAwayTeamId());
 		case "Alt_q":
 			return (List<T>) CricketFunctions.processAllPott(cricketService);
-		case "Alt_Shift_R": case "Alt_z": case "Alt_Shift_W": case "Control_0": //case "Control_Shift_F8":
+		case "Alt_Shift_R": case "Alt_z": case "Alt_Shift_W": case "Control_0":
 			return (List<T>) session_team;
 		case "Shift_!":
 			List<Stats> database_statistics = new ArrayList<Stats>();
@@ -1335,29 +1335,29 @@ public class IndexController
 			}
 			
 			return (List<T>) statistics;
-//		case "Control_Shift_F8":
-//			if(whatToProcess.contains(",")) {
-//				FullFramesGfx.stats_past_tournament = CricketFunctions.extractTournamentData("CURRENT_MATCH_DATA", false, headToHead.getH2hPlayer(), cricketService, 
-//						session_match, past_tournament_stats);
-//				FullFramesGfx.stats_past_tournament.removeIf(tournament -> tournament.getPlayer().getTeamId() != Integer.valueOf(whatToProcess.split(",")[1])); 
-//				switch(whatToProcess.split(",")[2]) {
-//					case "MOST RUNS":
-//						Collections.sort(FullFramesGfx.stats_past_tournament,new CricketFunctions.BatsmenMostRunComparator());
-//						break;
-//					case "MOST WICKETS":
-//						Collections.sort(FullFramesGfx.stats_past_tournament,new CricketFunctions.BowlerWicketsComparator());
-//						break;
-//					case "MOST FOURS":
-//						Collections.sort(FullFramesGfx.stats_past_tournament,new CricketFunctions.BatsmanFoursComparator());
-//						break;
-//					case "MOST SIXES":
-//						Collections.sort(FullFramesGfx.stats_past_tournament,new CricketFunctions.BatsmanSixesComparator());
-//						break;
-//					}
-//		        return FullFramesGfx.stats_past_tournament.size() > 5 ? (List<T>) FullFramesGfx.stats_past_tournament.subList(0, 5) : (List<T>) FullFramesGfx.stats_past_tournament;
-//			}else {
-//				return (List<T>) cricketService.getTeams();
-//			}
+		case "Control_Shift_F8":
+			if(whatToProcess.contains(",")) {
+				List<Tournament> tournamentStats = CricketFunctions.extractTournamentData("CURRENT_MATCH_DATA",false, headToHead.getH2hPlayer(),
+				        cricketService,session_match, past_tournament_stats);
+				tournamentStats.removeIf(tournament -> tournament.getPlayer().getTeamId() != Integer.valueOf(whatToProcess.split(",")[1])); 
+				switch(whatToProcess.split(",")[2]) {
+					case "MOST RUNS":
+						Collections.sort(tournamentStats,new CricketFunctions.BatsmenMostRunComparator());
+						break;
+					case "MOST WICKETS":
+						Collections.sort(tournamentStats,new CricketFunctions.BowlerWicketsComparator());
+						break;
+					case "MOST FOURS":
+						Collections.sort(tournamentStats,new CricketFunctions.BatsmanFoursComparator());
+						break;
+					case "MOST SIXES":
+						Collections.sort(tournamentStats,new CricketFunctions.BatsmanSixesComparator());
+						break;
+					}
+		        return tournamentStats.size() > 5 ? (List<T>) tournamentStats.subList(0, 5) : (List<T>) tournamentStats;
+			}else {
+				return (List<T>) cricketService.getTeams();
+			}
 		case "z": case "x": case "c": case "v": case "Control_Shift_Z": case "Control_Shift_Y": case "Shift_@": case "Shift_$": case "Control_Shift_@": case "Control_Alt_5":
 		case "Control_Alt_9": case "Control_Alt_0":	case "Alt_Shift_K": case "Alt_Shift_X": case "Alt_Shift_T": case "Alt_Shift_V": 
 			
