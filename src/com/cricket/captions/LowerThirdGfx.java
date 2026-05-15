@@ -7143,7 +7143,7 @@ public class LowerThirdGfx
 		if(fixture.getDate().equalsIgnoreCase(new SimpleDateFormat("dd-MM-yyyy").format(cal_bengal.getTime()))) {
 			
 			if(config.getBroadcaster().toUpperCase().equalsIgnoreCase(Constants.MPL)) {
-				text = "TOMORROW - " + fixture.getLocalTime() + " - " + matchAllData.getSetup().getGround().getCity();
+				text = "TOMORROW - " + fixture.getLocalTime() + " - " + matchAllData.getSetup().getGround().getFullname();
 			}else if(config.getBroadcaster().toUpperCase().equalsIgnoreCase(Constants.NPL)) {
 				text = "TOMORROW - " + fixture.getLocalTime() + " NST - " + fixture.getVenue();
 			}else {
@@ -7153,7 +7153,7 @@ public class LowerThirdGfx
 		}else {
 			cal_bengal.add(Calendar.DATE, -1);
 			if(fixture.getDate().equalsIgnoreCase(new SimpleDateFormat("dd-MM-yyyy").format(cal_bengal.getTime()))) {
-				text = "UP NEXT - " + match_name + " - LIVE FROM " + matchAllData.getSetup().getGround().getCity();
+				text = "UP NEXT - " + match_name + " - LIVE FROM " + matchAllData.getSetup().getGround().getFullname();
 			}else {
 				newDate = fixture.getDate().split("-")[0];
 				if(Integer.valueOf(newDate) < 10) {
@@ -7163,7 +7163,7 @@ public class LowerThirdGfx
 						Month.of(Integer.valueOf(fixture.getDate().split("-")[1]));
 				
 				if(config.getBroadcaster().toUpperCase().equalsIgnoreCase(Constants.MPL)) {
-					text = date_data + " - " + fixture.getLocalTime() + " - " + matchAllData.getSetup().getGround().getCity();
+					text = date_data + " - " + fixture.getLocalTime() + " - " + matchAllData.getSetup().getGround().getFullname();
 				}else if(config.getBroadcaster().toUpperCase().equalsIgnoreCase(Constants.NPL)) {
 					text = date_data + " - " + fixture.getLocalTime() + " NST - " + fixture.getVenue();
 				}else {
@@ -13255,7 +13255,14 @@ public class LowerThirdGfx
 				Collections.sort(battingCardList);
 				for (BattingCard bc : battingCardList) {
 					row_id = row_id + 1;
-					containerNam1 = "$Data_Grp02";
+					switch (config.getBroadcaster().toUpperCase()) {
+					case Constants.MPL : {
+						containerNam1 = "$Data_Grp";
+						break;
+					}
+					default:
+						containerNam1 = "$Data_Grp02";
+					}
 					if(battingCardList.size() >= 12) {
 					//	containerNam1 = "$Data_Grp";
 						offset = "133.0";

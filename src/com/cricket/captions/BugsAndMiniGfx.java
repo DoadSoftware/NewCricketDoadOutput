@@ -856,6 +856,8 @@ public class BugsAndMiniGfx
 		case "Control_Shift_U_change_on": // POP-Up
 			switch (whatToProcess.split(",")[3].toUpperCase()) {
 			case "SCORE":
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$PopUps$POP_UP$band$txt_Header"
+						+ "*GEOM*TEXT SET " + battingCard.getPlayer().getTicker_name() + "\0", print_writers);
 				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$BatterScore$Body$Data$Side1$SubSide" + WhichSide + "$Select"
 						+ "*FUNCTION*Omo*vis_con SET 0\0", print_writers);
 				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$BatterScore$Body$Data$Side1$SubSide" + WhichSide + "$Four-Six"
@@ -866,6 +868,8 @@ public class BugsAndMiniGfx
 				break;
 
 			case "STRIKERATE":
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$PopUps$POP_UP$band$txt_Header"
+						+ "*GEOM*TEXT SET " + battingCard.getPlayer().getTicker_name() + " - THIS MATCH" + "\0", print_writers);
 				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$BatterScore$Body$Data$Side1$SubSide" + WhichSide + "$Select"
 						+ "*FUNCTION*Omo*vis_con SET 0\0", print_writers);
 				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$BatterScore$Body$Data$Side1$SubSide" + WhichSide + "$Four-Six"
@@ -876,6 +880,8 @@ public class BugsAndMiniGfx
 				break;
 			
 			case "BOUNDARY":
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$PopUps$POP_UP$band$txt_Header"
+						+ "*GEOM*TEXT SET " + battingCard.getPlayer().getTicker_name() + " - THIS MATCH" + "\0", print_writers);
 				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$BatterScore$Body$Data$Side1$SubSide" + WhichSide + "$Select"
 						+ "*FUNCTION*Omo*vis_con SET 0\0", print_writers);
 				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$BatterScore$Body$Data$Side1$SubSide" + WhichSide + "$Four-Six"
@@ -884,6 +890,39 @@ public class BugsAndMiniGfx
 				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$BatterScore$Body$Data$Side1$SubSide" + WhichSide + "$Four-Six$Data$Title"
 						+ "*GEOM*TEXT SET " + battingCard.getFours() + "/" + battingCard.getSixes() + "\0", print_writers);
 				break;	
+			case "BOUNDARY_PERCENT":
+
+			    int fours = battingCard.getFours();
+			    int sixes = battingCard.getSixes();
+			    int totalRuns = battingCard.getRuns();
+
+			    int boundaryRuns = (fours * 4) + (sixes * 6);
+
+			    double boundaryPercent = 0;
+
+			    if (totalRuns > 0) {
+			        boundaryPercent = (boundaryRuns * 100.0) / totalRuns;
+			    }
+			    
+			    CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$PopUps$POP_UP$band$txt_Header"
+						+ "*GEOM*TEXT SET " + battingCard.getPlayer().getTicker_name()+ "\0", print_writers);
+
+			    CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$PopUps$POP_UP$Side" + WhichSide + "$StatHead1"
+			        + "*GEOM*TEXT SET BOUNDARY %\0",print_writers);
+			    
+//			    CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$PopUps$POP_UP$Side" + WhichSide + "$StatHead1"
+//				        + "*GEOM*TEXT SET MATCH BOUNDARY%\0",print_writers);
+
+			    CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$PopUps$POP_UP$Side" + WhichSide + "$Score"
+			        + "*GEOM*TEXT SET "+ String.format("%.0f", boundaryPercent)+ "\0",print_writers);
+
+			    CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$PopUps$POP_UP$Side" + WhichSide
+			        + "$Seperator*ACTIVE SET 0\0",print_writers);
+
+			    CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$PopUps$POP_UP$Side" + WhichSide + "$Balls"
+			        + "*GEOM*TEXT SET \0",print_writers);
+
+			    break;
 			}
 			break;
 		case "Control_Shift_V_change_on":
@@ -1723,7 +1762,7 @@ public class BugsAndMiniGfx
 							+ "*TEXTURE*IMAGE SET " + Constants.MPL_LOGO_PATH + inning.getBatting_team().getTeamBadge() + logoCategory + "\0", print_writers);
 					
 					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$PopUps$POP_UP$band$txt_Header"
-							+ "*GEOM*TEXT SET " + battingCard.getPlayer().getFull_name()+ "\0", print_writers);
+							+ "*GEOM*TEXT SET " + battingCard.getPlayer().getTicker_name()+ "\0", print_writers);
 					
 					break;	
 				case Constants.LEGENDS:
@@ -1737,6 +1776,8 @@ public class BugsAndMiniGfx
 				
 				switch (whatToProcess.split(",")[3].toUpperCase()) {
 				case "SCORE":
+					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$PopUps$POP_UP$band$txt_Header"
+							+ "*GEOM*TEXT SET " + battingCard.getPlayer().getTicker_name()+ "\0", print_writers);
 					
 					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$PopUps$POP_UP$Side" + WhichSide + "$StatHead1"
 							+ "*GEOM*TEXT SET \0", print_writers);
@@ -1757,6 +1798,8 @@ public class BugsAndMiniGfx
 					break;
 
 				case "STRIKERATE":
+					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$PopUps$POP_UP$band$txt_Header"
+							+ "*GEOM*TEXT SET " + battingCard.getPlayer().getTicker_name() + " - THIS MATCH" + "\0", print_writers);
 					
 					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$PopUps$POP_UP$Side" + WhichSide + "$StatHead1"
 							+ "*GEOM*TEXT SET STRIKE RATE \0", print_writers);
@@ -1783,6 +1826,9 @@ public class BugsAndMiniGfx
 				    if (totalRuns > 0) {
 				        boundaryPercent = (boundaryRuns * 100.0) / totalRuns;
 				    }
+				    
+				    CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$PopUps$POP_UP$band$txt_Header"
+							+ "*GEOM*TEXT SET " + battingCard.getPlayer().getTicker_name()+ "\0", print_writers);
 
 				    CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$PopUps$POP_UP$Side" + WhichSide + "$StatHead1"
 				        + "*GEOM*TEXT SET BOUNDARY %\0",print_writers);
@@ -1802,6 +1848,8 @@ public class BugsAndMiniGfx
 				    break;
 				    	
 				 case "BOUNDARY":
+					 CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$PopUps$POP_UP$band$txt_Header"
+								+ "*GEOM*TEXT SET " + battingCard.getPlayer().getTicker_name() + " - THIS MATCH" + "\0", print_writers);
 					
 					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$PopUps$POP_UP$Side" + WhichSide + "$StatHead1"
 							+ "*GEOM*TEXT SET FOURS/SIXES \0", print_writers);

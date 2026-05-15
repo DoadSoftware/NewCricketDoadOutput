@@ -1265,8 +1265,14 @@ public class Animation
 						processAnimation(Constants.BACK, print_writers, "Anim_FullFrames$In_Out$Main$Profile", "START");
 						processAnimation(Constants.BACK, print_writers, "BG_Scale", "START");
 						if(Integer.valueOf(whatToProcess.split(",")[4]) > 0) {
-							processAnimation(Constants.BACK, print_writers, "Profile_Highlight$Side1$"+whatToProcess.split(",")[4], "START");
-							prevHighlightDirector =whatToProcess.split(",")[4];
+							if(Integer.valueOf(whatToProcess.split(",")[4]) == 5) {
+								processAnimation(Constants.BACK, print_writers, "Profile_Highlight$Side1$7", "START");
+								prevHighlightDirector ="7";
+							}else {
+								processAnimation(Constants.BACK, print_writers, "Profile_Highlight$Side1$"+whatToProcess.split(",")[4], "START");
+								prevHighlightDirector =whatToProcess.split(",")[4];
+							}
+							
 						}
 						break;
 					case "Shift_T":
@@ -1701,7 +1707,11 @@ public class Animation
 					break;
 				case "Control_d": case "Control_e": case "Shift_P": case "Shift_Q":
 					if(Integer.valueOf(whatToProcess.split(",")[4]) > 0) {
-						processAnimation(Constants.BACK, print_writers, "Profile_Highlight$Side1$"+whatToProcess.split(",")[4], "START");
+						if((Integer.valueOf(whatToProcess.split(",")[4])  == 5)){
+							processAnimation(Constants.BACK, print_writers, "Profile_Highlight$Side1$7", "START");
+						}else {
+							processAnimation(Constants.BACK, print_writers, "Profile_Highlight$Side1$"+whatToProcess.split(",")[4], "START");
+						}
 					}
 					break;
 				}
@@ -3568,7 +3578,12 @@ public class Animation
 //					break;
 				case "Control_d": case "Control_e": case "Shift_P": case "Shift_Q":
 					if(Integer.valueOf(whatToProcess.split(",")[4]) > 0) {
-						processAnimation(Constants.BACK, print_writers, "Profile_Highlight$Side1$"+whatToProcess.split(",")[4], "CONTINUE");
+						if((Integer.valueOf(whatToProcess.split(",")[4])  == 5)){
+							processAnimation(Constants.BACK, print_writers, "Profile_Highlight$Side1$7", "CONTINUE");
+						}else {
+							processAnimation(Constants.BACK, print_writers, "Profile_Highlight$Side1$"+whatToProcess.split(",")[4], "CONTINUE");
+						}
+						
 					}
 					break;
 				}
@@ -4977,8 +4992,13 @@ public class Animation
 						break;	
 					case "Control_d": case "Control_e": case "Shift_P": case "Shift_Q":
 						if(Integer.valueOf(whatToProcess.split(",")[4]) > 0) {
-							processAnimation(Constants.BACK, print_writers, "Profile_Highlight$Side1$"+whatToProcess.split(",")[4], "START");
-							prevHighlightDirector = whatToProcess.split(",")[4];
+							if((Integer.valueOf(whatToProcess.split(",")[4])  == 5)){
+								processAnimation(Constants.BACK, print_writers, "Profile_Highlight$Side1$7", "START");
+								prevHighlightDirector = "7";
+							}else {
+								processAnimation(Constants.BACK, print_writers, "Profile_Highlight$Side1$"+whatToProcess.split(",")[4], "START");
+								prevHighlightDirector = whatToProcess.split(",")[4];
+							}
 						}
 						break;
 					case "Control_p":
@@ -4999,8 +5019,14 @@ public class Animation
 					}
 				}
 				if(Integer.valueOf(whatToProcess.split(",")[4]) > 0) {
-					processAnimation(Constants.BACK, print_writers, "Profile_Highlight$Side1$"+whatToProcess.split(",")[4], "START");
-					prevHighlightDirector = whatToProcess.split(",")[4];
+					if(Integer.valueOf(whatToProcess.split(",")[4]) == 5) {
+						processAnimation(Constants.BACK, print_writers, "Profile_Highlight$Side1$7", "START");
+						prevHighlightDirector = "7" ;
+					}else {
+						processAnimation(Constants.BACK, print_writers, "Profile_Highlight$Side1$"+whatToProcess.split(",")[4], "START");
+						prevHighlightDirector = whatToProcess.split(",")[4];
+					}
+					
 				}
 				break;
 			case "highlightLeader":
@@ -6470,7 +6496,12 @@ public class Animation
 				case "Control_d": case "Control_e": case "Shift_P": case "Shift_Q":
 					processAnimation(Constants.BACK, print_writers, "Change$Profile", "SHOW 0.0");
 					if(Integer.valueOf(whatToProcess.split(",")[4]) > 0) {
-						processAnimation(Constants.BACK, print_writers, "Profile_Highlight$Side1$"+whatToProcess.split(",")[4], "SHOW 0.0");
+						if(Integer.valueOf(whatToProcess.split(",")[4]) == 5) {
+							processAnimation(Constants.BACK, print_writers, "Profile_Highlight$Side1$7", "SHOW 0.0");
+						}else {
+							processAnimation(Constants.BACK, print_writers, "Profile_Highlight$Side1$"+whatToProcess.split(",")[4], "SHOW 0.0");
+						}
+						
 					}
 					break;
 				case "Control_p":
@@ -6481,7 +6512,12 @@ public class Animation
 				case "Control_d": case "Control_e": case "Shift_P": case "Shift_Q":
 					processAnimation(Constants.BACK, print_writers, "Anim_FullFrames$In_Out$Main$Profile", "SHOW 3.0");
 					if(Integer.valueOf(whatToProcess.split(",")[4]) > 0) {
-						processAnimation(Constants.BACK, print_writers, "Profile_Highlight$Side1$"+whatToProcess.split(",")[4], "START");
+						if(Integer.valueOf(whatToProcess.split(",")[4]) == 5) {
+							processAnimation(Constants.BACK, print_writers, "Profile_Highlight$Side1$7", "START");
+						}else {
+							processAnimation(Constants.BACK, print_writers, "Profile_Highlight$Side1$"+whatToProcess.split(",")[4], "START");
+						}
+						
 					}
 					break;
 				case "Shift_T":
@@ -12169,7 +12205,12 @@ public class Animation
 						break;
 					case "Control_d": case "Control_e": case "Shift_P": case "Shift_Q":
 						if(Integer.valueOf(whatToProcess.split(",")[4])>0) {
-							previewCommand = previewCommand + " Profile_Highlight$Side1$" + whatToProcess.split(",")[4] + " 1.780";
+							if(Integer.valueOf(whatToProcess.split(",")[4]) == 5) {
+								previewCommand = previewCommand + " Profile_Highlight$Side1$7" + " 1.780";
+							}else {
+								previewCommand = previewCommand + " Profile_Highlight$Side1$" + whatToProcess.split(",")[4] + " 1.780";
+							}
+							
 						}
 						previewCommand = previewCommand + " Anim_FullFrames$In_Out$Main$Profile 3.000 Anim_FullFrames$In_Out$Main$Profile$In 2.680 Anim_FullFrames$In_Out$ExtraData$In 3.000 BG_Scale 0.800";
 						break;
@@ -12361,7 +12402,12 @@ public class Animation
 								break;	
 							case "Control_d": case "Control_e": case "Shift_P": case "Shift_Q":
 								if(Integer.valueOf(whatToProcess.split(",")[4])>0) {
-									previewCommand = previewCommand + " Profile_Highlight$Side1$"+whatToProcess.split(",")[4]+" 0.500";
+									if(Integer.valueOf(whatToProcess.split(",")[4]) == 5) {
+										previewCommand = previewCommand + " Profile_Highlight$Side1$7"+" 0.500";
+									}else {
+										previewCommand = previewCommand + " Profile_Highlight$Side1$"+whatToProcess.split(",")[4]+" 0.500";
+									}
+									
 								}
 								previewCommand = previewCommand + " Change$Profile 1.440 Change$Profile$Change_In 2.680 Change$ExtraData$Change_In 0.720 BG_Scale 0.800";
 								break;
@@ -12490,7 +12536,12 @@ public class Animation
 						break;
 					case "Control_d": case "Control_e": case "Shift_P": case "Shift_Q":
 						if(Integer.valueOf(whatToProcess.split(",")[4])>0) {
-							previewCommand = previewCommand + " Profile_Highlight$Side1$" + whatToProcess.split(",")[4] + " 1.780";
+							if(Integer.valueOf(whatToProcess.split(",")[4]) == 5) {
+								previewCommand = previewCommand + " Profile_Highlight$Side1$7" + " 1.780";
+							}else {
+								previewCommand = previewCommand + " Profile_Highlight$Side1$" + whatToProcess.split(",")[4] + " 1.780";
+							}
+							
 						}
 						previewCommand = previewCommand + " Anim_FullFrames$In_Out$Main$Profile 3.000 Anim_FullFrames$In_Out$Main$Profile$In 2.680 Anim_FullFrames$In_Out$ExtraData$In 3.000 BG_Scale 0.800";
 						break;
@@ -12661,7 +12712,12 @@ public class Animation
 								break;	
 							case "Control_d": case "Control_e": case "Shift_P": case "Shift_Q":
 								if(Integer.valueOf(whatToProcess.split(",")[4])>0) {
-									previewCommand = previewCommand + " Profile_Highlight$Side1$"+whatToProcess.split(",")[4]+" 0.500";
+									if(Integer.valueOf(whatToProcess.split(",")[4]) == 5) {
+										previewCommand = previewCommand + " Profile_Highlight$Side1$7"+" 0.500";
+									}else {
+										previewCommand = previewCommand + " Profile_Highlight$Side1$"+whatToProcess.split(",")[4]+" 0.500";
+									}
+									
 								}
 								previewCommand = previewCommand + " Change$Profile 1.440 Change$Profile$Change_In 2.680 Change$Profile$Change_In$In 2.680 Change$ExtraData$Change_In 0.720 BG_Scale 0.800";
 								break;
@@ -13026,7 +13082,11 @@ public class Animation
 						case "Control_d": case "Control_e": case "Shift_P": case "Shift_Q"://PlayerProfile
 							previewCommand = previewCommand + " Anim_FullFrames$In_Out$Main$Profile$In 2.300";
 							if(Integer.valueOf(whatToProcess.split(",")[4]) > 0) {
-								previewCommand = previewCommand + " Profile_Highlight$Side1$" + whatToProcess.split(",")[4] + " 1.000";
+								if(Integer.valueOf(whatToProcess.split(",")[4]) == 5) {
+									previewCommand = previewCommand + " Profile_Highlight$Side1$7" + " 1.000";
+								}else {
+									previewCommand = previewCommand + " Profile_Highlight$Side1$" + whatToProcess.split(",")[4] + " 1.000";
+								}
 							}	
 							break;
 						case "Shift_K"://FFCurrPartnership
