@@ -8952,8 +8952,8 @@ public class InfobarGfx
 						    	+ "$Projected_Wide$Stat_2$txt_Fig*GEOM*TEXT SET " + "-" + "\0", print_writers);
 					}else {
 						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Infobar$Right$Side_" + WhichSide + "$Projected_Wide$"
-								+ "Stat_2$txt_Fig*GEOM*TEXT SET " + CricketFunctions.generateRunRate(Integer.valueOf(PP1.split("-")[0]), 6, 0, 2, matchAllData) 
-								+ "\0", print_writers);
+								+ "Stat_2$txt_Fig*GEOM*TEXT SET " + CricketFunctions.generateRunRate(Integer.valueOf(PP1.split("-")[0]), 
+										CricketFunctions.getPowerplayOvers("1-6", inning.getTotalOvers()), 0, 2, matchAllData) + "\0", print_writers);
 					}
 					
 					if(PP2.equalsIgnoreCase("-")) {
@@ -8961,8 +8961,8 @@ public class InfobarGfx
 						    	+ "$Projected_Wide$Stat_3$txt_Fig*GEOM*TEXT SET " +  "-" + "\0", print_writers);
 					}else {
 						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Infobar$Right$Side_" + WhichSide + "$Projected_Wide$"
-								+ "Stat_3$txt_Fig*GEOM*TEXT SET " +  CricketFunctions.generateRunRate(Integer.valueOf(PP2.split("-")[0]), 9, 0, 2, matchAllData) 
-								+ "\0", print_writers);
+								+ "Stat_3$txt_Fig*GEOM*TEXT SET " +  CricketFunctions.generateRunRate(Integer.valueOf(PP1.split("-")[0]), 
+										CricketFunctions.getPowerplayOvers("7-15", inning.getTotalOvers()), 0, 2, matchAllData) + "\0", print_writers);
 					}
 					
 					if(PP3.equalsIgnoreCase("-")) {
@@ -8970,8 +8970,8 @@ public class InfobarGfx
 						    	+ "$Projected_Wide$Stat_4$txt_Fig*GEOM*TEXT SET " +  "-" + "\0", print_writers);
 					}else {
 						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Infobar$Right$Side_" + WhichSide + "$Projected_Wide$"
-								+ "Stat_4$txt_Fig*GEOM*TEXT SET " +  CricketFunctions.generateRunRate(Integer.valueOf(PP3.split("-")[0]), 5, 0, 2, matchAllData) 
-								+ "\0", print_writers);
+								+ "Stat_4$txt_Fig*GEOM*TEXT SET " +  CricketFunctions.generateRunRate(Integer.valueOf(PP1.split("-")[0]), 
+										CricketFunctions.getPowerplayOvers("16-20", inning.getTotalOvers()), 0, 2, matchAllData) + "\0", print_writers);
 					}
 					break;
 				}

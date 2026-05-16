@@ -148,11 +148,11 @@ public class Animation
 			case "Control_F10": case "Shift_F10": case "Control_Shift_D": case "Shift_D": case "Alt_F11": case "Control_z": case "Control_x": case "Control_Shift_Z":
 			case "Control_Shift_Y": case "Alt_m": case "Alt_n": case "Control_Shift_E": case "Control_Shift_F": case "Alt_Shift_W": case "Control_Shift_I":
 			case "Control_Shift_F8": case "Control_Alt_F1": case "Control_Alt_F2": case "Alt_Shift_P": case "Control_Shift_K": case "Alt_Shift_Z": case "Shift_L":
-			case "Shift_M": case "Control_Shift_P": case "Alt_Shift_R": case "Alt_F5":
+			case "Shift_M": case "Control_Shift_P": case "Alt_Shift_R": case "Alt_F5": case "Alt_Shift_J":
 				return Constants.FULL_FRAMER;
 			case "Shift_O": case "Control_k": case "k": case "g": case "y": case "Control_Shift_R": case "Control_Shift_U": case "Control_Shift_V":
 			case "h": case "Shift_F4": case "Shift_F":case "Alt_b": case "Alt_p": case "Control_Shift_F3":  case "Shift_C": case "Control_Shift_J": case "6":
-			case "Control_y": case "Control_4": case "Alt_Shift_J":
+			case "Control_y": case "Control_4":
 				return Constants.BUGS;
 			case "Shift_F1": case "Shift_F2": case "Alt_F7": case "Alt_F1": case "Alt_F2":
 				return Constants.MINIS;	
@@ -1253,6 +1253,7 @@ public class Animation
 						break;
 					case "Alt_Shift_J":
 						processAnimation(Constants.BACK, print_writers, "Anim_FullFrames$In_Out$Main$BattingCard_Manhattan", "START");
+						processAnimation(Constants.BACK, print_writers, "BG_Scale", "START");
 						break;	
 					case "Control_F7":
 						processAnimation(Constants.BACK, print_writers, "Anim_FullFrames$In_Out$Main$Teams", "START");

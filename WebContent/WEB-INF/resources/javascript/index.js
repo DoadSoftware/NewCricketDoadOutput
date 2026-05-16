@@ -705,8 +705,8 @@ function processCricketProcedures(whatToProcess,dataToProcess)
 							processUserSelection($('#cancel_graphics_btn').attr('value','cancel_graphics_btn'));
 						}
 					} else {
-						if(data.status != 'YES'){
-							alert(data.status);
+						if(data != 'YES'){
+							alert(data);
 						}	
 						/*$("#select_graphic_options_div").empty();
 						document.getElementById('select_graphic_options_div').style.display = 'none';
