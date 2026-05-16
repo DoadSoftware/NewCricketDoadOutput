@@ -705,9 +705,10 @@ function processCricketProcedures(whatToProcess,dataToProcess)
 							processUserSelection($('#cancel_graphics_btn').attr('value','cancel_graphics_btn'));
 						}
 					} else {
-						if(data != 'YES'){
-							alert(data);
-						}	
+						if(data != 'YES' && typeof data !== 'object'){
+						      
+						        alert(data);
+						    }	
 						/*$("#select_graphic_options_div").empty();
 						document.getElementById('select_graphic_options_div').style.display = 'none';
 						$("#captions_div").show();*/
@@ -1305,7 +1306,6 @@ function addItemsToList(whatToProcess,dataToProcess)
 			}
 			thead.appendChild(tr);
 			table.appendChild(thead);
-			alert(dataToProcess.length);
 			for(var i = 0; i <= dataToProcess.length - 1; i++){
 				row = tbody.insertRow(tbody.rows.length);
 				for(var j = 0; j <= 4; j++){

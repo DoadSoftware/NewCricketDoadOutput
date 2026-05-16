@@ -31597,6 +31597,10 @@ public class FullFramesGfx
 						break;
 					}
 				}
+//				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$Main$Side_" + WhichSide + "$Standings$" + rowId +
+//						containerName + "$txt_Played*GEOM*TEXT SET "+ "NR" +"\0", print_writers);
+				
+				
 				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$Main$Side_" + WhichSide + "$Standings$" + rowId +
 						containerName + "$txt_Played*GEOM*TEXT SET "+leagueTable.getLeagueTeams().get(i).getPlayed()+"\0", print_writers);
 				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$Main$Side_" + WhichSide + "$Standings$" + rowId + 
