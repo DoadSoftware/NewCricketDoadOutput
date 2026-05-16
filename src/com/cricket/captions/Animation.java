@@ -1229,9 +1229,11 @@ public class Animation
 					switch (whatToProcess.split(",")[0]) {
 					case "Control_Alt_F1":
 						processAnimation(Constants.BACK, print_writers, "Anim_FullFrames$In_Out$Main$Batting_Bowling_Card", "START");
+						processAnimation(Constants.BACK, print_writers, "BG_Scale", "START");
 						break;
 					case "Control_Alt_F2":
 						processAnimation(Constants.BACK, print_writers, "Anim_FullFrames$In_Out$Main$Batting_Bowling_Manhattan", "START");
+						processAnimation(Constants.BACK, print_writers, "BG_Scale", "START");
 						break;
 					case "F1": case "Control_Shift_A": case "Control_Shift_F1":
 						processAnimation(Constants.BACK, print_writers, "Anim_FullFrames$In_Out$Main$BattingCard", "START");
@@ -11452,8 +11454,8 @@ public class Animation
 					case "F1": case "Control_Shift_A": case "F2": case "Control_Shift_F1": case "Control_Shift_F2": case "F4": case "Control_Shift_F4": 
 					case "Shift_K": case "Control_Alt_F1": case "Control_Alt_F2": case "Alt_Shift_J": case "Shift_T":
 						previewCommand = "Anim_Infobar$Push 0.500 Anim_FullFrames$In_Out$Essentials$In 2.800 Anim_FullFrames$In_Out$Header$In 2.000 Anim_FullFrames$In_Out$Logo$In 2.500"
-								+ " Anim_FullFrames$In_Out$SubHeader$In 2.000 Anim_FullFrames$In_Out$Footer 3.000 Anim_FullFrames$In_Out$Footer$In_Out 3.000 Anim_FullFrames$In_Out$Footer$In_Out$Essentials 3.000"
-								+ " Anim_FullFrames$In_Out$Footer$In_Out$Essentials$In 2.860 Anim_FullFrames$In_Out$Footer$In_Out$Data 3.000"
+								+ " Anim_FullFrames$In_Out$SubHeader$In 2.000 Anim_FullFrames$In_Out$Footer 3.000 Anim_FullFrames$In_Out$Footer$In_Out 3.000 "
+								+ "Anim_FullFrames$In_Out$Footer$In_Out$Essentials 3.000 Anim_FullFrames$In_Out$Footer$In_Out$Essentials$In 2.860 Anim_FullFrames$In_Out$Footer$In_Out$Data 3.000"
 								+ " Anim_FullFrames$In_Out$Footer$In_Out$Data$In 2.860";
 						break;
 					case "Control_Shift_D":
@@ -11478,10 +11480,12 @@ public class Animation
 					}
 					switch (whatToProcess.split(",")[0]) {
 					case "Control_Alt_F1":
-						previewCommand = previewCommand + " Anim_FullFrames$In_Out$Main 3.000 Anim_FullFrames$In_Out$Main$Batting_Bowling_Card 3.000 Anim_FullFrames$In_Out$Main$Batting_Bowling_Card$In 2.880 Anim_FullFrames$In_Out$ExtraData$In 3.000";
+						previewCommand = previewCommand + " Anim_FullFrames$In_Out$Main 3.000 Anim_FullFrames$In_Out$Main$Batting_Bowling_Card 3.000 "
+								+ "Anim_FullFrames$In_Out$Main$Batting_Bowling_Card$In 2.880 Anim_FullFrames$In_Out$ExtraData$In 3.000 BG_Scale 0.800";
 						break;
 					case "Control_Alt_F2":
-						previewCommand = previewCommand + " Anim_FullFrames$In_Out$Main 3.000 Anim_FullFrames$In_Out$Main$Batting_Bowling_Manhattan 3.000 Anim_FullFrames$In_Out$Main$Batting_Bowling_Manhattan$In 2.880 Anim_FullFrames$In_Out$ExtraData$In 3.000";
+						previewCommand = previewCommand + " Anim_FullFrames$In_Out$Main 3.000 Anim_FullFrames$In_Out$Main$Batting_Bowling_Manhattan 3.000 "
+								+ "Anim_FullFrames$In_Out$Main$Batting_Bowling_Manhattan$In 2.880 Anim_FullFrames$In_Out$ExtraData$In 3.000 BG_Scale 0.800";
 						break;
 					case "Alt_Shift_J":
 						previewCommand = previewCommand + " Anim_FullFrames$In_Out$Main 3.000 Anim_FullFrames$In_Out$Main$BattingCard_Manhattan 3.000 Anim_FullFrames$In_Out$Main$BattingCard_Manhattan$In 2.880 Anim_FullFrames$In_Out$ExtraData$In 3.000";
