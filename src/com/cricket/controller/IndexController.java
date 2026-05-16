@@ -793,7 +793,7 @@ public class IndexController
 	public void infobarAnimateOutAllSection(Configuration session_configuration, MatchAllData session_match, List<PrintWriter> print_writers, HeadToHead headToHead) 
 			throws Exception {
 		switch(session_configuration.getBroadcaster()) {
-		case Constants.NPL: case Constants.LEGENDS: case Constants.APL:
+		case Constants.NPL: case Constants.LEGENDS: case Constants.APL: case Constants.MPL:
 			this_caption.whichSide = 2;
 			int Inn_Number = session_match.getMatch().getInning().stream().filter(inn -> inn.getIsCurrentInning()
 					.equalsIgnoreCase(CricketUtil.YES)).findAny().orElse(null).getInningNumber();

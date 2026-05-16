@@ -1145,6 +1145,7 @@ public class Caption
 				}
 				break;
 			case "Alt_3":
+			
 				if(config.getWhichInfobar().equalsIgnoreCase("LOF_INFOBAR")) {
 					this_lofInfobarGfx.infobar.setMiddle_section("BAT_PROFILE_CAREER");
 					this_lofInfobarGfx.FirstPlayerId = Integer.valueOf(whatToProcess.split(",")[2]);

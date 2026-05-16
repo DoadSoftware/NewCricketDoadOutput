@@ -8030,9 +8030,12 @@ function addItemsToList(whatToProcess,dataToProcess)
 							break;
 
 						case 'MPL':
-							addOption('KCL', 'KCL CAREER');
+							addOption('MPL', 'MPL CAREER');
 							addOption('DT20');
 							addOption('IT20');
+							addOption('MPL_BOUNDARY_CAREER', 'MPL BOUNDARY CAREER');
+							addOption('MPL_BOUNDARY', 'THIS SEASON BOUNDARY');
+							addOption('RECENT_FORM_BAT', 'RECENT FORM');
 							break;
 
 						case 'APL':
