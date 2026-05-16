@@ -13850,51 +13850,161 @@ public class InfobarGfx
 			
 			player = CricketFunctions.getPlayerFromMatchData(Integer.valueOf(whatToProcess.split(",")[2]), matchAllData);
 			if(player == null) {
-				statsData.add("InfoBarPlayerProfile: Player Id not found [" + FirstPlayerId + "]");
+				statsData.add("InfoBarPlayerProfile: Player Id not found [" + Integer.valueOf(whatToProcess.split(",")[2]) + "]");
 				return (List<T>) statsData;
 			}
 			
-			if(!whatToProcess.split(",")[3].equalsIgnoreCase("NPL_CAREER")) {
+			if(!whatToProcess.split(",")[3].equalsIgnoreCase("NPL_CAREER") && !whatToProcess.split(",")[3].equalsIgnoreCase("KCL") && 
+					!whatToProcess.split(",")[3].equalsIgnoreCase("APL_CAREER") && !whatToProcess.split(",")[3].equalsIgnoreCase("APL_BOUNDARY_CAREER") && 
+					!whatToProcess.split(",")[3].equalsIgnoreCase("APL_BOUNDARY") && !whatToProcess.split(",")[3].equalsIgnoreCase("APL_MILESTONE_BAT") && 
+					!whatToProcess.split(",")[3].equalsIgnoreCase("APL_MILESTONE_BALL") && !whatToProcess.split(",")[3].equalsIgnoreCase("BPL_CAREER") && 
+					!whatToProcess.split(",")[3].equalsIgnoreCase("BPL_BOUNDARY_CAREER") && !whatToProcess.split(",")[3].equalsIgnoreCase("BPL_BOUNDARY") && 
+					!whatToProcess.split(",")[3].equalsIgnoreCase("BPL_MILESTONE_BAT") && !whatToProcess.split(",")[3].equalsIgnoreCase("BPL_MILESTONE_BALL")) {
 				statsType = statsTypes.stream().filter(stype -> stype.getStats_short_name().equalsIgnoreCase(whatToProcess.split(",")[3])).findAny().orElse(null);
 				if(statsTypes == null) {
-					statsData.add("InfoBarPlayerProfile: Stats Type not found for profile [" + WhichProfile + "]");
+					statsData.add("InfoBarPlayerProfile: Stats Type not found for profile [" + whatToProcess.split(",")[3] + "]");
 					return (List<T>) statsData;
 				}
 				stat = statistics.stream().filter(st -> st.getPlayer_id() == player.getPlayerId() && statsType.getStats_id() == st.getStats_type_id()).findAny().orElse(null);
 				if(stat == null) {
-					statsData.add("InfoBarPlayerProfile: Stats not found for Player Id [" + FirstPlayerId + "]");
+					statsData.add("InfoBarPlayerProfile: Stats not found for Player Id [" + player.getPlayerId() + "]");
 					return (List<T>) statsData;
 				}
 				stat.setStats_type(statsType);
 			}else {
-				statsType = statsTypes.stream().filter(st -> st.getStats_short_name().equalsIgnoreCase("NPL S1")).findAny().orElse(null);
-				if(statsTypes == null) {
-					statsData.add("InfoBarPlayerProfile: Stats Type not found for profile [" + WhichProfile + "]");
-					return (List<T>) statsData;
+				switch (config.getBroadcaster()) {
+				case Constants.APL: case Constants.LEGENDS:
+					switch (whatToProcess.split(",")[3].toUpperCase()) {
+					case "APL_BOUNDARY": case "BPL_BOUNDARY":
+						this_series =  CricketFunctions.extractTournamentData("CURRENT_MATCH_DATA", false, headToHead,cricketService, matchAllData, past_tournament_stats);
+						tournament = this_series.stream().filter(tourn -> tourn.getPlayerId() == player.getPlayerId()).findAny().orElse(null);
+						break;
+					case "BPL_CAREER": case "BPL_BOUNDARY_CAREER": case "BPL_MILESTONE_BAT": case "BPL_MILESTONE_BALL":
+						statsType = statsTypes.stream().filter(st -> st.getStats_short_name().equalsIgnoreCase("BPL_CAREER")).findAny().orElse(null);
+						if(statsTypes == null) {
+							statsData.add("InfoBarPlayerProfile: Stats Type not found for profile [" + whatToProcess.split(",")[3] + "]");
+							return (List<T>) statsData;
+						}
+						
+						stat = statistics.stream().filter(st -> st.getPlayer_id() == player.getPlayerId() && statsType.getStats_id() == st.getStats_type_id()).findAny().orElse(null);
+						if(stat == null) {
+							statsData.add("InfoBarPlayerProfile: Stats not found for Player Id [" + player.getPlayerId() + "]");
+							return (List<T>) statsData;
+						}
+						
+						statsType = statsTypes.stream().filter(st -> st.getStats_short_name().equalsIgnoreCase("DT20")).findAny().orElse(null);
+						stat.setStats_type(statsType);
+						
+						stat = CricketFunctions.updateTournamentWithH2h(stat, headToHead, matchAllData, CricketUtil.TEAMNAME_3);
+						stat = CricketFunctions.updateStatisticsWithMatchData(stat, matchAllData, CricketUtil.TEAMNAME_3);
+
+						break;
+					case "APL_CAREER": case "APL_BOUNDARY_CAREER": case "APL_MILESTONE_BAT": case "APL_MILESTONE_BALL":
+						statsType = statsTypes.stream().filter(st -> st.getStats_short_name().equalsIgnoreCase("APL_CAREER")).findAny().orElse(null);
+						if(statsTypes == null) {
+							statsData.add("InfoBarPlayerProfile: Stats Type not found for profile [" + whatToProcess.split(",")[3] + "]");
+							return (List<T>) statsData;
+						}
+						
+						stat = statistics.stream().filter(st -> st.getPlayer_id() == player.getPlayerId() && statsType.getStats_id() == st.getStats_type_id()).findAny().orElse(null);
+						if(stat == null) {
+							statsData.add("InfoBarPlayerProfile: Stats not found for Player Id [" + player.getPlayerId() + "]");
+							return (List<T>) statsData;
+						}
+						
+						statsType = statsTypes.stream().filter(st -> st.getStats_short_name().equalsIgnoreCase("DT20")).findAny().orElse(null);
+						stat.setStats_type(statsType);
+						
+						stat = CricketFunctions.updateTournamentWithH2h(stat, headToHead, matchAllData, CricketUtil.TEAMNAME_3);
+						stat = CricketFunctions.updateStatisticsWithMatchData(stat, matchAllData, CricketUtil.TEAMNAME_3);
+						
+						break;
+					}
+				case Constants.NPL:
+					switch (whatToProcess.split(",")[3].toUpperCase()) {
+					case "NPL_CAREER":
+						statsType = statsTypes.stream().filter(st -> st.getStats_short_name().equalsIgnoreCase("NPL S1")).findAny().orElse(null);
+						if(statsTypes == null) {
+							statsData.add("InfoBarPlayerProfile: Stats Type not found for profile [" + whatToProcess.split(",")[3] + "]");
+							return (List<T>) statsData;
+						}
+						
+						stat = statistics.stream().filter(st -> st.getPlayer_id() == player.getPlayerId() && statsType.getStats_id() == st.getStats_type_id()).findAny().orElse(null);
+						if(stat == null) {
+							statsData.add("InfoBarPlayerProfile: Stats not found for Player Id [" + player.getPlayerId() + "]");
+							return (List<T>) statsData;
+						}
+						
+						statsType = statsTypes.stream().filter(st -> st.getStats_short_name().equalsIgnoreCase("DT20")).findAny().orElse(null);
+						stat.setStats_type(statsType);
+						
+						stat = CricketFunctions.updateTournamentWithH2h(stat, headToHead, matchAllData, CricketUtil.TEAMNAME_3);
+						stat = CricketFunctions.updateStatisticsWithMatchData(stat, matchAllData, CricketUtil.TEAMNAME_3);
+						break;
+					}
+					break;
+				case Constants.MPL:
+					switch (whatToProcess.split(",")[3].toUpperCase()) {
+					case "KCL":
+						statsType = statsTypes.stream().filter(st -> st.getStats_short_name().equalsIgnoreCase("KCL")).findAny().orElse(null);
+						if(statsTypes == null) {
+							statsData.add("InfoBarPlayerProfile: Stats Type not found for profile [" + whatToProcess.split(",")[3] + "]");
+							return (List<T>) statsData;
+						}
+						
+						stat = statistics.stream().filter(st -> st.getPlayer_id() == player.getPlayerId() && statsType.getStats_id() == st.getStats_type_id()).findAny().orElse(null);
+						if(stat == null) {
+							statsData.add("InfoBarPlayerProfile: Stats not found for Player Id [" + player.getPlayerId() + "]");
+							return (List<T>) statsData;
+						}
+						
+						statsType = statsTypes.stream().filter(st -> st.getStats_short_name().equalsIgnoreCase("DT20")).findAny().orElse(null);
+						stat.setStats_type(statsType);
+						
+						stat = CricketFunctions.updateTournamentWithH2h(stat, headToHead, matchAllData, CricketUtil.TEAMNAME_3);
+						stat = CricketFunctions.updateStatisticsWithMatchData(stat, matchAllData, CricketUtil.TEAMNAME_3);
+						break;
+					}
+					break;
 				}
-				
-				stat = statistics.stream().filter(st -> st.getPlayer_id() == player.getPlayerId() && statsType.getStats_id() == st.getStats_type_id()).findAny().orElse(null);
-				if(stat == null) {
-					statsData.add("InfoBarPlayerProfile: Stats not found for Player Id [" + FirstPlayerId + "]");
-					return (List<T>) statsData;
-				}
-				
-				statsType = statsTypes.stream().filter(st -> st.getStats_short_name().equalsIgnoreCase("DT20")).findAny().orElse(null);
-				stat.setStats_type(statsType);
-				
-				stat = CricketFunctions.updateTournamentWithH2h(stat, headToHead, matchAllData, CricketUtil.TEAMNAME_3);
-				stat = CricketFunctions.updateStatisticsWithMatchData(stat, matchAllData, CricketUtil.TEAMNAME_3);
 			}
+			
 			statsData.add(player.getFull_name());
-			statsData.add("MATCHES," + stat.getMatches());
+			
 			switch ((whatToProcess.contains(",") ? whatToProcess.split(",")[0] : whatToProcess)) {
 			case "Alt_3":
-				statsData.add("RUNS," + stat.getRuns());
-				statsData.add("STRIKE RATE," + CricketFunctions.generateStrikeRate(stat.getRuns(), stat.getBalls_faced(), 0));
+				switch (whatToProcess.split(",")[3]) {
+				case "BPL_BOUNDARY_CAREER": case "APL_BOUNDARY_CAREER":
+					statsData.add("FOURS," + stat.getFours());
+					statsData.add("SIXES," + stat.getSixes());
+					break;
+				case "BPL_BOUNDARY": case "APL_BOUNDARY":
+					statsData.add("FOUR" + CricketFunctions.Plural(tournament.getFours()).toUpperCase()+"," +tournament.getFours());
+					statsData.add((tournament.getSixes() == 1 ? "SIX" : "SIXES")+"," + tournament.getSixes());
+					break;
+				case "BPL_MILESTONE_BAT": case "APL_MILESTONE_BAT":
+					statsData.add("RUNS," + stat.getRuns());
+					statsData.add("50s/100s," + stat.getFifties() + "/" + stat.getHundreds());
+					break;
+				default:
+					statsData.add("MATCHES," + stat.getMatches());
+					statsData.add("RUNS," + stat.getRuns());
+					statsData.add("STRIKE RATE," + CricketFunctions.generateStrikeRate(stat.getRuns(), stat.getBalls_faced(), 0));
+					break;
+				}
 				break;
 			case "Alt_4":
-				statsData.add("WICKETS," + stat.getWickets());
-				statsData.add("ECONOMY," + CricketFunctions.getEconomy(stat.getRuns_conceded(), stat.getBalls_bowled(), 2, slashOrDash));
+				switch (whatToProcess.split(",")[3]) {
+				case "BPL_MILESTONE_BALL": case "APL_MILESTONE_BALL":
+					statsData.add("WICKETS," + stat.getWickets());
+					statsData.add("ECONOMY," + CricketFunctions.getEconomy(stat.getRuns_conceded(), stat.getBalls_bowled(), 2, slashOrDash));
+					break;
+				default:
+					statsData.add("MATCHES," + stat.getMatches());
+					statsData.add("WICKETS," + stat.getWickets());
+					statsData.add("ECONOMY," + CricketFunctions.getEconomy(stat.getRuns_conceded(), stat.getBalls_bowled(), 2, slashOrDash));
+					break;
+				}
 				break;
 			}
 			return (List<T>) statsData;

@@ -4712,7 +4712,7 @@ public class LowerThirdGfx
 			if(inning == null) {
 				return "populateGeneric: Inning is Not Found";
 			}
-			data = "CURRENT RUN RATE : " + CricketFunctions.generateRunRate(inning.getTotalRuns(),inning.getTotalOvers(), inning.getTotalBalls(), 2,matchAllData);
+			data = "CURRENT RUN RATE: " + CricketFunctions.generateRunRate(inning.getTotalRuns(),inning.getTotalOvers(), inning.getTotalBalls(), 2,matchAllData);
 		}else if(whatToProcess.split(",")[2].equalsIgnoreCase("RRR")){
 			inning = matchAllData.getMatch().getInning().stream().filter(inn -> 
 			inn.getInningNumber() == Integer.valueOf(whatToProcess.split(",")[1])).findAny().orElse(null);
@@ -4720,7 +4720,8 @@ public class LowerThirdGfx
 			if(inning == null) {
 				return "populateGeneric: Inning is Not Found";
 			}
-			data = "REQUIRED RUN RATE : " + CricketFunctions.generateRunRate(CricketFunctions.GetTargetData(matchAllData).getRemaningRuns(),0,CricketFunctions.GetTargetData(matchAllData).getRemaningBall(),2,matchAllData);
+			data = "REQUIRED RUN RATE: " + CricketFunctions.generateRunRate(CricketFunctions.GetTargetData(matchAllData).getRemaningRuns(),0,
+					CricketFunctions.GetTargetData(matchAllData).getRemaningBall(),2,matchAllData);
 		}else if(whatToProcess.split(",")[2].equalsIgnoreCase("LAST_WICKET")) {
 			inning = matchAllData.getMatch().getInning().stream().filter(inn -> 
 				inn.getIsCurrentInning().equalsIgnoreCase(CricketUtil.YES)).findAny().orElse(null);
@@ -4784,7 +4785,7 @@ public class LowerThirdGfx
 				}
 			}
 			
-			data = "LAST WICKET : " + how_out_txt + " " + battingCardList.get(battingCardList.size()-1).getRuns() + " (" + 
+			data = "LAST WICKET: " + how_out_txt + " " + battingCardList.get(battingCardList.size()-1).getRuns() + " (" + 
 					battingCardList.get(battingCardList.size()-1).getBalls() + ")";
 			
 		}else if(whatToProcess.split(",")[2].equalsIgnoreCase("CURR_PART")) {
@@ -4812,7 +4813,7 @@ public class LowerThirdGfx
 				return "populateGeneric: Inning return is NULL";
 			}
 			
-			data = "INNINGS BOUNDARIES : FOURS : " + inning.getTotalFours() + "  SIXES : " + inning.getTotalSixes();
+			data = "INNINGS BOUNDARIES | FOURS: " + inning.getTotalFours() + "  SIXES: " + inning.getTotalSixes();
 			
 		}else if(whatToProcess.split(",")[2].equalsIgnoreCase("CRR_RRR")) {
 			inning = matchAllData.getMatch().getInning().stream().filter(inn -> 
@@ -4821,7 +4822,7 @@ public class LowerThirdGfx
 			if(inning == null) {
 				return "populateGeneric: Inning is Not Found";
 			}
-			data = "CURRENT RUN RATE : " + inning.getRunRate() + "           REQUIRED RUN RATE : " + 
+			data = "CURRENT RUN RATE: " + inning.getRunRate() + "           REQUIRED RUN RATE : " + 
 					CricketFunctions.generateRunRate(CricketFunctions.GetTargetData(matchAllData).getRemaningRuns(),0,CricketFunctions.GetTargetData(matchAllData).getRemaningBall(),2,matchAllData);
 			
 		}else if(whatToProcess.split(",")[2].equalsIgnoreCase("COMPARISON")) {
@@ -4832,7 +4833,7 @@ public class LowerThirdGfx
 			if(inning == null) {
 				return "populateGeneric: Inning return is NULL";
 			}
-			data = "AT THIS STAGE : " + matchAllData.getMatch().getInning().get(0).getBatting_team().getTeamName1().toUpperCase() + 
+			data = "AT THIS STAGE: " + matchAllData.getMatch().getInning().get(0).getBatting_team().getTeamName1().toUpperCase() + 
 					 " WERE " + CricketFunctions.compareInningData(matchAllData,"-", 1 , matchAllData.getEventFile().getEvents());
 		}
 		
@@ -7667,8 +7668,7 @@ public class LowerThirdGfx
 				return "PopulateL3rdPlayerProfile: Team Id not found [" + player.getTeamId() + "]";
 			}
 			
-			if(!WhichProfile.equalsIgnoreCase("ISPL_CAREER") && !WhichProfile.equalsIgnoreCase("NPL_CAREER")
-					&& !WhichProfile.equalsIgnoreCase("APL_CAREER")) {
+			if(!WhichProfile.equalsIgnoreCase("ISPL_CAREER") && !WhichProfile.equalsIgnoreCase("NPL_CAREER") && !WhichProfile.equalsIgnoreCase("APL_CAREER")) {
 				statsType = statsTypes.stream().filter(stype -> stype.getStats_short_name().equalsIgnoreCase(WhichProfile)).findAny().orElse(null);
 				if(statsType == null) {
 					return "PopulateL3rdPlayerProfile: Stats Type not found for profile [" + WhichProfile + "]";
@@ -7683,10 +7683,10 @@ public class LowerThirdGfx
 			switch (config.getBroadcaster().toUpperCase()) {
 			case Constants.LEGENDS:
 				break;
-			case Constants.NPL: case Constants.APL:
+			case Constants.APL:
 				switch (WhichProfile.toUpperCase()) {
-				case "NPL_CAREER":
-					statsType = statsTypes.stream().filter(st -> st.getStats_short_name().equalsIgnoreCase("NPL S1")).findAny().orElse(null);
+				case "APL_CAREER":
+					statsType = statsTypes.stream().filter(st -> st.getStats_short_name().equalsIgnoreCase("APL_CAREER")).findAny().orElse(null);
 					if(statsType == null) {
 						return "InfoBarPlayerProfile: Stats Type not found for profile [" + WhichProfile + "]";
 					}
@@ -7702,8 +7702,12 @@ public class LowerThirdGfx
 					stat = CricketFunctions.updateTournamentWithH2h(stat, headToHead, matchAllData, CricketUtil.TEAMNAME_3);
 					stat = CricketFunctions.updateStatisticsWithMatchData(stat, matchAllData, CricketUtil.TEAMNAME_3);
 					break;
-				case "APL_CAREER":
-					statsType = statsTypes.stream().filter(st -> st.getStats_short_name().equalsIgnoreCase("APL_T20")).findAny().orElse(null);
+				}
+				break;
+			case Constants.NPL:
+				switch (WhichProfile.toUpperCase()) {
+				case "NPL_CAREER":
+					statsType = statsTypes.stream().filter(st -> st.getStats_short_name().equalsIgnoreCase("NPL S1")).findAny().orElse(null);
 					if(statsType == null) {
 						return "InfoBarPlayerProfile: Stats Type not found for profile [" + WhichProfile + "]";
 					}

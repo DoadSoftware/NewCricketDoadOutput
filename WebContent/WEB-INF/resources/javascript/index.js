@@ -7742,18 +7742,7 @@ function addItemsToList(whatToProcess,dataToProcess)
 						  select.appendChild(option);
 					});
 					break;
-				case 'NPL': case 'MPL': case 'APL':
-					
-					option = document.createElement('option');
-					option.value = 'DT20';
-					option.text = 'DT20';
-					select.appendChild(option);
-					
-					option = document.createElement('option');
-					option.value = 'IT20';
-					option.text = 'IT20';
-					select.appendChild(option);
-				
+				case 'NPL': case 'MPL': case 'APL':			
 					if($('#selected_broadcaster').val().toUpperCase()=='MPL'){
 						option = document.createElement('option');
 						option.value = 'MPL';
@@ -7769,32 +7758,22 @@ function addItemsToList(whatToProcess,dataToProcess)
 						option.value = 'NPL_CAREER';
 						option.text = 'NPL CAREER';
 						select.appendChild(option);
-						
-						/*option = document.createElement('option');
-						option.value = 'IPL';
-						option.text = 'IPL';
-						select.appendChild(option);
-						
-						option = document.createElement('option');
-						option.value = 'IPL 2025';
-						option.text = 'IPL 2025';
-						select.appendChild(option);*/
 					}else if($('#selected_broadcaster').val().toUpperCase()=='APL'){
 						option = document.createElement('option');
 						option.value = 'APL_CAREER';
 						option.text = 'APL CAREER';
 						select.appendChild(option);
-						
-						/*option = document.createElement('option');
-						option.value = 'IPL';
-						option.text = 'IPL';
-						select.appendChild(option);
-						
-						option = document.createElement('option');
-						option.value = 'IPL 2025';
-						option.text = 'IPL 2025';
-						select.appendChild(option);*/
 					}
+					
+					option = document.createElement('option');
+					option.value = 'DT20';
+					option.text = 'DT20';
+					select.appendChild(option);
+					
+					option = document.createElement('option');
+					option.value = 'IT20';
+					option.text = 'IT20';
+					select.appendChild(option);
 					break;
 				case 'ISPL':
 					option = document.createElement('option');
@@ -8573,16 +8552,6 @@ function addItemsToList(whatToProcess,dataToProcess)
 					});
 					break;
 				case 'NPL': case 'MPL': case 'APL':
-					option = document.createElement('option');
-					option.value = 'DT20';
-					option.text = 'DT20';
-					select.appendChild(option);
-					
-					option = document.createElement('option');
-					option.value = 'IT20';
-					option.text = 'IT20';
-					select.appendChild(option);
-				
 					if($('#selected_broadcaster').val().toUpperCase()=='MPL'){
 						option = document.createElement('option');
 						option.value = 'KCL';
@@ -8598,33 +8567,23 @@ function addItemsToList(whatToProcess,dataToProcess)
 						option.value = 'NPL_CAREER';
 						option.text = 'NPL CAREER';
 						select.appendChild(option);
-						
-						/*option = document.createElement('option');
-						option.value = 'IPL';
-						option.text = 'IPL';
-						select.appendChild(option);
-						
-						option = document.createElement('option');
-						option.value = 'IPL 2025';
-						option.text = 'IPL 2025';
-						select.appendChild(option);*/
 					}
 					else if($('#selected_broadcaster').val().toUpperCase()=='APL'){
 						option = document.createElement('option');
 						option.value = 'APL_CAREER';
 						option.text = 'APL CAREER';
 						select.appendChild(option);
-						
-						/*option = document.createElement('option');
-						option.value = 'IPL';
-						option.text = 'IPL';
-						select.appendChild(option);
-						
-						option = document.createElement('option');
-						option.value = 'IPL 2025';
-						option.text = 'IPL 2025';
-						select.appendChild(option);*/
 					}
+					
+					option = document.createElement('option');
+					option.value = 'DT20';
+					option.text = 'DT20';
+					select.appendChild(option);
+					
+					option = document.createElement('option');
+					option.value = 'IT20';
+					option.text = 'IT20';
+					select.appendChild(option);
 					break;
 				case 'ISPL':
 					option = document.createElement('option');

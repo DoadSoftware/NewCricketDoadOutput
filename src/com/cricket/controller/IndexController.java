@@ -1,20 +1,15 @@
 package com.cricket.controller;
 
-import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileFilter;
-import java.io.FileReader;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.lang.reflect.InvocationTargetException;
 import java.net.MalformedURLException;
 import java.net.URISyntaxException;
 import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -23,7 +18,9 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.concurrent.TimeUnit;
+import java.util.function.Consumer;
 import java.util.stream.Collectors;
 import jakarta.xml.bind.JAXBContext;
 import jakarta.xml.bind.JAXBException;
@@ -56,8 +53,6 @@ import com.cricket.model.FieldersData;
 import com.cricket.model.Fixture;
 import com.cricket.model.Ground;
 import com.cricket.model.HeadToHead;
-import com.cricket.model.HeadToHeadPlayer;
-import com.cricket.model.HeadToHeadTeam;
 import com.cricket.model.InfobarStats;
 import com.cricket.model.Match;
 import com.cricket.model.MatchAllData;
@@ -77,7 +72,6 @@ import com.cricket.model.VariousText;
 import com.cricket.service.CricketService;
 import com.cricket.util.CricketFunctions;
 import com.cricket.util.CricketUtil;
-import com.fasterxml.jackson.core.exc.StreamReadException;
 import com.fasterxml.jackson.core.exc.StreamWriteException;
 import com.fasterxml.jackson.databind.DatabindException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -130,14 +124,7 @@ public class IndexController
 	private final ObjectMapper objectMapper = new ObjectMapper();
 	private long last_match_time_stamp = 0;
 	private boolean show_speed = false;
-	private long plotter_match_time_stamp1 = 0;
-	private long plotter_match_time_stamp2 = 0;
-	private long plotter_match_time_stamp3 = 0;
-	private long plotter_match_time_stamp4 = 0;
-	private long plotter_match_time_stamp = 0;
 	private long speed_match_time_stamp = 0;
-	private long speedfile_match_time_stamp = 0;
-	private String plotterData, speedPath;
 	public boolean Plotter_file_change = false;
 	public String expiryDate = "";
 	
@@ -244,418 +231,182 @@ public class IndexController
 	{
 		return "Help";
 	}
-		
-	@RequestMapping(value = {"/output"}, method={RequestMethod.GET,RequestMethod.POST}) 
+	
+	@RequestMapping(value = {"/output"}, method = {RequestMethod.GET, RequestMethod.POST})
 	public String outputPage(ModelMap model,
-			@RequestParam(value = "configuration_file_name", required = false, defaultValue = "") String configuration_file_name,
-			@RequestParam(value = "select_cricket_matches", required = false, defaultValue = "") String selectedMatch,
-			@RequestParam(value = "select_type", required = false, defaultValue = "") String select_type,
-			@RequestParam(value = "select_broadcaster", required = false, defaultValue = "") String select_broadcaster,
-			@RequestParam(value = "select_second_broadcaster", required = false, defaultValue = "") String select_second_broadcaster,
-			@RequestParam(value = "qtIPAddress", required = false, defaultValue = "") String qtIPAddress,
-			@RequestParam(value = "qtPortNumber", required = false, defaultValue = "0") Integer qtPortNumber,
-			@RequestParam(value = "generateInteractiveFile", required = false, defaultValue = "") String generateInteractiveFile,
-			@RequestParam(value = "vizIPAddress", required = false, defaultValue = "") String vizIPAddress,
-			@RequestParam(value = "vizPortNumber", required = false, defaultValue = "0") Integer vizPortNumber,
-			@RequestParam(value = "vizSceneName", required = false, defaultValue = "") String vizScene,
-			@RequestParam(value = "vizLanguage", required = false, defaultValue = "") String vizLanguage,
-			@RequestParam(value = "primaryVariousOptions", required = false, defaultValue = "") String primaryVariousOptions,
-			@RequestParam(value = "vizSecondaryIPAddress", required = false, defaultValue = "") String vizSecondaryIPAddress,
-			@RequestParam(value = "vizSecondaryPortNumber", required = false, defaultValue = "0") Integer vizSecondaryPortNumber,
-			@RequestParam(value = "vizSecondaryScene", required = false, defaultValue = "") String vizSecondaryScene,
-			@RequestParam(value = "vizSecondaryLanguage", required = false, defaultValue = "") String vizSecondaryLanguage,
-			@RequestParam(value = "vizTertiaryIPAddress", required = false, defaultValue = "") String vizTertiaryIPAddress,
-			@RequestParam(value = "vizTertiaryPortNumber", required = false, defaultValue = "0") Integer vizTertiaryPortNumber,
-			@RequestParam(value = "vizTertiaryScene", required = false, defaultValue = "") String vizTertiaryScene,
-			@RequestParam(value = "vizTertiaryLanguage", required = false, defaultValue = "") String vizTertiaryLanguage,
-			@RequestParam(value = "previewOnOrOff", required = false, defaultValue = "") String previewOnOrOff,
-			@RequestParam(value = "selectInfobar", required = false, defaultValue = "") String selectInfobar,
-			@RequestParam(value = "Category", required = false, defaultValue = "") String Category)
-				throws StreamWriteException, DatabindException, IllegalAccessException, InvocationTargetException, 
-				JAXBException, IOException, URISyntaxException, ParseException, InterruptedException, CloneNotSupportedException 
-	{
-		if(current_date == null || current_date.isEmpty()) {
-			
-			model.addAttribute("error_message","You must be connected to the internet online");
-			return "error";
-		
-		} else if(new SimpleDateFormat("yyyy-MM-dd").parse(expiry_date).before(new SimpleDateFormat("yyyy-MM-dd").parse(current_date))) {
-			
-			model.addAttribute("error_message","This software has expired");
-			return "error";
-			
-		}else {
 
-			DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-			
-			LocalDate date1 = LocalDate.parse(current_date, dtf);
-			LocalDate date2 = LocalDate.parse(expiry_date, dtf);
-			
-			long daysBetween = ChronoUnit.DAYS.between(date1, date2);
-			
-			expiryDate = String.valueOf(daysBetween);
-			if (select_type == null || select_type.trim().isEmpty() || 
-					select_type.equals(",")) {
-				last_match_time_stamp = new File(CricketUtil.CRICKET_SERVER_DIRECTORY + CricketUtil.MATCHES_DIRECTORY 
-						+ selectedMatch).lastModified();
-		    } else {
-		    	last_match_time_stamp = new File(CricketUtil.CRICKET_ARCHIVE_DIRECTORY + CricketUtil.ARCHIVE_MATCHES_DIRECTORY + select_type.split(",", -1)[0] + "/" +
-		                CricketUtil.MATCHES_DIRECTORY + selectedMatch).lastModified();
-		    }
+	        @RequestParam(value = "configuration_file_name", required = false, defaultValue = "") String configuration_file_name,
+	        @RequestParam(value = "select_cricket_matches", required = false, defaultValue = "") String selectedMatch,
+	        @RequestParam(value = "select_type", required = false, defaultValue = "") String select_type,
+	        @RequestParam(value = "select_broadcaster", required = false, defaultValue = "") String select_broadcaster,
+	        @RequestParam(value = "select_second_broadcaster", required = false, defaultValue = "") String select_second_broadcaster,
 
-			session_configuration = new Configuration(selectedMatch, select_broadcaster, select_second_broadcaster,
-				vizIPAddress, vizPortNumber, vizLanguage, qtIPAddress, qtPortNumber, primaryVariousOptions, vizSecondaryIPAddress,
-				vizSecondaryPortNumber, vizSecondaryLanguage, previewOnOrOff,selectInfobar, generateInteractiveFile, Category, select_type.split(",", -1)[0]);
-			session_configuration.setCategory(Category);
-			
-			JAXBContext.newInstance(Configuration.class).createMarshaller().marshal(session_configuration, 
-					new File(CricketUtil.CRICKET_SERVER_DIRECTORY + CricketUtil.CONFIGURATIONS_DIRECTORY + configuration_file_name));
-				
-			print_writers = CricketFunctions.processPrintWriter(session_configuration);
+	        @RequestParam(value = "qtIPAddress", required = false, defaultValue = "") String qtIPAddress,
+	        @RequestParam(value = "qtPortNumber", required = false, defaultValue = "0") Integer qtPortNumber,
 
-			GetVariousDBData("", session_configuration, headToHead);
-			
-			this_scene = new Scene();
-			this_animation = new Animation(new Infobar());
-			
-			session_match = new MatchAllData();
-			
-			if (select_type == null || select_type.trim().isEmpty() || 
-					select_type.equals(",")) {
-				if(new File(CricketUtil.CRICKET_DIRECTORY + CricketUtil.SETUP_DIRECTORY + selectedMatch).exists()) {
-					session_match.setSetup(objectMapper.readValue(new File(CricketUtil.CRICKET_DIRECTORY + CricketUtil.SETUP_DIRECTORY + 
-						selectedMatch), Setup.class));
-				}
-				if(new File(CricketUtil.CRICKET_DIRECTORY + CricketUtil.MATCHES_DIRECTORY + selectedMatch).exists()) {
-					session_match.setMatch(objectMapper.readValue(new File(CricketUtil.CRICKET_DIRECTORY + CricketUtil.MATCHES_DIRECTORY + 
-						selectedMatch), Match.class));
-				}
-				
-				if(new File(CricketUtil.CRICKET_DIRECTORY + CricketUtil.EVENT_DIRECTORY + selectedMatch).exists()) {
-					session_match.setEventFile(objectMapper.readValue(new File(CricketUtil.CRICKET_DIRECTORY + CricketUtil.EVENT_DIRECTORY + 
-						selectedMatch), EventFile.class));
-				}
-		    } else {
-		    	if(new File(CricketUtil.CRICKET_ARCHIVE_DIRECTORY + CricketUtil.ARCHIVE_MATCHES_DIRECTORY + select_type.split(",", -1)[0] + "/" + CricketUtil.SETUP_DIRECTORY + selectedMatch).exists()) {
-					session_match.setSetup(objectMapper.readValue(new File(CricketUtil.CRICKET_ARCHIVE_DIRECTORY + CricketUtil.ARCHIVE_MATCHES_DIRECTORY + select_type.split(",", -1)[0] + "/" + CricketUtil.SETUP_DIRECTORY + 
-						selectedMatch), Setup.class));
-				}
-				if(new File(CricketUtil.CRICKET_ARCHIVE_DIRECTORY + CricketUtil.ARCHIVE_MATCHES_DIRECTORY + select_type.split(",", -1)[0] + "/" + CricketUtil.MATCHES_DIRECTORY + selectedMatch).exists()) {
-					session_match.setMatch(objectMapper.readValue(new File(CricketUtil.CRICKET_ARCHIVE_DIRECTORY + CricketUtil.ARCHIVE_MATCHES_DIRECTORY + select_type.split(",", -1)[0] + "/" + CricketUtil.MATCHES_DIRECTORY + 
-						selectedMatch), Match.class));
-				}
-				
-				if(new File(CricketUtil.CRICKET_ARCHIVE_DIRECTORY + CricketUtil.ARCHIVE_MATCHES_DIRECTORY + select_type.split(",", -1)[0] + "/" + CricketUtil.EVENT_DIRECTORY + selectedMatch).exists()) {
-					session_match.setEventFile(objectMapper.readValue(new File(CricketUtil.CRICKET_ARCHIVE_DIRECTORY + CricketUtil.ARCHIVE_MATCHES_DIRECTORY + select_type.split(",", -1)[0] + "/" + CricketUtil.EVENT_DIRECTORY + 
-						selectedMatch), EventFile.class));
-				}
-		    }
+	        @RequestParam(value = "generateInteractiveFile", required = false, defaultValue = "") String generateInteractiveFile,
 
-			session_match.getMatch().setMatchFileName(selectedMatch);
-			MatchStats = CricketFunctions.getAllEvents(session_match,session_configuration.getBroadcaster(), session_match.getEventFile().getEvents());
-			session_match = CricketFunctions.populateMatchVariables(CricketFunctions.readOrSaveMatchFile(CricketUtil.READ, 
-					CricketUtil.SETUP + "," + CricketUtil.MATCH + "," + CricketUtil.EVENT, session_match, session_configuration), session_players, session_team, session_ground);			
-			session_match.getSetup().setMatchFileTimeStamp(new SimpleDateFormat("dd-MM-yyyy HH:mm:ss").format(new Date()));
-			
-			session_match.getSetup().setGenerateInteractiveFile(session_configuration.getGenerateInteractiveFile());
-			CricketFunctions.getInteractive(session_match, "FULL_WRITE");
-			
-			if(headToHead.getH2hPlayer() == null) {
-				headToHead.setH2hPlayer(new ArrayList<HeadToHeadPlayer>());
-				headToHead.setH2hTeam(new ArrayList<HeadToHeadTeam>());
-			}
-			System.out.println("BEFORE headToHead.getH2hPlayer().size() = " + headToHead.getH2hPlayer().size());
-			if(headToHead.getH2hPlayer().size() <= 0) {
-				HeadToHead extractedH2H = CricketFunctions.extractHeadToHead(session_match, cricketService);
-				headToHead.setH2hPlayer(extractedH2H.getH2hPlayer());
-				headToHead.setH2hTeam(extractedH2H.getH2hTeam());
-			}
-//			this_seriesPowerplay = CricketFunctions.PowerPlayTeamThisSeries(session_match, cricket_matches);
-			session_match.getMatch().setMatchStats(MatchStats);
-			
-			GetVariousDBData("NEW", session_configuration, headToHead);
-			
-			switch (select_broadcaster) {
-			case Constants.ISPL:
-				if(session_configuration.getPrimaryVariousOptions().contains(Constants.FULL_FRAMER)) {
-					this_scene.LoadScene("FULL-FRAMERS", print_writers, session_configuration);
-				}
+	        @RequestParam(value = "vizIPAddress", required = false, defaultValue = "") String vizIPAddress,
+	        @RequestParam(value = "vizPortNumber", required = false, defaultValue = "0") Integer vizPortNumber,
+	        @RequestParam(value = "vizSceneName", required = false, defaultValue = "") String vizScene,
+	        @RequestParam(value = "vizLanguage", required = false, defaultValue = "") String vizLanguage,
+
+	        @RequestParam(value = "primaryVariousOptions", required = false, defaultValue = "") String primaryVariousOptions,
+
+	        @RequestParam(value = "vizSecondaryIPAddress", required = false, defaultValue = "") String vizSecondaryIPAddress,
+	        @RequestParam(value = "vizSecondaryPortNumber", required = false, defaultValue = "0") Integer vizSecondaryPortNumber,
+	        @RequestParam(value = "vizSecondaryScene", required = false, defaultValue = "") String vizSecondaryScene,
+	        @RequestParam(value = "vizSecondaryLanguage", required = false, defaultValue = "") String vizSecondaryLanguage,
+
+	        @RequestParam(value = "vizTertiaryIPAddress", required = false, defaultValue = "") String vizTertiaryIPAddress,
+	        @RequestParam(value = "vizTertiaryPortNumber", required = false, defaultValue = "0") Integer vizTertiaryPortNumber,
+	        @RequestParam(value = "vizTertiaryScene", required = false, defaultValue = "") String vizTertiaryScene,
+	        @RequestParam(value = "vizTertiaryLanguage", required = false, defaultValue = "") String vizTertiaryLanguage,
+
+	        @RequestParam(value = "previewOnOrOff", required = false, defaultValue = "") String previewOnOrOff,
+	        @RequestParam(value = "selectInfobar", required = false, defaultValue = "") String selectInfobar,
+	        @RequestParam(value = "Category", required = false, defaultValue = "") String Category)
+
+	        throws Exception {
+
+	    // VALIDATE LICENSE
+	    if (current_date == null || current_date.trim().isEmpty()) {
+	        model.addAttribute("error_message", "You must be connected to the internet online");
+	        return "error";
+	    }
+
+	    LocalDate currentDate = LocalDate.parse(current_date);
+	    LocalDate expiryDateLocal = LocalDate.parse(expiry_date);
+
+	    if (expiryDateLocal.isBefore(currentDate)) {
+	        model.addAttribute("error_message", "This software has expired");
+	        return "error";
+	    }
+
+	    expiryDate = String.valueOf(ChronoUnit.DAYS.between(currentDate, expiryDateLocal));
+
+	    // COMMON VARIABLES
+	    boolean isArchive = select_type != null && !select_type.trim().isEmpty() && !select_type.equals(",");
+	    String seriesType = isArchive ? select_type.split(",", -1)[0]: "";
+	    String basePath = isArchive ? CricketUtil.CRICKET_ARCHIVE_DIRECTORY + CricketUtil.ARCHIVE_MATCHES_DIRECTORY 
+							+ seriesType + "/" : CricketUtil.CRICKET_DIRECTORY;
+
+	    // LAST MODIFIED
+	    last_match_time_stamp = new File(basePath + CricketUtil.MATCHES_DIRECTORY + selectedMatch).lastModified();
+
+	    // CONFIGURATION
+	    session_configuration = new Configuration(selectedMatch,select_broadcaster,select_second_broadcaster,vizIPAddress,vizPortNumber,
+	            vizLanguage, qtIPAddress, qtPortNumber, primaryVariousOptions, vizSecondaryIPAddress,vizSecondaryPortNumber, vizSecondaryLanguage,
+	            previewOnOrOff,selectInfobar, generateInteractiveFile,Category,seriesType);
 				
-				if(session_configuration.getWhichInfobar().equalsIgnoreCase("LOF_INFOBAR")) {
-					this_scene.LoadScene("OVERLAYS", print_writers, session_configuration);
-				}else{
-					this_scene.LoadScene("TRADITIONAL_OVERLAYS", print_writers, session_configuration);
-				}
-				
-				this_animation.ResetAnimation("CLEAR-ALL", print_writers, session_configuration);
-				break;
-			case Constants.T20_MUMBAI:
-				if(session_configuration.getPrimaryVariousOptions().contains(Constants.FULL_FRAMER)) {
-					this_scene.LoadScene("FULL-FRAMERS", print_writers, session_configuration);
-				}
-				if(session_match.getSetup().getMatchType().equalsIgnoreCase(CricketUtil.SUPER_OVER)) {
-					this_scene.LoadScene("OVERLAYS_SUPER_OVER", print_writers, session_configuration);
-				}else {
-					this_scene.LoadScene("OVERLAYS", print_writers, session_configuration);
-					this_animation.ResetAnimation("CLEAR-ALL", print_writers, session_configuration);
-				}
-				break;
-			case Constants.ICC_U19_2023: case Constants.BENGAL_T20: case Constants.NPL: case Constants.LEGENDS:
-			case Constants.MPL:	case Constants.APL:
-				if(session_configuration.getPrimaryVariousOptions().contains(Constants.FULL_FRAMER)) {
-					this_scene.LoadScene("FULL-FRAMERS", print_writers, session_configuration);
-				}
-				this_scene.LoadScene("OVERLAYS", print_writers, session_configuration);
-				this_animation.ResetAnimation("CLEAR-ALL", print_writers, session_configuration);
-				break;
-			}
-			
-			if(select_broadcaster.equalsIgnoreCase(Constants.MPL)) {
-				this_caption.this_fullFramesGfx.setFullFrameBase(session_configuration);
-			}else if(select_broadcaster.equalsIgnoreCase(Constants.BENGAL_T20)){
-				this_caption.this_fullFramesGfx.PopulateFfFooter(0, "", session_match, 0);
-			}
-			
-			if(session_match.getMatch().getInning() != null) {
-				model.addAttribute("which_inning", session_match.getMatch().getInning().stream().filter(inn -> inn.getIsCurrentInning()
-						.equalsIgnoreCase(CricketUtil.YES)).findAny().orElse(null).getInningNumber());
-			} else {
-				model.addAttribute("which_inning", "1");
-			}
-			
-			model.addAttribute("session_match", session_match);
-			model.addAttribute("expiryDate", expiryDate);
-			model.addAttribute("session_configuration", session_configuration);
-			model.addAttribute("select_second_broadcaster", select_second_broadcaster);
-			model.addAttribute("select_broadcaster", select_broadcaster);
-			model.addAttribute("select_type", select_type);
-			return "output";
+	    session_configuration.setCategory(Category);
+
+	    JAXBContext.newInstance(Configuration.class).createMarshaller().marshal(session_configuration,new File(
+	                CricketUtil.CRICKET_SERVER_DIRECTORY + CricketUtil.CONFIGURATIONS_DIRECTORY+ configuration_file_name));
+
+	    // PRINT WRITERS + DB
+	    print_writers = CricketFunctions.processPrintWriter(session_configuration);
+	    GetVariousDBData("", session_configuration, headToHead);
+
+	    // INITIALIZE OBJECTS
+	    this_scene = new Scene();
+	    this_animation = new Animation(new Infobar());
+	    session_match = new MatchAllData();
+
+	    // LOAD FILES
+	    session_match.setSetup(loadFile(basePath + CricketUtil.SETUP_DIRECTORY + selectedMatch, Setup.class));
+	    session_match.setMatch(loadFile(basePath + CricketUtil.MATCHES_DIRECTORY + selectedMatch,Match.class));
+	    session_match.setEventFile(loadFile(basePath + CricketUtil.EVENT_DIRECTORY + selectedMatch,EventFile.class));
+
+	    // INITIALIZE MATCH
+	    if (session_match.getMatch() != null) {
+	        session_match.getMatch().setMatchFileName(selectedMatch);
+	        initializeMatchData(true,session_match,session_configuration,session_players,session_team,session_ground);
+	    }
+
+	    // HEAD TO HEAD
+	    if (headToHead.getH2hPlayer() == null) {
+	        headToHead.setH2hPlayer(new ArrayList<>());
+	    }
+	    if (headToHead.getH2hTeam() == null) {
+	        headToHead.setH2hTeam(new ArrayList<>());
+	    }
+
+	    if (headToHead.getH2hPlayer().isEmpty()) {
+	        HeadToHead extractedH2H = CricketFunctions.extractHeadToHead(session_match,cricketService);
+	        headToHead.setH2hPlayer(extractedH2H.getH2hPlayer());
+	        headToHead.setH2hTeam(extractedH2H.getH2hTeam());
+	    }
+
+	    if (session_match.getMatch() != null) {
+	        session_match.getMatch().setMatchStats(MatchStats);
+	    }
+
+	    GetVariousDBData("NEW", session_configuration, headToHead);
+
+	    // LOAD SCENES
+	    loadScenes(select_broadcaster);
+
+	    // SPECIAL CASES
+	    if (select_broadcaster.equalsIgnoreCase(Constants.MPL)) {
+	        this_caption.this_fullFramesGfx.setFullFrameBase(session_configuration);
+	    } else if (select_broadcaster.equalsIgnoreCase(Constants.BENGAL_T20)) {
+	        this_caption.this_fullFramesGfx.PopulateFfFooter(0, "", session_match, 0);
+	    }
+
+	    // WHICH INNING
+	    if(session_match.getMatch().getInning() != null) {
+			model.addAttribute("which_inning", session_match.getMatch().getInning().stream().filter(inn -> inn.getIsCurrentInning()
+					.equalsIgnoreCase(CricketUtil.YES)).findAny().orElse(null).getInningNumber());
+		} else {
+			model.addAttribute("which_inning", "1");
 		}
-	}
 
+	    // MODEL ATTRIBUTES
+	    model.addAttribute("session_match", session_match);
+	    model.addAttribute("expiryDate", expiryDate);
+	    model.addAttribute("session_configuration", session_configuration);
+	    model.addAttribute("select_second_broadcaster", select_second_broadcaster);
+	    model.addAttribute("select_broadcaster", select_broadcaster);
+	    model.addAttribute("select_type", select_type);
+
+	    return "output";
+	}
+	
 	@RequestMapping(value = {"/processCricketProcedures.html"}, method={RequestMethod.GET,RequestMethod.POST})    
 	public @ResponseBody String processCricketProcedures(
 		@RequestParam(value = "whatToProcess", required = false, defaultValue = "") String whatToProcess,
 		@RequestParam(value = "valueToProcess", required = false, defaultValue = "") String valueToProcess) 
 			throws Exception 
 	{
-		switch (whatToProcess.toUpperCase()) {
+
+		String process = whatToProcess.toUpperCase();
+		switch (process) {
 		case "HEAD_TO_HEAD_FILE":
-			CricketFunctions.exportMatchData(session_match);
-			
-			return objectMapper.writeValueAsString(session_match);
-		case "GET-CONFIG-DATA":
-
-			session_configuration = (Configuration)JAXBContext.newInstance(Configuration.class).createUnmarshaller().unmarshal(
-				new File(CricketUtil.CRICKET_DIRECTORY + CricketUtil.CONFIGURATIONS_DIRECTORY + valueToProcess));
-			
-			return objectMapper.writeValueAsString(session_configuration);
-			
-		case "DB_DATA_READ":
-			GetVariousDBData("ONLY_DB", session_configuration, headToHead);
-
-			return objectMapper.writeValueAsString(session_match);
-			
-		case "RE_READ_DATA":
-			
-			HeadToHead extractedH2H = CricketFunctions.extractHeadToHead(session_match, cricketService);
-			headToHead.setH2hPlayer(extractedH2H.getH2hPlayer());
-			headToHead.setH2hTeam(extractedH2H.getH2hTeam());
-			//this_seriesPowerplay = CricketFunctions.PowerPlayTeamThisSeries(session_match, cricket_matches);
-			GetVariousDBData("UPDATE", session_configuration, headToHead);
-			return objectMapper.writeValueAsString(session_match);
-		
-		case "TURN_ON_OR_OFF_SPEED":
-			System.out.println("valueToProcess - " + valueToProcess);
-			if(valueToProcess.equalsIgnoreCase("TRUE")) {
-				show_speed = true;
-			}else {
-				show_speed = false;
-			}
-			return String.valueOf(show_speed);
-			
-		case "TURN_ON_OR_OFF_AUDIO":
-			
-			if(valueToProcess.equalsIgnoreCase("TRUE")) {
-				this_animation.audioenabled = "TRUE";
-			}else {
-				this_animation.audioenabled = "FALSE";
-			}
-			return null;	
-			
-		case "READ-MATCH-AND-POPULATE":
-			
-			if(session_match == null) {
-				return objectMapper.writeValueAsString(null);
-			}
-			
-			if(last_match_time_stamp != new File(CricketUtil.CRICKET_DIRECTORY + CricketUtil.MATCHES_DIRECTORY 
-				+ session_match.getMatch().getMatchFileName()).lastModified()) {
-				session_match = CricketFunctions.populateMatchVariables(CricketFunctions.readOrSaveMatchFile(CricketUtil.READ,
-					CricketUtil.MATCH + "," + CricketUtil.EVENT, session_match, session_configuration), session_players, session_team, session_ground);
-				session_match.getSetup().setGenerateInteractiveFile(session_configuration.getGenerateInteractiveFile());
-
-				last_match_time_stamp = new File(CricketUtil.CRICKET_DIRECTORY + CricketUtil.MATCHES_DIRECTORY 
-						+ session_match.getMatch().getMatchFileName()).lastModified();
-				MatchStats = CricketFunctions.getAllEvents(session_match,session_configuration.getBroadcaster(), session_match.getEventFile().getEvents());
-				CricketFunctions.getInteractive(session_match, "FULL_WRITE");
-
-				session_match.getMatch().setMatchStats(MatchStats);
-				
-				if(session_configuration.getWhichInfobar().equalsIgnoreCase("LOF_INFOBAR")) {
-					this_caption.this_lofInfobarGfx.updateInfobar(print_writers, session_match);
-				}else {
-					this_caption.this_infobarGfx.updateInfobar(print_writers, session_match);
-				}
-			}
-			if(session_configuration.getBroadcaster() != null) {
-				switch (session_configuration.getBroadcaster()) {
-				case Constants.T20_MUMBAI: case Constants.NPL: case Constants.APL:
-					if(show_speed == true) {
-						if (speedFile.exists()) {
-							long currentTimestamp = speedFile.lastModified();
-						    // Check if speed_match_time_stamp is initialized
-						    if (speed_match_time_stamp == 0) {
-						        speed_match_time_stamp = currentTimestamp; // Set the initial value if uninitialized
-						    }
-
-						    // Use a tolerance for comparison
-						    if (Math.abs(speed_match_time_stamp - currentTimestamp) > 100) {
-						        this_caption.this_infobarGfx.speed(CricketFunctions.processPrintWriter(session_configuration).get(0), session_match, session_configuration);
-						        speed_match_time_stamp = currentTimestamp; // Update to the new timestamp
-						    }
-						} else {
-						    //System.out.println("File does not exist.");
-						}
-					}else if(show_speed == false) {
-						if (speedFile.exists()) {
-							long currentTimestamp = speedFile.lastModified();
-						    if (speed_match_time_stamp == 0) {
-						        speed_match_time_stamp = currentTimestamp; // Set the initial value if uninitialized
-						    }
-
-						    if (Math.abs(speed_match_time_stamp - currentTimestamp) > 100) {
-						        speed_match_time_stamp = currentTimestamp; // Update to the new timestamp
-						    } else {
-						        //System.out.println("No modification detected.");
-						    }
-						}
-					}
-					break;
-				case Constants.ISPL:
-					if(show_speed == true) {
-						if (speedFile.exists()) {
-							long currentTimestamp = speedFile.lastModified();
-						    // Check if speed_match_time_stamp is initialized
-						    if (speed_match_time_stamp == 0) {
-						        speed_match_time_stamp = currentTimestamp; // Set the initial value if uninitialized
-						    }
-
-						    // Use a tolerance for comparison
-						    if (Math.abs(speed_match_time_stamp - currentTimestamp) > 100) {
-						    	if(this_animation.infobar.isInfobar_on_screen()) {
-						    		switch(session_match.getEventFile().getEvents().get(session_match.getEventFile().getEvents().size() - 1).getEventType()) {
-						    		case CricketUtil.CHANGE_BOWLER: case CricketUtil.END_OVER: case CricketUtil.NEW_BATSMAN: case CricketUtil.LOG_50_50:
-						    		case CricketUtil.LOG_OVERWRITE_BATSMAN_HOWOUT: case "LOG_PP_DATA":
-						    			break;
-						    		default:
-						    			this_caption.this_lofInfobarGfx.speed(CricketFunctions.processPrintWriter(session_configuration).get(0),session_match);
-						    			break;
-						    		}
-						    	}
-						    	this_caption.this_lofInfobarGfx.speed(CricketFunctions.processPrintWriter(session_configuration).get(0),session_match);
-						        speed_match_time_stamp = currentTimestamp; // Update to the new timestamp
-						    }
-						} else {
-						    //System.out.println("File does not exist.");
-						}
-					}else if(show_speed == false) {
-						if (speedFile.exists()) {
-							long currentTimestamp = speedFile.lastModified();
-						    if (speed_match_time_stamp == 0) {
-						        speed_match_time_stamp = currentTimestamp; // Set the initial value if uninitialized
-						    }
-
-						    if (Math.abs(speed_match_time_stamp - currentTimestamp) > 100) {
-						        speed_match_time_stamp = currentTimestamp; // Update to the new timestamp
-						    } else {
-						        //System.out.println("No modification detected.");
-						    }
-						}
-					}
-					break;
-				}
-			}			
-
-			if(new File("C:\\Sports\\Cricket\\Fielder\\Fielder_Text\\FieldPlotter.txt").exists()) {
-				
-				String data = new String(Files.readAllBytes(Paths.get("C:\\Sports\\Cricket\\Fielder\\Fielder_Text\\" + 
-			            "FieldPlotter.txt")));
-		        // Split the content by lines and print each line separately
-		        String[] lines = data.split("\n");
-		        
-		        plotterData = lines[0].trim();
-		        
-		        if(lines.length > 0) {
-					if(lines[1].trim().equalsIgnoreCase("true")) {
-						fielderFormation = CricketFunctions.getFielderFormation(CricketUtil.CRICKET_DIRECTORY + "Fielder/" + lines[0].trim());
-						if(fielderFormation.isCheckbox() == true) {
-							if(lines[0].trim().equalsIgnoreCase("FielderFormation.JSON")) {
-								if(plotter_match_time_stamp != new File(CricketUtil.CRICKET_DIRECTORY + "Fielder/" + lines[0].trim()).lastModified()) {
-									plotter_match_time_stamp = new File(CricketUtil.CRICKET_DIRECTORY + "Fielder/" + lines[0].trim()).lastModified();
-									//System.out.println("AfterCheckBox = " + fielderFormation.isCheckbox());
-									Plotter_file_change = true;
-								}
-							}else if(lines[0].trim().equalsIgnoreCase("FielderFormation_1.JSON")) {
-								if(plotter_match_time_stamp1 != new File(CricketUtil.CRICKET_DIRECTORY + "Fielder/" + lines[0].trim()).lastModified()) {
-									plotter_match_time_stamp1 = new File(CricketUtil.CRICKET_DIRECTORY + "Fielder/" + lines[0].trim()).lastModified();
-									//System.out.println("AfterCheckBox = " + fielderFormation.isCheckbox());
-									Plotter_file_change = true;
-								}
-							}else if(lines[0].trim().equalsIgnoreCase("FielderFormation_2.JSON")) {
-								if(plotter_match_time_stamp2 != new File(CricketUtil.CRICKET_DIRECTORY + "Fielder/" + lines[0].trim()).lastModified()) {
-									plotter_match_time_stamp2 = new File(CricketUtil.CRICKET_DIRECTORY + "Fielder/" + lines[0].trim()).lastModified();
-									//System.out.println("AfterCheckBox = " + fielderFormation.isCheckbox());
-									Plotter_file_change = true;
-								}
-							}else if(lines[0].trim().equalsIgnoreCase("FielderFormation_3.JSON")) {
-								if(plotter_match_time_stamp3 != new File(CricketUtil.CRICKET_DIRECTORY + "Fielder/" + lines[0].trim()).lastModified()) {
-									plotter_match_time_stamp3 = new File(CricketUtil.CRICKET_DIRECTORY + "Fielder/" + lines[0].trim()).lastModified();
-									//System.out.println("AfterCheckBox = " + fielderFormation.isCheckbox());
-									Plotter_file_change = true;
-								}
-							}else if(lines[0].trim().equalsIgnoreCase("FielderFormation_4.JSON")) {
-								if(plotter_match_time_stamp4 != new File(CricketUtil.CRICKET_DIRECTORY + "Fielder/" + lines[0].trim()).lastModified()) {
-									plotter_match_time_stamp4 = new File(CricketUtil.CRICKET_DIRECTORY + "Fielder/" + lines[0].trim()).lastModified();
-									//System.out.println("AfterCheckBox = " + fielderFormation.isCheckbox());
-									Plotter_file_change = true;
-								}
-							}
-						}
-					}else if(lines[1].trim().equalsIgnoreCase("false")) {
-						
-					}
-				}
-			}
-			
-			if(Plotter_file_change == true) {
-				if(this_caption.this_infobarGfx!=null) {
-					this_caption.this_infobarGfx.updateFieldPlotter(print_writers, session_match);
-				}
-				Plotter_file_change = false;
-			}
-			return objectMapper.writeValueAsString(session_match);
+            return handleHeadToHead();
+        case "GET-CONFIG-DATA":
+            return handleConfigData(valueToProcess);
+        case "DB_DATA_READ":
+            return handleDbRead();
+        case "RE_READ_DATA":
+            return handleReReadData();
+        case "TURN_ON_OR_OFF_SPEED":
+            return handleSpeedToggle(valueToProcess);
+        case "TURN_ON_OR_OFF_AUDIO":
+            return handleAudioToggle(valueToProcess);
+        case "READ-MATCH-AND-POPULATE":
+            return handleReadMatchAndPopulate();
+            
 		default:
-			if(session_configuration.getBroadcaster().equalsIgnoreCase(Constants.NPL) || 
-					session_configuration.getBroadcaster().equalsIgnoreCase(Constants.MPL) ||
-					session_configuration.getBroadcaster().equalsIgnoreCase(Constants.APL)) {
-				if(whatToProcess.split(",")[0].toUpperCase().equalsIgnoreCase("highlightProfile") || 
-						whatToProcess.split(",")[0].toUpperCase().equalsIgnoreCase("highlightLeader")) {
-					
-					this_animation.ChangeOn(whatToProcess, print_writers, session_configuration);
+			switch(session_configuration.getBroadcaster()) {
+			case Constants.NPL: case Constants.MPL: case Constants.APL:
+				if(process.split(",")[0].toUpperCase().equalsIgnoreCase("highlightProfile") || 
+						process.split(",")[0].toUpperCase().equalsIgnoreCase("highlightLeader")) {
+					this_animation.ChangeOn(process, print_writers, session_configuration);
 				}
+				break;
 			}
-			if(whatToProcess.toUpperCase().equalsIgnoreCase("IMPACT-CHANGE-ON")) {
+			if(process.toUpperCase().equalsIgnoreCase("IMPACT-CHANGE-ON")) {
 				switch (session_configuration.getBroadcaster()) {
 				case Constants.ISPL:
 					this_animation.Lof_ISPL_ChangeOn(this_caption.this_lowerThirdGfx.impactPlayerData, print_writers, session_configuration);
@@ -680,242 +431,39 @@ public class IndexController
 					break;
 				}
 			}
-			if(whatToProcess.toUpperCase().equalsIgnoreCase("PLAYING-XI-CHANGE-ON")) {
+			if(process.toUpperCase().equalsIgnoreCase("PLAYING-XI-CHANGE-ON")) {
 				this_animation.AnimateIn("Shift_T", print_writers, session_configuration);
 			}
-			if(whatToProcess.contains("GRAPHICS-OPTIONS") || whatToProcess.contains("GRAPHICS-OPTIONS_DATA")) {
+			if(process.contains("GRAPHICS-OPTIONS") || process.contains("GRAPHICS-OPTIONS_DATA")) {
 				return objectMapper.writeValueAsString(GetGraphicOption(valueToProcess,session_configuration, headToHead));
-			}else if(whatToProcess.contains("POPULATE-GRAPHICS")) {
-				switch(this_animation.getTypeOfGraphicsOnScreen(session_configuration,valueToProcess)){
-				case Constants.INFO_BAR:
-					if(valueToProcess.split(",")[0].equalsIgnoreCase("Control_F12") || valueToProcess.split(",")[0].equalsIgnoreCase("Shift_F12")) {
-						if(this_animation.infobar.isInfobar_on_screen()) {
-							this_caption.whichSide = 2;
-						} else {
-							this_caption.whichSide = 1;
-						}
-						
-						this_caption.PopulateGraphics(valueToProcess, session_match);
-						this_animation.caption = this_caption;
-						this_animation.processInfoBarPreview(valueToProcess, print_writers, this_caption.whichSide, session_configuration, 
-								this_animation.whichGraphicOnScreen);
-//						if(this_caption.status.equalsIgnoreCase(Constants.OK)) {
-//							processAnimations("ANIMATE-IN-GRAPHICS", session_configuration, valueToProcess, print_writers);
-//							return JSONObject.fromObject(this_caption).toString();
-//						} else {
-//							return JSONObject.fromObject(this_caption).toString();
-//						}
-					}else {
-						if(this_animation.infobar.isInfobar_on_screen()) {
-							if(session_configuration.getWhichInfobar().equalsIgnoreCase("LOF_INFOBAR")) {
-								if(this_caption.this_lofInfobarGfx.infobar.getLast_middle_section() != null && 
-										!this_caption.this_lofInfobarGfx.infobar.getLast_middle_section().isEmpty()) {
-									if(this_caption.this_lofInfobarGfx.infobar.getLast_middle_section().equalsIgnoreCase(CricketUtil.BATSMAN) ||
-											this_caption.this_lofInfobarGfx.infobar.getLast_middle_section().equalsIgnoreCase("IDENT")) {
-										this_caption.whichSide = 1;
-									}else {
-										this_caption.whichSide = 2;
-									}
-								}else {
-									this_caption.whichSide = 1;
-								}
-							}else {
-								this_caption.whichSide = 2;
-							}
-						} else {
-							this_caption.whichSide = 1;
-						}
-						
-						this_caption.PopulateGraphics(valueToProcess, session_match);
-						this_animation.caption = this_caption;
-						
-						switch (session_configuration.getBroadcaster()) {
-						case Constants.ISPL:
-							if(!valueToProcess.split(",")[0].equalsIgnoreCase("F12")) {
-								this_caption.this_lofInfobarGfx.setPositionOfScoreBug(this_caption.this_lofInfobarGfx.infobar.getMiddle_section(), 
-										2, session_configuration, 0);
-								this_animation.processInfoBarPreview(valueToProcess, print_writers, this_caption.whichSide, 
-										session_configuration, this_animation.whichGraphicOnScreen);
-							}
-							break;
-						case Constants.T20_MUMBAI:
-							this_animation.processInfoBarPreview(valueToProcess, print_writers, this_caption.whichSide, 
-									session_configuration, this_animation.whichGraphicOnScreen);
-							break;
-						default:
-							if(this_caption.status.equalsIgnoreCase(Constants.OK)) {
-								processAnimations("ANIMATE-IN-GRAPHICS", session_configuration, valueToProcess, print_writers, headToHead);
-								this_caption.status = CricketUtil.YES;
-								return objectMapper.writeValueAsString(this_caption);
-							} else {
-								return objectMapper.writeValueAsString(this_caption);
-							}
-						}
-					}
-					break;
-				default:
-					switch (session_configuration.getBroadcaster()) {
-					case Constants.ICC_U19_2023: case Constants.ISPL: case Constants.BENGAL_T20: case Constants.NPL: case Constants.LEGENDS:
-					case Constants.MPL:	case Constants.APL:
-						if(!session_configuration.getPrimaryVariousOptions().contains(Constants.FULL_FRAMER)
-							&& this_animation.getTypeOfGraphicsOnScreen(session_configuration, valueToProcess).contains(Constants.FULL_FRAMER)) {
-							this_caption.setStatus("Error: Full framers captions NOT selected on start-up");
-							return objectMapper.writeValueAsString(this_caption);
-						}
-						break;
-					}
-					if(this_animation.whichGraphicOnScreen.isEmpty()) {
-						if(!this_animation.specialBugOnScreen.equalsIgnoreCase(CricketUtil.TOSS)) {
-							if(this_animation.infobar.isInfobar_on_screen() == false) {
-								this_animation.ResetAnimation("CLEAR-ALL", print_writers, session_configuration);
-							}else {
-								this_animation.ResetAnimation("", print_writers, session_configuration);
-							}
-						}
-						this_caption.whichSide = 1;
-					} else {
-						//Don't allow L3rds change-on while FFs are on screen
-						switch (this_animation.getTypeOfGraphicsOnScreen(session_configuration, this_animation.whichGraphicOnScreen)) {
-						case Constants.FULL_FRAMER: case Constants.LOWER_THIRD: 
-						case Constants.NAME_SUPERS + Constants.LOWER_THIRD:
-						case Constants.BOUNDARIES + Constants.LOWER_THIRD:
-						case Constants.BUGS:	
-							
-							if(this_animation.getTypeOfGraphicsOnScreen(session_configuration,valueToProcess) 
-								!= this_animation.getTypeOfGraphicsOnScreen(session_configuration,this_animation.whichGraphicOnScreen)) {
-
-								//Make a preview of lowerThird when FullFrames is on Screen and vice-verca
-								switch (this_animation.getTypeOfGraphicsOnScreen(session_configuration, this_animation.whichGraphicOnScreen)) {
-								case Constants.FULL_FRAMER: 
-									switch (this_animation.getTypeOfGraphicsOnScreen(session_configuration, valueToProcess)) {
-									case Constants.LOWER_THIRD: case Constants.NAME_SUPERS + Constants.LOWER_THIRD: 
-									case Constants.BOUNDARIES + Constants.LOWER_THIRD:
-										this_caption.whichSide = 1;
-										this_caption.PopulateGraphics(valueToProcess, session_match);
-										this_animation.processL3Preview(valueToProcess, print_writers, this_caption.whichSide, session_configuration,session_match);
-										break;
-									case Constants.BUGS: 
-										this_caption.whichSide = 1;
-										this_caption.PopulateGraphics(valueToProcess, session_match);
-										this_animation.processBugsPreview(valueToProcess, print_writers, this_caption.whichSide, session_configuration,this_animation.whichGraphicOnScreen);
-										break;	
-									}
-									break;
-								case Constants.BUGS: 
-									switch (this_animation.getTypeOfGraphicsOnScreen(session_configuration, valueToProcess)) {
-									case Constants.FULL_FRAMER:
-										this_caption.whichSide = 1;
-										this_caption.PopulateGraphics(valueToProcess, session_match);
-										if(session_configuration.getBroadcaster().equalsIgnoreCase(Constants.ISPL)) {
-											this_animation.Lof_ISPL_FullFramesPreview(valueToProcess, print_writers, this_caption.whichSide, 
-													session_configuration, this_animation.whichGraphicOnScreen);
-										}else {
-											this_animation.processFullFramesPreview(valueToProcess, print_writers, this_caption.whichSide, 
-													session_configuration, this_animation.whichGraphicOnScreen);	
-										}
-										break;
-									case Constants.LOWER_THIRD: case Constants.NAME_SUPERS + Constants.LOWER_THIRD: 
-									case Constants.BOUNDARIES + Constants.LOWER_THIRD:
-										this_caption.whichSide = 1;
-										this_caption.PopulateGraphics(valueToProcess, session_match);
-										this_animation.processL3Preview(valueToProcess, print_writers, this_caption.whichSide, session_configuration,session_match);
-										break;
-									}
-									break;	
-								case Constants.LOWER_THIRD: case Constants.NAME_SUPERS + Constants.LOWER_THIRD: 
-								case Constants.BOUNDARIES + Constants.LOWER_THIRD:
-									switch (this_animation.getTypeOfGraphicsOnScreen(session_configuration, valueToProcess)) {
-									case Constants.FULL_FRAMER:
-										this_caption.whichSide = 1;
-										this_caption.PopulateGraphics(valueToProcess, session_match);
-										if(session_configuration.getBroadcaster().equalsIgnoreCase(Constants.ISPL)) {
-											this_animation.Lof_ISPL_FullFramesPreview(valueToProcess, print_writers, this_caption.whichSide, 
-													session_configuration, this_animation.whichGraphicOnScreen);
-										}else {
-											this_animation.processFullFramesPreview(valueToProcess, print_writers, this_caption.whichSide, 
-													session_configuration, this_animation.whichGraphicOnScreen);	
-										}
-										break;
-									case Constants.BUGS: 
-										this_caption.whichSide = 1;
-										this_caption.PopulateGraphics(valueToProcess, session_match);
-										this_animation.processBugsPreview(valueToProcess, print_writers, this_caption.whichSide, session_configuration,this_animation.whichGraphicOnScreen);
-										break;	
-									}
-									break;
-								}
-								
-								this_caption.setStatus(this_animation.getTypeOfGraphicsOnScreen(session_configuration,
-									this_animation.whichGraphicOnScreen).replace("_", " ") + " is on screen. "
-									+ this_animation.getTypeOfGraphicsOnScreen(session_configuration,valueToProcess).replace(
-									"_", " ") + " not allowed" );
-								
-								return objectMapper.writeValueAsString(this_caption);
-
-							}
-							break;
-						}
-						this_caption.whichSide = 2;
-					}
-					
-					this_caption.PopulateGraphics(valueToProcess, session_match);
-					this_animation.caption = this_caption;
-					//Previews
-					switch (this_animation.getTypeOfGraphicsOnScreen(session_configuration, valueToProcess)) {
-					case Constants.FULL_FRAMER:
-						if(session_configuration.getBroadcaster().equalsIgnoreCase(Constants.ISPL)) {
-							this_animation.Lof_ISPL_FullFramesPreview(valueToProcess, print_writers, this_caption.whichSide, 
-									session_configuration, this_animation.whichGraphicOnScreen);
-						}else {
-							this_animation.processFullFramesPreview(valueToProcess, print_writers, this_caption.whichSide, 
-									session_configuration, this_animation.whichGraphicOnScreen);	
-						}
-						break;
-					case Constants.LOWER_THIRD: 
-					case Constants.NAME_SUPERS + Constants.LOWER_THIRD:
-					case Constants.BOUNDARIES + Constants.LOWER_THIRD:
-						this_animation.processL3Preview(valueToProcess, print_writers, this_caption.whichSide, session_configuration,session_match);
-						break;
-					case Constants.BUGS:
-						this_animation.processBugsPreview(valueToProcess, print_writers, this_caption.whichSide, 
-							session_configuration, this_animation.whichGraphicOnScreen);
-						break;
-					case Constants.MINIS:
-						this_animation.processMiniPreview(valueToProcess, print_writers, this_caption.whichSide, 
-							session_configuration, this_animation.whichGraphicOnScreen);
-						break;
-					}
-					break;
-				}
-				System.out.println(this_caption.getStatus());
-				return objectMapper.writeValueAsString(this_caption.status);
+			}else if(process.contains("POPULATE-GRAPHICS")) {
+				return handlePopulateGraphics(valueToProcess);
 			}
-			else if(whatToProcess.contains("ANIMATE-IN-GRAPHICS") || whatToProcess.contains("ANIMATE-OUT-GRAPHICS")
-				|| whatToProcess.contains("ANIMATE-OUT-INFOBAR") || whatToProcess.contains("QUIDICH-COMMANDS") || 
-				whatToProcess.contains("ANIMATE-OUT-TAPE") || whatToProcess.contains("ANIMATE-OUT-IDENT") || 
-				whatToProcess.contains("ANIMATE-OUT-TARGET") || whatToProcess.contains("ANIMATE-OUT-BOTTOM")) {
+			else if(process.contains("ANIMATE-IN-GRAPHICS") || process.contains("ANIMATE-OUT-GRAPHICS") || 
+					process.contains("ANIMATE-OUT-INFOBAR") || process.contains("QUIDICH-COMMANDS") || 
+					process.contains("ANIMATE-OUT-TAPE") || process.contains("ANIMATE-OUT-IDENT") || 
+					process.contains("ANIMATE-OUT-TARGET") || process.contains("ANIMATE-OUT-BOTTOM")) {
 
-				if(whatToProcess.contains("ANIMATE-OUT-GRAPHICS")) {
+				if(process.contains("ANIMATE-OUT-GRAPHICS")) {
 					switch (valueToProcess.split(",")[0]) {
 					case "Alt_p":
 						if(!this_animation.whichGraphicOnScreen.isEmpty()) {
 							this_animation.status = "Cannot animate out bugs while " + 
-								this_animation.whichGraphicOnScreen + " is on screen";
+							this_animation.whichGraphicOnScreen + " is on screen";
 							return objectMapper.writeValueAsString(this_animation);
 						}
 						break;
 					}
 				}
 				
-				processAnimations(whatToProcess, session_configuration, valueToProcess, print_writers, headToHead);
-			}else if(whatToProcess.contains("ANIMATE-OUT-SECOND_PLAYING")) {
+				processAnimations(process, session_configuration, valueToProcess, print_writers, headToHead);
+			}else if(process.contains("ANIMATE-OUT-SECOND_PLAYING")) {
 				switch (session_configuration.getBroadcaster()) {
 				case Constants.BENGAL_T20:
 					if(this_animation.whichGraphicOnScreen.contains("Control_Shift_F7")) {
 						this_animation.lineUpCount++;
 						if(this_animation.lineUpCount == 3) {
 							this_animation.lineUpCount = 0;
-							
 							this_animation.whichGraphicOnScreen = "";
 						}
 						this_animation.processAnimation(Constants.BACK, print_writers, "Anim_Lineup_Image_Big", "CONTINUE");
@@ -927,16 +475,16 @@ public class IndexController
 						
 						this_animation.processAnimation(Constants.BACK, print_writers, "anim_BigImageLineUp", "CONTINUE");
 						
-						if(this_animation.lineUpCount == 2) {
+						if (this_animation.lineUpCount == 2 && !this_caption.this_fullFramesGfx.PlayerId.isEmpty()) {
 							TimeUnit.MILLISECONDS.sleep(500);
-							if(!this_caption.this_fullFramesGfx.PlayerId.isEmpty()) {
-								this_caption.this_fullFramesGfx.populateTeamLineUpFooter(print_writers, 2, whatToProcess.split(",")[0], 
-										session_configuration, "SHOW-TOSS", session_match);
-									this_animation.processAnimation(Constants.BACK, print_writers, "Change_BigImageLineUp$Footer", "START");
+							for (int i = 2; i >= 1; i--) {
+								this_caption.this_fullFramesGfx.populateTeamLineUpFooter(print_writers, i, process.split(",")[0], 
+										session_configuration,"SHOW-TOSS",session_match);
+								this_animation.processAnimation(Constants.BACK,print_writers,"Change_BigImageLineUp$Footer",(i == 2 ? "START" : "SHOW 0.0"));
+
+								if (i == 2) {
 									TimeUnit.MILLISECONDS.sleep(1000);
-									this_caption.this_fullFramesGfx.populateTeamLineUpFooter(print_writers, 1, whatToProcess.split(",")[0], 
-											session_configuration, "SHOW-TOSS", session_match);
-									this_animation.processAnimation(Constants.BACK, print_writers, "Change_BigImageLineUp$Footer", "SHOW 0.0");
+								}
 							}
 						}
 						if(this_animation.lineUpCount == 3) {
@@ -974,39 +522,274 @@ public class IndexController
 			else if(whatToProcess.contains("CLEAR-ALL") || whatToProcess.contains("CLEAR-ALL-WITH-INFOBAR")) {
 				this_animation.ResetAnimation(whatToProcess, print_writers, session_configuration);
 			}else if(whatToProcess.contains("CANCLE-GRAPHICS")) {
-				this_caption.whichSide = 1;
-				switch(session_configuration.getWhichInfobar()) {
-				case "LOF_INFOBAR":
-					if(this_caption.this_lofInfobarGfx.infobar.getLast_middle_section() != null && !this_caption.this_lofInfobarGfx.infobar.getLast_middle_section().isEmpty()) {
-						this_caption.this_lofInfobarGfx.infobar.setMiddle_section(this_caption.this_lofInfobarGfx.infobar.getLast_middle_section());
-					}
-					break;
-				default:
-					switch (session_configuration.getBroadcaster()) {
-					case Constants.T20_MUMBAI:
-						if(this_caption.this_infobarGfx.infobar.getLast_middle_section() != null && !this_caption.this_infobarGfx.infobar.getLast_middle_section().isEmpty()) {
-							this_caption.this_infobarGfx.infobar.setMiddle_section(this_caption.this_infobarGfx.infobar.getLast_middle_section());
-						}
-						if(this_caption.this_infobarGfx.infobar.getLast_right_bottom() != null && !this_caption.this_infobarGfx.infobar.getLast_right_bottom().isEmpty()) {
-							this_caption.this_infobarGfx.infobar.setRight_bottom(this_caption.this_infobarGfx.infobar.getLast_right_bottom());
-						}
-						if(this_caption.this_infobarGfx.infobar.getLast_right_section() != null && !this_caption.this_infobarGfx.infobar.getLast_right_section().isEmpty()) {
-							this_caption.this_infobarGfx.infobar.setRight_section(this_caption.this_infobarGfx.infobar.getLast_right_section());
-						}
-						if(this_caption.this_infobarGfx.infobar.getLast_full_section() != null && !this_caption.this_infobarGfx.infobar.getLast_full_section().isEmpty()) {
-							this_caption.this_infobarGfx.infobar.setFull_section(this_caption.this_infobarGfx.infobar.getLast_full_section());
-						}
-						if(this_caption.this_infobarGfx.infobar.getLast_left_bottom() != null && !this_caption.this_infobarGfx.infobar.getLast_left_bottom().isEmpty()) {
-							this_caption.this_infobarGfx.infobar.setLeft_bottom(this_caption.this_infobarGfx.infobar.getLast_left_bottom());
-						}
-						break;
-					}
-					break;
-				}
+				resetInfobarSections();
 			}
 			return objectMapper.writeValueAsString(this_animation);
 		}
 	}
+	
+	private String handleHeadToHead() throws Exception {
+	    CricketFunctions.exportMatchData(session_match);
+	    return objectMapper.writeValueAsString(session_match);
+	}
+	private String handleConfigData(String valueToProcess)throws Exception {
+
+	    session_configuration = (Configuration) JAXBContext.newInstance(Configuration.class).createUnmarshaller()
+	                    .unmarshal(new File(CricketUtil.CRICKET_DIRECTORY + CricketUtil.CONFIGURATIONS_DIRECTORY + valueToProcess));
+	    return objectMapper.writeValueAsString(session_configuration);
+	}
+	private String handleDbRead() throws Exception {
+	    GetVariousDBData("ONLY_DB",session_configuration,headToHead);
+	    return objectMapper.writeValueAsString(session_match);
+	}
+	private String handleReReadData() throws Exception {
+	    HeadToHead extractedH2H = CricketFunctions.extractHeadToHead(session_match,cricketService);
+	    headToHead.setH2hPlayer(extractedH2H.getH2hPlayer());
+	    headToHead.setH2hTeam(extractedH2H.getH2hTeam());
+
+	    GetVariousDBData("UPDATE",session_configuration,headToHead);
+	    return objectMapper.writeValueAsString(session_match);
+	}
+	private String handleSpeedToggle(String valueToProcess) {
+	    show_speed = valueToProcess.equalsIgnoreCase("TRUE");
+	    return String.valueOf(show_speed);
+	}
+	private String handleAudioToggle(String valueToProcess) {
+	    this_animation.audioenabled = valueToProcess.equalsIgnoreCase("TRUE")
+			? "TRUE" : "FALSE";
+	    return null;
+	}
+
+	private String handleReadMatchAndPopulate() throws Exception {
+	    if (session_match == null || session_match.getMatch() == null) {
+	        return objectMapper.writeValueAsString(null);
+	    }
+	    File matchFile = new File(CricketUtil.CRICKET_DIRECTORY + CricketUtil.MATCHES_DIRECTORY
+	                    + session_match.getMatch().getMatchFileName()
+	    );
+
+	    if (last_match_time_stamp != matchFile.lastModified()) {
+	        session_match = CricketFunctions.populateMatchVariables(CricketFunctions.readOrSaveMatchFile(CricketUtil.READ,
+	                                CricketUtil.MATCH + "," + CricketUtil.EVENT,session_match,session_configuration),
+	                        session_players,session_team,session_ground);
+	        session_match.getSetup().setGenerateInteractiveFile(session_configuration.getGenerateInteractiveFile());
+	        last_match_time_stamp = matchFile.lastModified();
+	        MatchStats = CricketFunctions.getAllEvents(session_match,session_configuration.getBroadcaster(),
+				session_match.getEventFile().getEvents());
+	        CricketFunctions.getInteractive(session_match,"FULL_WRITE");
+	        session_match.getMatch().setMatchStats(MatchStats);
+	        updateInfobar();
+	    }
+	    handleSpeedGraphics();
+	    handleFieldPlotter();
+	    return objectMapper.writeValueAsString(session_match);
+	}
+	private void updateInfobar() throws Exception {
+	    if (session_configuration.getWhichInfobar().equalsIgnoreCase("LOF_INFOBAR")) {
+	        this_caption.this_lofInfobarGfx.updateInfobar(print_writers, session_match);
+	    } else {
+	        this_caption.this_infobarGfx.updateInfobar(print_writers, session_match);
+	    }
+	}
+	private void handleSpeedGraphics() throws Exception {
+	    if (!show_speed || !speedFile.exists()) {
+	        return;
+	    }
+	    long currentTimestamp = speedFile.lastModified();
+
+	    boolean updated = speed_match_time_stamp == 0 || 
+		Math.abs(speed_match_time_stamp - currentTimestamp) > 100;
+
+	    if (!updated) {
+	        return;
+	    }
+
+	    speed_match_time_stamp = currentTimestamp;
+
+	    switch (session_configuration.getBroadcaster()) {
+	        case Constants.T20_MUMBAI: case Constants.NPL: case Constants.APL:
+	            this_caption.this_infobarGfx.speed(CricketFunctions.processPrintWriter(session_configuration).get(0),
+	                    session_match,session_configuration);
+	            break;
+	        case Constants.ISPL:
+	            this_caption.this_lofInfobarGfx.speed(CricketFunctions.processPrintWriter(session_configuration).get(0),
+	                    session_match);
+	            break;
+	    }
+	}
+	private void handleFieldPlotter() throws Exception {
+	    File plotterFile = new File("C:\\Sports\\Cricket\\Fielder\\Fielder_Text\\FieldPlotter.txt");
+	    if (!plotterFile.exists()) {
+	        return;
+	    }
+	    List<String> lines = Files.readAllLines(plotterFile.toPath());
+	    if (lines.size() < 2) {
+	        return;
+	    }
+	    if (!lines.get(1).trim().equalsIgnoreCase("true")) {
+	        return;
+	    }
+	    String formationFile = lines.get(0).trim();
+	    fielderFormation = CricketFunctions.getFielderFormation(CricketUtil.CRICKET_DIRECTORY 
+								+ "Fielder/" + formationFile);
+
+	    if (!fielderFormation.isCheckbox()) {
+	        return;
+	    }
+	    if (this_caption.this_infobarGfx != null) {
+	        this_caption.this_infobarGfx.updateFieldPlotter(print_writers,session_match);
+	    }
+	}
+	private String handlePopulateGraphics(String valueToProcess)throws Exception {
+		String graphicsType = this_animation.getTypeOfGraphicsOnScreen(session_configuration, valueToProcess);
+		String currentGraphicsType = this_animation.getTypeOfGraphicsOnScreen(session_configuration,
+				this_animation.whichGraphicOnScreen);
+		String command = valueToProcess.split(",")[0];
+		switch (graphicsType) {
+		case Constants.INFO_BAR:
+			this_caption.whichSide = 1;
+			if (this_animation.infobar.isInfobar_on_screen()) {
+				if (command.equalsIgnoreCase("Control_F12") || command.equalsIgnoreCase("Shift_F12")) {
+					this_caption.whichSide = 2;
+				} else if (session_configuration.getWhichInfobar().equalsIgnoreCase("LOF_INFOBAR")) {
+					String lastMiddle = this_caption.this_lofInfobarGfx.infobar.getLast_middle_section();
+					this_caption.whichSide = (lastMiddle != null && !lastMiddle.isEmpty() && !lastMiddle.equalsIgnoreCase(CricketUtil.BATSMAN)
+							&& !lastMiddle.equalsIgnoreCase("IDENT")) ? 2 : 1;
+				} else {
+					this_caption.whichSide = 2;
+				}
+			}
+			this_caption.PopulateGraphics(valueToProcess, session_match);
+			this_animation.caption = this_caption;
+			switch (session_configuration.getBroadcaster()) {
+			case Constants.ISPL:
+				if (!command.equalsIgnoreCase("F12")) {
+					this_caption.this_lofInfobarGfx.setPositionOfScoreBug(this_caption.this_lofInfobarGfx.infobar.getMiddle_section(),2,session_configuration,0);
+					this_animation.processInfoBarPreview(valueToProcess,print_writers,this_caption.whichSide,session_configuration,this_animation.whichGraphicOnScreen);
+				}
+				break;
+			case Constants.T20_MUMBAI:
+				this_animation.processInfoBarPreview(valueToProcess,print_writers,this_caption.whichSide,
+						session_configuration,this_animation.whichGraphicOnScreen);
+				break;
+			default:
+				if (this_caption.status.equalsIgnoreCase(Constants.OK)) {
+					processAnimations("ANIMATE-IN-GRAPHICS",session_configuration,valueToProcess,print_writers,headToHead);
+					this_caption.status = CricketUtil.YES;
+				}
+				return objectMapper.writeValueAsString(this_caption);
+			}
+			break;
+		default:
+			if (Set.of(Constants.ICC_U19_2023,Constants.ISPL,Constants.BENGAL_T20,Constants.NPL,Constants.LEGENDS,
+					Constants.MPL,Constants.APL).contains(session_configuration.getBroadcaster())
+					&& !session_configuration.getPrimaryVariousOptions().contains(Constants.FULL_FRAMER)
+					&& graphicsType.contains(Constants.FULL_FRAMER)) {
+
+				this_caption.setStatus("Error: Full framers captions NOT selected on start-up");
+				return objectMapper.writeValueAsString(this_caption);
+			}
+			if (this_animation.whichGraphicOnScreen.isEmpty()) {
+				if (!this_animation.specialBugOnScreen.equalsIgnoreCase(CricketUtil.TOSS)) {
+					this_animation.ResetAnimation(this_animation.infobar.isInfobar_on_screen() ? "" : "CLEAR-ALL",print_writers,session_configuration);
+				}
+				this_caption.whichSide = 1;
+			} else {
+				this_caption.whichSide = 2;
+				if (Set.of(Constants.FULL_FRAMER,Constants.LOWER_THIRD,
+						Constants.NAME_SUPERS + Constants.LOWER_THIRD,
+						Constants.BOUNDARIES + Constants.LOWER_THIRD,
+						Constants.BUGS).contains(currentGraphicsType)
+						&& !graphicsType.equals(currentGraphicsType)) {
+
+					this_caption.whichSide = 1;
+					this_caption.PopulateGraphics(valueToProcess, session_match);
+					processGraphicsPreview(graphicsType, valueToProcess);
+					this_caption.setStatus(currentGraphicsType.replace("_", " ")+ " is on screen. " 
+						+ graphicsType.replace("_", " ")+ " not allowed");
+					return objectMapper.writeValueAsString(this_caption);
+				}
+			}
+			this_caption.PopulateGraphics(valueToProcess, session_match);
+			this_animation.caption = this_caption;
+			processGraphicsPreview(graphicsType, valueToProcess);
+			break;
+		}
+
+		System.out.println(this_caption.getStatus());
+		return objectMapper.writeValueAsString(this_caption.status);
+	}
+	private void processGraphicsPreview(String graphicsType,String valueToProcess) throws Exception {
+	    switch (graphicsType) {
+	    case Constants.FULL_FRAMER:
+	        if (session_configuration.getBroadcaster().equalsIgnoreCase(Constants.ISPL)) {
+	            this_animation.Lof_ISPL_FullFramesPreview(valueToProcess,print_writers,this_caption.whichSide,
+	            		session_configuration,this_animation.whichGraphicOnScreen);
+	        } else {
+	            this_animation.processFullFramesPreview(valueToProcess,print_writers,this_caption.whichSide,
+	            		session_configuration,this_animation.whichGraphicOnScreen);
+	        }
+	        break;
+	    case Constants.LOWER_THIRD:
+	    case Constants.NAME_SUPERS + Constants.LOWER_THIRD:
+	    case Constants.BOUNDARIES + Constants.LOWER_THIRD:
+	        this_animation.processL3Preview(valueToProcess,print_writers,this_caption.whichSide,
+	        		session_configuration,session_match);
+	        break;
+	    case Constants.BUGS:
+	        this_animation.processBugsPreview(valueToProcess,print_writers,this_caption.whichSide,
+	        		session_configuration,this_animation.whichGraphicOnScreen);
+	        break;
+	    case Constants.MINIS:
+	        this_animation.processMiniPreview(valueToProcess,print_writers,this_caption.whichSide,
+	        		session_configuration,this_animation.whichGraphicOnScreen);
+	        break;
+	    }
+	}
+	private void resetInfobarSections() {
+		this_caption.whichSide = 1;
+		switch (session_configuration.getWhichInfobar()) {
+		case "LOF_INFOBAR":
+			setIfNotEmpty(
+					this_caption.this_lofInfobarGfx.infobar.getLast_middle_section(),
+					this_caption.this_lofInfobarGfx.infobar::setMiddle_section
+			);
+			break;
+		default:
+			switch (session_configuration.getBroadcaster()) {
+			case Constants.T20_MUMBAI:
+				setIfNotEmpty(
+						this_caption.this_infobarGfx.infobar.getLast_middle_section(),
+						this_caption.this_infobarGfx.infobar::setMiddle_section
+				);
+				setIfNotEmpty(
+						this_caption.this_infobarGfx.infobar.getLast_right_bottom(),
+						this_caption.this_infobarGfx.infobar::setRight_bottom
+				);
+				setIfNotEmpty(
+						this_caption.this_infobarGfx.infobar.getLast_right_section(),
+						this_caption.this_infobarGfx.infobar::setRight_section
+				);
+				setIfNotEmpty(
+						this_caption.this_infobarGfx.infobar.getLast_full_section(),
+						this_caption.this_infobarGfx.infobar::setFull_section
+				);
+				setIfNotEmpty(
+						this_caption.this_infobarGfx.infobar.getLast_left_bottom(),
+						this_caption.this_infobarGfx.infobar::setLeft_bottom
+				);
+				break;
+			}
+			break;
+		}
+	}
+
+	private void setIfNotEmpty(String value, Consumer<String> setter) {
+		if (value != null && !value.isEmpty()) {
+			setter.accept(value);
+		}
+	}
+	
 	public void infobarAnimateOutAllSection(Configuration session_configuration, MatchAllData session_match, List<PrintWriter> print_writers, HeadToHead headToHead) 
 			throws Exception {
 		switch(session_configuration.getBroadcaster()) {
@@ -1240,12 +1023,10 @@ public class IndexController
   switch ((whatToProcess.contains(",")?whatToProcess.split(",")[0]:whatToProcess)) {
   	case "Alt_3":
 	    StatsType stat = (whatToProcess.split(",").length > 2) ? 
-	            cricketService.getAllStatsType().stream()
-	                .filter(st -> st.getStats_full_name().equalsIgnoreCase(whatToProcess.split(",")[2]))
+	            cricketService.getAllStatsType().stream().filter(st -> st.getStats_full_name().equalsIgnoreCase(whatToProcess.split(",")[2]))
 	                .findAny().orElse(null) : null;
 	    if (stat != null) {
-	        return (List<T>) cricketService.getAllStats().stream()
-	            .filter(st -> st.getStats_type_id() == stat.getStats_id())
+	        return (List<T>) cricketService.getAllStats().stream().filter(st -> st.getStats_type_id() == stat.getStats_id())
 	            .collect(Collectors.toList());
 	    }
 	    break;
@@ -1301,7 +1082,6 @@ public class IndexController
 		case "Shift_!":
 			List<Stats> database_statistics = new ArrayList<Stats>();
 			database_statistics = getPlayerFromMatchData(whatToProcess ,session_match);
-			
 			for(Statistics stats : session_statistics) {
 				for(int i=0;i<=database_statistics.size()-1;i++) {
 					if(database_statistics.get(i).getPlayerId() == stats.getPlayer_id()) {
@@ -1369,11 +1149,8 @@ public class IndexController
 
 			    String category = session_configuration.getCategory();
 			    if (category != null && !category.trim().isEmpty()) {
-
-			        tournamentStats.removeIf(t ->
-					        t == null ||
-					        t.getPlayer() == null ||
-					        !genderMatches(category, t.getPlayer().getGender())
+			        tournamentStats.removeIf(t ->t == null || t.getPlayer() == null ||
+					        !CricketFunctions.genderMatches(category, t.getPlayer().getGender())
 					);
 			    }
 			}
@@ -1385,68 +1162,6 @@ public class IndexController
 			}
 
 			return (List<T>) tournamentStats;
-			
-//			List<Tournament> tournamentStats = CricketFunctions.extractTournamentData("CURRENT_MATCH_DATA", false, 
-//				headToHead.getH2hPlayer(), cricketService, session_match, past_tournament_stats);
-//
-//			if (Constants.MPL.equalsIgnoreCase(session_configuration.getBroadcaster()) 
-//				&& session_configuration.getCategory() != null && !session_configuration.getCategory().trim().isEmpty()) {
-//				String gender = session_configuration.getCategory().trim();
-//			    tournamentStats.removeIf(t -> t.getPlayer() == null || !gender.equalsIgnoreCase(t.getPlayer().getGender()));
-//			}
-//		
-//		    Comparator<Tournament> comparator = SORT_MAP.get(whatToProcess);
-//
-//		    if (comparator != null) {
-//		        tournamentStats.sort(comparator);
-//		    }
-//		    
-//			return (List<T>) tournamentStats;
-			
-//			List<Tournament> gender_Specific_tournament_stats = new ArrayList<Tournament>();
-//			List<Tournament> tournament_stats = new ArrayList<Tournament>();
-//			
-//			if(session_configuration.getBroadcaster().equalsIgnoreCase(Constants.MPL)) {
-//				if(!session_configuration.getCategory().trim().isEmpty()) {
-//					gender_Specific_tournament_stats = CricketFunctions.extractTournamentData("CURRENT_MATCH_DATA", false, headToHead.getH2hPlayer(), cricketService, 
-//							session_match, past_tournament_stats);
-//					
-//					for(int i = 0; i <= gender_Specific_tournament_stats.size()-1; i++) {
-//						if(gender_Specific_tournament_stats.get(i).getPlayer().getGender().equalsIgnoreCase(session_configuration.getCategory())) {
-//							tournament_stats.add(gender_Specific_tournament_stats.get(i));
-//						}
-//					}
-//				}else {
-//					tournament_stats = CricketFunctions.extractTournamentData("CURRENT_MATCH_DATA", false, headToHead.getH2hPlayer(), cricketService, 
-//							session_match, past_tournament_stats);
-//				}
-//				
-//			}else {
-//				tournament_stats = CricketFunctions.extractTournamentData("CURRENT_MATCH_DATA", false, headToHead.getH2hPlayer(), cricketService, 
-//						session_match, past_tournament_stats);
-//			}
-//			
-//			switch (whatToProcess) {
-//			case "z": case "Shift_@": case "Alt_Shift_K":
-//				Collections.sort(tournament_stats,new CricketFunctions.BatsmenMostRunComparator());
-//				break;
-//			case "x": case "Shift_$": case "Alt_Shift_X":
-//				Collections.sort(tournament_stats,new CricketFunctions.BowlerWicketsComparator());
-//				break;
-//			case "c": case "Control_Shift_@": case "Alt_Shift_T":
-//				Collections.sort(tournament_stats,new CricketFunctions.BatsmanFoursComparator());
-//				break;
-//			case "v": case "Control_Alt_5": case "Alt_Shift_V":
-//				Collections.sort(tournament_stats,new CricketFunctions.BatsmanSixesComparator());
-//				break;
-//			case "Control_Shift_Z": case "Control_Alt_9": 
-//				Collections.sort(tournament_stats,new CricketFunctions.BestBatsmanStrikeRateComparator());
-//				break;
-//			case "Control_Shift_Y": case "Control_Alt_0":
-//				Collections.sort(tournament_stats,new CricketFunctions.BestBowlerEconomyComparator());
-//				break;
-//			}
-//			return (List<T>) tournament_stats;
 			
 		case "Control_Alt_8":
 			mvp_leaderBoard mvp = new mvp_leaderBoard();
@@ -1476,24 +1191,9 @@ public class IndexController
 					headToHead.getH2hPlayer());
 			Collections.sort(log_fifty,new CricketFunctions.LogFiftyWicketsComparator());
 			return (List<T>) log_fifty;
-//		case "Control_z": case "Control_x":
-//			
-//	        List<Tournament> tournaments = CricketFunctions.extractTournamentData("CURRENT_MATCH_DATA", false, 
-//	        	headToHead.getH2hPlayer(), cricketService, session_match, past_tournament_stats);
-//
-//	        switch (whatToProcess) {
-//			case "Control_z":
-//		        Collections.sort(tournaments, new CricketFunctions.TopBatsmenBestStatsComparator());
-//		        return (List<T>) tournaments;
-//			case "Control_x":
-//		        Collections.sort(tournaments, new CricketFunctions.TopBowlerBestStatsComparator());
-//		        return (List<T>) tournaments;
-//			}
-//			return null;	
+	
 		case "Control_z": case "Control_x": case "Alt_Shift_@": case "Control_Alt_6":
-//			 List<Tournament> tournaments = CricketFunctions.extractTournamentData("CURRENT_MATCH_DATA", false, headToHead.getH2hPlayer(), cricketService, 
-//		                session_match, past_tournament_stats);
-			
+
 			List<Tournament> gender_Specific_tournaments_stats = new ArrayList<Tournament>();
 			List<Tournament> tournaments = new ArrayList<Tournament>();
 			
@@ -1523,11 +1223,8 @@ public class IndexController
 	        	
 				switch (whatToProcess) {
 				case "Control_z": case "Alt_Shift_@":
-					//top_ten_beststat.clear();
 		            for(BestStats bs : tourn.getBatsman_best_Stats()) {
-//		            	System.out.println("bs = " + bs.getPlayer().getFull_name() + "  runs = " + bs.getBestEquation());
 		            	top_ten_beststat.add(CricketFunctions.getProcessedBatsmanBestStats(bs));
-		            	//break;
 		            }
 					Collections.sort(top_ten_beststat,new CricketFunctions.BatsmanBestStatsComparator());
 					break;
@@ -1545,275 +1242,215 @@ public class IndexController
 		return null;
 	}
 	
-	public void GetVariousDBData(String typeOfUpdate, Configuration config, HeadToHead headToHead) throws StreamReadException, DatabindException, 
-		IllegalAccessException, InvocationTargetException, JAXBException, IOException, CloneNotSupportedException, InterruptedException, URISyntaxException
-	{
-		switch (config.getBroadcaster()) {
-		case Constants.ICC_U19_2023: case Constants.ISPL: case Constants.BENGAL_T20: case Constants.NPL: case Constants.LEGENDS: 
-		case Constants.T20_MUMBAI: case Constants.MPL: case Constants.APL:
-			
-			switch (typeOfUpdate) {
-			case "ONLY_DB":
-				session_performance_bug = cricketService.getPerformanceBugs();
-				session_name_super =  cricketService.getNameSupers();
-				session_team =  cricketService.getTeams();
-				session_ground =  cricketService.getGrounds();
-				session_bugs = cricketService.getBugs();
-				session_infoBarStats = cricketService.getInfobarStats();
-				session_variousText = cricketService.getVariousTexts();
-				session_commentator = cricketService.getCommentator();
-				session_staff = cricketService.getStaff();
-				session_fixture =  CricketFunctions.processAllFixtures(cricketService);
-				session_players = cricketService.getAllPlayer();
-				session_pott = cricketService.getPott();
-				session_playoff = cricketService.getPlayOff();
-				
-				//Bug and Mini
-				this_caption.this_bugsAndMiniGfx.bugs = session_bugs;
-				this_caption.this_bugsAndMiniGfx.Teams = session_team;
-				this_caption.this_bugsAndMiniGfx.VariousText = session_variousText;
-				this_caption.this_bugsAndMiniGfx.performanceBugs = session_performance_bug;
-				this_caption.this_bugsAndMiniGfx.statistics = session_statistics;
-				this_caption.this_bugsAndMiniGfx.statsTypes = cricketService.getAllStatsType();
-				
-				if(config.getWhichInfobar().equalsIgnoreCase("LOF_INFOBAR")) {
-					//InfoBar
-					this_caption.this_lofInfobarGfx.statistics = session_statistics;
-					this_caption.this_lofInfobarGfx.statsTypes = cricketService.getAllStatsType();
-					this_caption.this_lofInfobarGfx.infobarStats  = session_infoBarStats;
-					this_caption.this_lofInfobarGfx.Grounds = session_ground;
-					this_caption.this_lofInfobarGfx.dls  = session_dls;
-					this_caption.this_lofInfobarGfx.Commentators = session_commentator;
-					this_caption.this_lofInfobarGfx.Players = session_players;
-				}else {
-					//InfoBar
-					this_caption.this_infobarGfx.statistics = session_statistics;
-					this_caption.this_infobarGfx.statsTypes = cricketService.getAllStatsType();
-					this_caption.this_infobarGfx.infobarStats  = session_infoBarStats;
-					this_caption.this_infobarGfx.Grounds = session_ground;
-					this_caption.this_infobarGfx.dls  = session_dls;
-					this_caption.this_infobarGfx.Commentators = session_commentator;
-					this_caption.this_infobarGfx.Players = session_players;
-				}
-				
-				//LowerThird
-				this_caption.this_lowerThirdGfx.statistics = session_statistics;
-				this_caption.this_lowerThirdGfx.statsTypes = cricketService.getAllStatsType();
-				this_caption.this_lowerThirdGfx.nameSupers = session_name_super;
-				this_caption.this_lowerThirdGfx.Teams = session_team;
-				this_caption.this_lowerThirdGfx.Grounds = session_ground;
-				this_caption.this_lowerThirdGfx.tournaments = past_tournament_stats;
-				this_caption.this_lowerThirdGfx.tapeballs = past_tape;
-				this_caption.this_lowerThirdGfx.dls = session_dls;
-				this_caption.this_lowerThirdGfx.Staff = session_staff;
-				this_caption.this_lowerThirdGfx.VariousText = session_variousText;
-				this_caption.this_lowerThirdGfx.Potts = session_pott;
-				this_caption.this_lowerThirdGfx.fixTures = session_fixture;
-				
-				//FullFrames
-				this_caption.this_fullFramesGfx.statistics = session_statistics;
-				this_caption.this_fullFramesGfx.statsTypes = cricketService.getAllStatsType();
-				this_caption.this_fullFramesGfx.fixTures = session_fixture;
-				this_caption.this_fullFramesGfx.Teams = session_team;
-				this_caption.this_fullFramesGfx.Grounds = session_ground;
-				this_caption.this_fullFramesGfx.tournaments = past_tournament_stats;
-				this_caption.this_fullFramesGfx.VariousText = session_variousText;
-				this_caption.this_fullFramesGfx.Potts = session_pott;
-				this_caption.this_fullFramesGfx.Playoffs = session_playoff;
-				
-//				session_match = CricketFunctions.populateMatchVariables(CricketFunctions.readOrSaveMatchFile(CricketUtil.READ, 
-//						CricketUtil.SETUP + "," + CricketUtil.MATCH + "," + CricketUtil.EVENT, session_match, config), session_players, session_team, session_ground);
-//				session_match.getSetup().setGenerateInteractiveFile(config.getGenerateInteractiveFile());
-//
-//				MatchStats = CricketFunctions.getAllEvents(session_match, config.getBroadcaster(), session_match.getEventFile().getEvents());
-//				CricketFunctions.getInteractive(session_match, "FULL_WRITE");
-//
-//				session_match.getMatch().setMatchStats(MatchStats);
-				break;
-			default:
-				
-				session_statistics = cricketService.getAllStats();
-				session_performance_bug = cricketService.getPerformanceBugs();
-				session_name_super =  cricketService.getNameSupers();
-				session_team =  cricketService.getTeams();
-				session_ground =  cricketService.getGrounds();
-				session_bugs = cricketService.getBugs();
-				session_infoBarStats = cricketService.getInfobarStats();
-				session_variousText = cricketService.getVariousTexts();
-				session_commentator = cricketService.getCommentator();
-				session_staff = cricketService.getStaff();
-				session_fixture =  CricketFunctions.processAllFixtures(cricketService);
-				session_players = cricketService.getAllPlayer();
-				session_pott = cricketService.getPott();
-				session_playoff = cricketService.getPlayOff();
-				
-				if(new File(CricketUtil.CRICKET_DIRECTORY + "ParScores BB.html").exists() && session_match != null) {
-					session_dls = CricketFunctions.populateDuckWorthLewis(session_match);
-				}
-				
-				if(new File(CricketUtil.CRICKET_DIRECTORY + "TeamChanges.txt").exists()) {
-					String text_to_return = "";
-					try (BufferedReader br = new BufferedReader(new FileReader(CricketUtil.CRICKET_DIRECTORY + "TeamChanges.txt"))) {
-						while((text_to_return = br.readLine()) != null) {
-							if(text_to_return.contains("|")) {
-								
-							}else {
-								if(text_to_return.contains("H") || text_to_return.contains("A")) {
-									session_teamChanges.add(text_to_return);
-								}
-							}
-						}
-					}
-				}
-				
-				switch (typeOfUpdate) {
-				case "NEW":
-					if(config.getBroadcaster().equalsIgnoreCase(Constants.ISPL)) {
-						past_tape = CricketFunctions.extractTapeData("PAST_MATCHES_DATA", cricketService, session_match, null, headToHead.getH2hPlayer());
-						past_tournament_stats = CricketFunctions.extractTournamentData("PAST_MATCHES_DATA", false, headToHead.getH2hPlayer(), cricketService, session_match, null);
-					}else {
-						past_tournament_stats = CricketFunctions.extractTournamentData("PAST_MATCHES_DATA", false, headToHead.getH2hPlayer(), cricketService, session_match, null);
-					}
-					
-					past_tournament_boundaries = CricketFunctions.extracttournamentFoursAndSixesData("PAST_MATCHES_DATA", headToHead.getH2hPlayer(), session_match, null);
-					
-					
-					this_caption = new Caption(print_writers, config, session_statistics,cricketService.getAllStatsType(), session_name_super,
-						session_bugs,session_infoBarStats,session_fixture, session_team, session_ground,session_variousText, session_commentator, session_staff, 
-						session_players, session_pott,session_playoff, session_teamChanges, session_performance_bug, new FullFramesGfx(),new LowerThirdGfx(), 
-						new InfobarGfx(), new LofInfobarGfx(), new BugsAndMiniGfx(), 1, "", "-", past_tournament_stats,past_tape,session_dls, headToHead.getH2hPlayer(), 
-						past_tournament_stats, cricketService);
-					this_caption.this_infobarGfx.previous_sixes = String.valueOf(past_tournament_boundaries.getTournament_sixes());
-					this_caption.this_infobarGfx.previous_fours = String.valueOf(past_tournament_boundaries.getTournament_fours());
-					
-					this_caption.this_lofInfobarGfx.previous_sixes = String.valueOf(past_tournament_boundaries.getTournament_sixes());
-					this_caption.this_lofInfobarGfx.previous_fours = String.valueOf(past_tournament_boundaries.getTournament_fours());
-					//extracttournamentFoursAndSixesData also have nines runs data also
-					this_caption.this_lofInfobarGfx.previous_nines = String.valueOf(past_tournament_boundaries.getTournament_nines());
-							
-					this_caption.this_bugsAndMiniGfx.previous_sixes =  String.valueOf(past_tournament_boundaries.getTournament_sixes());
-					this_caption.this_bugsAndMiniGfx.previous_fours =  String.valueOf(past_tournament_boundaries.getTournament_fours());
-					break;
-					
-				case "UPDATE":
-					
-					if(config.getBroadcaster().equalsIgnoreCase(Constants.ISPL)) {
-						past_tape = CricketFunctions.extractTapeData("PAST_MATCHES_DATA", cricketService, session_match, null, headToHead.getH2hPlayer());
-						past_tournament_stats = CricketFunctions.extractTournamentData("PAST_MATCHES_DATA", false, headToHead.getH2hPlayer(), cricketService, session_match, null);
-					}else {
-						past_tournament_stats = CricketFunctions.extractTournamentData("PAST_MATCHES_DATA", false, headToHead.getH2hPlayer(), cricketService, session_match, null);
-					}
-					
-					past_tournament_boundaries = CricketFunctions.extracttournamentFoursAndSixesData("PAST_MATCHES_DATA", headToHead.getH2hPlayer(), session_match, null);
-					
-					session_match = CricketFunctions.populateMatchVariables(CricketFunctions.readOrSaveMatchFile(CricketUtil.READ, 
-							CricketUtil.SETUP + "," + CricketUtil.MATCH + "," + CricketUtil.EVENT, session_match, config), session_players, session_team, session_ground);
-					session_match.getSetup().setGenerateInteractiveFile(config.getGenerateInteractiveFile());
-					CricketFunctions.getInteractive(session_match, "FULL_WRITE");
-					
-					this_caption.this_infobarGfx.previous_sixes = String.valueOf(past_tournament_boundaries.getTournament_sixes());
-					this_caption.this_infobarGfx.previous_fours = String.valueOf(past_tournament_boundaries.getTournament_fours());
-					
-					this_caption.this_lofInfobarGfx.previous_sixes = String.valueOf(past_tournament_boundaries.getTournament_sixes());
-					this_caption.this_lofInfobarGfx.previous_fours = String.valueOf(past_tournament_boundaries.getTournament_fours());
-					//extracttournamentFoursAndSixesData also have nines runs data also
-					this_caption.this_lofInfobarGfx.previous_nines = String.valueOf(past_tournament_boundaries.getTournament_nines());
-							
-					this_caption.this_bugsAndMiniGfx.previous_sixes =  String.valueOf(past_tournament_boundaries.getTournament_sixes());
-					this_caption.this_bugsAndMiniGfx.previous_fours =  String.valueOf(past_tournament_boundaries.getTournament_fours());
+	public void GetVariousDBData(String typeOfUpdate,Configuration config,HeadToHead headToHead)throws Exception {
 
-					//Bug and Mini
-					this_caption.this_bugsAndMiniGfx.bugs = session_bugs;
-					this_caption.this_bugsAndMiniGfx.Teams = session_team;
-					this_caption.this_bugsAndMiniGfx.VariousText = session_variousText;
-					this_caption.this_bugsAndMiniGfx.performanceBugs = session_performance_bug;
-					this_caption.this_bugsAndMiniGfx.statistics = session_statistics;
-					this_caption.this_bugsAndMiniGfx.statsTypes = cricketService.getAllStatsType();
-					//InfoBar
-					if(config.getWhichInfobar().equalsIgnoreCase("LOF_INFOBAR")) {
-						this_caption.this_lofInfobarGfx.statistics = session_statistics;
-						this_caption.this_lofInfobarGfx.statsTypes = cricketService.getAllStatsType();
-						this_caption.this_lofInfobarGfx.infobarStats  = session_infoBarStats;
-						this_caption.this_lofInfobarGfx.Grounds = session_ground;
-						this_caption.this_lofInfobarGfx.dls  = session_dls;
-						this_caption.this_lofInfobarGfx.Commentators = session_commentator;
-					}else {
-						this_caption.this_infobarGfx.statistics = session_statistics;
-						this_caption.this_infobarGfx.statsTypes = cricketService.getAllStatsType();
-						this_caption.this_infobarGfx.infobarStats  = session_infoBarStats;
-						this_caption.this_infobarGfx.Grounds = session_ground;
-						this_caption.this_infobarGfx.dls  = session_dls;
-						this_caption.this_infobarGfx.Commentators = session_commentator;	
-					}
-					
-					//LowerThird
-					this_caption.this_lowerThirdGfx.statistics = session_statistics;
-					this_caption.this_lowerThirdGfx.statsTypes = cricketService.getAllStatsType();
-					this_caption.this_lowerThirdGfx.nameSupers = session_name_super;
-					this_caption.this_lowerThirdGfx.Teams = session_team;
-					this_caption.this_lowerThirdGfx.Grounds = session_ground;
-					this_caption.this_lowerThirdGfx.tournaments = past_tournament_stats;
-					this_caption.this_lowerThirdGfx.tapeballs = past_tape;
-					this_caption.this_lowerThirdGfx.dls = session_dls;
-					this_caption.this_lowerThirdGfx.Staff = session_staff;
-					this_caption.this_lowerThirdGfx.VariousText = session_variousText;
-					this_caption.this_lowerThirdGfx.Potts = session_pott;
-					this_caption.this_lowerThirdGfx.fixTures = session_fixture;
-					
-					//FullFrames
-					this_caption.this_fullFramesGfx.statistics = session_statistics;
-					this_caption.this_fullFramesGfx.statsTypes = cricketService.getAllStatsType();
-					this_caption.this_fullFramesGfx.fixTures = session_fixture;
-					this_caption.this_fullFramesGfx.Teams = session_team;
-					this_caption.this_fullFramesGfx.Grounds = session_ground;
-					this_caption.this_fullFramesGfx.tournaments = past_tournament_stats;
-					this_caption.this_fullFramesGfx.VariousText = session_variousText;
-					this_caption.this_fullFramesGfx.Potts = session_pott;
-					this_caption.this_fullFramesGfx.Playoffs = session_playoff;
-					if(new File(CricketUtil.CRICKET_DIRECTORY + "TeamChanges.txt").exists()) {
-						String text_to_return = "";
-						this_caption.this_fullFramesGfx.TeamChanges.clear();
-						try (BufferedReader br = new BufferedReader(new FileReader(CricketUtil.CRICKET_DIRECTORY + "TeamChanges.txt"))) {
-							while((text_to_return = br.readLine()) != null) {
-								if(text_to_return.contains("|")) {
-									
-								}else {
-									if(text_to_return.contains("H") || text_to_return.contains("A")) {
-										this_caption.this_fullFramesGfx.TeamChanges.add(text_to_return);
-									}
-								}
-							}
-						}
-					}
-					
-					break;
-				}
-				break;
-			}
-			break;
-		}
-	}
-	private static boolean genderMatches(
-	        String category,
-	        String playerGender) {
-
-	    if (category == null || playerGender == null) {
-	        return false;
+	    if (!Set.of(Constants.ICC_U19_2023,Constants.ISPL,Constants.BENGAL_T20,Constants.NPL,Constants.LEGENDS,Constants.T20_MUMBAI,
+	    		Constants.MPL,Constants.APL).contains(config.getBroadcaster())) {
+	        return;
 	    }
 
-	    category = category.trim().toUpperCase();
-	    playerGender = playerGender.trim().toUpperCase();
+	    loadSessionData();
+	    if (new File(CricketUtil.CRICKET_DIRECTORY + "ParScores BB.html").exists() && session_match != null) {
+	        session_dls = CricketFunctions.populateDuckWorthLewis(session_match);
+	    }
+	    switch (typeOfUpdate) {
+	    case "ONLY_DB":
+	        updateGraphicsData(config);
+	        break;
+	    case "NEW":
+	        loadTournamentData(config, headToHead);
+	        this_caption = new Caption(print_writers,config,session_statistics,cricketService.getAllStatsType(),session_name_super,  session_bugs,session_infoBarStats,session_fixture,session_team,session_ground,
+	        		session_variousText,session_commentator, session_staff,session_players,session_pott,session_playoff,session_teamChanges,session_performance_bug,new FullFramesGfx(),new LowerThirdGfx(),
+	        		new InfobarGfx(),new LofInfobarGfx(),new BugsAndMiniGfx(),1,"","-",past_tournament_stats,past_tape,session_dls,headToHead.getH2hPlayer(),past_tournament_stats,cricketService);
 
-	    switch (category) {
-
-	        case "MEN":
-	            return "MALE".equals(playerGender);
-
-	        case "WOMEN":
-	            return "FEMALE".equals(playerGender);
-
-	        default:
-	            return category.equals(playerGender);
+	        updateBoundaryData();
+	        updateGraphicsData(config);
+	        break;
+	    case "UPDATE":
+	        initializeMatchData(false,session_match,config,session_players,session_team,session_ground);
+	        loadTournamentData(config, headToHead);
+	        updateBoundaryData();
+	        updateGraphicsData(config);
+	        break;
 	    }
 	}
+
+	private void loadSessionData() throws Exception {
+
+	    session_statistics = cricketService.getAllStats();
+	    session_performance_bug = cricketService.getPerformanceBugs();
+	    session_name_super = cricketService.getNameSupers();
+	    session_team = cricketService.getTeams();
+	    session_ground = cricketService.getGrounds();
+	    session_bugs = cricketService.getBugs();
+	    session_infoBarStats = cricketService.getInfobarStats();
+	    session_variousText = cricketService.getVariousTexts();
+	    session_commentator = cricketService.getCommentator();
+	    session_staff = cricketService.getStaff();
+	    session_fixture = CricketFunctions.processAllFixtures(cricketService);
+	    session_players = cricketService.getAllPlayer();
+	    session_pott = cricketService.getPott();
+	    session_playoff = cricketService.getPlayOff();
+	}
+
+	private void loadTournamentData(Configuration config, HeadToHead headToHead) throws Exception {
+
+	    if (config.getBroadcaster().equalsIgnoreCase(Constants.ISPL)) {
+	        past_tape = CricketFunctions.extractTapeData("PAST_MATCHES_DATA",cricketService,session_match,null,headToHead.getH2hPlayer());
+	    }
+	    past_tournament_stats = CricketFunctions.extractTournamentData("PAST_MATCHES_DATA",false,headToHead.getH2hPlayer(),cricketService,session_match,null);
+	    past_tournament_boundaries = CricketFunctions.extracttournamentFoursAndSixesData("PAST_MATCHES_DATA",headToHead.getH2hPlayer(),session_match,null);
+	}
+
+	private void updateBoundaryData() {
+
+	    String sixes = String.valueOf(past_tournament_boundaries.getTournament_sixes());
+	    String fours = String.valueOf(past_tournament_boundaries.getTournament_fours());
+
+	    this_caption.this_infobarGfx.previous_sixes = sixes;
+	    this_caption.this_infobarGfx.previous_fours = fours;
+
+	    this_caption.this_lofInfobarGfx.previous_sixes = sixes;
+	    this_caption.this_lofInfobarGfx.previous_fours = fours;
+
+	    this_caption.this_lofInfobarGfx.previous_nines = String.valueOf(past_tournament_boundaries.getTournament_nines());
+
+	    this_caption.this_bugsAndMiniGfx.previous_sixes = sixes;
+	    this_caption.this_bugsAndMiniGfx.previous_fours = fours;
+	}
+
+	private void updateGraphicsData(Configuration config) {
+
+	    String whichInfobar = config.getWhichInfobar();
+
+	    // =====================================================
+	    // BUGS + MINI
+	    // =====================================================
+
+	    this_caption.this_bugsAndMiniGfx.bugs = session_bugs;
+	    this_caption.this_bugsAndMiniGfx.Teams = session_team;
+	    this_caption.this_bugsAndMiniGfx.VariousText = session_variousText;
+	    this_caption.this_bugsAndMiniGfx.performanceBugs = session_performance_bug;
+	    this_caption.this_bugsAndMiniGfx.statistics = session_statistics;
+	    this_caption.this_bugsAndMiniGfx.statsTypes = cricketService.getAllStatsType();
+
+	    // =====================================================
+	    // INFOBAR
+	    // =====================================================
+
+	    if (whichInfobar.equalsIgnoreCase("LOF_INFOBAR")) {
+
+	        this_caption.this_lofInfobarGfx.statistics = session_statistics;
+	        this_caption.this_lofInfobarGfx.statsTypes = cricketService.getAllStatsType();
+	        this_caption.this_lofInfobarGfx.infobarStats = session_infoBarStats;
+	        this_caption.this_lofInfobarGfx.Grounds = session_ground;
+	        this_caption.this_lofInfobarGfx.dls = session_dls;
+	        this_caption.this_lofInfobarGfx.Commentators = session_commentator;
+	        this_caption.this_lofInfobarGfx.Players = session_players;
+
+	    } else {
+
+	        this_caption.this_infobarGfx.statistics = session_statistics;
+	        this_caption.this_infobarGfx.statsTypes = cricketService.getAllStatsType();
+	        this_caption.this_infobarGfx.infobarStats = session_infoBarStats;
+	        this_caption.this_infobarGfx.Grounds = session_ground;
+	        this_caption.this_infobarGfx.dls = session_dls;
+	        this_caption.this_infobarGfx.Commentators = session_commentator;
+	        this_caption.this_infobarGfx.Players = session_players;
+	    }
+
+	    // =====================================================
+	    // LOWER THIRD
+	    // =====================================================
+
+	    this_caption.this_lowerThirdGfx.statistics = session_statistics;
+	    this_caption.this_lowerThirdGfx.statsTypes = cricketService.getAllStatsType();
+	    this_caption.this_lowerThirdGfx.nameSupers = session_name_super;
+	    this_caption.this_lowerThirdGfx.Teams = session_team;
+	    this_caption.this_lowerThirdGfx.Grounds = session_ground;
+	    this_caption.this_lowerThirdGfx.tournaments = past_tournament_stats;
+	    this_caption.this_lowerThirdGfx.tapeballs = past_tape;
+	    this_caption.this_lowerThirdGfx.dls = session_dls;
+	    this_caption.this_lowerThirdGfx.Staff = session_staff;
+	    this_caption.this_lowerThirdGfx.VariousText = session_variousText;
+	    this_caption.this_lowerThirdGfx.Potts = session_pott;
+	    this_caption.this_lowerThirdGfx.fixTures = session_fixture;
+
+	    // =====================================================
+	    // FULL FRAME
+	    // =====================================================
+
+	    this_caption.this_fullFramesGfx.statistics = session_statistics;
+	    this_caption.this_fullFramesGfx.statsTypes = cricketService.getAllStatsType();
+	    this_caption.this_fullFramesGfx.fixTures = session_fixture;
+	    this_caption.this_fullFramesGfx.Teams = session_team;
+	    this_caption.this_fullFramesGfx.Grounds = session_ground;
+	    this_caption.this_fullFramesGfx.tournaments = past_tournament_stats;
+	    this_caption.this_fullFramesGfx.VariousText = session_variousText;
+	    this_caption.this_fullFramesGfx.Potts = session_pott;
+	    this_caption.this_fullFramesGfx.Playoffs = session_playoff;
+	}
+	
+	public static MatchAllData initializeMatchData(boolean withMatchStats, MatchAllData session_match,Configuration session_configuration, List<Player> session_players, 
+			List<Team> session_team, List<Ground> session_ground) throws StreamWriteException, DatabindException, JAXBException, IOException, URISyntaxException {
+
+	    if(withMatchStats) {
+	    	MatchStats = CricketFunctions.getAllEvents(session_match,session_configuration.getBroadcaster(),session_match.getEventFile().getEvents());
+	    }
+	    
+	    session_match = CricketFunctions.populateMatchVariables(CricketFunctions.readOrSaveMatchFile(CricketUtil.READ,CricketUtil.SETUP + "," + CricketUtil.MATCH 
+	    			+ "," + CricketUtil.EVENT,session_match,session_configuration),session_players,session_team,session_ground);
+	    session_match.getSetup().setMatchFileTimeStamp(new SimpleDateFormat("dd-MM-yyyy HH:mm:ss").format(new Date()));
+	    session_match.getSetup().setGenerateInteractiveFile(session_configuration.getGenerateInteractiveFile());
+	    CricketFunctions.getInteractive(session_match, "FULL_WRITE");
+
+	    return session_match;
+	}
+	
+	private <T> T loadFile(String path, Class<T> clazz) throws IOException {
+	    File file = new File(path);
+	    if (!file.exists()) {
+	        return null;
+	    }
+	    return objectMapper.readValue(file, clazz);
+	}
+
+	private void loadScenes(String broadcaster)throws IOException, InterruptedException {
+	    switch (broadcaster) {
+	        case Constants.ISPL:
+	            if (session_configuration.getPrimaryVariousOptions().contains(Constants.FULL_FRAMER)) {
+	                this_scene.LoadScene("FULL-FRAMERS",print_writers,session_configuration);
+	            }
+	            if (session_configuration.getWhichInfobar().equalsIgnoreCase("LOF_INFOBAR")) {
+	                this_scene.LoadScene("OVERLAYS", print_writers, session_configuration);
+	            } else {
+	                this_scene.LoadScene("TRADITIONAL_OVERLAYS", print_writers, session_configuration);
+	            }
+	            this_animation.ResetAnimation("CLEAR-ALL", print_writers, session_configuration);
+	            break;
+	        case Constants.T20_MUMBAI:
+	            if (session_configuration.getPrimaryVariousOptions().contains(Constants.FULL_FRAMER)) {
+	                this_scene.LoadScene("FULL-FRAMERS",print_writers,session_configuration);
+	            }
+	            if (session_match.getSetup() != null && session_match.getSetup().getMatchType()
+						.equalsIgnoreCase(CricketUtil.SUPER_OVER)) {
+	                this_scene.LoadScene("OVERLAYS_SUPER_OVER", print_writers, session_configuration);
+	            } else {
+	                this_scene.LoadScene("OVERLAYS", print_writers, session_configuration);
+	                this_animation.ResetAnimation("CLEAR-ALL",print_writers,session_configuration);
+	            }
+	            break;
+
+	        case Constants.ICC_U19_2023: case Constants.BENGAL_T20: case Constants.NPL: case Constants.LEGENDS:
+	        case Constants.MPL: case Constants.APL:
+
+	            if (session_configuration.getPrimaryVariousOptions().contains(Constants.FULL_FRAMER)) {
+	                this_scene.LoadScene("FULL-FRAMERS", print_writers,session_configuration);
+	            }
+	            this_scene.LoadScene("OVERLAYS",print_writers,session_configuration);
+	            this_animation.ResetAnimation("CLEAR-ALL",print_writers,session_configuration);
+	            break;
+	    }
+	}
+	
 }
