@@ -8363,15 +8363,15 @@ function addItemsToList(whatToProcess,dataToProcess)
 							addOption('IT20');
 							break;
 						case 'APL':
-							addOption('APL CAREER');
 							addOption('DT20');
+							addOption('APL_CAREER', 'APL CAREER');
 							addOption('APL_MILESTONE_BALL', 'APL MILESTONE');
 							addOption('RECENT_FORM_BALL', 'RECENT FORM');
 							break;		
 
 						case 'LEGENDS-90':
-							addOption('BPL CAREER');
 							addOption('DT20');
+							addOption('BPL_CAREER', 'BPL CAREER');
 							addOption('BPL_MILESTONE_BALL', 'BPL MILESTONE');
 							addOption('RECENT_FORM_BALL', 'RECENT FORM');
 							break;

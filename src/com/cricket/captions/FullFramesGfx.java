@@ -393,6 +393,7 @@ public class FullFramesGfx
 		if(inning == null) {
 			return "populateMatchSummary: current inning is NULL";
 		}
+
 		if(inning.getInningNumber()==1) {
 			phaseWiseScore = IndexController.MatchStats.getHomeFirstPowerPlay().getTotalRuns()+","+IndexController.MatchStats.getHomeFirstPowerPlay().getTotalWickets()+"_"+
 					IndexController.MatchStats.getHomeSecondPowerPlay().getTotalRuns()+","+IndexController.MatchStats.getHomeSecondPowerPlay().getTotalWickets()+"_"+
@@ -677,6 +678,25 @@ public class FullFramesGfx
 			}
 			break;
 		case Constants.APL:
+			switch (WhichProfile.toUpperCase()) {
+			case "APL_CAREER":
+				statsType = statsTypes.stream().filter(st -> st.getStats_short_name().equalsIgnoreCase("APL_CAREER")).findAny().orElse(null);
+				if(statsType == null) {
+					return "InfoBarPlayerProfile: Stats Type not found for profile [" + WhichProfile + "]";
+				}
+				
+				stat = statistics.stream().filter(st -> st.getPlayer_id() == FirstPlayerId && statsType.getStats_id() == st.getStats_type_id()).findAny().orElse(null);
+				if(stat == null) {
+					return "InfoBarPlayerProfile: Stats not found for Player Id [" + FirstPlayerId + "]";
+				}
+				
+				statsType = statsTypes.stream().filter(st -> st.getStats_short_name().equalsIgnoreCase("DT20")).findAny().orElse(null);
+				stat.setStats_type(statsType);
+				
+				stat = CricketFunctions.updateTournamentWithH2h(stat, headToHead, matchAllData, CricketUtil.TEAMNAME_3);
+				stat = CricketFunctions.updateStatisticsWithMatchData(stat, matchAllData, CricketUtil.TEAMNAME_3);
+				break;
+			}
 			break;
 		case Constants.NPL: 
 			switch (WhichProfile.toUpperCase()) {
@@ -4374,6 +4394,8 @@ public class FullFramesGfx
 						short_name =  "IPL CAREER";
 					}else if(WhichProfile.equalsIgnoreCase("NPL_CAREER")) {
 						short_name =  "NPL CAREER";
+					}else if(WhichProfile.equalsIgnoreCase("APL_CAREER")) {
+						short_name =  "APL CAREER";
 					}else if(WhichProfile.equalsIgnoreCase("IPL 2025")) {
 						short_name =  "IPL 2025";
 					}else if(WhichProfile.equalsIgnoreCase("NPL S1")) {
@@ -8686,7 +8708,7 @@ public class FullFramesGfx
 				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Ident$Main$Footer$txt_Footer1"
 						+ "*GEOM*TEXT SET " + "LIVE FROM " + "\0", print_writers);
 				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Ident$Main$Footer$txt_Footer2"
-						+ "*GEOM*TEXT SET " + matchAllData.getSetup().getVenueName() + "\0", print_writers);
+						+ "*GEOM*TEXT SET " + matchAllData.getSetup().getGround().getShortname()+ "\0", print_writers);
 				System.out.println("HOME : " + matchAllData.getSetup().getHomeTeam().getTeamName1() + " - AWAY : " + matchAllData.getSetup().getAwayTeam().getTeamName1());
 				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Ident$Main$Footer$TeamName1$txt_Name"
 						+ "*GEOM*TEXT SET " + matchAllData.getSetup().getHomeTeam().getTeamName1() + "\0", print_writers);

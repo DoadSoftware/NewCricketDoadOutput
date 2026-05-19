@@ -3685,7 +3685,7 @@ public class LowerThirdGfx
 		}
 		if(whatToProcess.split(",")[2].equalsIgnoreCase("VENUE")) {
 			lowerThird = new LowerThird(matchAllData.getSetup().getHomeTeam().getTeamBadge(), matchAllData.getSetup().getAwayTeam().getTeamBadge(), 
-					"LIVE FROM " + matchAllData.getSetup().getVenueName(),matchAllData.getSetup().getHomeTeam().getTeamName2(), matchAllData.getSetup().getHomeTeam().getTeamName3(),
+					"LIVE FROM " + matchAllData.getSetup().getGround().getShortname(),matchAllData.getSetup().getHomeTeam().getTeamName2(), matchAllData.getSetup().getHomeTeam().getTeamName3(),
 					matchAllData.getSetup().getAwayTeam().getTeamName2(),1,matchAllData.getSetup().getAwayTeam().getTeamName3(),"",null,null,null,null,null);
 			
 		}else if(whatToProcess.split(",")[2].equalsIgnoreCase("TOSS")) {
