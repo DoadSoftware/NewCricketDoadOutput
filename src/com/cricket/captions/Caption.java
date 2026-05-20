@@ -545,7 +545,6 @@ public class Caption
 				if(config.getWhichInfobar().equalsIgnoreCase("LOF_INFOBAR")) {
 					status = this_lofInfobarGfx.populateInfobar(print_writers,whatToProcess,matchAllData,whichSide);
 				}else {
-					System.out.println("whatToProcess - " + whatToProcess);
 					switch(config.getBroadcaster()) {
 					case Constants.NPL: case Constants.LEGENDS: case Constants.ISPL:  case Constants.MPL: case Constants.APL:
 						this_infobarGfx.infobar.setLeft_bottom(whatToProcess.split(",")[0]);
@@ -1033,8 +1032,7 @@ public class Caption
 				switch (config.getBroadcaster().toUpperCase()) {
 				case Constants.ICC_U19_2023: case Constants.NPL: case Constants.LEGENDS: case Constants.T20_MUMBAI: case Constants.MPL:
 				case Constants.APL:
-					if(config.getBroadcaster().equalsIgnoreCase(Constants.NPL) || 
-							config.getBroadcaster().equalsIgnoreCase(Constants.MPL) ||
+					if(config.getBroadcaster().equalsIgnoreCase(Constants.NPL) || config.getBroadcaster().equalsIgnoreCase(Constants.MPL) ||
 							config.getBroadcaster().equalsIgnoreCase(Constants.APL)) {
 						this_infobarGfx.infobar.setLeft_bottom(whatToProcess.split(",")[0]);
 					}
@@ -1447,7 +1445,7 @@ public class Caption
 					break;
 				case Constants.T20_MUMBAI:
 					this_infobarGfx.infobar.setRight_bottom(whatToProcess.split(",")[2]);
-					status = this_infobarGfx.populateVizInfobarRightBottom(print_writers, matchAllData, 1, whichSide);
+					status = this_infobarGfx.populateVizInfobarRightBottom(print_writers, matchAllData, whichSide, 1);
 					break;
 				case Constants.BENGAL_T20:
 					this_infobarGfx.infobar.setRight_bottom(whatToProcess.split(",")[2]);

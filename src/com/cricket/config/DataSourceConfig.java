@@ -1,5 +1,7 @@
 package com.cricket.config;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Properties;
 import javax.sql.DataSource;
 import org.hibernate.SessionFactory;
@@ -25,6 +27,8 @@ public class DataSourceConfig {
 
     private static final String PROPERTY_NAME_DATABASE_DRIVER = "hibernate.connection.driver_class";
     private static final String PROPERTY_NAME_DATABASE_URL = "hibernate.connection.local.url";
+    private static final String PROPERTY_NAME_MEN_DATABASE_URL = "hibernate.connection.men.url";
+    private static final String PROPERTY_NAME_WOMEN_DATABASE_URL = "hibernate.connection.women.url";
 
     @Autowired
     private Environment env;
@@ -34,7 +38,25 @@ public class DataSourceConfig {
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
         dataSource.setDriverClassName(env.getRequiredProperty(PROPERTY_NAME_DATABASE_DRIVER));
         dataSource.setUrl(env.getRequiredProperty(PROPERTY_NAME_DATABASE_URL));
-        return dataSource;
+        
+        DriverManagerDataSource men = new DriverManagerDataSource();
+        men.setDriverClassName(env.getRequiredProperty(PROPERTY_NAME_DATABASE_DRIVER));
+        men.setUrl(env.getRequiredProperty(PROPERTY_NAME_MEN_DATABASE_URL));
+        
+        DriverManagerDataSource women = new DriverManagerDataSource();
+        women.setDriverClassName(env.getRequiredProperty(PROPERTY_NAME_DATABASE_DRIVER));
+        women.setUrl(env.getRequiredProperty(PROPERTY_NAME_WOMEN_DATABASE_URL));
+        
+        Map<Object, Object> targetDataSources = new HashMap<>();
+        targetDataSources.put("LOCAL", dataSource);
+        targetDataSources.put("MEN", men);
+        targetDataSources.put("WOMEN", women);
+
+        RoutingDataSource routingDataSource = new RoutingDataSource();
+        routingDataSource.setTargetDataSources(targetDataSources);
+        routingDataSource.setDefaultTargetDataSource(dataSource);
+
+        return routingDataSource;
     }
 
     @Bean

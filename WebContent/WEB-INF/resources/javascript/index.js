@@ -642,6 +642,10 @@ function processCricketProcedures(whatToProcess,dataToProcess)
 	case 'READ-MATCH-AND-POPULATE':
 		valueToProcess = $('#matchFileTimeStamp').val();
 		break;
+	case 'GET-CATEGORY-DATA':
+		valueToProcess = $('#Category option:selected').val();
+		break;
+
 	}		
 	$.ajax({    
         type : 'Get',     
@@ -656,6 +660,23 @@ function processCricketProcedures(whatToProcess,dataToProcess)
 			case 'GET-CONFIG-DATA':
 				initialiseForm('UPDATE-CONFIG',data);
 				break;
+			case 'GET-CATEGORY-DATA':
+			    var matchSelect = document.getElementById('select_cricket_matches');
+			    matchSelect.innerHTML = '';
+			    if (data.matchFiles && data.matchFiles.length > 0) {
+			        data.matchFiles.forEach(function(fileName) {
+			            var option = document.createElement('option');
+			            option.value = fileName;
+			            option.text = fileName;
+			            matchSelect.appendChild(option);
+			        });
+			    } else {
+			        var option = document.createElement('option');
+			        option.value = '';
+			        option.text = '-- No matches found --';
+			        matchSelect.appendChild(option);
+			    }
+			    break;
 			case 'READ-MATCH-AND-POPULATE': case "RE_READ_DATA": case 'DB_DATA_READ':
 				if(data){
 					session_match = data;
@@ -3623,6 +3644,11 @@ function addItemsToList(whatToProcess,dataToProcess)
 					option.text = 'IDENT';
 					select.appendChild(option);
 					
+					option = document.createElement('option');
+					option.value = 'CURR_PARTNERSHIP';
+					option.text = 'Current Partnership';
+					select.appendChild(option);
+					
 					session_match.match.inning.forEach(function(inn){
 						if(inn.isCurrentInning == 'YES' && session_match.setup.matchType != 'TEST'&& session_match.setup.matchType != 'FC'){
 							if(inn.inningNumber == 1){
@@ -3637,10 +3663,10 @@ function addItemsToList(whatToProcess,dataToProcess)
 								option.text = 'Target';
 								select.appendChild(option);
 								
-								option = document.createElement('option');
+								/*option = document.createElement('option');
 								option.value = 'EQUATION';
 								option.text = 'Equation';
-								select.appendChild(option);
+								select.appendChild(option);*/
 								
 								option = document.createElement('option');
 								option.value = 'RRR';
@@ -3667,10 +3693,10 @@ function addItemsToList(whatToProcess,dataToProcess)
 					option.text = 'Super Over';
 					select.appendChild(option);
 					
-					option = document.createElement('option');
+					/*option = document.createElement('option');
 					option.value = 'BLANK';
 					option.text = 'No Data(Only TeamName)';
-					select.appendChild(option);
+					select.appendChild(option);*/
 					break;
 				
 				case 'NPL': case 'LEGENDS-90':  case 'MPL': case 'APL':
@@ -4438,6 +4464,11 @@ function addItemsToList(whatToProcess,dataToProcess)
 				option = document.createElement('option');
 				option.value = 'BOWLING_END';
 				option.text = 'Bowling End';
+				select.appendChild(option);
+				
+				option = document.createElement('option');
+				option.value = 'ECONOMY';
+				option.text = 'Economy';
 				select.appendChild(option);
 				
 				option = document.createElement('option');

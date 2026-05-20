@@ -6764,35 +6764,44 @@ public class Animation
 			break;
 		case "Control_F12":
 			if(this.infobar.isInfobar_on_screen()) {
-				processAnimation(Constants.FRONT, print_writers, "Default", "CONTINUE");
-				//TimeUnit.MILLISECONDS.sleep(1000);
+				
 			}else {
-				processAnimation(Constants.FRONT, print_writers, "Default", "SHOW 0.0");
+				processAnimation(Constants.FRONT, print_writers, "anim_Infobar$InOut$Essentials", "START");
+				processAnimation(Constants.FRONT, print_writers, "anim_Infobar$InOut$ColourAndLogos", "START");
+				processAnimation(Constants.FRONT, print_writers, "anim_Infobar$InOut$Ident", "START");
 			}
-			
-			processAnimation(Constants.FRONT, print_writers, "MatchIdent", "CONTINUE");
+
 			processAnimation(Constants.FRONT, print_writers, "Loop", "START");
 			this.infobar.setInfobar_on_screen(true);
-			TimeUnit.MILLISECONDS.sleep(1000);
-			processAnimation(Constants.FRONT, print_writers, "Default", "SHOW 0.0");
+			caption.this_infobarGfx.infobar.setInfobar_on_screen(true);
 			break;
 		case "F12":
+			processAnimation(Constants.FRONT, print_writers, "BatterStrike", "START");
 			if(this.infobar.isInfobar_on_screen()) {
-				processAnimation(Constants.FRONT, print_writers, "MatchIdent", "CONTINUE");
+				processAnimation(Constants.FRONT, print_writers, "anim_Infobar$IdentToNormal", "START");
+				processAnimation(Constants.FRONT, print_writers, "anim_Infobar$Change_ColourAndLogos", "START");
+				
+				TimeUnit.MILLISECONDS.sleep(1500);
+				caption.this_infobarGfx.TeamColor(true, print_writers, caption.this_infobarGfx.inning, 1);
+				processAnimation(Constants.FRONT, print_writers, "anim_Infobar$Change_ColourAndLogos", "SHOW 0.0");
+				
+				processAnimation(Constants.FRONT, print_writers, "anim_Infobar$InOut$Ident", "SHOW 0.0");
+				processAnimation(Constants.FRONT, print_writers, "anim_Infobar$InOut$Normal", "SHOW 2.900");
+			}else {
+				processAnimation(Constants.FRONT, print_writers, "anim_Infobar$InOut$Essentials", "START");
+				processAnimation(Constants.FRONT, print_writers, "anim_Infobar$InOut$ColourAndLogos", "START");
+				processAnimation(Constants.FRONT, print_writers, "anim_Infobar$InOut$Normal", "START");
+				processAnimation(Constants.FRONT, print_writers, "Loop", "START");
 			}
-			processAnimation(Constants.FRONT, print_writers, "Default", "CONTINUE");
-			processAnimation(Constants.FRONT, print_writers, "MoveForCentreInfo", "START");
-			processAnimation(Constants.FRONT, print_writers, "Loop", "START");
+			
 			this.infobar.setInfobar_on_screen(true);
+			caption.this_infobarGfx.infobar.setInfobar_on_screen(true);
 			this.infobar.setInfobar_status(Constants.TWO_LINER_INFOBAR);
 			MiddleSectionInfoOnScreen = true;
 			
 			caption.this_infobarGfx.infobar.setLast_right_bottom(caption.this_infobarGfx.infobar.getRight_bottom());
 			caption.this_infobarGfx.infobar.setLast_right_section(caption.this_infobarGfx.infobar.getRight_section());
 			caption.this_infobarGfx.infobar.setLast_middle_section(caption.this_infobarGfx.infobar.getMiddle_section());
-			
-			TimeUnit.MILLISECONDS.sleep(1000);
-			processAnimation(Constants.FRONT, print_writers, "MatchIdent", "SHOW 0.0");
 			break;
 			
 		case "r":
@@ -7031,22 +7040,31 @@ public class Animation
 	public String T20_MumbaiAnimateOut(String whatToProcess, List<PrintWriter> print_writers,Configuration config) throws InterruptedException, IOException {
 		switch (whatToProcess.split(",")[0]) {
 		case "Control_F12":
-			processAnimation(Constants.FRONT, print_writers, "MatchIdent", "CONTINUE");
+			processAnimation(Constants.FRONT, print_writers, "anim_Infobar$InOut$Essentials", "CONTINUE");
+			processAnimation(Constants.FRONT, print_writers, "anim_Infobar$InOut$ColourAndLogos", "CONTINUE");
+			processAnimation(Constants.FRONT, print_writers, "anim_Infobar$InOut$Ident", "CONTINUE");
+			
 			TimeUnit.MILLISECONDS.sleep(1800);
-			processAnimation(Constants.FRONT, print_writers, "MatchIdent", "SHOW 0.0");
+			processAnimation(Constants.FRONT, print_writers, "anim_Infobar", "SHOW 0.0");
 			infobar.setMiddle_section("");
 			infobar.setFull_section("");
 			infobar.setRight_bottom("");
 			infobar.setRight_section("");
 			
 			this.infobar.setInfobar_on_screen(false);
+			caption.this_infobarGfx.infobar.setInfobar_on_screen(false);
 			this.whichGraphicOnScreen = "";
 			break;
 		case "F12":
-			processAnimation(Constants.FRONT, print_writers, "Default", "CONTINUE");
+			processAnimation(Constants.FRONT, print_writers, "anim_Infobar$InOut$Essentials", "CONTINUE");
+			processAnimation(Constants.FRONT, print_writers, "anim_Infobar$InOut$ColourAndLogos", "CONTINUE");
+			processAnimation(Constants.FRONT, print_writers, "anim_Infobar$InOut$Normal", "CONTINUE");
+			
 			TimeUnit.MILLISECONDS.sleep(1800);
-			processAnimation(Constants.FRONT, print_writers, "MoveForCentreInfo", "SHOW 0.0");
+			processAnimation(Constants.FRONT, print_writers, "anim_Infobar", "SHOW 0.0");
+			
 			this.infobar.setInfobar_on_screen(false);
+			caption.this_infobarGfx.infobar.setInfobar_on_screen(false);
 			ExtraInfoOnScreen = false;
 			break;
 			
@@ -7249,29 +7267,15 @@ public class Animation
 	public String T20_MumbaiChangeOn(String whatToProcess, List<PrintWriter> print_writers,Configuration config) throws InterruptedException, IOException {
 		switch (whatToProcess.split(",")[0]) {
 		case "Shift_F12":
-			processAnimation(Constants.FRONT, print_writers, "TickerIdentChange", "START");
+			processAnimation(Constants.FRONT, print_writers, "anim_Infobar$Change_Ident", "START");
 			TimeUnit.MILLISECONDS.sleep(1000);
 			break;
 		case "Alt_7":
-			processAnimation(Constants.FRONT, print_writers, "ChangeOn_BtmRight", "START");
+			processAnimation(Constants.FRONT, print_writers, "Change_Section2", "START");
 			caption.this_infobarGfx.infobar.setLast_right_bottom(caption.this_infobarGfx.infobar.getRight_bottom());
 			break;
 		case "Alt_2":
-			switch(caption.this_infobarGfx.infobar.getMiddle_section().toUpperCase()) {
-			case "BLANK":
-				if(MiddleSectionInfoOnScreen) {
-					processAnimation(Constants.FRONT, print_writers, "MoveForCentreInfo", "CONTINUE REVERSE");
-					MiddleSectionInfoOnScreen = false;
-				}
-				break;
-			default:
-				if(MiddleSectionInfoOnScreen == false) {
-					processAnimation(Constants.FRONT, print_writers, "MoveForCentreInfo", "START");
-					MiddleSectionInfoOnScreen = true;
-				}
-				break;
-			}
-			processAnimation(Constants.FRONT, print_writers, "Changeon_Centre", "START");
+			processAnimation(Constants.FRONT, print_writers, "Change_Section1", "START");
 			caption.this_infobarGfx.infobar.setLast_middle_section(caption.this_infobarGfx.infobar.getMiddle_section());
 			break;
 		case "Alt_0": case "Alt_3": case "Alt_4": case "Alt_5": case "Alt_8": case "Alt_9":
@@ -7430,13 +7434,13 @@ public class Animation
 	public String T20_MumbaiCutBack(String whatToProcess, List<PrintWriter> print_writers,Configuration config) throws InterruptedException, IOException {
 		switch (whatToProcess.split(",")[0]) {
 		case "Shift_F12":
-			processAnimation(Constants.FRONT, print_writers, "TickerIdentChange", "SHOW 0.0");
+			processAnimation(Constants.FRONT, print_writers, "anim_Infobar$Change_Ident", "SHOW 0.0");
 			break;
 		case "Alt_7":
-			processAnimation(Constants.FRONT, print_writers, "ChangeOn_BtmRight", "SHOW 0.0");
+			processAnimation(Constants.FRONT, print_writers, "Change_Section2", "SHOW 0.0");
 			break;
 		case "Alt_2":
-			processAnimation(Constants.FRONT, print_writers, "Changeon_Centre", "SHOW 0.0");
+			processAnimation(Constants.FRONT, print_writers, "Change_Section1", "SHOW 0.0");
 			break;
 		case "Alt_0": case "Alt_3": case "Alt_4": case "Alt_5": case "Alt_8": case "Alt_9":
 			TimeUnit.MILLISECONDS.sleep(500);
@@ -10220,71 +10224,16 @@ public class Animation
 	{
 		switch (config.getBroadcaster().toUpperCase()) {
 		case Constants.T20_MUMBAI:
-			processAnimation(Constants.BACK, print_writers, "FullFramers", "SHOW 0.0");
-			processAnimation(Constants.BACK, print_writers, "Change", "SHOW 0.0");
-			processAnimation(Constants.BACK, print_writers, "PulseAnim", "SHOW 0.0");
-			processAnimation(Constants.BACK, print_writers, "BackVeil", "SHOW 0.0");
-			
-			processAnimation(Constants.BACK, print_writers, "PlayerBio", "SHOW 0.0");
-			
-			processAnimation(Constants.BACK, print_writers, "Loop", "SHOW 0.0");
-			processAnimation(Constants.BACK, print_writers, "FF_MatchIdent", "SHOW 0.0");
-			
-			processAnimation(Constants.BACK, print_writers, "FF_Leaderboard", "SHOW 0.0");
-			processAnimation(Constants.BACK, print_writers, "OTS_Leaderboard", "SHOW 0.0");
-			
-			processAnimation(Constants.BACK, print_writers, "Powerplay", "SHOW 0.0");
-
-			processAnimation(Constants.FRONT, print_writers, "HeaderChange", "SHOW 0.0");
-			processAnimation(Constants.FRONT, print_writers, "L3_In-Out", "SHOW 0.0");
-			processAnimation(Constants.FRONT, print_writers, "Body", "SHOW 0.0");
-			processAnimation(Constants.FRONT, print_writers, "BaseWidth", "SHOW 0.0");
-			
 			if(whatToProcess.contains("CLEAR-ALL")) {
-				processAnimation(Constants.FRONT, print_writers, "InfoBar", "SHOW 0.0");
+				processAnimation(Constants.FRONT, print_writers, "anim_Infobar", "SHOW 0.0");
 				processAnimation(Constants.FRONT, print_writers, "Loop", "SHOW 0.0");
-				
-				processAnimation(Constants.FRONT, print_writers, "L3_PlayerLineUP", "SHOW 0.0");
-				
-				processAnimation(Constants.FRONT, print_writers, "PowerplayOut", "SHOW 0.0");
-				
-				processAnimation(Constants.FRONT, print_writers, "TeamBug", "SHOW 0.0");
-				processAnimation(Constants.FRONT, print_writers, "BtmChangeon", "SHOW 0.0");
-				processAnimation(Constants.FRONT, print_writers, "TopChangeOn", "SHOW 0.0");
-				
-				processAnimation(Constants.FRONT, print_writers, "BaseWidth", "SHOW 0.0");
-				processAnimation(Constants.FRONT, print_writers, "L3_In-Out", "SHOW 0.0");
-				processAnimation(Constants.FRONT, print_writers, "Body", "SHOW 0.0");
-				processAnimation(Constants.FRONT, print_writers, "HeaderChange", "SHOW 0.0");
-				processAnimation(Constants.FRONT, print_writers, "PulseAnim", "SHOW 0.0");
-				
-				processAnimation(Constants.FRONT, print_writers, "L3MatchIdent", "SHOW 0.0");
-				
-				processAnimation(Constants.FRONT, print_writers, "NameSuper", "SHOW 0.0");
-				processAnimation(Constants.FRONT, print_writers, "NameSuperChange", "SHOW 0.0");
-				processAnimation(Constants.FRONT, print_writers, "PulseAnim", "SHOW 0.0");
-				processAnimation(Constants.FRONT, print_writers, "PositionForInfobar", "SHOW 0.0");
-				
-				processAnimation(Constants.FRONT, print_writers, "MiniBatting", "SHOW 0.0");
-				processAnimation(Constants.FRONT, print_writers, "Pulse", "SHOW 0.0");
-				
-				processAnimation(Constants.FRONT, print_writers, "SixCounter", "SHOW 0.0");
-				processAnimation(Constants.FRONT, print_writers, "Change", "SHOW 0.0");
-				processAnimation(Constants.FRONT, print_writers, "Pulse", "SHOW 0.0");
-				
-				processAnimation(Constants.FRONT, print_writers, "MiniBowling", "SHOW 0.0");
-				processAnimation(Constants.FRONT, print_writers, "Pulse", "SHOW 0.0");
-				
-				processAnimation(Constants.FRONT, print_writers, "Bug", "SHOW 0.0");
-				
-				processAnimation(Constants.FRONT, print_writers, "BatterScore", "SHOW 0.0");
-				
-				processAnimation(Constants.FRONT, print_writers, "ImpactPlayer", "SHOW 0.0");
 				
 				this.infobar.setInfobar_on_screen(false);
 				ExtraInfoOnScreen = false;
 				MiddleSectionInfoOnScreen = false;
 				bigScoreBug_On_Screen = false;
+			}else if(whatToProcess.contains("CLEAR-INFOBAR_DATA")) {
+				caption.this_infobarGfx.infobar.setInfobar_on_screen(false);
 			}
 			this.whichGraphicOnScreen = "";
 			break;
@@ -13481,13 +13430,14 @@ public class Animation
 					if(whichside == 1) {
 						switch(whatToProcess.split(",")[0]) {
 						case "Control_F12":
-							previewCommands = "InfoBar$MatchIdent 1.740";
+							previewCommands = "anim_Infobar 4.700 anim_Infobar$InOut 2.900 anim_Infobar$InOut$Essentials$In 2.680 "
+									+ "anim_Infobar$InOut$ColourAndLogos$In 2.100 anim_Infobar$InOut$Ident$In 2.300";
 							break;
 						}
 					}else if(whichside == 2) {
 						switch(whatToProcess.split(",")[0]) {
 						case "Shift_F12":
-							previewCommands = "InfoBar$TickerIdentChange 0.600";
+							previewCommands = "anim_Infobar$Change_Ident 0.500";
 							break;
 						case "Alt_7":
 							previewCommands = "Default 1.640 ChangeOn_BtmRight 1.000";
@@ -13521,7 +13471,7 @@ public class Animation
 							break;
 						}
 					}
-					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER PREVIEW SCENE*/T20/Scenes/Ticker "
+					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER PREVIEW SCENE*/Default/gfx_Overlays " 
 							+ "C:/Temp/Preview.tga " + previewCommands + " \0", print_writer);
 				}
 				break;

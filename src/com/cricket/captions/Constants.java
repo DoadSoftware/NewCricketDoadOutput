@@ -102,6 +102,17 @@ public class Constants
 	public final static String MPL_TEXT2 = "IMAGE*/Default/Essentials/Text2/";
 
 	public final static String T20_MUMBAI = "T20_MUMBAI";
+	
+	public final static String T20_MUMBAI_3D_Logos = "IMAGE*/Default/Assets/3D_Logos/";
+	public final static String T20_MUMBAI_Base1 = "IMAGE*/Default/Assets/Base1/";
+	public final static String T20_MUMBAI_Base2 = "IMAGE*/Default/Assets/Base2/";
+	public final static String T20_MUMBAI_Infobar_Base = "IMAGE*/Default/Assets/Infobar_Base/";
+	public final static String T20_MUMBAI_Logos = "IMAGE*/Default/Assets/Logos/";
+	public final static String T20_MUMBAI_Mascots = "IMAGE*/Default/Assets/Mascots/";
+	public final static String T20_MUMBAI_Text = "IMAGE*/Default/Assets/Text/";
+	public final static String T20_MUMBAI_Text1 = "IMAGE*/Default/Assets/Text1/";
+	public final static String T20_MUMBAI_Text2 = "IMAGE*/Default/Assets/Text2/";
+	
 	public final static String T20_MUMBAI_SPEED = "C:\\\\Sports\\\\Cricket\\\\Speed\\\\Speed.txt";
 	public final static String HASHTAG = "C:\\\\Sports\\\\Cricket\\\\HashTag.txt";
 	public final static String T20_MUMBAI_TEAMCOLOUR_GRADIENTS = "IMAGE*/T20/Assets/Colours/Gradients/";

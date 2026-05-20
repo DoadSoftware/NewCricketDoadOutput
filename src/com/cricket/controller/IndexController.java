@@ -40,6 +40,7 @@ import com.cricket.captions.InfobarGfx;
 import com.cricket.captions.LofInfobarGfx;
 import com.cricket.captions.LowerThirdGfx;
 import com.cricket.captions.Scene;
+import com.cricket.config.DatabaseContextHolder;
 import com.cricket.containers.Infobar;
 import com.cricket.containers.Stats;
 import com.cricket.ispl.mvp_leaderBoard;
@@ -127,6 +128,7 @@ public class IndexController
 	private long speed_match_time_stamp = 0;
 	public boolean Plotter_file_change = false;
 	public String expiryDate = "";
+	public static String basePath = "";
 	
 	static {
 	    Map<String, Comparator<Tournament>> map = new HashMap<>();
@@ -195,7 +197,7 @@ public class IndexController
 		        return name.endsWith(".xml") && pathname.isFile();
 		    }
 		}));
-		
+		DatabaseContextHolder.setDb("LOCAL");
 		return "initialise";
 	}
 	
@@ -288,8 +290,15 @@ public class IndexController
 	    // COMMON VARIABLES
 	    boolean isArchive = select_type != null && !select_type.trim().isEmpty() && !select_type.equals(",");
 	    String seriesType = isArchive ? select_type.split(",", -1)[0]: "";
-	    String basePath = isArchive ? CricketUtil.CRICKET_ARCHIVE_DIRECTORY + CricketUtil.ARCHIVE_MATCHES_DIRECTORY 
-							+ seriesType + "/" : CricketUtil.CRICKET_DIRECTORY;
+	    basePath = isArchive ? CricketUtil.CRICKET_ARCHIVE_DIRECTORY + CricketUtil.ARCHIVE_MATCHES_DIRECTORY 
+				+ seriesType + "/" : CricketUtil.CRICKET_DIRECTORY;
+	    
+	    if (Category.equalsIgnoreCase("men")) {
+	    	basePath = "C:\\Sports\\CricketMen\\";
+	    } else if (Category.equalsIgnoreCase("women")) {
+	    	basePath = "C:\\Sports\\CricketWomen\\";
+	    }
+	    System.out.println("basePath - " + basePath);
 
 	    // LAST MODIFIED
 	    last_match_time_stamp = new File(basePath + CricketUtil.MATCHES_DIRECTORY + selectedMatch).lastModified();
@@ -333,7 +342,7 @@ public class IndexController
 	    }
 
 	    if (headToHead.getH2hPlayer().isEmpty()) {
-	        HeadToHead extractedH2H = CricketFunctions.extractHeadToHead(session_match,cricketService);
+	        HeadToHead extractedH2H = CricketFunctions.extractHeadToHead(session_match,cricketService, basePath);
 	        headToHead.setH2hPlayer(extractedH2H.getH2hPlayer());
 	        headToHead.setH2hTeam(extractedH2H.getH2hTeam());
 	    }
@@ -381,7 +390,32 @@ public class IndexController
 	{
 
 		String process = whatToProcess.toUpperCase();
+		//System.out.println("whatToProcess - " + whatToProcess + " | valueToProcess - " + valueToProcess);
 		switch (process) {
+		case "GET-CATEGORY-DATA":
+		    String category = valueToProcess.trim().toLowerCase(); // "men" or "women"
+
+		    File matchDir;
+		    if (category.equalsIgnoreCase("men")) {
+		        matchDir = new File("C:\\Sports\\CricketMen\\Matches\\");
+		    } else if (category.equalsIgnoreCase("women")) {
+		        matchDir = new File("C:\\Sports\\CricketWomen\\Matches\\");
+		    } else {
+		        matchDir = new File(CricketUtil.CRICKET_SERVER_DIRECTORY + CricketUtil.MATCHES_DIRECTORY);
+		    }
+
+		    File[] files = matchDir.listFiles(f -> f.isFile() && f.getName().toLowerCase().endsWith(".json"));
+		    List<String> matchNames = new ArrayList<>();
+		    if (files != null) {
+		        for (File f : files) {
+		            matchNames.add(f.getName());
+		        }
+		    }
+
+		    Map<String, Object> response = new HashMap<>();
+		    response.put("configuration", session_configuration);
+		    response.put("matchFiles", matchNames);
+		    return objectMapper.writeValueAsString(response);
 		case "HEAD_TO_HEAD_FILE":
             return handleHeadToHead();
         case "GET-CONFIG-DATA":
@@ -521,6 +555,7 @@ public class IndexController
 			}
 			else if(whatToProcess.contains("CLEAR-ALL") || whatToProcess.contains("CLEAR-ALL-WITH-INFOBAR")) {
 				this_animation.ResetAnimation(whatToProcess, print_writers, session_configuration);
+				this_animation.ResetAnimation("CLEAR-INFOBAR_DATA", print_writers, session_configuration);
 			}else if(whatToProcess.contains("CANCLE-GRAPHICS")) {
 				resetInfobarSections();
 			}
@@ -533,7 +568,6 @@ public class IndexController
 	    return objectMapper.writeValueAsString(session_match);
 	}
 	private String handleConfigData(String valueToProcess)throws Exception {
-
 	    session_configuration = (Configuration) JAXBContext.newInstance(Configuration.class).createUnmarshaller()
 	                    .unmarshal(new File(CricketUtil.CRICKET_DIRECTORY + CricketUtil.CONFIGURATIONS_DIRECTORY + valueToProcess));
 	    return objectMapper.writeValueAsString(session_configuration);
@@ -543,7 +577,7 @@ public class IndexController
 	    return objectMapper.writeValueAsString(session_match);
 	}
 	private String handleReReadData() throws Exception {
-	    HeadToHead extractedH2H = CricketFunctions.extractHeadToHead(session_match,cricketService);
+	    HeadToHead extractedH2H = CricketFunctions.extractHeadToHead(session_match,cricketService, basePath);
 	    headToHead.setH2hPlayer(extractedH2H.getH2hPlayer());
 	    headToHead.setH2hTeam(extractedH2H.getH2hTeam());
 
@@ -564,19 +598,16 @@ public class IndexController
 	    if (session_match == null || session_match.getMatch() == null) {
 	        return objectMapper.writeValueAsString(null);
 	    }
-	    File matchFile = new File(CricketUtil.CRICKET_DIRECTORY + CricketUtil.MATCHES_DIRECTORY
-	                    + session_match.getMatch().getMatchFileName()
-	    );
+	    File matchFile = new File(basePath + CricketUtil.MATCHES_DIRECTORY+ session_match.getMatch().getMatchFileName());
 
 	    if (last_match_time_stamp != matchFile.lastModified()) {
 	        session_match = CricketFunctions.populateMatchVariables(CricketFunctions.readOrSaveMatchFile(CricketUtil.READ,
-	                                CricketUtil.MATCH + "," + CricketUtil.EVENT,session_match,session_configuration),
+	                                CricketUtil.MATCH + "," + CricketUtil.EVENT,session_match,session_configuration,basePath),
 	                        session_players,session_team,session_ground);
 	        session_match.getSetup().setGenerateInteractiveFile(session_configuration.getGenerateInteractiveFile());
 	        last_match_time_stamp = matchFile.lastModified();
-	        MatchStats = CricketFunctions.getAllEvents(session_match,session_configuration.getBroadcaster(),
-				session_match.getEventFile().getEvents());
-	        CricketFunctions.getInteractive(session_match,"FULL_WRITE");
+	        MatchStats = CricketFunctions.getAllEvents(session_match,session_configuration.getBroadcaster(),session_match.getEventFile().getEvents());
+	        CricketFunctions.getInteractive(session_match,"FULL_WRITE", basePath);
 	        session_match.getMatch().setMatchStats(MatchStats);
 	        updateInfobar();
 	    }
@@ -608,12 +639,10 @@ public class IndexController
 
 	    switch (session_configuration.getBroadcaster()) {
 	        case Constants.T20_MUMBAI: case Constants.NPL: case Constants.APL:
-	            this_caption.this_infobarGfx.speed(CricketFunctions.processPrintWriter(session_configuration).get(0),
-	                    session_match,session_configuration);
+	            this_caption.this_infobarGfx.speed(CricketFunctions.processPrintWriter(session_configuration).get(0),session_match,session_configuration, basePath);
 	            break;
 	        case Constants.ISPL:
-	            this_caption.this_lofInfobarGfx.speed(CricketFunctions.processPrintWriter(session_configuration).get(0),
-	                    session_match);
+	            this_caption.this_lofInfobarGfx.speed(CricketFunctions.processPrintWriter(session_configuration).get(0),session_match);
 	            break;
 	    }
 	}
@@ -630,8 +659,7 @@ public class IndexController
 	        return;
 	    }
 	    String formationFile = lines.get(0).trim();
-	    fielderFormation = CricketFunctions.getFielderFormation(CricketUtil.CRICKET_DIRECTORY 
-								+ "Fielder/" + formationFile);
+	    fielderFormation = CricketFunctions.getFielderFormation(CricketUtil.CRICKET_DIRECTORY + "Fielder/" + formationFile);
 
 	    if (!fielderFormation.isCheckbox()) {
 	        return;
@@ -668,10 +696,10 @@ public class IndexController
 					this_animation.processInfoBarPreview(valueToProcess,print_writers,this_caption.whichSide,session_configuration,this_animation.whichGraphicOnScreen);
 				}
 				break;
-			case Constants.T20_MUMBAI:
-				this_animation.processInfoBarPreview(valueToProcess,print_writers,this_caption.whichSide,
-						session_configuration,this_animation.whichGraphicOnScreen);
-				break;
+//			case Constants.T20_MUMBAI:
+//				this_animation.processInfoBarPreview(valueToProcess,print_writers,this_caption.whichSide,
+//						session_configuration,this_animation.whichGraphicOnScreen);
+//				break;
 			default:
 				if (this_caption.status.equalsIgnoreCase(Constants.OK)) {
 					processAnimations("ANIMATE-IN-GRAPHICS",session_configuration,valueToProcess,print_writers,headToHead);
@@ -1167,8 +1195,8 @@ public class IndexController
 			mvp_leaderBoard mvp = new mvp_leaderBoard();
 			List<Player> mvp_player = new ArrayList<Player>();
  			
-			if(new File(CricketUtil.CRICKET_DIRECTORY + CricketUtil.MVP).exists()) {
-				mvp = (objectMapper.readValue(new File(CricketUtil.CRICKET_DIRECTORY + CricketUtil.MVP), mvp_leaderBoard.class));
+			if(new File(basePath + CricketUtil.MVP).exists()) {
+				mvp = (objectMapper.readValue(new File(basePath + CricketUtil.MVP), mvp_leaderBoard.class));
 			}
 			for (int i = 0; i < mvp.getData().getTop().size(); i++) {
 				String player_id = mvp.getData().getTop().get(i).getPlayerId();
@@ -1250,7 +1278,7 @@ public class IndexController
 	    }
 
 	    loadSessionData();
-	    if (new File(CricketUtil.CRICKET_DIRECTORY + "ParScores BB.html").exists() && session_match != null) {
+	    if (new File(basePath + "ParScores BB.html").exists() && session_match != null) {
 	        session_dls = CricketFunctions.populateDuckWorthLewis(session_match);
 	    }
 	    switch (typeOfUpdate) {
@@ -1399,10 +1427,10 @@ public class IndexController
 	    }
 	    
 	    session_match = CricketFunctions.populateMatchVariables(CricketFunctions.readOrSaveMatchFile(CricketUtil.READ,CricketUtil.SETUP + "," + CricketUtil.MATCH 
-	    			+ "," + CricketUtil.EVENT,session_match,session_configuration),session_players,session_team,session_ground);
+	    			+ "," + CricketUtil.EVENT,session_match,session_configuration, basePath),session_players,session_team,session_ground);
 	    session_match.getSetup().setMatchFileTimeStamp(new SimpleDateFormat("dd-MM-yyyy HH:mm:ss").format(new Date()));
 	    session_match.getSetup().setGenerateInteractiveFile(session_configuration.getGenerateInteractiveFile());
-	    CricketFunctions.getInteractive(session_match, "FULL_WRITE");
+	    CricketFunctions.getInteractive(session_match, "FULL_WRITE", basePath);
 
 	    return session_match;
 	}
@@ -1438,6 +1466,7 @@ public class IndexController
 	            } else {
 	                this_scene.LoadScene("OVERLAYS", print_writers, session_configuration);
 	                this_animation.ResetAnimation("CLEAR-ALL",print_writers,session_configuration);
+	                this_caption.this_infobarGfx.TournamentColor(print_writers, session_configuration);
 	            }
 	            break;
 

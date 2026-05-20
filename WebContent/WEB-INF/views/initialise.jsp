@@ -305,7 +305,7 @@
 			    <label for="Category" class="col-sm-4 col-form-label text-left">Select Category </label>
 			    <div class="col-sm-6 col-md-6">
 			      <select id="Category" name="Category" class="browser-default custom-select custom-select-sm"
-			      		onchange="processUserSelection(this)">
+			      		onchange="processCricketProcedures('GET-CATEGORY-DATA')">
 			      		<option value=" "> </option>
 			      		<option value="MEN">MEN</option>
 			      		<option value="WOMEN">WOMEN</option>

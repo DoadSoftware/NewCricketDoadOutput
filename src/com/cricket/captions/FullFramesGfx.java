@@ -1194,7 +1194,7 @@ public class FullFramesGfx
 		}
 		
 		previous_match = CricketFunctions.populateMatchVariables(CricketFunctions.readOrSaveMatchFile(CricketUtil.READ,
-				CricketUtil.MATCH + "," + CricketUtil.EVENT, previous_match, config), cricketService.getAllPlayer(), Teams, Grounds);
+				CricketUtil.MATCH + "," + CricketUtil.EVENT, previous_match, config, IndexController.basePath), cricketService.getAllPlayer(), Teams, Grounds);
 		
 		ground = Grounds.stream().filter(grnd -> grnd.getFullname().contains(previous_match.getSetup().getVenueName())).findAny().orElse(null);
 		if(ground == null) {
