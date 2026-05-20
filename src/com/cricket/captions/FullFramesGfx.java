@@ -12131,7 +12131,7 @@ public class FullFramesGfx
 		switch (config.getBroadcaster().toUpperCase()) {
 		case Constants.LEGENDS:
 			CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$All$Side_" + WhichSide 
-					+ "$Select_GraphicsType*FUNCTION*Omo*vis_con SET 21\0", print_writers);
+					+ "$Select_GraphcsType*FUNCTION*Omo*vis_con SET 21\0", print_writers);
 			
 			for (int k=1; k<=6; k++){
 				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$All$Side_" + WhichSide + "$Manhattan_Phase_Compare$Bar$" 
