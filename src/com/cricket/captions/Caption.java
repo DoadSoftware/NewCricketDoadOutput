@@ -1329,14 +1329,20 @@ public class Caption
 			case "Alt_5":
 				switch (config.getBroadcaster().toUpperCase()) {
 				case Constants.T20_MUMBAI:
-					if(this_infobarGfx.infobar.getRight_section().equalsIgnoreCase(CricketUtil.BOWLER)) {
-						this_infobarGfx.infobar.setRight_section("LAST_X_BALLS");
-						this_infobarGfx.lastXballs = Integer.valueOf(whatToProcess.split(",")[2]);
-						status = this_infobarGfx.populateVizInfobarRightSection(false,print_writers, matchAllData, 1, 1);
+					if(whatToProcess.split(",")[2].equalsIgnoreCase("BLANK")) {
+						this_infobarGfx.infobar.setRight_full_section("BLANK");
+						status = Constants.OK;
 					}else {
-						this_infobarGfx.infobar.setRight_section("LAST_X_BALLS");
-						this_infobarGfx.lastXballs = Integer.valueOf(whatToProcess.split(",")[2]);
-						status = this_infobarGfx.populateVizInfobarRightSection(false,print_writers, matchAllData, 2, 1);
+						if(whatToProcess.split(",")[2].equalsIgnoreCase("LAST_X_BALLS")) {
+							this_infobarGfx.lastXballs = Integer.valueOf(whatToProcess.split(",")[3]);
+						}
+						if(this_infobarGfx.infobar.getRight_full_section().equalsIgnoreCase("BLANK")) {
+							this_infobarGfx.infobar.setRight_full_section(whatToProcess.split(",")[2]);
+							status = this_infobarGfx.populateVizInfobarRightFullSection(false, print_writers, matchAllData, 1, 1);
+						}else {
+							this_infobarGfx.infobar.setRight_full_section(whatToProcess.split(",")[2]);
+							status = this_infobarGfx.populateVizInfobarRightFullSection(false, print_writers, matchAllData, whichSide, 1);
+						}
 					}
 					break;
 				case Constants.NPL: case Constants.LEGENDS: case Constants.ISPL: case Constants.MPL: case Constants.APL:
@@ -1420,7 +1426,6 @@ public class Caption
 				status = this_infobarGfx.populateVizInfobarMiddleSection(print_writers, matchAllData, whichSide);
 				break;
 			case "Alt_7":
-				
 				switch (config.getBroadcaster().toUpperCase()) {
 				case Constants.NPL: case Constants.LEGENDS: case Constants.MPL: case Constants.APL:
 //					if(this_infobarGfx.infobar.getMiddle_section().equalsIgnoreCase(CricketUtil.BATSMAN)) {
@@ -1511,12 +1516,15 @@ public class Caption
 							
 							status = this_infobarGfx.populateVizInfobarBowler(print_writers, matchAllData, 1);
 						}else {
+							if(whatToProcess.split(",")[2].equalsIgnoreCase("LAST_X_BALLS")) {
+								this_infobarGfx.lastXballs = Integer.valueOf(whatToProcess.split(",")[3]);
+							}
 							if(this_infobarGfx.infobar.getRight_section().equalsIgnoreCase(CricketUtil.BOWLER)) {
 								this_infobarGfx.infobar.setRight_section(whatToProcess.split(",")[2]);
 								status = this_infobarGfx.populateVizInfobarRightSection(false,print_writers, matchAllData, 1, 1);
 							}else {
 								this_infobarGfx.infobar.setRight_section(whatToProcess.split(",")[2]);
-								status = this_infobarGfx.populateVizInfobarRightSection(false,print_writers, matchAllData, 2, 1);
+								status = this_infobarGfx.populateVizInfobarRightSection(false,print_writers, matchAllData, whichSide, 1);
 							}
 						}
 					}

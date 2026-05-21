@@ -52,6 +52,9 @@ public class Infobar {
 	private String full_section;
 	private String last_full_section;
 	
+	private String right_full_section;
+	private String last_right_full_section;
+	
 	private String infobar_ident_section;
 	
 	private List<BattingCard> last_batsmen;
@@ -364,6 +367,18 @@ public class Infobar {
 	}
 	public void setSuperOverThisOverOnScreen(boolean superOverThisOverOnScreen) {
 		this.superOverThisOverOnScreen = superOverThisOverOnScreen;
+	}
+	public String getRight_full_section() {
+		return right_full_section;
+	}
+	public void setRight_full_section(String right_full_section) {
+		this.right_full_section = right_full_section;
+	}
+	public String getLast_right_full_section() {
+		return last_right_full_section;
+	}
+	public void setLast_right_full_section(String last_right_full_section) {
+		this.last_right_full_section = last_right_full_section;
 	}
 	
 }

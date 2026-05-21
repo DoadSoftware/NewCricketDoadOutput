@@ -7325,7 +7325,23 @@ public class Animation
 			processAnimation(Constants.FRONT, print_writers, "Change_Section1", "START");
 			caption.this_infobarGfx.infobar.setLast_middle_section(caption.this_infobarGfx.infobar.getMiddle_section());
 			break;
-		case "Alt_5": case "Alt_8": //case "Alt_0": case "Alt_3": case "Alt_4": case "Alt_9":
+		case "Alt_5":
+			if(whatToProcess.split(",")[2].equalsIgnoreCase("BLANK")) {
+				processAnimation(Constants.FRONT, print_writers, "anim_Infobar$Section4$In_Out", "CONTINUE");
+				infobar.setRight_full_section(null);
+				TimeUnit.MILLISECONDS.sleep(700);
+				processAnimation(Constants.FRONT, print_writers, "anim_Infobar$Section4", "SHOW 0.0");
+			}else if(infobar.getRight_full_section() != null && !infobar.getRight_full_section().isEmpty()) {
+				TimeUnit.MILLISECONDS.sleep(200);
+				processAnimation(Constants.FRONT, print_writers, "anim_Infobar$Change_Section4", "START");
+				TimeUnit.MILLISECONDS.sleep(500);
+				infobar.setRight_full_section(whatToProcess.split(",")[2]);
+			}else {
+				processAnimation(Constants.FRONT, print_writers, "anim_Infobar$Section4$In_Out", "START");
+				infobar.setRight_full_section(whatToProcess.split(",")[2]);
+			}
+			break;
+		case "Alt_8": //case "Alt_0": case "Alt_3": case "Alt_4": case "Alt_9":
 			if(whatToProcess.split(",")[2].equalsIgnoreCase(CricketUtil.BOWLER)) {
 				processAnimation(Constants.FRONT, print_writers, "anim_Infobar$Section3$In_Out", "CONTINUE");
 				infobar.setRight_section(null);
@@ -7479,7 +7495,11 @@ public class Animation
 		case "Alt_2":
 			processAnimation(Constants.FRONT, print_writers, "Change_Section1", "SHOW 0.0");
 			break;
-		case "Alt_5": case "Alt_8": //case "Alt_0": case "Alt_3": case "Alt_4": case "Alt_9":
+		case "Alt_5":
+			TimeUnit.MILLISECONDS.sleep(500);
+			processAnimation(Constants.FRONT, print_writers, "anim_Infobar$Change_Section4", "SHOW 0.0");
+			break;
+		case "Alt_8": //case "Alt_0": case "Alt_3": case "Alt_4": case "Alt_9":
 			TimeUnit.MILLISECONDS.sleep(500);
 			processAnimation(Constants.FRONT, print_writers, "anim_Infobar$Change_Section3", "SHOW 0.0");
 			break;

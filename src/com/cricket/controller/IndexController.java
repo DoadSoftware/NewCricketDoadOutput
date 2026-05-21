@@ -295,8 +295,10 @@ public class IndexController
 	    
 	    if (Category.equalsIgnoreCase("men")) {
 	    	basePath = "C:\\Sports\\CricketMen\\";
+	    	DatabaseContextHolder.setDb("MEN");
 	    } else if (Category.equalsIgnoreCase("women")) {
 	    	basePath = "C:\\Sports\\CricketWomen\\";
+	    	DatabaseContextHolder.setDb("WOMEN");
 	    }
 	    
 	    speedFile = new File(basePath + "Speed\\SPEED.txt");
@@ -403,8 +405,10 @@ public class IndexController
 		    File matchDir;
 		    if (category.equalsIgnoreCase("men")) {
 		        matchDir = new File("C:\\Sports\\CricketMen\\Matches\\");
+		        DatabaseContextHolder.setDb("MEN");
 		    } else if (category.equalsIgnoreCase("women")) {
 		        matchDir = new File("C:\\Sports\\CricketWomen\\Matches\\");
+		        DatabaseContextHolder.setDb("WOMEN");
 		    } else {
 		        matchDir = new File(CricketUtil.CRICKET_SERVER_DIRECTORY + CricketUtil.MATCHES_DIRECTORY);
 		    }
@@ -820,6 +824,10 @@ public class IndexController
 						this_caption.this_infobarGfx.infobar.getLast_left_bottom(),
 						this_caption.this_infobarGfx.infobar::setLeft_bottom
 				);
+				setIfNotEmpty(
+						this_caption.this_infobarGfx.infobar.getLast_right_full_section(),
+						this_caption.this_infobarGfx.infobar::setRight_full_section
+				);
 				break;
 			}
 			break;
@@ -864,6 +872,15 @@ public class IndexController
 			}
 			break;
 		case Constants.T20_MUMBAI:
+			if(!this_caption.this_infobarGfx.infobar.getRight_section().equalsIgnoreCase("BLANK")) {
+				if(this_caption.this_infobarGfx.infobar.getRight_section() != null && !this_caption.this_infobarGfx.infobar.getRight_section().isEmpty()) {
+					this_caption.PopulateGraphics("Alt_5," + Inn_Number + ",BLANK", session_match);
+					this_animation.caption = this_caption;
+					TimeUnit.MILLISECONDS.sleep(1000);
+					processAnimations("ANIMATE-IN-GRAPHICS", session_configuration, "Alt_5," + Inn_Number + ",BLANK", print_writers, headToHead);
+				}
+			}
+			
 			if(!this_caption.this_infobarGfx.infobar.getRight_section().equalsIgnoreCase("BOWLER")) {
 				if(this_caption.this_infobarGfx.infobar.getRight_section() != null && !this_caption.this_infobarGfx.infobar.getRight_section().isEmpty()) {
 					this_caption.PopulateGraphics("Alt_8," + Inn_Number + ",BOWLER", session_match);
@@ -952,8 +969,7 @@ public class IndexController
 						TimeUnit.MILLISECONDS.sleep(2000);
 						this_caption.whichSide = 1;
 						this_caption.PopulateGraphics(valueToProcess, session_match);
-//						TimeUnit.MILLISECONDS.sleep(1000);
-//						this_animation.CutBack(valueToProcess, print_writers, session_configuration);
+						this_animation.CutBack(valueToProcess, print_writers, session_configuration);
 					}
 				}
 				break;

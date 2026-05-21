@@ -498,15 +498,24 @@ function processUserSelectionData(whatToProcess,dataToProcess)
 					break;
 			 	}
 				break;
-				case 'Alt_5':
-					switch($('#selected_broadcaster').val().toUpperCase()){
-					case 'ICC-U19-2023': case 'BENGAL-T20': case 'NPL': case 'MPL': case 'LEGENDS-90': case 'APL': case 'ISPL':
-						addItemsToList(dataToProcess,null); 
-						break;
-				 	}
-					break;	
+			case 'Alt_5':
+				switch($('#selected_broadcaster').val().toUpperCase()){
+				case 'ICC-U19-2023': case 'BENGAL-T20': case 'NPL': case 'MPL': case 'LEGENDS-90': case 'APL': case 'ISPL':
+				case 'T20_MUMBAI':
+					addItemsToList(dataToProcess,null); 
+					break;
+				 }
+				break;
+			case 'Alt_6':
+				switch($('#selected_broadcaster').val().toUpperCase()){
+				case 'ICC-U19-2023': case 'T20_MUMBAI':
+					addItemsToList(dataToProcess,null); 
+					break;
+				 }
+				break;
+					
 			case 'Shift_C': case 'Control_Shift_Q': case 'h':
-			case 'F12': case 'Alt_1': case 'Alt_2': case 'Alt_7': //case 'Alt_6': case 'Alt_8': case 'Alt_3': case 'Alt_4': case 'F7': case 'F11':
+			case 'F12': case 'Alt_1': case 'Alt_2': case 'Alt_7': // case 'Alt_8': case 'Alt_3': case 'Alt_4': case 'F7': case 'F11':
 			case 'Control_F5': case 'Shift_T': case 'Control_F9': case 'F5': case 'F6': case 'Alt_w':  case 'Control_j': case 'Alt_F8':
 			case 'F8': case 'F9':  case 'u': case 'q': case 'Shift_F5': case 'Shift_F9': case 'Shift_F6': case 'Control_y': case 'Shift_F8':
 			case 'Shift_O': case 'g': case 'y': case 'Control_g': case 'Control_s': case 'Control_f': //case 'Alt_F9': case 'Control_h':
@@ -4295,39 +4304,183 @@ function addItemsToList(whatToProcess,dataToProcess)
 			break;
 		
 		case 'Alt_5':
-			header_text.innerHTML = 'MIDDLE INFOBAR SECTION - LAST x BALLS';
-		
-			select = document.createElement('input');
-			select.type = "text";
-			select.id = 'selectFreeText';
-			select.value = '10';
-			
-			select.setAttribute('onchange',"setTextBoxOptionToSelectOptionArray(0)");
-			row.insertCell(cellCount).appendChild(select);
-			setTextBoxOptionToSelectOptionArray(0);
-			cellCount = cellCount + 1;
-			
 			switch($('#selected_broadcaster').val().toUpperCase()){
-			case 'ISPL':
+			case 'T20_MUMBAI':
+				header_text.innerHTML = 'RIGHT FULL INFOBAR SECTION';
+				
 				select = document.createElement('select');
-				select.id = 'selectMiddleStat';
+				select.id = 'selectRightFullSection';
 				select.name = select.id;
 				
-				option = document.createElement('option');
-				option.value = 'WITH';
-				option.text = 'With CRR';
-				select.appendChild(option);
+				if(session_match.setup.matchType == 'SUPER_OVER'){
+					session_match.match.inning.forEach(function(inn){
+						if(inn.isCurrentInning == 'YES' && session_match.setup.matchType != 'TEST' && session_match.setup.matchType != 'FC'){
+							if(inn.inningNumber == 1){
+								
+							}
+							else{
+								option = document.createElement('option');
+								option.value = 'TARGET';
+								option.text = 'Target';
+								select.appendChild(option);
+								
+								option = document.createElement('option');
+								option.value = 'EQUATION';
+								option.text = 'Equation';
+								select.appendChild(option);
+							}
+						}
+					});
+					
+					option = document.createElement('option');
+					option.value = 'OVER';
+					option.text = 'This Over';
+					select.appendChild(option);
+					
+					option = document.createElement('option');
+					option.value = 'REVIEWS_REMAINING';
+					option.text = 'Reviews Remaining';
+					select.appendChild(option);
+					
+				}else{
+					option = document.createElement('option');
+					option.value = 'BLANK';
+					option.text = 'blank';
+					select.appendChild(option);
+					
+					/*option = document.createElement('option');
+					option.value = 'PARTNERSHIP';
+					option.text = 'Partnership';
+					select.appendChild(option);*/
 				
-				option = document.createElement('option');
-				option.value = 'WITHOUT';
-				option.text = 'Without CRR';
-				select.appendChild(option);
+					option = document.createElement('option');
+					option.value = 'LAST_X_BALLS';
+					option.text = 'Last X Balls';
+					select.appendChild(option);
+					
+					option = document.createElement('option');
+					option.value = 'BOUNDARY';
+					option.text = 'Innings Boundaries';
+					select.appendChild(option);
+					
+					option = document.createElement('option');
+					option.value = 'BALLS_SINCE_LAST_BOUNDARY';
+					option.text = 'Ball Since Last Boundary';
+					select.appendChild(option);
+					
+					option = document.createElement('option');
+					option.value = 'REVIEWS_REMAINING';
+					option.text = 'Reviews Remaining';
+					select.appendChild(option);
+					
+					option = document.createElement('option');
+					option.value = 'LAST_WICKET';
+					option.text = 'Last Wicket';
+					select.appendChild(option);
+					
+					session_match.match.inning.forEach(function(inn){
+						if(inn.isCurrentInning == 'YES'){
+							if(inn.inningNumber == 1){
+								option = document.createElement('option');
+								option.value = 'Projected';
+								option.text = 'Projected Score';
+								select.appendChild(option);
+							}
+							else if(inn.inningNumber == 2){
+								
+								option = document.createElement('option');
+								option.value = 'RUNRATE';
+								option.text = 'Run-Rate';
+								select.appendChild(option);
+								
+								option = document.createElement('option');
+								option.value = 'EQUATION';
+								option.text = 'Equation';
+								select.appendChild(option);
+								
+								option = document.createElement('option');
+								option.value = 'COMPARE';
+								option.text = 'Compare';
+								select.appendChild(option);
+							}
+						}
+					});	
+				}
 				
-				select.setAttribute('onchange',"setDropdownOptionToSelectOptionArray(this, 1)");
+				select.setAttribute('onchange',"setDropdownOptionToSelectOptionArray(this, 0)");
 				row.insertCell(cellCount).appendChild(select);
-				setDropdownOptionToSelectOptionArray($(select),1);
-				cellCount = cellCount + 1;
+				setDropdownOptionToSelectOptionArray($(select),0);
+				cellCount = cellCount + 1
+				
+				select.addEventListener('change', function () {
+				    if (document.getElementById('selectFreeText')) {
+				        document.getElementById('selectFreeText').parentElement.remove();
+				    }
+				    if (this.value === 'LAST_X_BALLS') {
+				        let label = document.createElement('label');
+				        label.setAttribute('for', 'selectFreeText');
+				        label.innerHTML = 'BALLS : ';
+
+				        let xballselect = document.createElement('input');
+				        xballselect.type = "text";
+				        xballselect.id = 'selectFreeText';
+				        xballselect.value = '10';
+
+				        xballselect.size = 3;
+				        xballselect.maxLength = 3;
+				        xballselect.style.width = "50px";
+
+				        xballselect.setAttribute('onchange', "setTextBoxOptionToSelectOptionArray(1)");
+				        let cell = row.insertCell(1);
+				        cell.style.cssText = "display:flex; align-items:center; text-align:center; vertical-align:middle; gap:5px;";
+				        cell.appendChild(label);
+				        cell.appendChild(xballselect);
+
+				        setTextBoxOptionToSelectOptionArray(1);
+
+				        cellCount++;
+				    }
+				});
+
+				// Trigger once initially
+				select.dispatchEvent(new Event('change'));
 				break;
+			default:
+				header_text.innerHTML = 'MIDDLE INFOBAR SECTION - LAST x BALLS';
+						
+				select = document.createElement('input');
+				select.type = "text";
+				select.id = 'selectFreeText';
+				select.value = '10';
+				
+				select.setAttribute('onchange',"setTextBoxOptionToSelectOptionArray(0)");
+				row.insertCell(cellCount).appendChild(select);
+				setTextBoxOptionToSelectOptionArray(0);
+				cellCount = cellCount + 1;
+				
+				switch($('#selected_broadcaster').val().toUpperCase()){
+				case 'ISPL':
+					select = document.createElement('select');
+					select.id = 'selectMiddleStat';
+					select.name = select.id;
+					
+					option = document.createElement('option');
+					option.value = 'WITH';
+					option.text = 'With CRR';
+					select.appendChild(option);
+					
+					option = document.createElement('option');
+					option.value = 'WITHOUT';
+					option.text = 'Without CRR';
+					select.appendChild(option);
+					
+					select.setAttribute('onchange',"setDropdownOptionToSelectOptionArray(this, 1)");
+					row.insertCell(cellCount).appendChild(select);
+					setDropdownOptionToSelectOptionArray($(select),1);
+					cellCount = cellCount + 1;
+					break;
+				}
+				break;	
 			}
 			break;
 		case 'Shift_C':
@@ -4423,7 +4576,79 @@ function addItemsToList(whatToProcess,dataToProcess)
 			
 		case 'Alt_6':
 			switch($('#selected_broadcaster').val().toUpperCase()){
-				case 'ICC-U19-2023':
+			case 'T20_MUMBAI':
+				header_text.innerHTML = 'FULL INFOBAR SECTION';
+				
+				select = document.createElement('select');
+				select.id = 'selectFullSection';
+				select.name = select.id;
+				
+				if(session_match.setup.matchType == 'SUPER_OVER'){
+					session_match.match.inning.forEach(function(inn){
+						if(inn.isCurrentInning == 'YES' && session_match.setup.matchType != 'TEST' && session_match.setup.matchType != 'FC'){
+							if(inn.inningNumber == 1){
+								
+							}
+							else{
+								option = document.createElement('option');
+								option.value = 'TARGET';
+								option.text = 'Target';
+								select.appendChild(option);
+								
+								option = document.createElement('option');
+								option.value = 'EQUATION';
+								option.text = 'Equation';
+								select.appendChild(option);
+							}
+						}
+					});
+					
+					option = document.createElement('option');
+					option.value = 'OVER';
+					option.text = 'This Over';
+					select.appendChild(option);
+					
+					option = document.createElement('option');
+					option.value = 'REVIEWS_REMAINING';
+					option.text = 'Reviews Remaining';
+					select.appendChild(option);
+					
+				}else{
+					option = document.createElement('option');
+					option.value = 'BLANK';
+					option.text = 'blank';
+					select.appendChild(option);
+								
+					option = document.createElement('option');
+					option.value = 'IDENT';
+					option.text = 'Ident';
+					select.appendChild(option);
+					
+					session_match.match.inning.forEach(function(inn){
+						if(inn.isCurrentInning == 'YES'){
+							if(inn.inningNumber == 1){
+								option = document.createElement('option');
+								option.value = 'Projected';
+								option.text = 'Projected Score';
+								select.appendChild(option);
+							}
+							else if(inn.inningNumber == 2){
+								option = document.createElement('option');
+								option.value = 'EQUATION_BIG';
+								option.text = 'Equation Big';
+								select.appendChild(option);
+							}
+						}
+					});	
+				}
+				
+				select.setAttribute('onchange',"setDropdownOptionToSelectOptionArray(this, 0)");
+				row.insertCell(cellCount).appendChild(select);
+				setDropdownOptionToSelectOptionArray($(select),0);
+				cellCount = cellCount + 1
+
+				break;
+			case 'ICC-U19-2023':
 					header_text.innerHTML = 'MIDDLE INFOBAR SECTION - BAT & SPONSOR';
 		
 					select = document.createElement('select');
@@ -4730,16 +4955,21 @@ function addItemsToList(whatToProcess,dataToProcess)
 						option.value = 'PARTNERSHIP';
 						option.text = 'Partnership';
 						select.appendChild(option);*/
+					
+						option = document.createElement('option');
+						option.value = 'LAST_X_BALLS';
+						option.text = 'Last X Balls';
+						select.appendChild(option);
 						
 						option = document.createElement('option');
 						option.value = 'BOUNDARY';
 						option.text = 'Innings Boundaries';
 						select.appendChild(option);
 						
-						option = document.createElement('option');
+						/*option = document.createElement('option');
 						option.value = 'BALLS_SINCE_LAST_BOUNDARY';
 						option.text = 'Ball Since Last Boundary';
-						select.appendChild(option);
+						select.appendChild(option);*/
 						
 						option = document.createElement('option');
 						option.value = 'EXTRAS';
@@ -4751,10 +4981,10 @@ function addItemsToList(whatToProcess,dataToProcess)
 						option.text = 'Fall Of Wickets';
 						select.appendChild(option);*/
 						
-						option = document.createElement('option');
+						/*option = document.createElement('option');
 						option.value = 'REVIEWS_REMAINING';
 						option.text = 'Reviews Remaining';
-						select.appendChild(option);
+						select.appendChild(option);*/
 						
 						/*option = document.createElement('option');
 						option.value = 'TIMELINE';
@@ -4974,6 +5204,43 @@ function addItemsToList(whatToProcess,dataToProcess)
 			row.insertCell(cellCount).appendChild(select);
 			setDropdownOptionToSelectOptionArray($(select),0);
 			cellCount = cellCount + 1
+			
+			switch($('#selected_broadcaster').val().toUpperCase()){
+			case 'T20_MUMBAI': 
+				select.addEventListener('change', function () {
+				    if (document.getElementById('selectFreeText')) {
+				        document.getElementById('selectFreeText').parentElement.remove();
+				    }
+				    if (this.value === 'LAST_X_BALLS') {
+				        let label = document.createElement('label');
+				        label.setAttribute('for', 'selectFreeText');
+				        label.innerHTML = 'BALLS : ';
+
+				        let xballselect = document.createElement('input');
+				        xballselect.type = "text";
+				        xballselect.id = 'selectFreeText';
+				        xballselect.value = '10';
+
+				        xballselect.size = 3;
+				        xballselect.maxLength = 3;
+				        xballselect.style.width = "50px";
+
+				        xballselect.setAttribute('onchange', "setTextBoxOptionToSelectOptionArray(1)");
+				        let cell = row.insertCell(1);
+				        cell.style.cssText = "display:flex; align-items:center; text-align:center; vertical-align:middle; gap:5px;";
+				        cell.appendChild(label);
+				        cell.appendChild(xballselect);
+
+				        setTextBoxOptionToSelectOptionArray(1);
+
+				        cellCount++;
+				    }
+				});
+
+				// Trigger once initially
+				select.dispatchEvent(new Event('change'));
+				break;
+			}
 			break;
 			
 		case 'Alt_9':
