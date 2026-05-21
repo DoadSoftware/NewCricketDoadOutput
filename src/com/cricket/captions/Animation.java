@@ -138,7 +138,7 @@ public class Animation
 				return Constants.LOWER_THIRD;	
 			}
 			break;
-		case Constants.NPL: case Constants.MPL: case Constants.APL:
+		case Constants.NPL: case Constants.MPL: case Constants.APL: case Constants.VIDARBHA:
 			switch (whatToProcess.split(",")[0]) {
 			case "Alt_1": case "Alt_2": case "Alt_3": case "Alt_4": case "Alt_5": case "Alt_6": case "Alt_7": case "Alt_8": 
 			case "Alt_9": case "Alt_0": case "Control_F12": case "Shift_F12": case "Control_Shift_(":
@@ -502,6 +502,15 @@ public class Animation
 	public String AnimateIn(String whatToProcess, List<PrintWriter> print_writers, Configuration config) throws InterruptedException, IOException 
 	{
 		switch (config.getBroadcaster().toUpperCase()) {
+		case Constants.VIDARBHA:
+			switch (whatToProcess.split(",")[0]) {
+			 case "F1":
+				 processAnimation(Constants.BACK, print_writers, "Anim_FullFrames", "START");
+			 break;
+			}
+		
+			
+			break;
 		case Constants.T20_MUMBAI:
 			T20_MumbaiAnimateIn(whatToProcess, print_writers, config);
 			break;

@@ -372,7 +372,7 @@ function processUserSelectionData(whatToProcess,dataToProcess)
 				case 'ISPL':
 					addItemsToList(dataToProcess,null);
 					break;
-				case 'ICC-U19-2023': case 'BENGAL-T20': case 'NPL': case 'LEGENDS-90': case 'MPL': case 'T20_MUMBAI': case 'APL':
+				case 'ICC-U19-2023': case 'BENGAL-T20': case 'NPL': case 'LEGENDS-90': case 'MPL': case 'T20_MUMBAI': case 'APL': case 'VIDARBHA':
 					dataToProcess = dataToProcess + ',' + document.getElementById('which_inning').value;
 					processCricketProcedures("POPULATE-GRAPHICS", dataToProcess);
 					break;
@@ -2845,7 +2845,7 @@ function addItemsToList(whatToProcess,dataToProcess)
 				setDropdownOptionToSelectOptionArray($(select),0);
 				cellCount = cellCount + 1;
 				break;
-			case 'MPL': case 'NPL': case 'APL':
+			case 'MPL': case 'NPL': case 'APL': 
 				select = document.createElement('select');
 				select.id = 'selectMiddleStat';
 				select.name = select.id;

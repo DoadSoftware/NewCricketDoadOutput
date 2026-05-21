@@ -78,6 +78,14 @@ public class Constants
 	public final static String NPL_WEATHER_PATH = "IMAGE*/Default/Essentials/WeatherIcons/";
 	public final static String NPL_CAPS_PATH = "IMAGE*/Default/Essentials/Caps/";
 	
+	public final static String VIDARBHA = "VIDARBHA";
+//	public final static String NPL_LOGO_PATH = "IMAGE*/Default/Essentials/Logos/";
+//	public final static String NPL_LOCAL_PHOTO_PATH = "C:\\\\Images\\\\NPL\\\\Photos\\\\";
+//	public final static String NPL_PHOTO_PATH = "\\c\\Images\\NPL\\Photos\\";
+//	public final static String NPL_SPONSOR_PATH = "IMAGE*/Default/Essentials/Sponsor/";
+//	public final static String NPL_WEATHER_PATH = "IMAGE*/Default/Essentials/WeatherIcons/";
+//	public final static String NPL_CAPS_PATH = "IMAGE*/Default/Essentials/Caps/";
+	
 	public final static String APL = "APL";
 	public final static String APL_LOGO_PATH = "IMAGE*/Default/Essentials/Logos/";
 	public final static String APL_LOCAL_PHOTO_PATH = "C:\\\\Images\\\\APL\\\\Photos\\\\";

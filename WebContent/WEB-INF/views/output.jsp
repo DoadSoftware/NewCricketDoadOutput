@@ -226,6 +226,7 @@
 	      					session_configuration.broadcaster == 'NPL' ||
 	      					session_configuration.broadcaster == 'APL' ||
 	      					session_configuration.broadcaster == 'MPL' ||
+	      					session_configuration.broadcaster == 'VIDARBHA' ||
 	      					session_configuration.broadcaster == 'LEGENDS-90')}">
 			    <br>
 			   <div class="custom-toggle-wrapper">

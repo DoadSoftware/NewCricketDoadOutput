@@ -253,6 +253,7 @@
 			      <select id="select_broadcaster" name="select_broadcaster" class="browser-default custom-select custom-select-sm">
 			      		<option value="MPL">MPL</option>
 			      		<option value="APL">APL</option>
+			      		<option value="VIDARBHA">VIDARBHA</option>
 			      		<option value="ISPL">ISPL</option>
 			      		<option value="LEGENDS-90">LEGENDS 90</option>
 			      		<option value="T20_MUMBAI">T20 MUMBAI</option>

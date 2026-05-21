@@ -301,6 +301,7 @@ public class IndexController
 	    System.out.println("basePath - " + basePath);
 
 	    // LAST MODIFIED
+	    System.out.println("basePath = " + basePath);
 	    last_match_time_stamp = new File(basePath + CricketUtil.MATCHES_DIRECTORY + selectedMatch).lastModified();
 
 	    // CONFIGURATION
@@ -330,6 +331,8 @@ public class IndexController
 	    // INITIALIZE MATCH
 	    if (session_match.getMatch() != null) {
 	        session_match.getMatch().setMatchFileName(selectedMatch);
+	        
+	        System.out.println("selectedMatch = " + selectedMatch);
 	        initializeMatchData(true,session_match,session_configuration,session_players,session_team,session_ground);
 	    }
 
@@ -433,7 +436,7 @@ public class IndexController
             
 		default:
 			switch(session_configuration.getBroadcaster()) {
-			case Constants.NPL: case Constants.MPL: case Constants.APL:
+			case Constants.NPL: case Constants.MPL: case Constants.APL: case Constants.VIDARBHA:
 				if(process.split(",")[0].toUpperCase().equalsIgnoreCase("highlightProfile") || 
 						process.split(",")[0].toUpperCase().equalsIgnoreCase("highlightLeader")) {
 					this_animation.ChangeOn(process, print_writers, session_configuration);
@@ -451,6 +454,15 @@ public class IndexController
 					this_animation.Lof_ISPL_CutBack(this_caption.this_lowerThirdGfx.impactPlayerData, print_writers, session_configuration);
 					this_caption.this_lowerThirdGfx.chnageOn = false;
 					break;
+				case Constants.VIDARBHA:
+				//	this_animation.Lof_ISPL_ChangeOn(this_caption.this_lowerThirdGfx.impactPlayerData, print_writers, session_configuration);
+				//	this_caption.this_lowerThirdGfx.chnageOn = true;
+					TimeUnit.MILLISECONDS.sleep(3000);
+					this_caption.whichSide = 1;
+					this_caption.PopulateGraphics(this_caption.this_lowerThirdGfx.impactPlayerData, session_match);
+					this_animation.CutBack(this_caption.this_lowerThirdGfx.impactPlayerData, print_writers, session_configuration);
+					this_caption.this_lowerThirdGfx.chnageOn = false;
+					break;	
 				case Constants.NPL: case Constants.APL:
 					this_animation.ChangeOn(this_caption.this_lowerThirdGfx.impactPlayerData, print_writers, session_configuration);
 					this_caption.this_lowerThirdGfx.chnageOn = true;
@@ -638,7 +650,7 @@ public class IndexController
 	    speed_match_time_stamp = currentTimestamp;
 
 	    switch (session_configuration.getBroadcaster()) {
-	        case Constants.T20_MUMBAI: case Constants.NPL: case Constants.APL:
+	        case Constants.T20_MUMBAI: case Constants.NPL: case Constants.APL: case Constants.VIDARBHA:
 	            this_caption.this_infobarGfx.speed(CricketFunctions.processPrintWriter(session_configuration).get(0),session_match,session_configuration, basePath);
 	            break;
 	        case Constants.ISPL:
@@ -710,7 +722,7 @@ public class IndexController
 			break;
 		default:
 			if (Set.of(Constants.ICC_U19_2023,Constants.ISPL,Constants.BENGAL_T20,Constants.NPL,Constants.LEGENDS,
-					Constants.MPL,Constants.APL).contains(session_configuration.getBroadcaster())
+					Constants.MPL,Constants.APL,Constants.VIDARBHA).contains(session_configuration.getBroadcaster())
 					&& !session_configuration.getPrimaryVariousOptions().contains(Constants.FULL_FRAMER)
 					&& graphicsType.contains(Constants.FULL_FRAMER)) {
 
@@ -821,7 +833,7 @@ public class IndexController
 	public void infobarAnimateOutAllSection(Configuration session_configuration, MatchAllData session_match, List<PrintWriter> print_writers, HeadToHead headToHead) 
 			throws Exception {
 		switch(session_configuration.getBroadcaster()) {
-		case Constants.NPL: case Constants.LEGENDS: case Constants.APL: case Constants.MPL:
+		case Constants.NPL: case Constants.LEGENDS: case Constants.APL: case Constants.MPL: case Constants.VIDARBHA:
 			this_caption.whichSide = 2;
 			int Inn_Number = session_match.getMatch().getInning().stream().filter(inn -> inn.getIsCurrentInning()
 					.equalsIgnoreCase(CricketUtil.YES)).findAny().orElse(null).getInningNumber();
@@ -1273,7 +1285,7 @@ public class IndexController
 	public void GetVariousDBData(String typeOfUpdate,Configuration config,HeadToHead headToHead)throws Exception {
 
 	    if (!Set.of(Constants.ICC_U19_2023,Constants.ISPL,Constants.BENGAL_T20,Constants.NPL,Constants.LEGENDS,Constants.T20_MUMBAI,
-	    		Constants.MPL,Constants.APL).contains(config.getBroadcaster())) {
+	    		Constants.MPL,Constants.APL,Constants.VIDARBHA).contains(config.getBroadcaster())) {
 	        return;
 	    }
 
@@ -1471,7 +1483,7 @@ public class IndexController
 	            break;
 
 	        case Constants.ICC_U19_2023: case Constants.BENGAL_T20: case Constants.NPL: case Constants.LEGENDS:
-	        case Constants.MPL: case Constants.APL:
+	        case Constants.MPL: case Constants.APL: case Constants.VIDARBHA:
 
 	            if (session_configuration.getPrimaryVariousOptions().contains(Constants.FULL_FRAMER)) {
 	                this_scene.LoadScene("FULL-FRAMERS", print_writers,session_configuration);

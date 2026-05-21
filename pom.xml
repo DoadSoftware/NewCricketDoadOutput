@@ -24,7 +24,7 @@
         <dependency>
             <groupId>com.cricket</groupId>
             <artifactId>NewCricketLibrary</artifactId>
-            <version>3.6</version>
+            <version>3.5</version>
         </dependency>
 
 		<dependency>
