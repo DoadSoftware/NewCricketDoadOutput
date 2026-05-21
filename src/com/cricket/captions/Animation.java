@@ -504,9 +504,7 @@ public class Animation
 		switch (config.getBroadcaster().toUpperCase()) {
 		case Constants.VIDARBHA:
 			switch (whatToProcess.split(",")[0]) {
-			 case "F1":
-				 processAnimation(Constants.BACK, print_writers, "Anim_FullFrames", "START");
-			 break;
+
 			 case "m": case "Control_m":
 					AnimateIn("ArrowDown,", print_writers, config); // Push infobar
 					TimeUnit.MILLISECONDS.sleep(500);
@@ -520,6 +518,30 @@ public class Animation
 					processAnimation(Constants.BACK, print_writers, "Anim_Target$Loop", "START");
 					this.whichGraphicOnScreen = whatToProcess;
 					break;	
+
+			case "F1": case "Control_Shift_A": case "F2": case "F4": case "Control_F7": case "Shift_T": case "Shift_F8": case "Control_F11":
+			case "Shift_K":	case "Control_p": case "Shift_F11": case "z": case "x": case "c": case "v": case "Control_F10":
+			case "Control_c": case "Control_v": case "Shift_V": case "Control_z": case "Control_x":
+				AnimateIn("ArrowDown,", print_writers, config); // Push infobar
+				TimeUnit.MILLISECONDS.sleep(500);
+				processAnimation(Constants.BACK, print_writers, "Anim_FullFrames$In_Out$Essentials", "START");
+				processAnimation(Constants.BACK, print_writers, "Anim_FullFrames$In_Out$Header", "START");
+				switch (whatToProcess.split(",")[0]) {
+				case "F1": case "Control_Shift_A":
+					processAnimation(Constants.BACK, print_writers, "Anim_FullFrames$In_Out$Main$Batting_Card", "START");
+					break;
+				case "F2":
+					processAnimation(Constants.BACK, print_writers, "Anim_FullFrames$In_Out$Main$Bowling_Card", "START");
+					break;
+				case "F4":
+					processAnimation(Constants.BACK, print_writers, "Anim_FullFrames$In_Out$Main$Partnership_List", "START");
+					break;
+				case "Control_F7":
+					processAnimation(Constants.BACK, print_writers, "Anim_FullFrames$In_Out$Main$Teams", "START");
+					break;	
+				}
+				break;
+
 			}
 		
 			

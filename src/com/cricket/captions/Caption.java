@@ -376,7 +376,9 @@ public class Caption
 					}
 				}
 				
-				System.out.println("whattoprocess====================" + whatToProcess );
+					if(config.getBroadcaster().toUpperCase().equalsIgnoreCase(Constants.VIDARBHA)) {
+						this_fullFramesGfx.WhichScoreCard = whatToProcess.split(",")[2];
+					}
 				status = this_fullFramesGfx.PopulateScorecardFF(whichSide, whatToProcess.split(",")[0], matchAllData, 
 					Integer.valueOf(whatToProcess.split(",")[1]));
 				break;
