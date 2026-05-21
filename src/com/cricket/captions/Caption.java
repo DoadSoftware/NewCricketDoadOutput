@@ -1407,7 +1407,7 @@ public class Caption
 			case "Alt_6":
 				this_infobarGfx.infobar.setMiddle_section("BATSMAN_SPONSOR");
 				this_infobarGfx.sponsor_omo = Integer.valueOf(whatToProcess.split(",")[2]);
-				//status = this_infobarGfx.populateVizInfobarMiddleSection(print_writers, matchAllData, whichSide);
+				status = this_infobarGfx.populateVizInfobarMiddleSection(print_writers, matchAllData, whichSide);
 				break;
 			case "Alt_7":
 				
@@ -1490,18 +1490,18 @@ public class Caption
 				break;
 			case "Alt_8":
 				switch (config.getBroadcaster().toUpperCase()) {
-				case Constants.T20_MUMBAI:
-					if(!whatToProcess.split(",")[2].equalsIgnoreCase(CricketUtil.BOWLER)) {
-						this_infobarGfx.infobar.setRight_section(whatToProcess.split(",")[2]);
-						status = this_infobarGfx.populateVizInfobarRightSection(false,print_writers, matchAllData, whichSide, 1);
-					}else {
-						this_infobarGfx.infobar.setRight_section(CricketUtil.BOWLER);
-						this_infobarGfx.infobar.setRight_bottom("BOWLING_STYLE");
-						
-						status = this_infobarGfx.populateVizInfobarBowler(print_writers, matchAllData, whichSide);
-					}
-					break;
-				case Constants.NPL: case Constants.LEGENDS: case Constants.MPL: case Constants.APL:
+//				case Constants.T20_MUMBAI:
+//					if(!whatToProcess.split(",")[2].equalsIgnoreCase(CricketUtil.BOWLER)) {
+//						this_infobarGfx.infobar.setRight_section(whatToProcess.split(",")[2]);
+//						status = this_infobarGfx.populateVizInfobarRightSection(false,print_writers, matchAllData, whichSide, 1);
+//					}else {
+//						this_infobarGfx.infobar.setRight_section(CricketUtil.BOWLER);
+//						this_infobarGfx.infobar.setRight_bottom("BOWLING_END");
+//						
+//						status = this_infobarGfx.populateVizInfobarBowler(print_writers, matchAllData, whichSide);
+//					}
+//					break;
+				case Constants.NPL: case Constants.LEGENDS: case Constants.MPL: case Constants.APL: case Constants.T20_MUMBAI:
 					if(this_infobarGfx.infobar.getRight_section().equalsIgnoreCase(CricketUtil.BOWLER) && 
 							whatToProcess.split(",")[2].equalsIgnoreCase(CricketUtil.BOWLER)) {
 						status = "IN Alt+8 Section BOWLER IS ALREADY SELECTED";
@@ -1667,7 +1667,7 @@ public class Caption
 				case Constants.BENGAL_T20:
 					this_infobarGfx.infobar.setMiddle_section("FREE_TEXT");
 					this_infobarGfx.infobarStatsId = Integer.valueOf(whatToProcess.split(",")[2]);
-					//status = this_infobarGfx.populateVizInfobarMiddleSection(print_writers, matchAllData, whichSide);
+					status = this_infobarGfx.populateVizInfobarMiddleSection(print_writers, matchAllData, whichSide);
 					break;	
 //				case Constants.ISPL:
 //					if(this_infobarGfx.infobar.getFull_section() != null && !this_infobarGfx.infobar.getFull_section().isEmpty()) {
@@ -1725,7 +1725,7 @@ public class Caption
 				case Constants.BENGAL_T20:
 					this_infobarGfx.infobar.setMiddle_section("COMMENTATORS");
 					this_infobarGfx.Comms_Name = whatToProcess;
-					//status = this_infobarGfx.populateVizInfobarMiddleSection(print_writers, matchAllData, whichSide);
+					status = this_infobarGfx.populateVizInfobarMiddleSection(print_writers, matchAllData, whichSide);
 					break;	
 //				case Constants.ISPL:
 //					if(this_infobarGfx.infobar.getFull_section() != null && !this_infobarGfx.infobar.getFull_section().isEmpty()) {

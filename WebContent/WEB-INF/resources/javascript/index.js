@@ -3645,6 +3645,16 @@ function addItemsToList(whatToProcess,dataToProcess)
 					select.appendChild(option);
 					
 					option = document.createElement('option');
+					option.value = 'EXTRAS';
+					option.text = 'Extras';
+					select.appendChild(option);
+					
+					option = document.createElement('option');
+					option.value = 'BOUNDARY';
+					option.text = 'Boundary';
+					select.appendChild(option);
+					
+					option = document.createElement('option');
 					option.value = 'CURR_PARTNERSHIP';
 					option.text = 'Current Partnership';
 					select.appendChild(option);
@@ -4679,10 +4689,10 @@ function addItemsToList(whatToProcess,dataToProcess)
 						option.text = 'Bowler';
 						select.appendChild(option);
 						
-						option = document.createElement('option');
+						/*option = document.createElement('option');
 						option.value = 'PARTNERSHIP';
 						option.text = 'Partnership';
-						select.appendChild(option);
+						select.appendChild(option);*/
 						
 						option = document.createElement('option');
 						option.value = 'BOUNDARY';
@@ -4699,27 +4709,27 @@ function addItemsToList(whatToProcess,dataToProcess)
 						option.text = 'Extras';
 						select.appendChild(option);
 						
-						option = document.createElement('option');
+						/*option = document.createElement('option');
 						option.value = 'FOW';
 						option.text = 'Fall Of Wickets';
-						select.appendChild(option);
+						select.appendChild(option);*/
 						
 						option = document.createElement('option');
 						option.value = 'REVIEWS_REMAINING';
 						option.text = 'Reviews Remaining';
 						select.appendChild(option);
 						
-						option = document.createElement('option');
+						/*option = document.createElement('option');
 						option.value = 'TIMELINE';
 						option.text = 'Timeline';
-						select.appendChild(option);
+						select.appendChild(option);*/
 						
 						option = document.createElement('option');
 						option.value = 'LAST_WICKET';
 						option.text = 'Last Wicket';
 						select.appendChild(option);
 						
-						option = document.createElement('option');
+						/*option = document.createElement('option');
 						option.value = 'PHASE_WISE_SCORE';
 						option.text = 'Phase Wise Score';
 						select.appendChild(option);
@@ -4732,24 +4742,24 @@ function addItemsToList(whatToProcess,dataToProcess)
 						option = document.createElement('option');
 						option.value = 'ST_BALL';
 						option.text = 'Strategic TimeOut Ball';
-						select.appendChild(option);
+						select.appendChild(option);*/
 						
 						session_match.match.inning.forEach(function(inn){
 							if(inn.isCurrentInning == 'YES'){
 								if(inn.inningNumber == 1){
-									option = document.createElement('option');
+									/*option = document.createElement('option');
 									option.value = 'Toss';
 									option.text = 'Toss';
 									select.appendChild(option);
 									
 									option = document.createElement('option');
 									option.value = 'Projected';
-									option.text = 'Projected Score';
+									option.text = 'Projected Score';*/
 									select.appendChild(option);
 								}
 								else if(inn.inningNumber == 2){
 									
-									option = document.createElement('option');
+									/*option = document.createElement('option');
 									option.value = 'TARGET';
 									option.text = 'Target';
 									select.appendChild(option);
@@ -4762,7 +4772,7 @@ function addItemsToList(whatToProcess,dataToProcess)
 									option = document.createElement('option');
 									option.value = 'SMALL_EQUATION';
 									option.text = 'Small Equation';
-									select.appendChild(option);
+									select.appendChild(option);*/
 									
 									option = document.createElement('option');
 									option.value = 'COMPARE';

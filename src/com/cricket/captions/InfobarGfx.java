@@ -653,7 +653,7 @@ public class InfobarGfx
 					if(status == Constants.OK) {
 						this.infobar.setMiddle_section(whatToProcess.split(",")[2]);
 						this.infobar.setRight_section(CricketUtil.BOWLER);
-						this.infobar.setRight_bottom("BOWLING_STYLE");
+						this.infobar.setRight_bottom("BOWLING_END");
 						
 						populateCurrentBatsmen(print_writers, matchAllData, 1);
 						populateVizInfobarBowler(print_writers, matchAllData, 1);
@@ -896,6 +896,7 @@ public class InfobarGfx
 		int lineIndex1 = 1;
 		boolean found1 = false;
 		TimeUnit.MILLISECONDS.sleep(500);
+		System.out.println(directory);
 		BufferedReader br = new BufferedReader(new FileReader(directory + "Speed/SPEED.txt"));
 
 		while ((text_to_return = br.readLine()) != null) {
@@ -940,7 +941,8 @@ public class InfobarGfx
 					case CricketUtil.SUPER_OVER:
 						break;
 					default:
-						print_writer.println("-1 RENDERER*FRONT_LAYER*TREE*$gfx_Infobar$All$Normal$Speed$txt_Figure*GEOM*TEXT SET " + text_to_return + "\0");
+						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_Infobar$All$Normal$Speed$txt_Figure*ANIMATION*KEY*$speed*VALUE SET " 
+								+ text_to_return + "\0",print_writers);
 						print_writer.println("-1 RENDERER*FRONT_LAYER*TREE*$gfx_Infobar$All$Normal$Speed$txt_Figure*GEOM*TEXT SET " + "KPH" + "\0");
 						break;
 					}
@@ -3191,7 +3193,7 @@ public class InfobarGfx
 			}else {
 				if(infobar.getLast_bowler() != null) {
 					if(infobar.getLast_bowler().getPlayerId() != bowlingCard.getPlayerId()) {
-						this.infobar.setRight_bottom("BOWLING_STYLE");
+						this.infobar.setRight_bottom("BOWLING_END");
 						
 						populateRightTopBowler(print_writers, matchAllData, 2, 1);
 						populateVizInfobarRightBottom(print_writers, matchAllData, 2, 1);
@@ -3459,10 +3461,12 @@ public class InfobarGfx
 				case "ECONOMY":
 					isThisOverLimitExceed = true;
 					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_Infobar$All$Normal$BowlerSection$Section2$Side" + 
-							WhichSide + "$select_DataType*FUNCTION*Omo*vis_con SET 1\0", print_writers);
-					
+							WhichSide + "$select_DataType*FUNCTION*Omo*vis_con SET 2\0", print_writers);
+				
 					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_Infobar$All$Normal$BowlerSection$Section2$Side" + WhichSide + 
-							"$FreeText1$txt_Info*GEOM*TEXT SET ECONOMY: " + bowlingCard.getEconomyRate() + "\0", print_writers);
+							"$FreeText2$txt_StatHead*GEOM*TEXT SET ECONOMY\0", print_writers);
+					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_Infobar$All$Normal$BowlerSection$Section2$Side" + WhichSide + 
+							"$FreeText2$txt_StatValue*GEOM*TEXT SET " + bowlingCard.getEconomyRate() + "\0", print_writers);
 					break;
 				case "BOWLING_END":
 					isThisOverLimitExceed = true;
@@ -3470,7 +3474,7 @@ public class InfobarGfx
 							WhichSide + "$select_DataType*FUNCTION*Omo*vis_con SET 1\0", print_writers);
 					
 					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_Infobar$All$Normal$BowlerSection$Section2$Side" + WhichSide + 
-							"$FreeText1$txt_Info*GEOM*TEXT SET BOWLING FROM " + (bowlingCard.getBowling_end() == 1 ? matchAllData.getSetup().getGround().getFirst_bowling_end() :
+							"$FreeText1$txt_Info*GEOM*TEXT SET " + (bowlingCard.getBowling_end() == 1 ? matchAllData.getSetup().getGround().getFirst_bowling_end() :
 								matchAllData.getSetup().getGround().getSecond_bowling_end()) + " END" + "\0", print_writers);
 					break;
 				case "LAST_BOWLER":
@@ -3487,13 +3491,21 @@ public class InfobarGfx
 					if(lastBowler == null) {
 						return "populateVizInfobarRightBottom: lastBowler is null";
 					}
-					LastOverRuns = CricketFunctions.PreviousBowlerRuns(matchAllData, bowlingCard.getPlayerId()) + " RUN" + 
-							CricketFunctions.Plural(CricketFunctions.PreviousBowlerRuns(matchAllData, bowlingCard.getPlayerId())).toUpperCase();
+					LastOverRuns = CricketFunctions.PreviousBowlerRuns(matchAllData, bowlingCard.getPlayerId()).split(",")[1] + "-" + 
+							CricketFunctions.PreviousBowlerRuns(matchAllData, bowlingCard.getPlayerId()).split(",")[0];
 					
+					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_Infobar$All$Normal$BowlerSection$Section2$Side" + 
+							WhichSide + "$select_DataType*FUNCTION*Omo*vis_con SET 2\0", print_writers);
+				
 					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_Infobar$All$Normal$BowlerSection$Section2$Side" + WhichSide + 
 							"$FreeText2$txt_StatHead*GEOM*TEXT SET LAST OVER\0", print_writers);
 					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_Infobar$All$Normal$BowlerSection$Section2$Side" + WhichSide + 
-							"$FreeText2$txt_StatValue*GEOM*TEXT SET " + lastBowler.getPlayer().getTicker_name() + " : " + LastOverRuns + "\0", print_writers);
+							"$FreeText2$txt_StatValue*GEOM*TEXT SET " + lastBowler.getPlayer().getTicker_name() + ": " + LastOverRuns + "\0", print_writers);
+					
+//					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_Infobar$All$Normal$BowlerSection$Section2$Side" + 
+//							WhichSide + "$select_DataType*FUNCTION*Omo*vis_con SET 1\0", print_writers);
+//					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_Infobar$All$Normal$BowlerSection$Section2$Side" + WhichSide + 
+//							"$FreeText1$txt_Info*GEOM*TEXT SET " + "LAST OVER - " + lastBowler.getPlayer().getTicker_name() + ": " + LastOverRuns + "\0", print_writers);
 					break;
 				case "BOWLING_STYLE":
 					isThisOverLimitExceed = true;
@@ -3512,10 +3524,12 @@ public class InfobarGfx
 					}
 					
 					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_Infobar$All$Normal$BowlerSection$Section2$Side" + 
-							WhichSide + "$select_DataType*FUNCTION*Omo*vis_con SET 1\0", print_writers);
-					
+							WhichSide + "$select_DataType*FUNCTION*Omo*vis_con SET 2\0", print_writers);
+				
 					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_Infobar$All$Normal$BowlerSection$Section2$Side" + WhichSide + 
-							"$FreeText1$txt_Info*GEOM*TEXT SET CURRENT RUN RATE: " + CricketFunctions.generateRunRate(inning.getTotalRuns(), inning.getTotalOvers(), 
+							"$FreeText2$txt_StatHead*GEOM*TEXT SET CURRENT RUN RATE\0", print_writers);
+					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_Infobar$All$Normal$BowlerSection$Section2$Side" + WhichSide + 
+							"$FreeText2$txt_StatValue*GEOM*TEXT SET " + CricketFunctions.generateRunRate(inning.getTotalRuns(), inning.getTotalOvers(), 
 									inning.getTotalBalls(), 2,matchAllData) + "\0", print_writers);
 					break;
 				case "RRR":
@@ -3526,10 +3540,12 @@ public class InfobarGfx
 					inning = matchAllData.getMatch().getInning().stream().filter(inn -> inn.getIsCurrentInning().equalsIgnoreCase(CricketUtil.YES)).findAny().orElse(null);
 					
 					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_Infobar$All$Normal$BowlerSection$Section2$Side" + 
-							WhichSide + "$select_DataType*FUNCTION*Omo*vis_con SET 1\0", print_writers);
-					
+							WhichSide + "$select_DataType*FUNCTION*Omo*vis_con SET 2\0", print_writers);
+				
 					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_Infobar$All$Normal$BowlerSection$Section2$Side" + WhichSide + 
-							"$FreeText1$txt_Info*GEOM*TEXT SET REQUIRED RUN RATE: " + CricketFunctions.generateRunRate(CricketFunctions.GetTargetData(matchAllData).getRemaningRuns(), 
+							"$FreeText2$txt_StatHead*GEOM*TEXT SET REQUIRED RUN-RATE\0", print_writers);
+					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_Infobar$All$Normal$BowlerSection$Section2$Side" + WhichSide + 
+							"$FreeText2$txt_StatValue*GEOM*TEXT SET " + CricketFunctions.generateRunRate(CricketFunctions.GetTargetData(matchAllData).getRemaningRuns(), 
 									0, CricketFunctions.GetTargetData(matchAllData).getRemaningBall(),2,matchAllData) + "\0", print_writers);
 					break;	
 					
@@ -3564,7 +3580,7 @@ public class InfobarGfx
 						
 						
 						for(int iBall = 0; iBall < this_data_str.get(this_data_str.size()-1).split(",").length; iBall++) {
-						
+							
 							switch (this_data_str.get(this_data_str.size()-1).split(",")[iBall].toUpperCase()) {
 							case CricketUtil.DOT: case CricketUtil.ONE: case CricketUtil.TWO: case CricketUtil.THREE: case CricketUtil.FIVE: 
 							case CricketUtil.FOUR:case CricketUtil.SIX: case "W":
@@ -3662,20 +3678,24 @@ public class InfobarGfx
 							}
 						}
 						
-//						if(!matchAllData.getSetup().getMatchType().equalsIgnoreCase(CricketUtil.SUPER_OVER)) {
-//							for (BowlingCard boc : inning.getBowlingCard()) {
-//								switch (boc.getStatus().toUpperCase()) {
-//								case CricketUtil.LAST + CricketUtil.BOWLER:
-//									CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$object$" + containerName + "$Bowler$OutForExtra$Side" + 
-//											WhichSubSide + "$Select*FUNCTION*Omo*vis_con SET 2 \0", print_writers);
-//									CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$object$" + containerName + "$Bowler$OutForExtra$Side" + 
-//											WhichSubSide + "$Free_Text$ThisOver*GEOM*TEXT SET " + "LAST OVER: " + CricketFunctions.processThisOverRunsCount(boc.getPlayerId(),
-//											matchAllData.getEventFile().getEvents()).split("-")[0] + " RUN" + CricketFunctions.Plural(Integer.valueOf(CricketFunctions.
-//											processThisOverRunsCount(boc.getPlayerId(),matchAllData.getEventFile().getEvents()).split("-")[0])).toUpperCase() + "\0", print_writers);
-//									break;
-//								}
-//							}
-//						}
+						if(!matchAllData.getSetup().getMatchType().equalsIgnoreCase(CricketUtil.SUPER_OVER)) {
+							for (BowlingCard boc : inning.getBowlingCard()) {
+								switch (boc.getStatus().toUpperCase()) {
+								case CricketUtil.LAST + CricketUtil.BOWLER:
+									CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_Infobar$All$Normal$BowlerSection$Section2$Side" + WhichSide 
+											+ "$ThisOver$ThisOverDataAll$select_DataType*FUNCTION*Omo*vis_con SET 1\0", print_writers);
+									CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_Infobar$All$Normal$BowlerSection$Section2$Side" + WhichSide 
+											+ "$ThisOver$select_ThisOverHead*FUNCTION*Omo*vis_con SET 1\0", print_writers);
+									CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_Infobar$All$Normal$BowlerSection$Section2$Side" + WhichSide 
+											+ "$ThisOver$txt_ThisOverHead*GEOM*TEXT SET " + "LAST OVER " + " \0", print_writers);
+								    CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_Infobar$All$Normal$BowlerSection$Section2$Side" + WhichSide 
+								    		+ "$ThisOver$ThisOverDataAll$TotalScore$txt_ThisOverFigure*GEOM*TEXT SET " + CricketFunctions.processThisOverRunsCount(boc.getPlayerId(),
+												matchAllData.getEventFile().getEvents()).split("-")[0] + " RUN" + CricketFunctions.Plural(Integer.valueOf(CricketFunctions.
+														processThisOverRunsCount(boc.getPlayerId(),matchAllData.getEventFile().getEvents()).split("-")[0])).toUpperCase() + "\0", print_writers);
+									break;
+								}
+							}
+						}
 					}else {
 						if(this_data_str.get(this_data_str.size()-1).split(",").length > 8 || isThisOverLimitExceed) {
 							isThisOverLimitExceed = true;
@@ -3695,7 +3715,7 @@ public class InfobarGfx
 					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_Infobar$All$Normal$BowlerSection$Section2$Side" + WhichSide + 
 							"$ThisOver$Balls$select_BallNumber*FUNCTION*Omo*vis_con SET " + totalOverSize + "\0", print_writers);
 					if(totalOverSize >= 6) {
-						for(int i = totalOverSize;i<=12;i++) {
+						for(int i = totalOverSize+1;i<=12;i++) {
 							CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_Infobar$All$Normal$BowlerSection$Section2$Side" + WhichSide + 
 									"$ThisOver$Balls$select_BallNumber$Ball" + i + "$select_BallType*FUNCTION*Omo*vis_con SET 0\0", print_writers);
 						}
@@ -4460,7 +4480,6 @@ public class InfobarGfx
 				switch (matchAllData.getSetup().getMatchType()) {
 				case CricketUtil.SUPER_OVER:
 					return RightSectionSuperOver(is_this_updating, print_writers, matchAllData, WhichSide, WhichSubSide);
-
 				default:
 					return t20MumbaiRightSection(is_this_updating, print_writers, matchAllData, WhichSide, WhichSubSide);
 				}
@@ -6626,23 +6645,18 @@ public class InfobarGfx
 					break;
 				case CricketUtil.BOUNDARY:
 					
-					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$object$Right$Side" + WhichSide + "$Select*FUNCTION*Omo*vis_con SET 3\0", print_writers);
-					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$object$Right$Side" + WhichSide + "$Boundries$Top$Title*GEOM*TEXT SET " 
+					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_Infobar$All$Normal$Section3$Side" + WhichSide + "$select_DataType*FUNCTION*Omo*vis_con SET 0\0", print_writers);
+					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_Infobar$All$Normal$Section3$Side" + WhichSide + "$Boundaries$TopText$txt_Title*GEOM*TEXT SET " 
 							+ "INNINGS BOUNDARIES" + "\0", print_writers);
-					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$object$Right$Side" + WhichSide + "$Boundries$Btm$Four$TeamColour*GEOM*TEXT SET " 
-							+ inning.getTotalFours() + "\0", print_writers);
-					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$object$Right$Side" + WhichSide + "$Boundries$Btm$Six$TeamColour*GEOM*TEXT SET " 
-							+ inning.getTotalSixes() + "\0", print_writers);
+					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_Infobar$All$Normal$Section3$Side" + WhichSide + "$Boundaries$BottomText$Fours_Grp$txt_Figures"
+							+ "*GEOM*TEXT SET " + inning.getTotalFours() + "\0", print_writers);
+					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_Infobar$All$Normal$Section3$Side" + WhichSide + "$Boundaries$BottomText$Six_Grp$txt_Figures"
+							+ "*GEOM*TEXT SET " + inning.getTotalSixes() + "\0", print_writers);
 					
-					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$object$Right$Side" + WhichSide + "$Boundries$Btm$Four$Title*GEOM*TEXT SET " 
-							+ "FOUR" + CricketFunctions.Plural(inning.getTotalFours()).toUpperCase() + "\0", print_writers);
-					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$object$Right$Side" + WhichSide + "$Boundries$Btm$Six$Title*GEOM*TEXT SET " 
-							+ (inning.getTotalSixes() == 1 ? "SIX" : "SIXES") + "\0", print_writers);
-					
-					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$object$Right$Side" + WhichSide + "$Boundries$Btm$Four$TeamColour*TEXTURE*IMAGE SET " 
-							+ Constants.T20_MUMBAI_TEAMCOLOUR_FLAT + inning.getBatting_team().getTeamBadge() + "\0", print_writers);
-					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$object$Right$Side" + WhichSide + "$Boundries$Btm$Six$TeamColour*TEXTURE*IMAGE SET " 
-							+ Constants.T20_MUMBAI_TEAMCOLOUR_FLAT + inning.getBatting_team().getTeamBadge() + "\0", print_writers);
+					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_Infobar$All$Normal$Section3$Side" + WhichSide + "$Boundaries$BottomText$Fours_Grp$txt_StatHead"
+							+ "*GEOM*TEXT SET " + "FOUR" + CricketFunctions.Plural(inning.getTotalFours()).toUpperCase() + "\0", print_writers);
+					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_Infobar$All$Normal$Section3$Side" + WhichSide + "$Boundaries$BottomText$Six_Grp$txt_StatHead"
+							+ "*GEOM*TEXT SET " + (inning.getTotalSixes() == 1 ? "SIX" : "SIXES") + "\0", print_writers);
 					break;
 				case "BALLS_SINCE_LAST_BOUNDARY":
 					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$object$Right$Side" + WhichSide + "$Select*FUNCTION*Omo*vis_con SET 10\0", print_writers);
@@ -6653,54 +6667,14 @@ public class InfobarGfx
 							+ CricketFunctions.lastFewOversData(CricketUtil.BOUNDARY, matchAllData.getEventFile().getEvents(), inning.getInningNumber()) + "\0", print_writers);
 					break;
 				case CricketUtil.EXTRAS:
-					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$object$Right$Side" + WhichSide + "$Select*FUNCTION*Omo*vis_con SET 5\0", print_writers);
-					
-					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$object$Right$Side" + WhichSide + "$Extra$Title*GEOM*TEXT SET " 
-							+ CricketUtil.EXTRAS + " - " + inning.getTotalExtras() + "\0", print_writers);
-					
-					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$object$Right$Side" + WhichSide + "$Extra$Wides$Title*GEOM*TEXT SET " 
-							+ "WD" + "\0", print_writers);
-					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$object$Right$Side" + WhichSide + "$Extra$Wides$Value*GEOM*TEXT SET " 
-							+ inning.getTotalWides() + "\0", print_writers);
-					
-					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$object$Right$Side" + WhichSide + "$Extra$NoBalls$Title*GEOM*TEXT SET " 
-							+ "NB" + "\0", print_writers);
-					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$object$Right$Side" + WhichSide + "$Extra$NoBalls$Value*GEOM*TEXT SET " 
-							+ inning.getTotalNoBalls() + "\0", print_writers);
-					
-					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$object$Right$Side" + WhichSide + "$Extra$byes$Title*GEOM*TEXT SET " 
-							+ "B" + "\0", print_writers);
-					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$object$Right$Side" + WhichSide + "$Extra$byes$Value*GEOM*TEXT SET " 
-							+ inning.getTotalByes() + "\0", print_writers);
-					
-					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$object$Right$Side" + WhichSide + "$Extra$Legbyes$Title*GEOM*TEXT SET " 
-							+ "LB" + "\0", print_writers);
-					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$object$Right$Side" + WhichSide + "$Extra$Legbyes$Value*GEOM*TEXT SET " 
-							+ inning.getTotalLegByes() + "\0", print_writers);
-					
-					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$object$Right$Side" + WhichSide + "$Extra$Wides$Value*TEXTURE*IMAGE SET " 
-							+ Constants.T20_MUMBAI_TEAMCOLOUR_FLAT + inning.getBowling_team().getTeamBadge() + "\0", print_writers);
-					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$object$Right$Side" + WhichSide + "$Extra$NoBalls$Value*TEXTURE*IMAGE SET " 
-							+ Constants.T20_MUMBAI_TEAMCOLOUR_FLAT + inning.getBowling_team().getTeamBadge() + "\0", print_writers);
-					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$object$Right$Side" + WhichSide + "$Extra$byes$Value*TEXTURE*IMAGE SET " 
-							+ Constants.T20_MUMBAI_TEAMCOLOUR_FLAT + inning.getBowling_team().getTeamBadge() + "\0", print_writers);
-					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$object$Right$Side" + WhichSide + "$Extra$Legbyes$Value*TEXTURE*IMAGE SET " 
-							+ Constants.T20_MUMBAI_TEAMCOLOUR_FLAT + inning.getBowling_team().getTeamBadge() + "\0", print_writers);
-					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$object$Right$Side" + WhichSide + "$Extra$Penalties$Value*TEXTURE*IMAGE SET " 
-							+ Constants.T20_MUMBAI_TEAMCOLOUR_FLAT + inning.getBowling_team().getTeamBadge() + "\0", print_writers);
-					
-					if(inning.getTotalPenalties() > 0) {
-						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$object$Right$Side" + WhichSide + "$Extra$Penalties"
-								+ "*ACTIVE SET 1\0", print_writers);
-						
-						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$object$Right$Side" + WhichSide + "$Extra$Penalties$Title*GEOM*TEXT SET " 
-								+ "PEN" + "\0", print_writers);
-						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$object$Right$Side" + WhichSide + "$Extra$Penalties$Value*GEOM*TEXT SET " 
-								+ inning.getTotalPenalties() + "\0", print_writers);
-					} else {
-						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$object$Right$Side" + WhichSide + "$Extra$Penalties"
-								+ "*ACTIVE SET 0\0", print_writers);
-					}
+					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_Infobar$All$Normal$Section3$Side" + WhichSide + "$select_DataType*FUNCTION*Omo*vis_con SET 1\0", print_writers);
+					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_Infobar$All$Normal$Section3$Side" + WhichSide + "$Extras$TopText$txt_Title*GEOM*TEXT SET " 
+							+ CricketUtil.EXTRAS + "\0", print_writers);
+					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_Infobar$All$Normal$Section3$Side" + WhichSide + "$Extras$BottomText$Details_Grp$txt_Details"
+							+ "*GEOM*TEXT SET " + "(WD " + inning.getTotalWides() + ", NB" + inning.getTotalNoBalls() + ", B " + inning.getTotalByes() + ", LB " + inning.getTotalLegByes() 
+							+ (inning.getTotalPenalties() > 0 ? ", PN " + inning.getTotalPenalties() + ")" : ")") + "\0", print_writers);
+					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_Infobar$All$Normal$Section3$Side" + WhichSide + "$Extras$BottomText$Total_Grp$txt_Figures"
+							+ "*GEOM*TEXT SET " + inning.getTotalExtras() + "\0", print_writers);
 					break;
 				case "FOW":
 					if(inning.getFallsOfWickets() == null) {
@@ -6803,7 +6777,7 @@ public class InfobarGfx
 				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_Infobar$All$Normal$Section1$Side" + WhichSide + "$Select_DataType*FUNCTION*Omo*vis_con SET 0\0", print_writers);
 				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_Infobar$All$Normal$Section1$Side" + WhichSide + "$Stats$StatValue$select_StatNumber*FUNCTION*Omo*vis_con SET 1\0", print_writers);
 				
-				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_Infobar$All$Normal$Section1$Side" + WhichSide + "$Stats$txt_StatHead*GEOM*TEXT SET CURR P'SHIP\0", print_writers);
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_Infobar$All$Normal$Section1$Side" + WhichSide + "$Stats$txt_StatHead*GEOM*TEXT SET PARTNERSHIP\0", print_writers);
 				
 				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_Infobar$All$Normal$Section1$Side" + WhichSide + "$Stats$StatValue$txt_StatValue1*GEOM*TEXT SET " 
 						+ partnership.getTotalRuns() + "*\0", print_writers);
@@ -6843,6 +6817,18 @@ public class InfobarGfx
 				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_Infobar$All$Normal$Section1$Side" + WhichSide + "$FreeText$txt_Text2*GEOM*TEXT SET " 
 						+ matchAllData.getSetup().getMatchIdent() + "\0", print_writers);
 				break;
+			case "BOUNDARY":
+				inning = matchAllData.getMatch().getInning().stream().filter(inn -> inn.getIsCurrentInning().equalsIgnoreCase(CricketUtil.YES)).findAny().orElse(null);
+				if(inning == null) {
+					return "populateVizInfobarLeftBottom: Inning return is NULL";
+				}
+				
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_Infobar$All$Normal$Section1$Side" + WhichSide + "$Select_DataType*FUNCTION*Omo*vis_con SET 2\0", print_writers);
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_Infobar$All$Normal$Section1$Side" + WhichSide + "$FreeText$txt_Text1*GEOM*TEXT SET " 
+						+ "BOUNDARIES" + "\0", print_writers);
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_Infobar$All$Normal$Section1$Side" + WhichSide + "$FreeText$txt_Text2*GEOM*TEXT SET " 
+						+ "4s: " + inning.getTotalFours() + " | 6s: " + inning.getTotalSixes() + "\0", print_writers);
+				break;
 			case "FIRST_INNING_SCORE":
 				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_Infobar$All$Normal$Section1$Side" + WhichSide + "$Select_DataType*FUNCTION*Omo*vis_con SET 2\0", print_writers);
 				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_Infobar$All$Normal$Section1$Side" + WhichSide + "$FreeText$txt_Text1*GEOM*TEXT SET " 
@@ -6860,7 +6846,7 @@ public class InfobarGfx
 				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_Infobar$All$Normal$Section1$Side" + WhichSide + "$Select_DataType*FUNCTION*Omo*vis_con SET 0\0", print_writers);
 				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_Infobar$All$Normal$Section1$Side" + WhichSide + "$Stats$StatValue$select_StatNumber*FUNCTION*Omo*vis_con SET 0\0", print_writers);
 				
-				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_Infobar$All$Normal$Section1$Side" + WhichSide + "$Stats$txt_StatHead*GEOM*TEXT SET REQ. RUN RATE\0", print_writers);
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_Infobar$All$Normal$Section1$Side" + WhichSide + "$Stats$txt_StatHead*GEOM*TEXT SET REQUIRED RUN-RATE\0", print_writers);
 				
 				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_Infobar$All$Normal$Section1$Side" + WhichSide + "$Stats$StatValue$txt_StatValue1*GEOM*TEXT SET " 
 						+ CricketFunctions.generateRunRate(CricketFunctions.GetTargetData(matchAllData).getRemaningRuns(), 0, CricketFunctions.GetTargetData(matchAllData).getRemaningBall(),2,matchAllData) + "\0", print_writers);
@@ -6876,10 +6862,24 @@ public class InfobarGfx
 				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_Infobar$All$Normal$Section1$Side" + WhichSide + "$Select_DataType*FUNCTION*Omo*vis_con SET 0\0", print_writers);
 				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_Infobar$All$Normal$Section1$Side" + WhichSide + "$Stats$StatValue$select_StatNumber*FUNCTION*Omo*vis_con SET 0\0", print_writers);
 				
-				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_Infobar$All$Normal$Section1$Side" + WhichSide + "$Stats$txt_StatHead*GEOM*TEXT SET RUN RATE\0", print_writers);
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_Infobar$All$Normal$Section1$Side" + WhichSide + "$Stats$txt_StatHead*GEOM*TEXT SET CURRENT RUN-RATE\0", print_writers);
 				
 				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_Infobar$All$Normal$Section1$Side" + WhichSide + "$Stats$StatValue$txt_StatValue1*GEOM*TEXT SET " 
 						+ CricketFunctions.generateRunRate(inning.getTotalRuns(),inning.getTotalOvers(), inning.getTotalBalls(), 2,matchAllData) + "\0", print_writers);
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_Infobar$All$Normal$Section1$Side" + WhichSide + "$Stats$StatValue$txt_StatValue2*GEOM*TEXT SET \0", print_writers);
+				break;
+			case "EXTRAS":
+				inning = matchAllData.getMatch().getInning().stream().filter(inn -> inn.getIsCurrentInning().equalsIgnoreCase(CricketUtil.YES)).findAny().orElse(null);
+				if(inning == null) {
+					return "populateVizInfobarLeftBottom: Inning return is NULL";
+				}
+				
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_Infobar$All$Normal$Section1$Side" + WhichSide + "$Select_DataType*FUNCTION*Omo*vis_con SET 0\0", print_writers);
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_Infobar$All$Normal$Section1$Side" + WhichSide + "$Stats$StatValue$select_StatNumber*FUNCTION*Omo*vis_con SET 0\0", print_writers);
+				
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_Infobar$All$Normal$Section1$Side" + WhichSide + "$Stats$txt_StatHead*GEOM*TEXT SET EXTRAS\0", print_writers);
+				
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_Infobar$All$Normal$Section1$Side" + WhichSide + "$Stats$StatValue$txt_StatValue1*GEOM*TEXT SET " + inning.getTotalExtras() + "\0", print_writers);
 				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_Infobar$All$Normal$Section1$Side" + WhichSide + "$Stats$StatValue$txt_StatValue2*GEOM*TEXT SET \0", print_writers);
 				break;
 			case "DLS_PAR_SCORE":

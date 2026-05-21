@@ -121,7 +121,7 @@ public class IndexController
 
 	private static final Map<String, Comparator<Tournament>> SORT_MAP;
 
-	private final File speedFile = new File("C:\\Sports\\Cricket\\Speed\\SPEED.txt");
+	private File speedFile = new File("C:\\Sports\\Cricket\\Speed\\SPEED.txt");
 	private final ObjectMapper objectMapper = new ObjectMapper();
 	private long last_match_time_stamp = 0;
 	private boolean show_speed = false;
@@ -298,8 +298,10 @@ public class IndexController
 	    } else if (Category.equalsIgnoreCase("women")) {
 	    	basePath = "C:\\Sports\\CricketWomen\\";
 	    }
+	    
+	    speedFile = new File(basePath + "Speed\\SPEED.txt");
 	    System.out.println("basePath - " + basePath);
-
+	    
 	    // LAST MODIFIED
 	    System.out.println("basePath = " + basePath);
 	    last_match_time_stamp = new File(basePath + CricketUtil.MATCHES_DIRECTORY + selectedMatch).lastModified();
@@ -939,9 +941,9 @@ public class IndexController
 						TimeUnit.MILLISECONDS.sleep(2000);
 						this_caption.whichSide = 1;
 						this_caption.PopulateGraphics(valueToProcess, session_match);
-						this_animation.CutBack(valueToProcess, print_writers, session_configuration);
+//						TimeUnit.MILLISECONDS.sleep(1000);
+//						this_animation.CutBack(valueToProcess, print_writers, session_configuration);
 					}
-					
 				}
 				break;
 			default:
