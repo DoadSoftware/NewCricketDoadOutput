@@ -507,6 +507,19 @@ public class Animation
 			 case "F1":
 				 processAnimation(Constants.BACK, print_writers, "Anim_FullFrames", "START");
 			 break;
+			 case "m": case "Control_m":
+					AnimateIn("ArrowDown,", print_writers, config); // Push infobar
+					TimeUnit.MILLISECONDS.sleep(500);
+					processAnimation(Constants.BACK, print_writers, "Anim_MatchId$In_Out", "START");
+					this.whichGraphicOnScreen = whatToProcess;
+					break;
+			 case "Shift_D":
+					AnimateIn("ArrowDown,", print_writers, config); // Push infobar
+					TimeUnit.MILLISECONDS.sleep(500);
+					processAnimation(Constants.BACK, print_writers, "Anim_Target$In_Out", "START");
+					processAnimation(Constants.BACK, print_writers, "Anim_Target$Loop", "START");
+					this.whichGraphicOnScreen = whatToProcess;
+					break;	
 			}
 		
 			

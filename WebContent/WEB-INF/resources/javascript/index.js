@@ -1,4 +1,4 @@
-var session_match, session_caption, session_animation,isSplitScorecard = false;
+   var session_match, session_caption, session_animation,isSplitScorecard = false;
 var selected_options = [];
 let TeamScore = "";
 function processWaitingButtonSpinner(whatToProcess) 

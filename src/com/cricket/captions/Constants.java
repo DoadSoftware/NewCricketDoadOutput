@@ -79,12 +79,15 @@ public class Constants
 	public final static String NPL_CAPS_PATH = "IMAGE*/Default/Essentials/Caps/";
 	
 	public final static String VIDARBHA = "VIDARBHA";
-//	public final static String NPL_LOGO_PATH = "IMAGE*/Default/Essentials/Logos/";
-//	public final static String NPL_LOCAL_PHOTO_PATH = "C:\\\\Images\\\\NPL\\\\Photos\\\\";
-//	public final static String NPL_PHOTO_PATH = "\\c\\Images\\NPL\\Photos\\";
-//	public final static String NPL_SPONSOR_PATH = "IMAGE*/Default/Essentials/Sponsor/";
-//	public final static String NPL_WEATHER_PATH = "IMAGE*/Default/Essentials/WeatherIcons/";
-//	public final static String NPL_CAPS_PATH = "IMAGE*/Default/Essentials/Caps/";
+	public final static String VIDARBHA_LOGO_PATH = "IMAGE*/Default/Essentials/TeamLogo/";
+	public final static String VIDARBHA_BASE1 = "IMAGE*/Default/Essentials/Base1/";
+	public final static String VIDARBHA_BASE2 = "IMAGE*/Default/Essentials/Base2/";
+	public final static String VIDARBHA_LOGOS_BW_PATH = "IMAGE*/Default/Essentials/TeamLogoBW/";
+	public final static String Local_VIDARBHA_PHOTOS_PATH = "C:\\\\Images\\\\VIDARBHA\\\\Photos\\\\";
+	public final static String VIDARBHA_PHOTO_PATH = "\\c\\Images\\VIDARBHA\\Photos\\";
+//	public final static String VIDARBHA_SPONSOR_PATH = "IMAGE*/Default/Essentials/Sponsor/";
+//	public final static String VIDARBHA_WEATHER_PATH = "IMAGE*/Default/Essentials/WeatherIcons/";
+//	public final static String VIDARBHA_CAPS_PATH = "IMAGE*/Default/Essentials/Caps/";
 	
 	public final static String APL = "APL";
 	public final static String APL_LOGO_PATH = "IMAGE*/Default/Essentials/Logos/";
