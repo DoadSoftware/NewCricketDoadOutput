@@ -375,6 +375,8 @@ public class Caption
 						this_fullFramesGfx.WhichProfile = whatToProcess;
 					}
 				}
+				
+				System.out.println("whattoprocess====================" + whatToProcess );
 				status = this_fullFramesGfx.PopulateScorecardFF(whichSide, whatToProcess.split(",")[0], matchAllData, 
 					Integer.valueOf(whatToProcess.split(",")[1]));
 				break;

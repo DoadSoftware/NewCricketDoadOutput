@@ -369,10 +369,10 @@ function processUserSelectionData(whatToProcess,dataToProcess)
 			switch(dataToProcess) {
 			case 'F1':
 				switch($('#selected_broadcaster').val().toUpperCase()){
-				case 'ISPL':
+				case 'ISPL': case 'VIDARBHA':
 					addItemsToList(dataToProcess,null);
 					break;
-				case 'ICC-U19-2023': case 'BENGAL-T20': case 'NPL': case 'LEGENDS-90': case 'MPL': case 'T20_MUMBAI': case 'APL': case 'VIDARBHA':
+				case 'ICC-U19-2023': case 'BENGAL-T20': case 'NPL': case 'LEGENDS-90': case 'MPL': case 'T20_MUMBAI': case 'APL': 
 					dataToProcess = dataToProcess + ',' + document.getElementById('which_inning').value;
 					processCricketProcedures("POPULATE-GRAPHICS", dataToProcess);
 					break;
@@ -891,12 +891,16 @@ function setPlayerInDropdown(dataToProcess) {
 }
 function setDropdownOptionToSelectOptionArray(whichInput, whichIndex)
 {
-	isSplitScorecard = false;
-	if($('#' + $(whichInput).attr('id') + ' option:selected').val() == 'SPLIT'){
-		isSplitScorecard = true;
-		addItemsToList('F1')
-		selected_options[selected_options.length] = 'SPLIT';
-	}
+	switch($('#selected_broadcaster').val().toUpperCase()){
+		case 'ISPL':
+			isSplitScorecard = false;
+			if($('#' + $(whichInput).attr('id') + ' option:selected').val() == 'SPLIT'){
+				isSplitScorecard = true;
+				addItemsToList('F1')
+				selected_options[selected_options.length] = 'SPLIT';
+			}
+			break;
+		}
 	selected_options[0] = document.getElementById('which_inning').value;
 	selected_options[whichIndex+1] = $('#' + $(whichInput).attr('id') + ' option:selected').val();
 }
@@ -2398,120 +2402,146 @@ function addItemsToList(whatToProcess,dataToProcess)
 			cellCount = cellCount + 1;
 			break;
 			case 'F1':
-			if(isSplitScorecard){
-				select = document.createElement('select');
-				select.id = 'selectBatter';
-				select.name = select.id;
-				
-				session_match.match.inning.forEach(function(inn){
-					if(inn.inningNumber == document.getElementById('which_inning').value){
-						inn.battingCard.sort(function(a, b) {
-					      if (b.runs === a.runs) {
-							if(a.balls === b.balls){
-								return b.fours - a.fours
-						  	}
-					        // If totalRuns are equal, sort by totalBalls (ascending)
-					        return a.balls - b.balls;
-					      }
-					      // Otherwise, sort by totalRuns (descending)
-					      return b.runs - a.runs;
-					    });
+				switch($('#selected_broadcaster').val().toUpperCase()){
+					case 'ISPL':
+						if(isSplitScorecard){
+						select = document.createElement('select');
+						select.id = 'selectBatter';
+						select.name = select.id;
 						
-						inn.battingCard.forEach(function(bc,bc_index,bc_arr){
-							option = document.createElement('option');
-							option.value = bc.playerId;
-							option.text = bc.player.full_name + " - " + bc.status;	
-							select.appendChild(option);
-						});
-					}
-				});
-				
-				select.setAttribute('onchange',"setDropdownOptionToSelectOptionArray(this, 1)");
-				row.insertCell(cellCount).appendChild(select);
-				setDropdownOptionToSelectOptionArray($(select),1);
-				removeSelectDuplicates(select.id);
-				cellCount = cellCount + 1;
-				
-				select = document.createElement('select');
-				select.id = 'selectBowler';
-				select.name = select.id;
-				
-				session_match.match.inning.forEach(function(inn){
-					if(inn.inningNumber == document.getElementById('which_inning').value){
-						inn.bowlingCard.sort(function(a, b) {
-					      if (b.wickets === a.wickets) {
-							if(a.economyRate === b.economyRate){
-								return b.dots - a.dots;
-						  	}
-					        return a.economyRate - b.economyRate;
-					      }
-					      return b.wickets - a.wickets;
-					    });
-						
-						inn.bowlingCard.forEach(function(boc,boc_index,bc_arr){
-							option = document.createElement('option');
-							option.value = boc.playerId;
-							option.text = boc.player.full_name;	
-							select.appendChild(option);
-						});
-					}
-				});
-				
-				select.setAttribute('onchange',"setDropdownOptionToSelectOptionArray(this, 2)");
-				row.insertCell(cellCount).appendChild(select);
-				setDropdownOptionToSelectOptionArray($(select),2);
-				removeSelectDuplicates(select.id);
-				cellCount = cellCount + 1;
-				
-				select = document.createElement('select');
-				select.id = 'manhattanOrNot';
-				select.name = select.id;
-				
-				option = document.createElement('option');
-				option.value = '';
-				option.text = '';	
-				select.appendChild(option);
-				
-				option = document.createElement('option');
-				option.value = 'MANHATTAN';
-				option.text = 'MANHATTAN';	
-				select.appendChild(option);
-				
-				select.setAttribute('onchange',"setDropdownOptionToSelectOptionArray(this, 3)");
-				row.insertCell(cellCount).appendChild(select);
-				setDropdownOptionToSelectOptionArray($(select),3);
-				cellCount = cellCount + 1;
-			}else{
-				header_text.innerHTML = 'SCORECARD';
-				select = document.createElement('select');
-				select.id = 'selectScoreCard';
-				select.name = select.id;
-				
-				option = document.createElement('option');
-	            option.value = 'TRADITIONAL';
-	            option.text = 'TRADITIONAL';
-	            select.appendChild(option);
+						session_match.match.inning.forEach(function(inn){
+							if(inn.inningNumber == document.getElementById('which_inning').value){
+								inn.battingCard.sort(function(a, b) {
+							      if (b.runs === a.runs) {
+									if(a.balls === b.balls){
+										return b.fours - a.fours
+								  	}
+							        // If totalRuns are equal, sort by totalBalls (ascending)
+							        return a.balls - b.balls;
+							      }
+							      // Otherwise, sort by totalRuns (descending)
+							      return b.runs - a.runs;
+							    });
 								
-				option = document.createElement('option');
-	            option.value = 'NORMAL';
-	            option.text = 'NORMAL';
-	            select.appendChild(option);
-				
-				option = document.createElement('option');
-	            option.value = 'SPLIT';
-	            option.text = 'SPLIT';
-	            select.appendChild(option);
-	            
-	            option = document.createElement('option');
-	            option.value = 'BATTING_CHANGE_ON';
-	            option.text = 'BATTING CHANGE ON';
-	            select.appendChild(option);
-	            
-				select.setAttribute('onchange',"setDropdownOptionToSelectOptionArray(this, 0)");
-				row.insertCell(cellCount).appendChild(select);
-				setDropdownOptionToSelectOptionArray($(select),0);
-				cellCount = cellCount + 1;
+								inn.battingCard.forEach(function(bc,bc_index,bc_arr){
+									option = document.createElement('option');
+									option.value = bc.playerId;
+									option.text = bc.player.full_name + " - " + bc.status;	
+									select.appendChild(option);
+								});
+							}
+						});
+						
+						select.setAttribute('onchange',"setDropdownOptionToSelectOptionArray(this, 1)");
+						row.insertCell(cellCount).appendChild(select);
+						setDropdownOptionToSelectOptionArray($(select),1);
+						removeSelectDuplicates(select.id);
+						cellCount = cellCount + 1;
+						
+						select = document.createElement('select');
+						select.id = 'selectBowler';
+						select.name = select.id;
+						
+						session_match.match.inning.forEach(function(inn){
+							if(inn.inningNumber == document.getElementById('which_inning').value){
+								inn.bowlingCard.sort(function(a, b) {
+							      if (b.wickets === a.wickets) {
+									if(a.economyRate === b.economyRate){
+										return b.dots - a.dots;
+								  	}
+							        return a.economyRate - b.economyRate;
+							      }
+							      return b.wickets - a.wickets;
+							    });
+								
+								inn.bowlingCard.forEach(function(boc,boc_index,bc_arr){
+									option = document.createElement('option');
+									option.value = boc.playerId;
+									option.text = boc.player.full_name;	
+									select.appendChild(option);
+								});
+							}
+						});
+						
+						select.setAttribute('onchange',"setDropdownOptionToSelectOptionArray(this, 2)");
+						row.insertCell(cellCount).appendChild(select);
+						setDropdownOptionToSelectOptionArray($(select),2);
+						removeSelectDuplicates(select.id);
+						cellCount = cellCount + 1;
+						
+						select = document.createElement('select');
+						select.id = 'manhattanOrNot';
+						select.name = select.id;
+						
+						option = document.createElement('option');
+						option.value = '';
+						option.text = '';	
+						select.appendChild(option);
+						
+						option = document.createElement('option');
+						option.value = 'MANHATTAN';
+						option.text = 'MANHATTAN';	
+						select.appendChild(option);
+						
+						select.setAttribute('onchange',"setDropdownOptionToSelectOptionArray(this, 3)");
+						row.insertCell(cellCount).appendChild(select);
+						setDropdownOptionToSelectOptionArray($(select),3);
+						cellCount = cellCount + 1;
+					}else{
+						header_text.innerHTML = 'SCORECARD';
+						select = document.createElement('select');
+						select.id = 'selectScoreCard';
+						select.name = select.id;
+						
+						option = document.createElement('option');
+			            option.value = 'TRADITIONAL';
+			            option.text = 'TRADITIONAL';
+			            select.appendChild(option);
+										
+						option = document.createElement('option');
+			            option.value = 'NORMAL';
+			            option.text = 'NORMAL';
+			            select.appendChild(option);
+						
+						option = document.createElement('option');
+			            option.value = 'SPLIT';
+			            option.text = 'SPLIT';
+			            select.appendChild(option);
+			            
+			            option = document.createElement('option');
+			            option.value = 'BATTING_CHANGE_ON';
+			            option.text = 'BATTING CHANGE ON';
+			            select.appendChild(option);
+			            
+						select.setAttribute('onchange',"setDropdownOptionToSelectOptionArray(this, 0)");
+						row.insertCell(cellCount).appendChild(select);
+						setDropdownOptionToSelectOptionArray($(select),0);
+						cellCount = cellCount + 1;
+								}
+						break;
+					case 'VIDARBHA':
+						header_text.innerHTML = 'SCORECARD';
+						select = document.createElement('select');
+						select.id = 'selectScoreCard';
+						select.name = select.id;
+						
+						option = document.createElement('option');
+			            option.value = 'SPLIT';
+			            option.text = 'SPLIT';
+			            select.appendChild(option);
+			            
+						option = document.createElement('option');
+			            option.value = 'NORMAL';
+			            option.text = 'NORMAL';
+			            select.appendChild(option);
+						
+						select.setAttribute('onchange',"setDropdownOptionToSelectOptionArray(this, 0)");
+						row.insertCell(cellCount).appendChild(select);
+						setDropdownOptionToSelectOptionArray($(select),0);
+						cellCount = cellCount + 1;
+				break;
 			}
+			
 			break;
 		case 'F2':
 	    	header_text.innerHTML = 'BALL CARD';
