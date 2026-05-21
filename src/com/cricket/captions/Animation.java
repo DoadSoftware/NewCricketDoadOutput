@@ -519,7 +519,7 @@ public class Animation
 					this.whichGraphicOnScreen = whatToProcess;
 					break;	
 
-			case "F1": case "Control_Shift_A": case "F2": case "F4": case "Control_F7": case "Shift_T": case "Shift_F8": case "Control_F11":
+			case "F1": case "Control_Shift_A": case "F2": case "F4": case "Control_F7":  case "Shift_F8": case "Control_F11":
 			case "Shift_K":	case "Control_p": case "Shift_F11": case "z": case "x": case "c": case "v": case "Control_F10":
 			case "Control_c": case "Control_v": case "Shift_V": case "Control_z": case "Control_x":
 				AnimateIn("ArrowDown,", print_writers, config); // Push infobar
@@ -541,10 +541,18 @@ public class Animation
 					break;	
 				}
 				break;
-
+			case "Shift_T":
+				AnimateIn("ArrowDown,", print_writers, config); // Push infobar
+				TimeUnit.MILLISECONDS.sleep(500);
+				processAnimation(Constants.BACK, print_writers, "Anim_FullFrames$In_Out$Essentials", "START");
+				processAnimation(Constants.BACK, print_writers, "Anim_FullFrames$In_Out$Header", "START");
+				switch (whatToProcess.split(",")[0]) {
+				case "Shift_T":
+					processAnimation(Constants.BACK, print_writers, "Anim_FullFrames$In_Out$Main$Team_Single", "START");
+					break;
+				}
+				break;
 			}
-		
-			
 			break;
 		case Constants.T20_MUMBAI:
 			T20_MumbaiAnimateIn(whatToProcess, print_writers, config);
