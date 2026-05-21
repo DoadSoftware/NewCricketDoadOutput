@@ -88,6 +88,10 @@ public class Constants
 //	public final static String VIDARBHA_SPONSOR_PATH = "IMAGE*/Default/Essentials/Sponsor/";
 //	public final static String VIDARBHA_WEATHER_PATH = "IMAGE*/Default/Essentials/WeatherIcons/";
 //	public final static String VIDARBHA_CAPS_PATH = "IMAGE*/Default/Essentials/Caps/";
+	public final static String VIDARBHA_TEXT1 = "IMAGE*/Default/Essentials/Text1/";
+	public final static String VIDARBHA_TEXT2 = "IMAGE*/Default/Essentials/Text2/";
+	public final static String VIDARBHA_TEXT3 = "IMAGE*/Default/Essentials/Text3/";
+	public final static String VIDARBHA_TEXT4 = "IMAGE*/Default/Essentials/Text4/";
 	
 	public final static String APL = "APL";
 	public final static String APL_LOGO_PATH = "IMAGE*/Default/Essentials/Logos/";
