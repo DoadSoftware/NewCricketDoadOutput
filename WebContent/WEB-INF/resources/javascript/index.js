@@ -497,9 +497,16 @@ function processUserSelectionData(whatToProcess,dataToProcess)
 					processCricketProcedures("POPULATE-GRAPHICS", dataToProcess);
 					break;
 			 	}
-				break;	
+				break;
+				case 'Alt_5':
+					switch($('#selected_broadcaster').val().toUpperCase()){
+					case 'ICC-U19-2023': case 'BENGAL-T20': case 'NPL': case 'MPL': case 'LEGENDS-90': case 'APL': case 'ISPL':
+						addItemsToList(dataToProcess,null); 
+						break;
+				 	}
+					break;	
 			case 'Shift_C': case 'Control_Shift_Q': case 'h':
-			case 'F12': case 'Alt_1': case 'Alt_2': case 'Alt_7':  case 'Alt_5': //case 'Alt_6': case 'Alt_8': case 'Alt_3': case 'Alt_4': case 'F7': case 'F11':
+			case 'F12': case 'Alt_1': case 'Alt_2': case 'Alt_7': //case 'Alt_6': case 'Alt_8': case 'Alt_3': case 'Alt_4': case 'F7': case 'F11':
 			case 'Control_F5': case 'Shift_T': case 'Control_F9': case 'F5': case 'F6': case 'Alt_w':  case 'Control_j': case 'Alt_F8':
 			case 'F8': case 'F9':  case 'u': case 'q': case 'Shift_F5': case 'Shift_F9': case 'Shift_F6': case 'Control_y': case 'Shift_F8':
 			case 'Shift_O': case 'g': case 'y': case 'Control_g': case 'Control_s': case 'Control_f': //case 'Alt_F9': case 'Control_h':

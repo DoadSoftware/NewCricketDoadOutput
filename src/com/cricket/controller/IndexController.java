@@ -832,14 +832,15 @@ public class IndexController
 		}
 	}
 	
-	public void infobarAnimateOutAllSection(Configuration session_configuration, MatchAllData session_match, List<PrintWriter> print_writers, HeadToHead headToHead) 
-			throws Exception {
+	public void infobarAnimateOutAllSection(Configuration session_configuration, MatchAllData session_match, List<PrintWriter> print_writers, HeadToHead headToHead) throws Exception {
+		
+		int Inn_Number = session_match.getMatch().getInning().stream().filter(inn -> inn.getIsCurrentInning()
+				.equalsIgnoreCase(CricketUtil.YES)).findAny().orElse(null).getInningNumber();
+		
 		switch(session_configuration.getBroadcaster()) {
 		case Constants.NPL: case Constants.LEGENDS: case Constants.APL: case Constants.MPL: case Constants.VIDARBHA:
 			this_caption.whichSide = 2;
-			int Inn_Number = session_match.getMatch().getInning().stream().filter(inn -> inn.getIsCurrentInning()
-					.equalsIgnoreCase(CricketUtil.YES)).findAny().orElse(null).getInningNumber();
-			
+
 			if(!this_caption.this_infobarGfx.infobar.getMiddle_section().equalsIgnoreCase("BATSMAN") && 
 					!this_caption.this_infobarGfx.infobar.getMiddle_section().equalsIgnoreCase("PHOTO BATSMAN")) {
 				
@@ -853,6 +854,16 @@ public class IndexController
 				}
 			}
 			
+			if(!this_caption.this_infobarGfx.infobar.getRight_section().equalsIgnoreCase("BOWLER")) {
+				if(this_caption.this_infobarGfx.infobar.getRight_section() != null && !this_caption.this_infobarGfx.infobar.getRight_section().isEmpty()) {
+					this_caption.PopulateGraphics("Alt_8," + Inn_Number + ",BOWLER", session_match);
+					this_animation.caption = this_caption;
+					TimeUnit.MILLISECONDS.sleep(1000);
+					processAnimations("ANIMATE-IN-GRAPHICS", session_configuration, "Alt_8," + Inn_Number + ",BOWLER", print_writers, headToHead);
+				}
+			}
+			break;
+		case Constants.T20_MUMBAI:
 			if(!this_caption.this_infobarGfx.infobar.getRight_section().equalsIgnoreCase("BOWLER")) {
 				if(this_caption.this_infobarGfx.infobar.getRight_section() != null && !this_caption.this_infobarGfx.infobar.getRight_section().isEmpty()) {
 					this_caption.PopulateGraphics("Alt_8," + Inn_Number + ",BOWLER", session_match);

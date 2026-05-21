@@ -248,6 +248,17 @@
 			    </div>
 			  </div>
 			  <div class="form-group row row-bottom-margin ml-2" style="margin-bottom:0.8px;">
+			    <label for="Category" class="col-sm-4 col-form-label text-left">Select Category </label>
+			    <div class="col-sm-6 col-md-6">
+			      <select id="Category" name="Category" class="browser-default custom-select custom-select-sm"
+			      		onchange="processCricketProcedures('GET-CATEGORY-DATA')">
+			      		<option value=" "> </option>
+			      		<option value="MEN">MEN</option>
+			      		<option value="WOMEN">WOMEN</option>
+			      </select>
+			    </div>
+			  </div>
+			  <div class="form-group row row-bottom-margin ml-2" style="margin-bottom:0.8px;">
 			    <label for="select_broadcaster" class="col-sm-4 col-form-label text-left">Select Broadcaster </label>
 			    <div class="col-sm-6 col-md-6">
 			      <select id="select_broadcaster" name="select_broadcaster" class="browser-default custom-select custom-select-sm">
@@ -301,17 +312,6 @@
 			          <option value="LOF_INFOBAR">LOF INFOBAR</option>
 				     </select>
 			  	</div>	
-			  </div>
-			  <div class="form-group row row-bottom-margin ml-2" style="margin-bottom:0.8px;">
-			    <label for="Category" class="col-sm-4 col-form-label text-left">Select Category </label>
-			    <div class="col-sm-6 col-md-6">
-			      <select id="Category" name="Category" class="browser-default custom-select custom-select-sm"
-			      		onchange="processCricketProcedures('GET-CATEGORY-DATA')">
-			      		<option value=" "> </option>
-			      		<option value="MEN">MEN</option>
-			      		<option value="WOMEN">WOMEN</option>
-			      </select>
-			    </div>
 			  </div>
 			<div class="row">
 			<table class="table table-bordered table-responsive">
