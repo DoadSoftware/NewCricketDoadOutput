@@ -654,7 +654,7 @@ public class Caption
 				break;
 			case "Control_F11": //MATCH SUMMARY
 				switch(config.getBroadcaster()) {
-				case Constants.BENGAL_T20: case Constants.NPL: case Constants.ISPL: case Constants.MPL: case Constants.APL:
+				case Constants.BENGAL_T20: case Constants.NPL: case Constants.ISPL: case Constants.MPL: case Constants.APL: 
 					this_fullFramesGfx.WhichType = whatToProcess.split(",")[2];
 					break;
 				}
@@ -758,7 +758,7 @@ public class Caption
 				}
 				
 				if(!config.getBroadcaster().equalsIgnoreCase(Constants.ISPL) && !config.getBroadcaster().equalsIgnoreCase(Constants.LEGENDS) &&
-						!config.getBroadcaster().equalsIgnoreCase(Constants.MPL)) {
+						!config.getBroadcaster().equalsIgnoreCase(Constants.MPL) && !config.getBroadcaster().equalsIgnoreCase(Constants.VIDARBHA)) {
 					if(whatToProcess.split(",")[0].equalsIgnoreCase("Control_Shift_Z")){
 						this_fullFramesGfx.whichSponsor = whatToProcess.split(",")[3];
 					}else if(whatToProcess.split(",")[0].equalsIgnoreCase("Alt_Shift_W")){
@@ -972,6 +972,21 @@ public class Caption
 				break;	
 			case "Alt_1": // Infobar Left 
 				switch (config.getBroadcaster().toUpperCase()) {
+				case Constants.VIDARBHA:
+					if(this_infobarGfx.infobar.getFull_section() != null && !this_infobarGfx.infobar.getFull_section().isEmpty()) {
+						if(!this_infobarGfx.infobar.getFull_section().equalsIgnoreCase(whatToProcess.split(",")[2])) {
+							whichSide = 2;
+						}else {
+							whichSide = 1;
+						}
+					}else {
+						whichSide = 1;
+					}
+					this_infobarGfx.infobar.setFull_section(whatToProcess.split(",")[2]);
+					this_infobarGfx.infobar.setMiddle_section("");
+					this_infobarGfx.infobar.setRight_bottom("");
+					status = this_infobarGfx.populateFullSection(print_writers, matchAllData, whichSide);
+					break;
 				case Constants.ISPL:
 					if(config.getWhichInfobar().equalsIgnoreCase("LOF_INFOBAR")) {
 						if(this_lofInfobarGfx.infobar.getFull_section() != null && !this_lofInfobarGfx.infobar.getFull_section().isEmpty()) {
@@ -1076,6 +1091,38 @@ public class Caption
 						}
 					}
 					break;	
+				case Constants.VIDARBHA:
+					
+					if(this_infobarGfx.infobar.getMiddle_section().equalsIgnoreCase(CricketUtil.BATSMAN)) {
+						this_infobarGfx.infobar.setMiddle_section(whatToProcess.split(",")[2]);
+						status = this_infobarGfx.populateVizInfobarMiddleSection(print_writers,matchAllData, 1);
+					}else {
+						if(whatToProcess.split(",")[2].equalsIgnoreCase(CricketUtil.BATSMAN)) {
+							this_infobarGfx.infobar.setMiddle_section(whatToProcess.split(",")[2]);
+							
+							status = this_infobarGfx.populateVizInfobarMiddleSection(print_writers,matchAllData, 1);
+						}else {
+							if(this_infobarGfx.infobar.getMiddle_section() != null && !this_infobarGfx.infobar.getMiddle_section().isEmpty()) {
+								if(!this_infobarGfx.infobar.getMiddle_section().equalsIgnoreCase(whatToProcess.split(",")[2])) {
+									whichSide = 2;
+								}else {
+									whichSide = 1;
+								}
+							}else {
+								whichSide = 1;
+							}
+							this_infobarGfx.infobar.setMiddle_section(whatToProcess.split(",")[2]);
+							status = this_infobarGfx.populateVizInfobarMiddleSection(print_writers,matchAllData, whichSide);
+						}
+						
+						if(this_infobarGfx.infobar.getRight_bottom().trim().isEmpty()) {
+							this_infobarGfx.infobar.setRight_bottom(CricketUtil.BOWLER);
+							this_infobarGfx.populateVizInfobarRightBottom(print_writers, matchAllData, 1, 1);
+						}
+					}
+					
+					this_infobarGfx.infobar.setFull_section("");
+					break;
 
 				case Constants.ISPL:
 					this_lofInfobarGfx.whichInning = Integer.valueOf(whatToProcess.split(",")[1]);
@@ -1427,6 +1474,40 @@ public class Caption
 				break;
 			case "Alt_7":
 				switch (config.getBroadcaster().toUpperCase()) {
+				case Constants.VIDARBHA:
+					if(this_infobarGfx.infobar.getRight_bottom().equalsIgnoreCase(CricketUtil.BOWLER)) {
+						this_infobarGfx.infobar.setRight_bottom(whatToProcess.split(",")[2]);
+						status = this_infobarGfx.populateVizInfobarRightBottom(print_writers, matchAllData, 1, 1);
+					}else {
+						if(whatToProcess.split(",")[2].equalsIgnoreCase(CricketUtil.BOWLER)) {
+							this_infobarGfx.infobar.setRight_bottom(whatToProcess.split(",")[2]);
+							status = this_infobarGfx.populateVizInfobarRightBottom(print_writers, matchAllData, 1, 1);
+						}else {
+							if(this_infobarGfx.infobar.getRight_bottom() != null && !this_infobarGfx.infobar.getRight_bottom().isEmpty()) {
+								if(!this_infobarGfx.infobar.getRight_bottom().equalsIgnoreCase(whatToProcess.split(",")[2])) {
+									whichSide = 2;
+								}else {
+									whichSide = 1;
+								}
+							}else {
+								whichSide = 1;
+							}
+							
+							this_infobarGfx.infobar.setRight_bottom(whatToProcess.split(",")[2]);
+							status = this_infobarGfx.populateVizInfobarRightBottom(print_writers, matchAllData, whichSide, 1);
+						}
+						
+						if(this_infobarGfx.infobar.getMiddle_section().trim().isEmpty()) {
+							this_infobarGfx.infobar.setMiddle_section(CricketUtil.BATSMAN);
+							this_infobarGfx.populateVizInfobarMiddleSection(print_writers,matchAllData, 1);
+						}
+					}
+					
+					this_infobarGfx.infobar.setFull_section("");
+					
+//					this_infobarGfx.infobar.setRight_bottom(whatToProcess.split(",")[2]);
+//					status = this_infobarGfx.populateVizInfobarRightBottom(print_writers, matchAllData, 1, whichSide);
+					break;
 				case Constants.NPL: case Constants.LEGENDS: case Constants.MPL: case Constants.APL:
 //					if(this_infobarGfx.infobar.getMiddle_section().equalsIgnoreCase(CricketUtil.BATSMAN)) {
 //						this_infobarGfx.infobar.setRight_bottom(whatToProcess.split(",")[2]);
@@ -1505,6 +1586,11 @@ public class Caption
 				break;
 			case "Alt_8":
 				switch (config.getBroadcaster().toUpperCase()) {
+				case Constants.VIDARBHA:
+					whichSide = 1;
+					this_infobarGfx.infobar.setRight_section(whatToProcess.split(",")[2]);
+					status = this_infobarGfx.populateVizInfobarRightSection(false,print_writers, matchAllData, whichSide, 0);
+					break;	
 				case Constants.T20_MUMBAI:
 					if(this_infobarGfx.infobar.getRight_section().equalsIgnoreCase(CricketUtil.BOWLER) && 
 							whatToProcess.split(",")[2].equalsIgnoreCase(CricketUtil.BOWLER)) {
