@@ -539,6 +539,9 @@ public class Animation
 				case "Control_F7":
 					processAnimation(Constants.BACK, print_writers, "Anim_FullFrames$In_Out$Main$Teams", "START");
 					break;	
+				case "Control_F10":
+					processAnimation(Constants.BACK, print_writers, "Anim_FullFrames$In_Out$Main$Manhattan", "START");
+					break;	
 				}
 				break;
 			case "Shift_T":

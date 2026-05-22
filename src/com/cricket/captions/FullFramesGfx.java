@@ -7241,8 +7241,9 @@ public class FullFramesGfx
 			String powerPlay = "";
 			String powerPlay2 = "";
 			switch (config.getBroadcaster().toUpperCase()) {
+		
 			case Constants.ICC_U19_2023: case Constants.ISPL: case Constants.BENGAL_T20: case Constants.NPL: case Constants.MPL:
-			case Constants.LEGENDS: case Constants.APL:
+			case Constants.LEGENDS: case Constants.APL: case Constants.VIDARBHA:
 				switch (config.getBroadcaster().toUpperCase()) {
 				case Constants.ISPL:
 					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_FullFrame$All_Graphics$Side_" + WhichSide 
@@ -7261,6 +7262,12 @@ public class FullFramesGfx
 					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$AllGraphics$Side" + WhichSide + 
 							"$Select_GraphicsType*FUNCTION*Omo*vis_con SET 9 \0", print_writers);
 					break;
+				case Constants.VIDARBHA:	
+					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$AllGraphics$Side" + WhichSide + 
+							"$Select_Graphics*FUNCTION*Omo*vis_con SET 9 \0", print_writers);
+					
+					
+					break;	
 				
 				}
 				
@@ -7273,6 +7280,12 @@ public class FullFramesGfx
 								+ "$Out$Wkt_" + irow + "$img_TeamBase01$Select_Wickets*FUNCTION*Omo*vis_con SET 0\0", print_writers);
 					}
 					break;
+				case Constants.VIDARBHA:
+					for(int irow = 1; irow <= 20; irow++) {
+						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$AllGraphics$Side" + WhichSide + "$Manhattan$Wickets_Axis"
+								+ "$Out$Wkt_" + irow + "$Select_Wickets*FUNCTION*Omo*vis_con SET 0\0", print_writers);
+					}
+					break;	
 				}
 				
 				int tape_ball1=0,tape_ball2=0,log_50_over=0,log_50_runs=0,tape_count=0;
@@ -7348,7 +7361,19 @@ public class FullFramesGfx
 						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$AllGraphics$Side" + WhichSide + "$Manhattan$Wickets_Axis"
 								+ "$Out$Wkt_" + j+ "$PowerPlay$Select_Wickets*FUNCTION*Omo*vis_con SET 0\0", print_writers);
 					}
-				}else if(config.getBroadcaster().toUpperCase().equalsIgnoreCase(Constants.NPL) || config.getBroadcaster().equalsIgnoreCase(Constants.APL)) {
+				}else if(config.getBroadcaster().toUpperCase().equalsIgnoreCase(Constants.VIDARBHA)) {
+					GFX="Manhattan";
+					gfx_name ="gfx_Full_Frame$AllGraphics$Side";
+					for(int j=1; j<=20; j++) {
+						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$AllGraphics$Side" + WhichSide + "$Manhattan$Wickets_Axis"
+								+ "$Out$Wkt_" + j+ "$Select_PowerPlay*FUNCTION*Omo*vis_con SET 1\0", print_writers);
+						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$AllGraphics$Side" + WhichSide + "$Manhattan$Wickets_Axis"
+								+ "$Out$Wkt_" + j+ "$PowerPlay$Select_Wickets*FUNCTION*Omo*vis_con SET 0\0", print_writers);
+						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$AllGraphics$Side" + WhichSide + "$Manhattan$Wickets_Axis"
+								+ "$Out$Wkt_" + j+ "$Normal$Select_Wickets*FUNCTION*Omo*vis_con SET 0\0", print_writers);
+					}
+				}
+				else if(config.getBroadcaster().toUpperCase().equalsIgnoreCase(Constants.NPL) || config.getBroadcaster().equalsIgnoreCase(Constants.APL)) {
 					GFX="Manhattan";
 					gfx_name ="gfx_Full_Frame$AllGraphics$Side";
 					for(int j=1; j<=20; j++) {
@@ -7363,6 +7388,9 @@ public class FullFramesGfx
 					GFX="Manhattan";
 					gfx_name ="gfx_Full_Frame$All$Main$Side_";
 				}else if(config.getBroadcaster().toUpperCase().equalsIgnoreCase(Constants.BENGAL_T20)) {
+					GFX="Manhattan";
+					gfx_name ="gfx_Full_Frame$AllGraphics$Side";
+				}else if(config.getBroadcaster().toUpperCase().equalsIgnoreCase(Constants.VIDARBHA)) {
 					GFX="Manhattan";
 					gfx_name ="gfx_Full_Frame$AllGraphics$Side";
 				}else {
@@ -7395,6 +7423,18 @@ public class FullFramesGfx
 						}
 						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$AllGraphics$Side" + WhichSide + "$Manhattan$Wickets_Axis"
 								+ "$Out$Wkt_" + (j) + "$Select_PowerPlay*FUNCTION*Omo*vis_con SET " + powerplay_omo + "\0", print_writers);
+						break;	
+					case Constants.VIDARBHA:
+						if((j*6) <= powerPlayValue) {
+							powerplay_omo = 0;
+							powerPlay = "$PowerPlay";
+						}
+						else {
+							powerplay_omo = 1;
+							powerPlay = "$Normal";
+						}
+						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$AllGraphics$Side" + WhichSide + "$Manhattan$Wickets_Axis"
+								+ "$Out$Wkt_" + (j) + "$Select_PowerPlay*FUNCTION*Omo*vis_con SET " + powerplay_omo + "\0", print_writers);	
 						break;	
 					case Constants.BENGAL_T20: case Constants.NPL: case Constants.APL:
 						if((j*6) <= powerPlayValue) {
@@ -7496,6 +7536,9 @@ public class FullFramesGfx
 						}
 						
 						switch (config.getBroadcaster().toUpperCase()) {
+						case Constants.VIDARBHA: 
+						lngth = ((382 * Integer.valueOf(manhattan.get(j).getOverTotalRuns())) / maxRuns);
+						break;
 						case Constants.NPL: case Constants.MPL: case Constants.APL:
 							lngth = ((382 * Integer.valueOf(manhattan.get(j).getOverTotalRuns())) / maxRuns);
 							break;
@@ -7536,6 +7579,10 @@ public class FullFramesGfx
 						}
 						
 						switch (config.getBroadcaster().toUpperCase()) {
+						case Constants.VIDARBHA:
+							CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$AllGraphics$Side" + WhichSide + "$Manhattan$Wickets_Axis"
+									+ "$Out$Wkt_" + j + "$Select_Wickets*FUNCTION*Omo*vis_con SET " + manhattan.get(j).getOverTotalWickets() + "\0", print_writers);
+							break;
 						case Constants.BENGAL_T20: case Constants.NPL: case Constants.MPL: case Constants.APL:
 							CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$AllGraphics$Side" + WhichSide + "$Manhattan$Wickets_Axis"
 									+ "$Out$Wkt_" + (j) + powerPlay + "$Select_Wickets*FUNCTION*Omo*vis_con SET " + manhattan.get(j).getOverTotalWickets() + "\0", print_writers);
@@ -30704,6 +30751,8 @@ public class FullFramesGfx
 	
 	public String LeaderBoardBody(int WhichSide, String whatToProcess, MatchAllData matchAllData, int WhichInning) {
 		switch (config.getBroadcaster().toUpperCase()) {
+		case Constants.VIDARBHA:
+			break;
 		case Constants.T20_MUMBAI:
 			return T20MumbaiLeaderBoardBody(WhichSide, whatToProcess, matchAllData, WhichInning);
 		case Constants.LEGENDS:
