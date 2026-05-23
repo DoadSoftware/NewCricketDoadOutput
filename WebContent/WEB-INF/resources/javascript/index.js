@@ -4638,6 +4638,11 @@ function addItemsToList(whatToProcess,dataToProcess)
 					option.text = 'Standings';
 					select.appendChild(option);
 					
+					option = document.createElement('option');
+					option.value = 'TEAMS_RUNS';
+					option.text = 'Team 0s,4s,6s,';
+					select.appendChild(option);
+					
 					session_match.match.inning.forEach(function(inn){
 						if(inn.isCurrentInning == 'YES'){
 							if(inn.inningNumber == 1){
@@ -4971,7 +4976,7 @@ function addItemsToList(whatToProcess,dataToProcess)
 					['selectFreeText', 'selectFreeText1', 'Player1', 'Player2', 'Player3', 'selectPhoto', 'FreeText', 'SponsorValue', 'Promo'].forEach(id => {
 					    const el = document.getElementById(id);
 					    if (el) {
-					        id === 'selectFreeText' ? el.parentElement.remove() : el.remove();
+					        id === 'selectFreeText' || id === 'selectFreeText1' ? el.parentElement.remove() : el.remove();
 					    }
 					});
  
@@ -5015,7 +5020,12 @@ function addItemsToList(whatToProcess,dataToProcess)
 			 			cellCount = 2;
 						processCricketProcedures("GRAPHICS-OPTIONS_DATA", whatToProcess + "," +
 	    				(this.value || $(this).find('option').first().val()));
-					} else if(this.value == 'BatMileStone' || this.value == 'BallMileStone'){
+					}else if(this.value == 'PROMO'){
+						row.insertCell(1).id = 'Promo';
+			 			cellCount = 2;
+						processCricketProcedures("GRAPHICS-OPTIONS_DATA", whatToProcess + "," +
+	    				(this.value || $(this).find('option').first().val()));
+					}else if(this.value == 'BatMileStone' || this.value == 'BallMileStone'){
 						let xballselect  = document.createElement('select');
 						xballselect.id = 'selectFreeText';
 						xballselect.name = xballselect.id;
@@ -5091,12 +5101,6 @@ function addItemsToList(whatToProcess,dataToProcess)
 						row.insertCell(1).appendChild(xballselect);
 						setDropdownOptionToSelectOptionArray($(xballselect),1);
 						cellCount = 2;
-					}
-					else if(this.value == 'PROMO'){
-						row.insertCell(1).id = 'Promo';
-			 			cellCount++;
-						processCricketProcedures("GRAPHICS-OPTIONS_DATA", whatToProcess + "," +
-	    				(this.value || $(this).find('option').first().val()));
 					}
 				});
 				select.dispatchEvent(new Event('change'));

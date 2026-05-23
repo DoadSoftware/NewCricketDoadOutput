@@ -88,6 +88,8 @@ public class InfobarGfx
 	public List<Player> Players;
 	public List<HeadToHeadPlayer> headToHead;
 	public List<Tournament> past_tournament_stats;
+	public List<Fixture> fixtures;
+	public List<Team> teams;
 	
 	@JsonIgnore
 	public CricketService cricketService;
@@ -117,7 +119,8 @@ public class InfobarGfx
 
 	public InfobarGfx(Configuration config, String slashOrDash, List<PrintWriter> print_writers, List<Statistics> statistics, List<StatsType> statsTypes, 
 			List<InfobarStats> infobarStats, List<Ground> Grounds, List<Commentator> commentators, List<DuckWorthLewis> dls, List<Player> players, 
-			List<HeadToHeadPlayer> headToHead, List<Tournament> past_tournament_stats, CricketService cricketService) {
+			List<HeadToHeadPlayer> headToHead, List<Tournament> past_tournament_stats, CricketService cricketService, List<Fixture> fixtures, 
+			List<Team> teams) {
 		super();
 		this.config = config;
 		this.slashOrDash = slashOrDash;
@@ -131,6 +134,8 @@ public class InfobarGfx
 		this.Players = players;
 		this.headToHead = headToHead;
 		this.past_tournament_stats = past_tournament_stats;
+		this.fixtures = fixtures;
+		this.teams = teams;
 		this.cricketService = cricketService;
 		
 	}
@@ -678,10 +683,14 @@ public class InfobarGfx
 					if(status == Constants.OK) {
 						this.infobar.setMiddle_section(whatToProcess.split(",")[2]);
 						this.infobar.setRight_section(CricketUtil.BOWLER);
+						this.infobar.setLast_right_section(null);
 						this.infobar.setRight_bottom("BOWLING_STYLE");
 						
 						this.infobar.setRight_full_section("BLANK");
+						this.infobar.setLast_right_full_section(null);
+						
 						this.infobar.setFull_section("BLANK");
+						this.infobar.setLast_full_section(null);
 						
 						populateCurrentBatsmen(print_writers, matchAllData, 1);
 						populateVizInfobarBowler(print_writers, matchAllData, 1);
@@ -6730,7 +6739,7 @@ public class InfobarGfx
 				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Infobar$Right$Side_" + WhichSide + "$NextToBat$Header$txt_Header"
 						+ "*GEOM*TEXT SET " + "TIMELINE" + "\0", print_writers);
 				break;		
-			case "LAST_WICKET": case "PARTNERSHIP": case CricketUtil.BOUNDARY: case "BALLS_SINCE_LAST_BOUNDARY": case "LAST_X_BALLS":
+			case "LAST_WICKET": case "PARTNERSHIP": case CricketUtil.BOUNDARY: case "BALLS_SINCE_LAST_BOUNDARY": case "LAST_X_BALLS": case "TEAMS_RUNS":
 				inning = matchAllData.getMatch().getInning().stream().filter(inn -> inn.getIsCurrentInning().equalsIgnoreCase(CricketUtil.YES)).findAny().orElse(null);
 				
 				if(inning == null) {
@@ -6835,7 +6844,7 @@ public class InfobarGfx
 				case CricketUtil.BOUNDARY:
 					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_Infobar$All$Normal$Section4$Side" + WhichSide + "$select_DataType*FUNCTION*Omo*vis_con SET 9\0", print_writers);
 					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_Infobar$All$Normal$Section4$Side" + WhichSide + "$Standings$txt_Title*GEOM*TEXT SET " 
-							+ "INNINGS BOUNDARIES" + "\0", print_writers);
+							+ "INNS BOUNDARIES" + "\0", print_writers);
 					
 					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_Infobar$All$Normal$Section4$Side" + WhichSide + "$Standings$Team1$txt_TeamName"
 							+ "*GEOM*TEXT SET " + "FOUR" + CricketFunctions.Plural(inning.getTotalFours()).toUpperCase() + "\0", print_writers);
@@ -6845,10 +6854,8 @@ public class InfobarGfx
 					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_Infobar$All$Normal$Section4$Side" + WhichSide + "$Standings$Team1$"
 							+ "StatAll$txt_Value*GEOM*TEXT SET " + inning.getTotalFours() + "\0", print_writers);
 					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_Infobar$All$Normal$Section4$Side" + WhichSide + "$Standings$Team2$"
-							+ "StatAll$txt_Value*GEOM*TEXT SET " + inning + "\0", print_writers);
-
+							+ "StatAll$txt_Value*GEOM*TEXT SET " + inning.getTotalSixes() + "\0", print_writers);
 					break;
-				
 				case "BALLS_SINCE_LAST_BOUNDARY":
 					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_Infobar$All$Normal$Section4$Side" + WhichSide + "$select_DataType*FUNCTION*Omo*vis_con SET 6\0", print_writers);
 					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_Infobar$All$Normal$Section4$Side" + WhichSide + "$BallSince$Tille$txt_Title*GEOM*TEXT SET " 
@@ -6876,6 +6883,20 @@ public class InfobarGfx
 							+ "*GEOM*TEXT SET " + this_data_str.get(this_data_str.size()-1).split(slashOrDash)[1] + "\0", print_writers);
 					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_Infobar$All$Normal$Section4$Side" + WhichSide + "$LastXBalls$Wickets$txt_Title"
 							+ "*GEOM*TEXT SET " + "WICKET" + CricketFunctions.Plural(Integer.valueOf(this_data_str.get(this_data_str.size()-1).split(slashOrDash)[1])).toUpperCase() + "\0", print_writers);
+					break;
+				case "TEAMS_RUNS":
+					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_Infobar$All$Normal$Section4$Side" + WhichSide + "$select_DataType*FUNCTION*Omo*vis_con SET 10\0", print_writers);
+					
+					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_Infobar$All$Normal$Section4$Side" + WhichSide + "$TeamRunStat$txt_Title*GEOM*TEXT SET " 
+							+ inning.getBatting_team().getTeamName1() + "\0", print_writers);
+					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_Infobar$All$Normal$Section4$Side" + WhichSide + "$TeamRunStat$0$txt_StatHead*GEOM*TEXT SET " + "0s" + "\0", print_writers);
+					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_Infobar$All$Normal$Section4$Side" + WhichSide + "$TeamRunStat$1$txt_StatHead*GEOM*TEXT SET " + "4s" + "\0", print_writers);
+					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_Infobar$All$Normal$Section4$Side" + WhichSide + "$TeamRunStat$2$txt_StatHead*GEOM*TEXT SET " + "6s" + "\0", print_writers);
+
+					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_Infobar$All$Normal$Section4$Side" + WhichSide + "$TeamRunStat$0$txt_StatValue*GEOM*TEXT SET " 
+							+ (inning.getInningNumber() == 1 ? IndexController.MatchStats.getHomeTeamScoreData().getTotalDots() : IndexController.MatchStats.getAwayTeamScoreData().getTotalDots()) + "\0", print_writers);
+					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_Infobar$All$Normal$Section4$Side" + WhichSide + "$TeamRunStat$1$txt_StatValue*GEOM*TEXT SET " + inning.getTotalFours() + "\0", print_writers);
+					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_Infobar$All$Normal$Section4$Side" + WhichSide + "$TeamRunStat$2$txt_StatValue*GEOM*TEXT SET " + inning.getTotalSixes() + "\0", print_writers);
 					break;
 				}
 				break;
@@ -12760,7 +12781,7 @@ public class InfobarGfx
 						+ Constants.T20_MUMBAI_Logos + matchAllData.getSetup().getAwayTeam().getTeamBadge() +"\0",print_writers);
 				break;
 			case "PROMO":
-				Fixture fixture = CricketFunctions.processAllFixtures(cricketService).stream().filter(fix -> fix.getMatchnumber() == fixtureid).findAny().orElse(null);
+				Fixture fixture = CricketFunctions.processAllFixtures(fixtures, teams).stream().filter(fix -> fix.getMatchnumber() == fixtureid).findAny().orElse(null);
 				String matchname = fixture.getMatchfilename();
 				if (matchname.matches("MATCH 0[1-9]")) {
 					matchname = matchname.replace("MATCH 0", "MATCH ");
@@ -12811,7 +12832,7 @@ public class InfobarGfx
 				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_Infobar$All$Normal$Analytics$Side" + WhichSide + "$Select_DataType*FUNCTION*Omo*vis_con SET 2\0", print_writers);
 				
 				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_Infobar$All$Normal$Analytics$Side"+ WhichSide + "$Projected$RPO$txt_Title*GEOM*TEXT SET " 
-						+ "RUN PER OVER" + "\0", print_writers);
+						+ "RUNS PER OVER" + "\0", print_writers);
 				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_Infobar$All$Normal$Analytics$Side"+ WhichSide + "$Projected$Score$txt_Title*GEOM*TEXT SET " 
 						+ "PROJECTED SCORES" + "\0", print_writers);
 				

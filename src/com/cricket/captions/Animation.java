@@ -7809,6 +7809,19 @@ public class Animation
 				}
 			}
 			break;
+			
+		case "Alt_5":
+			processAnimation(Constants.FRONT, print_writers, "anim_Infobar$Section4$In_Out", "START");
+			infobar.setRight_full_section(whatToProcess.split(",")[2]);
+			break;
+		case "Alt_6":
+			processAnimation(Constants.FRONT, print_writers, "anim_Infobar$Analytics$In_Out", "START");
+			infobar.setFull_section(whatToProcess.split(",")[2]);
+			break;
+		case "Alt_8":
+			processAnimation(Constants.FRONT, print_writers, "anim_Infobar$Section3$In_Out", "START");
+			infobar.setRight_section(whatToProcess.split(",")[2]);
+			break;
 	
 		case "5":
 			CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$object$LeftPlayer*ACTIVE SET 1\0", print_writers);
@@ -8158,6 +8171,25 @@ public class Animation
 			ExtraInfoOnScreen = false;
 			break;
 			
+		case "Alt_5":
+			processAnimation(Constants.FRONT, print_writers, "anim_Infobar$Section4$In_Out", "CONTINUE");
+			TimeUnit.MILLISECONDS.sleep(700);
+			processAnimation(Constants.FRONT, print_writers, "anim_Infobar$Section4", "SHOW 0.0");
+			infobar.setRight_full_section(null);
+			break;
+		case "Alt_6":
+			processAnimation(Constants.FRONT, print_writers, "anim_Infobar$Analytics$In_Out", "CONTINUE");
+			TimeUnit.MILLISECONDS.sleep(700);
+			processAnimation(Constants.FRONT, print_writers, "anim_Infobar$Analytics", "SHOW 0.0");
+			infobar.setFull_section(null);
+			break;
+		case "Alt_8":
+			processAnimation(Constants.FRONT, print_writers, "anim_Infobar$Section3$In_Out", "CONTINUE");
+			TimeUnit.MILLISECONDS.sleep(700);
+			processAnimation(Constants.FRONT, print_writers, "anim_Infobar$Section3", "SHOW 0.0");
+			infobar.setRight_section("");
+			break;
+			
 		case "r":
 			T20_MumbaiAnimateIn("ArrowRight,", print_writers, config); // Push infobar
 			processAnimation(Constants.FRONT, print_writers, "TeamBug", "CONTINUE");
@@ -8369,53 +8401,16 @@ public class Animation
 			caption.this_infobarGfx.infobar.setLast_middle_section(caption.this_infobarGfx.infobar.getMiddle_section());
 			break;
 		case "Alt_5":
-			if(whatToProcess.split(",")[2].equalsIgnoreCase("BLANK")) {
-				processAnimation(Constants.FRONT, print_writers, "anim_Infobar$Section4$In_Out", "CONTINUE");
-				infobar.setRight_full_section(null);
-				TimeUnit.MILLISECONDS.sleep(700);
-				processAnimation(Constants.FRONT, print_writers, "anim_Infobar$Section4", "SHOW 0.0");
-			}else if(infobar.getRight_full_section() != null && !infobar.getRight_full_section().isEmpty()) {
-				TimeUnit.MILLISECONDS.sleep(200);
-				processAnimation(Constants.FRONT, print_writers, "anim_Infobar$Change_Section4", "START");
-				TimeUnit.MILLISECONDS.sleep(500);
-				infobar.setRight_full_section(whatToProcess.split(",")[2]);
-			}else {
-				processAnimation(Constants.FRONT, print_writers, "anim_Infobar$Section4$In_Out", "START");
-				infobar.setRight_full_section(whatToProcess.split(",")[2]);
-			}
+			processAnimation(Constants.FRONT, print_writers, "anim_Infobar$Change_Section4", "START");
+			infobar.setRight_full_section(whatToProcess.split(",")[2]);
 			break;
 		case "Alt_6":
-			if(whatToProcess.split(",")[2].equalsIgnoreCase("BLANK")) {
-				processAnimation(Constants.FRONT, print_writers, "anim_Infobar$Analytics$In_Out", "CONTINUE");
-				infobar.setFull_section(null);
-				TimeUnit.MILLISECONDS.sleep(700);
-				processAnimation(Constants.FRONT, print_writers, "anim_Infobar$Analytics", "SHOW 0.0");
-			}else if(infobar.getFull_section() != null && !infobar.getFull_section().isEmpty()) {
-				TimeUnit.MILLISECONDS.sleep(200);
-				processAnimation(Constants.FRONT, print_writers, "anim_Infobar$Analytics$Change", "START");
-				TimeUnit.MILLISECONDS.sleep(500);
-				infobar.setFull_section(whatToProcess.split(",")[2]);
-			}else {
-				processAnimation(Constants.FRONT, print_writers, "anim_Infobar$Analytics$In_Out", "START");
-				infobar.setFull_section(whatToProcess.split(",")[2]);
-			}
+			processAnimation(Constants.FRONT, print_writers, "anim_Infobar$Analytics$Change", "START");
+			infobar.setFull_section(whatToProcess.split(",")[2]);
 			break;
-		case "Alt_8": //case "Alt_0": case "Alt_3": case "Alt_4": case "Alt_9":
-			if(whatToProcess.split(",")[2].equalsIgnoreCase(CricketUtil.BOWLER)) {
-				processAnimation(Constants.FRONT, print_writers, "anim_Infobar$Section3$In_Out", "CONTINUE");
-				infobar.setRight_section(null);
-				TimeUnit.MILLISECONDS.sleep(700);
-				processAnimation(Constants.FRONT, print_writers, "anim_Infobar$Section3", "SHOW 0.0");
-			}else if(infobar.getRight_section() != null && !infobar.getRight_section().isEmpty() && 
-					!infobar.getRight_section().equalsIgnoreCase(CricketUtil.BOWLER)) {
-				TimeUnit.MILLISECONDS.sleep(200);
-				processAnimation(Constants.FRONT, print_writers, "anim_Infobar$Change_Section3", "START");
-				TimeUnit.MILLISECONDS.sleep(500);
-				infobar.setRight_section(whatToProcess.split(",")[2]);
-			}else {
-				processAnimation(Constants.FRONT, print_writers, "anim_Infobar$Section3$In_Out", "START");
-				infobar.setRight_section(whatToProcess.split(",")[2]);
-			}
+		case "Alt_8":
+			processAnimation(Constants.FRONT, print_writers, "anim_Infobar$Change_Section3", "START");
+			infobar.setRight_section(whatToProcess.split(",")[2]);
 			break;
 			
 		case "Control_Shift_U": case "Control_Shift_V":
@@ -8555,15 +8550,12 @@ public class Animation
 			processAnimation(Constants.FRONT, print_writers, "Change_Section1", "SHOW 0.0");
 			break;
 		case "Alt_5":
-			TimeUnit.MILLISECONDS.sleep(500);
 			processAnimation(Constants.FRONT, print_writers, "anim_Infobar$Change_Section4", "SHOW 0.0");
 			break;
 		case "Alt_6":
-			TimeUnit.MILLISECONDS.sleep(500);
 			processAnimation(Constants.FRONT, print_writers, "anim_Infobar$Analytics$Change", "SHOW 0.0");
 			break;
-		case "Alt_8": //case "Alt_0": case "Alt_3": case "Alt_4": case "Alt_9":
-			TimeUnit.MILLISECONDS.sleep(500);
+		case "Alt_8":
 			processAnimation(Constants.FRONT, print_writers, "anim_Infobar$Change_Section3", "SHOW 0.0");
 			break;
 			
@@ -11401,14 +11393,22 @@ public class Animation
 				processAnimation(Constants.FRONT, print_writers, "Loop", "SHOW 0.0");
 				
 				this.infobar.setInfobar_on_screen(false);
+				this.infobar.setFull_section(null);
+				this.infobar.setRight_full_section(null);
+				this.infobar.setRight_section(null);
 				ExtraInfoOnScreen = false;
 				MiddleSectionInfoOnScreen = false;
 				bigScoreBug_On_Screen = false;
 			}else if(whatToProcess.contains("CLEAR-INFOBAR_DATA")) {
 				caption.this_infobarGfx.infobar.setInfobar_on_screen(false);
-				infobar.setFull_section(null);
-				infobar.setRight_full_section(null);
-				infobar.setRight_section(null);
+				caption.this_infobarGfx.infobar.setFull_section(null);
+				caption.this_infobarGfx.infobar.setRight_full_section(null);
+				caption.this_infobarGfx.infobar.setRight_section(null);
+				caption.this_infobarGfx.infobar.setMiddle_section(null);
+				caption.this_infobarGfx.infobar.setLast_right_section(null);
+				caption.this_infobarGfx.infobar.setRight_bottom(null);
+				caption.this_infobarGfx.infobar.setLast_right_full_section(null);
+				caption.this_infobarGfx.infobar.setLast_full_section(null);
 			}
 			this.whichGraphicOnScreen = "";
 			break;

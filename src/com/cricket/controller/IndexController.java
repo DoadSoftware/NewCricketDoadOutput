@@ -3,6 +3,7 @@ package com.cricket.controller;
 import java.io.File;
 import java.io.FileFilter;
 import java.io.IOException;
+import java.io.ObjectInputFilter.Config;
 import java.io.PrintWriter;
 import java.lang.reflect.InvocationTargetException;
 import java.net.MalformedURLException;
@@ -694,15 +695,39 @@ public class IndexController
 		switch (graphicsType) {
 		case Constants.INFO_BAR:
 			this_caption.whichSide = 1;
+			String lastDataPart = "";
 			if (this_animation.infobar.isInfobar_on_screen()) {
 				if (command.equalsIgnoreCase("Control_F12") || command.equalsIgnoreCase("Shift_F12")) {
 					this_caption.whichSide = 2;
 				} else if (session_configuration.getWhichInfobar().equalsIgnoreCase("LOF_INFOBAR")) {
-					String lastMiddle = this_caption.this_lofInfobarGfx.infobar.getLast_middle_section();
-					this_caption.whichSide = (lastMiddle != null && !lastMiddle.isEmpty() && !lastMiddle.equalsIgnoreCase(CricketUtil.BATSMAN)
-							&& !lastMiddle.equalsIgnoreCase("IDENT")) ? 2 : 1;
+					lastDataPart = this_caption.this_lofInfobarGfx.infobar.getLast_middle_section();
+					this_caption.whichSide = (lastDataPart != null && !lastDataPart.isEmpty() && !lastDataPart.equalsIgnoreCase(CricketUtil.BATSMAN)
+							&& !lastDataPart.equalsIgnoreCase("IDENT")) ? 2 : 1;
 				} else {
-					this_caption.whichSide = 2;
+					switch (session_configuration.getBroadcaster()) {
+					case Constants.T20_MUMBAI:
+						switch(command) {
+						case "Alt_2": case "Alt_7":
+							this_caption.whichSide = 2;
+							break;
+						case "Alt_5":
+							lastDataPart = this_caption.this_infobarGfx.infobar.getLast_right_full_section();
+							this_caption.whichSide = (lastDataPart != null && !lastDataPart.isEmpty() && !lastDataPart.equalsIgnoreCase("BLANK")) ? 2 : 1;
+							break;
+						case "Alt_6":
+							lastDataPart = this_caption.this_infobarGfx.infobar.getLast_full_section();
+							this_caption.whichSide = (lastDataPart != null && !lastDataPart.isEmpty() && !lastDataPart.equalsIgnoreCase("BLANK")) ? 2 : 1;
+							break;
+						case "Alt_8":
+							lastDataPart = this_caption.this_infobarGfx.infobar.getLast_right_section();
+							this_caption.whichSide = (lastDataPart != null && !lastDataPart.isEmpty() && !lastDataPart.equalsIgnoreCase(CricketUtil.BOWLER)) ? 2 : 1;
+							break;
+						}
+						break;
+					default:
+						this_caption.whichSide = 2;
+						break;
+					}
 				}
 			}
 			this_caption.PopulateGraphics(valueToProcess, session_match);
@@ -872,31 +897,19 @@ public class IndexController
 			}
 			break;
 		case Constants.T20_MUMBAI:
-			if(!this_caption.this_infobarGfx.infobar.getFull_section().equalsIgnoreCase("BLANK")) {
-				if(this_caption.this_infobarGfx.infobar.getFull_section() != null && !this_caption.this_infobarGfx.infobar.getFull_section().isEmpty()) {
-					this_caption.PopulateGraphics("Alt_6," + Inn_Number + ",BLANK", session_match);
-					this_animation.caption = this_caption;
-					TimeUnit.MILLISECONDS.sleep(1000);
-					processAnimations("ANIMATE-IN-GRAPHICS", session_configuration, "Alt_6," + Inn_Number + ",BLANK", print_writers, headToHead);
-				}
+			if(this_caption.this_infobarGfx.infobar.getLast_full_section() != null && !this_caption.this_infobarGfx.infobar.getLast_full_section().isEmpty()) {
+				this_caption.PopulateGraphics("Alt_6," + Inn_Number + ",BLANK", session_match);
+				this_animation.AnimateOut("Alt_6," + Inn_Number + ",BLANK", print_writers, session_configuration);
 			}
 			
-			if(!this_caption.this_infobarGfx.infobar.getRight_full_section().equalsIgnoreCase("BLANK")) {
-				if(this_caption.this_infobarGfx.infobar.getRight_full_section() != null && !this_caption.this_infobarGfx.infobar.getRight_full_section().isEmpty()) {
-					this_caption.PopulateGraphics("Alt_5," + Inn_Number + ",BLANK", session_match);
-					this_animation.caption = this_caption;
-					TimeUnit.MILLISECONDS.sleep(1000);
-					processAnimations("ANIMATE-IN-GRAPHICS", session_configuration, "Alt_5," + Inn_Number + ",BLANK", print_writers, headToHead);
-				}
+			if(this_caption.this_infobarGfx.infobar.getLast_right_full_section() != null && !this_caption.this_infobarGfx.infobar.getLast_right_full_section().isEmpty()) {
+				this_caption.PopulateGraphics("Alt_5," + Inn_Number + ",BLANK", session_match);
+				this_animation.AnimateOut("Alt_5," + Inn_Number + ",BLANK", print_writers, session_configuration);
 			}
 			
-			if(!this_caption.this_infobarGfx.infobar.getRight_section().equalsIgnoreCase("BOWLER")) {
-				if(this_caption.this_infobarGfx.infobar.getRight_section() != null && !this_caption.this_infobarGfx.infobar.getRight_section().isEmpty()) {
-					this_caption.PopulateGraphics("Alt_8," + Inn_Number + ",BOWLER", session_match);
-					this_animation.caption = this_caption;
-					TimeUnit.MILLISECONDS.sleep(1000);
-					processAnimations("ANIMATE-IN-GRAPHICS", session_configuration, "Alt_8," + Inn_Number + ",BOWLER", print_writers, headToHead);
-				}
+			if(this_caption.this_infobarGfx.infobar.getLast_right_section() != null && !this_caption.this_infobarGfx.infobar.getLast_right_section().isEmpty()) {
+				this_caption.PopulateGraphics("Alt_8," + Inn_Number + ",BOWLER", session_match);
+				this_animation.AnimateOut("Alt_8," + Inn_Number + ",BOWLER", print_writers, session_configuration);
 			}
 			break;
 		}
@@ -938,7 +951,7 @@ public class IndexController
 				}else if(valueToProcess.split(",")[0].equalsIgnoreCase("Alt_e")){
 					GetGraphicOption(valueToProcess,session_configuration, headToHead);
 				}else {
-					if(session_configuration.getWhichInfobar().equalsIgnoreCase("LOF_INFOBAR")) {
+					if(session_configuration.getWhichInfobar().equalsIgnoreCase("LOF_INFOBAR")) {	
 						switch(valueToProcess.split(",")[0]) {
 						case "Alt_1": case "Control_5": case "Alt_5": case "Alt_9": case "Alt_0": case "Control_4": case "6": case "Control_Alt_3":
 							if(this_caption.whichSide == 1) {
@@ -974,11 +987,54 @@ public class IndexController
 							break;
 						}
 					}else {
-						this_animation.ChangeOn(valueToProcess, print_writers, session_configuration);
-						TimeUnit.MILLISECONDS.sleep(2000);
-						this_caption.whichSide = 1;
-						this_caption.PopulateGraphics(valueToProcess, session_match);
-						this_animation.CutBack(valueToProcess, print_writers, session_configuration);
+						switch(session_configuration.getBroadcaster()) {
+						case Constants.T20_MUMBAI:
+							switch(valueToProcess.split(",")[0]) {
+							case "Alt_5": case "Alt_6": case "Alt_8":
+							    String lastSection = null;
+							    switch(valueToProcess.split(",")[0]) {
+							        case "Alt_5":
+							            lastSection = this_caption.this_infobarGfx.infobar.getLast_right_full_section();
+							            break;
+							        case "Alt_6":
+							            lastSection = this_caption.this_infobarGfx.infobar.getLast_full_section();
+							            break;
+							        case "Alt_8":
+							            lastSection = this_caption.this_infobarGfx.infobar.getLast_right_section();
+							            break;
+							    }
+							    
+							    if(lastSection != null && !lastSection.trim().isEmpty()) {
+							        if(this_caption.whichSide == 1) {
+							            this_animation.AnimateIn(valueToProcess,print_writers,session_configuration);
+							        } else {
+							            this_animation.ChangeOn(valueToProcess,print_writers,session_configuration);
+							            TimeUnit.MILLISECONDS.sleep(1000);
+							            this_caption.whichSide = 1;
+							            this_caption.PopulateGraphics(valueToProcess,session_match);
+							            this_animation.CutBack(valueToProcess,print_writers,session_configuration);
+							        }
+							    } else {
+							        this_animation.AnimateOut(valueToProcess,print_writers,session_configuration);
+							    }
+							    break;
+							case "Alt_2": case "Alt_7":
+								this_animation.ChangeOn(valueToProcess, print_writers, session_configuration);
+								TimeUnit.MILLISECONDS.sleep(1000);
+								this_caption.whichSide = 1;
+								this_caption.PopulateGraphics(valueToProcess, session_match);
+								this_animation.CutBack(valueToProcess, print_writers, session_configuration);
+								break;
+							}
+							break;
+						default:
+							this_animation.ChangeOn(valueToProcess, print_writers, session_configuration);
+							TimeUnit.MILLISECONDS.sleep(2000);
+							this_caption.whichSide = 1;
+							this_caption.PopulateGraphics(valueToProcess, session_match);
+							this_animation.CutBack(valueToProcess, print_writers, session_configuration);
+							break;
+						}
 					}
 				}
 				break;
@@ -1144,7 +1200,7 @@ public class IndexController
 			if(whatToProcess.contains(",")) {
 	  			switch (whatToProcess.split(",")[1]) {
 	  			case "PROMO":
-	  				return (List<T>) CricketFunctions.processAllFixtures(cricketService);
+	  				return (List<T>) CricketFunctions.processAllFixtures(session_fixture, session_team);
 	  			}
 			 }
 			break;
@@ -1156,7 +1212,7 @@ public class IndexController
   			case "FreeTextDb":
   				return (List<T>) session_infoBarStats;
   			case "PROMO":
-  				return (List<T>) CricketFunctions.processAllFixtures(cricketService);
+  				return (List<T>) CricketFunctions.processAllFixtures(session_fixture, session_team);
   			}
 		  }
 		  break;
@@ -1446,6 +1502,8 @@ public class IndexController
 	        this_caption.this_infobarGfx.dls = session_dls;
 	        this_caption.this_infobarGfx.Commentators = session_commentator;
 	        this_caption.this_infobarGfx.Players = session_players;
+	        this_caption.this_infobarGfx.fixtures = session_fixture;
+	        this_caption.this_infobarGfx.teams = session_team;
 	    }
 
 	    // =====================================================

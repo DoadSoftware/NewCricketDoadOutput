@@ -127,7 +127,7 @@ public class Caption
 				staff, players, pott, varioustText, headToHead, past_tournament_stats, cricketService,fixTures);
 		this.whichSide = whichSide;
 		this.this_infobarGfx = new InfobarGfx(config, slashOrDash, print_writers, statistics, statsTypes, infobarStats, Grounds, Commentators, dls, 
-				players, headToHead, past_tournament_stats, cricketService);
+				players, headToHead, past_tournament_stats, cricketService, fixTures, Teams);
 		this.this_lofInfobarGfx = new LofInfobarGfx(config, slashOrDash, print_writers, statistics, statsTypes, infobarStats, Grounds, Commentators, dls, 
 				players, headToHead,past_tournament_stats, cricketService);
 		this.this_bugsAndMiniGfx = new BugsAndMiniGfx(print_writers, config, bugs, performanceBugs, Teams, VariousText, cricketService, headToHead,
@@ -1380,23 +1380,19 @@ public class Caption
 				case Constants.T20_MUMBAI:
 					if(this_infobarGfx.infobar.getRight_full_section().equalsIgnoreCase("BLANK") && 
 							whatToProcess.split(",")[2].equalsIgnoreCase("BLANK")) {
-						status = "Already reset";
+						status = "IN Alt+5 Section BLANK IS ALREADY SELECTED";
 					}else {
 						if(whatToProcess.split(",")[2].equalsIgnoreCase("BLANK")) {
-							this_infobarGfx.infobar.setRight_full_section(whatToProcess.split(",")[2]);
+							this_infobarGfx.infobar.setRight_full_section("BLANK");
+							this_infobarGfx.infobar.setLast_right_full_section(null);
 							status = Constants.OK;
 						}else {
 							if(whatToProcess.split(",")[2].equalsIgnoreCase("LAST_X_BALLS")) {
 								this_infobarGfx.lastXballs = Integer.valueOf(whatToProcess.split(",")[3]);
 							}
 							
-							if(this_infobarGfx.infobar.getRight_full_section().equalsIgnoreCase("BLANK")) {
-								this_infobarGfx.infobar.setRight_full_section(whatToProcess.split(",")[2]);
-								status = this_infobarGfx.populateVizInfobarRightFullSection(false, print_writers, matchAllData, 1, 1);
-							}else {
-								this_infobarGfx.infobar.setRight_full_section(whatToProcess.split(",")[2]);
-								status = this_infobarGfx.populateVizInfobarRightFullSection(false, print_writers, matchAllData, whichSide, 1);
-							}
+							this_infobarGfx.infobar.setRight_full_section(whatToProcess.split(",")[2]);
+							status = this_infobarGfx.populateVizInfobarRightFullSection(false, print_writers, matchAllData, whichSide, 1);
 						}
 					}
 					break;
@@ -1480,40 +1476,39 @@ public class Caption
 				case Constants.T20_MUMBAI:
 					if(this_infobarGfx.infobar.getFull_section().equalsIgnoreCase("BLANK") && 
 							whatToProcess.split(",")[2].equalsIgnoreCase("BLANK")) {
-						status = "Already reset";
+						status = "IN Alt+6 Section BLANK IS ALREADY SELECTED";
 					}else {
+						System.out.println("whatToProcess - " + whatToProcess);
 						if(whatToProcess.split(",")[2].equalsIgnoreCase("BLANK")) {
-							this_infobarGfx.infobar.setFull_section(whatToProcess.split(",")[2]);
+							this_infobarGfx.infobar.setFull_section("BLANK");
+							this_infobarGfx.infobar.setLast_full_section(null);
 							status = Constants.OK;
 						}else {
-							if(whatToProcess.split(",")[2].equalsIgnoreCase("Commentators")) {
-								this_infobarGfx.Comms_Name = String.join(",", Arrays.asList(whatToProcess.split(",")).subList(whatToProcess.
-										split(",").length - 3, whatToProcess.split(",").length));
-							}
-							else if(whatToProcess.split(",")[2].equalsIgnoreCase("FreeTextDb")) {
-								this_infobarGfx.infobarStatsId = Integer.valueOf(whatToProcess.split(",")[3]);		
-							}
-							else if(whatToProcess.split(",")[2].equalsIgnoreCase("FreeText")) {
-								this_infobarGfx.freeText = whatToProcess;
-							}
-							else if(whatToProcess.split(",")[2].equalsIgnoreCase("BatsmanTimeLine")) {
-								this_infobarGfx.FirstPlayerId = Integer.valueOf(whatToProcess.split(",")[3]);
-							}
-							else if(whatToProcess.split(",")[2].equalsIgnoreCase("BatMileStone") || 
-									whatToProcess.split(",")[2].equalsIgnoreCase("BallMileStone")) {
-								this_infobarGfx.FirstPlayerId = Integer.valueOf(whatToProcess.split(",")[3]);
-								this_infobarGfx.data_Type = whatToProcess.split(",")[4];
-							}else if(whatToProcess.split(",")[2].equalsIgnoreCase("PROMO")) {
-								this_infobarGfx.fixtureid = Integer.valueOf(whatToProcess.split(",")[3]);
+							switch(whatToProcess.split(",")[2]) {
+							    case "Commentators":
+							    	this_infobarGfx.Comms_Name = String.join(",", Arrays.asList(whatToProcess.split(",")).subList(whatToProcess.
+											split(",").length - 3, whatToProcess.split(",").length));
+							        break;
+							    case "FreeTextDb":
+							    	this_infobarGfx.infobarStatsId = Integer.valueOf(whatToProcess.split(",")[3]);
+							        break;
+							    case "FreeText":
+							    	this_infobarGfx.freeText = whatToProcess;
+							        break;
+							    case "BatsmanTimeLine":
+							    	this_infobarGfx.FirstPlayerId = Integer.valueOf(whatToProcess.split(",")[3]);
+							        break;
+							    case "BatMileStone": case "BallMileStone":
+							    	this_infobarGfx.FirstPlayerId = Integer.valueOf(whatToProcess.split(",")[3]);
+									this_infobarGfx.data_Type = whatToProcess.split(",")[4];
+							        break;
+							    case "PROMO":
+							    	this_infobarGfx.fixtureid = Integer.valueOf(whatToProcess.split(",")[3]);
+							        break;
 							}
 							
-							if(this_infobarGfx.infobar.getFull_section().equalsIgnoreCase("BLANK")) {
-								this_infobarGfx.infobar.setFull_section(whatToProcess.split(",")[2]);
-								status = this_infobarGfx.populateFullSection(print_writers, matchAllData, 1);
-							}else {
-								this_infobarGfx.infobar.setFull_section(whatToProcess.split(",")[2]);
-								status = this_infobarGfx.populateFullSection(print_writers, matchAllData, whichSide);
-							}
+							this_infobarGfx.infobar.setFull_section(whatToProcess.split(",")[2]);
+							status = this_infobarGfx.populateFullSection(print_writers, matchAllData, whichSide);
 						}
 					}
 					break;
@@ -1650,6 +1645,7 @@ public class Caption
 					}else {
 						if(whatToProcess.split(",")[2].equalsIgnoreCase(CricketUtil.BOWLER)) {
 							this_infobarGfx.infobar.setRight_section(CricketUtil.BOWLER);
+							this_infobarGfx.infobar.setLast_right_section(null);
 							this_infobarGfx.infobar.setRight_bottom("BOWLING_STYLE");
 							
 							status = this_infobarGfx.populateVizInfobarBowler(print_writers, matchAllData, 1);
@@ -1657,13 +1653,9 @@ public class Caption
 							if(whatToProcess.split(",")[2].equalsIgnoreCase("LAST_X_BALLS")) {
 								this_infobarGfx.lastXballs = Integer.valueOf(whatToProcess.split(",")[3]);
 							}
-							if(this_infobarGfx.infobar.getRight_section().equalsIgnoreCase(CricketUtil.BOWLER)) {
-								this_infobarGfx.infobar.setRight_section(whatToProcess.split(",")[2]);
-								status = this_infobarGfx.populateVizInfobarRightSection(false,print_writers, matchAllData, 1, 1);
-							}else {
-								this_infobarGfx.infobar.setRight_section(whatToProcess.split(",")[2]);
-								status = this_infobarGfx.populateVizInfobarRightSection(false,print_writers, matchAllData, whichSide, 1);
-							}
+							
+							this_infobarGfx.infobar.setRight_section(whatToProcess.split(",")[2]);
+							status = this_infobarGfx.populateVizInfobarRightSection(false,print_writers, matchAllData, whichSide, 1);
 						}
 					}
 					break;
