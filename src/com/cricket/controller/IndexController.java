@@ -714,7 +714,7 @@ public class IndexController
 							lastDataPart = this_caption.this_infobarGfx.infobar.getLast_right_full_section();
 							this_caption.whichSide = (lastDataPart != null && !lastDataPart.isEmpty() && !lastDataPart.equalsIgnoreCase("BLANK")) ? 2 : 1;
 							break;
-						case "Alt_6":
+						case "Alt_3": case "Alt_4": case "Alt_6":
 							lastDataPart = this_caption.this_infobarGfx.infobar.getLast_full_section();
 							this_caption.whichSide = (lastDataPart != null && !lastDataPart.isEmpty() && !lastDataPart.equalsIgnoreCase("BLANK")) ? 2 : 1;
 							break;
@@ -897,9 +897,9 @@ public class IndexController
 			}
 			break;
 		case Constants.T20_MUMBAI:
-			if(this_caption.this_infobarGfx.infobar.getLast_full_section() != null && !this_caption.this_infobarGfx.infobar.getLast_full_section().isEmpty()) {
-				this_caption.PopulateGraphics("Alt_6," + Inn_Number + ",BLANK", session_match);
-				this_animation.AnimateOut("Alt_6," + Inn_Number + ",BLANK", print_writers, session_configuration);
+			if(this_caption.this_infobarGfx.infobar.getLast_right_section() != null && !this_caption.this_infobarGfx.infobar.getLast_right_section().isEmpty()) {
+				this_caption.PopulateGraphics("Alt_8," + Inn_Number + ",BOWLER", session_match);
+				this_animation.AnimateOut("Alt_8," + Inn_Number + ",BOWLER", print_writers, session_configuration);
 			}
 			
 			if(this_caption.this_infobarGfx.infobar.getLast_right_full_section() != null && !this_caption.this_infobarGfx.infobar.getLast_right_full_section().isEmpty()) {
@@ -907,9 +907,9 @@ public class IndexController
 				this_animation.AnimateOut("Alt_5," + Inn_Number + ",BLANK", print_writers, session_configuration);
 			}
 			
-			if(this_caption.this_infobarGfx.infobar.getLast_right_section() != null && !this_caption.this_infobarGfx.infobar.getLast_right_section().isEmpty()) {
-				this_caption.PopulateGraphics("Alt_8," + Inn_Number + ",BOWLER", session_match);
-				this_animation.AnimateOut("Alt_8," + Inn_Number + ",BOWLER", print_writers, session_configuration);
+			if(this_caption.this_infobarGfx.infobar.getLast_full_section() != null && !this_caption.this_infobarGfx.infobar.getLast_full_section().isEmpty()) {
+				this_caption.PopulateGraphics("Alt_6," + Inn_Number + ",BLANK", session_match);
+				this_animation.AnimateOut("Alt_6," + Inn_Number + ",BLANK", print_writers, session_configuration);
 			}
 			break;
 		}
@@ -990,13 +990,13 @@ public class IndexController
 						switch(session_configuration.getBroadcaster()) {
 						case Constants.T20_MUMBAI:
 							switch(valueToProcess.split(",")[0]) {
-							case "Alt_5": case "Alt_6": case "Alt_8":
+							case "Alt_3": case "Alt_4": case "Alt_5": case "Alt_6": case "Alt_8":
 							    String lastSection = null;
 							    switch(valueToProcess.split(",")[0]) {
 							        case "Alt_5":
 							            lastSection = this_caption.this_infobarGfx.infobar.getLast_right_full_section();
 							            break;
-							        case "Alt_6":
+							        case "Alt_3": case "Alt_4": case "Alt_6":
 							            lastSection = this_caption.this_infobarGfx.infobar.getLast_full_section();
 							            break;
 							        case "Alt_8":

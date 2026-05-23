@@ -7814,7 +7814,7 @@ public class Animation
 			processAnimation(Constants.FRONT, print_writers, "anim_Infobar$Section4$In_Out", "START");
 			infobar.setRight_full_section(whatToProcess.split(",")[2]);
 			break;
-		case "Alt_6":
+		case "Alt_3": case "Alt_4": case "Alt_6":
 			processAnimation(Constants.FRONT, print_writers, "anim_Infobar$Analytics$In_Out", "START");
 			infobar.setFull_section(whatToProcess.split(",")[2]);
 			break;
@@ -8177,7 +8177,7 @@ public class Animation
 			processAnimation(Constants.FRONT, print_writers, "anim_Infobar$Section4", "SHOW 0.0");
 			infobar.setRight_full_section(null);
 			break;
-		case "Alt_6":
+		case "Alt_3": case "Alt_4": case "Alt_6":
 			processAnimation(Constants.FRONT, print_writers, "anim_Infobar$Analytics$In_Out", "CONTINUE");
 			TimeUnit.MILLISECONDS.sleep(700);
 			processAnimation(Constants.FRONT, print_writers, "anim_Infobar$Analytics", "SHOW 0.0");
@@ -8404,7 +8404,7 @@ public class Animation
 			processAnimation(Constants.FRONT, print_writers, "anim_Infobar$Change_Section4", "START");
 			infobar.setRight_full_section(whatToProcess.split(",")[2]);
 			break;
-		case "Alt_6":
+		case "Alt_3": case "Alt_4": case "Alt_6":
 			processAnimation(Constants.FRONT, print_writers, "anim_Infobar$Analytics$Change", "START");
 			infobar.setFull_section(whatToProcess.split(",")[2]);
 			break;
@@ -8552,7 +8552,7 @@ public class Animation
 		case "Alt_5":
 			processAnimation(Constants.FRONT, print_writers, "anim_Infobar$Change_Section4", "SHOW 0.0");
 			break;
-		case "Alt_6":
+		case "Alt_3": case "Alt_4": case "Alt_6":
 			processAnimation(Constants.FRONT, print_writers, "anim_Infobar$Analytics$Change", "SHOW 0.0");
 			break;
 		case "Alt_8":

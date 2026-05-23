@@ -1196,7 +1196,6 @@ public class Caption
 				}
 				break;
 			case "Alt_3":
-			
 				if(config.getWhichInfobar().equalsIgnoreCase("LOF_INFOBAR")) {
 					this_lofInfobarGfx.infobar.setMiddle_section("BAT_PROFILE_CAREER");
 					this_lofInfobarGfx.FirstPlayerId = Integer.valueOf(whatToProcess.split(",")[2]);
@@ -1208,10 +1207,10 @@ public class Caption
 				}else {
 					switch (config.getBroadcaster().toUpperCase()) {
 					case Constants.T20_MUMBAI:
-						this_infobarGfx.infobar.setRight_section("BAT_PROFILE_CAREER");
 						this_infobarGfx.FirstPlayerId = Integer.valueOf(whatToProcess.split(",")[2]);
 						this_infobarGfx.WhichProfile = whatToProcess.split(",")[3];
-						status = this_infobarGfx.populateVizInfobarRightSection(false, print_writers, matchAllData, whichSide, 1);
+						this_infobarGfx.infobar.setFull_section("BAT_PROFILE_CAREER");
+						status = this_infobarGfx.populateFullSection(print_writers, matchAllData, whichSide);
 						break;
 					default:
 						this_infobarGfx.infobar.setMiddle_section("BAT_PROFILE_CAREER");
@@ -1236,12 +1235,11 @@ public class Caption
 				}else {
 					switch (config.getBroadcaster().toUpperCase()) {
 					case Constants.T20_MUMBAI:
-						this_infobarGfx.infobar.setRight_section("BALL_PROFILE_CAREER");
 						this_infobarGfx.FirstPlayerId = Integer.valueOf(whatToProcess.split(",")[2]);
 						this_infobarGfx.WhichProfile = whatToProcess.split(",")[3];
-						status = this_infobarGfx.populateVizInfobarRightSection(false, print_writers, matchAllData, whichSide, 1);
+						this_infobarGfx.infobar.setFull_section("BALL_PROFILE_CAREER");
+						status = this_infobarGfx.populateFullSection(print_writers, matchAllData, whichSide);
 						break;
-
 					default:
 						this_infobarGfx.infobar.setMiddle_section("BALL_PROFILE_CAREER");
 						this_infobarGfx.FirstPlayerId = Integer.valueOf(whatToProcess.split(",")[2]);
@@ -1505,6 +1503,9 @@ public class Caption
 							    case "PROMO":
 							    	this_infobarGfx.fixtureid = Integer.valueOf(whatToProcess.split(",")[3]);
 							        break;
+							    case "RECENT_FORM":
+							    	this_infobarGfx.team_id = Integer.valueOf(whatToProcess.split(",")[3]);
+							    	break;
 							}
 							
 							this_infobarGfx.infobar.setFull_section(whatToProcess.split(",")[2]);
