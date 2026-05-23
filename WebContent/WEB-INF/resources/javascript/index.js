@@ -756,20 +756,39 @@ function processCricketProcedures(whatToProcess,dataToProcess)
 					addItemsToList(dataToProcess,data);
 					break;
 				case "GRAPHICS-OPTIONS_DATA":
-					//alert(JSON.stringify(data));
-					if(valueToProcess.includes("Control_Shift_X") || valueToProcess.includes("Control_u")||
-						valueToProcess.includes("Shift_W")){
-						setPlayerDropdown(data)
-					}else if(valueToProcess.includes("Alt_2")){
-						if(valueToProcess.includes("PROMO")){
-							setPromoDropdown("PROMO",data);
-						}
-					}
-					else{
-						setPlayerInDropdown(data);
-					}
-				
-					break;	
+				    console.log("valueToProcess =", valueToProcess);
+				    // Player dropdown cases
+				    if (valueToProcess.includes("Control_Shift_X") || valueToProcess.includes("Control_u") ||
+				        valueToProcess.includes("Shift_W")) {
+				        setPlayerDropdown(data);
+				        return;
+				    }
+				    // Promo case
+				    if (valueToProcess.includes("Alt_2")) {
+				        if (valueToProcess.includes("PROMO")) {
+				            setPromoDropdown("PROMO", data);
+				        }
+				        return;
+				    }
+				    // Commentators / FreeTextDb
+				    if (valueToProcess.includes("Alt_6")) {
+				        let processValue = valueToProcess.toUpperCase();
+				        if (processValue.includes("COMMENTATORS")) {
+				            setCommentators("Commentators", data);
+				            return; // IMPORTANT
+				        }
+				        if (processValue.includes("FREETEXTDB")) {
+				            setInfoBarStatsDropdown("FreeTextDb", data);
+				            return; // IMPORTANT
+				        }
+						if (processValue.includes("PROMO")) {
+							console.log("HELLO");
+				            setPromoDropdown("PROMO", data);
+							return; // IMPORTANT
+				        }
+				    }
+				    setPlayerInDropdown(data);
+				    break;	
 				default:
 					if(whatToProcess.includes("ANIMATE-IN-") || whatToProcess.includes("ANIMATE-OUT-")) {
 						session_animation = data;
@@ -834,12 +853,107 @@ function removeSelectDuplicates(select_id)
 	});
 }
 
+function setCommentators(type, data) {
+  if (type === "Commentators" && Array.isArray(data)) {
+    const commentatorCells = [
+      document.getElementById('Player1'),
+      document.getElementById('Player2'),
+      document.getElementById('Player3')
+    ];
+
+    // Clear each cell and add a commentator dropdown
+    commentatorCells.forEach((cell, index) => {
+      if (!cell) {
+        console.warn(`Cell Player${index+1} not found`);
+        return;
+      }
+
+      cell.innerHTML = '';
+
+      const commSelect = document.createElement('select');
+      commSelect.id = `commentatorDropdown${index + 1}`;
+
+      // Add a default empty option
+      const defaultOption = document.createElement('option');
+      defaultOption.value = '0';
+      defaultOption.text = '';
+      commSelect.appendChild(defaultOption);
+
+      // Use the passed data array here
+      data.forEach(comm => {
+        if (comm.useThis === 'Yes') {
+          const option = document.createElement('option');
+          option.value = comm.commentatorId;
+          option.text = comm.commentatorName;
+          commSelect.appendChild(option);
+        }
+      });
+      commSelect.selectedIndex = 0;
+
+      $(commSelect).on('change', function() {
+        setDropdownOptionToSelectOptionArray($(this), index + 1);
+      });
+
+      cell.appendChild(commSelect);
+
+      // Initialize selection
+      setDropdownOptionToSelectOptionArray($(commSelect), index + 1);
+      $(commSelect).trigger('change');
+    });
+  }
+}
+
+function setInfoBarStatsDropdown(type, data) {
+  if (type === "FreeTextDb" && Array.isArray(data)) {
+	
+	const freeTextCells = [
+	      document.getElementById('FreeText')
+	    ];
+
+    // Clear each cell and add a commentator dropdown
+    freeTextCells.forEach((cell, index) => {
+      if (!cell) {
+        console.warn(`Cell Player${index+1} not found`);
+        return;
+      }
+
+      cell.innerHTML = '';
+
+      const freeTextSelect = document.createElement('select');
+      freeTextSelect.id = `commentatorDropdown${index + 1}`;
+
+      // Add a default empty option
+      const defaultOption = document.createElement('option');
+      defaultOption.value = '0';
+      defaultOption.text = '';
+      freeTextSelect.appendChild(defaultOption);
+
+      // Use the passed data array here
+      data.forEach(pro1 => {
+        const option = document.createElement('option');
+          option.value = pro1.order;  
+          option.text = pro1.prompt;
+          freeTextSelect.appendChild(option);
+      });
+      freeTextSelect.selectedIndex = 0;
+
+      $(freeTextSelect).on('change', function() {
+        setDropdownOptionToSelectOptionArray($(this), index + 1);
+      });
+
+      cell.appendChild(freeTextSelect);
+
+      // Initialize selection
+      setDropdownOptionToSelectOptionArray($(freeTextSelect), index + 1);
+      $(freeTextSelect).trigger('change');
+    });
+  }
+}
+
 function setPromoDropdown(type, data) {
   if (type === "PROMO" && Array.isArray(data)) {
 	
-	const promoCells = [
-	      document.getElementById('Promo')
-	    ];
+	const promoCells = [document.getElementById('Promo')];
 
     // Clear each cell and add a commentator dropdown
     promoCells.forEach((cell, index) => {
@@ -918,6 +1032,11 @@ function setTextBoxOptionToSelectOptionArray(whichIndex)
 {
 	selected_options[0] = document.getElementById('which_inning').value;
 	selected_options[whichIndex+1] = $('#selectFreeText').val();
+}
+function setTextBoxOptionToSelectOptionArray1(whichIndex)
+{
+	selected_options[0] = document.getElementById('which_inning').value;
+	selected_options[whichIndex+1] = $('#selectFreeText1').val();
 }
 
 function setTextBoxOptionForSixDistanceToSelectOptionArray(whichIndex)
@@ -4479,10 +4598,10 @@ function addItemsToList(whatToProcess,dataToProcess)
 					option.text = 'blank';
 					select.appendChild(option);
 					
-					/*option = document.createElement('option');
+					option = document.createElement('option');
 					option.value = 'PARTNERSHIP';
 					option.text = 'Partnership';
-					select.appendChild(option);*/
+					select.appendChild(option);
 				
 					option = document.createElement('option');
 					option.value = 'LAST_X_BALLS';
@@ -4507,6 +4626,16 @@ function addItemsToList(whatToProcess,dataToProcess)
 					option = document.createElement('option');
 					option.value = 'LAST_WICKET';
 					option.text = 'Last Wicket';
+					select.appendChild(option);
+					
+					/*option = document.createElement('option');
+					option.value = 'NEXT_TO_BAT';
+					option.text = 'Next To Bat';
+					select.appendChild(option);*/
+					
+					option = document.createElement('option');
+					option.value = 'TEAMS_STANDINGS';
+					option.text = 'Standings';
 					select.appendChild(option);
 					
 					session_match.match.inning.forEach(function(inn){
@@ -4755,6 +4884,61 @@ function addItemsToList(whatToProcess,dataToProcess)
 					option.text = 'Ident';
 					select.appendChild(option);
 					
+					option = document.createElement('option');
+					option.value = 'PROMO';
+					option.text = 'Promo';
+					select.appendChild(option);
+					
+					option = document.createElement('option');
+					option.value = 'FreeText';
+					option.text = 'FreeText';
+					select.appendChild(option);
+					
+					option = document.createElement('option');
+					option.value = 'FreeTextDb';
+					option.text = 'FreeTextDb';
+					select.appendChild(option);
+					
+					option = document.createElement('option');
+					option.value = 'Commentators';
+					option.text = 'Commentators';
+					select.appendChild(option);
+					
+					option = document.createElement('option');
+					option.value = 'EXTRAS';
+					option.text = 'Extras';
+					select.appendChild(option);
+					
+					option = document.createElement('option');
+					option.value = 'TIMELINE';
+					option.text = 'TimeLine';
+					select.appendChild(option);
+					
+					option = document.createElement('option');
+					option.value = 'BATSMANTIMELINE';
+					option.text = 'BatsMan TimeLine';
+					select.appendChild(option);
+					
+					option = document.createElement('option');
+					option.value = 'PHASE_WISE_SCORE';
+					option.text = 'PhaseWise Score';
+					select.appendChild(option);
+					
+					option = document.createElement('option');
+					option.value = 'PHASE_WISE_RUNRATE';
+					option.text = 'PhaseWise Run-Rate';
+					select.appendChild(option);
+					
+					option = document.createElement('option');
+					option.value = 'BatMileStone';
+					option.text = 'Batter MileStone';
+					select.appendChild(option);
+					
+					option = document.createElement('option');
+					option.value = 'BallMileStone';
+					option.text = 'Bowler MileStone';
+					select.appendChild(option);
+					
 					session_match.match.inning.forEach(function(inn){
 						if(inn.isCurrentInning == 'YES'){
 							if(inn.inningNumber == 1){
@@ -4768,6 +4952,11 @@ function addItemsToList(whatToProcess,dataToProcess)
 								option.value = 'EQUATION_BIG';
 								option.text = 'Equation Big';
 								select.appendChild(option);
+								
+								option = document.createElement('option');
+								option.value = 'EQUATION';
+								option.text = 'Equation';
+								select.appendChild(option);
 							}
 						}
 					});	
@@ -4777,7 +4966,140 @@ function addItemsToList(whatToProcess,dataToProcess)
 				row.insertCell(cellCount).appendChild(select);
 				setDropdownOptionToSelectOptionArray($(select),0);
 				cellCount = cellCount + 1
+				
+				select.addEventListener('change', function () {
+					['selectFreeText', 'selectFreeText1', 'Player1', 'Player2', 'Player3', 'selectPhoto', 'FreeText', 'SponsorValue', 'Promo'].forEach(id => {
+					    const el = document.getElementById(id);
+					    if (el) {
+					        id === 'selectFreeText' ? el.parentElement.remove() : el.remove();
+					    }
+					});
+ 
+					//it will show text value (UI VALUE):this.options[this.selectedIndex].text.toUpperCase()
+					if(this.value == 'FreeText'){
+						let label1 = document.createElement('label');
+					    label1.setAttribute('for', 'selectFreeText'); 
+					    label1.innerHTML = 'Line 1';	
+					    					    	    			
+						let ftheader1 = document.createElement('input');
+						ftheader1.type = "text";
+						ftheader1.id = 'selectFreeText';
+						ftheader1.value = '';
+						
+						ftheader1.setAttribute('onchange',"setTextBoxOptionToSelectOptionArray(1)");
+						row.insertCell(1).appendChild(label1).appendChild(ftheader1);
+					    setTextBoxOptionToSelectOptionArray(1);
+					    
+					    let label2 = document.createElement('label');
+					    label2.setAttribute('for', 'selectFreeText1'); 
+					    label2.innerHTML = 'Line 2';	
+					    					    	    			
+						let ftheader2 = document.createElement('input');
+						ftheader2.type = "text";
+						ftheader2.id = 'selectFreeText1';
+						ftheader2.value = '';
+						
+						ftheader2.setAttribute('onchange',"setTextBoxOptionToSelectOptionArray1(2)");
+						row.insertCell(2).appendChild(label2).appendChild(ftheader2);
+					    setTextBoxOptionToSelectOptionArray1(2);
+				   		cellCount = 3;
+					}else if(this.value == 'Commentators'){
+						row.insertCell(1).id = 'Player1';
+			 			row.insertCell(2).id = 'Player2';
+			 			row.insertCell(3).id = 'Player3';
+			 			cellCount = 4;
+						processCricketProcedures("GRAPHICS-OPTIONS_DATA", whatToProcess + "," +
+	    				(this.value || $(this).find('option').first().val()));
+					}else if(this.value == 'FreeTextDb'){
+						row.insertCell(1).id = 'FreeText';
+			 			cellCount = 2;
+						processCricketProcedures("GRAPHICS-OPTIONS_DATA", whatToProcess + "," +
+	    				(this.value || $(this).find('option').first().val()));
+					} else if(this.value == 'BatMileStone' || this.value == 'BallMileStone'){
+						let xballselect  = document.createElement('select');
+						xballselect.id = 'selectFreeText';
+						xballselect.name = xballselect.id;
+						
+						let selectedValue = this.value; 
+						
+						session_match.match.inning.forEach(function(inn){
+						if(inn.isCurrentInning == 'YES'){
+								if(selectedValue == 'BatMileStone'){
+									inn.battingCard.forEach(function(bc){
+										if(bc.status == 'NOT OUT'){
+											option = document.createElement('option');
+											option.value = bc.playerId;
+											option.text = bc.player.full_name + " - " + bc.status;	
+											xballselect.appendChild(option);	
+										}
+									});
+								}else{
+									inn.bowlingCard.forEach(function(boc){
+										option = document.createElement('option');
+										option.value = boc.playerId;
+										option.text = boc.player.full_name;	
+										xballselect.appendChild(option);
+									});
+								}
+							}
+						});
+						xballselect.setAttribute('onchange',"setDropdownOptionToSelectOptionArray(this, 1)");
+						row.insertCell(1).appendChild(xballselect);
+						setDropdownOptionToSelectOptionArray($(xballselect),1);
 
+						let ballselect  = document.createElement('select');
+						ballselect.id = 'selectPhoto';
+						ballselect.name = ballselect.id;
+						if(this.value == 'BatMileStone'){
+							[{ value: 'Runs', text: 'Runs' },{ value: '50', text: '50s' },
+							{ value: '100', text: '100s' }].forEach(({ value, text }) => {
+								  option = document.createElement('option');
+								  option.value = value;
+								  option.text = text;
+								  ballselect.appendChild(option);
+							});
+						}else{
+							[{ value: 'Wickets', text: 'Wickets' },{ value: '3WI', text: '3WI' },
+							{ value: '5WI', text: '5WI' }].forEach(({ value, text }) => {
+								  option = document.createElement('option');
+								  option.value = value;
+								  option.text = text;
+								  ballselect.appendChild(option);
+							});
+						}
+						ballselect.setAttribute('onchange',"setDropdownOptionToSelectOptionArray(this, 2)");
+						row.insertCell(2).appendChild(ballselect);
+						setDropdownOptionToSelectOptionArray($(ballselect),2);
+						cellCount = 3;
+					}else if(this.value == 'BATSMANTIMELINE'){
+						let xballselect  = document.createElement('select');
+						xballselect.id = 'selectFreeText';
+						xballselect.name = xballselect.id;
+						session_match.match.inning.forEach(function(inn){
+						if(inn.isCurrentInning == 'YES'){
+								inn.battingCard.forEach(function(bc){
+									if(bc.status == 'NOT OUT'){
+										option = document.createElement('option');
+										option.value = bc.playerId;
+										option.text = bc.player.full_name + " - " + bc.status;	
+										xballselect.appendChild(option);	
+									}
+								});
+							}
+						});
+						xballselect.setAttribute('onchange',"setDropdownOptionToSelectOptionArray(this, 1)");
+						row.insertCell(1).appendChild(xballselect);
+						setDropdownOptionToSelectOptionArray($(xballselect),1);
+						cellCount = 2;
+					}
+					else if(this.value == 'PROMO'){
+						row.insertCell(1).id = 'Promo';
+			 			cellCount++;
+						processCricketProcedures("GRAPHICS-OPTIONS_DATA", whatToProcess + "," +
+	    				(this.value || $(this).find('option').first().val()));
+					}
+				});
+				select.dispatchEvent(new Event('change'));
 				break;
 			case 'ICC-U19-2023':
 					header_text.innerHTML = 'MIDDLE INFOBAR SECTION - BAT & SPONSOR';
@@ -5398,141 +5720,149 @@ function addItemsToList(whatToProcess,dataToProcess)
 			break;
 			
 		case 'Alt_9':
-			header_text.innerHTML = 'MIDDLE INFOBAR SECTION - FREE TEXT';
-		
-			select = document.createElement('select');
-			select.id = 'selectInfoBarStats';
-			select.name = select.id;
-			
-			dataToProcess.forEach(function(pro1){
-				option = document.createElement('option');
-				option.value = pro1.order;
-				option.text = pro1.order + '-' + pro1.prompt ;
-				select.appendChild(option);
-			});
-			
-			select.setAttribute('onchange',"setDropdownOptionToSelectOptionArray(this, 0)");
-			row.insertCell(cellCount).appendChild(select);
-			setDropdownOptionToSelectOptionArray($(select),0);
-			cellCount = cellCount + 1
-			break;
-			
-		case 'Alt_0':
-			header_text.innerHTML = 'MIDDLE INFOBAR SECTION - COMMANTATORS';
-		
-			select = document.createElement('select');
-			select.id = 'selectInfoBarComm1';
-			select.name = select.id;
-			
-			option = document.createElement('option');
-			option.value = '0';
-			option.text = "";
-			select.appendChild(option);
-			
-			dataToProcess.forEach(function(comm){
-				if(comm.useThis == 'Yes'){
-					option = document.createElement('option');
-					option.value = comm.commentatorId;
-					option.text = comm.commentatorName;
-					select.appendChild(option);
-				}
-			});
-			
-			select.setAttribute('onchange',"setDropdownOptionToSelectOptionArray(this, 0)");
-			row.insertCell(cellCount).appendChild(select);
-			setDropdownOptionToSelectOptionArray($(select),0);
-			cellCount = cellCount + 1
-			
-			select = document.createElement('select');
-			select.id = 'selectInfoBarComm2';
-			select.name = select.id;
-			
-			option = document.createElement('option');
-			option.value = '0';
-			option.text = "";
-			select.appendChild(option);
-			
-			dataToProcess.forEach(function(comm){
-				if(comm.useThis == 'Yes'){
-					option = document.createElement('option');
-					option.value = comm.commentatorId;
-					option.text = comm.commentatorName;
-					select.appendChild(option);
-				}
-			});
-			
-			select.setAttribute('onchange',"setDropdownOptionToSelectOptionArray(this, 1)");
-			row.insertCell(cellCount).appendChild(select);
-			setDropdownOptionToSelectOptionArray($(select),1);
-			cellCount = cellCount + 1
-			
-			select = document.createElement('select');
-			select.id = 'selectInfoBarComm3';
-			select.name = select.id;
-			
-			option = document.createElement('option');
-			option.value = '0';
-			option.text = "";
-			select.appendChild(option);
-			
-			dataToProcess.forEach(function(comm){
-				if(comm.useThis == 'Yes'){
-					option = document.createElement('option');
-					option.value = comm.commentatorId;
-					option.text = comm.commentatorName;
-					select.appendChild(option);
-				}
-			});
-			
-			select.setAttribute('onchange',"setDropdownOptionToSelectOptionArray(this, 2)");
-			row.insertCell(cellCount).appendChild(select);
-			setDropdownOptionToSelectOptionArray($(select),2);
-			cellCount = cellCount + 1
-			break;
-			case 'Alt_Shift_F4':
-				header_text.innerHTML = 'TEAMS';
+			switch($('#selected_broadcaster').val().toUpperCase()){
+			case 'ICC-U19-2023': case 'BENGAL-T20': case 'NPL': case 'MPL': case 'LEGENDS-90': case 'APL': case 'ISPL':
+				header_text.innerHTML = 'MIDDLE INFOBAR SECTION - FREE TEXT';
+						
 				select = document.createElement('select');
-				select.id = 'selectPlayer';
+				select.id = 'selectInfoBarStats';
 				select.name = select.id;
 				
-				 [{ value: "TEAMS LOGOS", text: "LOGOS" },
-				  { value: "TEAMS LOGOS WITH CAPTAINS", text: "LOGOS + CAPTAINS" }
-				  ].forEach(function(inn){
+				dataToProcess.forEach(function(pro1){
 					option = document.createElement('option');
-					option.value = inn.value;
-					option.text = inn.text;	
+					option.value = pro1.order;
+					option.text = pro1.order + '-' + pro1.prompt ;
 					select.appendChild(option);
 				});
 				
 				select.setAttribute('onchange',"setDropdownOptionToSelectOptionArray(this, 0)");
 				row.insertCell(cellCount).appendChild(select);
 				setDropdownOptionToSelectOptionArray($(select),0);
-				removeSelectDuplicates(select.id);
-				cellCount = cellCount + 1;
+				cellCount = cellCount + 1
 				break;
-			case "Alt_Shift_B":
-				header_text.innerHTML = 'Bowler Speed ';
+			}
+			break;
+			
+		case 'Alt_0':
+			switch($('#selected_broadcaster').val().toUpperCase()){
+			case 'ICC-U19-2023': case 'BENGAL-T20': case 'NPL': case 'MPL': case 'LEGENDS-90': case 'APL': case 'ISPL':
+				header_text.innerHTML = 'MIDDLE INFOBAR SECTION - COMMANTATORS';
+						
 				select = document.createElement('select');
-				select.id = 'selectPlayer';
+				select.id = 'selectInfoBarComm1';
 				select.name = select.id;
 				
-				session_match.match.inning.forEach(function(inn){
-					if(inn.inningNumber == document.getElementById('which_inning').value){
-						inn.bowlingCard.forEach(function(boc){
-							option = document.createElement('option');
-							option.value = boc.playerId;
-							option.text = boc.player.full_name;	
-							select.appendChild(option);
-						});
+				option = document.createElement('option');
+				option.value = '0';
+				option.text = "";
+				select.appendChild(option);
+				
+				dataToProcess.forEach(function(comm){
+					if(comm.useThis == 'Yes'){
+						option = document.createElement('option');
+						option.value = comm.commentatorId;
+						option.text = comm.commentatorName;
+						select.appendChild(option);
 					}
 				});
 				
 				select.setAttribute('onchange',"setDropdownOptionToSelectOptionArray(this, 0)");
 				row.insertCell(cellCount).appendChild(select);
 				setDropdownOptionToSelectOptionArray($(select),0);
-				removeSelectDuplicates(select.id);
-				cellCount = cellCount + 1;
+				cellCount = cellCount + 1
+				
+				select = document.createElement('select');
+				select.id = 'selectInfoBarComm2';
+				select.name = select.id;
+				
+				option = document.createElement('option');
+				option.value = '0';
+				option.text = "";
+				select.appendChild(option);
+				
+				dataToProcess.forEach(function(comm){
+					if(comm.useThis == 'Yes'){
+						option = document.createElement('option');
+						option.value = comm.commentatorId;
+						option.text = comm.commentatorName;
+						select.appendChild(option);
+					}
+				});
+				
+				select.setAttribute('onchange',"setDropdownOptionToSelectOptionArray(this, 1)");
+				row.insertCell(cellCount).appendChild(select);
+				setDropdownOptionToSelectOptionArray($(select),1);
+				cellCount = cellCount + 1
+				
+				select = document.createElement('select');
+				select.id = 'selectInfoBarComm3';
+				select.name = select.id;
+				
+				option = document.createElement('option');
+				option.value = '0';
+				option.text = "";
+				select.appendChild(option);
+				
+				dataToProcess.forEach(function(comm){
+					if(comm.useThis == 'Yes'){
+						option = document.createElement('option');
+						option.value = comm.commentatorId;
+						option.text = comm.commentatorName;
+						select.appendChild(option);
+					}
+				});
+				
+				select.setAttribute('onchange',"setDropdownOptionToSelectOptionArray(this, 2)");
+				row.insertCell(cellCount).appendChild(select);
+				setDropdownOptionToSelectOptionArray($(select),2);
+				cellCount = cellCount + 1
 				break;
+			}
+			break;
+		case 'Alt_Shift_F4':
+			header_text.innerHTML = 'TEAMS';
+			select = document.createElement('select');
+			select.id = 'selectPlayer';
+			select.name = select.id;
+			
+			 [{ value: "TEAMS LOGOS", text: "LOGOS" },
+			  { value: "TEAMS LOGOS WITH CAPTAINS", text: "LOGOS + CAPTAINS" }
+			  ].forEach(function(inn){
+				option = document.createElement('option');
+				option.value = inn.value;
+				option.text = inn.text;	
+				select.appendChild(option);
+			});
+			
+			select.setAttribute('onchange',"setDropdownOptionToSelectOptionArray(this, 0)");
+			row.insertCell(cellCount).appendChild(select);
+			setDropdownOptionToSelectOptionArray($(select),0);
+			removeSelectDuplicates(select.id);
+			cellCount = cellCount + 1;
+			break;
+		case "Alt_Shift_B":
+			header_text.innerHTML = 'Bowler Speed ';
+			select = document.createElement('select');
+			select.id = 'selectPlayer';
+			select.name = select.id;
+			
+			session_match.match.inning.forEach(function(inn){
+				if(inn.inningNumber == document.getElementById('which_inning').value){
+					inn.bowlingCard.forEach(function(boc){
+						option = document.createElement('option');
+						option.value = boc.playerId;
+						option.text = boc.player.full_name;	
+						select.appendChild(option);
+					});
+				}
+			});
+			
+			select.setAttribute('onchange',"setDropdownOptionToSelectOptionArray(this, 0)");
+			row.insertCell(cellCount).appendChild(select);
+			setDropdownOptionToSelectOptionArray($(select),0);
+			removeSelectDuplicates(select.id);
+			cellCount = cellCount + 1;
+			break;
 		case 'Shift_E':
 		 	header_text.innerHTML = 'LT - EXTRAS';
 		
@@ -9566,6 +9896,7 @@ function addItemsToList(whatToProcess,dataToProcess)
 		break;
 	}
 }
+
 function setPlayerDropdown(dataToProcess) {
  	const playerCell = document.getElementById('Player');
  	playerCell.innerHTML = ''; 	

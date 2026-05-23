@@ -872,8 +872,17 @@ public class IndexController
 			}
 			break;
 		case Constants.T20_MUMBAI:
-			if(!this_caption.this_infobarGfx.infobar.getRight_section().equalsIgnoreCase("BLANK")) {
-				if(this_caption.this_infobarGfx.infobar.getRight_section() != null && !this_caption.this_infobarGfx.infobar.getRight_section().isEmpty()) {
+			if(!this_caption.this_infobarGfx.infobar.getFull_section().equalsIgnoreCase("BLANK")) {
+				if(this_caption.this_infobarGfx.infobar.getFull_section() != null && !this_caption.this_infobarGfx.infobar.getFull_section().isEmpty()) {
+					this_caption.PopulateGraphics("Alt_6," + Inn_Number + ",BLANK", session_match);
+					this_animation.caption = this_caption;
+					TimeUnit.MILLISECONDS.sleep(1000);
+					processAnimations("ANIMATE-IN-GRAPHICS", session_configuration, "Alt_6," + Inn_Number + ",BLANK", print_writers, headToHead);
+				}
+			}
+			
+			if(!this_caption.this_infobarGfx.infobar.getRight_full_section().equalsIgnoreCase("BLANK")) {
+				if(this_caption.this_infobarGfx.infobar.getRight_full_section() != null && !this_caption.this_infobarGfx.infobar.getRight_full_section().isEmpty()) {
 					this_caption.PopulateGraphics("Alt_5," + Inn_Number + ",BLANK", session_match);
 					this_animation.caption = this_caption;
 					TimeUnit.MILLISECONDS.sleep(1000);
@@ -1132,7 +1141,6 @@ public class IndexController
 		case "Alt_0":
 			return (List<T>) session_commentator;
 		case "Alt_2":
-			System.out.println("whatToProcess - " + whatToProcess);
 			if(whatToProcess.contains(",")) {
 	  			switch (whatToProcess.split(",")[1]) {
 	  			case "PROMO":
@@ -1140,6 +1148,18 @@ public class IndexController
 	  			}
 			 }
 			break;
+		case "Alt_6":
+		 if(whatToProcess.contains(",")) {
+  			switch (whatToProcess.split(",")[1]) {
+  			case "Commentators":
+  				return (List<T>) session_commentator;
+  			case "FreeTextDb":
+  				return (List<T>) session_infoBarStats;
+  			case "PROMO":
+  				return (List<T>) CricketFunctions.processAllFixtures(cricketService);
+  			}
+		  }
+		  break;
 		case "Alt_a":
 			return (List<T>) CricketFunctions.processAllStaff(cricketService, session_match.getSetup().getHomeTeamId());
 		case "Alt_s":

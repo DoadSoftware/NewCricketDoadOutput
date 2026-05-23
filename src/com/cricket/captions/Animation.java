@@ -79,7 +79,7 @@ public class Animation
 		switch (config.getBroadcaster().toUpperCase()) {
 		case Constants.T20_MUMBAI:
 			switch (whatToProcess.split(",")[0]) {
-			case "Alt_0": case "Alt_2": case "Alt_3": case "Alt_4": case "Alt_5": case "Alt_7": case "Alt_8": case "Alt_9":
+			case "Alt_0": case "Alt_2": case "Alt_3": case "Alt_4": case "Alt_5": case "Alt_6": case "Alt_7": case "Alt_8": case "Alt_9":
 			case "Control_F12": case "Shift_F12":
 				return Constants.INFO_BAR;
 			case "F1": case "Control_Shift_F1": case "F2": case "Control_F11": case "F4": case "Shift_K": case "Shift_T": case "Control_F7":
@@ -8384,6 +8384,22 @@ public class Animation
 				infobar.setRight_full_section(whatToProcess.split(",")[2]);
 			}
 			break;
+		case "Alt_6":
+			if(whatToProcess.split(",")[2].equalsIgnoreCase("BLANK")) {
+				processAnimation(Constants.FRONT, print_writers, "anim_Infobar$Analytics$In_Out", "CONTINUE");
+				infobar.setFull_section(null);
+				TimeUnit.MILLISECONDS.sleep(700);
+				processAnimation(Constants.FRONT, print_writers, "anim_Infobar$Analytics", "SHOW 0.0");
+			}else if(infobar.getFull_section() != null && !infobar.getFull_section().isEmpty()) {
+				TimeUnit.MILLISECONDS.sleep(200);
+				processAnimation(Constants.FRONT, print_writers, "anim_Infobar$Analytics$Change", "START");
+				TimeUnit.MILLISECONDS.sleep(500);
+				infobar.setFull_section(whatToProcess.split(",")[2]);
+			}else {
+				processAnimation(Constants.FRONT, print_writers, "anim_Infobar$Analytics$In_Out", "START");
+				infobar.setFull_section(whatToProcess.split(",")[2]);
+			}
+			break;
 		case "Alt_8": //case "Alt_0": case "Alt_3": case "Alt_4": case "Alt_9":
 			if(whatToProcess.split(",")[2].equalsIgnoreCase(CricketUtil.BOWLER)) {
 				processAnimation(Constants.FRONT, print_writers, "anim_Infobar$Section3$In_Out", "CONTINUE");
@@ -8541,6 +8557,10 @@ public class Animation
 		case "Alt_5":
 			TimeUnit.MILLISECONDS.sleep(500);
 			processAnimation(Constants.FRONT, print_writers, "anim_Infobar$Change_Section4", "SHOW 0.0");
+			break;
+		case "Alt_6":
+			TimeUnit.MILLISECONDS.sleep(500);
+			processAnimation(Constants.FRONT, print_writers, "anim_Infobar$Analytics$Change", "SHOW 0.0");
 			break;
 		case "Alt_8": //case "Alt_0": case "Alt_3": case "Alt_4": case "Alt_9":
 			TimeUnit.MILLISECONDS.sleep(500);
@@ -11386,6 +11406,9 @@ public class Animation
 				bigScoreBug_On_Screen = false;
 			}else if(whatToProcess.contains("CLEAR-INFOBAR_DATA")) {
 				caption.this_infobarGfx.infobar.setInfobar_on_screen(false);
+				infobar.setFull_section(null);
+				infobar.setRight_full_section(null);
+				infobar.setRight_section(null);
 			}
 			this.whichGraphicOnScreen = "";
 			break;
