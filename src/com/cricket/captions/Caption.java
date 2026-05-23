@@ -1752,6 +1752,23 @@ public class Caption
 				break;
 			case "Alt_9":
 				switch (config.getBroadcaster().toUpperCase()) {
+				case Constants.VIDARBHA:
+					if(this_infobarGfx.infobar.getFull_section() != null && !this_infobarGfx.infobar.getFull_section().isEmpty()) {
+						if(this_infobarGfx.infobarStatsId != Integer.valueOf(whatToProcess.split(",")[2])) {
+							whichSide = 2;
+						}else {
+							whichSide = 1;
+						}
+					}else {
+						whichSide = 1;
+					}
+					
+					this_infobarGfx.infobar.setFull_section("FREE_TEXT");
+					this_infobarGfx.infobar.setMiddle_section("");
+					this_infobarGfx.infobar.setRight_bottom("");
+					this_infobarGfx.infobarStatsId = Integer.valueOf(whatToProcess.split(",")[2]);
+					status = this_infobarGfx.populateFullSection(print_writers, matchAllData, whichSide);
+					break;
 				case Constants.ICC_U19_2023: case Constants.NPL: case Constants.ISPL: case Constants.LEGENDS: case Constants.MPL:
 				case Constants.APL:
 					if(config.getWhichInfobar().equalsIgnoreCase("LOF_INFOBAR")) {
