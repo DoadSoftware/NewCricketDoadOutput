@@ -143,7 +143,8 @@ public class Caption
 	}
 
 	public void PopulateGraphics(String whatToProcess, MatchAllData matchAllData) throws Exception
-	{
+	{	
+	//System.out.println("whatToProcess =+++++===============" + whatToProcess);
 		if(whatToProcess.contains(",")) {
 			switch (whatToProcess.split(",")[0]) {
 			case "Control_Shift_F11":
@@ -925,6 +926,9 @@ public class Caption
 			case "Control_F6":
 				status = this_lowerThirdGfx.populateQuickHowOut(whatToProcess,whichSide,matchAllData);
 				break;
+			case "Alt_o"://Curr Part
+				status = this_lowerThirdGfx.populateL3rdCurrentPartnership(whatToProcess,whichSide,matchAllData);
+				break;	
 			case "Shift_F6":
 				status = this_lowerThirdGfx.populateHowOutWithOutFielder(whatToProcess,whichSide,matchAllData);
 				break;	
@@ -987,6 +991,9 @@ public class Caption
 					this_infobarGfx.infobar.setFull_section(whatToProcess.split(",")[2]);
 					this_infobarGfx.infobar.setMiddle_section("");
 					this_infobarGfx.infobar.setRight_bottom("");
+					if(whatToProcess.split(",")[2].equalsIgnoreCase("LAST_X_BALLS")) {
+						this_infobarGfx.lastXballs = Integer.valueOf(whatToProcess.split(",")[3]);
+					}
 					status = this_infobarGfx.populateFullSection(print_writers, matchAllData, whichSide);
 					break;
 				case Constants.ISPL:
@@ -1868,7 +1875,7 @@ public class Caption
 			case "Alt_0":
 				switch (config.getBroadcaster().toUpperCase()) {
 				case Constants.ICC_U19_2023: case Constants.NPL: case Constants.ISPL: case Constants.LEGENDS: case Constants.MPL:
-				case Constants.APL:
+				case Constants.APL: case Constants.VIDARBHA:
 					if(config.getWhichInfobar().equalsIgnoreCase("LOF_INFOBAR")) {
 						
 						System.out.println("IF");

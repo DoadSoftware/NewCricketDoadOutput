@@ -3299,6 +3299,20 @@ function addItemsToList(whatToProcess,dataToProcess)
 				option.text = 'Inning Boundaries';
 				select.appendChild(option);
 				
+				option = document.createElement('option');
+				option.value = 'REVIEW';
+				option.text = 'Review';
+				select.appendChild(option);
+			
+				option = document.createElement('option');
+				option.value = 'BALLS_SINCE_LAST_BOUNDARY';
+				option.text = 'Ball Since Last Boundary';
+				select.appendChild(option);	
+				
+				option = document.createElement('option');
+				option.value = 'LAST_X_BALLS';
+				option.text = 'Last x Balls';
+				select.appendChild(option);
 				
 				option = document.createElement('option');
 				option.value = 'EXTRAS';
@@ -3654,6 +3668,39 @@ function addItemsToList(whatToProcess,dataToProcess)
 				row.insertCell(cellCount).appendChild(select);
 				setDropdownOptionToSelectOptionArray($(select),0);
 				cellCount = cellCount + 1;
+				
+				select.addEventListener('change', function () {
+			    if (document.getElementById('selectFreeText')) {
+			        document.getElementById('selectFreeText').parentElement.remove();
+			    }
+			    if (this.value === 'LAST_X_BALLS') {
+			        let label = document.createElement('label');
+			        label.setAttribute('for', 'selectFreeText');
+			        label.innerHTML = 'BALLS : ';
+
+			        let xballselect = document.createElement('input');
+			        xballselect.type = "text";
+			        xballselect.id = 'selectFreeText';
+			        xballselect.value = '10';
+
+			        xballselect.size = 3;
+			        xballselect.maxLength = 3;
+			        xballselect.style.width = "50px";
+
+			        xballselect.setAttribute('onchange', "setTextBoxOptionToSelectOptionArray(1)");
+			        let cell = row.insertCell(1);
+			        cell.style.cssText = "display:flex; align-items:center; text-align:center; vertical-align:middle; gap:5px;";
+			        cell.appendChild(label);
+			        cell.appendChild(xballselect);
+
+			        setTextBoxOptionToSelectOptionArray(1);
+
+			        cellCount++;
+			    }
+			});
+
+			// Trigger once initially
+			select.dispatchEvent(new Event('change'));
 			break;
 		case 'h':
 			header_text.innerHTML = 'HIGHLIGHT BUG';
@@ -5753,7 +5800,7 @@ function addItemsToList(whatToProcess,dataToProcess)
 			
 		case 'Alt_9':
 			switch($('#selected_broadcaster').val().toUpperCase()){
-			case 'ICC-U19-2023': case 'BENGAL-T20': case 'NPL': case 'MPL': case 'LEGENDS-90': case 'APL': case 'ISPL':
+			case 'ICC-U19-2023': case 'BENGAL-T20': case 'NPL': case 'MPL': case 'LEGENDS-90': case 'APL': case 'ISPL': case 'VIDARBHA':
 				header_text.innerHTML = 'MIDDLE INFOBAR SECTION - FREE TEXT';
 						
 				select = document.createElement('select');
@@ -5777,7 +5824,7 @@ function addItemsToList(whatToProcess,dataToProcess)
 			
 		case 'Alt_0':
 			switch($('#selected_broadcaster').val().toUpperCase()){
-			case 'ICC-U19-2023': case 'BENGAL-T20': case 'NPL': case 'MPL': case 'LEGENDS-90': case 'APL': case 'ISPL':
+			case 'ICC-U19-2023': case 'BENGAL-T20': case 'NPL': case 'MPL': case 'LEGENDS-90': case 'APL': case 'ISPL': case "VIDARBHA":
 				header_text.innerHTML = 'MIDDLE INFOBAR SECTION - COMMANTATORS';
 						
 				select = document.createElement('select');
@@ -6009,7 +6056,7 @@ function addItemsToList(whatToProcess,dataToProcess)
 					setDropdownOptionToSelectOptionArray($(select),0);
 					cellCount = cellCount + 1
 					break;
-				case 'NPL':  case 'MPL': case 'T20_MUMBAI': case 'BENGAL-T20': case 'APL':
+				case 'NPL':  case 'MPL': case 'T20_MUMBAI': case 'BENGAL-T20': case 'APL': case 'VIDARBHA':
 					header_text.innerHTML = 'POWERPLAY';
 	
 					select = document.createElement('select');
@@ -6431,25 +6478,25 @@ function addItemsToList(whatToProcess,dataToProcess)
 					option.text = session_match.setup.awayTeam.teamName4 + '-' + 'FIELD';
 					select.appendChild(option);
 					break;
-				case 'NPL': case 'LEGENDS-90':  case 'MPL': case 'BENGAL-T20': case 'APL':
+				case 'NPL': case 'LEGENDS-90':  case 'MPL': case 'BENGAL-T20': case 'APL': case 'VIDARBHA':
 				option = document.createElement('option');
-				option.value = session_match.setup.homeTeam.teamName3 + '-' + 'BAT';
-				option.text = session_match.setup.homeTeam.teamName3 + '-' + 'BAT';
+				option.value = session_match.setup.homeTeam.teamName1 + '-' + 'BAT';
+				option.text = session_match.setup.homeTeam.teamName1 + '-' + 'BAT';
 				select.appendChild(option);
 				
 				option = document.createElement('option');
-				option.value = session_match.setup.homeTeam.teamName3 + '-' + 'FIELD';
-				option.text = session_match.setup.homeTeam.teamName3 + '-' + 'FIELD';
+				option.value = session_match.setup.homeTeam.teamName1 + '-' + 'FIELD';
+				option.text = session_match.setup.homeTeam.teamName1 + '-' + 'FIELD';
 				select.appendChild(option);
 				
 				option = document.createElement('option');
-				option.value = session_match.setup.awayTeam.teamName3 + '-' + 'BAT';
-				option.text = session_match.setup.awayTeam.teamName3 + '-' + 'BAT';
+				option.value = session_match.setup.awayTeam.teamName1 + '-' + 'BAT';
+				option.text = session_match.setup.awayTeam.teamName1 + '-' + 'BAT';
 				select.appendChild(option);
 				
 				option = document.createElement('option');
-				option.value = session_match.setup.awayTeam.teamName3 + '-' + 'FIELD';
-				option.text = session_match.setup.awayTeam.teamName3 + '-' + 'FIELD';
+				option.value = session_match.setup.awayTeam.teamName1 + '-' + 'FIELD';
+				option.text = session_match.setup.awayTeam.teamName1 + '-' + 'FIELD';
 				select.appendChild(option);
 			break;
 			}
