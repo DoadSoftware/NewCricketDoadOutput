@@ -11111,7 +11111,7 @@ public class InfobarGfx
 					switch(config.getBroadcaster()) {
 					case Constants.LEGENDS:
 						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Infobar$Right$Side_" + WhichSide + "$Tournament_Sixes$txt_Title"
-								+ "*GEOM*TEXT SET " + "THIS MATCH DOTS" + "\0", print_writers);
+								+ "*GEOM*TEXT SET " + "THIS INNING DOTS" + "\0", print_writers);
 						break;
 					default:
 						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Infobar$Right$Side_" + WhichSide + "$Tournament_Sixes$txt_Title"
@@ -14346,9 +14346,11 @@ public class InfobarGfx
 		case "APL_MILESTONE_BAT": case "APL_MILESTONE_BALL": case "RECENT_FORM_BAT": case "RECENT_FORM_BALL": case "BPL_MILESTONE_BAT": case "BPL_MILESTONE_BALL":
 			
 			CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Infobar$Right$Side_" + WhichSide + "$Player_Stats_Wide$Top$txt_Firstname"
-					+ "*GEOM*TEXT SET " + player.getFirstname() + "\0", print_writers);
+					+ "*GEOM*TEXT SET\0", print_writers);
+//			CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Infobar$Right$Side_" + WhichSide + "$Player_Stats_Wide$Top$txt_SecondName"
+//					+ "*GEOM*TEXT SET " + (player.getSurname() != null ? player.getSurname() :"") + "\0", print_writers);
 			CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Infobar$Right$Side_" + WhichSide + "$Player_Stats_Wide$Top$txt_SecondName"
-					+ "*GEOM*TEXT SET " + (player.getSurname() != null ? player.getSurname() :"") + "\0", print_writers);
+					+ "*GEOM*TEXT SET " + player.getTicker_name() + "\0", print_writers);
 			CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Infobar$Right$Side_" + WhichSide + "$Player_Stats_Wide$Top$txt_Balls"
 					+ "*ACTIVE SET 1\0", print_writers);
 			
@@ -14584,7 +14586,7 @@ public class InfobarGfx
 							+ "$4_Stats*FUNCTION*Omo*vis_con SET 3\0",print_writers);
 					
 					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Infobar$Right$Side_" + WhichSide + "$Analytics_2_Wide$4_Stats$Stat_1"
-							+ "$txt_Desig*GEOM*TEXT SET " + "MATCHES" + "\0", print_writers);	
+							+ "$txt_Desig*GEOM*TEXT SET " + "MTS" + "\0", print_writers);	
 					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Infobar$Right$Side_" + WhichSide + "$Analytics_2_Wide$4_Stats$Stat_1"
 							+ "$txt_Fig*GEOM*TEXT SET " + stat.getMatches() + "\0", print_writers);
 					
@@ -14691,7 +14693,7 @@ public class InfobarGfx
 							+ "$4_Stats*FUNCTION*Omo*vis_con SET 2\0",print_writers);
 					
 					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Infobar$Right$Side_" + WhichSide + "$Analytics_2_Wide$4_Stats$Stat_1"
-							+ "$txt_Desig*GEOM*TEXT SET " + "MATCHES" + "\0", print_writers);	
+							+ "$txt_Desig*GEOM*TEXT SET " + "MTS" + "\0", print_writers);	
 					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Infobar$Right$Side_" + WhichSide + "$Analytics_2_Wide$4_Stats$Stat_1"
 							+ "$txt_Fig*GEOM*TEXT SET " + stat.getMatches() + "\0", print_writers);
 					
@@ -14823,7 +14825,7 @@ public class InfobarGfx
 							+ "$5_Stats*FUNCTION*Omo*vis_con SET 2\0",print_writers);
 					
 					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Infobar$Right$Side_" + WhichSide + "$Analytics_2_Wide$5_Stats$Stat_1"
-							+ "$txt_Desig*GEOM*TEXT SET " + "MATCHES" + "\0", print_writers);	
+							+ "$txt_Desig*GEOM*TEXT SET " + "MTS" + "\0", print_writers);	
 					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Infobar$Right$Side_" + WhichSide + "$Analytics_2_Wide$5_Stats$Stat_1"
 							+ "$txt_Fig*GEOM*TEXT SET " + stat.getMatches() + "\0", print_writers);
 					
@@ -14930,7 +14932,7 @@ public class InfobarGfx
 							+ "$5_Stats*FUNCTION*Omo*vis_con SET 2\0",print_writers);
 					
 					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Infobar$Right$Side_" + WhichSide + "$Analytics_2_Wide$5_Stats$Stat_1"
-							+ "$txt_Desig*GEOM*TEXT SET " + "MATCHES" + "\0", print_writers);	
+							+ "$txt_Desig*GEOM*TEXT SET " + "MTS" + "\0", print_writers);	
 					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Infobar$Right$Side_" + WhichSide + "$Analytics_2_Wide$5_Stats$Stat_1"
 							+ "$txt_Fig*GEOM*TEXT SET " + stat.getMatches() + "\0", print_writers);
 					

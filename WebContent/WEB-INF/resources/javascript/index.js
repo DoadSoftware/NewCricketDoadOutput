@@ -526,13 +526,13 @@ function processUserSelectionData(whatToProcess,dataToProcess)
 			case 'Control_Shift_D': case 'Alt_Shift_Z': case 'Control_Shift_F7': case 'Shift_I': case 'Alt_Shift_C': case 'Control_Shift_F2':  case 'Control_Shift_F4':
 			case 'Control_Shift_U': case 'Control_Shift_V': case 'Control_Shift_O':case 'Control_u':case 'Shift_W':case "Alt_b": case "Shift_G": case 'Control_5': 
 			case 'Control_F8': case 'Control_Shift_F11': case 'Alt_/': case "Alt_Shift_B":case 'Alt_Shift_F4':case 'Alt_Shift_F6': case 'Alt_Shift_F7': case 'Shift_L':
-			case 'Alt_x':
+			case 'Alt_x':case 'Alt_f':
 				addItemsToList(dataToProcess,null); 
 				break;
 			//changed shift_f11 to control_f11
 			case 'Shift_F10': case 'm': case 'Control_F1': case 'Control_a': case "Control_Shift_F10": case 'Alt_o':  case 'Shift_F3': case 'd': case 'e': case 'Control_F6': 
 			case 'Control_F7': case 'Control_k': case 'Control_F10': case 'Control_F3':  case 'a': case 't': case 'n': case 'Shift_F1': case 'Shift_F2': case 'Shift_D': 
-			case 'Control_q': case 'Control_b': case 'o': case 'Control_F2': case 'b': case 'Alt_F11': case 'Shift_U': case 'Alt_j': case 'Alt_h': case 'Alt_Shift_L': 
+			case 'Control_q': case 'Control_b': case 'o': case 'Control_F2': case 'b': case 'Alt_F11': case 'Shift_U': case 'Alt_j': case 'Alt_h': case 'Alt_Shift_L':	 
 			//case 'Shift_F':
 			case '.': case '/': case 'Shift_V': case 'Alt_i': case 'b': case 'Shift_B': case 'Control_Shift_B': case 'Alt_Shift_F3': case 'Control_Shift_R': 
 			case 'Control_Shift_F3': case 'Control_Shift_H': case "Control_Shift_I": case "Alt_Shift_D":case "Alt_Shift_E":case "Alt_Shift_F":case "Alt_Shift_G":
@@ -1414,7 +1414,7 @@ function addItemsToList(whatToProcess,dataToProcess)
 	case "Shift_@": case "Shift_$": case "Control_Shift_@": case "Control_Alt_5": case "Alt_Shift_@": case "Control_Alt_6": case "Control_Alt_9": case "Control_Alt_0":
 	case "Alt_Shift_N": case "Alt_Shift_M":case 'Alt_Shift_Q': case 'Alt_Shift_P': case 'Alt_Shift_K': case 'Alt_Shift_X': case 'Alt_Shift_T': case 'Alt_Shift_V':
 	case 'Alt_Shift_F4':case "Alt_Shift_F5":case 'Alt_Shift_F6':case 'Alt_Shift_F7': case 'Shift_L': case 'h': case 'Control_Shift_(': case 'Shift_M': case 'Control_Alt_7':
-	case 'Control_Alt_8': case 'Alt_x':
+	case 'Control_Alt_8': case 'Alt_x': case 'Alt_f':
 	//Shift+2 and Shift+4
 	 //InfoBar LeftBottom-Middle-BatPP-BallPP-LastXBalls-Batsman/Sponsor-RightBottom
 	case "Alt_b": 
@@ -4100,15 +4100,59 @@ function addItemsToList(whatToProcess,dataToProcess)
 					select.appendChild(option);
 					
 					option = document.createElement('option');
-					option.value = 'PROMO';
-					option.text = 'Match Promo';
+					option.value = 'BALLS_SINCE_LAST_BOUNDARY';
+					option.text = 'Balls Since Last Boundary';
 					select.appendChild(option);
+										
+					session_match.match.inning.forEach(function(inn){
+						if(inn.isCurrentInning == 'YES' && session_match.setup.matchType != 'TEST' && session_match.setup.matchType != 'FC'){
+							if(inn.inningNumber == 1){
 					
-					option = document.createElement('option');
-					option.value = 'RECENT_FORM';
-					option.text = 'RECENT FORM';
-					select.appendChild(option);
+								option = document.createElement('option');
+								option.value = 'TOSS';
+								option.text = 'Toss';
+								select.appendChild(option);
 					
+								option = document.createElement('option');
+								option.value = 'PROJECTED';
+								option.text = 'Projected Score';
+								select.appendChild(option);
+								
+							}
+							else{
+								option = document.createElement('option');
+								option.value = 'EQUATION';
+								option.text = 'Equation';
+								select.appendChild(option);
+								
+								option = document.createElement('option');
+								option.value = 'RRR';
+								option.text = 'Required Run Rate';
+								select.appendChild(option);
+								
+								option = document.createElement('option');
+								option.value = 'CRR_RRR';
+								option.text = 'Current and Required Run Rate';
+								select.appendChild(option);
+					
+								option = document.createElement('option');
+								option.value = 'TARGET';
+								option.text = 'Target';
+								select.appendChild(option);
+								
+								option = document.createElement('option');
+								option.value = 'RESULT';
+								option.text = 'Result';
+								select.appendChild(option);
+								
+								option = document.createElement('option');
+								option.value = 'DLS_PAR_SCORE';
+								option.text = 'D/L Par Score';
+								select.appendChild(option);
+							}
+						}
+					});
+							
 					option = document.createElement('option');
 					option.value = 'CURR_PARTNERSHIP';
 					option.text = 'Current Partnership';
@@ -4128,10 +4172,15 @@ function addItemsToList(whatToProcess,dataToProcess)
 					option.value = 'LAST_WICKET';
 					option.text = 'Last Wicket';
 					select.appendChild(option);
+													
+					option = document.createElement('option');
+					option.value = 'PROMO';
+					option.text = 'Match Promo';
+					select.appendChild(option);
 					
 					option = document.createElement('option');
-					option.value = 'BALLS_SINCE_LAST_BOUNDARY';
-					option.text = 'Balls Since Last Boundary';
+					option.value = 'RECENT_FORM';
+					option.text = 'RECENT FORM';
 					select.appendChild(option);
 					
 					switch($('#selected_broadcaster').val().toUpperCase()){
@@ -4197,55 +4246,6 @@ function addItemsToList(whatToProcess,dataToProcess)
 					option.value = 'CRR';
 					option.text = 'Current Run Rate';
 					select.appendChild(option);
-					
-					session_match.match.inning.forEach(function(inn){
-						if(inn.isCurrentInning == 'YES' && session_match.setup.matchType != 'TEST' && session_match.setup.matchType != 'FC'){
-							if(inn.inningNumber == 1){
-					
-								option = document.createElement('option');
-								option.value = 'TOSS';
-								option.text = 'Toss';
-								select.appendChild(option);
-					
-								option = document.createElement('option');
-								option.value = 'PROJECTED';
-								option.text = 'Projected Score';
-								select.appendChild(option);
-								
-							}
-							else{
-								option = document.createElement('option');
-								option.value = 'EQUATION';
-								option.text = 'Equation';
-								select.appendChild(option);
-								
-								option = document.createElement('option');
-								option.value = 'RRR';
-								option.text = 'Required Run Rate';
-								select.appendChild(option);
-								
-								option = document.createElement('option');
-								option.value = 'CRR_RRR';
-								option.text = 'Current and Required Run Rate';
-								select.appendChild(option);
-					
-								option = document.createElement('option');
-								option.value = 'TARGET';
-								option.text = 'Target';
-								select.appendChild(option);
-								
-								option = document.createElement('option');
-								option.value = 'RESULT';
-								option.text = 'Result';
-								select.appendChild(option);
-								
-								option = document.createElement('option');
-								option.value = 'DLS_PAR_SCORE';
-								option.text = 'D/L Par Score';
-								select.appendChild(option);
-							}
-						}
-					});
 					break;
 				
 				case 'ICC-U19-2023':
@@ -6583,6 +6583,24 @@ function addItemsToList(whatToProcess,dataToProcess)
 			setDropdownOptionToSelectOptionArray($(select), 0);
 			cellCount++;
 			break;
+		case 'Alt_f':
+			header_text.innerHTML = 'Mini Options'; 
+		
+			select = document.createElement('select');
+			select.id = 'selectType';
+			select.name = select.id;
+			
+			['MANHATTAN', 'WORM','PARTNRSHIP','PHASE']
+			    .forEach(text => {
+			        const option = new Option(text, text);
+			        select.add(option);
+			    });
+			
+			select.setAttribute('onchange', "setDropdownOptionToSelectOptionArray(this, 0)");
+			row.insertCell(cellCount).appendChild(select);
+			setDropdownOptionToSelectOptionArray($(select), 0);
+			cellCount++;
+			break;	
 			
 		case 'Alt_z': case 'Alt_Shift_W': case 'Control_0':
 			switch(whatToProcess) {
@@ -7004,7 +7022,7 @@ function addItemsToList(whatToProcess,dataToProcess)
 						break;
 					default:
 						for(i=0;i<dataToProcess.length;i++){
-							if(dataToProcess[i].ballsBowled>=60){
+							if(dataToProcess[i].ballsBowled>=12){
 								if(num<5){
 									option = document.createElement('option');
 						            option.value = (num+1)+ "_" + dataToProcess[i].playerId;
@@ -9860,7 +9878,7 @@ function addItemsToList(whatToProcess,dataToProcess)
 			case "Alt_Shift_B":	case 'Control_0': case "Shift_@": case "Shift_$": case "Control_Shift_@": case "Control_Alt_5": case "Alt_Shift_@": case "Control_Alt_6":
 			case "Control_Alt_9": case "Control_Alt_0":	case 'r': case "Alt_Shift_N": case "Alt_Shift_M":case 'Alt_Shift_Q': case 'Alt_Shift_P': case 'Alt_Shift_K': 
 			case 'Alt_Shift_X': case 'Alt_Shift_T': case 'Alt_Shift_V':case 'Control_Shift_F5':case "Alt_Shift_F5":case 'Alt_Shift_F4':case 'Alt_Shift_F6':case 'Alt_Shift_F7':
-			case 'Shift_L': case 'h': case 'Control_Shift_(': case 'Shift_M': case 'Control_Alt_7': case 'Control_Alt_8': case 'Alt_x':
+			case 'Shift_L': case 'h': case 'Control_Shift_(': case 'Shift_M': case 'Control_Alt_7': case 'Control_Alt_8': case 'Alt_x': case 'Alt_f':
 
 				option = document.createElement('input');
 				option.type = 'button';

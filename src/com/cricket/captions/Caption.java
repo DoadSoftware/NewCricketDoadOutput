@@ -131,7 +131,7 @@ public class Caption
 		this.this_lofInfobarGfx = new LofInfobarGfx(config, slashOrDash, print_writers, statistics, statsTypes, infobarStats, Grounds, Commentators, dls, 
 				players, headToHead,past_tournament_stats, cricketService);
 		this.this_bugsAndMiniGfx = new BugsAndMiniGfx(print_writers, config, bugs, performanceBugs, Teams, VariousText, cricketService, headToHead,
-				statistics, statsTypes, past_tournament_stats);
+				statistics, statsTypes, past_tournament_stats,players);
 		this.status = "";
 	}
 
@@ -617,6 +617,9 @@ public class Caption
 				break;
 			case "Control_Shift_O":
 				status = this_lowerThirdGfx.populateL3rdLineUp(whatToProcess,whichSide,matchAllData);
+				break;
+			case "Alt_f":
+				status = this_bugsAndMiniGfx.populatebugManhattan(whatToProcess,whichSide ,matchAllData,Integer.valueOf(whatToProcess.split(",")[1]));
 				break;
 			case "Control_y":
 				status = this_bugsAndMiniGfx.populatebugPowerplay(whatToProcess,whichSide ,matchAllData);

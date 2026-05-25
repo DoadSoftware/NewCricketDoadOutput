@@ -119,7 +119,7 @@ public class Animation
 			case "h": case "Shift_F4": case "Shift_F":case "Alt_b": case "Alt_p": case "Control_Shift_F3":  case "Shift_C": case "Control_Shift_J": case "6":
 			case "Control_y": case "Control_4":
 				return Constants.BUGS;
-			case "Shift_F1": case "Shift_F2": case "Alt_F7": case "Alt_F1": case "Alt_F2":case "Alt_Shift_F8":
+			case "Shift_F1": case "Shift_F2": case "Alt_F7": case "Alt_F1": case "Alt_F2":case "Alt_Shift_F8": case "Alt_f":
 				return Constants.MINIS;	
 			
 			case "F8": case "Control_Shift_B":
@@ -668,7 +668,7 @@ public class Animation
 						break;
 					case "Alt_Shift_J":	
 						processAnimation(Constants.BACK, print_writers, "anim_FullFrame$In_Out$FF_Base", "START");
-						processAnimation(Constants.BACK, print_writers, "anim_FullFrame$In_Out$Batting_Manhattan", "START");
+						processAnimation(Constants.BACK, print_writers, "anim_FullFrame$In_Out$BattingCard_Manhattan", "START");
 						break;
 					}
 					break;
@@ -791,7 +791,7 @@ public class Animation
 				break;
 				
 			//MINI's
-			case "Shift_F1": case "Shift_F2": case "Alt_F1": case "Alt_F2": case "Alt_F7":case "Alt_Shift_F8":
+			case "Shift_F1": case "Shift_F2": case "Alt_F1": case "Alt_F2": case "Alt_F7":case "Alt_Shift_F8": case "Alt_f":
 				processAnimation(Constants.FRONT, print_writers, "Anim_Mini$In_Out", "START");
 				this.whichGraphicOnScreen = whatToProcess;
 				break;
@@ -811,7 +811,7 @@ public class Animation
 				TimeUnit.MILLISECONDS.sleep(400);
 				switch (whatToProcess.split(",")[0]) {
 				case "6":
-					processAnimation(Constants.FRONT, print_writers, "Sponsor", "START");
+//					processAnimation(Constants.FRONT, print_writers, "Sponsor", "START");
 					break;
 				}
 				TimeUnit.MILLISECONDS.sleep(1300);
@@ -861,7 +861,7 @@ public class Animation
 				
 			case "F5": case "F6": case "F7": case "F9": case "F11": case "Control_F2": case "Control_F5": case "Control_F9": case "Control_a":  case "Control_F3": case "Alt_k": 
 			case "Shift_F3": case "u": case "d": case "e": case "Shift_F5": case "Shift_F9": case "Alt_F12": case "Control_h":  case "Control_F6": case "Shift_F6": case "Control_s": 
-			case "Control_f":  case "Shift_E": case "Alt_F8": case "F8": case "F10": case "a":case "Alt_Shift_F5":case "Alt_Shift_F7":case "Alt_Shift_F6":
+			case "Control_f":  case "Shift_E": case "Alt_F8": case "F8": case "F10": case "a":case "Alt_Shift_F5":case "Alt_Shift_F7":case "Alt_Shift_F6": case "Alt_d":
 				if(!infobar.getInfobar_status().equalsIgnoreCase(Constants.FORCED+Constants.SHRUNK_INFOBAR)) {
 					AnimateIn("ArrowLeft" + ",", print_writers, config); // Shrink infobar
 					TimeUnit.MILLISECONDS.sleep(1000);
@@ -3371,7 +3371,7 @@ public class Animation
 				break;
 			
 			//Mini
-			case "Shift_F1": case "Shift_F2": case "Alt_F1": case "Alt_F2": case "Alt_F7":case "Alt_Shift_F8":
+			case "Shift_F1": case "Shift_F2": case "Alt_F1": case "Alt_F2": case "Alt_F7":case "Alt_Shift_F8": case "Alt_f":
 				processAnimation(Constants.FRONT, print_writers, "Anim_Mini$In_Out", "CONTINUE");
 				TimeUnit.MILLISECONDS.sleep(1000);
 				this.whichGraphicOnScreen = "";
@@ -3400,7 +3400,7 @@ public class Animation
 				processAnimation(Constants.FRONT, print_writers, "PopUps$InOut", "CONTINUE");
 				switch (whatToProcess.split(",")[0]) {
 				case "6":
-					processAnimation(Constants.FRONT, print_writers, "Sponsor", "CONTINUE");
+//					processAnimation(Constants.FRONT, print_writers, "Sponsor", "CONTINUE");
 					break;
 				}
 				this.whichGraphicOnScreen = "";
@@ -3432,7 +3432,7 @@ public class Animation
 			case "F5": case "F6": case "F7": case "F9": case "F11": case "Control_F2": case "Control_F5": case "Control_F9": case "Control_a": 
 			case "Control_F3": case "Alt_k": case "Shift_F3": case "u": case "d": case "e": case "Shift_F5": case "Shift_F9": case "Alt_F12":
 			case "Control_h":  case "Control_F6": case "Shift_F6": case "Control_s": case "Control_f":  case "Shift_E": case "Alt_F8": case "F8": 
-			case "F10": case "a":case "Alt_Shift_F5":case "Alt_Shift_F7":case "Alt_Shift_F6":
+			case "F10": case "a":case "Alt_Shift_F5":case "Alt_Shift_F7":case "Alt_Shift_F6": case "Alt_d":
 				processAnimation(Constants.FRONT, print_writers, "anim_LowerThird$InOut", "CONTINUE");
 				
 				if(!infobar.getInfobar_status().equalsIgnoreCase(Constants.FORCED+Constants.SHRUNK_INFOBAR)) {
@@ -4987,7 +4987,7 @@ public class Animation
 				}
 				break;
 			//Minis
-			case "Shift_F1": case "Shift_F2": case "Alt_F1": case "Alt_F2": case "Alt_F7":case "Alt_Shift_F8":
+			case "Shift_F1": case "Shift_F2": case "Alt_F1": case "Alt_F2": case "Alt_F7":case "Alt_Shift_F8": case "Alt_f":
 				processAnimation(Constants.FRONT, print_writers, "Anim_MiniChange", "START");
 				break;
 			//Bugs
@@ -5002,7 +5002,7 @@ public class Animation
 			case "F5": case "F6": case "F7": case "F9": case "F11": case "Control_F2": case "Control_F5": case "Control_F9": case "Control_a":  
 			case "Control_F3": case "Alt_k": case "Shift_F3": case "u": case "d": case "e": case "Shift_F5": case "Shift_F9": case "Alt_F12":
 			case "Control_h":  case "Control_F6": case "Shift_F6": case "Control_s": case "Control_f":  case "Shift_E": case "Alt_F8": case "F8": 
-			case "F10": case "a": case "Alt_Shift_F5": case "Alt_Shift_F7": case "Alt_Shift_F6":
+			case "F10": case "a": case "Alt_Shift_F5": case "Alt_Shift_F7": case "Alt_Shift_F6": case "Alt_d":
 				processAnimation(Constants.FRONT, print_writers, "anim_LT_Change", "START");
 				processAnimation(Constants.FRONT, print_writers, "Lt_Position", "START");
 				break;
@@ -6903,7 +6903,7 @@ public class Animation
 				}
 				break;
 			//Mini's
-			case "Shift_F1": case "Shift_F2": case "Alt_F1": case "Alt_F2": case "Alt_F7":case "Alt_Shift_F8":
+			case "Shift_F1": case "Shift_F2": case "Alt_F1": case "Alt_F2": case "Alt_F7":case "Alt_Shift_F8": case "Alt_f":
 				processAnimation(Constants.FRONT, print_writers, "Anim_MiniChange", "SHOW 0.0");
 				break;
 			//Bugs
@@ -6922,7 +6922,7 @@ public class Animation
 			case "F5": case "F6": case "F7": case "F9": case "F11": case "Control_F2": case "Control_F5": case "Control_F9": case "Control_a": case "Control_F3": 
 			case "Alt_k": case "Shift_F3": case "u": case "d": case "e": case "Shift_F5": case "Shift_F9": case "Alt_F12": case "Control_h":  case "Control_F6": 
 			case "Shift_F6": case "Control_s": case "Control_f":  case "Shift_E": case "Alt_F8": case "F8": case "F10": case "a":case "Alt_Shift_F5":
-			case "Alt_Shift_F7": case "Alt_Shift_F6":
+			case "Alt_Shift_F7": case "Alt_Shift_F6": case "Alt_d":
 				processAnimation(Constants.FRONT, print_writers, "anim_LT_Change", "SHOW 0.0");
 				this.whichGraphicOnScreen = whatToProcess;
 				break;
@@ -14253,7 +14253,7 @@ public class Animation
 					case "F5": case "F6": case "F7": case "F9": case "F11": case "Control_F2": case "Control_F5": case "Control_F9": case "Control_a":
 					case "Control_F3": case "Alt_k": case "Shift_F3": case "u": case "d": case "e": case "Shift_F5": case "Shift_F9": case "Alt_F12":
 					case "Control_h":  case "Control_F6": case "Shift_F6": case "Control_s": case "Control_f":  case "Shift_E": case "Alt_F8": 
-					case "F8": case "F10": case "a":	case "Alt_Shift_F5":case "Alt_Shift_F7":case "Alt_Shift_F6":
+					case "F8": case "F10": case "a":	case "Alt_Shift_F5":case "Alt_Shift_F7":case "Alt_Shift_F6": case "Alt_d":
 						previewCommands = "Anim_Infobar$Push 0.500 anim_LowerThird 2.580 anim_LowerThird$InOut 1.900 anim_LowerThird$InOut$Essentials 1.900 "
 								+ "anim_LowerThird$InOut$Essentials$In 1.900 anim_LT_Change$Lt_Position 1.000";
 						break;
@@ -14263,7 +14263,7 @@ public class Animation
 					case "F5": case "F6": case "F7": case "F9": case "F11": case "Control_F2": case "Control_F5": case "Control_F9": case "Control_a":
 					case "Control_F3": case "Alt_k": case "Shift_F3": case "u": case "d": case "e": case "Shift_F5": case "Shift_F9": case "Alt_F12":
 					case "Control_h":  case "Control_F6": case "Shift_F6": case "Control_s": case "Control_f":  case "Shift_E": case "Alt_F8": 
-					case "F8": case "F10": case "a":	case "Alt_Shift_F5":case "Alt_Shift_F7":case "Alt_Shift_F6":
+					case "F8": case "F10": case "a":	case "Alt_Shift_F5":case "Alt_Shift_F7":case "Alt_Shift_F6": case "Alt_d":
 						
 						previewCommands = "anim_LT_Change 1.240 anim_LT_Change$Logo 1.000 anim_LT_Change$TopLine 1.000 anim_LT_Change$SubLine 1.000 "
 								+ "anim_LT_Change$Lt_Position 1.000";
@@ -14516,7 +14516,7 @@ public class Animation
 				
 				if(whatToProcess.contains(",")) {
 					switch(whatToProcess.split(",")[0]) {
-					case "Shift_F1": case "Shift_F2": case "Alt_F1": case "Alt_F2":case "Alt_Shift_F8":
+					case "Shift_F1": case "Shift_F2": case "Alt_F1": case "Alt_F2":case "Alt_Shift_F8": case "Alt_f":
 						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER PREVIEW SCENE*" 
 								+ "/Default/" + bugs_pre + " C:/Temp/Preview.tga Anim_Mini$In_Out 1.200 Anim_Mini$In_Out$In 1.260 "
 								+ "Anim_Mini$In_Out$Out2 1.260\0", print_writer);
@@ -14543,7 +14543,7 @@ public class Animation
 					}
 					if(whichside == 2) {
 						switch(whatToProcess.split(",")[0]) {
-						case "Shift_F1": case "Shift_F2": case "Alt_F1": case "Alt_F2": case "Alt_F7":case "Alt_Shift_F8":
+						case "Shift_F1": case "Shift_F2": case "Alt_F1": case "Alt_F2": case "Alt_F7":case "Alt_Shift_F8": case "Alt_f":
 							CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER PREVIEW SCENE*" 
 									+ "/Default/" + bugs_pre + " C:/Temp/Preview.tga Anim_MiniChange 1.860 Anim_MiniChange$Change_In 1.860 \0", print_writer);
 							break;	
