@@ -3265,7 +3265,7 @@ public class Animation
 				switch (whatToProcess.split(",")[0]) {
 				case "Alt_Shift_J":	
 					processAnimation(Constants.BACK, print_writers, "anim_FullFrame$In_Out$FF_Base", "CONTINUE");
-					processAnimation(Constants.BACK, print_writers, "anim_FullFrame$In_Out$Batting_Manhattan", "CONTINUE");
+					processAnimation(Constants.BACK, print_writers, "anim_FullFrame$In_Out$BattingCard_Manhattan", "CONTINUE");
 					break;
 				case "Control_Alt_F1":	
 					processAnimation(Constants.BACK, print_writers, "anim_FullFrame$In_Out$FF_Base", "CONTINUE");
@@ -7984,22 +7984,24 @@ public class Animation
 			
 		case "F5":case "F9":case "l":case "Shift_F5":case "Shift_F9":case "Control_h":case "Alt_F12": case "F7": case "F11": case "Control_a": case "q": 
 		case "u": case "Control_q": case "Shift_F3": case "Control_F3": case "Shift_B": case "Control_F6": case "F6": case "Alt_Shift_F3":case "Shift_F6":
-		case "Alt_Shift_O":case "Control_F9":case "Control_F5": case "d": case "e":case "Alt_F1": case "Alt_F2":
+		case "Alt_Shift_O":case "Control_F9":case "Control_F5": case "d": case "e":case "Alt_F1": case "Alt_F2": case "F8": case "Alt_F8":
 			T20_MumbaiAnimateIn(Constants.SHRUNK_INFOBAR, print_writers, config); // Push infobar
 			if(this.infobar.isInfobar_on_screen() == true ||this.specialBugOnScreen.equalsIgnoreCase(CricketUtil.TOSS)) {
-				processAnimation(Constants.FRONT, print_writers, "PositionForInfobar$ForShrinK", "START");
+				processAnimation(Constants.FRONT, print_writers, "anim_Infobar$Shrink", "START");
 			}else {
-				processAnimation(Constants.FRONT, print_writers, "PositionForInfobar$NoInfobar", "START");
+				processAnimation(Constants.FRONT, print_writers, "anim_Infobar$NoInfobar", "START");
 			}
 			TimeUnit.MILLISECONDS.sleep(1000);
-			processAnimation(Constants.FRONT, print_writers, "BaseWidth", "START");
-			processAnimation(Constants.FRONT, print_writers, "L3_In-Out", "START");
-			processAnimation(Constants.FRONT, print_writers, "HeaderChange$Side1$In", "START");
+			processAnimation(Constants.FRONT, print_writers, "anim_LowerThird$InOut$Essentials", "START");
+			processAnimation(Constants.FRONT, print_writers, "anim_LowerThird$InOut$Colours", "START");
+			processAnimation(Constants.FRONT, print_writers, "anim_LowerThird$InOut$Logo", "START");
+			processAnimation(Constants.FRONT, print_writers, "anim_LowerThird$InOut$TopLine", "START");
+			processAnimation(Constants.FRONT, print_writers, "anim_LowerThird$InOut$Subline", "START");
 			TimeUnit.MILLISECONDS.sleep(1000);
 			processAnimation(Constants.FRONT, print_writers, "Body$Side1$In", "START");
 			this.whichGraphicOnScreen = whatToProcess;
 			break;
-		case "F8": case "Alt_F8": case "F10": case "j":
+		case "F10": case "j":
 			T20_MumbaiAnimateIn(Constants.SHRUNK_INFOBAR, print_writers, config); // Push infobar
 			if(this.infobar.isInfobar_on_screen() == true ||this.specialBugOnScreen.equalsIgnoreCase(CricketUtil.TOSS)) {
 				processAnimation(Constants.FRONT, print_writers, "PositionForInfobar$ForShrinK", "START");
@@ -12336,7 +12338,7 @@ public class Animation
 					case "m": case "Control_m": case "Shift_K": case "F4": case "Shift_T": case "F1": case "F2": case "Control_F7": case "Control_F11": case "Shift_F10": 
 					case "Control_p": case "Shift_F11": case "Control_F10": case "Control_Shift_F5": case "Control_Shift_D": case "Alt_Shift_F4": case "z": case "x": 
 					case "c": case "v":case "Control_z": case "Control_x":case "Control_Shift_F8":case "Control_Shift_K": case "Control_Shift_Z": case "Control_Shift_Y":
-					case "Alt_F5":
+					case "Alt_F5": case "Control_Alt_F1": case "Control_Alt_F2": case "Alt_Shift_J":
 						if(whatToProcess.split(",")[0].equalsIgnoreCase("Alt_Shift_F4")) {
 							previewCommand = "Anim_Infobar$Push 0.500 anim_FullFrame$In_Out$Essentials$In 1.300 anim_FullFrame$In_Out$Event_Logo$In 1.200 "
 									+ "anim_FullFrame$In_Out$Header$In 1.500 anim_FullFrame$In_Out$SubHeader$In 1.600 anim_FullFrame$In_Out$Logo_FF$In 1.900 "
@@ -12359,6 +12361,15 @@ public class Animation
 						case "z": case "x": case "c": case "v":case "Control_z": case "Control_x":case "Control_Shift_F8": case "Control_Shift_Z": 
 						case "Control_Shift_Y":
 							previewCommand = previewCommand + "anim_FullFrame$In_Out$FF_Base$In 1.400 anim_FullFrame$In_Out$Leaderboard$In 2.000";
+							break;
+						case "Control_Alt_F1": 
+							previewCommand = previewCommand + "anim_FullFrame$In_Out$FF_Base$In 1.400 anim_FullFrame$In_Out$Batting_Bowling_Card$In 2.000";
+							break;
+						case "Control_Alt_F2": 
+							previewCommand = previewCommand + "anim_FullFrame$In_Out$FF_Base$In 1.400 anim_FullFrame$In_Out$Batting_Bowling_Manhattan$In 2.000";
+							break;
+						case "Alt_Shift_J": 
+							previewCommand = previewCommand + "anim_FullFrame$In_Out$FF_Base$In 1.400 anim_FullFrame$In_Out$BattingCard_Manhattan$In 2.000";
 							break;
 						case "F1": 
 							previewCommand = previewCommand + "anim_FullFrame$In_Out$FF_Base$In 1.400 anim_FullFrame$In_Out$BattingCard$In 2.000";
@@ -12442,7 +12453,7 @@ public class Animation
 						previewCommand = "anim_Change$Worm 1.400 anim_Change$Worm$Change_Out 0.600 anim_Change$Worm$Change_In 1.400 ";
 						break;
 					case "Control_p":
-						previewCommand = "anim_Change$Standings 1.400 anim_Change$Standings$Change_Out 0.600 anim_Change$Standings$In 1.400 ";
+						previewCommand = "anim_Change$Standings 1.400 anim_Change$Standings$Change_Out 0.600 anim_Change$Standings$Change_In 1.400 ";
 						break;
 					case "Control_Shift_K":
 						previewCommand = "anim_Change$PlayOff 1.400 anim_Change$PlayOff$Change_Out 0.600 anim_Change$PlayOff$In 1.400 ";
@@ -12547,7 +12558,7 @@ public class Animation
 							previewCommand = previewCommand + "anim_Change$Worm 1.400 anim_Change$Worm$Change_Out 0.600 anim_Change$Worm$Change_In 1.400";
 							break;
 						case "Control_p":
-							previewCommand = previewCommand + "anim_Change$Standings 1.400 anim_Change$Standings$Change_Out 0.600 anim_Change$Standings$In 1.400";
+							previewCommand = previewCommand + "anim_Change$Standings 1.400 anim_Change$Standings$Change_Out 0.600 anim_Change$Standings$Change_In 1.400";
 							break;
 						case "Control_Shift_K":
 							previewCommand = previewCommand + "anim_Change$PlayOff 1.400 anim_Change$PlayOff$Change_Out 0.600 anim_Change$PlayOff$In 1.400";
@@ -14408,7 +14419,10 @@ public class Animation
 							break;
 						case "Control_Shift_U": case "Control_Shift_V":
 							 CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER PREVIEW SCENE*" + "/Default/" + bugs_pre + " C:/Temp/Preview.tga "
-										+ "PopUps$Change 1.000\0", print_writer);
+										+ "PopUps$Change 1.000 PopUps$Change$HeadAll_Change 1.000 PopUps$Change$HeadAll_Change$Head_Change 1.000 "
+										+ "PopUps$Change$HeadAll_Change 1.000 PopUps$Change$HeadAll_Change$Head_Change 1.000 "
+										+ "PopUps$Change$HeadAll_Change$Logo_Change 1.000 PopUps$Change$DataAll_Change 1.000 "
+										+ "PopUps$Change$DataAll_Change$SubHead_Change 1.000 PopUps$Change$DataAll_Change$Data_Change 1.000\0", print_writer);
 							 break;	
 						}
 					}
@@ -14515,18 +14529,54 @@ public class Animation
 					break;
 				}
 				
+				System.out.println("whatToProcess = " + whatToProcess);
 				if(whatToProcess.contains(",")) {
 					switch(whatToProcess.split(",")[0]) {
-					case "Shift_F1": case "Shift_F2": case "Alt_F1": case "Alt_F2":case "Alt_Shift_F8": case "Alt_f":
+					case "Alt_f":
+						
+						switch(whatToProcess.split(",")[2]) {
+						case "MANHATTAN":
+							CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER PREVIEW SCENE*" 
+									+ "/Default/" + bugs_pre + " C:/Temp/Preview.tga Anim_Mini$In_Out 1.260 Anim_Mini$In_Out$In 1.240 Anim_Mini$In_Out$In$Manhattan 1.100 Anim_Mini$In_Out$In$Manhattan$In 1.100 "
+									+ "Anim_Mini$In_Out$Out2 1.240\0", print_writer);
+							
+							TimeUnit.MILLISECONDS.sleep(500);
+							CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER PREVIEW SCENE*" 
+									+ "/Default/" + bugs_pre + " C:/Temp/Preview.tga Anim_Mini$In_Out 1.260 Anim_Mini$In_Out$In 1.240 Anim_Mini$In_Out$In$Manhattan 1.100 Anim_Mini$In_Out$In$Manhattan$In 1.100 "
+									+ "Anim_Mini$In_Out$Out2 1.240\0", print_writer);
+							break;
+						case "WORM":
+							CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER PREVIEW SCENE*" 
+									+ "/Default/" + bugs_pre + " C:/Temp/Preview.tga Anim_Mini$In_Out 1.260 Anim_Mini$In_Out$In 1.240 Anim_Mini$In_Out$In$Worm 1.200 Anim_Mini$In_Out$In$Worm$In 1.200 "
+									+ "Anim_Mini$In_Out$Out2 1.240\0", print_writer);
+							
+							TimeUnit.MILLISECONDS.sleep(500);
+							CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER PREVIEW SCENE*" 
+									+ "/Default/" + bugs_pre + " C:/Temp/Preview.tga Anim_Mini$In_Out 1.260 Anim_Mini$In_Out$In 1.240 Anim_Mini$In_Out$In$Worm 1.200 Anim_Mini$In_Out$In$Worm$In 1.200 "
+									+ "Anim_Mini$In_Out$Out2 1.240\0", print_writer);
+							break;
+						default:
+							CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER PREVIEW SCENE*" 
+									+ "/Default/" + bugs_pre + " C:/Temp/Preview.tga Anim_Mini$In_Out 1.260 Anim_Mini$In_Out$In 1.240 "
+									+ "Anim_Mini$In_Out$Out2 1.240\0", print_writer);
+							
+							TimeUnit.MILLISECONDS.sleep(500);
+							CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER PREVIEW SCENE*" 
+									+ "/Default/" + bugs_pre + " C:/Temp/Preview.tga Anim_Mini$In_Out 1.260 Anim_Mini$In_Out$In 1.240 "
+									+ "Anim_Mini$In_Out$Out2 1.240\0", print_writer);
+							break;
+						}
+						break;
+					case "Shift_F1": case "Shift_F2": case "Alt_F1": case "Alt_F2":case "Alt_Shift_F8":
+						
 						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER PREVIEW SCENE*" 
-								+ "/Default/" + bugs_pre + " C:/Temp/Preview.tga Anim_Mini$In_Out 1.200 Anim_Mini$In_Out$In 1.260 "
-								+ "Anim_Mini$In_Out$Out2 1.260\0", print_writer);
+								+ "/Default/" + bugs_pre + " C:/Temp/Preview.tga Anim_Mini$In_Out 1.260 Anim_Mini$In_Out$In 1.240 "
+								+ "Anim_Mini$In_Out$Out2 1.240\0", print_writer);
 						
 						TimeUnit.MILLISECONDS.sleep(500);
 						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER PREVIEW SCENE*" 
-								+ "/Default/" + bugs_pre + " C:/Temp/Preview.tga Anim_Mini$In_Out 1.200 Anim_Mini$In_Out$In 1.260 "
-								+ "Anim_Mini$In_Out$Out2 1.260\0", print_writer);
-						
+								+ "/Default/" + bugs_pre + " C:/Temp/Preview.tga Anim_Mini$In_Out 1.260 Anim_Mini$In_Out$In 1.240 "
+								+ "Anim_Mini$In_Out$Out2 1.240\0", print_writer);
 						break;
 					case "Alt_F7":
 						switch (config.getBroadcaster()) {

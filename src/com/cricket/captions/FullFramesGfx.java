@@ -29711,7 +29711,10 @@ public class FullFramesGfx
 								+ team.getTeamName4().replace("BIG BOYS", "BIG_BOYS") + "\\" + PlayingXI.get(i-1).getPhoto() + CricketUtil.PNG_EXTENSION + "\0", print_writers);
 					}
 					
-					if(PlayingXI.get(i-1).getRole().equalsIgnoreCase(CricketUtil.BATSMAN) || PlayingXI.get(i-1).getRole().equalsIgnoreCase("BAT/KEEPER")) {
+					if(PlayingXI.get(i-1).getRole().equalsIgnoreCase(CricketUtil.BATSMAN)) {
+						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_LineUpBigImage$Team_BigImage$Side" + WhichSide + containerName 
+								+ "$Photo_" + rowId + "$Role$txt_Bat*GEOM*TEXT SET " + "BATTER" + "\0", print_writers);
+					}else if(PlayingXI.get(i-1).getRole().equalsIgnoreCase("BAT/KEEPER")) {
 						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_LineUpBigImage$Team_BigImage$Side" + WhichSide + containerName 
 								+ "$Photo_" + rowId + "$Role$txt_Bat*GEOM*TEXT SET " + "BAT" + "\0", print_writers);
 					}

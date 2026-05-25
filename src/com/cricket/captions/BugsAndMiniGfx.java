@@ -2560,15 +2560,6 @@ public class BugsAndMiniGfx
 							rowId = rowId + 1;
 							Left_Batsman ="" ; Right_Batsman="";
 							for (BattingCard bc : inning.getBattingCard()) {
-								
-								if(bc.getPlayerId() == impactOutPlayerId) {
-									if(!bc.getStatus().equalsIgnoreCase(CricketUtil.STILL_TO_BAT)) {
-									}else {
-										row_size = (inning.getBattingCard().size() - 1);
-										continue;
-									}
-								}
-								
 								if(bc.getPlayerId() == ps.getFirstBatterNo()) {
 									Left_Batsman = bc.getPlayer().getTicker_name();
 								}
@@ -2576,6 +2567,7 @@ public class BugsAndMiniGfx
 									Right_Batsman = bc.getPlayer().getTicker_name();
 								}
 							}
+							
 							if(inning.getPartnerships().size() >= 10 && inning.getTotalWickets()>=10) {
 								if(ps.getPartnershipNumber()<=inning.getPartnerships().size()) {
 									omo_num = 0;
@@ -2598,7 +2590,7 @@ public class BugsAndMiniGfx
 							}
 							
 							CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$minis$Side" + WhichSide + "$Partnership$" +
-									containerName_2 + "*FUNCTION*Grid*num_row SET " + inning.getPartnerships().size() + " \0", print_writers);
+									containerName_2 + "*FUNCTION*Grid*num_row SET " + (inning.getPartnerships().size() + 1) + " \0", print_writers);
 
 							switch (config.getBroadcaster().toUpperCase()) {
 							case Constants.LEGENDS:
@@ -2951,7 +2943,7 @@ public class BugsAndMiniGfx
 				switch (whatToProcess.split(",")[3].toUpperCase()) {
 				case "SCORE":
 					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$PopUps$POP_UP$band$txt_Header"
-							+ "*GEOM*TEXT SET " + battingCard.getPlayer().getTicker_name()+ "\0", print_writers);
+							+ "*GEOM*TEXT SET " + battingCard.getPlayer().getTicker_name() + " - THIS MATCH" + "\0", print_writers);
 					
 					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$PopUps$POP_UP$Side" + WhichSide + "$StatHead1"
 							+ "*GEOM*TEXT SET \0", print_writers);
@@ -3002,7 +2994,7 @@ public class BugsAndMiniGfx
 				    }
 				    
 				    CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$PopUps$POP_UP$band$txt_Header"
-							+ "*GEOM*TEXT SET " + battingCard.getPlayer().getTicker_name()+ "\0", print_writers);
+							+ "*GEOM*TEXT SET " + battingCard.getPlayer().getTicker_name() + " - THIS MATCH" + "\0", print_writers);
 
 				    CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$PopUps$POP_UP$Side" + WhichSide + "$StatHead1"
 				        + "*GEOM*TEXT SET BOUNDARY %\0",print_writers);

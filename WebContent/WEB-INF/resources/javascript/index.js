@@ -9118,9 +9118,9 @@ function addItemsToList(whatToProcess,dataToProcess)
 
 					case 'LEGENDS-90':
 						addOption('DT20');
-						addOption('BPL_CAREER', 'APL CAREER');
-						addOption('BPL_MILESTONE_BAT', 'APL MILESTONE');
-						addOption('BPL_BOUNDARY_CAREER', 'APL BOUNDARY CAREER');
+						addOption('BPL_CAREER', 'BPL CAREER');
+						addOption('BPL_MILESTONE_BAT', 'BPL MILESTONE');
+						addOption('BPL_BOUNDARY_CAREER', 'BPL BOUNDARY CAREER');
 						addOption('BPL_BOUNDARY', 'THIS SEASON BOUNDARY');
 						addOption('RECENT_FORM_BAT', 'RECENT FORM');
 						break;
