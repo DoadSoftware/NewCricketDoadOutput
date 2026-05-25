@@ -997,7 +997,7 @@ public class Caption
 					if(whatToProcess.split(",")[2].equalsIgnoreCase("LAST_X_BALLS")) {
 						this_infobarGfx.lastXballs = Integer.valueOf(whatToProcess.split(",")[3]);
 					}
-					status = this_infobarGfx.populateFullSection(print_writers, matchAllData, whichSide);
+					status = this_infobarGfx.populateFullSection(false,print_writers, matchAllData, whichSide);
 					break;
 				case Constants.ISPL:
 					if(config.getWhichInfobar().equalsIgnoreCase("LOF_INFOBAR")) {
@@ -1029,7 +1029,7 @@ public class Caption
 						this_infobarGfx.infobar.setFull_section(whatToProcess.split(",")[2]);
 						this_infobarGfx.infobar.setMiddle_section("");
 						this_infobarGfx.infobar.setRight_bottom("");
-						status = this_infobarGfx.populateFullSection(print_writers, matchAllData, whichSide);
+						status = this_infobarGfx.populateFullSection(false,print_writers, matchAllData, whichSide);
 					}
 					break;
 
@@ -1220,7 +1220,7 @@ public class Caption
 						this_infobarGfx.FirstPlayerId = Integer.valueOf(whatToProcess.split(",")[2]);
 						this_infobarGfx.WhichProfile = whatToProcess.split(",")[3];
 						this_infobarGfx.infobar.setFull_section("BAT_PROFILE_CAREER");
-						status = this_infobarGfx.populateFullSection(print_writers, matchAllData, whichSide);
+						status = this_infobarGfx.populateFullSection(false,print_writers, matchAllData, whichSide);
 						break;
 					default:
 						this_infobarGfx.infobar.setMiddle_section("BAT_PROFILE_CAREER");
@@ -1248,7 +1248,7 @@ public class Caption
 						this_infobarGfx.FirstPlayerId = Integer.valueOf(whatToProcess.split(",")[2]);
 						this_infobarGfx.WhichProfile = whatToProcess.split(",")[3];
 						this_infobarGfx.infobar.setFull_section("BALL_PROFILE_CAREER");
-						status = this_infobarGfx.populateFullSection(print_writers, matchAllData, whichSide);
+						status = this_infobarGfx.populateFullSection(false,print_writers, matchAllData, whichSide);
 						break;
 					default:
 						this_infobarGfx.infobar.setMiddle_section("BALL_PROFILE_CAREER");
@@ -1508,7 +1508,7 @@ public class Caption
 							    case "FreeText":
 							    	this_infobarGfx.freeText = whatToProcess;
 							        break;
-							    case "BatsmanTimeLine":
+							    case "BATSMANTIMELINE": case "BOWLERTIMELINE": case "INNINGSBUILDER":
 							    	this_infobarGfx.FirstPlayerId = Integer.valueOf(whatToProcess.split(",")[3]);
 							        break;
 							    case "BatMileStone": case "BallMileStone":
@@ -1521,10 +1521,14 @@ public class Caption
 							    case "RECENT_FORM":
 							    	this_infobarGfx.team_id = Integer.valueOf(whatToProcess.split(",")[3]);
 							    	break;
+							    case "TEAM_TOP_THREE":
+							    	this_infobarGfx.team_id = Integer.valueOf(whatToProcess.split(",")[3]);
+									this_infobarGfx.data_Type = whatToProcess.split(",")[4];
+							        break;
 							}
 							
 							this_infobarGfx.infobar.setFull_section(whatToProcess.split(",")[2]);
-							status = this_infobarGfx.populateFullSection(print_writers, matchAllData, whichSide);
+							status = this_infobarGfx.populateFullSection(false,print_writers, matchAllData, whichSide);
 						}
 					}
 					break;
@@ -1832,7 +1836,7 @@ public class Caption
 					this_infobarGfx.infobar.setMiddle_section("");
 					this_infobarGfx.infobar.setRight_bottom("");
 					this_infobarGfx.infobarStatsId = Integer.valueOf(whatToProcess.split(",")[2]);
-					status = this_infobarGfx.populateFullSection(print_writers, matchAllData, whichSide);
+					status = this_infobarGfx.populateFullSection(false,print_writers, matchAllData, whichSide);
 					break;
 				case Constants.ICC_U19_2023: case Constants.NPL: case Constants.ISPL: case Constants.LEGENDS: case Constants.MPL:
 				case Constants.APL:

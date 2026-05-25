@@ -4016,10 +4016,10 @@ function addItemsToList(whatToProcess,dataToProcess)
 								option.text = 'Target';
 								select.appendChild(option);
 								
-								/*option = document.createElement('option');
+								option = document.createElement('option');
 								option.value = 'EQUATION';
 								option.text = 'Equation';
-								select.appendChild(option);*/
+								select.appendChild(option);
 								
 								option = document.createElement('option');
 								option.value = 'RRR';
@@ -5006,6 +5006,16 @@ function addItemsToList(whatToProcess,dataToProcess)
 					select.appendChild(option);
 					
 					option = document.createElement('option');
+					option.value = 'BOWLERTIMELINE';
+					option.text = 'Bowler TimeLine';
+					select.appendChild(option);
+					
+					option = document.createElement('option');
+					option.value = 'INNINGSBUILDER';
+					option.text = 'Player Innings Builder';
+					select.appendChild(option);
+					
+					option = document.createElement('option');
 					option.value = 'PHASE_WISE_SCORE';
 					option.text = 'PhaseWise Score';
 					select.appendChild(option);
@@ -5028,6 +5038,11 @@ function addItemsToList(whatToProcess,dataToProcess)
 					option = document.createElement('option');
 					option.value = 'RECENT_FORM';
 					option.text = 'Last 3 Matches';
+					select.appendChild(option);
+					
+					option = document.createElement('option');
+					option.value = 'TEAM_TOP_THREE';
+					option.text = 'Team Top 3 Data';
 					select.appendChild(option);
 					
 					session_match.match.inning.forEach(function(inn){
@@ -5134,6 +5149,41 @@ function addItemsToList(whatToProcess,dataToProcess)
 						setDropdownOptionToSelectOptionArray($(teamSelect), 1);
 						cellCount = 2;
 					}
+					else if(this.value === 'TEAM_TOP_THREE'){
+						// === 2. Team Dropdown ===
+						let teamSelect = document.createElement('select');
+						teamSelect.id = 'selectTeams';
+						teamSelect.name = teamSelect.id;
+				
+						let homeOption = document.createElement('option');
+						homeOption.value = session_match.setup.homeTeam.teamId;
+						homeOption.text = session_match.setup.homeTeam.teamName3;
+						teamSelect.appendChild(homeOption);
+				
+						let awayOption = document.createElement('option');
+						awayOption.value = session_match.setup.awayTeam.teamId;
+						awayOption.text = session_match.setup.awayTeam.teamName3;
+						teamSelect.appendChild(awayOption);
+				
+						row.insertCell(1).appendChild(teamSelect);
+						teamSelect.setAttribute('onchange', "setDropdownOptionToSelectOptionArray(this, 1)");
+						setDropdownOptionToSelectOptionArray($(teamSelect), 1);
+						
+						let typeselect  = document.createElement('select');
+						typeselect.id = 'selectPhoto';
+						typeselect.name = typeselect.id;
+						[{ value: 'Runs', text: 'Runs' },{ value: 'wickets', text: 'wickets' },
+						{ value: 'fours', text: 'fours' }, { value: 'sixes', text: 'sixes' }].forEach(({ value, text }) => {
+							  option = document.createElement('option');
+							  option.value = value;
+							  option.text = text;
+							  typeselect.appendChild(option);
+						});
+						typeselect.setAttribute('onchange',"setDropdownOptionToSelectOptionArray(this, 2)");
+						row.insertCell(2).appendChild(typeselect);
+						setDropdownOptionToSelectOptionArray($(typeselect),2);
+						cellCount = 3;
+					}
 					else if(this.value == 'BatMileStone' || this.value == 'BallMileStone'){
 						let xballselect  = document.createElement('select');
 						xballselect.id = 'selectFreeText';
@@ -5190,12 +5240,16 @@ function addItemsToList(whatToProcess,dataToProcess)
 						row.insertCell(2).appendChild(ballselect);
 						setDropdownOptionToSelectOptionArray($(ballselect),2);
 						cellCount = 3;
-					}else if(this.value == 'BATSMANTIMELINE'){
+					}else if(this.value == 'BATSMANTIMELINE' || this.value == 'BOWLERTIMELINE' || this.value == 'INNINGSBUILDER'){
 						let xballselect  = document.createElement('select');
 						xballselect.id = 'selectFreeText';
 						xballselect.name = xballselect.id;
+						
+						let selectedValue = this.value; 
+						
 						session_match.match.inning.forEach(function(inn){
 						if(inn.isCurrentInning == 'YES'){
+							if(selectedValue == 'BATSMANTIMELINE' || selectedValue == 'INNINGSBUILDER'){
 								inn.battingCard.forEach(function(bc){
 									if(bc.status == 'NOT OUT'){
 										option = document.createElement('option');
@@ -5204,7 +5258,15 @@ function addItemsToList(whatToProcess,dataToProcess)
 										xballselect.appendChild(option);	
 									}
 								});
+							}else{
+								inn.bowlingCard.forEach(function(boc){
+									option = document.createElement('option');
+									option.value = boc.playerId;
+									option.text = boc.player.full_name;	
+									xballselect.appendChild(option);
+								});
 							}
+						}
 						});
 						xballselect.setAttribute('onchange',"setDropdownOptionToSelectOptionArray(this, 1)");
 						row.insertCell(1).appendChild(xballselect);

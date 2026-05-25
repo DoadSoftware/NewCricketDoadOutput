@@ -3,6 +3,7 @@ package com.cricket.captions;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.TimeUnit;
 import com.cricket.containers.Infobar;
 import com.cricket.containers.LowerThird;
@@ -7850,24 +7851,24 @@ public class Animation
 			break;
 			
 		case "w": case "f": case "s": case "i": case "0": case "8":
-			if(whatToProcess.split(",")[0].equalsIgnoreCase("w")) {
-				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$object$Score_Wipe_Group$Select*FUNCTION*Omo*vis_con SET 3\0", print_writers);
-			}else if(whatToProcess.split(",")[0].equalsIgnoreCase("f")) {
-				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$object$Score_Wipe_Group$Select*FUNCTION*Omo*vis_con SET 2\0", print_writers);
-			}else if(whatToProcess.split(",")[0].equalsIgnoreCase("s")) {
-				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$object$Score_Wipe_Group$Select*FUNCTION*Omo*vis_con SET 1\0", print_writers);
-			}else if(whatToProcess.split(",")[0].equalsIgnoreCase("i")) {
-				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$object$Score_Wipe_Group$Select*FUNCTION*Omo*vis_con SET 6\0", print_writers);
-			}else if(whatToProcess.split(",")[0].equalsIgnoreCase("0")) {
-				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$object$Score_Wipe_Group$Select*FUNCTION*Omo*vis_con SET 4\0", print_writers);
-			}else if(whatToProcess.split(",")[0].equalsIgnoreCase("8")) {
-				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$object$Score_Wipe_Group$Select*FUNCTION*Omo*vis_con SET 5\0", print_writers);
+			String whichData = Map.of("s", "SIX","w", "WICKET","f", "FOUR","i", "FREE-HIT","0", "HAT-TRICK","8", 
+					"ON HAT-TRICK").getOrDefault(whatToProcess.split(",")[0], "");
+			caption.this_infobarGfx.TeamWipeColor(print_writers, whatToProcess.split(",")[0]);
+			for(int i=1;i<=10;i++) {
+				if(i<=6) {
+					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_Infobar$All$Normal$DisruptiveAnimations$BigText$" + i 
+							+ "$txt_Event*GEOM*TEXT SET " + whichData + "\0", print_writers);
+					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_Infobar$All$Normal$DisruptiveAnimations$BigText$" + i 
+							+ "$txt_EventOutline*GEOM*TEXT SET " + whichData + "\0", print_writers);
+				}
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_Infobar$All$Normal$DisruptiveAnimations$SmallText$txt_Event_"
+						+ i + "*GEOM*TEXT SET " + whichData + "\0", print_writers);
 			}
 			
 			if(this.infobar.isInfobar_on_screen() == true && !this.infobar.isInfobar_pushed()) {
-				processAnimation(Constants.FRONT, print_writers, "ScoreWipe", "START");
-				TimeUnit.MILLISECONDS.sleep(6500);
-				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$object$Score_Wipe_Group$Select*FUNCTION*Omo*vis_con SET 0\0", print_writers);
+				processAnimation(Constants.FRONT, print_writers, "Disruptives$InOut", "START");
+				TimeUnit.MILLISECONDS.sleep(2500);
+				processAnimation(Constants.FRONT, print_writers, "Disruptives$InOut", "CONTINUE");
 			}
 			break;
 		case "Control_F12":
