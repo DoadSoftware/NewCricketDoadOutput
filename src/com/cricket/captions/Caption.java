@@ -1395,8 +1395,13 @@ public class Caption
 							this_infobarGfx.infobar.setLast_right_full_section(null);
 							status = Constants.OK;
 						}else {
-							if(whatToProcess.split(",")[2].equalsIgnoreCase("LAST_X_BALLS")) {
+							switch(whatToProcess.split(",")[2]) {
+							case "LAST_X_BALLS":
 								this_infobarGfx.lastXballs = Integer.valueOf(whatToProcess.split(",")[3]);
+								break;
+							 case "FreeText":
+						    	this_infobarGfx.freeTextRight = whatToProcess;
+						        break;
 							}
 							
 							this_infobarGfx.infobar.setRight_full_section(whatToProcess.split(",")[2]);
@@ -1598,6 +1603,11 @@ public class Caption
 					}
 					break;
 				case Constants.T20_MUMBAI:
+					switch(whatToProcess.split(",")[2]) {
+				    case "FreeText":
+				    	this_infobarGfx.freeTextRightBottom = whatToProcess.split(",")[3];
+				        break;
+					}
 					this_infobarGfx.infobar.setRight_bottom(whatToProcess.split(",")[2]);
 					status = this_infobarGfx.populateVizInfobarRightBottom(print_writers, matchAllData, whichSide, 1);
 					break;

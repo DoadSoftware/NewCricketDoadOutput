@@ -4690,6 +4690,11 @@ function addItemsToList(whatToProcess,dataToProcess)
 					option.text = 'Team 0s,4s,6s,';
 					select.appendChild(option);
 					
+					option = document.createElement('option');
+					option.value = 'FreeText';
+					option.text = 'FreeText';
+					select.appendChild(option);
+					
 					session_match.match.inning.forEach(function(inn){
 						if(inn.isCurrentInning == 'YES'){
 							if(inn.inningNumber == 1){
@@ -4725,9 +4730,12 @@ function addItemsToList(whatToProcess,dataToProcess)
 				cellCount = cellCount + 1
 				
 				select.addEventListener('change', function () {
-				    if (document.getElementById('selectFreeText')) {
-				        document.getElementById('selectFreeText').parentElement.remove();
-				    }
+					['selectFreeText', 'selectFreeText1'].forEach(id => {
+					    const el = document.getElementById(id);
+					    if (el) {
+					        id === 'selectFreeText' || id === 'selectFreeText1' ? el.parentElement.remove() : el.remove();
+					    }
+					});
 				    if (this.value === 'LAST_X_BALLS') {
 				        let label = document.createElement('label');
 				        label.setAttribute('for', 'selectFreeText');
@@ -4749,9 +4757,35 @@ function addItemsToList(whatToProcess,dataToProcess)
 				        cell.appendChild(xballselect);
 
 				        setTextBoxOptionToSelectOptionArray(1);
-
 				        cellCount++;
-				    }
+				    }else if(this.value == 'FreeText'){
+						let label1 = document.createElement('label');
+					    label1.setAttribute('for', 'selectFreeText'); 
+					    label1.innerHTML = 'Line 1';	
+					    					    	    			
+						let ftheader1 = document.createElement('input');
+						ftheader1.type = "text";
+						ftheader1.id = 'selectFreeText';
+						ftheader1.value = '';
+						
+						ftheader1.setAttribute('onchange',"setTextBoxOptionToSelectOptionArray(1)");
+						row.insertCell(1).appendChild(label1).appendChild(ftheader1);
+					    setTextBoxOptionToSelectOptionArray(1);
+					    
+					    let label2 = document.createElement('label');
+					    label2.setAttribute('for', 'selectFreeText1'); 
+					    label2.innerHTML = 'Line 2';	
+					    					    	    			
+						let ftheader2 = document.createElement('input');
+						ftheader2.type = "text";
+						ftheader2.id = 'selectFreeText1';
+						ftheader2.value = '';
+						
+						ftheader2.setAttribute('onchange',"setTextBoxOptionToSelectOptionArray1(2)");
+						row.insertCell(2).appendChild(label2).appendChild(ftheader2);
+					    setTextBoxOptionToSelectOptionArray1(2);
+				   		cellCount = 3;
+					}
 				});
 
 				// Trigger once initially
@@ -5223,8 +5257,7 @@ function addItemsToList(whatToProcess,dataToProcess)
 			
 		case 'Alt_7':
 			switch($('#selected_broadcaster').val().toUpperCase()){
-				case 'VIDARBHA':
-								
+				case 'VIDARBHA':			
 				select = document.createElement('select');
 				select.id = 'selectRightBottom';
 				select.name = select.id;
@@ -5318,6 +5351,11 @@ function addItemsToList(whatToProcess,dataToProcess)
 				option.text = 'Bowling Style';
 				select.appendChild(option);
 				
+				option = document.createElement('option');
+				option.value = 'FreeText';
+				option.text = 'FreeText';
+				select.appendChild(option);
+				
 				session_match.match.inning.forEach(function(inn){
 					if(inn.isCurrentInning == 'YES' && session_match.setup.matchType != 'TEST' && session_match.setup.matchType != 'FC'){
 						if(inn.inningNumber == 1){
@@ -5335,6 +5373,16 @@ function addItemsToList(whatToProcess,dataToProcess)
 							option = document.createElement('option');
 							option.value = 'RRR';
 							option.text = 'Required Run Rate';
+							select.appendChild(option);
+							
+							option = document.createElement('option');
+							option.value = 'TARGET';
+							option.text = 'Target';
+							select.appendChild(option);
+							
+							option = document.createElement('option');
+							option.value = 'EQUATION';
+							option.text = 'Equation';
 							select.appendChild(option);
 						}
 					}
@@ -5419,11 +5467,37 @@ function addItemsToList(whatToProcess,dataToProcess)
 			}
 			header_text.innerHTML = 'RIGHT BOTTOM INFOBAR SECTION';
 			
-			
 			select.setAttribute('onchange',"setDropdownOptionToSelectOptionArray(this, 0)");
 			row.insertCell(cellCount).appendChild(select);
 			setDropdownOptionToSelectOptionArray($(select),0);
 			cellCount = cellCount + 1
+			
+			select.addEventListener('change', function () {
+				['selectFreeText'].forEach(id => {
+				    const el = document.getElementById(id);
+				    if (el) {
+				        id === 'selectFreeText' ? el.parentElement.remove() : el.remove();
+				    }
+				});
+ 
+				//it will show text value (UI VALUE):this.options[this.selectedIndex].text.toUpperCase()
+				if(this.value == 'FreeText'){
+					let label1 = document.createElement('label');
+				    label1.setAttribute('for', 'selectFreeText'); 
+				    label1.innerHTML = 'Line 1';	
+				    					    	    			
+					let ftheader1 = document.createElement('input');
+					ftheader1.type = "text";
+					ftheader1.id = 'selectFreeText';
+					ftheader1.value = '';
+						
+					ftheader1.setAttribute('onchange',"setTextBoxOptionToSelectOptionArray(1)");
+					row.insertCell(1).appendChild(label1).appendChild(ftheader1);
+				    setTextBoxOptionToSelectOptionArray(1);
+			  		cellCount = 2;
+				}
+			});
+			select.dispatchEvent(new Event('change'));
 			break;
 			
 		case 'Alt_8':
@@ -9202,11 +9276,13 @@ function addItemsToList(whatToProcess,dataToProcess)
 			break;
 		case 'Alt_4': 
 			switch($('#selected_broadcaster').val().toUpperCase()){
-				case 'ICC-U19-2023': case 'NPL':case "ISPL": case 'LEGENDS-90':  case 'MPL': case 'T20_MUMBAI':
-				case 'APL':
-					switch(whatToProcess){
-					case 'Alt_4':
-					header_text.innerHTML = 'MIDDLE INFOBAR SECTION - BALL PLAYER PROFILE';
+				case 'ICC-U19-2023': case 'NPL':case "ISPL": case 'LEGENDS-90':  case 'MPL': case 'T20_MUMBAI': case 'APL':
+					switch($('#selected_broadcaster').val().toUpperCase()){
+					case 'T20_MUMBAI':
+						header_text.innerHTML = 'FULL INFOBAR SECTION - BALL PLAYER PROFILE';
+						break;
+					default:
+						header_text.innerHTML = 'MIDDLE INFOBAR SECTION - BALL PLAYER PROFILE';
 						break;
 					}
 				
@@ -9310,14 +9386,13 @@ function addItemsToList(whatToProcess,dataToProcess)
 							addOption('BPL_MILESTONE_BALL', 'BPL MILESTONE');
 							addOption('RECENT_FORM_BALL', 'RECENT FORM');
 							break;
-
+							
 						case 'T20_MUMBAI':
-							[
-								['MCA T20s', 'MCA T20 24-25'],
+							[['T20 MUMBAI', 'T20 Mumbai'],
+								['THIS_SERIES', 'This Season'],
 								['DT20', 'T20'],
-								['THIS_SERIES', 'THIS SERIES'],
-								['IPL', 'IPL'],
-								['IPL 2025', 'IPL 2025']
+								['IT20', 'T20I'],
+								['IPL', 'IPL']
 							].forEach(([value, text]) => addOption(value, text));
 							break;
 

@@ -24,7 +24,6 @@ import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
 import com.cricket.containers.Infobar;
-import com.cricket.containers.Stats;
 import com.cricket.controller.IndexController;
 import com.cricket.model.BattingCard;
 import com.cricket.model.BestStats;
@@ -67,7 +66,7 @@ public class InfobarGfx
 			stats_text = "", par_Overs="", Comms_Name,color = "", color2 = "", prev_score = "", new_score = "",
 			prev_wicket = "", new_wicket = "", prevTeamScore = "", currTeamScore = "", freeText = "",today_sixes="",
 			logoCategory = "",phaseWiseScore = "",matchType="",today_fours="",previous_fours = "",LastOverRuns="",category = "",
-			data_Type = "";
+			data_Type = "",freeTextRightBottom="", freeTextRight ="";
 	
 	boolean isThisOverLimitExceed = false, isbatsmannotout = false,isimpactBowlIn = false,isimpactBatIn = false;
 //	int runs = 0,wicket = 0;
@@ -3790,6 +3789,27 @@ public class InfobarGfx
 					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_Infobar$All$Normal$BowlerSection$Section2$Side" + WhichSide + 
 							"$FreeText2$txt_StatValue*GEOM*TEXT SET " + bowlingCard.getEconomyRate() + "\0", print_writers);
 					break;
+				case "TARGET":
+					isThisOverLimitExceed = true;
+					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_Infobar$All$Normal$BowlerSection$Section2$Side" + 
+							WhichSide + "$select_DataType*FUNCTION*Omo*vis_con SET 2\0", print_writers);
+					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_Infobar$All$Normal$BowlerSection$Section2$Side" + WhichSide + 
+							"$FreeText2$txt_StatHead*GEOM*TEXT SET TARGET\0", print_writers);
+					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_Infobar$All$Normal$BowlerSection$Section2$Side" + WhichSide + 
+							"$FreeText2$txt_StatValue*GEOM*TEXT SET " + CricketFunctions.GetTargetData(matchAllData).getTargetRuns() + (matchAllData.getSetup().getTargetType() != null 
+							&& !matchAllData.getSetup().getTargetType().isEmpty()? " (" + matchAllData.getSetup().getTargetType().toUpperCase()+")":"")+ "\0", print_writers);
+					break;
+				case "EQUATION":
+					isThisOverLimitExceed = true;
+					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_Infobar$All$Normal$BowlerSection$Section2$Side" + WhichSide + 
+							"$select_DataType*FUNCTION*Omo*vis_con SET 1\0", print_writers);
+					
+					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_Infobar$All$Normal$BowlerSection$Section2$Side" + WhichSide + "$FreeText1$txt_Info"
+							+ "*GEOM*TEXT SET " + "NEED " + CricketFunctions.GetTargetData(matchAllData).getRemaningRuns() + " RUN" + CricketFunctions.Plural(CricketFunctions.
+							GetTargetData(matchAllData).getRemaningRuns()).toUpperCase() + " FROM " + CricketFunctions.GetTargetData(matchAllData).getRemaningBall() + " BALL" + 
+							CricketFunctions.Plural(CricketFunctions.GetTargetData(matchAllData).getRemaningBall()).toUpperCase() + (matchAllData.getSetup().getTargetType() != null 
+							&& !matchAllData.getSetup().getTargetType().isEmpty() ? " (" + matchAllData.getSetup().getTargetType() + ")" : "") + "\0", print_writers);
+					break;
 				case "BOWLING_END":
 					isThisOverLimitExceed = true;
 					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_Infobar$All$Normal$BowlerSection$Section2$Side" + 
@@ -3798,6 +3818,13 @@ public class InfobarGfx
 					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_Infobar$All$Normal$BowlerSection$Section2$Side" + WhichSide + 
 							"$FreeText1$txt_Info*GEOM*TEXT SET " + (bowlingCard.getBowling_end() == 1 ? matchAllData.getSetup().getGround().getFirst_bowling_end() :
 								matchAllData.getSetup().getGround().getSecond_bowling_end()) + " END" + "\0", print_writers);
+					break;
+				case "FREETEXT":
+					isThisOverLimitExceed = true;
+					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_Infobar$All$Normal$BowlerSection$Section2$Side" + 
+							WhichSide + "$select_DataType*FUNCTION*Omo*vis_con SET 1\0", print_writers);
+					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_Infobar$All$Normal$BowlerSection$Section2$Side" + WhichSide + 
+							"$FreeText1$txt_Info*GEOM*TEXT SET " + freeTextRightBottom + "\0", print_writers);
 					break;
 				case "LAST_BOWLER":
 					isThisOverLimitExceed = true;
@@ -6569,7 +6596,25 @@ public class InfobarGfx
 	
 	public String t20MumbaiRightFullSection(boolean is_this_updating,List<PrintWriter> print_writers, MatchAllData matchAllData,int WhichSide,int WhichSubSide) throws Exception {
 		if(infobar.getRight_full_section() != null && !infobar.getRight_full_section().isEmpty()) {
-			switch(infobar.getRight_full_section().toUpperCase()) {	
+			switch(infobar.getRight_full_section().toUpperCase()) {
+			case "FREETEXT":
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_Infobar$All$Normal$Section4$Side" + WhichSide + "$select_DataType"
+						+ "*FUNCTION*Omo*vis_con SET 13\0", print_writers);
+				
+				if(freeTextRight.split(",").length == 5) {
+					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_Infobar$All$Normal$Section4$Side" + WhichSide + "$FreeText$select_LineNumber"
+							+ "*FUNCTION*Omo*vis_con SET 2\0", print_writers);
+					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_Infobar$All$Normal$Section4$Side" + WhichSide + "$FreeText$txt_Info1*GEOM*TEXT SET " 
+							+ freeTextRight.split(",")[3] + "\0", print_writers);
+					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_Infobar$All$Normal$Section4$Side" + WhichSide + "$FreeText$txt_Info2*GEOM*TEXT SET " 
+							+ freeTextRight.split(",")[4] + "\0", print_writers);
+				}else if(freeTextRight.split(",").length == 4) {
+					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_Infobar$All$Normal$Section4$Side" + WhichSide + "$FreeText$select_LineNumber"
+							+ "*FUNCTION*Omo*vis_con SET 1\0", print_writers);
+					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_Infobar$All$Normal$Section4$Side" + WhichSide + "$FreeText$txt_Info1*GEOM*TEXT SET " 
+							+ freeTextRight.split(",")[3] + "\0", print_writers);
+				}
+				break;
 			case "RUNRATE":
 				inning = matchAllData.getMatch().getInning().stream().filter(inn -> inn.getIsCurrentInning().equalsIgnoreCase(CricketUtil.YES)
 						&& inn.getInningNumber() == 2).findAny().orElse(null);
@@ -7858,8 +7903,7 @@ public class InfobarGfx
 				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_Infobar$All$Normal$Section1$Side" + WhichSide + "$FreeText$txt_Text1*GEOM*TEXT SET " 
 						+ "1st INN SCORE" + "\0", print_writers);
 				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_Infobar$All$Normal$Section1$Side" + WhichSide + "$FreeText$txt_Text2*GEOM*TEXT SET " 
-						+ matchAllData.getMatch().getInning().get(0).getBatting_team().getTeamName4() + " " + CricketFunctions.getTeamScore(matchAllData.getMatch().getInning().get(0), 
-								"-", false) + "\0", print_writers);
+						+ CricketFunctions.getTeamScore(matchAllData.getMatch().getInning().get(0), "-", false) + "\0", print_writers);
 				break;
 			case "RRR":
 				if(!matchAllData.getMatch().getInning().get(1).getIsCurrentInning().equalsIgnoreCase(CricketUtil.YES)) {
