@@ -1028,6 +1028,13 @@ public class InfobarGfx
 		
 		String whichColor = (config.getCategory().equalsIgnoreCase("WOMEN") ? "WOMENS" : "MENS");
 		
+		//LT
+		CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_LowerThird$Colours$Chnage_In$Eventbase" +
+				"$img_EventBase1*TEXTURE*IMAGE SET " + Constants.T20_MUMBAI_Base1 + whichColor + "\0",print_writers);
+		CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_LowerThird$Colours$Chnage_Out$Eventbase" +
+				"$img_EventBase1*TEXTURE*IMAGE SET " + Constants.T20_MUMBAI_Base1 + whichColor + "\0",print_writers);
+		CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_LtHowOut$Colours$Eventbase" +
+				"$img_EventBase1*TEXTURE*IMAGE SET " + Constants.T20_MUMBAI_Base1 + whichColor + "\0",print_writers);
 		//Veil
 		CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_Infobar$Main$Veil$noname*TEXTURE*IMAGE SET " 
 				+ Constants.T20_MUMBAI_Base1 + whichColor + "\0", print_writers);

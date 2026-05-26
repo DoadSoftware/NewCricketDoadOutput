@@ -7981,15 +7981,22 @@ public class Animation
 				this.whichGraphicOnScreen = whatToProcess.split(",")[0];
 			}
 			break;
+		case "Control_F6": case "F6": case "Shift_F6":
+			T20_MumbaiAnimateIn(Constants.SHRUNK_INFOBAR, print_writers, config); // Push infobar
+			if(this.infobar.isInfobar_on_screen() == true ||this.specialBugOnScreen.equalsIgnoreCase(CricketUtil.TOSS)) {
+				processAnimation(Constants.FRONT, print_writers, "anim_Infobar$Shrink", "START");
+			}
+			TimeUnit.MILLISECONDS.sleep(1000);
+			processAnimation(Constants.FRONT, print_writers, "anim_LT_HowOut$InOut", "START");
 			
+			this.whichGraphicOnScreen = whatToProcess;
+			break;
 		case "F5":case "F9":case "l":case "Shift_F5":case "Shift_F9":case "Control_h":case "Alt_F12": case "F7": case "F11": case "Control_a": case "q": 
-		case "u": case "Control_q": case "Shift_F3": case "Control_F3": case "Shift_B": case "Control_F6": case "F6": case "Alt_Shift_F3":case "Shift_F6":
+		case "u": case "Control_q": case "Shift_F3": case "Control_F3": case "Shift_B": case "Alt_Shift_F3":
 		case "Alt_Shift_O":case "Control_F9":case "Control_F5": case "d": case "e":case "Alt_F1": case "Alt_F2": case "F8": case "Alt_F8":
 			T20_MumbaiAnimateIn(Constants.SHRUNK_INFOBAR, print_writers, config); // Push infobar
 			if(this.infobar.isInfobar_on_screen() == true ||this.specialBugOnScreen.equalsIgnoreCase(CricketUtil.TOSS)) {
 				processAnimation(Constants.FRONT, print_writers, "anim_Infobar$Shrink", "START");
-			}else {
-				processAnimation(Constants.FRONT, print_writers, "anim_Infobar$NoInfobar", "START");
 			}
 			TimeUnit.MILLISECONDS.sleep(1000);
 			processAnimation(Constants.FRONT, print_writers, "anim_LowerThird$InOut$Essentials", "START");
@@ -7997,8 +8004,7 @@ public class Animation
 			processAnimation(Constants.FRONT, print_writers, "anim_LowerThird$InOut$Logo", "START");
 			processAnimation(Constants.FRONT, print_writers, "anim_LowerThird$InOut$TopLine", "START");
 			processAnimation(Constants.FRONT, print_writers, "anim_LowerThird$InOut$Subline", "START");
-			TimeUnit.MILLISECONDS.sleep(1000);
-			processAnimation(Constants.FRONT, print_writers, "Body$Side1$In", "START");
+			
 			this.whichGraphicOnScreen = whatToProcess;
 			break;
 		case "F10": case "j":
@@ -8256,24 +8262,26 @@ public class Animation
 			processAnimation(Constants.FRONT, print_writers, "ImpactPlayer", "SHOW 0.0");
 			break;	
 		
-		case "F5":case "F9":case "l":case "Shift_F5":case "Shift_F9":case "Control_h":case "Alt_F12": case "F7": case "F11": case "Control_a": case "q": 
-		case "u": case "Control_q": case "Shift_F3": case "Control_F3": case "Shift_B": case "Control_F6": case "F6": case "Alt_Shift_F3":case "Shift_F6":
-		case "Alt_Shift_O":case "Control_F9":case "Control_F5": case "d": case "e":case "Alt_F1": case "Alt_F2":
-			processAnimation(Constants.FRONT, print_writers, "HeaderChange$Side1$Out", "START");
-			processAnimation(Constants.FRONT, print_writers, "Body$Side1$Out", "START");
-			processAnimation(Constants.FRONT, print_writers, "BaseWidth", "CONTINUE");
-			processAnimation(Constants.FRONT, print_writers, "L3_In-Out", "CONTINUE");
+		case "Control_F6": case "F6": case "Shift_F6":
+			processAnimation(Constants.FRONT, print_writers, "anim_LT_HowOut$InOut", "CONTINUE");
 			TimeUnit.MILLISECONDS.sleep(500);
 			T20_MumbaiAnimateIn(Constants.SHRUNK_INFOBAR, print_writers, config); // Push infobar
 			this.whichGraphicOnScreen = "";
-			TimeUnit.MILLISECONDS.sleep(2000);
-			processAnimation(Constants.FRONT, print_writers, "HeaderChange", "SHOW 0.0");
-			processAnimation(Constants.FRONT, print_writers, "L3_In-Out", "SHOW 0.0");
-			processAnimation(Constants.FRONT, print_writers, "Body", "SHOW 0.0");
-			processAnimation(Constants.FRONT, print_writers, "BaseWidth", "SHOW 0.0");
+			break;
+		case "F5":case "F9":case "l":case "Shift_F5":case "Shift_F9":case "Control_h":case "Alt_F12": case "F7": case "F11": case "Control_a": case "q": 
+		case "u": case "Control_q": case "Shift_F3": case "Control_F3": case "Shift_B": case "Alt_Shift_F3":
+		case "Alt_Shift_O":case "Control_F9":case "Control_F5": case "d": case "e":case "Alt_F1": case "Alt_F2": case "F8": case "Alt_F8": case "F10":
+			processAnimation(Constants.FRONT, print_writers, "anim_LowerThird$InOut$Essentials", "CONTINUE");
+			processAnimation(Constants.FRONT, print_writers, "anim_LowerThird$InOut$Colours", "CONTINUE");
+			processAnimation(Constants.FRONT, print_writers, "anim_LowerThird$InOut$Logo", "CONTINUE");
+			processAnimation(Constants.FRONT, print_writers, "anim_LowerThird$InOut$TopLine", "CONTINUE");
+			processAnimation(Constants.FRONT, print_writers, "anim_LowerThird$InOut$Subline", "CONTINUE");
+			TimeUnit.MILLISECONDS.sleep(500);
+			T20_MumbaiAnimateIn(Constants.SHRUNK_INFOBAR, print_writers, config); // Push infobar
+			this.whichGraphicOnScreen = "";
 			break;
 			
-		case "F8": case "Alt_F8": case "F10": case "j":
+		case "j":
 			processAnimation(Constants.FRONT, print_writers, "NameSuper", "CONTINUE");
 			TimeUnit.MILLISECONDS.sleep(500);
 			T20_MumbaiAnimateIn(Constants.SHRUNK_INFOBAR, print_writers, config); // Push infobar
