@@ -486,6 +486,10 @@ public class IndexController
 			if(process.toUpperCase().equalsIgnoreCase("PLAYING-XI-CHANGE-ON")) {
 				this_animation.AnimateIn("Shift_T", print_writers, session_configuration);
 			}
+			if(process.toUpperCase().equalsIgnoreCase("ANIMATE-IN-PROFILE_IN_AT")) {
+				System.out.println(this_animation.whichGraphicOnScreen);
+				this_animation.ChangeOn(this_animation.whichGraphicOnScreen, print_writers, session_configuration);
+			}
 			if(process.contains("GRAPHICS-OPTIONS") || process.contains("GRAPHICS-OPTIONS_DATA")) {
 				return objectMapper.writeValueAsString(GetGraphicOption(valueToProcess,session_configuration, headToHead));
 			}else if(process.contains("POPULATE-GRAPHICS")) {

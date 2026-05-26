@@ -85,7 +85,7 @@ public class Animation
 				return Constants.INFO_BAR;
 			case "F1": case "Control_Shift_F1": case "F2": case "Control_F11": case "F4": case "Shift_K": case "Shift_T": case "Control_F7":
 			case "m": case "Control_m": case "Shift_F11": case "Shift_F10": case "p": case "Alt_Shift_J": case "z": case "x": case "c": case "v":
-			case "Control_z": case "Control_x": case "Control_F1":
+			case "Control_z": case "Control_x": case "Control_F1": case "Control_b":
 				return Constants.FULL_FRAMER;
 			case "F5": case "F9": case "l": case "Shift_F5": case "Shift_F9": case "Control_h": case "Alt_F12": case "Control_Shift_M": 
 			case "Control_Shift_O": case "Control_Shift_L": case "F7": case "F11": case "Control_a": case "q": case "u": case "Control_q":
@@ -8055,11 +8055,19 @@ public class Animation
 			processAnimation(Constants.BACK, print_writers, "Loop", "START");
 			this.whichGraphicOnScreen = whatToProcess;
 			break;
+		
 		case "Control_d": case "Control_e": case "Shift_P": case "Shift_Q":
 			T20_MumbaiAnimateIn(Constants.SHRUNK_INFOBAR, print_writers, config); // Push infobar
 			
 			processAnimation(Constants.BACK, print_writers, "anim_Profile$In_Out$In", "START");
 			processAnimation(Constants.BACK, print_writers, "anim_Profile$In_Out$Out", "SHOW 2.520");
+			processAnimation(Constants.BACK, print_writers, "Loop", "START");
+			this.whichGraphicOnScreen = whatToProcess;
+			break;
+		case "Control_b":
+			T20_MumbaiAnimateIn(Constants.SHRUNK_INFOBAR, print_writers, config); // Push infobar
+			
+			processAnimation(Constants.BACK, print_writers, "anim_Profile$In_Out", "START");
 			processAnimation(Constants.BACK, print_writers, "Loop", "START");
 			this.whichGraphicOnScreen = whatToProcess;
 			break;
@@ -8352,6 +8360,15 @@ public class Animation
 			this.whichGraphicOnScreen = "";
 			break;
 			
+		case "Control_b":
+			processAnimation(Constants.BACK, print_writers, "anim_Profile$In_Out", "CONTINUE");
+			TimeUnit.MILLISECONDS.sleep(1000);
+			T20_MumbaiAnimateIn(Constants.SHRUNK_INFOBAR, print_writers, config); // Push infobar
+			processAnimation(Constants.BACK, print_writers, "anim_Profile", "SHOW 0.0");
+			processAnimation(Constants.BACK, print_writers, "InAt_To_Profile", "SHOW 0.0");
+			this.whichGraphicOnScreen = "";
+			break;
+			
 		case "z": case "x": case "c": case "v": case "Control_z": case "Control_x":
 			if(audioenabled.equalsIgnoreCase("TRUE")) {
 				processAnimation(Constants.BACK, print_writers, "sfx_FF_Out", "START");
@@ -8475,6 +8492,11 @@ public class Animation
 			break;
 		case "F8": case "Alt_F8": case "F10": case "j":
 			processAnimation(Constants.FRONT, print_writers, "NameSuperChange", "START");
+			break;
+			
+		case "Control_b":
+			processAnimation(Constants.BACK, print_writers, "anim_Profile$InAt_To_Profile", "START");
+			this.whichGraphicOnScreen = whatToProcess;
 			break;
 			
 		case "F1": case "Control_Shift_F1": case "F2": case "Control_F11": case "F4": case "Shift_K": case "Shift_T":case "Control_F7":
@@ -12224,6 +12246,9 @@ public class Animation
 						previewCommand = "anim_Ident$In_Out$In 2.500";
 						break;
 					case "Control_d": case "Control_e": case "Shift_P": case "Shift_Q":
+						previewCommand = "anim_Profile$In_Out$In 2.500";
+						break;
+					case "Control_b":
 						previewCommand = "anim_Profile$In_Out$In 2.500";
 						break;
 					

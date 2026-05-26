@@ -227,7 +227,10 @@ function processUserSelection(whichInput)
 		}else if($('#which_keypress').val() == 'Shift_I'){
 			processUserSelectionData('IMPACT-CHANGE-ON', 'Shift_I');
 			processUserSelection($('#cancel_graphics_btn').attr('value','cancel_graphics_btn'));	
-		}
+		}		
+		break;
+	case 'change_on_profile':
+		processCricketProcedures('ANIMATE-IN-PROFILE_IN_AT');
 		break;
 	case 'pop_up_change_on':
 		dataToProcess = $('#which_keypress').val() + '_change_on' + ',' + selected_options.toString();
@@ -6392,6 +6395,30 @@ function addItemsToList(whatToProcess,dataToProcess)
 			cellCount = cellCount + 1;
 			
 			switch(whatToProcess) {
+			case 'Control_b':
+				switch($('#selected_broadcaster').val().toUpperCase()){
+				case 'T20_MUMBAI':
+					select = document.createElement('select');
+					select.id = 'selectProfile';
+					select.name = select.id;
+					
+					[ { value: 'T20 MUMBAI', text: 'T20 MUMBAI' },
+						  { value: 'DT20', text: 'T20' },
+						  { value: 'IT20', text: 'T20I' },
+						  { value: 'IPL', text: 'IPL' }
+						].forEach(({ value, text }) => {
+							  option = document.createElement('option');
+							  option.value = value;
+							  option.text = text;
+							  select.appendChild(option);
+						});
+					select.setAttribute('onchange',"setDropdownOptionToSelectOptionArray(this, 1)");
+					row.insertCell(cellCount).appendChild(select);
+					setDropdownOptionToSelectOptionArray($(select),1);
+					cellCount = cellCount + 1
+					break;
+				}
+				break;	
 			case 'Control_s':
 				switch($('#selected_broadcaster').val().toUpperCase()){
 					case 'BENGAL-T20': //case 'NPL': case 'APL':
@@ -9600,11 +9627,10 @@ function addItemsToList(whatToProcess,dataToProcess)
 			
 			switch($('#selected_broadcaster').val().toUpperCase()){
 				case 'T20_MUMBAI':
-					[ { value: 'THIS_SERIES', text: 'THIS SERIES' },
-					  {value: 'MCA T20s', text: 'MCA T20 24-25' },
+					[ { value: 'T20 MUMBAI', text: 'T20 MUMBAI' },
 					  { value: 'DT20', text: 'T20' },
-					  { value: 'IPL', text: 'IPL' },
-					  { value: 'IPL 2025', text: 'IPL 2025' }
+					  { value: 'IT20', text: 'T20I' },
+					  { value: 'IPL', text: 'IPL' }
 					].forEach(({ value, text }) => {
 						  option = document.createElement('option');
 						  option.value = value;
@@ -9916,6 +9942,20 @@ function addItemsToList(whatToProcess,dataToProcess)
 			option.type = 'button';
 			option.name = 'change_on';
 			option.value = 'Change On';
+		    option.id = option.name;
+		    option.setAttribute('onclick','processUserSelection(this)');
+		    
+		    div = document.createElement('div');
+		    div.append(option);
+		    row.insertCell(cellCount).appendChild(div);
+	    	cellCount = cellCount + 1;
+		}
+		
+		if(whatToProcess == 'Control_b' && $('#selected_broadcaster').val().toUpperCase()== 'T20_MUMBAI'){
+			option = document.createElement('input');
+			option.type = 'button';
+			option.name = 'change_on_profile';
+			option.value = 'Change On Profile';
 		    option.id = option.name;
 		    option.setAttribute('onclick','processUserSelection(this)');
 		    

@@ -378,7 +378,7 @@ public class Caption
 					}
 				}
 				
-				if(config.getBroadcaster().toUpperCase().equalsIgnoreCase(Constants.VIDARBHA)) {
+					if(config.getBroadcaster().toUpperCase().equalsIgnoreCase(Constants.VIDARBHA)) {
 						this_fullFramesGfx.WhichScoreCard = whatToProcess.split(",")[2];
 					}
 				status = this_fullFramesGfx.PopulateScorecardFF(whichSide, whatToProcess.split(",")[0], matchAllData, 
@@ -637,6 +637,12 @@ public class Caption
 				status = this_fullFramesGfx.populateTarget(whichSide, whatToProcess.split(",")[0], matchAllData, Integer.valueOf(whatToProcess.split(",")[1]));
 				break;
 			case "Control_b":
+				switch (config.getBroadcaster()) {
+				case Constants.T20_MUMBAI: case Constants.APL:
+					System.out.println("whatToProcess - " + whatToProcess);
+					this_fullFramesGfx.WhichProfile = whatToProcess.split(",")[3];
+					break;
+				}
 				status = this_fullFramesGfx.populateInAt(whichSide, whatToProcess.split(",")[0],Integer.valueOf( whatToProcess.split(",")[2]), matchAllData);
 				break;
 			case "Alt_m":
