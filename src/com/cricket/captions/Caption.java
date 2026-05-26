@@ -378,7 +378,7 @@ public class Caption
 					}
 				}
 				
-					if(config.getBroadcaster().toUpperCase().equalsIgnoreCase(Constants.VIDARBHA)) {
+				if(config.getBroadcaster().toUpperCase().equalsIgnoreCase(Constants.VIDARBHA)) {
 						this_fullFramesGfx.WhichScoreCard = whatToProcess.split(",")[2];
 					}
 				status = this_fullFramesGfx.PopulateScorecardFF(whichSide, whatToProcess.split(",")[0], matchAllData, 

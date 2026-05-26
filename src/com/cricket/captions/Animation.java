@@ -7802,10 +7802,10 @@ public class Animation
 		case Constants.SHRUNK_INFOBAR:
 			if(this.infobar.isInfobar_on_screen() == true) {
 				if(this.infobar.getInfobar_status().equalsIgnoreCase(Constants.TWO_LINER_INFOBAR)) {
-					processAnimation(Constants.FRONT, print_writers, "SrinkInfobar", "START");
+					processAnimation(Constants.FRONT, print_writers, "anim_Infobar$Shrink", "START");
 					this.infobar.setInfobar_status(Constants.SHRUNK_INFOBAR);
 				} else if(this.infobar.getInfobar_status().equalsIgnoreCase(Constants.SHRUNK_INFOBAR)) {
-					processAnimation(Constants.FRONT, print_writers, "SrinkInfobar", "CONTINUE REVERSE");
+					processAnimation(Constants.FRONT, print_writers, "anim_Infobar$Shrink", "CONTINUE REVERSE");
 					this.infobar.setInfobar_status(Constants.TWO_LINER_INFOBAR);
 				}
 			}
@@ -8049,9 +8049,18 @@ public class Animation
 		case "m": case "Control_m":
 			T20_MumbaiAnimateIn("ArrowDown,", print_writers, config); // Push infobar
 			if(audioenabled.equalsIgnoreCase("TRUE")) {
-				processAnimation(Constants.BACK, print_writers, "sfx_FF_In", "START");
+				processAnimation(Constants.BACK, print_writers, "AUDIO$sfx_FF_In", "START");
 			}
-			processAnimation(Constants.BACK, print_writers, "FF_MatchIdent", "START");
+			processAnimation(Constants.BACK, print_writers, "anim_Ident$In_Out", "START");
+			processAnimation(Constants.BACK, print_writers, "Loop", "START");
+			this.whichGraphicOnScreen = whatToProcess;
+			break;
+		case "Control_d": case "Control_e": case "Shift_P": case "Shift_Q":
+			T20_MumbaiAnimateIn(Constants.SHRUNK_INFOBAR, print_writers, config); // Push infobar
+			
+			processAnimation(Constants.BACK, print_writers, "anim_Profile$In_Out$In", "START");
+			processAnimation(Constants.BACK, print_writers, "anim_Profile$In_Out$Out", "SHOW 2.520");
+			processAnimation(Constants.BACK, print_writers, "Loop", "START");
 			this.whichGraphicOnScreen = whatToProcess;
 			break;
 			
@@ -8101,13 +8110,20 @@ public class Animation
 		case "Control_F7": case "Shift_F10": case "p": case "Alt_Shift_J": case "Control_F1":
 			T20_MumbaiAnimateIn("ArrowDown,", print_writers, config); // Push infobar
 			if(audioenabled.equalsIgnoreCase("TRUE")) {
-				processAnimation(Constants.BACK, print_writers, "sfx_FF_In", "START");
+				processAnimation(Constants.BACK, print_writers, "AUDIO$sfx_FF_In", "START");
 			}
-			processAnimation(Constants.BACK, print_writers, "FullFramers$Inout", "START");
-			processAnimation(Constants.BACK, print_writers, "FullFramers$Header", "START");
+			processAnimation(Constants.BACK, print_writers, "anim_FullFrames$In_Out$Essentials", "START");
+			processAnimation(Constants.BACK, print_writers, "anim_FullFrames$In_Out$Elemnets", "START");
+			processAnimation(Constants.BACK, print_writers, "anim_FullFrames$In_Out$ColourBase", "START");
+			processAnimation(Constants.BACK, print_writers, "anim_FullFrames$In_Out$VerticalText", "START");
+			processAnimation(Constants.BACK, print_writers, "anim_FullFrames$In_Out$Logo", "START");
+			processAnimation(Constants.BACK, print_writers, "anim_FullFrames$In_Out$Header", "START");
+			processAnimation(Constants.BACK, print_writers, "anim_FullFrames$In_Out$SubHeader", "START");
+			processAnimation(Constants.BACK, print_writers, "anim_FullFrames$In_Out$Footer", "START");
+			processAnimation(Constants.BACK, print_writers, "anim_FullFrames$In_Out$Wipe", "START");
 			switch(whatToProcess.split(",")[0]) {
 			case "F1":
-				processAnimation(Constants.BACK, print_writers, "FullFramers$Main$BattingCard", "START");
+				processAnimation(Constants.BACK, print_writers, "anim_FullFrames$In_Out$Main$BattingCard", "START");
 				break;
 			case "Control_Shift_F1":
 				processAnimation(Constants.BACK, print_writers, "FullFramers$Main$BestInning", "START");
@@ -8141,8 +8157,6 @@ public class Animation
 				processAnimation(Constants.BACK, print_writers, "FullFramers$Main$ImageBatting", "START");
 				break;
 			}
-			processAnimation(Constants.BACK, print_writers, "BackVeil$Director", "START");
-			processAnimation(Constants.BACK, print_writers, "BackVeil$Loop", "START");
 			processAnimation(Constants.BACK, print_writers, "Loop", "START");
 			this.whichGraphicOnScreen = whatToProcess;
 			break;
@@ -8319,14 +8333,23 @@ public class Animation
 			
 		case "m": case "Control_m":
 			if(audioenabled.equalsIgnoreCase("TRUE")) {
-				processAnimation(Constants.BACK, print_writers, "sfx_FF_Out", "START");
+				processAnimation(Constants.BACK, print_writers, "AUDIO$sfx_FF_Out", "START");
 			}
-			processAnimation(Constants.BACK, print_writers, "FF_MatchIdent", "CONTINUE");
+			processAnimation(Constants.BACK, print_writers, "anim_Ident$In_Out", "CONTINUE");
 			TimeUnit.MILLISECONDS.sleep(1000);
 			T20_MumbaiAnimateIn("ArrowUp,", print_writers, config); // Push infobar
 			this.whichGraphicOnScreen = "";
 			TimeUnit.MILLISECONDS.sleep(1000);
-			processAnimation(Constants.BACK, print_writers, "FF_MatchIdent", "SHOW 0.0");
+			processAnimation(Constants.BACK, print_writers, "anim_Ident", "SHOW 0.0");
+			break;
+			
+		case "Control_d": case "Control_e": case "Shift_P": case "Shift_Q":
+			processAnimation(Constants.BACK, print_writers, "anim_Profile$In_Out$Out", "SHOW 2.520");
+			processAnimation(Constants.BACK, print_writers, "anim_Profile$In_Out$Out", "CONTINUE");
+			TimeUnit.MILLISECONDS.sleep(1000);
+			T20_MumbaiAnimateIn(Constants.SHRUNK_INFOBAR, print_writers, config); // Push infobar
+			processAnimation(Constants.BACK, print_writers, "anim_Profile", "SHOW 0.0");
+			this.whichGraphicOnScreen = "";
 			break;
 			
 		case "z": case "x": case "c": case "v": case "Control_z": case "Control_x":
@@ -8344,11 +8367,11 @@ public class Animation
 		case "F1": case "Control_Shift_F1": case "F2": case "Control_F11": case "F4": case "Shift_K": case "Shift_T": case "Control_F7":
 		case "Shift_F10": case "Shift_F11": case "p": case "Alt_Shift_J": case "Control_F1":
 			if(audioenabled.equalsIgnoreCase("TRUE")) {
-				processAnimation(Constants.BACK, print_writers, "sfx_FF_Out", "START");
+				processAnimation(Constants.BACK, print_writers, "AUDIO$sfx_FF_Out", "START");
 			}
 			switch(whatToProcess.split(",")[0]) {
 			case "F1":
-				processAnimation(Constants.BACK, print_writers, "FullFramers$Main$BattingCard", "CONTINUE");
+				processAnimation(Constants.BACK, print_writers, "anim_FullFrames$In_Out$Main$BattingCard", "CONTINUE");
 				break;
 			case "Control_Shift_F1":
 				processAnimation(Constants.BACK, print_writers, "FullFramers$Main$BestInning", "CONTINUE");
@@ -8385,14 +8408,19 @@ public class Animation
 				processAnimation(Constants.BACK, print_writers, "FullFramers$Main$ImageBatting", "CONTINUE");
 				break;
 			}
-			processAnimation(Constants.BACK, print_writers, "BackVeil$Director", "CONTINUE");
-			processAnimation(Constants.BACK, print_writers, "FullFramers$Inout", "CONTINUE");
-			processAnimation(Constants.BACK, print_writers, "FullFramers$Header", "CONTINUE");
+			processAnimation(Constants.BACK, print_writers, "anim_FullFrames$In_Out$Essentials", "CONTINUE");
+			processAnimation(Constants.BACK, print_writers, "anim_FullFrames$In_Out$Elemnets", "CONTINUE");
+			processAnimation(Constants.BACK, print_writers, "anim_FullFrames$In_Out$ColourBase", "CONTINUE");
+			processAnimation(Constants.BACK, print_writers, "anim_FullFrames$In_Out$VerticalText", "CONTINUE");
+			processAnimation(Constants.BACK, print_writers, "anim_FullFrames$In_Out$Logo", "CONTINUE");
+			processAnimation(Constants.BACK, print_writers, "anim_FullFrames$In_Out$Header", "CONTINUE");
+			processAnimation(Constants.BACK, print_writers, "anim_FullFrames$In_Out$SubHeader", "CONTINUE");
+			processAnimation(Constants.BACK, print_writers, "anim_FullFrames$In_Out$Footer", "CONTINUE");
+			processAnimation(Constants.BACK, print_writers, "anim_FullFrames$In_Out$Wipe", "CONTINUE");
 			this.whichGraphicOnScreen = "";
 			TimeUnit.MILLISECONDS.sleep(1000);
 			T20_MumbaiAnimateIn("ArrowUp,", print_writers, config); // Push infobar
-			processAnimation(Constants.BACK, print_writers, "FullFramers", "SHOW 0.0");
-			processAnimation(Constants.BACK, print_writers, "PulseAnim", "SHOW 0.0");
+			processAnimation(Constants.BACK, print_writers, "anim_FullFrames", "SHOW 0.0");
 			break;
 		}
 		return CricketUtil.YES;
@@ -8561,12 +8589,15 @@ public class Animation
 			processAnimation(Constants.FRONT, print_writers, "Change_Section1", "SHOW 0.0");
 			break;
 		case "Alt_5":
+			TimeUnit.MILLISECONDS.sleep(500);
 			processAnimation(Constants.FRONT, print_writers, "anim_Infobar$Change_Section4", "SHOW 0.0");
 			break;
 		case "Alt_3": case "Alt_4": case "Alt_6":
+			TimeUnit.MILLISECONDS.sleep(500);
 			processAnimation(Constants.FRONT, print_writers, "anim_Infobar$Analytics$Change", "SHOW 0.0");
 			break;
 		case "Alt_8":
+			TimeUnit.MILLISECONDS.sleep(500);
 			processAnimation(Constants.FRONT, print_writers, "anim_Infobar$Change_Section3", "SHOW 0.0");
 			break;
 			
@@ -11403,6 +11434,13 @@ public class Animation
 				processAnimation(Constants.FRONT, print_writers, "anim_Infobar", "SHOW 0.0");
 				processAnimation(Constants.FRONT, print_writers, "Loop", "SHOW 0.0");
 				
+				processAnimation(Constants.BACK, print_writers, "Loop", "SHOW 0.0");
+				processAnimation(Constants.BACK, print_writers, "AUDIO", "SHOW 0.0");
+				processAnimation(Constants.BACK, print_writers, "anim_Ident", "SHOW 0.0");
+				processAnimation(Constants.BACK, print_writers, "anim_Profile", "SHOW 0.0");
+				processAnimation(Constants.BACK, print_writers, "anim_FullFrames", "SHOW 0.0");
+				processAnimation(Constants.BACK, print_writers, "Change_Fullframes", "SHOW 0.0");
+				
 				this.infobar.setInfobar_on_screen(false);
 				this.infobar.setFull_section(null);
 				this.infobar.setRight_full_section(null);
@@ -12183,19 +12221,24 @@ public class Animation
 				if(whichside == 1) {
 					switch(whatToProcess.split(",")[0]) {
 					case "m": case "Control_m":
-						previewCommand = "FF_MatchIdent 2.080";
+						previewCommand = "anim_Ident$In_Out$In 2.500";
 						break;
+					case "Control_d": case "Control_e": case "Shift_P": case "Shift_Q":
+						previewCommand = "anim_Profile$In_Out$In 2.500";
+						break;
+					
 					case "z": case "x": case "c": case "v": case "Control_z": case "Control_x":
 						previewCommand = "InfoBar$Push 0.400 FF_Leaderboard$FullFramers$Inout 2.460 FF_Leaderboard$FullFramers$Inout$In 2.460";
 						break;
 						
-					case "F1": case "Control_Shift_F1": case "F2": case "Control_F11": case "F4": case "Shift_K": case "Control_F7":
-					case "Shift_T": case "Shift_F10": case "Shift_F11": case "p": case "Alt_Shift_J": case "Control_F1":
-						previewCommand = "InfoBar$Push 0.400 FullFramers$Inout 2.460 FullFramers$Header 0.540 FullFramers$Header$In 0.540 "
-								+ "BackVeil$Director 1.000 ";
+					case "F1": case "Control_Shift_F1": case "F2": case "Control_F11": case "F4": case "Shift_K": case "Control_F7": case "Shift_T": case "Shift_F10": 
+					case "Shift_F11": case "p": case "Alt_Shift_J": case "Control_F1":
+						previewCommand = "anim_Infobar$Push 0.500 anim_FullFrames$In_Out$Essentials$In 2.300 anim_FullFrames$In_Out$Elemnets$In 2.500 anim_FullFrames$In_Out$ColourBase$In 2.400 "
+								+ "anim_FullFrames$In_Out$VerticalText$In 2.200 anim_FullFrames$In_Out$Logo$In 2.000 anim_FullFrames$In_Out$Header$In 2.300 anim_FullFrames$In_Out$SubHeader$In 2.500 "
+								+ "anim_FullFrames$In_Out$Footer$In 2.140 ";
 						switch(whatToProcess.split(",")[0]) {
 						case "F1":
-							previewCommand = previewCommand + "FullFramers$Main$BattingCard 1.480 FullFramers$Main$BattingCard$In 0.800";
+							previewCommand = previewCommand + "anim_FullFrames$In_Out$Main$BattingCard$In 2.180";
 							break;
 						case "Control_Shift_F1":
 							previewCommand = previewCommand + "FullFramers$Main$BestInning 1.480 FullFramers$Main$BestInning$In 1.440";
@@ -12324,7 +12367,7 @@ public class Animation
 						}
 					}
 				}
-				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER PREVIEW SCENE*/T20/Scenes/FF_FullFrames " + "C:/Temp/Preview.tga " + previewCommand + "\0", print_writer);
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER PREVIEW SCENE*/Default/gfx_Fullframes " + "C:/Temp/Preview.tga " + previewCommand + "\0", print_writer);
 				break;
 			case Constants.LEGENDS:
 				if(whichside == 1) {

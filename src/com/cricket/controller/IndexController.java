@@ -1008,7 +1008,7 @@ public class IndexController
 							            this_animation.AnimateIn(valueToProcess,print_writers,session_configuration);
 							        } else {
 							            this_animation.ChangeOn(valueToProcess,print_writers,session_configuration);
-							            TimeUnit.MILLISECONDS.sleep(1000);
+							            TimeUnit.MILLISECONDS.sleep(700);
 							            this_caption.whichSide = 1;
 							            this_caption.PopulateGraphics(valueToProcess,session_match);
 							            this_animation.CutBack(valueToProcess,print_writers,session_configuration);
@@ -1019,7 +1019,7 @@ public class IndexController
 							    break;
 							case "Alt_2": case "Alt_7":
 								this_animation.ChangeOn(valueToProcess, print_writers, session_configuration);
-								TimeUnit.MILLISECONDS.sleep(1000);
+								TimeUnit.MILLISECONDS.sleep(600);
 								this_caption.whichSide = 1;
 								this_caption.PopulateGraphics(valueToProcess, session_match);
 								this_animation.CutBack(valueToProcess, print_writers, session_configuration);
@@ -1048,17 +1048,15 @@ public class IndexController
 					
 					if(session_configuration.getWhichInfobar().equalsIgnoreCase("LOF_INFOBAR")) {
 						this_animation.Lof_ISPL_ChangeOn(valueToProcess, print_writers, session_configuration);
-						TimeUnit.MILLISECONDS.sleep(2500);
+						TimeUnit.MILLISECONDS.sleep(1000);
 						this_caption.whichSide = 1;
 						this_caption.PopulateGraphics(valueToProcess, session_match);
-						TimeUnit.MILLISECONDS.sleep(2000);
 						this_animation.Lof_ISPL_CutBack(valueToProcess, print_writers, session_configuration);
 					}else {
 						this_animation.ChangeOn(valueToProcess, print_writers, session_configuration);
-						TimeUnit.MILLISECONDS.sleep(2500);
+						TimeUnit.MILLISECONDS.sleep(1000);
 						this_caption.whichSide = 1;
 						this_caption.PopulateGraphics(valueToProcess, session_match);
-						TimeUnit.MILLISECONDS.sleep(2000);
 						this_animation.CutBack(valueToProcess, print_writers, session_configuration);
 					}
 				}
@@ -1190,7 +1188,7 @@ public class IndexController
 		case "Shift_M":
 			return (List<T>) cricketService.getLeaderBoards();
 		case "Control_m": case "Shift_F11": case "Control_Shift_L": case "Control_9":
-			return (List<T>) CricketFunctions.processAllFixtures(cricketService);
+			return (List<T>) CricketFunctions.processAllFixtures(session_fixture, session_team);
 		case "Alt_9":
 			return (List<T>) session_infoBarStats;
 		case "Alt_0":
@@ -1585,6 +1583,7 @@ public class IndexController
 	                this_scene.LoadScene("OVERLAYS", print_writers, session_configuration);
 	                this_animation.ResetAnimation("CLEAR-ALL",print_writers,session_configuration);
 	                this_caption.this_infobarGfx.TournamentColor(print_writers, session_configuration);
+	                this_caption.this_fullFramesGfx.FFTournamentColor(print_writers, session_configuration);
 	            }
 	            break;
 

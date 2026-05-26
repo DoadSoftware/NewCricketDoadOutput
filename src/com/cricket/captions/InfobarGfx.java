@@ -13013,6 +13013,14 @@ public class InfobarGfx
 				for(int i=fixture1.size()-1;i>=0;i--) {
 					rowId = rowId - 1;
 					if(rowId<=3) {
+						if(fixture1.get(i).getHometeamid() == team_id) {
+							CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_Infobar$All$Normal$Analytics$Side"+ WhichSide + "$TeamLast3$ResultGrp$"
+									+ rowId + "$txt_TeamName*GEOM*TEXT SET v " + fixture1.get(i).getAway_Team().getTeamBadge() + "\0", print_writers);
+						}else {
+							CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_Infobar$All$Normal$Analytics$Side"+ WhichSide + "$TeamLast3$ResultGrp$"
+									+ rowId + "$txt_TeamName*GEOM*TEXT SET v " + fixture1.get(i).getHome_Team().getTeamBadge() + "\0", print_writers);
+						}
+
 						if(!fixture1.get(i).getWinnerteam().equalsIgnoreCase("NR")) {
 							if(fixture1.get(i).getHometeamid() == team_id && fixture1.get(i).getHome_Team().getTeamName1().equalsIgnoreCase(fixture1.get(i).getWinnerteam())) {
 								CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_Infobar$All$Normal$Analytics$Side"+ WhichSide + "$TeamLast3$ResultGrp$" 
@@ -13061,6 +13069,9 @@ public class InfobarGfx
 						+ this_data_str.get(2) + "/OVER" + "\0", print_writers);
 				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_Infobar$All$Normal$Analytics$Side"+ WhichSide + "$Projected$RPO$txt_Stat_3*GEOM*TEXT SET " 
 						+ this_data_str.get(4) + "/OVER" + "\0", print_writers);
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_Infobar$All$Normal$Analytics$Side"+ WhichSide + "$Projected$RPO$txt_Stat_4*GEOM*TEXT SET " 
+						+ this_data_str.get(6) + "/OVER" + "\0", print_writers);
+				
 				
 				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_Infobar$All$Normal$Analytics$Side"+ WhichSide + "$Projected$Score$1$txt_Stat*GEOM*TEXT SET " 
 						+ this_data_str.get(1) + "\0", print_writers);
@@ -13068,6 +13079,8 @@ public class InfobarGfx
 						+ this_data_str.get(3) + "\0", print_writers);
 				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_Infobar$All$Normal$Analytics$Side"+ WhichSide + "$Projected$Score$3$txt_Stat*GEOM*TEXT SET " 
 						+ this_data_str.get(5) + "\0", print_writers);
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_Infobar$All$Normal$Analytics$Side"+ WhichSide + "$Projected$Score$4$txt_Stat*GEOM*TEXT SET " 
+						+ this_data_str.get(7) + "\0", print_writers);
 				
 				break;
 			case "PHASE_WISE_SCORE": case "PHASE_WISE_RUNRATE":

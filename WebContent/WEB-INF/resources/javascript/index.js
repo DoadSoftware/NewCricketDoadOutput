@@ -6489,7 +6489,6 @@ function addItemsToList(whatToProcess,dataToProcess)
 				case 'Shift_P':
 				switch($('#selected_broadcaster').val().toUpperCase()){
 					case 'ICC-U19-2023': case 'NPL': case 'LEGENDS-90':  case 'MPL': case 'APL':
-						
 					select = document.createElement('select');
 					select.id = 'selectStatType';
 					select.name = select.id;
@@ -6553,34 +6552,33 @@ function addItemsToList(whatToProcess,dataToProcess)
 							select.appendChild(option);
 							break;
 					}
-					select.setAttribute('onchange',"setDropdownOptionToSelectOptionArray(this, 2)");
+					select.setAttribute('onchange',"setDropdownOptionToSelectOptionArray(this, 1)");
 					row.insertCell(cellCount).appendChild(select);
-					setDropdownOptionToSelectOptionArray($(select),2);
+					setDropdownOptionToSelectOptionArray($(select),1);
 					cellCount = cellCount + 1
-					
-					switch($('#selected_broadcaster').val().toUpperCase()){
-						case 'NPL': case 'LEGENDS-90':  case 'MPL': case 'APL':
-							select = document.createElement('select');
-							select.id = 'selectType';
-							select.name = select.id;
-							
-							option = document.createElement('option');
-							option.value = 'WITH_CURRENT';
-							option.text = 'With Current Match';
-							select.appendChild(option);
-							
-							option = document.createElement('option');
-							option.value = 'WITHOUT_CURRENT';
-							option.text = 'Without Current Match';
-							select.appendChild(option);
-							
-							select.setAttribute('onchange',"setDropdownOptionToSelectOptionArray(this, 3)");
-							row.insertCell(cellCount).appendChild(select);
-							setDropdownOptionToSelectOptionArray($(select),3);
-							cellCount = cellCount + 1;
-							break;
-					}
-				break;
+					break;
+				}
+				switch($('#selected_broadcaster').val().toUpperCase()){
+					case 'NPL': case 'LEGENDS-90':  case 'MPL': case 'APL': case 'T20_MUMBAI':
+						select = document.createElement('select');
+						select.id = 'selectType';
+						select.name = select.id;
+						
+						option = document.createElement('option');
+						option.value = 'WITH_CURRENT';
+						option.text = 'With Current Match';
+						select.appendChild(option);
+						
+						option = document.createElement('option');
+						option.value = 'WITHOUT_CURRENT';
+						option.text = 'Without Current Match';
+						select.appendChild(option);
+						
+						select.setAttribute('onchange',"setDropdownOptionToSelectOptionArray(this, 2)");
+						row.insertCell(cellCount).appendChild(select);
+						setDropdownOptionToSelectOptionArray($(select),2);
+						cellCount = cellCount + 1;
+						break;
 				}
 				break;
 			}
@@ -7667,35 +7665,34 @@ function addItemsToList(whatToProcess,dataToProcess)
 						break;
 					}
 					
-					
-					select.setAttribute('onchange',"setDropdownOptionToSelectOptionArray(this, 2)");
+					select.setAttribute('onchange',"setDropdownOptionToSelectOptionArray(this, 1)");
 					row.insertCell(cellCount).appendChild(select);
-					setDropdownOptionToSelectOptionArray($(select),2);
+					setDropdownOptionToSelectOptionArray($(select),1);
 					cellCount = cellCount + 1
-					
-					switch($('#selected_broadcaster').val().toUpperCase()){
-						case 'NPL': case 'LEGENDS-90':  case 'MPL': case 'APL':
-							select = document.createElement('select');
-							select.id = 'selectType';
-							select.name = select.id;
-							
-							option = document.createElement('option');
-							option.value = 'WITH_CURRENT';
-							option.text = 'With Current Match';
-							select.appendChild(option);
-							
-							option = document.createElement('option');
-							option.value = 'WITHOUT_CURRENT';
-							option.text = 'Without Current Match';
-							select.appendChild(option);
-							
-							select.setAttribute('onchange',"setDropdownOptionToSelectOptionArray(this, 3)");
-							row.insertCell(cellCount).appendChild(select);
-							setDropdownOptionToSelectOptionArray($(select),3);
-							cellCount = cellCount + 1;
-							break;
-					}
 					break;
+				}
+				
+				switch($('#selected_broadcaster').val().toUpperCase()){
+					case 'NPL': case 'LEGENDS-90':  case 'MPL': case 'APL': case 'T20_MUMBAI':
+						select = document.createElement('select');
+						select.id = 'selectType';
+						select.name = select.id;
+						
+						option = document.createElement('option');
+						option.value = 'WITH_CURRENT';
+						option.text = 'With Current Match';
+						select.appendChild(option);
+						
+						option = document.createElement('option');
+						option.value = 'WITHOUT_CURRENT';
+						option.text = 'Without Current Match';
+						select.appendChild(option);
+						
+						select.setAttribute('onchange',"setDropdownOptionToSelectOptionArray(this, 2)");
+						row.insertCell(cellCount).appendChild(select);
+						setDropdownOptionToSelectOptionArray($(select),2);
+						cellCount = cellCount + 1;
+						break;
 				}
 			}
 			
@@ -8782,11 +8779,10 @@ function addItemsToList(whatToProcess,dataToProcess)
 			
 			switch($('#selected_broadcaster').val().toUpperCase()){
 				case 'T20_MUMBAI':
-					[ { value: 'THIS_SERIES', text: 'THIS SERIES' },
-					  {value: 'MCA T20s', text: 'MCA T20 24-25' },
+					[ { value: 'T20 MUMBAI', text: 'T20 MUMBAI' },
 					  { value: 'DT20', text: 'T20' },
-					  { value: 'IPL', text: 'IPL' },
-					  { value: 'IPL 2025', text: 'IPL 2025' }
+					  { value: 'IT20', text: 'T20I' },
+					  { value: 'IPL', text: 'IPL' }
 					].forEach(({ value, text }) => {
 						  option = document.createElement('option');
 						  option.value = value;

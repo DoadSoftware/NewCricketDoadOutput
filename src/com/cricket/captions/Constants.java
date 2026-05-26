@@ -118,7 +118,7 @@ public class Constants
 
 	public final static String T20_MUMBAI = "T20_MUMBAI";
 	
-	public final static String T20_MUMBAI_3D_Logos = "IMAGE*/Default/Assets/3D_Logos/";
+	public final static String T20_MUMBAI_3D_Logos = "GEOM*/Default/Assets/3D_Logos/";
 	public final static String T20_MUMBAI_Base1 = "IMAGE*/Default/Assets/Base1/";
 	public final static String T20_MUMBAI_Base2 = "IMAGE*/Default/Assets/Base2/";
 	public final static String T20_MUMBAI_Infobar_Base = "IMAGE*/Default/Assets/Infobar_Base/";
