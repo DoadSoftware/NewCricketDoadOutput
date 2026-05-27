@@ -428,7 +428,7 @@ function processUserSelectionData(whatToProcess,dataToProcess)
 			case 'Control_p': case 'Alt_F7':
 				switch($('#selected_broadcaster').val().toUpperCase()){
 				case 'ISPL': case 'BENGAL-T20': case 'NPL': case 'LEGENDS-90':  case 'MPL': case 'T20_MUMBAI': 
-				case 'APL':
+				case 'APL': case 'VIDARBHA':
 					dataToProcess = dataToProcess + ',' + document.getElementById('which_inning').value;
 					processCricketProcedures("POPULATE-GRAPHICS", dataToProcess);
 					break;
@@ -439,7 +439,7 @@ function processUserSelectionData(whatToProcess,dataToProcess)
 				break;
 			case 'Control_h':
 				switch($('#selected_broadcaster').val().toUpperCase()){
-				case 'NPL': case 'LEGENDS-90':  case 'MPL': case 'T20_MUMBAI': case 'BENGAL-T20': case 'APL':
+				case 'NPL': case 'LEGENDS-90':  case 'MPL': case 'T20_MUMBAI': case 'BENGAL-T20': case 'APL': case 'VIDARBHA':
 					dataToProcess = dataToProcess + ',' + document.getElementById('which_inning').value
 					processCricketProcedures("POPULATE-GRAPHICS", dataToProcess);
 					break;
@@ -450,14 +450,14 @@ function processUserSelectionData(whatToProcess,dataToProcess)
 				break;
 			case 'F7':
 				switch($('#selected_broadcaster').val().toUpperCase()){
-					case 'BENGAL-T20': case 'NPL': case 'ISPL': case 'LEGENDS-90':  case 'MPL': case 'T20_MUMBAI': case 'APL':
+					case 'BENGAL-T20': case 'NPL': case 'ISPL': case 'LEGENDS-90':  case 'MPL': case 'T20_MUMBAI': case 'APL': case 'VIDARBHA':
 					addItemsToList(dataToProcess,null); 
 					break;
 				}
 			break;		
 			case 'F11':
 				switch($('#selected_broadcaster').val().toUpperCase()){
-					case 'BENGAL-T20': case 'NPL': case 'ISPL': case 'LEGENDS-90':  case 'MPL': case 'T20_MUMBAI': case 'APL':
+					case 'BENGAL-T20': case 'NPL': case 'ISPL': case 'LEGENDS-90':  case 'MPL': case 'T20_MUMBAI': case 'APL': case 'VIDARBHA':
 					addItemsToList(dataToProcess,null); 
 					break;
 				}
@@ -3325,6 +3325,11 @@ function addItemsToList(whatToProcess,dataToProcess)
 				select.appendChild(option);
 				
 				option = document.createElement('option');
+				option.value = 'AT_THIS_STAGE';
+				option.text = 'At This Stage';
+				select.appendChild(option);
+				
+				option = document.createElement('option');
 				option.value = 'EXTRAS';
 				option.text = 'Extras';
 				select.appendChild(option);
@@ -3774,15 +3779,6 @@ function addItemsToList(whatToProcess,dataToProcess)
 							option.text = 'Required Rate';
 							select.appendChild(option);
 							
-							option = document.createElement('option');
-							option.value = 'TARGET';
-							option.text = 'Target';
-							select.appendChild(option);
-							
-							option = document.createElement('option');
-							option.value = 'EQUATION';
-							option.text = 'Equation';
-							select.appendChild(option);
 						}
 					}
 				});
@@ -7794,7 +7790,8 @@ function addItemsToList(whatToProcess,dataToProcess)
 						setDropdownOptionToSelectOptionArray($(select),1);
 						cellCount = cellCount + 1;
 					    break;
-					case 'ICC-U19-2023': case 'BENGAL-T20': case 'NPL':  case 'MPL': case 'APL':
+							
+					case 'ICC-U19-2023': case 'BENGAL-T20': case 'NPL':  case 'MPL': case 'APL': 
 						select = document.createElement('select');
 						select.id = 'selectpreSummary';
 						select.name = select.id;
@@ -8841,7 +8838,7 @@ function addItemsToList(whatToProcess,dataToProcess)
 						  select.appendChild(option);
 					});
 					break;
-				case 'NPL': case 'MPL': case 'APL':			
+				case 'NPL': case 'MPL': case 'APL':	case 'VIDARBHA':		
 					if($('#selected_broadcaster').val().toUpperCase()=='MPL'){
 						option = document.createElement('option');
 						option.value = 'MPL';
@@ -8862,7 +8859,17 @@ function addItemsToList(whatToProcess,dataToProcess)
 						option.value = 'APL_CAREER';
 						option.text = 'APL CAREER';
 						select.appendChild(option);
-					}
+	                }else if($('#selected_broadcaster').val().toUpperCase()=='VIDARBHA'){
+							option = document.createElement('option');
+							option.value = 'VIDARBHA_CAREER';
+							option.text = 'VIDARBHA CAREER';
+							select.appendChild(option);
+							
+							option = document.createElement('option');
+							option.value = 'IPL';
+							option.text = 'IPL';
+							select.appendChild(option);
+						}
 					
 					option = document.createElement('option');
 					option.value = 'DT20';
@@ -9668,7 +9675,7 @@ function addItemsToList(whatToProcess,dataToProcess)
 						  select.appendChild(option);
 					});
 					break;
-				case 'NPL': case 'MPL': case 'APL':
+				case 'NPL': case 'MPL': case 'APL': case 'VIDARBHA':
 					if($('#selected_broadcaster').val().toUpperCase()=='MPL'){
 						option = document.createElement('option');
 						option.value = 'KCL';
@@ -9689,6 +9696,16 @@ function addItemsToList(whatToProcess,dataToProcess)
 						option = document.createElement('option');
 						option.value = 'APL_CAREER';
 						option.text = 'APL CAREER';
+						select.appendChild(option);
+					}else if($('#selected_broadcaster').val().toUpperCase()=='VIDARBHA'){
+						option = document.createElement('option');
+						option.value = 'VIDARBHA_CAREER';
+						option.text = 'VIDARBHA CAREER';
+						select.appendChild(option);
+						
+						option = document.createElement('option');
+						option.value = 'IPL';
+						option.text = 'IPL';
 						select.appendChild(option);
 					}
 					

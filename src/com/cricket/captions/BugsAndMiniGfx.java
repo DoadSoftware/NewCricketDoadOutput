@@ -1227,13 +1227,13 @@ public class BugsAndMiniGfx
 	                    + "$img_Logo*TEXTURE*IMAGE SET " + Constants.VIDARBHA_LOGO_PATH + awaycolor + "\0", print_writers);
 
 	            CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Bugs_All$MainTxt_Grp$Side" + WhichSide
-	                    + "$txt_Name*GEOM*TEXT SET " + inning.getBatting_team().getTeamName1() + "\0", print_writers);
+	                    + "$txt_Name*GEOM*TEXT SET " + inning.getBatting_team().getTeamName1() + ": " + "\0", print_writers);
 	            if (inning.getTotalWickets() >= 10) {
 	                CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Bugs_All$MainTxt_Grp$Side" + WhichSide
 	                        + "$txt_Runs*GEOM*TEXT SET " + inning.getTotalRuns() + "\0", print_writers);
 	            } else {
 	                CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Bugs_All$MainTxt_Grp$Side" + WhichSide
-	                        + "$txt_Runs*GEOM*TEXT SET " + inning.getTotalRuns() + " - " + inning.getTotalWickets() + "\0", print_writers);
+	                        + "$txt_Runs*GEOM*TEXT SET " + inning.getTotalRuns() + "-" + inning.getTotalWickets() + "\0", print_writers);
 	            }
 
 	            CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Bugs_All$MainTxt_Grp$Side" + WhichSide
@@ -1561,7 +1561,7 @@ public class BugsAndMiniGfx
 	                    + "$img_Logo*TEXTURE*IMAGE SET " + Constants.VIDARBHA_LOGO_PATH + homecolor + "\0", print_writers);
 
 	            CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Bugs_All$MainTxt_Grp$Side" + WhichSide
-	                    + "$txt_Name*GEOM*TEXT SET " + "CURRENT PARTNERSHIP" + "\0", print_writers);
+	                    + "$txt_Name*GEOM*TEXT SET " + "CURRENT PARTNERSHIP: " + "\0", print_writers);
 	            CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Bugs_All$MainTxt_Grp$Side" + WhichSide
 	                    + "$txt_Runs*GEOM*TEXT SET " + partnership.getTotalRuns() + "*" + "\0", print_writers);
 	            CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Bugs_All$MainTxt_Grp$Side" + WhichSide
@@ -5665,8 +5665,8 @@ public class BugsAndMiniGfx
 	            for (int i = 0; i <= leagueTable.getLeagueTeams().size() - 1; i++) {
 	                rowId = rowId + 1;
 
-	                if (matchAllData.getSetup().getHomeTeam().getTeamName4().equalsIgnoreCase(leagueTable.getLeagueTeams().get(i).getTeamName())
-	                        || matchAllData.getSetup().getAwayTeam().getTeamName4().equalsIgnoreCase(leagueTable.getLeagueTeams().get(i).getTeamName())) {
+	                if (matchAllData.getSetup().getHomeTeam().getTeamBadge().equalsIgnoreCase(leagueTable.getLeagueTeams().get(i).getTeamName())
+	                        || matchAllData.getSetup().getAwayTeam().getTeamBadge().equalsIgnoreCase(leagueTable.getLeagueTeams().get(i).getTeamName())) {
 
 	                    CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$MiniPointsTable$AllDataGrp$DataGrp"
 	                            + "$Row" + rowId + "$Select_Row_Type*FUNCTION*Omo*vis_con SET 3 \0", print_writers);
@@ -5677,6 +5677,17 @@ public class BugsAndMiniGfx
 	                            + "$Row" + rowId + "$Select_Row_Type*FUNCTION*Omo*vis_con SET 2 \0", print_writers);
 	                    containerName = "$Dehighlight";
 	                }
+	                
+	                CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$MiniPointsTable$AllDataGrp"
+	                		+ "$Header$LooBase$img2*TEXTURE*IMAGE SET " + Constants.VIDARBHA_BASE1
+		                    + "TLogo" + " \0", print_writers);
+	                
+	                CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$MiniPointsTable$AllDataGrp"
+	                		+ "$Header$TeamNameGrp$img_Flag*TEXTURE*IMAGE SET " + Constants.VIDARBHA_LOGO_PATH
+		                    + "TLogo" + " \0", print_writers);
+	                CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$MiniPointsTable$AllDataGrp"
+	                		+ "$Header$headerBnd$img1*TEXTURE*IMAGE SET " + Constants.VIDARBHA_BASE2
+		                    + "TLogo" + " \0", print_writers);
 
 	                if (leagueTable.getLeagueTeams().get(i).getQualifiedStatus().trim().equalsIgnoreCase("")) {
 	                    CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$MiniPointsTable$AllDataGrp$DataGrp"
@@ -5685,10 +5696,25 @@ public class BugsAndMiniGfx
 	                    CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$MiniPointsTable$AllDataGrp$DataGrp"
 	                            + "$Row" + rowId + "$Select_Row_Type" + containerName + "$fig_Rank*GEOM*TEXT SET Q \0", print_writers);
 	                }
-
+	                
 	                CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$MiniPointsTable$AllDataGrp$DataGrp"
-	                        + "$Row" + rowId + "$Select_Row_Type" + containerName + "$txt_Name*GEOM*TEXT SET "
-	                        + leagueTable.getLeagueTeams().get(i).getTeamName() + " \0", print_writers);
+	                        + "$Row" + rowId + "$Select_Row_Type" + containerName + "$Base$img2*TEXTURE*IMAGE SET "
+	                         + Constants.VIDARBHA_BASE2 + "TLogo" +  " \0", print_writers);
+	                CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$MiniPointsTable$AllDataGrp$DataGrp"
+	                        + "$Row" + rowId + "$Select_Row_Type" + containerName + "$Base$saperator$img_txt2*TEXTURE*IMAGE SET "
+	                         + Constants.VIDARBHA_TEXT2 + "TLogo" +  " \0", print_writers);
+	                
+	                
+	                
+	                for(Team tm:cricketService.getTeams()) {
+	                	if(tm.getTeamBadge().equalsIgnoreCase(leagueTable.getLeagueTeams().get(i).getTeamName())) {
+	                		CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$MiniPointsTable$AllDataGrp$DataGrp"
+	    	                        + "$Row" + rowId + "$Select_Row_Type" + containerName + "$txt_Name*GEOM*TEXT SET "
+	    	                        + tm.getTeamName3() + " \0", print_writers);
+	                	}
+	                	
+	                }
+	                
 
 	                CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$MiniPointsTable$AllDataGrp$DataGrp"
 	                        + "$Row" + rowId + "$Select_Row_Type" + containerName + "$fig_Play*GEOM*TEXT SET "

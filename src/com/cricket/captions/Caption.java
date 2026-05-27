@@ -813,7 +813,7 @@ public class Caption
 			case "Control_h"://powerplay Summary
 				switch (config.getBroadcaster().toUpperCase()) {
 				case Constants.NPL: case Constants.LEGENDS: case Constants.MPL: case Constants.T20_MUMBAI: case Constants.BENGAL_T20:
-				case Constants.APL:
+				case Constants.APL: case Constants.VIDARBHA:
 					status = this_lowerThirdGfx.populateL3PhaseWise(whatToProcess,whichSide,matchAllData);
 					break;
 

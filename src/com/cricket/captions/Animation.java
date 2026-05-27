@@ -168,7 +168,7 @@ public class Animation
 			case "Control_s": case "Alt_d": case "Control_f": case "Control_q": case "l": case "n": case "a": case "Control_F2":
 			case "Alt_a": case "Alt_s":case "Shift_E": case "Alt_q": case "Alt_F6": case "Shift_A": case "Shift_R": case "Shift_U":
 			case "Alt_w": case "Control_j": case "Alt_i": case "Alt_j": case "b": case "Control_i": case "Alt_Shift_L": case "Shift_B": 
-			case "Control_Shift_M": case "Control_Shift_L": case "Alt_Shift_O": 
+			case "Control_Shift_M": case "Control_Shift_L": case "Alt_Shift_O":  case "Alt_o":
 			case "Alt_Shift_D":case "Alt_Shift_E":case "Alt_Shift_F":case "Alt_Shift_G":case "Alt_Shift_H":
 			case "Control_u": case "Shift_G": case "Shift_W":case "Control_Shift_X": case "Control_6": case "Alt_Shift_F5": case "Alt_Shift_F3":
 				return Constants.LOWER_THIRD;	
@@ -2493,6 +2493,7 @@ public class Animation
 	}	
 	
 	private void T20_VidarbhaAnimateIn(String whatToProcess, List<PrintWriter> print_writers, Configuration config) throws InterruptedException, IOException {
+		System.out.println(whatToProcess.split(",")[0]);
 		switch (whatToProcess.split(",")[0]) {
 		case "Control_1":
 			processAnimation(Constants.FRONT, print_writers, "Anim_InfoBar$Bonus_In", "START");
@@ -6537,6 +6538,7 @@ public class Animation
 				this.whichGraphicOnScreen = whatToProcess;
 				break;
 			case "Alt_1": case "Alt_9": case "Alt_0":
+				TimeUnit.MILLISECONDS.sleep(500);
 				processAnimation(Constants.FRONT, print_writers, "Anim_InfoBar$Stage3_Change", "SHOW 0.0");
 				break;
 			case "Alt_2": case "Alt_3": case "Alt_4": case "Alt_5": case "Alt_6": 
@@ -12051,6 +12053,7 @@ public class Animation
 		}
 	}
 	
+	
 	public void Lof_ISPL_FullFramesPreview(String whatToProcess, List<PrintWriter> print_writer, int whichside, 
 			Configuration config,String whichGraphicOnScreen) 
 		{
@@ -12479,6 +12482,148 @@ public class Animation
 				}
 				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER PREVIEW SCENE*/Default/gfx_Fullframes " + "C:/Temp/Preview.tga " + previewCommand + "\0", print_writer);
 				break;
+			 case Constants.VIDARBHA:
+		            if(whichside == 1) {
+		                if(whatToProcess.contains(",")) {
+		                    switch(whatToProcess.split(",")[0]) {
+		                    case "F1": case "Control_Shift_A": case "F2": case "F4": case "Control_F11": case "Control_F7": case "Shift_F8":
+		                    case "Shift_K": case "Control_p": case "Shift_F11": case "z": case "x": case "c": case "v": case "Control_z": case "Control_x":
+		                    case "Control_c": case "Control_v": case "Shift_V": case "Control_F10":  case "Shift_T":
+		                        previewCommand = "Anim_Infobar$Push 0.500 Anim_FullFrames$In_Out$Essentials$In 2.140 Anim_FullFrames$In_Out$Header$In 2.100";
+		                        break;
+		                    case "m": case "Control_m":
+		                        previewCommand = "Anim_MatchId$In_Out$In 1.700";
+		                        break;
+		                    case "Shift_D":
+		                        previewCommand = "Anim_Target$In_Out$In 1.500";
+		                        break;
+		                    }
+		                    switch(whatToProcess.split(",")[0]) {
+		                    case "F1": case "Control_Shift_A":
+		                        previewCommand = previewCommand + " Anim_FullFrames$In_Out$Main$Batting_Card$In 2.200";
+		                        break;
+		                    case "F2":
+		                        previewCommand = previewCommand + " Anim_FullFrames$In_Out$Main$Bowling_Card$In 2.120";
+		                        break;
+		                    case "F4":
+		                        previewCommand = previewCommand + " Anim_FullFrames$In_Out$Main$Partnership_List$In 2.200";
+		                        break;
+		                    case "Control_F11": case "Shift_F11":
+		                        previewCommand = previewCommand + " Anim_FullFrames$In_Out$Main$Summary$In 1.880";
+		                        break;
+		                    case "Control_F7":
+		                        previewCommand = previewCommand + " Anim_FullFrames$In_Out$Main$Teams$In 2.220";
+		                        break;
+		                    case "Shift_T":
+		                        previewCommand = previewCommand + " Anim_FullFrames$In_Out$Main$Team_Single$In 2.240";
+		                        break;
+		                    case "Shift_F8":
+		                        previewCommand = previewCommand + " Anim_FullFrames$In_Out$Main$LineUp_Image$In 2.240";
+		                        break;
+		                    case "Shift_K":
+		                        previewCommand = previewCommand + " Anim_FullFrames$In_Out$Main$Partnership$In 2.200";
+		                        break;
+		                    case "Control_F10":
+		                        previewCommand = previewCommand + " Anim_FullFrames$In_Out$Main$Manhattan$In 2.220";
+		                        break;
+		                    case "Control_p":
+		                        previewCommand = previewCommand + " Anim_FullFrames$In_Out$Main$Standings$In 1.843";
+		                        break;
+		                    case "z": case "x": case "c": case "v": case "Control_c": case "Control_v": case "Control_z": case "Control_x":
+		                        previewCommand = previewCommand + " Anim_FullFrames$In_Out$Main$LeaderBoard$In 2.220";
+		                        previewCommand = previewCommand + " LeaderBoardHighlight$Side1$Player" + whatToProcess.split(",")[2].split("_")[0] + " 1.574";
+		                        break;
+		                    case "Shift_V":
+		                        previewCommand = previewCommand + " Anim_FullFrames$In_Out$Main$LeaderBoard$In 2.220";
+		                        break;
+		                    }
+		                }
+		            } else if(whichside == 2) {
+		                if(whatToProcess.contains(",")) {
+		                    switch(whatToProcess.split(",")[0]) {
+		                    case "F1": case "Control_Shift_A": case "F2": case "F4": case "Control_F11": case "Shift_T": case "Shift_F8": case "Shift_K":
+		                    case "Control_p": case "z": case "x": case "c": case "v": case "Control_z": case "Control_x":
+		                        previewCommand = previewCommand + "Change$Header 1.600 Change$Header$Change_In 1.600 Change$Header$Change_Out 0.420";
+		                        if(whichGraphicOnScreen.contains(",")) {
+		                            switch(whichGraphicOnScreen.split(",")[0]) {
+		                            case "F1": case "Control_Shift_A":
+		                                previewCommand = previewCommand + " Change$Batting_Card 1.900 Change$Batting_Card$Change_Out 0.860 Change$Batting_Card$Change_In 1.900";
+		                                break;
+		                            case "F2":
+		                                previewCommand = previewCommand + " Change$Bowling_Card 1.820 Change$Bowling_Card$Change_Out 0.760 Change$Bowling_Card$Change_In 1.820";
+		                                break;
+		                            case "F4":
+		                                previewCommand = previewCommand + " Change$Partnership_List 1.900 Change$Partnership_List$Change_Out 0.860 "
+		                                        + "Change$Partnership_List$Change_In 1.900";
+		                                break;
+		                            case "Control_F11":
+		                                previewCommand = previewCommand + " Change$Summary 1.580 Change$Summary$Change_Out 0.760 Change$Summary$Change_In 1.580";
+		                                break;
+		                            case "Shift_T":
+		                                previewCommand = previewCommand + " Change$Team_Single 1.940 Change$Team_Single$Change_Out 0.820 Change$Team_Single$Change_In 1.940";
+		                                break;
+		                            case "Shift_F8":
+		                                previewCommand = previewCommand + " Change$LineUp_Image 1.940 Change$LineUp_Image$Change_Out 0.820 Change$LineUp_Image$Change_In 1.940";
+		                                break;
+		                            case "Shift_K":
+		                                previewCommand = previewCommand + " Change$Partnership 1.900 Change$Partnership$Change_Out 0.860 "
+		                                        + "Change$Partnership$Change_In 1.900";
+		                                break;
+		                            case "Control_p":
+		                                previewCommand = previewCommand + " Change$Standings 1.543 Change$Standings$Change_Out 0.760 "
+		                                        + "Change$Standings$Change_In 1.543";
+		                                break;
+		                            case "z": case "x": case "c": case "v": case "Control_z": case "Control_x":
+		                                previewCommand = previewCommand + " Change$LeaderBoard 2.200 Change$LeaderBoard$Change_Out 0.760 "
+		                                        + "Change$LeaderBoard$Change_In 2.200";
+		                                previewCommand = previewCommand + " LeaderBoardHighlight$Side2$Player" + whatToProcess.split(",")[2].split("_")[0] + " 1.574";
+		                                break;
+		                            }
+		                        }
+		                        if(!whichGraphicOnScreen.split(",")[0].equalsIgnoreCase(whatToProcess.split(",")[0])) {
+		                            switch(whatToProcess.split(",")[0]) {
+		                            case "F1": case "Control_Shift_A": case "F2": case "F4": case "Control_F11": case "Shift_K": case "Control_p":
+		                            case "Shift_T": case "Shift_F8": case "z": case "x": case "c": case "v": case "Control_z": case "Control_x":
+		                                previewCommand = previewCommand + " Header_Shrink 0.000 Header_Shrink$In 0.000";
+		                                break;
+		                            }
+		                            switch(whatToProcess.split(",")[0]) {
+		                            case "F1": case "Control_Shift_A":
+		                                previewCommand = previewCommand + " Change$Batting_Card 1.900 Change$Batting_Card$Change_Out 0.860 Change$Batting_Card$Change_In 1.900";
+		                                break;
+		                            case "F2":
+		                                previewCommand = previewCommand + " Change$Bowling_Card 1.820 Change$Bowling_Card$Change_Out 0.760 Change$Bowling_Card$Change_In 1.820";
+		                                break;
+		                            case "F4":
+		                                previewCommand = previewCommand + " Change$Partnership_List 1.900 Change$Partnership_List$Change_Out 0.860 "
+		                                        + "Change$Partnership_List$Change_In 1.900";
+		                                break;
+		                            case "Control_F11":
+		                                previewCommand = previewCommand + " Change$Summary 1.580 Change$Summary$Change_Out 0.760 Change$Summary$Change_In 1.580";
+		                                break;
+		                            case "Shift_T":
+		                                previewCommand = previewCommand + " Change$Team_Single 1.940 Change$Team_Single$Change_Out 0.820 Change$Team_Single$Change_In 1.940";
+		                                break;
+		                            case "Shift_F8":
+		                                previewCommand = previewCommand + " Change$LineUp_Image 1.940 Change$LineUp_Image$Change_Out 0.820 Change$LineUp_Image$Change_In 1.940";
+		                                break;
+		                            case "Shift_K":
+		                                previewCommand = previewCommand + " Change$Partnership 1.900 Change$Partnership$Change_Out 0.860 "
+		                                        + "Change$Partnership$Change_In 1.900";
+		                                break;
+		                            case "Control_p":
+		                                previewCommand = previewCommand + " Change$Standings 1.543 Change$Standings$Change_Out 0.760 "
+		                                        + "Change$Standings$Change_In 1.543";
+		                                break;
+		                            }
+		                        }
+		                        break;
+		                    }
+		                }
+		            }
+		            CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER PREVIEW SCENE*/Default/FullFrames "
+		                    + "C:/Temp/Preview.tga " + previewCommand + " \0", print_writer);
+		            break;
 			case Constants.LEGENDS:
 				if(whichside == 1) {
 					switch(whatToProcess.split(",")[0]) {
@@ -14015,9 +14160,80 @@ public class Animation
 
 	public void processL3Preview(String whatToProcess, List<PrintWriter> print_writer, int whichside, Configuration config,MatchAllData match) throws InterruptedException
 	{
+		System.out.println("coming here for preivew");
 		if(config.getPreview().equalsIgnoreCase("WITH_PREVIEW")) {
 			String previewCommands = "";
 			switch (config.getBroadcaster().toUpperCase()) {
+			case Constants.VIDARBHA:
+				if(whichside == 1) {
+					switch(whatToProcess.split(",")[0]) {
+					case "F5": case "F6": case "F7": case "F9": case "F11": case "Control_F2":
+					case "Control_F5": case "Control_F9": case "Control_a":  case "Control_F3": case "Alt_o":
+					case "Shift_F3": case "u": case "d": case "e": case "Shift_F5": case "Shift_F9": case "Alt_F12":
+					case "Control_g": case "Control_h": case "Control_p": case "Control_F6": case "Shift_F6": case "Control_s":
+					case "Alt_d": case "Control_f": case "l": case "a": case "Alt_F1": case "Alt_F2":case "Shift_E": case "Alt_Shift_L":
+					case "Alt_F6": case "Shift_A":  case "Shift_R": case "Shift_U": case "Alt_F8": case "F8": case "F10": case "j": 
+					case "Alt_a": case "Alt_s":  case "Alt_w": case "Control_j": case "Alt_i": case "Alt_j": case "b": case "Control_i":
+					case "Alt_Shift_F3":
+					case "Alt_Shift_D":case "Alt_Shift_E":case "Alt_Shift_F":case "Alt_Shift_G":case "Alt_Shift_H":
+					case "Control_u": case "Shift_G": case "Shift_W":case "Control_Shift_X":
+						previewCommands = "Anim_Infobar$Push 0.560 "
+								+ "Anim_LtChange$Top_Header 2.680  Anim_LtChange$Top_Header$In 1.920 "
+								+ "anim_Lower_Third$Essentials 3.200 anim_Lower_Third$Essentials$In 1.900 "
+								+ "anim_Lower_Third$Row 3.000 anim_Lower_Third$Row$In 1.900 "
+								+ "Anim_LtChange$Lt_X_Position 1.140 Anim_LtChange$Lt_X_Position$MoveForShrink 1.820 ";
+						break;
+					 case "Alt_q":
+						 previewCommands = "Anim_Infobar$Push 0.500 anim_POTT$In 1.400";
+						break;
+					case "q": case "Control_q":// Boundary L3rd
+						previewCommands = "Anim_Infobar$Push 0.500 anim_Boundary_LT$Essentials 2.200 anim_Boundary_LT$Essentials$In 1.400 "
+							+ "anim_Boundary_LT$Row 2.160 anim_Boundary_LT$Row$In 0.620";
+						break;
+					case "Shift_F7": case "Control_Shift_F9":
+						previewCommands = "Anim_Infobar$Push 0.560 "
+								+ "Anim_Image_LT$Top_Header 2.680  Anim_Image_LT$Top_Header$In 1.920 "
+								+ "Anim_Image_LT$Essentials 3.200 Anim_Image_LT$Essentials$In 1.900 "
+								+ "Anim_Image_LT$Row 3.000 Anim_Image_LT$Row$In 1.900 "
+								+ "Anim_Image_LtChange$Lt_X_Position 1.140 Anim_Image_LtChange$Lt_X_Position$MoveForShrink 1.820 ";
+						break;	
+					}
+				}else if(whichside == 2) {
+					switch (whatToProcess.split(",")[0]) {
+					case "F5": case "F6": case "F7": case "F9": case "F11": case "l": case "a": case "Control_F2": case "F8": case "F10":
+					case "Control_F5": case "Control_F9": case "Control_a":  case "Control_F3": case "Alt_o": case "Alt_F1": case "Alt_F2":
+					case "Shift_F3": case "u": case "d": case "e": case "Shift_F5": case "Shift_F9": case "Alt_F12":case "Shift_E":
+					case "Control_g": case "Control_h": case "Control_p": case "Control_F6": case "Shift_F6": case "Control_s": case "Control_f": 
+					case "Alt_F6": case "Shift_A":  case "Shift_R": case "Shift_U": case "Alt_F8":  case "j": case "Alt_a": case "Alt_s": case "Alt_w":
+					case "Control_j": case "Alt_i": case "Alt_j":  case "b": case "Control_i": case "Alt_Shift_L": case "Alt_Shift_F3":
+					//case "n":	
+					case "Alt_Shift_D":case "Alt_Shift_E":case "Alt_Shift_F":case "Alt_Shift_G":case "Alt_Shift_H":
+					case "Control_u": case "Shift_G": case "Shift_W":case "Control_Shift_X":
+						previewCommands = previewCommands + " Anim_LtChange$Sublines 0.780 "
+								+ "Anim_LtChange$Topline 0.900 Anim_LtChange$Lt_Y_Scale 0.900 "
+								+ "Anim_LtChange$Lt_X_Position 0.900";
+						break;
+					case "q": case "Control_q":
+						previewCommands = previewCommands + " Anim_Boundary_LtChange$Flag 1.300 Anim_Boundary_LtChange$Sublines 1.200 "
+							+ "Anim_Boundary_LtChange$Topline 0.900 Anim_Boundary_LtChange$Lt_Position 0.940 Anim_Boundary_LtChange$HeaderDynamic 1.223 "
+							+ "Anim_Boundary_LtChange$HeaderDynamic$Change_In 1.223 Anim_Boundary_LtChange$HeaderDynamic$Change_Out 0.600";
+						break;
+					case "Shift_F7": case "Control_Shift_F9":
+						previewCommands = previewCommands + " Anim_Image_LtChange$Flag 1.300 Anim_Image_LtChange$Sublines 1.240 "
+								+ "Anim_Image_LtChange$Topline 0.900 Anim_Image_LtChange$Lt_Position 0.940 Anim_Image_LtChange$HeaderDynamic 1.180 "
+								+ "Anim_Image_LtChange$HeaderDynamic$Change_In 1.180 Anim_Image_LtChange$HeaderDynamic$Change_Out 0.560";
+						break;	
+					}
+				}
+				if(match.getSetup().getMatchType().equalsIgnoreCase(CricketUtil.SUPER_OVER)) {
+					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER PREVIEW SCENE*/Default/Overlays_SuperOver "
+					    	+ "C:/Temp/Preview.tga " + previewCommands + " \0", print_writer);
+				}else {
+					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER PREVIEW SCENE*/Default/Overlays "
+					    	+ "C:/Temp/Preview.tga " + previewCommands + " \0", print_writer);
+				}
+			    
+				break;	
 			case Constants.T20_MUMBAI:
 				if(whichside == 1) {
 					System.out.println("whatToProcess - " + whatToProcess);
@@ -14468,6 +14684,42 @@ public class Animation
 		if(config.getPreview().equalsIgnoreCase("WITH_PREVIEW")) {
 			String previewCommand = "",which_gfx="/T20/Scenes/Ticker";
 			switch (config.getBroadcaster().toUpperCase()) {
+			case Constants.VIDARBHA:
+	            if(whatToProcess.contains(",")) {
+	                if(whichside == 1) {
+	                    switch(whatToProcess.split(",")[0]) {
+	                    case "Shift_O": case "Control_k": case "k": case "g": case "y": case "Control_y": case "h": case "Shift_F4": case "Shift_F": case "Alt_b":
+	                    case ".": case "/": case "Shift_C": case "Control_Shift_R": case "Control_Shift_F3": case "Control_Shift_J":
+	                        CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER PREVIEW SCENE*" + "/Default/Overlays" + " C:/Temp/Preview.tga Anim_Bugs 2.940 "
+	                                + "Anim_Bugs$Essentials 2.940 Anim_Bugs$Essentials$In 0.960 Anim_Bugs$Essentials$In$Anim_Bugs 2.940 "
+	                                + "Anim_Bugs$Essentials$In$Anim_Bugs$Essentials 2.940 Anim_Bugs$Essentials$In$Anim_Bugs$Essentials$Out 2.940 \0", print_writer);
+	                        break;
+	                    case "Alt_p": case "o": case "t":
+	                        CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER PREVIEW SCENE*" 
+	                                + "/Default/Overlays" + " C:/Temp/Preview.png Anim_Center_Bug$In 0.700 \0", print_writer);
+	                        break;
+	                    case "Control_Shift_U": case "Control_Shift_V": case "6":
+	                        CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*STAGE*DIRECTOR*PopUps$Out SHOW 1.100 \0", print_writer);
+	                        CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER PREVIEW SCENE*" + "/Default/Overlays" + " C:/Temp/Preview.tga "
+	                                + "PopUps$In 1.700\0", print_writer);
+	                        break;
+	                    }
+	                } else {
+	                    switch(whatToProcess.split(",")[0]) {
+	                    case "Shift_O": case "Control_k": case "k": case "g": case "y": case "Control_y": case "h": case "Shift_F4": case "Shift_F": case "Alt_b":
+	                    case ".": case "/": case "Control_Shift_F3": case "Control_Shift_J":
+	                        CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER PREVIEW SCENE*" 
+	                                + "/Default/Overlays C:/Temp/Preview.png Anim_BugsChange 1.260 \0", print_writer);
+	                        break;
+	                    case "Control_Shift_U": case "Control_Shift_V":
+	                        CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER PREVIEW SCENE*" + "/Default/Overlays" + " C:/Temp/Preview.tga "
+	                                + "PopUps$Change 1.000\0", print_writer);
+	                        break;
+	                    }
+	                }
+	            }
+	            break;
+			
 			case Constants.T20_MUMBAI:
 				if(whichside == 1) {
 					switch(whatToProcess.split(",")[0]) {
@@ -14664,6 +14916,37 @@ public class Animation
 	public void processMiniPreview(String whatToProcess, List<PrintWriter> print_writer, int whichside, Configuration config, String whichGraphicOnScreen) throws InterruptedException {
 		if(config.getPreview().equalsIgnoreCase("WITH_PREVIEW")) {
 			switch (config.getBroadcaster().toUpperCase()) {
+			 case Constants.VIDARBHA:
+		            if(whatToProcess.contains(",")) {
+		                switch(whatToProcess.split(",")[0]) {
+		                case "Shift_F1": case "Shift_F2": case "Alt_F1": case "Alt_F2":
+		                    CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER PREVIEW SCENE*"
+		                            + "/Default/Overlays C:/Temp/Preview.tga Anim_Mini$In_Out 1.200 Anim_Mini$In_Out$In 1.260 "
+		                            + "Anim_Mini$In_Out$Out2 1.260\0", print_writer);
+
+		                    TimeUnit.MILLISECONDS.sleep(500);
+		                    CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER PREVIEW SCENE*"
+		                            + "/Default/Overlays C:/Temp/Preview.tga Anim_Mini$In_Out 1.200 Anim_Mini$In_Out$In 1.260 "
+		                            + "Anim_Mini$In_Out$Out2 1.260\0", print_writer);
+		                    break;
+
+		                case "Alt_F7":
+		                    CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER PREVIEW SCENE*"
+		                            + "/Default/Overlays" + " C:/Temp/Preview.tga Anim_Infobar$Push 0.500 Anim_MiniPoints$In_Out 0.940 Anim_MiniPoints$In_Out$In 0.940 \0", print_writer);
+		                    break;
+		                }
+
+		                if(whichside == 2) {
+		                    switch(whatToProcess.split(",")[0]) {
+		                    case "Shift_F1": case "Shift_F2": case "Alt_F1": case "Alt_F2": case "Alt_F7":
+		                        CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER PREVIEW SCENE*"
+		                                + "/Default/Overlays" + " C:/Temp/Preview.tga Anim_MiniChange 1.860 Anim_MiniChange$Change_In 1.860 \0", print_writer);
+		                        break;
+		                    }
+		                }
+		            }
+		            break;
+			
 			case Constants.T20_MUMBAI:
 				if(whatToProcess.contains(",")) {
 					switch(whatToProcess.split(",")[0]) {
