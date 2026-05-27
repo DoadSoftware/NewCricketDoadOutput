@@ -8078,7 +8078,7 @@ public class InfobarGfx
 				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_Infobar$All$Normal$Section1$Side" + WhichSide + "$DoubleStat$StatValue$txt_StatValue1*GEOM*TEXT SET " 
 						+ CricketFunctions.GetTargetData(matchAllData).getTargetRuns() + "\0", print_writers);
 				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_Infobar$All$Normal$Section1$Side" + WhichSide + "$DoubleStat$StatValue$txt_StatValue2*GEOM*TEXT SET "
-						+ (matchAllData.getSetup().getTargetType() != null && !matchAllData.getSetup().getTargetType().isEmpty()?matchAllData.getSetup().getTargetType().toUpperCase():"") 
+						+ (matchAllData.getSetup().getTargetType() != null && !matchAllData.getSetup().getTargetType().isEmpty()? " ("+matchAllData.getSetup().getTargetType().toUpperCase()+")":"") 
 						+ "\0", print_writers);
 				break;
 			case "EQUATION":
