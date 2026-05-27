@@ -3146,7 +3146,7 @@ public class LowerThirdGfx
 				 lowerThird = new LowerThird("FALL OF WICKETS", inning.getBatting_team().getTeamName2(), inning.getBatting_team().getTeamName3(),"", 
 							String.valueOf(inning.getTotalRuns()), String.valueOf(inning.getTotalWickets()),
 							2,"",inning.getBatting_team().getTeamName4(),fowNumber,fowData,new String[]{"WKTS","SCORE"},null,
-							new String[] {"-7.0","37.5","66.11","94.72","123.33","151.94","180.56","209.17","237.78","266.39","295.0"});
+							new String[] {"82","158","236","316","400","480","558","641","722","807"});
 					break;
 			case Constants.LEGENDS:
 				lowerThird = new LowerThird("", inning.getBatting_team().getTeamName3(),"","FALL OF WICKETS", 
@@ -3158,7 +3158,7 @@ public class LowerThirdGfx
 			status = PopulateL3rdHeader(whatToProcess.split(",")[0],WhichSide);
 			if(status == Constants.OK) {
 				switch (config.getBroadcaster().toUpperCase()) {
-				case Constants.ISPL: case Constants.ICC_U19_2023: case Constants.LEGENDS: case Constants.VIDARBHA:
+				case Constants.ISPL: case Constants.ICC_U19_2023: case Constants.LEGENDS: case Constants.VIDARBHA: case Constants.T20_MUMBAI:
 					HideAndShowL3rdSubStrapContainers(WhichSide);
 					setPositionOfLT(whatToProcess,WhichSide,config,lowerThird.getNumberOfSubLines());
 					break;
@@ -3243,8 +3243,8 @@ public class LowerThirdGfx
 				case Constants.T20_MUMBAI:
 					lowerThird = new LowerThird("", matchAllData.getSetup().getAwayTeam().getTeamName2(), matchAllData.getSetup().getAwayTeam().getTeamName3(),
 							whichSplit, String.valueOf(inning.getTotalRuns() + "-" + inning.getTotalWickets()), "",
-							2,"",matchAllData.getSetup().getAwayTeam().getTeamName4(),splitNumber,splitData,new String[]{"THIRTIES","BALLS"},null,
-							new String[] {"-350","-224.0","-89.0","57.0","195.0","331.0","477.0","610.0","650.0","700.0"});
+							2,"",matchAllData.getSetup().getAwayTeam().getTeamBadge(),splitNumber,splitData,new String[]{"THIRTIES","BALLS"},null,
+							new String[] {"139","228","323","417","509","604","694","786"});
 					break;
 				case Constants.LEGENDS:
 					lowerThird = new LowerThird("", matchAllData.getSetup().getAwayTeam().getTeamName3(),"",whichSplit,CricketFunctions.getTeamScore(inning, "-", false),
@@ -3284,8 +3284,8 @@ public class LowerThirdGfx
 				case Constants.T20_MUMBAI:
 					lowerThird = new LowerThird("", matchAllData.getSetup().getAwayTeam().getTeamName2(), matchAllData.getSetup().getAwayTeam().getTeamName3(),
 							whichSplit, String.valueOf(inning.getTotalRuns() + "-" + inning.getTotalWickets()), "",
-							2,"",matchAllData.getSetup().getAwayTeam().getTeamName4(),splitNumber,splitData,new String[]{"FIFTIES","BALLS"},null,
-							new String[] {"-271.0","-125.0","10.0","149.0","283.0","400.0","543.0","1066.0","1066.0","1066.0"});
+							2,"",matchAllData.getSetup().getAwayTeam().getTeamBadge(),splitNumber,splitData,new String[]{"FIFTIES","BALLS"},null,
+							new String[] {"139","228","323","417","509","604","694","786"});
 					break;
 				case Constants.LEGENDS:
 					lowerThird = new LowerThird("", matchAllData.getSetup().getAwayTeam().getTeamName3(),"",whichSplit, CricketFunctions.getTeamScore(inning, "-", false),
@@ -3335,8 +3335,8 @@ public class LowerThirdGfx
 				case Constants.T20_MUMBAI:
 					lowerThird = new LowerThird("", matchAllData.getSetup().getHomeTeam().getTeamName2(), matchAllData.getSetup().getHomeTeam().getTeamName3(),
 							whichSplit, String.valueOf(inning.getTotalRuns() + "-" + inning.getTotalWickets()), "",
-							2,"",matchAllData.getSetup().getHomeTeam().getTeamName4(),splitNumber,splitData,new String[]{"THIRTIES","BALLS"},null,
-							new String[] {"-350","-224.0","-89.0","57.0","195.0","331.0","477.0","610.0","650.0","700.0"});
+							2,"",matchAllData.getSetup().getHomeTeam().getTeamBadge(),splitNumber,splitData,new String[]{"THIRTIES","BALLS"},null,
+							new String[] {"139","228","323","417","509","604","694","786"});
 					break;
 				case Constants.VIDARBHA:
 					lowerThird = new LowerThird("", matchAllData.getSetup().getHomeTeam().getTeamName1(), "",whichSplit, String.valueOf(inning.getTotalRuns() + "-" + inning.getTotalWickets()), "",
@@ -3376,8 +3376,8 @@ public class LowerThirdGfx
 				case Constants.T20_MUMBAI:
 					lowerThird = new LowerThird("", matchAllData.getSetup().getHomeTeam().getTeamName2(), matchAllData.getSetup().getHomeTeam().getTeamName3(),
 							whichSplit, String.valueOf(inning.getTotalRuns() + "-" + inning.getTotalWickets()), "",
-							2,"",matchAllData.getSetup().getHomeTeam().getTeamName4(),splitNumber,splitData,new String[]{"FIFTIES","BALLS"},null,
-							new String[] {"-271.0","-125.0","10.0","149.0","283.0","400.0","543.0","1066.0","1066.0","1066.0"});
+							2,"",matchAllData.getSetup().getHomeTeam().getTeamBadge(),splitNumber,splitData,new String[]{"FIFTIES","BALLS"},null,
+							new String[] {"139","228","323","417","509","604","694","786"});
 					break;
 				case Constants.LEGENDS:
 					lowerThird = new LowerThird("", matchAllData.getSetup().getHomeTeam().getTeamName3(),"",whichSplit, CricketFunctions.getTeamScore(inning, "-", false), 
@@ -3397,7 +3397,7 @@ public class LowerThirdGfx
 		if(status == Constants.OK) {
 			
 			switch (config.getBroadcaster().toUpperCase()) {
-			case Constants.ICC_U19_2023: case Constants.BENGAL_T20: case Constants.ISPL: case Constants.LEGENDS: case Constants.VIDARBHA:
+			case Constants.ICC_U19_2023: case Constants.BENGAL_T20: case Constants.ISPL: case Constants.LEGENDS: case Constants.VIDARBHA: case Constants.T20_MUMBAI:
 				HideAndShowL3rdSubStrapContainers(WhichSide);
 				break;
 			}
@@ -4044,7 +4044,7 @@ public class LowerThirdGfx
 				
 				lowerThird = new LowerThird("", "TARGET","","", "", "",
 						1,"",inning.getBatting_team().getTeamName4(),null,null, null, 
-						new String[]{String.valueOf(summary+ " FROM " + matchAllData.getSetup().getMaxOvers()*6)+ " BALLS",""},null);
+						new String[]{String.valueOf(summary),String.valueOf(" FROM " + matchAllData.getSetup().getMaxOvers()*6)+ " BALLS",""},null);
 			}else {
 				if(matchAllData.getSetup().getTargetOvers() == "" || matchAllData.getSetup().getTargetOvers().trim().isEmpty() && matchAllData.getSetup().getTargetRuns() == 0) {
 					
@@ -4055,7 +4055,7 @@ public class LowerThirdGfx
 									Integer.valueOf(CricketFunctions.GetTargetData(matchAllData).getTargetOvers().split("\\.")[1]):0)), 2, matchAllData) + " RUNS PER OVER";
 					
 					lowerThird = new LowerThird("", "TARGET","","", "", "",1,"",
-							inning.getBatting_team().getTeamName4(),null,null,null,new String[]{summary + String.valueOf(" FROM " + CricketFunctions.GetTargetData(matchAllData).getTargetOvers())+ 
+							inning.getBatting_team().getTeamName4(),null,null,null,new String[]{String.valueOf(summary),String.valueOf(" FROM " + CricketFunctions.GetTargetData(matchAllData).getTargetOvers())+ 
 							" OVERS",runRate},null);
 
 				}else {
@@ -4068,18 +4068,18 @@ public class LowerThirdGfx
 					if(matchAllData.getSetup().getTargetOvers() != null && !matchAllData.getSetup().getTargetOvers().isEmpty()) {
 						
 						lowerThird = new LowerThird("", "TARGET","","", "", "",1,"",
-								inning.getBatting_team().getTeamBadge(),null,null,null,new String[]{summary +String.valueOf(" FROM " + 
+								inning.getBatting_team().getTeamBadge(),null,null,null,new String[]{String.valueOf(summary),String.valueOf(" FROM " + 
 										CricketFunctions.GetTargetData(matchAllData).getTargetOvers())+ " OVERS",runRate},null);
 					}
 					if(matchAllData.getSetup().getTargetType().toUpperCase().equalsIgnoreCase("VJD")) {
 						
 						lowerThird = new LowerThird("", "TARGET","","", "", "",1,"",inning.getBatting_team().getTeamBadge(),null,null,
-								null,new String[]{summary +String.valueOf(" FROM " + CricketFunctions.GetTargetData(matchAllData).getTargetOvers())+ " OVERS",runRate + " (VJD)"},null);
+								null,new String[]{String.valueOf(summary),String.valueOf(" FROM " + CricketFunctions.GetTargetData(matchAllData).getTargetOvers())+ " OVERS",runRate + " (VJD)"},null);
 						
 					}else if(matchAllData.getSetup().getTargetType().toUpperCase().equalsIgnoreCase("DLS")) {
 						
 						lowerThird = new LowerThird("", "TARGET","","", "", "",1,"",inning.getBatting_team().getTeamBadge(),null,null,
-								null,new String[]{summary + String.valueOf(" FROM " + CricketFunctions.GetTargetData(matchAllData).getTargetOvers())+ " OVERS",runRate + " (DLS)"},null);
+								null,new String[]{String.valueOf(summary),String.valueOf(" FROM " + CricketFunctions.GetTargetData(matchAllData).getTargetOvers())+ " OVERS",runRate + " (DLS)"},null);
 					}
 				}
 			}
@@ -6116,13 +6116,20 @@ public class LowerThirdGfx
 					String.valueOf(battingCard.getBalls()), 6, "", inning.getBatting_team().getTeamBadge(),new String[] {"0s", "1s", "2s", "3s", "4s", "6s"},
 					new String[]{Count[0],Count[1],Count[2],Count[3],Count[4],Count[6]},null,new String[] {"WITHOUT_TITLE"},new String[] {"123","236.8","350.6","464.4","578.2","692"});
 			break;
-		case Constants.BENGAL_T20: case Constants.T20_MUMBAI:
+		case Constants.BENGAL_T20:
 			player = battingCard.getPlayer();
 			containerName =(config.getBroadcaster().toUpperCase().equalsIgnoreCase(Constants.T20_MUMBAI)?"THIS INNINGS":"");
 			lowerThird = new LowerThird(containerName, battingCard.getPlayer().getFirstname(), surName,outOrNot, String.valueOf(battingCard.getRuns()), 
 					String.valueOf(battingCard.getBalls()), 2, "", inning.getBatting_team().getTeamName4(),new String[] {"DOTS", "ONES", "TWOS", "THREES", "FOURS", "SIXES"},
 					new String[]{Count[0],Count[1],Count[2],Count[3],Count[4],Count[6]},null,null,new String[] {"-12.0","42.0","94.0","146.0","198.0","250.0"});
 			break;
+		case Constants.T20_MUMBAI:
+			player = battingCard.getPlayer();
+			containerName =(config.getBroadcaster().toUpperCase().equalsIgnoreCase(Constants.T20_MUMBAI)?"THIS INNINGS":"");
+			lowerThird = new LowerThird(containerName, battingCard.getPlayer().getFirstname(), surName,outOrNot, String.valueOf(battingCard.getRuns()), 
+					String.valueOf(battingCard.getBalls()), 2, "", inning.getBatting_team().getTeamName4(),new String[] {"DOTS", "ONES", "TWOS", "THREES", "FOURS", "SIXES"},
+					new String[]{Count[0],Count[1],Count[2],Count[3],Count[4],Count[6]},null,null,new String[] {"0","152","305","466","640","790"});
+			break;	
 		case Constants.ICC_U19_2023:
 			lowerThird = new LowerThird("", battingCard.getPlayer().getFirstname(), surName,outOrNot, String.valueOf(battingCard.getRuns()), 
 					String.valueOf(battingCard.getBalls()), 2, "", inning.getBatting_team().getTeamName4(),new String[] {"DOTS", "ONES", "TWOS", "THREES", "FOURS", "SIXES"},
@@ -6148,7 +6155,7 @@ public class LowerThirdGfx
 		status = PopulateL3rdHeader(whatToProcess.split(",")[0],WhichSide);
 		if(status == Constants.OK) {
 			switch (config.getBroadcaster().toUpperCase()) {
-			case Constants.BENGAL_T20: case Constants.ICC_U19_2023: case Constants.ISPL: case Constants.LEGENDS: case Constants.VIDARBHA:
+			case Constants.BENGAL_T20: case Constants.ICC_U19_2023: case Constants.ISPL: case Constants.LEGENDS: case Constants.VIDARBHA: case Constants.T20_MUMBAI:
 				HideAndShowL3rdSubStrapContainers(WhichSide);
 				break;
 			case Constants.NPL: case Constants.APL:
@@ -6249,13 +6256,20 @@ public class LowerThirdGfx
 					String.valueOf(CricketFunctions.OverBalls(bowlingCard.getOvers(), bowlingCard.getBalls())), 6, "", inning.getBowling_team().getTeamBadge(),new String[] {"0s", "1s", "2s", "3s", "4s", "6s"},
 					new String[]{Count[0],Count[1],Count[2],Count[3],Count[4],Count[6]},null,new String[] {"WITHOUT_TITLE"},new String[] {"123","236.8","350.6","464.4","578.2","692"});
 			break;
-		case Constants.BENGAL_T20: case Constants.T20_MUMBAI:
+		case Constants.BENGAL_T20:
 			player = bowlingCard.getPlayer();
 			containerName =(config.getBroadcaster().toUpperCase().equalsIgnoreCase(Constants.T20_MUMBAI)?"THIS INNINGS":"");
 			lowerThird = new LowerThird(containerName, bowlingCard.getPlayer().getFirstname(), surName,over_text, String.valueOf(bowlingCard.getWickets()) + "-" + String.valueOf(bowlingCard.getRuns()), 
 					String.valueOf(CricketFunctions.OverBalls(bowlingCard.getOvers(), bowlingCard.getBalls())), 2, "", inning.getBowling_team().getTeamName4(),new String[] {"DOTS", "ONES", "TWOS", "THREES", "FOURS", "SIXES"},
 					new String[]{Count[0],Count[1],Count[2],Count[3],Count[4],Count[6]},null,null,new String[] {"-12.0","42.0","94.0","146.0","198.0","250.0"});
 			break;
+		case Constants.T20_MUMBAI:
+			player = bowlingCard.getPlayer();
+			containerName =(config.getBroadcaster().toUpperCase().equalsIgnoreCase(Constants.T20_MUMBAI)?"THIS INNINGS":"");
+			lowerThird = new LowerThird(containerName, bowlingCard.getPlayer().getFirstname(), surName,over_text, String.valueOf(bowlingCard.getWickets()) + "-" + String.valueOf(bowlingCard.getRuns()), 
+					String.valueOf(CricketFunctions.OverBalls(bowlingCard.getOvers(), bowlingCard.getBalls())), 2, "", inning.getBowling_team().getTeamName4(),new String[] {"DOTS", "ONES", "TWOS", "THREES", "FOURS", "SIXES"},
+					new String[]{Count[0],Count[1],Count[2],Count[3],Count[4],Count[6]},null,null,new String[] {"0","152","305","466","640","790"});
+			break;	
 		case Constants.ICC_U19_2023:
 			lowerThird = new LowerThird("", bowlingCard.getPlayer().getFirstname(), surName,over_text, String.valueOf(bowlingCard.getWickets()) + "-" + String.valueOf(bowlingCard.getRuns()), 
 					String.valueOf(CricketFunctions.OverBalls(bowlingCard.getOvers(), bowlingCard.getBalls())), 2, "", inning.getBowling_team().getTeamName4(),new String[] {"DOTS", "ONES", "TWOS", "THREES", "FOURS", "SIXES"},
@@ -6351,7 +6365,7 @@ public class LowerThirdGfx
 			lowerThird = new LowerThird("",inning.getBatting_team().getTeamName2(), inning.getBatting_team().getTeamName3(),"", String.valueOf(inning.getTotalRuns()) + "-" + String.valueOf(inning.getTotalWickets()), 
 					CricketFunctions.OverBalls(inning.getTotalOvers(), inning.getTotalBalls()), 2, "", inning.getBatting_team().getTeamName4(),
 					new String[] {"DOTS", "ONES", "TWOS", "THREES", "FOURS", "SIXES"},new String[]{Count[0],Count[1],Count[2],Count[3],String.valueOf(inning.getTotalFours()),
-					String.valueOf(inning.getTotalSixes())},null,null,new String[] {"-530.0","-328.0","-122.0","115.0","344.0","560.0"});
+					String.valueOf(inning.getTotalSixes())},null,null,new String[] {"0","152","305","466","640","790"});
 			break;
 		case Constants.ICC_U19_2023:
 			lowerThird = new LowerThird(inning.getBatting_team().getTeamName1(), "", "","", String.valueOf(inning.getTotalRuns()) + "-" + String.valueOf(inning.getTotalWickets()), 
@@ -12930,6 +12944,98 @@ public class LowerThirdGfx
 	{
 		PopulateL3rdBaseColorT20_MUMBAI(whatToProcess,WhichSide, lowerThird.getWhichTeamFlag());
 		switch(whatToProcess) {
+		case "Alt_F12":
+			CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_LowerThird$LogoAll$Side" + WhichSide 
+					+ "$select_Logo*FUNCTION*Omo*vis_con SET 1\0", print_writers);
+			CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_LowerThird$LogoAll$Side" + WhichSide 
+					+ "$img_LogosShadow*TEXTURE*IMAGE SET " + Constants.T20_MUMBAI_Logos + lowerThird.getWhichTeamFlag() + "\0", print_writers);
+			CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_LowerThird$LogoAll$Side" + WhichSide 
+					+ "$img_Logos*TEXTURE*IMAGE SET " + Constants.T20_MUMBAI_Logos + lowerThird.getWhichTeamFlag() + "\0", print_writers);
+			
+			CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_LowerThird$TopLine$Side" + WhichSide 
+					+ "$txt_FirstName*GEOM*TEXT SET " + lowerThird.getFirstName() + "\0", print_writers);
+			CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_LowerThird$TopLine$Side" + WhichSide 
+					+ "$txt_LastName*GEOM*TEXT SET " + lowerThird.getSurName() + "\0", print_writers);
+			
+			CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_LowerThird$TopLine$Side" + WhichSide 
+					+ "$Score$txt_Runs*GEOM*TEXT SET " + lowerThird.getScoreText() + "\0", print_writers);
+			CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_LowerThird$TopLine$Side" + WhichSide 
+					+ "$txt_Info*GEOM*TEXT SET " + lowerThird.getHeaderText() + "\0", print_writers);
+			CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_LowerThird$TopLine$Side" + WhichSide 
+					+ "$Score$txt_Balls*GEOM*TEXT SET " + lowerThird.getBallsFacedText() + " OVERS" + "\0", print_writers);
+			break;
+		case "Shift_F5": case "Shift_F9":
+			CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_LowerThird$LogoAll$Side" + WhichSide 
+					+ "$select_Logo*FUNCTION*Omo*vis_con SET 1\0", print_writers);
+			CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_LowerThird$LogoAll$Side" + WhichSide 
+					+ "$img_LogosShadow*TEXTURE*IMAGE SET " + Constants.T20_MUMBAI_Logos + lowerThird.getWhichTeamFlag() + "\0", print_writers);
+			CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_LowerThird$LogoAll$Side" + WhichSide 
+					+ "$img_Logos*TEXTURE*IMAGE SET " + Constants.T20_MUMBAI_Logos + lowerThird.getWhichTeamFlag() + "\0", print_writers);
+			
+			CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_LowerThird$TopLine$Side" + WhichSide 
+					+ "$txt_FirstName*GEOM*TEXT SET " + lowerThird.getFirstName() + "\0", print_writers);
+			CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_LowerThird$TopLine$Side" + WhichSide 
+					+ "$txt_LastName*GEOM*TEXT SET " + lowerThird.getSurName() + "\0", print_writers);
+			
+			switch(whatToProcess) {
+			case "Shift_F5":
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_LowerThird$TopLine$Side" + WhichSide 
+						+ "$Score$txt_Runs*GEOM*TEXT SET " + lowerThird.getScoreText() + lowerThird.getSubTitle() + "\0", print_writers);
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_LowerThird$TopLine$Side" + WhichSide 
+						+ "$txt_Info*GEOM*TEXT SET \0", print_writers);
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_LowerThird$TopLine$Side" + WhichSide 
+						+ "$Score$txt_Balls*GEOM*TEXT SET " + lowerThird.getBallsFacedText() + "\0", print_writers);
+				break;
+			case "Shift_F9":
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_LowerThird$TopLine$Side" + WhichSide 
+						+ "$Score$txt_Runs*GEOM*TEXT SET " + lowerThird.getScoreText() + "\0", print_writers);
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_LowerThird$TopLine$Side" + WhichSide 
+						+ "$txt_Info*GEOM*TEXT SET \0", print_writers);
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_LowerThird$TopLine$Side" + WhichSide 
+						+ "$Score$txt_Balls*GEOM*TEXT SET " + lowerThird.getBallsFacedText() + " " + lowerThird.getSubTitle() + "\0", print_writers);
+				break;	
+			}
+			break;
+		case "Shift_F3":
+			CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_LowerThird$LogoAll$Side" + WhichSide 
+					+ "$select_Logo*FUNCTION*Omo*vis_con SET 1\0", print_writers);
+			CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_LowerThird$LogoAll$Side" + WhichSide 
+					+ "$img_LogosShadow*TEXTURE*IMAGE SET " + Constants.T20_MUMBAI_Logos + lowerThird.getWhichTeamFlag() + "\0", print_writers);
+			CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_LowerThird$LogoAll$Side" + WhichSide 
+					+ "$img_Logos*TEXTURE*IMAGE SET " + Constants.T20_MUMBAI_Logos + lowerThird.getWhichTeamFlag() + "\0", print_writers);
+			
+			CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_LowerThird$TopLine$Side" + WhichSide 
+					+ "$txt_FirstName*GEOM*TEXT SET " + lowerThird.getFirstName() + "\0", print_writers);
+			CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_LowerThird$TopLine$Side" + WhichSide 
+					+ "$txt_LastName*GEOM*TEXT SET " + lowerThird.getSurName() + "\0", print_writers);
+			
+			CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_LowerThird$TopLine$Side" + WhichSide 
+					+ "$Score$txt_Runs*GEOM*TEXT SET " + lowerThird.getScoreText() + "\0", print_writers);
+			CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_LowerThird$TopLine$Side" + WhichSide 
+					+ "$txt_Info*GEOM*TEXT SET " + lowerThird.getHeaderText() + "\0", print_writers);
+			CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_LowerThird$TopLine$Side" + WhichSide 
+					+ "$Score$txt_Balls*GEOM*TEXT SET\0", print_writers);
+			break;
+		case "u":
+			CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_LowerThird$LogoAll$Side" + WhichSide 
+					+ "$select_Logo*FUNCTION*Omo*vis_con SET 1\0", print_writers);
+			CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_LowerThird$LogoAll$Side" + WhichSide 
+					+ "$img_LogosShadow*TEXTURE*IMAGE SET " + Constants.T20_MUMBAI_Logos + lowerThird.getWhichTeamFlag() + "\0", print_writers);
+			CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_LowerThird$LogoAll$Side" + WhichSide 
+					+ "$img_Logos*TEXTURE*IMAGE SET " + Constants.T20_MUMBAI_Logos + lowerThird.getWhichTeamFlag() + "\0", print_writers);
+			
+			CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_LowerThird$TopLine$Side" + WhichSide 
+					+ "$txt_FirstName*GEOM*TEXT SET " + lowerThird.getFirstName() + "\0", print_writers);
+			CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_LowerThird$TopLine$Side" + WhichSide 
+					+ "$txt_LastName*GEOM*TEXT SET " + lowerThird.getSurName() + "\0", print_writers);
+			
+			CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_LowerThird$TopLine$Side" + WhichSide 
+					+ "$Score$txt_Runs*GEOM*TEXT SET " + lowerThird.getScoreText() + "\0", print_writers);
+			CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_LowerThird$TopLine$Side" + WhichSide 
+					+ "$txt_Info*GEOM*TEXT SET " + lowerThird.getSubTitle() + "\0", print_writers);
+			CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_LowerThird$TopLine$Side" + WhichSide 
+					+ "$Score$txt_Balls*GEOM*TEXT SET\0", print_writers);
+			break;
 		case "Control_a":
 			CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_LowerThird$LogoAll$Side" + WhichSide 
 					+ "$select_Logo*FUNCTION*Omo*vis_con SET 1\0", print_writers);
@@ -19333,6 +19439,80 @@ public class LowerThirdGfx
 			CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_LtHowOut$TextAll$HowOut"
 					+ "$txt_HowOut2*GEOM*TEXT SET " + "   S/R: " + lowerThird.getRightText()[0] + "\0", print_writers);
 			break;
+		case "Shift_F3":
+			CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_LowerThird$TextAll$Subline$Side" + WhichSide +
+					"$select_Subline$2$Text$StatHead*ACTIVE SET 0 \0", print_writers);
+			CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_LowerThird$TextAll$Subline$Side" + WhichSide +
+					"$select_Subline$3$Text$StatHead*ACTIVE SET 0 \0", print_writers);
+			CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_LowerThird$TextAll$Subline$Side" + WhichSide +
+					"$select_Subline$4$Text$StatHead*ACTIVE SET 0 \0", print_writers);
+			
+			for(int i=0; i<lowerThird.getTitlesText().length; i++) {
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_LowerThird$TextAll$Subline$Side" + WhichSide +
+					"$select_Subline$1$Text$StatHead$txt_StatHead" + (i+1) + "*GEOM*TEXT SET " + lowerThird.getTitlesText()[i] + "\0", print_writers);
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_LowerThird$TextAll$Subline$Side" + WhichSide +
+					"$select_Subline$2$Text$StatValue$txt_StatHead" + (i+1) + "*GEOM*TEXT SET " + lowerThird.getStatsText()[i] + "\0", print_writers);
+			}
+			
+			CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_LowerThird$TextAll$Subline$Side" + WhichSide +
+				"$select_Subline$1$Text$Left$txt_Title*GEOM*TEXT SET " + lowerThird.getLeftText()[0] + "\0", print_writers);
+			CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_LowerThird$TextAll$Subline$Side" + WhichSide +
+				"$select_Subline$2$Text$Left$txt_Title*GEOM*TEXT SET " + lowerThird.getLeftText()[1] + "\0", print_writers);
+			break;
+		case "Shift_F5": case "Shift_F9": case "Alt_F12":
+			CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_LowerThird$TextAll$Subline$Side" + WhichSide +
+					"$select_Subline$2$Text$StatHead*ACTIVE SET 0 \0", print_writers);
+			CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_LowerThird$TextAll$Subline$Side" + WhichSide +
+					"$select_Subline$3$Text$StatHead*ACTIVE SET 0 \0", print_writers);
+			CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_LowerThird$TextAll$Subline$Side" + WhichSide +
+					"$select_Subline$4$Text$StatHead*ACTIVE SET 0 \0", print_writers);
+			
+			for(int i=0; i<lowerThird.getTitlesText().length; i++) {
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_LowerThird$TextAll$Subline$Side" + WhichSide +
+						"$select_Subline$1$Text$StatHead$txt_StatHead" + (i+1) + "*GEOM*TEXT SET " + lowerThird.getTitlesText()[i] + "\0", print_writers);
+					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_LowerThird$TextAll$Subline$Side" + WhichSide +
+						"$select_Subline$2$Text$StatValue$txt_StatHead" + (i+1) + "*GEOM*TEXT SET " + lowerThird.getStatsText()[i] + "\0", print_writers);
+			}
+			break;
+		case "u":
+			CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_LowerThird$TextAll$Subline$Side" + WhichSide +
+					"$select_Subline$2$Text$StatHead*ACTIVE SET 0 \0", print_writers);
+			CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_LowerThird$TextAll$Subline$Side" + WhichSide +
+					"$select_Subline$3$Text$StatHead*ACTIVE SET 0 \0", print_writers);
+			CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_LowerThird$TextAll$Subline$Side" + WhichSide +
+					"$select_Subline$4$Text$StatHead*ACTIVE SET 0 \0", print_writers);
+			
+			CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_LowerThird$TextAll$Subline$Side" + WhichSide +
+					"$select_Subline$1$Text$StatHead$txt_StatHead1*GEOM*TEXT SET " + "1st" + "\0", print_writers);
+			CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_LowerThird$TextAll$Subline$Side" + WhichSide +
+					"$select_Subline$1$Text$StatHead$txt_StatHead2*GEOM*TEXT SET " + "2nd" + "\0", print_writers);
+			CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_LowerThird$TextAll$Subline$Side" + WhichSide +
+					"$select_Subline$1$Text$StatHead$txt_StatHead3*GEOM*TEXT SET " + "3rd" + "\0", print_writers);
+			CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_LowerThird$TextAll$Subline$Side" + WhichSide +
+					"$select_Subline$1$Text$StatHead$txt_StatHead4*GEOM*TEXT SET " + "4th" + "\0", print_writers);
+			CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_LowerThird$TextAll$Subline$Side" + WhichSide +
+					"$select_Subline$1$Text$StatHead$txt_StatHead5*GEOM*TEXT SET " + "5th" + "\0", print_writers);
+			CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_LowerThird$TextAll$Subline$Side" + WhichSide +
+					"$select_Subline$1$Text$StatHead$txt_StatHead6*GEOM*TEXT SET " + "6th" + "\0", print_writers);
+			CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_LowerThird$TextAll$Subline$Side" + WhichSide +
+					"$select_Subline$1$Text$StatHead$txt_StatHead7*GEOM*TEXT SET " + "7th" + "\0", print_writers);
+			CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_LowerThird$TextAll$Subline$Side" + WhichSide +
+					"$select_Subline$1$Text$StatHead$txt_StatHead8*GEOM*TEXT SET " + "8th" + "\0", print_writers);
+			CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_LowerThird$TextAll$Subline$Side" + WhichSide +
+					"$select_Subline$1$Text$StatHead$txt_StatHead9*GEOM*TEXT SET " + "9th" + "\0", print_writers);
+			CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_LowerThird$TextAll$Subline$Side" + WhichSide +
+					"$select_Subline$1$Text$StatHead$txt_StatHead10*GEOM*TEXT SET " + "10th" + "\0", print_writers);
+			
+			for(int i=0; i<lowerThird.getTitlesText().length; i++) {
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_LowerThird$TextAll$Subline$Side" + WhichSide +
+					"$select_Subline$2$Text$StatValue$txt_StatHead" + (i+1) + "*GEOM*TEXT SET " + lowerThird.getStatsText()[i] + "\0", print_writers);
+			}
+			
+			CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_LowerThird$TextAll$Subline$Side" + WhichSide 
+				+ "$select_Subline$1$Text$Left$txt_Title*GEOM*TEXT SET " + lowerThird.getLeftText()[0] + "\0", print_writers);
+			CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_LowerThird$TextAll$Subline$Side" + WhichSide 
+				+ "$select_Subline$2$Text$Left$txt_Title*GEOM*TEXT SET " + lowerThird.getLeftText()[1] + "\0", print_writers);
+			break;
 		case "j":
 			if(lowerThird.getWhichTeamFlag().toLowerCase().equalsIgnoreCase("tlogo")) {
 				lowerThird.setWhichTeamFlag("TLogo");
@@ -19542,7 +19722,7 @@ public class LowerThirdGfx
 					+ "Select$Left$Main$Title1*TRANSFORMATION*POSITION*X SET " +(lowerThird.getRightText()[0].split(" ").length > 5 ? 
 					"135.0":"100.0")+"\0",print_writers);
 			break;
-		case "Shift_F3": case "Alt_Shift_O":
+		case "Alt_Shift_O":
 			PopulateL3rdBaseT20_MUMBAI(WhichSide,lowerThird.getNumberOfSubLines());
 			CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$LowerThird$Position$Header$Main$Side" + WhichSide 
 					+ "$Out*ACTIVE SET 0\0", print_writers);
@@ -19969,72 +20149,6 @@ public class LowerThirdGfx
 			}
 			
 			break;
-		case "u":
-			CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$LowerThird$Position$Header$Main$Side" + WhichSide +
-					"$Title$txTitle*GEOM*TEXT SET " + lowerThird.getSubTitle() + "\0", print_writers);
-			CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$LowerThird$Position$Header$Main$Side" + WhichSide 
-					+ "$Out*ACTIVE SET 0\0", print_writers);
-			CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$LowerThird$Position$Header$Main$Side" + WhichSide 
-					+ "$Headshot*ACTIVE SET 0\0", print_writers);
-			CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$LowerThird$Position$Header$Main$Side" + WhichSide 
-					+ "$Data*SCRIPT*INSTANCE*Position INVOKE \0", print_writers);
-			CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$LowerThird$Body$Side" + WhichSide +
-					"$SelectRows*FUNCTION*Omo*vis_con SET " + lowerThird.getNumberOfSubLines() + "\0", print_writers);
-			
-			//ACTIVE SET
-			CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$LowerThird$Body$Side" + WhichSide +
-					"$SelectRows$Row1$Left*ACTIVE SET 0\0", print_writers);
-			CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$LowerThird$Body$Side" + WhichSide +
-					"$SelectRows$Row1$Right*ACTIVE SET 0\0", print_writers);
-			CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$LowerThird$Body$Side" + WhichSide +
-					"$SelectRows$Row1$Data*ACTIVE SET 0\0", print_writers);
-			CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$LowerThird$Body$Side" + WhichSide +
-					"$SelectRows$Row1$Title*ACTIVE SET 1\0", print_writers);
-			
-			CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$LowerThird$Body$Side" + WhichSide +
-					"$SelectRows$Row2$Left*ACTIVE SET 0\0", print_writers);
-			CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$LowerThird$Body$Side" + WhichSide +
-					"$SelectRows$Row2$Right*ACTIVE SET 0\0", print_writers);
-			CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$LowerThird$Body$Side" + WhichSide +
-					"$SelectRows$Row2$Data*ACTIVE SET 1\0", print_writers);
-			CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$LowerThird$Body$Side" + WhichSide +
-					"$SelectRows$Row2$Title*ACTIVE SET 0\0", print_writers);
-			
-			CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$LowerThird$Position$Header$TeamLogo$Side" + WhichSide + 
-					"$Logo*TEXTURE*IMAGE SET " + Constants.T20_MUMBAI_TEAMLOGO + CricketFunctions.whichLogo(whatToProcess ,lowerThird.getWhichTeamFlag()) + "\0", print_writers);
-			
-			CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$LowerThird$Position$Header$Main$Side" + WhichSide +
-					"$Heading$Firstname*GEOM*TEXT SET " + lowerThird.getFirstName() + "\0", print_writers);
-			CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$LowerThird$Position$Header$Main$Side" + WhichSide +
-					"$Heading$Lastname*GEOM*TEXT SET " + lowerThird.getSurName() + "\0", print_writers);
-			
-			for(int i=1;i<=10;i++ ) {
-				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$LowerThird$Body$Side" + WhichSide +
-						"$SelectRows$Row1$Select$Title$Main$Title" + i + "$Title*GEOM*TEXT SET \0", print_writers);
-				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$LowerThird$Body$Side" + WhichSide +
-						"$SelectRows$Row2$Select$Data$Main$Stat" + i + "$Title*GEOM*TEXT SET \0", print_writers);
-				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$LowerThird$Body$Side" + WhichSide +
-						"$SelectRows$Row2$Select$Data$Main$Fig" + i + "$Title*GEOM*TEXT SET \0", print_writers);
-			}
-			CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$LowerThird$Body$Side" + WhichSide +
-					"$SelectRows$Row1$Select$Title$Main$Title1$Title*GEOM*TEXT SET "+lowerThird.getLeftText()[0]+"\0", print_writers);
-			CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$LowerThird$Body$Side" + WhichSide +
-					"$SelectRows$Row2$Select$Data$Main$Stat1$Title*GEOM*TEXT SET "+lowerThird.getLeftText()[1]+"\0", print_writers);
-			
-			for(int i=0; i<lowerThird.getTitlesText().length; i++) {
-				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$LowerThird$Body$Side" + WhichSide +
-					"$SelectRows$Row1$Select$Title$Main$Title" + (i+2) + "$Title*GEOM*TEXT SET " + lowerThird.getTitlesText()[i] + "\0", print_writers);
-			}
-			for(int i=0; i<lowerThird.getStatsText().length; i++) {
-				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$LowerThird$Body$Side" + WhichSide + "$Row2$Select$Data$TeamBase"
-						+ "*TEXTURE*IMAGE SET "+ Constants.T20_MUMBAI_TEAMCOLOUR_GRADIENTS + lowerThird.getWhichTeamFlag() + "\0", print_writers);
-				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$LowerThird$Body$Side" + WhichSide + "$Row2$Select$Data$Main"
-						+ "*TEXTURE*IMAGE SET "+ Constants.T20_MUMBAI_TEAMCOLOUR_FLAT + CricketFunctions.whichTextColor(lowerThird.getWhichTeamFlag()) 
-						+ "\0", print_writers);
-				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$LowerThird$Body$Side" + WhichSide +
-					"$SelectRows$Row2$Select$Data$Main$Stat" + (i+2) + "$Title*GEOM*TEXT SET " + lowerThird.getStatsText()[i] + "\0", print_writers);
-			}
-			break;
 		case "q":case "Control_q":
 			switch (whatToProcess) {
 			case "Control_q":
@@ -20142,7 +20256,7 @@ public class LowerThirdGfx
 					"$select_Subline$2$Text$StatValue$txt_StatHead" + (i+1) + "*GEOM*TEXT SET " + lowerThird.getStatsText()[i] + "\0", print_writers);
 			}
 			break;
-		case "l":case "Shift_F5":case "Shift_F9":case "Alt_F12":
+		case "l":
 			switch (whatToProcess) {
 			case "Alt_F12":case "Control_a":
 				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$LowerThird$Position$Header$Main$Side" + WhichSide +
