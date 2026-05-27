@@ -599,6 +599,8 @@ public class IndexController
 	    return objectMapper.writeValueAsString(session_match);
 	}
 	private String handleReReadData() throws Exception {
+		System.out.println(basePath);
+		
 	    HeadToHead extractedH2H = CricketFunctions.extractHeadToHead(session_match,cricketService, basePath);
 	    headToHead.setH2hPlayer(extractedH2H.getH2hPlayer());
 	    headToHead.setH2hTeam(extractedH2H.getH2hTeam());
@@ -742,10 +744,10 @@ public class IndexController
 					this_animation.processInfoBarPreview(valueToProcess,print_writers,this_caption.whichSide,session_configuration,this_animation.whichGraphicOnScreen);
 				}
 				break;
-//			case Constants.T20_MUMBAI:
-//				this_animation.processInfoBarPreview(valueToProcess,print_writers,this_caption.whichSide,
-//						session_configuration,this_animation.whichGraphicOnScreen);
-//				break;
+			case Constants.T20_MUMBAI:
+				this_animation.processInfoBarPreview(valueToProcess,print_writers,this_caption.whichSide,
+						session_configuration,this_animation.whichGraphicOnScreen);
+				break;
 			default:
 				if (this_caption.status.equalsIgnoreCase(Constants.OK)) {
 					processAnimations("ANIMATE-IN-GRAPHICS",session_configuration,valueToProcess,print_writers,headToHead);
@@ -1032,7 +1034,7 @@ public class IndexController
 							break;
 						default:
 							this_animation.ChangeOn(valueToProcess, print_writers, session_configuration);
-							TimeUnit.MILLISECONDS.sleep(2000);
+							TimeUnit.MILLISECONDS.sleep(1000);
 							this_caption.whichSide = 1;
 							this_caption.PopulateGraphics(valueToProcess, session_match);
 							this_animation.CutBack(valueToProcess, print_writers, session_configuration);
@@ -1042,6 +1044,7 @@ public class IndexController
 				}
 				break;
 			default:
+				//FF,Mini,LT,Pop-Up Animation
 				if(this_animation.whichGraphicOnScreen.isEmpty()) {
 					if(session_configuration.getWhichInfobar().equalsIgnoreCase("LOF_INFOBAR")) {
 						this_animation.Lof_ISPL_AnimateIn(valueToProcess, print_writers, session_configuration);
@@ -1052,13 +1055,13 @@ public class IndexController
 					
 					if(session_configuration.getWhichInfobar().equalsIgnoreCase("LOF_INFOBAR")) {
 						this_animation.Lof_ISPL_ChangeOn(valueToProcess, print_writers, session_configuration);
-						TimeUnit.MILLISECONDS.sleep(1000);
+						TimeUnit.MILLISECONDS.sleep(2000);
 						this_caption.whichSide = 1;
 						this_caption.PopulateGraphics(valueToProcess, session_match);
 						this_animation.Lof_ISPL_CutBack(valueToProcess, print_writers, session_configuration);
 					}else {
 						this_animation.ChangeOn(valueToProcess, print_writers, session_configuration);
-						TimeUnit.MILLISECONDS.sleep(1000);
+						TimeUnit.MILLISECONDS.sleep(2000);
 						this_caption.whichSide = 1;
 						this_caption.PopulateGraphics(valueToProcess, session_match);
 						this_animation.CutBack(valueToProcess, print_writers, session_configuration);
@@ -1413,7 +1416,7 @@ public class IndexController
 	        updateGraphicsData(config);
 	        break;
 	    case "UPDATE":
-	        initializeMatchData(false,session_match,config,session_players,session_team,session_ground);
+	        initializeMatchData(false, session_match, config, session_players, session_team, session_ground);
 	        loadTournamentData(config, headToHead);
 	        updateBoundaryData();
 	        updateGraphicsData(config);

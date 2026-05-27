@@ -516,12 +516,19 @@ function processUserSelectionData(whatToProcess,dataToProcess)
 					break;
 				 }
 				break;
+			case 'Alt_F9':
+				switch($('#selected_broadcaster').val().toUpperCase()){
+				case 'ICC-U19-2023': case 'T20_MUMBAI':
+					addItemsToList(dataToProcess,null); 
+					break;
+				 }
+				break;
 					
 			case 'Shift_C': case 'Control_Shift_Q': case 'h':
 			case 'F12': case 'Alt_1': case 'Alt_2': case 'Alt_7': // case 'Alt_8': case 'Alt_3': case 'Alt_4': case 'F7': case 'F11':
 			case 'Control_F5': case 'Shift_T': case 'Control_F9': case 'F5': case 'F6': case 'Alt_w':  case 'Control_j': case 'Alt_F8':
 			case 'F8': case 'F9':  case 'u': case 'q': case 'Shift_F5': case 'Shift_F9': case 'Shift_F6': case 'Control_y': case 'Shift_F8':
-			case 'Shift_O': case 'g': case 'y': case 'Control_g': case 'Control_s': case 'Control_f': //case 'Alt_F9': case 'Control_h':
+			case 'Shift_O': case 'g': case 'y': case 'Control_g': case 'Control_s': case 'Control_f': // case 'Control_h':
 			case 'Alt_F12': case 'l': case 'Alt_m': case 'Alt_n': case 'Control_b': case 'Alt_F10': case 'Alt_d':
 			case 'Control_p': case 'Shift_F4': case 'Alt_F1': case 'Alt_F2': case 'Shift_E': case 'Shift_P': case 'Shift_Q': case 'Shift_F':
 			case 'Alt_F6': case 'Shift_R': case 'Shift_A': case 'Alt_c': case 'Control_F12': case 'Shift_F12': case 'Shift_F7': case 'Control_Shift_F9':
@@ -1404,7 +1411,7 @@ function addItemsToList(whatToProcess,dataToProcess)
 	case 'Control_F5': case 'Control_F9': case 'Shift_T': case 'u': case 'p': case 'Control_p': case 'Control_d': case 'Control_e': case 'Shift_F8':
 	case 'z': case 'x': case 'c': case 'v': case 'Shift_F11': case 'Control_y': case 'Alt_F8': case 'Alt_F1': case 'Alt_F2':
 	case 'Shift_K': case 'Shift_O': case 'k': case 'Shift_Y': case 'g': case 'y': case 'Shift_F5': case 'Shift_F9': case 'Control_h': case 'Control_g': case 'q':
-	case 'j': case 'Shift_F6': case 'Control_s':  case 'Control_f': case 'Alt_F12': case 'l': case 'Shift_E': //case 'Alt_F9':
+	case 'j': case 'Shift_F6': case 'Control_s':  case 'Control_f': case 'Alt_F12': case 'l': case 'Shift_E': case 'Alt_F9':
 	case 'F12': case 'Alt_1': case 'Alt_2': case 'Alt_3': case 'Alt_4': case 'Alt_5': case 'Alt_6': case 'Alt_7': case 'Alt_8': case 'Alt_9': case 'Alt_0':
 	case 'Alt_m': case 'Alt_n': case 'Control_b': case 'Alt_p': case 'Alt_F10': case 'Alt_d': case 'Shift_F4': case 'Alt_a': case 'Alt_s': 
 	case 'Shift_P': case 'Shift_Q': case 'Alt_z': case 'Control_c': case 'Control_v': case 'Control_z': case 'Control_x': case 'Alt_q': case 'Shift_F': 
@@ -6405,6 +6412,8 @@ function addItemsToList(whatToProcess,dataToProcess)
 					[ { value: 'T20 MUMBAI', text: 'T20 MUMBAI' },
 						  { value: 'DT20', text: 'T20' },
 						  { value: 'IT20', text: 'T20I' },
+						  { value: 'MT20 SEASON 3', text: 'MT20 SEASON 3' },
+						  { value: 'IPL 2026', text: 'IPL 2026' },
 						  { value: 'IPL', text: 'IPL' }
 						].forEach(({ value, text }) => {
 							  option = document.createElement('option');
@@ -6906,7 +6915,10 @@ function addItemsToList(whatToProcess,dataToProcess)
 				break;
 			case 'Alt_F12':
 				header_text.innerHTML = 'TEAM 0,1,2';
-				break;	
+				break;
+			case 'Alt_F9':
+				header_text.innerHTML = 'SINGLE TEAMS CAREER';
+				break;		
 			case 'Alt_F10':
 				header_text.innerHTML = 'SINGLE TEAM (THIS SERIES)';
 				break;
@@ -6999,7 +7011,7 @@ function addItemsToList(whatToProcess,dataToProcess)
 				break;
 			case 'Alt_F9': case 'Alt_F10':
 				
-				/*select = document.createElement('select');
+				select = document.createElement('select');
 				select.id = 'selectStyle';
 				select.name = select.id;
 				
@@ -7021,7 +7033,7 @@ function addItemsToList(whatToProcess,dataToProcess)
 				select.setAttribute('onchange',"setDropdownOptionToSelectOptionArray(this, 1)");
 				row.insertCell(cellCount).appendChild(select);
 				setDropdownOptionToSelectOptionArray($(select),1);
-				cellCount = cellCount + 1*/
+				cellCount = cellCount + 1
 				
 				select = document.createElement('select');
 				select.id = 'selectType';
@@ -7032,13 +7044,13 @@ function addItemsToList(whatToProcess,dataToProcess)
 				option.text = 'Runs';
 				select.appendChild(option);
 				
-				option = document.createElement('option');
+				/*option = document.createElement('option');
 				option.value = 'average';
 				option.text = 'Average';
-				select.appendChild(option);
+				select.appendChild(option);*/
 				
 				option = document.createElement('option');
-				option.value = 'strikeRate';
+				option.value = 'strike Rate';
 				option.text = 'Strike Rate';
 				select.appendChild(option);
 				
@@ -8809,6 +8821,8 @@ function addItemsToList(whatToProcess,dataToProcess)
 					[ { value: 'T20 MUMBAI', text: 'T20 MUMBAI' },
 					  { value: 'DT20', text: 'T20' },
 					  { value: 'IT20', text: 'T20I' },
+					  { value: 'MT20 SEASON 3', text: 'MT20 SEASON 3' },
+					  { value: 'IPL 2026', text: 'IPL 2026' },
 					  { value: 'IPL', text: 'IPL' }
 					].forEach(({ value, text }) => {
 						  option = document.createElement('option');
@@ -9155,6 +9169,8 @@ function addItemsToList(whatToProcess,dataToProcess)
 							['T20_MUMBAI_BOUNDARY', 'T20 MUMBAI BOUNDARY'],
 							['DT20', 'T20'],
 							['IT20', 'T20I'],
+							['MT20 SEASON 3', 'MT20 SEASON 3'],
+							['IPL 2026', 'IPL 2026'],
 							['IPL', 'IPL']
 						].forEach(([value, text]) => addOption(value, text));
 						break;
@@ -9477,6 +9493,8 @@ function addItemsToList(whatToProcess,dataToProcess)
 								['THIS_SERIES', 'This Season'],
 								['DT20', 'T20'],
 								['IT20', 'T20I'],
+								['MT20 SEASON 3', 'MT20 SEASON 3'],
+								['IPL 2026', 'IPL 2026'],
 								['IPL', 'IPL']
 							].forEach(([value, text]) => addOption(value, text));
 							break;
@@ -9630,6 +9648,8 @@ function addItemsToList(whatToProcess,dataToProcess)
 					[ { value: 'T20 MUMBAI', text: 'T20 MUMBAI' },
 					  { value: 'DT20', text: 'T20' },
 					  { value: 'IT20', text: 'T20I' },
+					  { value: 'MT20 SEASON 3', text: 'MT20 SEASON 3' },
+					  { value: 'IPL 2026', text: 'IPL 2026' },
 					  { value: 'IPL', text: 'IPL' }
 					].forEach(({ value, text }) => {
 						  option = document.createElement('option');
@@ -10038,7 +10058,7 @@ function addItemsToList(whatToProcess,dataToProcess)
 			case 'Control_F5': case 'Control_F9': case 'Shift_T': case 'u': case 'p': case 'Control_p': case 'Control_d': case 'Control_e': case 'z': 
 			case 'x': case 'c': case 'v': case 'Shift_F11': case 'Control_y': case 'Alt_F8': case 'Alt_F1': case 'Alt_F2': case 'Shift_K': case 'Shift_O': 
 			case 'k': case 'Shift_Y': case 'g': case 'y': case 'Shift_F5': case 'Shift_F9': case 'Control_h': case 'Control_g': case 'q': case 'j': case 'Shift_F6': case 'Shift_F8':
-			case 'Control_s':  case 'Control_f': case 'Alt_F12': case 'l': case 'Shift_E': //case 'Alt_F9':  
+			case 'Control_s':  case 'Control_f': case 'Alt_F12': case 'l': case 'Shift_E': case 'Alt_F9':  
 			case 'F12': case 'Alt_1': case 'Alt_2': case 'Alt_3': case 'Alt_4': case 'Alt_5': case 'Alt_6': case 'Alt_7': case 'Alt_8': case 'Alt_9': case 'Alt_0':
 			case 'Alt_m': case 'Alt_n': case 'Control_b': case 'Alt_p': case 'Alt_F10': case 'Alt_d': case 'Shift_F4': case 'Alt_a': case 'Alt_s': case 'Shift_P': 
 			case 'Shift_Q': case 'Alt_z': case 'Control_c': case 'Control_v': case 'Control_z': case 'Control_x': case 'Alt_q': case 'Shift_F': case 'Alt_F6': 
