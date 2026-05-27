@@ -91,10 +91,10 @@ public class Animation
 			case "Control_Shift_O": case "Control_Shift_L": case "F7": case "F11": case "Control_a": case "q": case "u": case "Control_q":
 			case "F8": case "Alt_F8": case "F10": case "j":case "Shift_F3": case "Control_F3": case "Shift_B": case "Control_F6": case "F6":
 			case "Alt_Shift_F3":case "Shift_F6":case "Alt_Shift_O":case "Control_F5":case "Control_F9": case "d": case "e": case "Shift_I":
-			case "Alt_F1": case "Alt_F2":
+			case "Alt_F1": case "Alt_F2": case "Control_Shift_Q":
 				return Constants.LOWER_THIRD;
 			case "Alt_p": case "r": case "h": case "Control_y": case "Control_k": case "Shift_F4": case "Shift_O": case "y": case "g": case "k":
-			case "Shift_C": case "Control_Shift_F3": case "Control_Shift_R": case "Control_Shift_J": 
+			case "Shift_C": case "Control_Shift_F3": case "Control_Shift_R": case "Control_Shift_J":
 			case "Alt_Shift_N":case "Alt_Shift_M": case "Alt_Shift_K": case "Alt_Shift_X": case "Alt_Shift_T": case "Alt_Shift_V":
 			case "Control_Shift_U": case "Control_Shift_V": case "6": case "Control_4": case "Alt_Shift_E":
 			case "Control_Shift_U_change_on": case "Control_Shift_V_change_on":
@@ -7982,6 +7982,14 @@ public class Animation
 			}
 			break;
 		case "Control_F6": case "F6": case "Shift_F6":
+			if(this.infobar.isInfobar_on_screen() == true) {
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_LtHowOut$Move_X_ForShrink"
+						+ "*TRANSFORMATION*POSITION*X SET 0\0", print_writers);
+			}else {
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_LtHowOut$Move_X_ForShrink"
+						+ "*TRANSFORMATION*POSITION*X SET -495\0", print_writers);
+			}
+			
 			T20_MumbaiAnimateIn(Constants.SHRUNK_INFOBAR, print_writers, config); // Push infobar
 			if(this.infobar.isInfobar_on_screen() == true ||this.specialBugOnScreen.equalsIgnoreCase(CricketUtil.TOSS)) {
 				processAnimation(Constants.FRONT, print_writers, "anim_Infobar$Shrink", "START");
@@ -7992,8 +8000,16 @@ public class Animation
 			this.whichGraphicOnScreen = whatToProcess;
 			break;
 		case "F5":case "F9":case "l":case "Shift_F5":case "Shift_F9":case "Control_h":case "Alt_F12": case "F7": case "F11": case "Control_a": case "q": 
-		case "u": case "Control_q": case "Shift_F3": case "Control_F3": case "Shift_B": case "Alt_Shift_F3":
+		case "u": case "Control_q": case "Shift_F3": case "Control_F3": case "Shift_B": case "Alt_Shift_F3": case "Control_Shift_Q":
 		case "Alt_Shift_O":case "Control_F9":case "Control_F5": case "d": case "e":case "Alt_F1": case "Alt_F2": case "F8": case "Alt_F8":
+			if(this.infobar.isInfobar_on_screen() == true) {
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_LowerThird$Move_X_ForShrink"
+						+ "*TRANSFORMATION*POSITION*X SET 0\0", print_writers);
+			}else {
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_LowerThird$Move_X_ForShrink"
+						+ "*TRANSFORMATION*POSITION*X SET -286\0", print_writers);
+			}
+			
 			T20_MumbaiAnimateIn(Constants.SHRUNK_INFOBAR, print_writers, config); // Push infobar
 			if(this.infobar.isInfobar_on_screen() == true ||this.specialBugOnScreen.equalsIgnoreCase(CricketUtil.TOSS)) {
 				processAnimation(Constants.FRONT, print_writers, "anim_Infobar$Shrink", "START");
@@ -8291,7 +8307,7 @@ public class Animation
 			this.whichGraphicOnScreen = "";
 			break;
 		case "F5":case "F9":case "l":case "Shift_F5":case "Shift_F9":case "Control_h":case "Alt_F12": case "F7": case "F11": case "Control_a": case "q": 
-		case "u": case "Control_q": case "Shift_F3": case "Control_F3": case "Shift_B": case "Alt_Shift_F3":
+		case "u": case "Control_q": case "Shift_F3": case "Control_F3": case "Shift_B": case "Alt_Shift_F3": case "Control_Shift_Q":
 		case "Alt_Shift_O":case "Control_F9":case "Control_F5": case "d": case "e":case "Alt_F1": case "Alt_F2": case "F8": case "Alt_F8": case "F10":
 			processAnimation(Constants.FRONT, print_writers, "anim_LowerThird$InOut$Essentials", "CONTINUE");
 			processAnimation(Constants.FRONT, print_writers, "anim_LowerThird$InOut$Colours", "CONTINUE");
