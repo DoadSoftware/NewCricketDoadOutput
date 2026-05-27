@@ -6344,51 +6344,57 @@ function addItemsToList(whatToProcess,dataToProcess)
 			select.name = select.id;
 			
 			session_match.match.inning.forEach(function(inn){
-				if(inn.inningNumber == document.getElementById('which_inning').value){
-					inn.battingCard.forEach(function(bc){
-						if(bc.status == 'NOT OUT'){
-							if(bc.onStrike == 'YES'){
-								option = document.createElement('option');
-								option.value = bc.player.playerId;
-								option.text = bc.player.full_name;
-								select.appendChild(option);
-							}else{
-								option = document.createElement('option');
-								option.value = bc.player.playerId;
-								option.text = bc.player.full_name;
-								select.appendChild(option);
-							}
-						}
-					});
-					
-					if(inn.battingTeamId == session_match.setup.homeTeamId){
-						session_match.setup.homeSquad.forEach(function(hs){
-							option = document.createElement('option');
-							option.value = hs.playerId;
-							option.text = hs.full_name;
-							select.appendChild(option);
-						});
-						session_match.setup.homeOtherSquad.forEach(function(hos){
-							option = document.createElement('option');
-							option.value = hos.playerId;
-							option.text = hos.full_name  + ' (OTHER)';
-							select.appendChild(option);
-						});
-					}else {
-						session_match.setup.awaySquad.forEach(function(as){
-							option = document.createElement('option');
-							option.value = as.playerId;
-							option.text = as.full_name;
-							select.appendChild(option);
-						});
-						session_match.setup.awayOtherSquad.forEach(function(aos){
-							option = document.createElement('option');
-							option.value = aos.playerId;
-							option.text = aos.full_name  + ' (OTHER)';
-							select.appendChild(option);
-						});
-					}
-				}
+			    if(inn.inningNumber == document.getElementById('which_inning').value){
+			        let addedPlayers = new Set();
+			        // Add NOT OUT batters with striker first
+			        inn.battingCard
+			            .filter(bc => bc.status == 'NOT OUT')
+			            .sort((a,b) => a.onStrike == 'YES' ? -1 : 1)
+			            .forEach(function(bc){
+			                let option = document.createElement('option');
+			                option.value = bc.player.playerId;
+			                option.text = bc.player.full_name;
+			                select.appendChild(option);
+			                addedPlayers.add(bc.player.playerId);
+			            });
+
+			        // Add squad players
+			        if(inn.battingTeamId == session_match.setup.homeTeamId){
+			            session_match.setup.homeSquad.forEach(function(hs){
+			                if(!addedPlayers.has(hs.playerId)){
+			                    let option = document.createElement('option');
+			                    option.value = hs.playerId;
+			                    option.text = hs.full_name;
+			                    select.appendChild(option);
+			                }
+			            });
+			            session_match.setup.homeOtherSquad.forEach(function(hos){
+			                if(!addedPlayers.has(hos.playerId)){
+			                    let option = document.createElement('option');
+			                    option.value = hos.playerId;
+			                    option.text = hos.full_name + ' (OTHER)';
+			                    select.appendChild(option);
+			                }
+			            });
+			        } else {
+			            session_match.setup.awaySquad.forEach(function(as){
+			                if(!addedPlayers.has(as.playerId)){
+			                    let option = document.createElement('option');
+			                    option.value = as.playerId;
+			                    option.text = as.full_name;
+			                    select.appendChild(option);
+			                }
+			            });
+			            session_match.setup.awayOtherSquad.forEach(function(aos){
+			                if(!addedPlayers.has(aos.playerId)){
+			                    let option = document.createElement('option');
+			                    option.value = aos.playerId;
+			                    option.text = aos.full_name + ' (OTHER)';
+			                    select.appendChild(option);
+			                }
+			            });
+			        }
+			    }
 			});
 
 			select.setAttribute('onchange',"setDropdownOptionToSelectOptionArray(this, 0)");

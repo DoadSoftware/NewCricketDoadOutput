@@ -318,10 +318,12 @@ public class InfobarGfx
 							populateVizInfobarRightSection(true,print_writers, matchAllData, 1, 1);	
 						}	
 					}
-					if(!infobar.getRight_full_section().equalsIgnoreCase("BLANK")) {
+					if(infobar.getRight_full_section() != null && !infobar.getRight_full_section().isEmpty() && 
+							!infobar.getRight_full_section().equalsIgnoreCase("BLANK")) {
 						populateVizInfobarRightFullSection(true, print_writers, matchAllData, 1, 1);
 					}
-					if(!infobar.getFull_section().equalsIgnoreCase("BLANK")) {
+					if(infobar.getFull_section() != null && !infobar.getFull_section().isEmpty() && 
+							!infobar.getFull_section().equalsIgnoreCase("BLANK")) {
 						populateFullSection(true,print_writers, matchAllData, 1);
 					}
 					
