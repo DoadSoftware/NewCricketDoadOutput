@@ -127,11 +127,12 @@ public class Constants
 	public final static String T20_MUMBAI_Text = "IMAGE*/Default/Assets/Text/";
 	public final static String T20_MUMBAI_Text1 = "IMAGE*/Default/Assets/Text1/";
 	public final static String T20_MUMBAI_Text2 = "IMAGE*/Default/Assets/Text2/";
+	public final static String T20_MUMBAI_ICONS = "IMAGE*/Default/Assets/Icons/";
 	
 	public final static String T20_MUMBAI_SPEED = "C:\\\\Sports\\\\Cricket\\\\Speed\\\\Speed.txt";
 	public final static String HASHTAG = "C:\\\\Sports\\\\Cricket\\\\HashTag.txt";
 	public final static String T20_MUMBAI_TEAMCOLOUR_GRADIENTS = "IMAGE*/T20/Assets/Colours/Gradients/";
-	public final static String T20_MUMBAI_ICONS = "IMAGE*/T20/Assets/Icons/";
+	
 	public final static String T20_MUMBAI_TEAMCOLOUR_FLAT = "IMAGE*/T20/Assets/Colours/Flat/";
 	public final static String T20_MUMBAI_TEAMCOLOUR_TEXTCOLOUR = "IMAGE*/T20/Assets/Colours/TextColour/";
 	

@@ -2474,6 +2474,22 @@ public class InfobarGfx
 				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_Infobar$All$Normal$BatterSection$Batter" + WhichBatsman + "$Side" + WhichSubSide 
 						+ "$txt_Balls*GEOM*TEXT SET " + battingCardList.get(WhichBatsman-1).getBalls() + "\0", print_writers);
 				
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_Infobar$All$Normal$BatterSection$Batter" + WhichBatsman + "$Side" + WhichSubSide 
+						+ "$Impact$select_Impact*FUNCTION*Omo*vis_con SET 0\0", print_writers);
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_Infobar$All$Normal$BatterSection$Batter" + WhichBatsman + "$Side" + WhichSubSide 
+						+ "$txt_Batter*FUNCTION*Maxsize*WIDTH_X SET 300\0", print_writers);
+				
+				if(!CricketFunctions.checkBatAndBallImpactInOutPlayer(matchAllData.getEventFile().getEvents(), battingCardList.get(WhichBatsman-1).getPlayerId()).isEmpty()) {
+					switch(CricketFunctions.checkBatAndBallImpactInOutPlayer(matchAllData.getEventFile().getEvents(), battingCardList.get(WhichBatsman-1).getPlayerId())) {
+					case "IMP_IN":
+						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_Infobar$All$Normal$BatterSection$Batter" + WhichBatsman + "$Side" 
+								+ WhichSubSide + "$Impact$select_Impact*FUNCTION*Omo*vis_con SET 1\0", print_writers);
+						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_Infobar$All$Normal$BatterSection$Batter" + WhichBatsman + "$Side" 
+								+ WhichSubSide + "$txt_Batter*FUNCTION*Maxsize*WIDTH_X SET 220\0", print_writers);
+						break;
+					}
+				}
+				
 				if((WhichBatsman == 1 && battingCardList.get(0).getOnStrike() != null && battingCardList.get(0).getOnStrike().equalsIgnoreCase(CricketUtil.YES))
 						||(WhichBatsman == 2 && battingCardList.get(1).getOnStrike() != null && battingCardList.get(1).getOnStrike().equalsIgnoreCase(CricketUtil.YES))) {
 					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_Infobar$All$Normal$BatterSection$Batter" + WhichBatsman + "$Side" + WhichSubSide 
@@ -3472,6 +3488,22 @@ public class InfobarGfx
 					+ "*GEOM*TEXT SET " + bowlingCard.getWickets() + slashOrDash + bowlingCard.getRuns() + "\0", print_writers);
 			CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_Infobar$All$Normal$BowlerSection$Bowler$Side" + WhichSide + "$txt_Over"
 					+ "*GEOM*TEXT SET " + CricketFunctions.OverBalls(bowlingCard.getOvers(), bowlingCard.getBalls()) + "\0", print_writers);
+			
+			CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_Infobar$All$Normal$BowlerSection$Bowler$Side" + WhichSide + "$Impact"
+					+ "$select_Impact*FUNCTION*Omo*vis_con SET 0\0", print_writers);
+			CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_Infobar$All$Normal$BowlerSection$Bowler$Side" + WhichSide + "$txt_BowlerName"
+					+ "*FUNCTION*Maxsize*WIDTH_X SET 260\0", print_writers);
+			
+			if(!CricketFunctions.checkBatAndBallImpactInOutPlayer(matchAllData.getEventFile().getEvents(), bowlingCard.getPlayerId()).isEmpty()) {
+				switch(CricketFunctions.checkBatAndBallImpactInOutPlayer(matchAllData.getEventFile().getEvents(), bowlingCard.getPlayerId())) {
+				case "IMP_IN":
+					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_Infobar$All$Normal$BowlerSection$Bowler$Side" + WhichSide + "$Impact"
+							+ "$select_Impact*FUNCTION*Omo*vis_con SET 1\0", print_writers);
+					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_Infobar$All$Normal$BowlerSection$Bowler$Side" + WhichSide + "$txt_BowlerName"
+							+ "*FUNCTION*Maxsize*WIDTH_X SET 180\0", print_writers);
+					break;
+				}
+			}
 			
 			if(bowlingCard.getStatus().equalsIgnoreCase(CricketUtil.CURRENT + CricketUtil.BOWLER)) {
 				this_animation.processAnimation(Constants.FRONT, print_writers, "BowlerLowliight", "SHOW 0.0");
