@@ -805,9 +805,12 @@ public class BugsAndMiniGfx
 					findAny().orElse(null);
 			
 			switch (config.getBroadcaster()) {
-			case Constants.NPL: case Constants.MPL: case Constants.LEGENDS: case Constants.APL:
+			case Constants.NPL: case Constants.MPL: case Constants.APL:
 				team = Teams.stream().filter(tm->tm.getTeamName3().equalsIgnoreCase(whatToProcess.split(",")[2].split("-")[0])).findAny().orElse(null);
 				break;
+			case Constants.LEGENDS:
+				team = Teams.stream().filter(tm->tm.getTeamName1().equalsIgnoreCase(whatToProcess.split(",")[2].split("-")[0])).findAny().orElse(null);
+				break;	
 			default:
 				team = Teams.stream().filter(tm->tm.getTeamName4().equalsIgnoreCase(whatToProcess.split(",")[2].split("-")[0])).findAny().orElse(null);
 				break;
