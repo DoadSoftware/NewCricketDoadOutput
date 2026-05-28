@@ -439,11 +439,11 @@ function processUserSelectionData(whatToProcess,dataToProcess)
 				break;
 			case 'Control_h':
 				switch($('#selected_broadcaster').val().toUpperCase()){
-				case 'NPL': case 'LEGENDS-90':  case 'MPL': case 'T20_MUMBAI': case 'BENGAL-T20': case 'APL': case 'VIDARBHA':
+				case 'NPL': case 'LEGENDS-90':  case 'MPL': case 'BENGAL-T20': case 'APL': case 'VIDARBHA':
 					dataToProcess = dataToProcess + ',' + document.getElementById('which_inning').value
 					processCricketProcedures("POPULATE-GRAPHICS", dataToProcess);
 					break;
-				case 'ICC-U19-2023': case 'ISPL': 
+				case 'ICC-U19-2023': case 'ISPL': case 'T20_MUMBAI':
 					addItemsToList(dataToProcess,null); 
 					break;
 				}
@@ -536,9 +536,10 @@ function processUserSelectionData(whatToProcess,dataToProcess)
 			case 'Control_Shift_D': case 'Alt_Shift_Z': case 'Control_Shift_F7': case 'Shift_I': case 'Alt_Shift_C': case 'Control_Shift_F2':  case 'Control_Shift_F4':
 			case 'Control_Shift_U': case 'Control_Shift_V': case 'Control_Shift_O':case 'Control_u':case 'Shift_W':case "Alt_b": case "Shift_G": case 'Control_5': 
 			case 'Control_F8': case 'Control_Shift_F11': case 'Alt_/': case "Alt_Shift_B":case 'Alt_Shift_F4':case 'Alt_Shift_F6': case 'Alt_Shift_F7': case 'Shift_L':
-			case 'Alt_x':case 'Alt_f':
+			case 'Alt_x':
 				addItemsToList(dataToProcess,null); 
 				break;
+				
 			//changed shift_f11 to control_f11
 			case 'Shift_F10': case 'm': case 'Control_F1': case 'Control_a': case "Control_Shift_F10": case 'Alt_o':  case 'Shift_F3': case 'd': case 'e': case 'Control_F6': 
 			case 'Control_F7': case 'Control_k': case 'Control_F10': case 'Control_F3':  case 'a': case 't': case 'n': case 'Shift_F1': case 'Shift_F2': case 'Shift_D': 
@@ -631,7 +632,18 @@ function processUserSelectionData(whatToProcess,dataToProcess)
 				}
 				
 				break;
-			case 'Alt_f': case 'Alt_g': case 'ArrowDown': case 'ArrowUp': case 'w': case 'i': case 'f': case 's': case '0': case ';': case 'Alt_e': case 'Shift_)':
+			case 'Alt_f':
+				switch($('#selected_broadcaster').val().toUpperCase()){
+				case 'LEGENDS-90':
+					addItemsToList(dataToProcess,null); 
+					break;
+				default:
+					dataToProcess = dataToProcess + ',' + document.getElementById('which_inning').value;
+					processCricketProcedures("ANIMATE-IN-GRAPHICS", dataToProcess);
+					break;	
+				}
+				break;	
+			case 'Alt_g': case 'ArrowDown': case 'ArrowUp': case 'w': case 'i': case 'f': case 's': case '0': case ';': case 'Alt_e': case 'Shift_)':
 			case 'Control_2': case 'Control_3': case 'ArrowLeft': case 'ArrowRight':case 'Shift_(':case 'Shift_*': case 'Control_Shift_*': case 'Alt_y':
 				dataToProcess = dataToProcess + ',' + document.getElementById('which_inning').value;
 				processCricketProcedures("ANIMATE-IN-GRAPHICS", dataToProcess);
@@ -2458,43 +2470,71 @@ function addItemsToList(whatToProcess,dataToProcess)
 			}
 		break;
 		case 'Control_i':
-			header_text.innerHTML = 'BATSMAN SCORE SPLIT';
-			select = document.createElement('select');
-			select.id = 'selectPlayer';
-			select.name = select.id;
-			
-			session_match.match.inning.forEach(function(inn){
-				if(inn.inningNumber == document.getElementById('which_inning').value){
+			switch($('#selected_broadcaster').val().toUpperCase()){
+			case 'T20_MUMBAI':
+				header_text.innerHTML = 'PLAYER INNING BUILDER';
+								
+				select = document.createElement('select');
+				select.id = 'selectType';
+				select.name = select.id;
+				
+				session_match.match.inning.forEach(function(inn){
+				if(inn.isCurrentInning == 'YES'){
 					inn.battingCard.forEach(function(bc){
-						if(bc.status == 'NOT OUT'){
-							if(bc.onStrike == 'YES'){
-								option = document.createElement('option');
-								option.value = bc.playerId;
-								option.text = bc.player.full_name + " - " + bc.status;
-								select.appendChild(option);
-							}else{
-								option = document.createElement('option');
-								option.value = bc.playerId;
-								option.text = bc.player.full_name + " - " + bc.status;
-								select.appendChild(option);
-							}
-						}
-					});
-					
-					inn.battingCard.forEach(function(bc,bc_index,bc_arr){
+					if(bc.status == 'NOT OUT'){
 						option = document.createElement('option');
 						option.value = bc.playerId;
 						option.text = bc.player.full_name + " - " + bc.status;	
-						select.appendChild(option);
-					});
+						select.appendChild(option);	
+					}
+				});
 				}
-			});
-			
-			select.setAttribute('onchange',"setDropdownOptionToSelectOptionArray(this, 0)");
-			row.insertCell(cellCount).appendChild(select);
-			setDropdownOptionToSelectOptionArray($(select),0);
-			removeSelectDuplicates(select.id);
-			cellCount = cellCount + 1;
+				});
+				select.setAttribute('onchange',"setDropdownOptionToSelectOptionArray(this, 0)");
+				row.insertCell(cellCount).appendChild(select);
+				setDropdownOptionToSelectOptionArray($(select),0);
+				cellCount++;
+				break;
+			default:
+				header_text.innerHTML = 'BATSMAN SCORE SPLIT';
+				select = document.createElement('select');
+				select.id = 'selectPlayer';
+				select.name = select.id;
+				
+				session_match.match.inning.forEach(function(inn){
+					if(inn.inningNumber == document.getElementById('which_inning').value){
+						inn.battingCard.forEach(function(bc){
+							if(bc.status == 'NOT OUT'){
+								if(bc.onStrike == 'YES'){
+									option = document.createElement('option');
+									option.value = bc.playerId;
+									option.text = bc.player.full_name + " - " + bc.status;
+									select.appendChild(option);
+								}else{
+									option = document.createElement('option');
+									option.value = bc.playerId;
+									option.text = bc.player.full_name + " - " + bc.status;
+									select.appendChild(option);
+								}
+							}
+						});
+						
+						inn.battingCard.forEach(function(bc,bc_index,bc_arr){
+							option = document.createElement('option');
+							option.value = bc.playerId;
+							option.text = bc.player.full_name + " - " + bc.status;	
+							select.appendChild(option);
+						});
+					}
+				});
+				
+				select.setAttribute('onchange',"setDropdownOptionToSelectOptionArray(this, 0)");
+				row.insertCell(cellCount).appendChild(select);
+				setDropdownOptionToSelectOptionArray($(select),0);
+				removeSelectDuplicates(select.id);
+				cellCount = cellCount + 1;
+				break;
+			}
 		break;	
 		case 'Control_F11':
 			header_text.innerHTML = 'SUMMARY';
@@ -6169,7 +6209,7 @@ function addItemsToList(whatToProcess,dataToProcess)
 			cellCount = cellCount + 1
 			break;
 
-		case 'Control_h': case 'Control_g': case 'Control_y':
+		case 'Control_g': case 'Control_y':
 			switch($('#selected_broadcaster').val().toUpperCase()){
 				case 'ICC-U19-2023':
 					header_text.innerHTML = 'POWERPLAY';
@@ -6270,7 +6310,36 @@ function addItemsToList(whatToProcess,dataToProcess)
 					break;	
 			}
 			
-			break;	
+			break;
+			case 'Control_h':
+			switch($('#selected_broadcaster').val().toUpperCase()){
+				case 'T20_MUMBAI':
+					header_text.innerHTML = 'PHASE';
+	
+					select = document.createElement('select');
+					select.style = 'width:130px';
+					select.id = 'selectphase';
+					select.name = select.id;
+					
+					option = document.createElement('option');
+					option.value = 'PHASE_WISE';
+					option.text = 'PHASE WISE';
+					select.appendChild(option);
+					
+					option = document.createElement('option');
+					option.value = 'RUN_RATE';
+					option.text = 'RUN RATE';
+					select.appendChild(option);
+					
+					select.setAttribute('onchange',"setDropdownOptionToSelectOptionArray(this, 0)");
+					row.insertCell(cellCount).appendChild(select);
+					setDropdownOptionToSelectOptionArray($(select),0);
+					
+					cellCount = cellCount + 1;
+					break;
+			}
+			
+			break;			
 			
 		case 'u':
 			
@@ -6757,7 +6826,7 @@ function addItemsToList(whatToProcess,dataToProcess)
 			break;
 		case 'Alt_f':
 			header_text.innerHTML = 'Mini Options'; 
-		
+					
 			select = document.createElement('select');
 			select.id = 'selectType';
 			select.name = select.id;

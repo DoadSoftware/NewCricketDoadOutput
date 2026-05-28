@@ -275,7 +275,14 @@ public class Caption
 				status = this_lowerThirdGfx.populatePointers(whatToProcess, whichSide, matchAllData);
 				break;
 			case "Control_i":
-				status = this_lowerThirdGfx.populateInningBuilder(whatToProcess, whichSide, matchAllData);
+				switch (config.getBroadcaster()) {
+				case Constants.T20_MUMBAI:
+					status = this_lowerThirdGfx.PopulateL3rdPlayerBuilder(whatToProcess,whichSide, matchAllData);
+					break;
+				default:
+					status = this_lowerThirdGfx.populateInningBuilder(whatToProcess, whichSide, matchAllData);
+					break;
+				}
 				break;
 			case "Control_1":
 				status = this_infobarGfx.populatebonus(whatToProcess,whichSide, matchAllData);
