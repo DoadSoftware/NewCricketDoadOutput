@@ -317,8 +317,8 @@ public class Caption
 				this_fullFramesGfx.WhichType = whatToProcess.split(",")[3];
 				switch (config.getBroadcaster()) {
 				case Constants.T20_MUMBAI:
-					status = this_fullFramesGfx.PopulateBatPerformerFF(whichSide, whatToProcess.split(",")[0], matchAllData, 
-							Integer.valueOf(whatToProcess.split(",")[1]));
+//					status = this_fullFramesGfx.PopulateBatPerformerFF(whichSide, whatToProcess.split(",")[0], matchAllData, 
+//							Integer.valueOf(whatToProcess.split(",")[1]));
 					break;
 				case Constants.NPL: case Constants.MPL: case Constants.APL:
 					if(!this_anim.whichGraphicOnScreen.equalsIgnoreCase("F1") && !this_anim.whichGraphicOnScreen.equalsIgnoreCase("Control_Shift_F1")) {

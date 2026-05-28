@@ -586,7 +586,7 @@ public class IndexController
 	}
 	
 	private String handleHeadToHead() throws Exception {
-	    CricketFunctions.exportMatchData(session_match);
+	    CricketFunctions.exportMatchData(session_match, basePath);
 	    return objectMapper.writeValueAsString(session_match);
 	}
 	private String handleConfigData(String valueToProcess)throws Exception {
@@ -745,8 +745,18 @@ public class IndexController
 				}
 				break;
 			case Constants.T20_MUMBAI:
-				this_animation.processInfoBarPreview(valueToProcess,print_writers,this_caption.whichSide,
-						session_configuration,this_animation.whichGraphicOnScreen);
+				switch(command) {
+				case "Control_F12": case "Shift_F12":
+					this_animation.processInfoBarPreview(valueToProcess,print_writers,this_caption.whichSide,
+							session_configuration,this_animation.whichGraphicOnScreen);
+					break;
+				default:
+					if (this_caption.status.equalsIgnoreCase(Constants.OK)) {
+						processAnimations("ANIMATE-IN-GRAPHICS",session_configuration,valueToProcess,print_writers,headToHead);
+						this_caption.status = CricketUtil.YES;
+					}
+					return objectMapper.writeValueAsString(this_caption);
+				}
 				break;
 			default:
 				if (this_caption.status.equalsIgnoreCase(Constants.OK)) {
