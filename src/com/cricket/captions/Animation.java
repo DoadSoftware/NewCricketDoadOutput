@@ -92,7 +92,7 @@ public class Animation
 			case "Control_Shift_O": case "Control_Shift_L": case "F7": case "F11": case "Control_a": case "q": case "u": case "Control_q":
 			case "F8": case "Alt_F8": case "F10": case "j":case "Shift_F3": case "Control_F3": case "Shift_B": case "Control_F6": case "F6":
 			case "Alt_Shift_F3":case "Shift_F6":case "Alt_Shift_O":case "Control_F5":case "Control_F9": case "d": case "e": case "Shift_I":
-			case "Alt_F1": case "Alt_F2": case "Control_Shift_Q": case "Control_i":
+			case "Alt_F1": case "Alt_F2": case "Control_Shift_Q": case "Control_i": case "Control_shift_O":
 				return Constants.LOWER_THIRD;
 			case "Alt_p": case "r": case "h": case "Control_y": case "Control_k": case "Shift_F4": case "Shift_O": case "y": case "g": case "k":
 			case "Shift_C": case "Control_Shift_F3": case "Control_Shift_R": case "Control_Shift_J":
@@ -8026,7 +8026,7 @@ public class Animation
 			processAnimation(Constants.BACK, print_writers, "BackVeil$Director", "START");
 			this.whichGraphicOnScreen = whatToProcess;
 			break;
-			
+				
 		case "h": case "Control_y": case "Control_k": case "Shift_F4": case "Shift_O": case "y": case "g": case "k":
 		case "Shift_C": case "Control_Shift_F3": case "Control_Shift_R": case "Control_Shift_J": 
 			processAnimation(Constants.FRONT, print_writers, "Bug", "START");
@@ -8174,9 +8174,7 @@ public class Animation
 			
 		case "Control_Shift_O":
 			T20_MumbaiAnimateIn("ArrowDown,", print_writers, config); // Push infobar
-			processAnimation(Constants.FRONT, print_writers, "PositionForInfobar$NoInfobar", "START");
-			
-			processAnimation(Constants.FRONT, print_writers, "L3_PlayerLineUP", "START");
+			processAnimation(Constants.FRONT, print_writers, "anim_Lt_BattingCard$InOut", "START");
 			this.whichGraphicOnScreen = whatToProcess;
 			break;
 			
@@ -8488,13 +8486,13 @@ public class Animation
 			this.whichGraphicOnScreen = "";
 			T20_MumbaiAnimateIn(Constants.SHRUNK_INFOBAR, print_writers, config); // Push infobar
 			break;
-			
+				
 		case "Control_Shift_O":
-			processAnimation(Constants.FRONT, print_writers, "L3_PlayerLineUP", "CONTINUE");
+			processAnimation(Constants.FRONT, print_writers, "anim_Lt_BattingCard$InOut", "CONTINUE");
 			this.whichGraphicOnScreen = "";
 			TimeUnit.MILLISECONDS.sleep(500);
 			T20_MumbaiAnimateIn("ArrowUp,", print_writers, config); // Push infobar
-			processAnimation(Constants.FRONT, print_writers, "PositionForInfobar", "SHOW 0.0");
+			processAnimation(Constants.FRONT, print_writers, "anim_Lt_BattingCard", "SHOW 0.0");
 			break;
 			
 		case "m": case "Control_m":
@@ -11732,6 +11730,8 @@ public class Animation
 		case Constants.T20_MUMBAI:
 			if(whatToProcess.contains("CLEAR-ALL")) {
 				processAnimation(Constants.FRONT, print_writers, "anim_Infobar", "SHOW 0.0");
+				processAnimation(Constants.FRONT, print_writers, "anim_LT_Ident", "SHOW 0.0");
+				processAnimation(Constants.FRONT, print_writers, "anim_Lt_BattingCard", "SHOW 0.0");
 				processAnimation(Constants.FRONT, print_writers, "anim_LT_HowOut", "SHOW 0.0");
 				processAnimation(Constants.FRONT, print_writers, "anim_LowerThird", "SHOW 0.0");
 				processAnimation(Constants.FRONT, print_writers, "ChangeLowerThird", "SHOW 0.0");
@@ -11742,6 +11742,13 @@ public class Animation
 				processAnimation(Constants.FRONT, print_writers, "Change_LT_NameSuper", "SHOW 0.0");
 				processAnimation(Constants.FRONT, print_writers, "MoveForNameSuper", "SHOW 0.0");
 				processAnimation(Constants.FRONT, print_writers, "Loop", "SHOW 0.0");
+				processAnimation(Constants.FRONT, print_writers, "anim_Impact", "SHOW 0.0");
+				processAnimation(Constants.FRONT, print_writers, "anim_TossBug", "SHOW 0.0");
+				processAnimation(Constants.FRONT, print_writers, "MoveForNameSuper", "SHOW 0.0");
+				processAnimation(Constants.FRONT, print_writers, "Anim_Bugs", "SHOW 0.0");
+				processAnimation(Constants.FRONT, print_writers, "anim_TargetBug", "SHOW 0.0");
+				processAnimation(Constants.FRONT, print_writers, "anim_BoundaryCounter", "SHOW 0.0");
+				processAnimation(Constants.FRONT, print_writers, "anim_SixDistance", "SHOW 0.0");
 				
 				processAnimation(Constants.BACK, print_writers, "Loop", "SHOW 0.0");
 				processAnimation(Constants.BACK, print_writers, "AUDIO", "SHOW 0.0");
@@ -12578,10 +12585,10 @@ public class Animation
 					
 					break;
 				case "Shift_F10":
-					previewCommand = previewCommand + "anim_FullFrames$In_Out$Main$Worm$In 2.580";
+					previewCommand = previewCommand + "anim_FullFrames$In_Out$Main$Worm$In 2.580 anim_FullFrames$In_Out$Main$Worm$In$Runs 2.580";
 					break;
 				case "Control_F10":
-					previewCommand = previewCommand + "anim_FullFrames$In_Out$Main$Manhattan$In 2.580";
+					previewCommand = previewCommand + "anim_FullFrames$In_Out$Main$Manhattan$In 2.580 anim_FullFrames$In_Out$Main$Manhattan$In$Runs 2.580";
 					break;
 				case "p":
 					
@@ -12647,10 +12654,12 @@ public class Animation
 					previewCommand = previewCommand + " Change_Fullframes$Teams 1.320 Change_Fullframes$Teams$Change_Out 0.520 Change_Fullframes$Teams$Change_In 1.320";
 					break;
 				case "Shift_F10":
-					previewCommand = previewCommand + " Change_Fullframes$Worm 1.680 Change_Fullframes$Worm$Change_Out 0.600 Change_Fullframes$Worm$Change_In 1.680";
+					previewCommand = previewCommand + " Change_Fullframes$Worm 1.680 Change_Fullframes$Worm$Change_Out 0.600 Change_Fullframes$Worm$Change_In 1.680 "
+							+ "Change_Fullframes$Worm$Change_In$Runs 1.680";
 					break;
 				case "Control_F10":
-					previewCommand = previewCommand + " Change_Fullframes$Manhattan 1.680 Change_Fullframes$Manhattan$Change_Out 0.600 Change_Fullframes$Manhattan$Change_In 1.680";
+					previewCommand = previewCommand + " Change_Fullframes$Manhattan 1.680 Change_Fullframes$Manhattan$Change_Out 0.600 Change_Fullframes$Manhattan$Change_In 1.680 "
+							+ "Change_Fullframes$Manhattan$Change_In$Runs 1.680";
 					break;
 				case "p":
 					
@@ -12701,10 +12710,12 @@ public class Animation
 						
 						break;
 					case "Shift_F10":
-						previewCommand = previewCommand + " Change_Fullframes$Worm 1.680 Change_Fullframes$Worm$Change_Out 0.600 Change_Fullframes$Worm$Change_In 1.680";
+						previewCommand = previewCommand + " Change_Fullframes$Worm 1.680 Change_Fullframes$Worm$Change_Out 0.600 Change_Fullframes$Worm$Change_In 1.680 "
+								+ "Change_Fullframes$Worm$Change_In$Runs 1.680";
 						break;
 					case "Control_F10":
-						previewCommand = previewCommand + " Change_Fullframes$Manhattan 1.680 Change_Fullframes$Manhattan$Change_Out 0.600 Change_Fullframes$Manhattan$Change_In 1.680";
+						previewCommand = previewCommand + " Change_Fullframes$Manhattan 1.680 Change_Fullframes$Manhattan$Change_Out 0.600 Change_Fullframes$Manhattan$Change_In 1.680 "
+								+ "Change_Fullframes$Manhattan$Change_In$Runs 1.680";
 						break;
 					case "p":
 						
@@ -13431,7 +13442,7 @@ public class Animation
 						previewCommands = "L3MatchIdent 1.840";
 						break;
 					case "Control_Shift_O":
-						previewCommands = "L3_PlayerLineUP 1.520";
+						previewCommands = "anim_Lt_BattingCard$InOut$In 2.080";
 						break;
 					case "Shift_I":
 						previewCommands = "SrinkInfobar 1.180 ImpactPlayer$IN-OUT 2.460";
