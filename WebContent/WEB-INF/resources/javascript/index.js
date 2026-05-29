@@ -6719,7 +6719,7 @@ function addItemsToList(whatToProcess,dataToProcess)
 					option.text = session_match.setup.awayTeam.teamName4 + '-' + 'FIELD';
 					select.appendChild(option);
 					break;
-				case 'NPL': case 'LEGENDS-90':  case 'MPL': case 'BENGAL-T20': case 'APL': case 'VIDARBHA':
+				case 'NPL': case 'LEGENDS-90':  case 'MPL': case 'BENGAL-T20': case 'APL': case 'VIDARBHA': case 'T20_MUMBAI':
 				option = document.createElement('option');
 				option.value = session_match.setup.homeTeam.teamName1 + '-' + 'BAT';
 				option.text = session_match.setup.homeTeam.teamName1 + '-' + 'BAT';

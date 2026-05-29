@@ -7945,7 +7945,7 @@ public class Animation
 			this.whichGraphicOnScreen = whatToProcess;
 			break;
 		case "Alt_p": 
-			processAnimation(Constants.FRONT, print_writers, "Bug", "START");
+			processAnimation(Constants.FRONT, print_writers, "anim_TossBug", "START");
 			this.specialBugOnScreen = CricketUtil.TOSS;
 			break;
 		case "Shift_F1":  case "Shift_F2":
@@ -7975,8 +7975,7 @@ public class Animation
 			
 		case "Control_Shift_U": case "Control_Shift_V":
 			T20_MumbaiAnimateIn(Constants.SHRUNK_INFOBAR, print_writers, config);
-			processAnimation(Constants.FRONT, print_writers, "BatterScore$IN-OUT", "START");
-			processAnimation(Constants.FRONT, print_writers, "BatterScore$Main", "START");
+			processAnimation(Constants.FRONT, print_writers, "anim_Pop_Up", "START");
 			this.whichGraphicOnScreen = whatToProcess;
 			break;
 		case "6": case "Control_4":
@@ -8002,12 +8001,20 @@ public class Animation
 			break;
 			
 		case "Shift_I":
+			if(this.infobar.isInfobar_on_screen() == true) {
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_Impact$Move_X_ForShrink"
+						+ "*TRANSFORMATION*POSITION*X SET 0\0", print_writers);
+			}else {
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_Impact$Move_X_ForShrink"
+						+ "*TRANSFORMATION*POSITION*X SET -600\0", print_writers);
+			}
+			
 			if(whichGraphicOnScreen.equalsIgnoreCase("Shift_I")) {
-				processAnimation(Constants.FRONT, print_writers, "ImpactPlayer$Change", "START");
+				processAnimation(Constants.FRONT, print_writers, "anim_Impact$SubToImpact", "START");
 				this.whichGraphicOnScreen = whatToProcess;
 			}else {
 				T20_MumbaiAnimateIn(Constants.SHRUNK_INFOBAR, print_writers, config);
-				processAnimation(Constants.FRONT, print_writers, "ImpactPlayer$IN-OUT", "START");
+				processAnimation(Constants.FRONT, print_writers, "anim_Impact$In_Out", "START");
 				this.whichGraphicOnScreen = whatToProcess.split(",")[0];
 			}
 			break;
@@ -8029,9 +8036,29 @@ public class Animation
 			
 			this.whichGraphicOnScreen = whatToProcess;
 			break;
+		case "F8": case "Alt_F8": case "F10":
+			if(this.infobar.isInfobar_on_screen() == true) {
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_NameSuper$Move_X_ForShrink"
+						+ "*TRANSFORMATION*POSITION*X SET 0\0", print_writers);
+			}else {
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_NameSuper$Move_X_ForShrink"
+						+ "*TRANSFORMATION*POSITION*X SET -495\0", print_writers);
+			}
+			
+			T20_MumbaiAnimateIn(Constants.SHRUNK_INFOBAR, print_writers, config); // Push infobar
+			if(this.infobar.isInfobar_on_screen() == true) {
+				processAnimation(Constants.FRONT, print_writers, "anim_Infobar$Shrink", "START");
+			}
+			if(this.specialBugOnScreen.equalsIgnoreCase(CricketUtil.TOSS)) {
+				processAnimation(Constants.FRONT, print_writers, "MoveForNameSuper", "START");
+			}
+			processAnimation(Constants.FRONT, print_writers, "anim_LT_NameSuper$InOut", "START");
+			
+			this.whichGraphicOnScreen = whatToProcess;
+			break;
 		case "F5":case "F9":case "l":case "Shift_F5":case "Shift_F9":case "Control_h":case "Alt_F12": case "F7": case "F11": case "Control_a": case "q": 
 		case "u": case "Control_q": case "Shift_F3": case "Control_F3": case "Shift_B": case "Alt_Shift_F3": case "Control_Shift_Q": case "Control_s":
-		case "Alt_Shift_O":case "Control_F9":case "Control_F5": case "d": case "e":case "Alt_F1": case "Alt_F2": case "F8": case "Alt_F8": case "Control_f":
+		case "Alt_Shift_O":case "Control_F9":case "Control_F5": case "d": case "e":case "Alt_F1": case "Alt_F2": case "Control_f":
 		case "Control_i":
 			if(this.infobar.isInfobar_on_screen() == true) {
 				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_LowerThird$Move_X_ForShrink"
@@ -8054,7 +8081,7 @@ public class Animation
 			
 			this.whichGraphicOnScreen = whatToProcess;
 			break;
-		case "F10": case "j":
+		case "j":
 			T20_MumbaiAnimateIn(Constants.SHRUNK_INFOBAR, print_writers, config); // Push infobar
 			if(this.infobar.isInfobar_on_screen() == true ||this.specialBugOnScreen.equalsIgnoreCase(CricketUtil.TOSS)) {
 				processAnimation(Constants.FRONT, print_writers, "PositionForInfobar$ForShrinK", "START");
@@ -8287,16 +8314,17 @@ public class Animation
 			break;
 		case "Alt_p":
 			if(this.specialBugOnScreen.equalsIgnoreCase(CricketUtil.TOSS)) {
-				processAnimation(Constants.FRONT, print_writers, "Bug", "CONTINUE");
+				processAnimation(Constants.FRONT, print_writers, "anim_TossBug", "CONTINUE");
 				this.specialBugOnScreen = "";
 			}
 			break;
 		case "Control_Shift_U": case "Control_Shift_V":
-			processAnimation(Constants.FRONT, print_writers, "BatterScore$IN-OUT", "CONTINUE");
-			processAnimation(Constants.FRONT, print_writers, "BatterScore$Main", "CONTINUE");
+			processAnimation(Constants.FRONT, print_writers, "anim_Pop_Up", "CONTINUE");
+			TimeUnit.MILLISECONDS.sleep(1000);
 			T20_MumbaiAnimateIn(Constants.SHRUNK_INFOBAR, print_writers, config);
-			TimeUnit.MILLISECONDS.sleep(2300);
-			processAnimation(Constants.FRONT, print_writers, "BatterScore", "SHOW 0.0");
+			TimeUnit.MILLISECONDS.sleep(2500);
+			processAnimation(Constants.FRONT, print_writers, "anim_Pop_Up", "SHOW 0.0");
+			processAnimation(Constants.FRONT, print_writers, "Change_PopUp", "SHOW 0.0");
 			this.whichGraphicOnScreen = "";
 			break;
 		case "6": case "Control_4":
@@ -8337,10 +8365,11 @@ public class Animation
 			break;
 			
 		case "Shift_I":
-			processAnimation(Constants.FRONT, print_writers, "ImpactPlayer$IN-OUT", "CONTINUE");
+			processAnimation(Constants.FRONT, print_writers, "anim_Impact$In_Out", "CONTINUE");
 			this.whichGraphicOnScreen = "";
 			TimeUnit.MILLISECONDS.sleep(1800);
-			processAnimation(Constants.FRONT, print_writers, "ImpactPlayer", "SHOW 0.0");
+			T20_MumbaiAnimateIn(Constants.SHRUNK_INFOBAR, print_writers, config); // Push infobar
+			processAnimation(Constants.FRONT, print_writers, "anim_Impact", "SHOW 0.0");
 			break;	
 		
 		case "Control_F6": case "F6": case "Shift_F6":
@@ -8349,9 +8378,18 @@ public class Animation
 			T20_MumbaiAnimateIn(Constants.SHRUNK_INFOBAR, print_writers, config); // Push infobar
 			this.whichGraphicOnScreen = "";
 			break;
+		case "F8": case "Alt_F8": case "F10":
+			processAnimation(Constants.FRONT, print_writers, "anim_LT_NameSuper$InOut", "CONTINUE");
+			TimeUnit.MILLISECONDS.sleep(1800);
+			if(this.specialBugOnScreen.equalsIgnoreCase(CricketUtil.TOSS)) {
+				processAnimation(Constants.FRONT, print_writers, "MoveForNameSuper", "CONTINUE REVERSE");
+			}
+			T20_MumbaiAnimateIn(Constants.SHRUNK_INFOBAR, print_writers, config); // Push infobar
+			this.whichGraphicOnScreen = "";
+			break;
 		case "F5":case "F9":case "l":case "Shift_F5":case "Shift_F9":case "Control_h":case "Alt_F12": case "F7": case "F11": case "Control_a": case "q": 
 		case "u": case "Control_q": case "Shift_F3": case "Control_F3": case "Shift_B": case "Alt_Shift_F3": case "Control_Shift_Q": case "Control_s": case "Control_f":
-		case "Alt_Shift_O":case "Control_F9":case "Control_F5": case "d": case "e":case "Alt_F1": case "Alt_F2": case "F8": case "Alt_F8": case "F10":
+		case "Alt_Shift_O":case "Control_F9":case "Control_F5": case "d": case "e":case "Alt_F1": case "Alt_F2":
 		case "Control_i":	
 			processAnimation(Constants.FRONT, print_writers, "anim_LowerThird$InOut$Essentials", "CONTINUE");
 			processAnimation(Constants.FRONT, print_writers, "anim_LowerThird$InOut$Colours", "CONTINUE");
@@ -8538,18 +8576,21 @@ public class Animation
 			break;
 			
 		case "Control_Shift_U": case "Control_Shift_V":
-			processAnimation(Constants.FRONT, print_writers, "BatterScore$Change", "START");
+			processAnimation(Constants.FRONT, print_writers, "Change_PopUp", "START");
 			break;
 		case "Control_Shift_U_change_on": case "Control_Shift_V_change_on":
-			processAnimation(Constants.FRONT, print_writers, "BatterScore$SubSide1Change", "START");
+			processAnimation(Constants.FRONT, print_writers, "Change_PopUp$Data", "START");
 			break;
 			
 		case "r":
 			processAnimation(Constants.FRONT, print_writers, "BtmChangeon", "START");
 			break;
+		case "F8": case "Alt_F8": case "F10":
+			processAnimation(Constants.FRONT, print_writers, "Change_LT_NameSuper", "START");
+			break;
 		case "F5":case "F9":case "l":case "Shift_F5":case "Shift_F9":case "Control_h":case "Alt_F12": case "F7": case "F11": case "q":case "u":case "Control_q": 
 		case "Shift_F3": case "Control_a": case "Control_F3": case "Shift_B": case "Alt_Shift_F3":case "Alt_Shift_O": case "Control_s": case "Control_f":
-		case "Control_F9":case "Control_F5": case "d": case "e":case "Alt_F1": case "Alt_F2": case "F8": case "Alt_F8": case "F10": case "Control_i":
+		case "Control_F9":case "Control_F5": case "d": case "e":case "Alt_F1": case "Alt_F2": case "Control_i":
 //			if(whatToProcess.contains("Player_ChangeON")) {
 //				processAnimation(Constants.FRONT, print_writers, "Body$Side2", "START");
 //			}else {
@@ -8723,11 +8764,11 @@ public class Animation
 			break;
 			
 		case "Control_Shift_U": case "Control_Shift_V":
-			processAnimation(Constants.FRONT, print_writers, "BatterScore$Change", "SHOW 0.0");
+			processAnimation(Constants.FRONT, print_writers, "Change_PopUp", "SHOW 0.0");
 			this.whichGraphicOnScreen = whatToProcess;
 			break;
 		case "Control_Shift_U_change_on": case "Control_Shift_V_change_on":
-			processAnimation(Constants.FRONT, print_writers, "BatterScore$SubSide1Change", "SHOW 0.0");
+			processAnimation(Constants.FRONT, print_writers, "Change_PopUp$Data", "SHOW 0.0");
 			this.whichGraphicOnScreen = whatToProcess.replace("_change_on", "");
 			break;
 			
@@ -8735,10 +8776,13 @@ public class Animation
 			processAnimation(Constants.FRONT, print_writers, "BtmChangeon", "SHOW 0.0");
 			this.whichGraphicOnScreen = whatToProcess;
 			break;
+		case "F8": case "Alt_F8": case "F10":
+			processAnimation(Constants.FRONT, print_writers, "Change_LT_NameSuper", "SHOW 0.0");
+			break;	
 		case "F5":case "F9":case "l":case "Shift_F5":case "Shift_F9":case "Control_h":case "Alt_F12":case "F7": case "F11":
 		case "Control_a": case "u": case "q": case "Control_q": case "Shift_F3": case "Control_F3": case "Shift_B":
 		case "Alt_Shift_F3":case "Alt_Shift_O":case "Control_F9":case "Control_F5": case "d": case "e": case "Control_i":
-		case "Alt_F1": case "Alt_F2": case "F8": case "Alt_F8": case "F10": case "Control_s": case "Control_f":
+		case "Alt_F1": case "Alt_F2": case "Control_s": case "Control_f":
 //			if(whatToProcess.contains("Player_ChangeON")) {
 //				processAnimation(Constants.FRONT, print_writers, "Body$Side2", "SHOW 0.0");
 //			}else {
@@ -11595,6 +11639,12 @@ public class Animation
 				processAnimation(Constants.FRONT, print_writers, "anim_LT_HowOut", "SHOW 0.0");
 				processAnimation(Constants.FRONT, print_writers, "anim_LowerThird", "SHOW 0.0");
 				processAnimation(Constants.FRONT, print_writers, "ChangeLowerThird", "SHOW 0.0");
+				processAnimation(Constants.FRONT, print_writers, "anim_Pop_Up", "SHOW 0.0");
+				processAnimation(Constants.FRONT, print_writers, "Change_PopUp", "SHOW 0.0");
+				processAnimation(Constants.FRONT, print_writers, "anim_TossBug", "SHOW 0.0");
+				processAnimation(Constants.FRONT, print_writers, "anim_LT_NameSuper", "SHOW 0.0");
+				processAnimation(Constants.FRONT, print_writers, "Change_LT_NameSuper", "SHOW 0.0");
+				processAnimation(Constants.FRONT, print_writers, "MoveForNameSuper", "SHOW 0.0");
 				processAnimation(Constants.FRONT, print_writers, "Loop", "SHOW 0.0");
 				
 				processAnimation(Constants.BACK, print_writers, "Loop", "SHOW 0.0");
@@ -13274,10 +13324,16 @@ public class Animation
 					case "Control_F6": case "F6": case "Shift_F6":
 						previewCommands = "anim_Infobar$Shrink 0.500 anim_LT_HowOut 2.080 anim_LT_HowOut$InOut 2.080 anim_LT_HowOut$InOut$In 2.080";
 						break;
+					case "F8": case "Alt_F8": case "F10":
+						previewCommands = "anim_Infobar$Shrink 0.500 anim_LT_NameSuper 2.080 anim_LT_NameSuper$InOut 2.080 anim_LT_NameSuper$InOut$Essentials 2.080 "
+								+ "anim_LT_NameSuper$InOut$Essentials$In 2.080 anim_LT_NameSuper$InOut$Colours 2.080 anim_LT_NameSuper$InOut$Colours$In 1.600 "
+								+ "anim_LT_NameSuper$InOut$Logo 2.080 anim_LT_NameSuper$InOut$Logo$In 1.800 anim_LT_NameSuper$InOut$Name 2.080 anim_LT_NameSuper$InOut$Name$In 1.700 "
+								+ "anim_LT_NameSuper$InOut$Info 2.080 anim_LT_NameSuper$InOut$Info$In 2.080";
+						break;
 					case "F5": case "F9": case "l": case "Shift_F5": case "Shift_F9": case "Control_h": case "Alt_F12":
 					case "F7": case "F11": case "Control_a": case "q": case "u": case "Control_q": case "Shift_F3": case "Control_F3":
 					case "Shift_B": case "Alt_Shift_F3":case "Alt_Shift_O": case "Control_s": case "Control_f": case "Control_i":
-					case "Control_F5":case "Control_F9": case "d": case "e":case "Alt_F1": case "Alt_F2": case "F8": case "Alt_F8": case "F10":
+					case "Control_F5":case "Control_F9": case "d": case "e":case "Alt_F1": case "Alt_F2":
 						previewCommands = "anim_Infobar$Shrink 0.500 anim_LowerThird 2.080 anim_LowerThird$InOut 2.080 anim_LowerThird$InOut$Essentials 2.080 "
 								+ "anim_LowerThird$InOut$Essentials$In 2.080 anim_LowerThird$InOut$Colours 2.080 anim_LowerThird$InOut$Colours$In 1.600 "
 								+ "anim_LowerThird$InOut$Logo 2.080 anim_LowerThird$InOut$Logo$In 1.800 anim_LowerThird$InOut$TopLine 2.080 anim_LowerThird$InOut$TopLine$In 1.700 "
@@ -13292,9 +13348,13 @@ public class Animation
 					case "F5": case "F9": case "l": case "Shift_F5": case "Shift_F9": case "Control_h": case "Alt_F12":
 					case "F7": case "F11": case "Control_a": case "q": case "u": case "Control_q": case "Shift_F3": case "Control_F3":
 					case "Shift_B": case "Alt_Shift_F3":case "Alt_Shift_O": case "Control_s": case "Control_f": case "Control_i":
-					case "Control_F5":case "Control_F9": case "d": case "e":case "Alt_F1": case "Alt_F2": case "F8": case "Alt_F8":case "F10":
+					case "Control_F5":case "Control_F9": case "d": case "e":case "Alt_F1": case "Alt_F2":
 						previewCommands = "ChangeLowerThird 2.080 ChangeLowerThird$ExpandForSubline 2.080 "
 								+ "ChangeLowerThird$InOut$Colours 2.080 ChangeLowerThird$Logo 2.080 ChangeLowerThird$TopLine 2.080 ChangeLowerThird$Subline 2.080 ";
+						break;
+					case "F8": case "Alt_F8": case "F10":
+						previewCommands = "Change_LT_NameSuper 0.700 Change_LT_NameSuper$Name 0.700 "
+								+ "Change_LT_NameSuper$InOut$Colours 0.700 Change_LT_NameSuper$Logo 0.700 Change_LT_NameSuper$Info 0.700";
 						break;
 					case "j": 
 						previewCommands = "NameSuperChange 1.640";
@@ -13710,7 +13770,7 @@ public class Animation
 		Configuration config,String whichGraphicOnScreen) throws InterruptedException 
 	{
 		if(config.getPreview().equalsIgnoreCase("WITH_PREVIEW")) {
-			String previewCommand = "",which_gfx="/T20/Scenes/Ticker";
+			String previewCommand = "",which_gfx="/Default/gfx_Overlays";
 			switch (config.getBroadcaster().toUpperCase()) {
 			case Constants.VIDARBHA:
 	            if(whatToProcess.contains(",")) {
@@ -13754,12 +13814,17 @@ public class Animation
 					case "r":
 						previewCommand = "SrinkInfobar 1.180 TeamBug 1.880";
 						break;
-					case "Alt_p": case "h": case "Control_y": case "Control_k": case "Shift_F4": case "Shift_O": case "y": case "g": case "k":
+					case "Alt_p": 
+						previewCommand = "anim_TossBug 0.500 anim_TossBug$InOut 0.500 anim_TossBug$InOut$In 0.500";
+						break;
+					case "h": case "Control_y": case "Control_k": case "Shift_F4": case "Shift_O": case "y": case "g": case "k":
 					case "Shift_C": case "Control_Shift_F3": case "Control_Shift_R": case "Control_Shift_J": 
 						previewCommand = "Bug 1.880";
 						break;
 					case "Control_Shift_U": case "Control_Shift_V":
-						previewCommand = "SrinkInfobar 1.180 BatterScore$IN-OUT 2.480 BatterScore$Main 2.460 BatterScore$Main$In 2.460";
+						previewCommand = "anim_Infobar$Shrink 0.500 anim_Pop_Up 1.300 anim_Pop_Up$In_Out 1.300 anim_Pop_Up$In_Out$Essentials 1.300 anim_Pop_Up$In_Out$Essentials$In 1.000 "
+								+ "anim_Pop_Up$In_Out$ColouredBase 1.300 anim_Pop_Up$In_Out$ColouredBase$In 1.300 anim_Pop_Up$In_Out$Image 1.300 anim_Pop_Up$In_Out$Image$In 1.300 "
+								+ "anim_Pop_Up$In_Out$Name 1.300 anim_Pop_Up$In_Out$Name$In 1.100 anim_Pop_Up$In_Out$Data 1.300 anim_Pop_Up$In_Out$Data$In 1.200";
 						break;
 					case "6": case "Control_4":
 						previewCommand = "SrinkInfobar 1.180 SixCounter 2.480";
@@ -13782,11 +13847,8 @@ public class Animation
 					case "r":
 						previewCommand = "SrinkInfobar 1.180 TeamBug 1.880 BtmChangeon 0.720";
 						break;
-					case "Control_Shift_U": case "Control_Shift_V":
-						previewCommand = "SrinkInfobar 1.180 BatterScore$Change 1.080 BatterScore$Change$ChangeOut 1.080 BatterScore$Change$ChangeIn 0.920";
-						break;
-					case "Control_Shift_U_change_on": case "Control_Shift_V_change_on":
-						previewCommand = "SrinkInfobar 1.180 BatterScore$SubSide1Change 0.340";
+					case "Control_Shift_U": case "Control_Shift_V": case "Control_Shift_U_change_on": case "Control_Shift_V_change_on":
+						previewCommand = "anim_Infobar$Shrink 0.500 Change_PopUp 0.800 Change_PopUp$ColouredBase 0.800 Change_PopUp$Image 0.800 Change_PopUp$Name 0.800 Change_PopUp$Data 0.800";
 						break;
 					}
 				}

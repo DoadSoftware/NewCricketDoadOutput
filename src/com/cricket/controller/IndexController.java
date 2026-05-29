@@ -336,7 +336,6 @@ public class IndexController
 	    if (session_match.getMatch() != null) {
 	        session_match.getMatch().setMatchFileName(selectedMatch);
 	        
-	        System.out.println("selectedMatch = " + selectedMatch);
 	        initializeMatchData(true,session_match,session_configuration,session_players,session_team,session_ground);
 	    }
 
@@ -1596,10 +1595,12 @@ public class IndexController
 	            if (session_match.getSetup() != null && session_match.getSetup().getMatchType()
 						.equalsIgnoreCase(CricketUtil.SUPER_OVER)) {
 	                this_scene.LoadScene("OVERLAYS_SUPER_OVER", print_writers, session_configuration);
+	                this_caption.this_lowerThirdGfx.TournamentColor(print_writers, session_configuration);
 	            } else {
 	                this_scene.LoadScene("OVERLAYS", print_writers, session_configuration);
 	                this_animation.ResetAnimation("CLEAR-ALL",print_writers,session_configuration);
 	                this_caption.this_infobarGfx.TournamentColor(print_writers, session_configuration);
+	                this_caption.this_lowerThirdGfx.TournamentColor(print_writers, session_configuration);
 	                this_caption.this_fullFramesGfx.FFTournamentColor(print_writers, session_configuration);
 	            }
 	            break;
