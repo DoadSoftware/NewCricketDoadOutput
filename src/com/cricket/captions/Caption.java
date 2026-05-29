@@ -182,7 +182,7 @@ public class Caption
 			case "Control_4":
 				switch (config.getBroadcaster().toUpperCase()) {
 				case Constants.NPL: case Constants.LEGENDS: case Constants.MPL: case Constants.T20_MUMBAI: case Constants.BENGAL_T20:
-				case Constants.APL:
+				case Constants.APL: case Constants.VIDARBHA:
 					status = this_bugsAndMiniGfx.populateFourCounter(whatToProcess, whichSide, matchAllData);
 					break;
 				case Constants.ISPL:
@@ -218,6 +218,7 @@ public class Caption
 				status = this_infobarGfx.populateFieldPlotter(print_writers, matchAllData);
 				break;
 			case "Alt_Shift_Q":
+				System.out.println("HELLO");
 				this_scene = new Scene();
 				this_scene.LoadScene("LOF_PLOTTER", print_writers, config);
 				this_infobarGfx.containerName = "";
@@ -582,7 +583,7 @@ public class Caption
 				break;
 			case "Shift_T": case "Shift_F8"://Playing XI
 				status = this_fullFramesGfx.populatePlayingXI(whichSide, whatToProcess.split(",")[0],
-					Integer.valueOf(whatToProcess.split(",")[2]), matchAllData, 0);
+					Integer.valueOf(whatToProcess.split(",")[2]), matchAllData, Integer.valueOf(whatToProcess.split(",")[1]));
 				break;
 			case "Control_Shift_F7":
 				status = this_fullFramesGfx.populateSecondPlayingXI(whichSide, whatToProcess.split(",")[0],
@@ -1924,7 +1925,17 @@ public class Caption
 						status = this_lofInfobarGfx.populateFullSection(print_writers, matchAllData, whichSide);
 						
 					}else {
-						System.out.println("else");
+						if(this_infobarGfx.infobar.getMiddle_section() != null && !this_infobarGfx.infobar.getMiddle_section().isEmpty()) {
+							if(!this_infobarGfx.infobar.getMiddle_section().equalsIgnoreCase("COMMENTATORS")) {
+								whichSide = 1;
+							}else {
+								whichSide = 2;
+							}
+						}else {
+							whichSide = 1;
+						}
+						
+						System.out.println(this_infobarGfx.infobar.getMiddle_section());
 						this_infobarGfx.infobar.setMiddle_section("COMMENTATORS");
 						this_infobarGfx.Comms_Name = whatToProcess;
 						status = this_infobarGfx.populateVizInfobarMiddleSection(print_writers, matchAllData, whichSide);

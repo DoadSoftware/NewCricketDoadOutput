@@ -52,6 +52,16 @@ public class Scene
 			        break;
 				}
 				break;
+			case "PLOTTER":
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER SET_OBJECT SCENE*/Default/FieldPlotter_LLC \0", print_writers);
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*SCENE_DATA INITIALIZE \0", print_writers);
+		        CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*STAGE SHOW 0.0 \0", print_writers);
+				break;
+			case "LOF_PLOTTER":
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER SET_OBJECT SCENE*/Default/FieldDimesnsion \0", print_writers);
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*SCENE_DATA INITIALIZE \0", print_writers);
+		        CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*STAGE SHOW 0.0 \0", print_writers);
+				break;
 			}
 			break;
 		case "ICC-U19-2023": case Constants.NPL: case Constants.MPL: case Constants.APL:

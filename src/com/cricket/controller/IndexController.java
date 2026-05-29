@@ -460,12 +460,9 @@ public class IndexController
 					this_caption.this_lowerThirdGfx.chnageOn = false;
 					break;
 				case Constants.VIDARBHA:
-				//	this_animation.Lof_ISPL_ChangeOn(this_caption.this_lowerThirdGfx.impactPlayerData, print_writers, session_configuration);
-				//	this_caption.this_lowerThirdGfx.chnageOn = true;
+					this_animation.ChangeOn(this_caption.this_lowerThirdGfx.impactPlayerData, print_writers, session_configuration);
+					this_caption.this_lowerThirdGfx.chnageOn = true;
 					TimeUnit.MILLISECONDS.sleep(3000);
-					this_caption.whichSide = 1;
-					this_caption.PopulateGraphics(this_caption.this_lowerThirdGfx.impactPlayerData, session_match);
-					this_animation.CutBack(this_caption.this_lowerThirdGfx.impactPlayerData, print_writers, session_configuration);
 					this_caption.this_lowerThirdGfx.chnageOn = false;
 					break;	
 				case Constants.NPL: case Constants.APL:

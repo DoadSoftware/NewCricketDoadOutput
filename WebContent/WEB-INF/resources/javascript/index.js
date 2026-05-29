@@ -585,7 +585,7 @@ function processUserSelectionData(whatToProcess,dataToProcess)
 				break;	
 			case 'Control_4': 
 				switch($('#selected_broadcaster').val().toUpperCase()){
-				case 'NPL': case 'LEGENDS-90': case 'ISPL':  case 'MPL': case 'T20_MUMBAI': case 'BENGAL-T20': case 'APL':
+				case 'NPL': case 'LEGENDS-90': case 'ISPL':  case 'MPL': case 'T20_MUMBAI': case 'BENGAL-T20': case 'APL': case 'VIDARBHA':
 					switch(dataToProcess) {
 						case 'Control_4':
 							dataToProcess = dataToProcess + ',' + document.getElementById('which_inning').value;
@@ -607,7 +607,7 @@ function processUserSelectionData(whatToProcess,dataToProcess)
 			//All key presses which doesn't require graphics population will come here
 			case '5': case '6': case '7': case '8': case '9': case 'Alt_Shift_Q': case 'Alt_Shift_P':
 				switch($('#selected_broadcaster').val().toUpperCase()){
-				case 'NPL': case 'LEGENDS-90': case 'ISPL':  case 'MPL': case 'T20_MUMBAI': case 'BENGAL-T20': case 'APL':
+				case 'NPL': case 'LEGENDS-90': case 'ISPL':  case 'MPL': case 'T20_MUMBAI': case 'BENGAL-T20': case 'APL': case 'VIDARBHA':
 					switch(dataToProcess) {
 						case '6': case '9': 
 							dataToProcess = dataToProcess + ',' + document.getElementById('which_inning').value;
@@ -615,7 +615,7 @@ function processUserSelectionData(whatToProcess,dataToProcess)
 							break;
 						case 'Alt_Shift_Q': case 'Alt_Shift_P':
 							switch($('#selected_broadcaster').val().toUpperCase()){
-								case 'MPL': case 'LEGENDS-90': case 'BENGAL-T20': case 'NPL': case 'APL':
+								case 'MPL': case 'LEGENDS-90': case 'BENGAL-T20': case 'NPL': case 'APL': case 'VIDARBHA':
 									addItemsToList(dataToProcess,null);
 									break;
 								case 'ISPL':
