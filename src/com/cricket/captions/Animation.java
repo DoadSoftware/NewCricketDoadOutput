@@ -7997,17 +7997,12 @@ public class Animation
 			caption.this_infobarGfx.infobar.setInfobar_on_screen(true);
 			this.infobar.setInfobar_status(Constants.TWO_LINER_INFOBAR);
 			break;
-			
-		case "r":
-			T20_MumbaiAnimateIn("ArrowLeft,", print_writers, config); // Push infobar
-			TimeUnit.MILLISECONDS.sleep(1000);
-			processAnimation(Constants.FRONT, print_writers, "TeamBug", "START");
-			this.whichGraphicOnScreen = whatToProcess;
-			break;
+				
 		case "Alt_p": 
 			processAnimation(Constants.FRONT, print_writers, "anim_TossBug", "START");
 			this.specialBugOnScreen = CricketUtil.TOSS;
 			break;
+		
 		case "Shift_F1":  case "Shift_F2":
 			T20_MumbaiAnimateIn(Constants.SHRUNK_INFOBAR, print_writers, config);
 			processAnimation(Constants.FRONT, print_writers, "MiniBowling", "START");
@@ -8027,12 +8022,19 @@ public class Animation
 			this.whichGraphicOnScreen = whatToProcess;
 			break;
 				
-		case "h": case "Control_y": case "Control_k": case "Shift_F4": case "Shift_O": case "y": case "g": case "k":
-		case "Shift_C": case "Control_Shift_F3": case "Control_Shift_R": case "Control_Shift_J": 
-			processAnimation(Constants.FRONT, print_writers, "Bug", "START");
+		case "Shift_C":
+			processAnimation(Constants.FRONT, print_writers, "anim_SixDistance$In_Out", "START");
 			this.whichGraphicOnScreen = whatToProcess;
 			break;
-			
+		case "Control_Shift_F3":
+			processAnimation(Constants.FRONT, print_writers, "anim_TargetBug$In_Out", "START");
+			this.whichGraphicOnScreen = whatToProcess;
+			break;	
+		case "h": case "Control_y": case "Control_k": case "Shift_F4": case "Shift_O": case "y": case "g": case "k":
+		case "Control_Shift_R": case "Control_Shift_J": case "r":
+			processAnimation(Constants.FRONT, print_writers, "Anim_Bugs$In_Out", "START");
+			this.whichGraphicOnScreen = whatToProcess;
+			break;
 		case "Control_Shift_U": case "Control_Shift_V":
 			T20_MumbaiAnimateIn(Constants.SHRUNK_INFOBAR, print_writers, config);
 			processAnimation(Constants.FRONT, print_writers, "anim_Pop_Up", "START");
@@ -8040,23 +8042,23 @@ public class Animation
 			break;
 		case "6": case "Control_4":
 			T20_MumbaiAnimateIn(Constants.SHRUNK_INFOBAR, print_writers, config);
-			processAnimation(Constants.FRONT, print_writers, "SixCounter", "START");
+			processAnimation(Constants.FRONT, print_writers, "anim_BoundaryCounter$In_Out", "START");
 			TimeUnit.MILLISECONDS.sleep(1500);
 			this.whichGraphicOnScreen = whatToProcess;
 			if(!caption.this_bugsAndMiniGfx.this_data_str.get(caption.this_bugsAndMiniGfx.this_data_str.size()-2).split(",")[0].
 					equalsIgnoreCase(caption.this_bugsAndMiniGfx.this_data_str.get(caption.this_bugsAndMiniGfx.this_data_str.size()-1).split(",")[0])) {
-				processAnimation(Constants.FRONT, print_writers, "Change$First", "START");
-				processAnimation(Constants.FRONT, print_writers, "Change$Last", "START");
-				processAnimation(Constants.FRONT, print_writers, "Change$Mid", "START");
+				processAnimation(Constants.FRONT, print_writers, "Change$Units", "START");
+				processAnimation(Constants.FRONT, print_writers, "Change$Tenths", "START");
+				processAnimation(Constants.FRONT, print_writers, "Change$Hundredths", "START");
 			}
 			else if(!caption.this_bugsAndMiniGfx.this_data_str.get(caption.this_bugsAndMiniGfx.this_data_str.size()-2).split(",")[1].
 					equalsIgnoreCase(caption.this_bugsAndMiniGfx.this_data_str.get(caption.this_bugsAndMiniGfx.this_data_str.size()-1).split(",")[1])) {
-				processAnimation(Constants.FRONT, print_writers, "Change$Mid", "START");
-				processAnimation(Constants.FRONT, print_writers, "Change$Last", "START");
+				processAnimation(Constants.FRONT, print_writers, "Change$Tenths", "START");
+				processAnimation(Constants.FRONT, print_writers, "Change$Units", "START");
 			}
 			else if(!caption.this_bugsAndMiniGfx.this_data_str.get(caption.this_bugsAndMiniGfx.this_data_str.size()-2).split(",")[2].
 					equalsIgnoreCase(caption.this_bugsAndMiniGfx.this_data_str.get(caption.this_bugsAndMiniGfx.this_data_str.size()-1).split(",")[2])) {
-				processAnimation(Constants.FRONT, print_writers, "Change$Last", "START");
+				processAnimation(Constants.FRONT, print_writers, "Change$Units", "START");
 			}
 			break;
 			
@@ -8365,11 +8367,6 @@ public class Animation
 			infobar.setRight_section("");
 			break;
 			
-		case "r":
-			T20_MumbaiAnimateIn("ArrowRight,", print_writers, config); // Push infobar
-			processAnimation(Constants.FRONT, print_writers, "TeamBug", "CONTINUE");
-			this.whichGraphicOnScreen = "";
-			break;
 		case "Alt_p":
 			if(this.specialBugOnScreen.equalsIgnoreCase(CricketUtil.TOSS)) {
 				processAnimation(Constants.FRONT, print_writers, "anim_TossBug", "CONTINUE");
@@ -8386,17 +8383,26 @@ public class Animation
 			this.whichGraphicOnScreen = "";
 			break;
 		case "6": case "Control_4":
-			processAnimation(Constants.FRONT, print_writers, "SixCounter", "CONTINUE");
+			processAnimation(Constants.FRONT, print_writers, "anim_BoundaryCounter$In_Out", "CONTINUE");
 			this.whichGraphicOnScreen = "";
 			T20_MumbaiAnimateIn(Constants.SHRUNK_INFOBAR, print_writers, config);
 			TimeUnit.MILLISECONDS.sleep(500);
 			processAnimation(Constants.FRONT, print_writers, "Change", "SHOW 0.0");
-			processAnimation(Constants.FRONT, print_writers, "SixCounter", "SHOW 0.0");
+			processAnimation(Constants.FRONT, print_writers, "anim_BoundaryCounter", "SHOW 0.0");
 			break;
-		
+		case "Shift_C":
+			processAnimation(Constants.FRONT, print_writers, "anim_SixDistance$In_Out", "CONTINUE");
+			this.whichGraphicOnScreen = "";
+			break;
+		case "Control_Shift_F3":
+			processAnimation(Constants.FRONT, print_writers, "anim_TargetBug$In_Out", "CONTINUE");
+			this.whichGraphicOnScreen = "";
+			break;
 		case "h": case "Control_y": case "Control_k": case "Shift_F4": case "Shift_O": case "y": case "g": case "k":
-		case "Shift_C": case "Control_Shift_F3": case "Control_Shift_R": case "Control_Shift_J": 
-			processAnimation(Constants.FRONT, print_writers, "Bug", "CONTINUE");
+		case "Control_Shift_R": case "Control_Shift_J": case "r":
+			processAnimation(Constants.FRONT, print_writers, "Anim_Bugs$In_Out", "CONTINUE");
+			TimeUnit.MILLISECONDS.sleep(800);
+			processAnimation(Constants.FRONT, print_writers, "Anim_Bugs$In_Out", "SHOW 0.0");
 			this.whichGraphicOnScreen = "";
 			break;
 			
@@ -13933,19 +13939,21 @@ public class Animation
 	                }
 	            }
 	            break;
-			
 			case Constants.T20_MUMBAI:
 				if(whichside == 1) {
 					switch(whatToProcess.split(",")[0]) {
-					case "r":
-						previewCommand = "SrinkInfobar 1.180 TeamBug 1.880";
-						break;
-					case "Alt_p": 
+//					case "r":
+//						previewCommand = "SrinkInfobar 1.180 TeamBug 1.880";
+//						break;
+					case "Alt_p":
 						previewCommand = "anim_TossBug 0.500 anim_TossBug$InOut 0.500 anim_TossBug$InOut$In 0.500";
 						break;
+					case "Control_Shift_F3":
+						previewCommand = "anim_TargetBug 1.300 anim_TargetBug$In_Out 1.300 anim_TargetBug$In_Out$In 1.300";
+						break;
 					case "h": case "Control_y": case "Control_k": case "Shift_F4": case "Shift_O": case "y": case "g": case "k":
-					case "Shift_C": case "Control_Shift_F3": case "Control_Shift_R": case "Control_Shift_J": 
-						previewCommand = "Bug 1.880";
+					case "Shift_C": case "Control_Shift_R": case "Control_Shift_J": case "r":
+						previewCommand = "Anim_Bugs 0.500 Anim_Bugs$In_Out 0.500 Anim_Bugs$In_Out$In 0.500";
 						break;
 					case "Control_Shift_U": case "Control_Shift_V":
 						previewCommand = "anim_Infobar$Shrink 0.500 anim_Pop_Up 1.300 anim_Pop_Up$In_Out 1.300 anim_Pop_Up$In_Out$Essentials 1.300 anim_Pop_Up$In_Out$Essentials$In 1.000 "
@@ -13953,7 +13961,7 @@ public class Animation
 								+ "anim_Pop_Up$In_Out$Name 1.300 anim_Pop_Up$In_Out$Name$In 1.100 anim_Pop_Up$In_Out$Data 1.300 anim_Pop_Up$In_Out$Data$In 1.200";
 						break;
 					case "6": case "Control_4":
-						previewCommand = "SrinkInfobar 1.180 SixCounter 2.480";
+						previewCommand = "anim_Infobar$Shrink 0.500 anim_BoundaryCounter 1.300 anim_BoundaryCounter$In_Out 1.300 anim_BoundaryCounter$In_Out$In 1.300";
 						break;
 					case "Alt_Shift_N": case "Alt_Shift_M":
 						previewCommand = "SrinkInfobar 1.180 PlayerBio 2.140";

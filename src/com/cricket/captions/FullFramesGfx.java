@@ -17404,6 +17404,7 @@ public class FullFramesGfx
 		String dls_data = "";
 		
 		CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_FullFrames$All_Graphics$Side" + WhichSide + "$select_GFX_Type*FUNCTION*Omo*vis_con SET 2\0", print_writers);
+		CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_FullFrames$All_Graphics$Side" + WhichSide + "$Summary$select_SummaryType*FUNCTION*Omo*vis_con SET 0\0", print_writers);
 	
 		for(int i = 1; i <= WhichInning ; i++) {
 			if(i == 1) {
