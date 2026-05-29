@@ -230,7 +230,7 @@ function processUserSelection(whichInput)
 		}		
 		break;
 	case 'change_on_profile':
-		processCricketProcedures('ANIMATE-IN-PROFILE_IN_AT');
+		processCricketProcedures('POPULATE-PROFILE_IN_AT');
 		break;
 	case 'pop_up_change_on':
 		dataToProcess = $('#which_keypress').val() + '_change_on' + ',' + selected_options.toString();
@@ -523,6 +523,17 @@ function processUserSelectionData(whatToProcess,dataToProcess)
 					break;
 				 }
 				break;
+			case 'Control_F7':
+				switch($('#selected_broadcaster').val().toUpperCase()){
+				case 'T20_MUMBAI':
+					addItemsToList(dataToProcess,null); 
+					break;
+				default :
+					dataToProcess = dataToProcess + ',' + document.getElementById('which_inning').value;
+					processCricketProcedures("POPULATE-GRAPHICS", dataToProcess);
+					break;
+			 	}
+				break;
 					
 			case 'Shift_C': case 'Control_Shift_Q': case 'h':
 			case 'F12': case 'Alt_1': case 'Alt_2': case 'Alt_7': // case 'Alt_8': case 'Alt_3': case 'Alt_4': case 'F7': case 'F11':
@@ -542,7 +553,7 @@ function processUserSelectionData(whatToProcess,dataToProcess)
 				
 			//changed shift_f11 to control_f11
 			case 'Shift_F10': case 'm': case 'Control_F1': case 'Control_a': case "Control_Shift_F10": case 'Alt_o':  case 'Shift_F3': case 'd': case 'e': case 'Control_F6': 
-			case 'Control_F7': case 'Control_k': case 'Control_F10': case 'Control_F3':  case 'a': case 't': case 'n': case 'Shift_F1': case 'Shift_F2': case 'Shift_D': 
+			case 'Control_k': case 'Control_F10': case 'Control_F3':  case 'a': case 't': case 'n': case 'Shift_F1': case 'Shift_F2': case 'Shift_D': 
 			case 'Control_q': case 'Control_b': case 'o': case 'Control_F2': case 'b': case 'Alt_F11': case 'Shift_U': case 'Alt_j': case 'Alt_h': case 'Alt_Shift_L':	 
 			//case 'Shift_F':
 			case '.': case '/': case 'Shift_V': case 'Alt_i': case 'b': case 'Shift_B': case 'Control_Shift_B': case 'Alt_Shift_F3': case 'Control_Shift_R': 
@@ -736,7 +747,7 @@ function processCricketProcedures(whatToProcess,dataToProcess)
 				break;
 			default:
 				switch(whatToProcess) {	
-				case 'POPULATE-GRAPHICS':
+				case 'POPULATE-GRAPHICS': case 'POPULATE-PROFILE_IN_AT':
 					if(data == 'OK') {
 						session_caption = data;
 						if(confirm('Animate In?') == true) {
@@ -1436,7 +1447,7 @@ function addItemsToList(whatToProcess,dataToProcess)
 	case "Shift_@": case "Shift_$": case "Control_Shift_@": case "Control_Alt_5": case "Alt_Shift_@": case "Control_Alt_6": case "Control_Alt_9": case "Control_Alt_0":
 	case "Alt_Shift_N": case "Alt_Shift_M":case 'Alt_Shift_Q': case 'Alt_Shift_P': case 'Alt_Shift_K': case 'Alt_Shift_X': case 'Alt_Shift_T': case 'Alt_Shift_V':
 	case 'Alt_Shift_F4':case "Alt_Shift_F5":case 'Alt_Shift_F6':case 'Alt_Shift_F7': case 'Shift_L': case 'h': case 'Control_Shift_(': case 'Shift_M': case 'Control_Alt_7':
-	case 'Control_Alt_8': case 'Alt_x': case 'Alt_f':
+	case 'Control_Alt_8': case 'Alt_x': case 'Alt_f': case 'Control_F7':
 	//Shift+2 and Shift+4
 	 //InfoBar LeftBottom-Middle-BatPP-BallPP-LastXBalls-Batsman/Sponsor-RightBottom
 	case "Alt_b": 
@@ -2553,7 +2564,7 @@ function addItemsToList(whatToProcess,dataToProcess)
 	            option.value = 'photosummary';
 	            option.text = 'Photo Summary';
 	            select.appendChild(option);
-			break;
+				break;
 			default:
 				option = document.createElement('option');
 	            option.value = 'captain';
@@ -2993,13 +3004,23 @@ function addItemsToList(whatToProcess,dataToProcess)
 				setDropdownOptionToSelectOptionArray($(select),0);
 				cellCount = cellCount + 1;
 							
-			break;
+				break;
 			case 'T20_MUMBAI':
 				select = document.createElement('select');
 				select.id = 'selectMiddleStat';
 				select.name = select.id;
 				
 				if(session_match.setup.matchType == 'SUPER_OVER'){
+					option = document.createElement('option');
+					option.value = 'SUPER_OVER';
+					option.text = 'Super Over';
+					select.appendChild(option);
+					
+					option = document.createElement('option');
+					option.value = 'CRR';
+					option.text = 'Current Run Rate';
+					select.appendChild(option);
+					
 					session_match.match.inning.forEach(function(inn){
 						if(inn.isCurrentInning == 'YES' && session_match.setup.matchType != 'TEST' && session_match.setup.matchType != 'FC'){
 							if(inn.inningNumber == 1){
@@ -3013,11 +3034,6 @@ function addItemsToList(whatToProcess,dataToProcess)
 							}
 						}
 					});
-					
-					option = document.createElement('option');
-					option.value = 'OVER';
-					option.text = 'This Over';
-					select.appendChild(option);
 				}else{
 					session_match.match.inning.forEach(function(inn){
 						if(inn.isCurrentInning == 'YES' && session_match.setup.matchType != 'TEST' && session_match.setup.matchType != 'FC'){
@@ -6977,7 +6993,26 @@ function addItemsToList(whatToProcess,dataToProcess)
 			row.insertCell(cellCount).appendChild(select);
 			setDropdownOptionToSelectOptionArray($(select),0);
 			cellCount = cellCount + 1;
-			break;	
+			break;
+		case 'Control_F7':
+			header_text.innerHTML = 'Both Teams - (PlayingXi / Subs)';
+			
+			select = document.createElement('select');
+			select.id = 'selectType';
+			select.name = select.id;
+			
+			['Playing_11','Subs'].forEach(stat => {
+		        const option = document.createElement('option');
+		        option.value = stat;
+		        option.text = stat
+		        select.appendChild(option);
+		    });
+			
+			select.setAttribute('onchange',"setDropdownOptionToSelectOptionArray(this, 0)");
+			row.insertCell(cellCount).appendChild(select);
+			setDropdownOptionToSelectOptionArray($(select),0);
+			cellCount = cellCount + 1
+			break;
 		case 'Shift_T': case 'Alt_F9': case 'Alt_F12': case 'Alt_F10': case 'Shift_F8': 
 		case 'Control_Shift_F7': case 'Control_Shift_F11': case 'r':
 			switch(whatToProcess) {
@@ -10163,7 +10198,7 @@ function addItemsToList(whatToProcess,dataToProcess)
 			case "Alt_Shift_B":	case 'Control_0': case "Shift_@": case "Shift_$": case "Control_Shift_@": case "Control_Alt_5": case "Alt_Shift_@": case "Control_Alt_6":
 			case "Control_Alt_9": case "Control_Alt_0":	case 'r': case "Alt_Shift_N": case "Alt_Shift_M":case 'Alt_Shift_Q': case 'Alt_Shift_P': case 'Alt_Shift_K': 
 			case 'Alt_Shift_X': case 'Alt_Shift_T': case 'Alt_Shift_V':case 'Control_Shift_F5':case "Alt_Shift_F5":case 'Alt_Shift_F4':case 'Alt_Shift_F6':case 'Alt_Shift_F7':
-			case 'Shift_L': case 'h': case 'Control_Shift_(': case 'Shift_M': case 'Control_Alt_7': case 'Control_Alt_8': case 'Alt_x': case 'Alt_f':
+			case 'Shift_L': case 'h': case 'Control_Shift_(': case 'Shift_M': case 'Control_Alt_7': case 'Control_Alt_8': case 'Alt_x': case 'Alt_f': case 'Control_F7':
 
 				option = document.createElement('input');
 				option.type = 'button';

@@ -485,10 +485,7 @@ public class IndexController
 			if(process.toUpperCase().equalsIgnoreCase("PLAYING-XI-CHANGE-ON")) {
 				this_animation.AnimateIn("Shift_T", print_writers, session_configuration);
 			}
-			if(process.toUpperCase().equalsIgnoreCase("ANIMATE-IN-PROFILE_IN_AT")) {
-				System.out.println(this_animation.whichGraphicOnScreen);
-				this_animation.ChangeOn(this_animation.whichGraphicOnScreen, print_writers, session_configuration);
-			}
+			
 			if(process.contains("GRAPHICS-OPTIONS") || process.contains("GRAPHICS-OPTIONS_DATA")) {
 				return objectMapper.writeValueAsString(GetGraphicOption(valueToProcess,session_configuration, headToHead));
 			}else if(process.contains("POPULATE-GRAPHICS")) {
@@ -573,6 +570,12 @@ public class IndexController
 				}
 			}else if(whatToProcess.contains("ANIMATE-OUT-ALL_INFOBAR_PART")) {
 				infobarAnimateOutAllSection(session_configuration, session_match, print_writers, headToHead);
+			}
+			else if(process.toUpperCase().equalsIgnoreCase("POPULATE-PROFILE_IN_AT")) {
+				this_animation.processT20_MumbaiFullFramesPreview(this_animation.whichGraphicOnScreen, print_writers, 2, session_configuration,"");
+				return objectMapper.writeValueAsString(Constants.OK);
+			}else if(process.contains("ANIMATE-IN-PROFILE_IN_AT")) {
+				this_animation.ChangeOn(this_animation.whichGraphicOnScreen, print_writers, session_configuration);
 			}
 			else if(whatToProcess.contains("CLEAR-ALL") || whatToProcess.contains("CLEAR-ALL-WITH-INFOBAR")) {
 				this_animation.ResetAnimation(whatToProcess, print_writers, session_configuration);
@@ -1592,17 +1595,10 @@ public class IndexController
 	            if (session_configuration.getPrimaryVariousOptions().contains(Constants.FULL_FRAMER)) {
 	                this_scene.LoadScene("FULL-FRAMERS",print_writers,session_configuration);
 	            }
-	            if (session_match.getSetup() != null && session_match.getSetup().getMatchType()
-						.equalsIgnoreCase(CricketUtil.SUPER_OVER)) {
-	                this_scene.LoadScene("OVERLAYS_SUPER_OVER", print_writers, session_configuration);
-	                this_caption.this_lowerThirdGfx.TournamentColor(print_writers, session_configuration);
-	            } else {
-	                this_scene.LoadScene("OVERLAYS", print_writers, session_configuration);
-	                this_animation.ResetAnimation("CLEAR-ALL",print_writers,session_configuration);
-	                this_caption.this_infobarGfx.TournamentColor(print_writers, session_configuration);
-	                this_caption.this_lowerThirdGfx.TournamentColor(print_writers, session_configuration);
-	                this_caption.this_fullFramesGfx.FFTournamentColor(print_writers, session_configuration);
-	            }
+	            this_scene.LoadScene("OVERLAYS", print_writers, session_configuration);
+                this_animation.ResetAnimation("CLEAR-ALL",print_writers,session_configuration);
+                this_caption.this_infobarGfx.TournamentColor(print_writers, session_configuration, session_match);
+                this_caption.this_fullFramesGfx.FFTournamentColor(print_writers, session_configuration);
 	            break;
 
 	        case Constants.ICC_U19_2023: case Constants.BENGAL_T20: case Constants.NPL: case Constants.LEGENDS:

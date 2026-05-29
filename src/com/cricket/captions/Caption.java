@@ -317,8 +317,6 @@ public class Caption
 				this_fullFramesGfx.WhichType = whatToProcess.split(",")[3];
 				switch (config.getBroadcaster()) {
 				case Constants.T20_MUMBAI:
-//					status = this_fullFramesGfx.PopulateBatPerformerFF(whichSide, whatToProcess.split(",")[0], matchAllData, 
-//							Integer.valueOf(whatToProcess.split(",")[1]));
 					break;
 				case Constants.NPL: case Constants.MPL: case Constants.APL:
 					if(!this_anim.whichGraphicOnScreen.equalsIgnoreCase("F1") && !this_anim.whichGraphicOnScreen.equalsIgnoreCase("Control_Shift_F1")) {
@@ -339,16 +337,20 @@ public class Caption
 				this_fullFramesGfx.FirstPlayerId = Integer.valueOf(whatToProcess.split(",")[2]);
 				this_fullFramesGfx.WhichType = whatToProcess.split(",")[3];
 				System.out.println("WHAT : "+captionWhichGfx);
-				if(config.getBroadcaster().equalsIgnoreCase(Constants.NPL) || config.getBroadcaster().equalsIgnoreCase(Constants.MPL) ||
-						config.getBroadcaster().equalsIgnoreCase(Constants.APL)) {
+				switch (config.getBroadcaster()) {
+				case Constants.T20_MUMBAI:
+					break;
+				case Constants.NPL: case Constants.MPL: case Constants.APL:
 					if(!this_anim.whichGraphicOnScreen.equalsIgnoreCase("F2") && !this_anim.whichGraphicOnScreen.equalsIgnoreCase("Control_Shift_F2")) {
 						status = this_fullFramesGfx.PopulateBowlingCardFF(whichSide, "F2", matchAllData, Integer.valueOf(whatToProcess.split(",")[1]));
 					}
-				}else {
+					break;
+				default:
 					if(this_anim.whichGraphicOnScreen.equalsIgnoreCase("F2") || this_anim.whichGraphicOnScreen.equalsIgnoreCase("Control_Shift_F2")) {
 					}else {
 						status = this_fullFramesGfx.PopulateBowlingCardFF(whichSide, "F2", matchAllData, Integer.valueOf(whatToProcess.split(",")[1]));
 					}
+					break;
 				}
 				
 				status = this_fullFramesGfx.PopulateBallPerformerFF(whichSide, whatToProcess.split(",")[0], matchAllData, 
@@ -571,6 +573,11 @@ public class Caption
 				status = this_lowerThirdGfx.populateBattingStyleWithPhoto(whatToProcess,whichSide,matchAllData);
 				break;	
 			case "Control_F7": // Double Teams
+				switch(config.getBroadcaster()){
+				case Constants.T20_MUMBAI:
+					this_fullFramesGfx.WhichProfile = whatToProcess.split(",")[2];
+					break;
+				}
 				status = this_fullFramesGfx.PopulateDoubleTeams(whichSide, whatToProcess.split(",")[0], matchAllData);
 				break;
 			case "Shift_T": case "Shift_F8"://Playing XI
