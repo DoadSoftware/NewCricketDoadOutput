@@ -425,6 +425,9 @@ public class Caption
 			case "Alt_F5":
 				status = this_fullFramesGfx.populateRichieCaption(whichSide, whatToProcess.split(",")[0],matchAllData,Integer.valueOf(whatToProcess.split(",")[1]));
 				break;
+			case "Alt_Shift_F12":
+				status = this_fullFramesGfx.populateFFPhaseWiseRunRate(whichSide, whatToProcess.split(",")[0],matchAllData,Integer.valueOf(whatToProcess.split(",")[1]));
+				break;
 				
 			case "Control_Shift_I": // Bowling FF
 				status = this_fullFramesGfx.populateFFInningSummary(whichSide, whatToProcess.split(",")[0], matchAllData, 
@@ -680,6 +683,9 @@ public class Caption
 					break;
 				}
 				status = this_fullFramesGfx.populateMatchSummary(whichSide, whatToProcess.split(",")[0], matchAllData, Integer.valueOf(whatToProcess.split(",")[1]));
+				break;
+			case "Alt_Shift_F10":
+				status = this_fullFramesGfx.populateInningSummaryPerformer(whichSide, whatToProcess.split(",")[0], matchAllData, Integer.valueOf(whatToProcess.split(",")[1]));
 				break;
 			case "Control_Shift_F9": 
 				status = this_lowerThirdGfx.populateBowlingStyleWithPhoto(whatToProcess,whichSide,matchAllData);

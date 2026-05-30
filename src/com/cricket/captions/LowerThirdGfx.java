@@ -8573,6 +8573,8 @@ public class LowerThirdGfx
 						short_name =  "T20s CAREER";
 					}else if(WhichProfile.equalsIgnoreCase("IPL")) {
 						short_name =  "IPL CAREER";
+					}else if(WhichProfile.equalsIgnoreCase("WPL")) {
+						short_name =  "WPL CAREER";
 					}else if(WhichProfile.equalsIgnoreCase("T20 MUMBAI")) {
 						short_name =  "T20 MUMBAI CAREER";
 					}else if(WhichProfile.equalsIgnoreCase("MT20 SEASON 3")) {
@@ -8743,6 +8745,8 @@ public class LowerThirdGfx
 						short_name =  "T20 CAREER";
 					}else if(WhichProfile.equalsIgnoreCase("IPL")) {
 						short_name =  "IPL CAREER";
+					}else if(WhichProfile.equalsIgnoreCase("WPL")) {
+						short_name =  "WPL CAREER";
 					}else if(WhichProfile.equalsIgnoreCase("IPL 2026")) {
 						short_name =  "IPL 2026";
 					}else if(WhichProfile.equalsIgnoreCase("T20 MUMBAI")) {

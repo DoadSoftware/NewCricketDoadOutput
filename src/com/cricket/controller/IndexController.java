@@ -1167,24 +1167,24 @@ public class IndexController
 	
 	@SuppressWarnings("unchecked")
 	public <T> List<T> GetGraphicOption(String whatToProcess,Configuration session_configuration, HeadToHead headToHead) throws Exception {
-  switch ((whatToProcess.contains(",")?whatToProcess.split(",")[0]:whatToProcess)) {
-  	case "Alt_3":
-	    StatsType stat = (whatToProcess.split(",").length > 2) ? 
-	            cricketService.getAllStatsType().stream().filter(st -> st.getStats_full_name().equalsIgnoreCase(whatToProcess.split(",")[2]))
-	                .findAny().orElse(null) : null;
-	    if (stat != null) {
-	        return (List<T>) cricketService.getAllStats().stream().filter(st -> st.getStats_type_id() == stat.getStats_id())
-	            .collect(Collectors.toList());
-	    }
-	    break;
-  	case "Control_Shift_F5":
-  	    return (List<T>) new ArrayList<>(CricketFunctions.ReadExcel("C:\\Sports\\Cricket\\Summary.xlsx").keySet());
-  	case "Alt_Shift_F5":
-  	  return (List<T>)cricketService.getPointers();
-  	case "Alt_e":
-			this_caption.whichSide = 1;
-			this_caption.PopulateGraphics("Alt_e,", session_match);
-			break;
+	  switch ((whatToProcess.contains(",")?whatToProcess.split(",")[0]:whatToProcess)) {
+	  	case "Alt_3":
+		    StatsType stat = (whatToProcess.split(",").length > 2) ? 
+		            cricketService.getAllStatsType().stream().filter(st -> st.getStats_full_name().equalsIgnoreCase(whatToProcess.split(",")[2]))
+		                .findAny().orElse(null) : null;
+		    if (stat != null) {
+		        return (List<T>) cricketService.getAllStats().stream().filter(st -> st.getStats_type_id() == stat.getStats_id())
+		            .collect(Collectors.toList());
+		    }
+		    break;
+	  	case "Control_Shift_F5":
+	  	    return (List<T>) new ArrayList<>(CricketFunctions.ReadExcel("C:\\Sports\\Cricket\\Summary.xlsx").keySet());
+	  	case "Alt_Shift_F5":
+	  	  return (List<T>)cricketService.getPointers();
+	  	case "Alt_e":
+				this_caption.whichSide = 1;
+				this_caption.PopulateGraphics("Alt_e,", session_match);
+				break;
 		case "Control_Shift_J":
 			return (List<T>) session_performance_bug;
 		case "Control_Shift_X":

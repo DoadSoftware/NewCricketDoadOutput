@@ -559,7 +559,7 @@ function processUserSelectionData(whatToProcess,dataToProcess)
 			case '.': case '/': case 'Shift_V': case 'Alt_i': case 'b': case 'Shift_B': case 'Control_Shift_B': case 'Alt_Shift_F3': case 'Control_Shift_R': 
 			case 'Control_Shift_F3': case 'Control_Shift_H': case "Control_Shift_I": case "Alt_Shift_D":case "Alt_Shift_E":case "Alt_Shift_F":case "Alt_Shift_G":
 			case "Alt_Shift_H": case "Control_Shift_A": case 'Control_6': case "Alt_Shift_O": case 'Alt_F5': case 'Control_Alt_F1': case 'Control_Alt_F2': 
-			case 'Control_Shift_K': case "Alt_Shift_F8": case "Alt_k": case 'Alt_Shift_F11':
+			case 'Control_Shift_K': case "Alt_Shift_F8": case "Alt_k": case 'Alt_Shift_F11': case 'Alt_Shift_F10': case 'Alt_Shift_F12':
 				/*switch(dataToProcess){
 				case 'Shift_F':
 					count++;
@@ -8946,7 +8946,8 @@ function addItemsToList(whatToProcess,dataToProcess)
 					  { value: 'IT20', text: 'T20I' },
 					  { value: 'MT20 SEASON 3', text: 'MT20 SEASON 3' },
 					  { value: 'IPL 2026', text: 'IPL 2026' },
-					  { value: 'IPL', text: 'IPL' }
+					  { value: 'IPL', text: 'IPL' },
+					  { value: 'WPL', text: 'WPL' }
 					].forEach(({ value, text }) => {
 						  option = document.createElement('option');
 						  option.value = value;
@@ -9305,6 +9306,7 @@ function addItemsToList(whatToProcess,dataToProcess)
 							['MT20 SEASON 3', 'MT20 SEASON 3'],
 							['IPL 2026', 'IPL 2026'],
 							['IPL', 'IPL']
+							['WPL', 'WPL']
 						].forEach(([value, text]) => addOption(value, text));
 						break;
 
@@ -9629,6 +9631,7 @@ function addItemsToList(whatToProcess,dataToProcess)
 								['MT20 SEASON 3', 'MT20 SEASON 3'],
 								['IPL 2026', 'IPL 2026'],
 								['IPL', 'IPL']
+								['WPL', 'WPL']
 							].forEach(([value, text]) => addOption(value, text));
 							break;
 
@@ -9783,7 +9786,8 @@ function addItemsToList(whatToProcess,dataToProcess)
 					  { value: 'IT20', text: 'T20I' },
 					  { value: 'MT20 SEASON 3', text: 'MT20 SEASON 3' },
 					  { value: 'IPL 2026', text: 'IPL 2026' },
-					  { value: 'IPL', text: 'IPL' }
+					  { value: 'IPL', text: 'IPL' },
+					  { value: 'WPL', text: 'WPL' }
 					].forEach(({ value, text }) => {
 						  option = document.createElement('option');
 						  option.value = value;
