@@ -6214,6 +6214,17 @@ public class BugsAndMiniGfx
 								+ "$Row" + rowId + cont_name + "$img_Text1*TEXTURE*IMAGE SET "+ Constants.T20_MUMBAI_Text1 + 
 								inning.getBatting_team().getTeamBadge() + "\0", print_writers);
 						break;
+					case CricketUtil.STILL_TO_BAT:
+						if(bc.getHowOut() != null) {
+							omo_num = 0;
+							cont_name = "$Out$Out";
+							battingSize = battingSize + 1;
+							
+							CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Minis$PositionY$Datas" 
+								+ "$Row" + rowId + cont_name + "$img_Base1*TEXTURE*IMAGE SET "+ Constants.T20_MUMBAI_Base1 + 
+								inning.getBatting_team().getTeamBadge() + "\0", print_writers);
+						}
+						break;
 					}
 				if(!CricketFunctions.checkBatAndBallImpactInOutPlayer(matchAllData.getEventFile().getEvents(), bc.getPlayerId()).isEmpty()) {
 					switch(CricketFunctions.checkBatAndBallImpactInOutPlayer(matchAllData.getEventFile().getEvents(), bc.getPlayerId())) {

@@ -8008,12 +8008,18 @@ public class Animation
 			break;
 				
 		case "Alt_p": 
+			if(audioenabled.equalsIgnoreCase("TRUE")) {
+				processAnimation(Constants.FRONT, print_writers, "sfx_In", "START");
+			}
 			processAnimation(Constants.FRONT, print_writers, "anim_TossBug", "START");
 			this.specialBugOnScreen = CricketUtil.TOSS;
 			break;
 		
 		case "Shift_F1":  case "Shift_F2":
 			T20_MumbaiAnimateIn(Constants.SHRUNK_INFOBAR, print_writers, config);
+			if(audioenabled.equalsIgnoreCase("TRUE")) {
+				processAnimation(Constants.FRONT, print_writers, "sfx_In", "START");
+			}
 			processAnimation(Constants.FRONT, print_writers, "anim_Minis", "START");
 			this.whichGraphicOnScreen = whatToProcess;
 			break;
@@ -8032,25 +8038,40 @@ public class Animation
 			break;
 				
 		case "Shift_C":
+			if(audioenabled.equalsIgnoreCase("TRUE")) {
+				processAnimation(Constants.FRONT, print_writers, "sfx_In", "START");
+			}
 			processAnimation(Constants.FRONT, print_writers, "anim_SixDistance$In_Out", "START");
 			this.whichGraphicOnScreen = whatToProcess;
 			break;
 		case "Control_Shift_F3":
+			if(audioenabled.equalsIgnoreCase("TRUE")) {
+				processAnimation(Constants.FRONT, print_writers, "sfx_In", "START");
+			}
 			processAnimation(Constants.FRONT, print_writers, "anim_TargetBug$In_Out", "START");
 			this.whichGraphicOnScreen = whatToProcess;
 			break;	
 		case "h": case "Control_y": case "Control_k": case "Shift_F4": case "Shift_O": case "y": case "g": case "k":
 		case "Control_Shift_R": case "Control_Shift_J": case "r":
+			if(audioenabled.equalsIgnoreCase("TRUE")) {
+				processAnimation(Constants.FRONT, print_writers, "sfx_In", "START");
+			}
 			processAnimation(Constants.FRONT, print_writers, "Anim_Bugs$In_Out", "START");
 			this.whichGraphicOnScreen = whatToProcess;
 			break;
 		case "Control_Shift_U": case "Control_Shift_V":
 			T20_MumbaiAnimateIn(Constants.SHRUNK_INFOBAR, print_writers, config);
+			if(audioenabled.equalsIgnoreCase("TRUE")) {
+				processAnimation(Constants.FRONT, print_writers, "sfx_In", "START");
+			}
 			processAnimation(Constants.FRONT, print_writers, "anim_Pop_Up", "START");
 			this.whichGraphicOnScreen = whatToProcess;
 			break;
 		case "6": case "Control_4":
 			T20_MumbaiAnimateIn(Constants.SHRUNK_INFOBAR, print_writers, config);
+			if(audioenabled.equalsIgnoreCase("TRUE")) {
+				processAnimation(Constants.FRONT, print_writers, "sfx_In", "START");
+			}
 			processAnimation(Constants.FRONT, print_writers, "anim_BoundaryCounter$In_Out", "START");
 			TimeUnit.MILLISECONDS.sleep(1500);
 			this.whichGraphicOnScreen = whatToProcess;
@@ -8081,10 +8102,16 @@ public class Animation
 			}
 			
 			if(whichGraphicOnScreen.equalsIgnoreCase("Shift_I")) {
+				if(audioenabled.equalsIgnoreCase("TRUE")) {
+					processAnimation(Constants.FRONT, print_writers, "sfx_Out", "START");
+				}
 				processAnimation(Constants.FRONT, print_writers, "anim_Impact$SubToImpact", "START");
 				this.whichGraphicOnScreen = whatToProcess;
 			}else {
 				T20_MumbaiAnimateIn(Constants.SHRUNK_INFOBAR, print_writers, config);
+				if(audioenabled.equalsIgnoreCase("TRUE")) {
+					processAnimation(Constants.FRONT, print_writers, "sfx_In", "START");
+				}
 				processAnimation(Constants.FRONT, print_writers, "anim_Impact$In_Out", "START");
 				this.whichGraphicOnScreen = whatToProcess.split(",")[0];
 			}
@@ -8103,6 +8130,9 @@ public class Animation
 				processAnimation(Constants.FRONT, print_writers, "anim_Infobar$Shrink", "START");
 			}
 			TimeUnit.MILLISECONDS.sleep(1000);
+			if(audioenabled.equalsIgnoreCase("TRUE")) {
+				processAnimation(Constants.FRONT, print_writers, "sfx_In", "START");
+			}
 			processAnimation(Constants.FRONT, print_writers, "anim_LT_HowOut$InOut", "START");
 			
 			this.whichGraphicOnScreen = whatToProcess;
@@ -8122,6 +8152,10 @@ public class Animation
 			}
 			if(this.specialBugOnScreen.equalsIgnoreCase(CricketUtil.TOSS)) {
 				processAnimation(Constants.FRONT, print_writers, "MoveForNameSuper", "START");
+			}
+			
+			if(audioenabled.equalsIgnoreCase("TRUE")) {
+				processAnimation(Constants.FRONT, print_writers, "sfx_In", "START");
 			}
 			processAnimation(Constants.FRONT, print_writers, "anim_LT_NameSuper$InOut", "START");
 			
@@ -8144,6 +8178,9 @@ public class Animation
 				processAnimation(Constants.FRONT, print_writers, "anim_Infobar$Shrink", "START");
 			}
 			TimeUnit.MILLISECONDS.sleep(1000);
+			if(audioenabled.equalsIgnoreCase("TRUE")) {
+				processAnimation(Constants.FRONT, print_writers, "sfx_In", "START");
+			}
 			processAnimation(Constants.FRONT, print_writers, "anim_LowerThird$InOut$Essentials", "START");
 			processAnimation(Constants.FRONT, print_writers, "anim_LowerThird$InOut$Colours", "START");
 			processAnimation(Constants.FRONT, print_writers, "anim_LowerThird$InOut$Logo", "START");
@@ -8165,6 +8202,9 @@ public class Animation
 			break;
 			
 		case "Control_Shift_M": case "Control_Shift_L":
+			if(audioenabled.equalsIgnoreCase("TRUE")) {
+				processAnimation(Constants.FRONT, print_writers, "sfx_In", "START");
+			}
 			processAnimation(Constants.FRONT, print_writers, "anim_LT_Ident", "START");
 			this.whichGraphicOnScreen = whatToProcess;
 			break;
@@ -8185,6 +8225,9 @@ public class Animation
 			
 		case "Control_Shift_O":
 			T20_MumbaiAnimateIn("ArrowDown,", print_writers, config); // Push infobar
+			if(audioenabled.equalsIgnoreCase("TRUE")) {
+				processAnimation(Constants.FRONT, print_writers, "sfx_In", "START");
+			}
 			processAnimation(Constants.FRONT, print_writers, "anim_Lt_BattingCard$InOut", "START");
 			this.whichGraphicOnScreen = whatToProcess;
 			break;
@@ -8388,11 +8431,19 @@ public class Animation
 			
 		case "Alt_p":
 			if(this.specialBugOnScreen.equalsIgnoreCase(CricketUtil.TOSS)) {
+				if(audioenabled.equalsIgnoreCase("TRUE")) {
+					processAnimation(Constants.FRONT, print_writers, "sfx_Out", "START");
+				}
 				processAnimation(Constants.FRONT, print_writers, "anim_TossBug", "CONTINUE");
 				this.specialBugOnScreen = "";
+				TimeUnit.MILLISECONDS.sleep(2500);
+				processAnimation(Constants.FRONT, print_writers, "anim_TossBug", "SHOW 0.0");
 			}
 			break;
 		case "Control_Shift_U": case "Control_Shift_V":
+			if(audioenabled.equalsIgnoreCase("TRUE")) {
+				processAnimation(Constants.FRONT, print_writers, "sfx_Out", "START");
+			}
 			processAnimation(Constants.FRONT, print_writers, "anim_Pop_Up", "CONTINUE");
 			TimeUnit.MILLISECONDS.sleep(1000);
 			T20_MumbaiAnimateIn(Constants.SHRUNK_INFOBAR, print_writers, config);
@@ -8402,6 +8453,9 @@ public class Animation
 			this.whichGraphicOnScreen = "";
 			break;
 		case "6": case "Control_4":
+			if(audioenabled.equalsIgnoreCase("TRUE")) {
+				processAnimation(Constants.FRONT, print_writers, "sfx_Out", "START");
+			}
 			processAnimation(Constants.FRONT, print_writers, "anim_BoundaryCounter$In_Out", "CONTINUE");
 			this.whichGraphicOnScreen = "";
 			T20_MumbaiAnimateIn(Constants.SHRUNK_INFOBAR, print_writers, config);
@@ -8410,15 +8464,28 @@ public class Animation
 			processAnimation(Constants.FRONT, print_writers, "anim_BoundaryCounter", "SHOW 0.0");
 			break;
 		case "Shift_C":
+			if(audioenabled.equalsIgnoreCase("TRUE")) {
+				processAnimation(Constants.FRONT, print_writers, "sfx_Out", "START");
+			}
 			processAnimation(Constants.FRONT, print_writers, "anim_SixDistance$In_Out", "CONTINUE");
 			this.whichGraphicOnScreen = "";
+			TimeUnit.MILLISECONDS.sleep(2500);
+			processAnimation(Constants.FRONT, print_writers, "anim_SixDistance$In_Out", "SHOW 0.0");
 			break;
 		case "Control_Shift_F3":
+			if(audioenabled.equalsIgnoreCase("TRUE")) {
+				processAnimation(Constants.FRONT, print_writers, "sfx_Out", "START");
+			}
 			processAnimation(Constants.FRONT, print_writers, "anim_TargetBug$In_Out", "CONTINUE");
 			this.whichGraphicOnScreen = "";
+			TimeUnit.MILLISECONDS.sleep(2500);
+			processAnimation(Constants.FRONT, print_writers, "anim_TargetBug$In_Out", "SHOW 0.0");
 			break;
 		case "h": case "Control_y": case "Control_k": case "Shift_F4": case "Shift_O": case "y": case "g": case "k":
 		case "Control_Shift_R": case "Control_Shift_J": case "r":
+			if(audioenabled.equalsIgnoreCase("TRUE")) {
+				processAnimation(Constants.FRONT, print_writers, "sfx_Out", "START");
+			}
 			processAnimation(Constants.FRONT, print_writers, "Anim_Bugs$In_Out", "CONTINUE");
 			TimeUnit.MILLISECONDS.sleep(800);
 			processAnimation(Constants.FRONT, print_writers, "Anim_Bugs$In_Out", "SHOW 0.0");
@@ -8433,6 +8500,9 @@ public class Animation
 			break;
 		
 		case "Shift_F1":  case "Shift_F2":
+			if(audioenabled.equalsIgnoreCase("TRUE")) {
+				processAnimation(Constants.FRONT, print_writers, "sfx_Out", "START");
+			}
 			processAnimation(Constants.FRONT, print_writers, "anim_Minis", "CONTINUE");
 			T20_MumbaiAnimateIn(Constants.SHRUNK_INFOBAR, print_writers, config);
 			this.whichGraphicOnScreen = "";
@@ -8448,6 +8518,9 @@ public class Animation
 			break;
 			
 		case "Shift_I":
+			if(audioenabled.equalsIgnoreCase("TRUE")) {
+				processAnimation(Constants.FRONT, print_writers, "sfx_Out", "START");
+			}
 			processAnimation(Constants.FRONT, print_writers, "anim_Impact$In_Out", "CONTINUE");
 			this.whichGraphicOnScreen = "";
 			TimeUnit.MILLISECONDS.sleep(1800);
@@ -8456,24 +8529,38 @@ public class Animation
 			break;	
 		
 		case "Control_F6": case "F6": case "Shift_F6":
+			if(audioenabled.equalsIgnoreCase("TRUE")) {
+				processAnimation(Constants.FRONT, print_writers, "sfx_Out", "START");
+			}
 			processAnimation(Constants.FRONT, print_writers, "anim_LT_HowOut$InOut", "CONTINUE");
 			TimeUnit.MILLISECONDS.sleep(1000);
 			T20_MumbaiAnimateIn(Constants.SHRUNK_INFOBAR, print_writers, config); // Push infobar
 			this.whichGraphicOnScreen = "";
+			TimeUnit.MILLISECONDS.sleep(2500);
+			processAnimation(Constants.FRONT, print_writers, "anim_LT_HowOut$InOut", "SHOW 0.0");
 			break;
 		case "F8": case "Alt_F8": case "F10":
+			if(audioenabled.equalsIgnoreCase("TRUE")) {
+				processAnimation(Constants.FRONT, print_writers, "sfx_Out", "START");
+			}
 			processAnimation(Constants.FRONT, print_writers, "anim_LT_NameSuper$InOut", "CONTINUE");
-			TimeUnit.MILLISECONDS.sleep(1800);
+			TimeUnit.MILLISECONDS.sleep(1400);
 			if(this.specialBugOnScreen.equalsIgnoreCase(CricketUtil.TOSS)) {
 				processAnimation(Constants.FRONT, print_writers, "MoveForNameSuper", "CONTINUE REVERSE");
 			}
 			T20_MumbaiAnimateIn(Constants.SHRUNK_INFOBAR, print_writers, config); // Push infobar
 			this.whichGraphicOnScreen = "";
+			TimeUnit.MILLISECONDS.sleep(2500);
+			processAnimation(Constants.FRONT, print_writers, "anim_LT_NameSuper", "SHOW 0.0");
+			processAnimation(Constants.FRONT, print_writers, "MoveForNameSuper", "SHOW 0.0");
 			break;
 		case "F5":case "F9":case "l":case "Shift_F5":case "Shift_F9":case "Control_h":case "Alt_F12": case "F7": case "F11": case "Control_a": case "q": 
 		case "u": case "Control_q": case "Shift_F3": case "Control_F3": case "Shift_B": case "Alt_Shift_F3": case "Control_Shift_Q": case "Control_s": case "Control_f":
 		case "Alt_Shift_O":case "Control_F9":case "Control_F5": case "d": case "e":case "Alt_F1": case "Alt_F2":
-		case "Control_i":	
+		case "Control_i":
+			if(audioenabled.equalsIgnoreCase("TRUE")) {
+				processAnimation(Constants.FRONT, print_writers, "sfx_Out", "START");
+			}
 			processAnimation(Constants.FRONT, print_writers, "anim_LowerThird$InOut$Essentials", "CONTINUE");
 			processAnimation(Constants.FRONT, print_writers, "anim_LowerThird$InOut$Colours", "CONTINUE");
 			processAnimation(Constants.FRONT, print_writers, "anim_LowerThird$InOut$Logo", "CONTINUE");
@@ -8482,6 +8569,8 @@ public class Animation
 			TimeUnit.MILLISECONDS.sleep(1800);
 			T20_MumbaiAnimateIn(Constants.SHRUNK_INFOBAR, print_writers, config); // Push infobar
 			this.whichGraphicOnScreen = "";
+			TimeUnit.MILLISECONDS.sleep(2500);
+			processAnimation(Constants.FRONT, print_writers, "anim_LowerThird", "SHOW 0.0");
 			break;
 			
 		case "j":
@@ -8495,8 +8584,13 @@ public class Animation
 			break;
 
 		case "Control_Shift_M": case "Control_Shift_L":
+			if(audioenabled.equalsIgnoreCase("TRUE")) {
+				processAnimation(Constants.FRONT, print_writers, "sfx_Out", "START");
+			}
 			processAnimation(Constants.FRONT, print_writers, "anim_LT_Ident", "CONTINUE");
 			this.whichGraphicOnScreen = "";
+			TimeUnit.MILLISECONDS.sleep(2500);
+			processAnimation(Constants.FRONT, print_writers, "anim_LT_Ident", "SHOW 0.0");
 			break;
 			
 		case "Alt_Shift_N":case "Alt_Shift_M":
@@ -8513,6 +8607,9 @@ public class Animation
 			break;
 				
 		case "Control_Shift_O":
+			if(audioenabled.equalsIgnoreCase("TRUE")) {
+				processAnimation(Constants.FRONT, print_writers, "sfx_Out", "START");
+			}
 			processAnimation(Constants.FRONT, print_writers, "anim_Lt_BattingCard$InOut", "CONTINUE");
 			this.whichGraphicOnScreen = "";
 			TimeUnit.MILLISECONDS.sleep(500);
@@ -8672,9 +8769,15 @@ public class Animation
 			break;
 			
 		case "Control_Shift_U": case "Control_Shift_V":
+			if(audioenabled.equalsIgnoreCase("TRUE")) {
+				processAnimation(Constants.FRONT, print_writers, "sfx_Change", "START");
+			}
 			processAnimation(Constants.FRONT, print_writers, "Change_PopUp", "START");
 			break;
 		case "Control_Shift_U_change_on": case "Control_Shift_V_change_on":
+			if(audioenabled.equalsIgnoreCase("TRUE")) {
+				processAnimation(Constants.FRONT, print_writers, "sfx_Change", "START");
+			}
 			processAnimation(Constants.FRONT, print_writers, "Change_PopUp$Data", "START");
 			break;
 			
@@ -8682,6 +8785,9 @@ public class Animation
 			processAnimation(Constants.FRONT, print_writers, "BtmChangeon", "START");
 			break;
 		case "F8": case "Alt_F8": case "F10":
+			if(audioenabled.equalsIgnoreCase("TRUE")) {
+				processAnimation(Constants.FRONT, print_writers, "sfx_Change", "START");
+			}
 			processAnimation(Constants.FRONT, print_writers, "Change_LT_NameSuper", "START");
 			break;
 		case "F5":case "F9":case "l":case "Shift_F5":case "Shift_F9":case "Control_h":case "Alt_F12": case "F7": case "F11": case "q":case "u":case "Control_q": 
@@ -8694,7 +8800,9 @@ public class Animation
 //				processAnimation(Constants.FRONT, print_writers, "Body$Side2", "START");
 //				processAnimation(Constants.FRONT, print_writers, "BaseWidth", "START");	
 //			}
-			
+			if(audioenabled.equalsIgnoreCase("TRUE")) {
+				processAnimation(Constants.FRONT, print_writers, "sfx_Change", "START");
+			}
 			processAnimation(Constants.FRONT, print_writers, "ChangeLowerThird", "START");
 			
 			break;

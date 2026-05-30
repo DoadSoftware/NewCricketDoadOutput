@@ -8701,28 +8701,44 @@ function addItemsToList(whatToProcess,dataToProcess)
 			select.id = 'selectHowoutPlayers';
 			select.name = select.id;
 			
-			session_match.match.inning.forEach(function(inn){
-				if(inn.inningNumber == document.getElementById('which_inning').value){
-					inn.battingCard.forEach(function(bc,bc_index,bc_arr){
-						if(inn.fallsOfWickets.length > 0){
-							if(bc.playerId == inn.fallsOfWickets[inn.fallsOfWickets.length-1].fowPlayerID){
-								option = document.createElement('option');
-								option.value = bc.playerId;
-								option.text = bc.player.full_name + " - " + bc.status;	
-								select.appendChild(option);
+			switch(whatToProcess) {
+			case 'Shift_F6':
+				session_match.match.inning.forEach(function(inn){
+					if(inn.inningNumber == document.getElementById('which_inning').value){
+						inn.battingCard.forEach(function(bc,bc_index,bc_arr){
+							option = document.createElement('option');
+							option.value = bc.playerId;
+							option.text = bc.player.full_name + " - " + bc.status;	
+							select.appendChild(option);
+						});
+					}
+				});
+				break;
+			default:
+				session_match.match.inning.forEach(function(inn){
+					if(inn.inningNumber == document.getElementById('which_inning').value){
+						inn.battingCard.forEach(function(bc,bc_index,bc_arr){
+							if(inn.fallsOfWickets.length > 0){
+								if(bc.playerId == inn.fallsOfWickets[inn.fallsOfWickets.length-1].fowPlayerID){
+									option = document.createElement('option');
+									option.value = bc.playerId;
+									option.text = bc.player.full_name + " - " + bc.status;	
+									select.appendChild(option);
+								}
 							}
-						}
+							
+						});
 						
-					});
-					
-					inn.battingCard.forEach(function(bc,bc_index,bc_arr){
-						option = document.createElement('option');
-						option.value = bc.playerId;
-						option.text = bc.player.full_name + " - " + bc.status;	
-						select.appendChild(option);
-					});
-				}
-			});
+						inn.battingCard.forEach(function(bc,bc_index,bc_arr){
+							option = document.createElement('option');
+							option.value = bc.playerId;
+							option.text = bc.player.full_name + " - " + bc.status;	
+							select.appendChild(option);
+						});
+					}
+				});
+				break;				
+			}
 			
 			select.setAttribute('onchange','setDropdownOptionToSelectOptionArray(this, 0)');
 			row.insertCell(cellCount).appendChild(select);
@@ -8737,7 +8753,7 @@ function addItemsToList(whatToProcess,dataToProcess)
 			select.id = 'selectType';
 			select.name = select.id;
 			switch($('#selected_broadcaster').val().toUpperCase()){
-				case 'T20_MUMBAI':
+				/*case 'T20_MUMBAI':
 					option = document.createElement('option');
 					option.value = 'Economy';
 					option.text = 'This match - First (Economy)';
@@ -8747,8 +8763,8 @@ function addItemsToList(whatToProcess,dataToProcess)
 					option.value = 'Catches';
 					option.text = 'This Match - Second (Catches)';
 					select.appendChild(option);
-				 	break;
-				 case 'ISPL':
+				 	break;*/
+				 case 'ISPL': case 'T20_MUMBAI':
 				 	option = document.createElement('option');
 					option.value = 'THIS_MATCH';
 					option.text = 'This Match';
