@@ -303,7 +303,7 @@ public class InfobarGfx
 				}
 				
 				if(infobar.isInfobar_on_screen()) {
-					this_targetData = CricketFunctions.GenerateMatchSummaryStatus(inning.getInningNumber(), matchAllData, CricketUtil.FULL, "|", 
+					this_targetData = CricketFunctions.GenerateMatchSummaryStatus(inning.getInningNumber(), matchAllData, CricketUtil.SHORT, "|", 
 							config.getBroadcaster(), true);
 					if(this_targetData.isMatchFinished() == true) {
 						
@@ -1263,9 +1263,9 @@ public class InfobarGfx
 						+ matchAllData.getSetup().getMatchIdent() + " - " + matchAllData.getSetup().getHomeTeam().getTeamName1() 
 						+ " v " + matchAllData.getSetup().getAwayTeam().getTeamName1() + "\0", print_writers);
 				
-				if(this_targetData.getTargetOrResult().toUpperCase().contains(" " + CricketUtil.BEAT + " ") || this_targetData.getTargetOrResult().toUpperCase().contains(CricketUtil.TIED)) {
+				if(!this_targetData.getTargetOrResult().toUpperCase().split("\\|")[0].contains(CricketUtil.TIED)) {
 					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_Infobar$All$Results$Info$txt_Info*GEOM*TEXT SET " 
-							+ this.infobar.getFreeText().get(0).toUpperCase() + " " + this.infobar.getFreeText().get(1).toUpperCase() + "\0", print_writers);
+							+ this_targetData.getTargetOrResult().toUpperCase() + "\0", print_writers);
 				}else {
 					if(matchAllData.getSetup().getMatchType().equalsIgnoreCase(CricketUtil.SUPER_OVER)) {
 						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_Infobar$All$Results$Info$txt_Info*GEOM*TEXT SET " 
@@ -1855,6 +1855,12 @@ public class InfobarGfx
 				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_Infobar$All$Normal$ScoreAll$Teams$Name$txt_Team2*GEOM*TEXT SET " + 
 						inning.getBowling_team().getTeamBadge() + "\0", print_writers);
 				
+				if(inning.getInningNumber() == 1 && inning.getIsCurrentInning().equalsIgnoreCase(CricketUtil.YES)) {
+					infobar.setLeft_bottom("BALL_LEFT");
+				}else {
+					infobar.setLeft_bottom("SUPER_OVER");
+				}
+				
 				TeamColor(false, print_writers, matchAllData, inning, (infobar.isInfobar_on_screen() == true ? 2 : whichSide));
 			}
 			
@@ -1895,9 +1901,17 @@ public class InfobarGfx
 			
 			switch(matchAllData.getSetup().getMatchType()) {
 			case CricketUtil.SUPER_OVER:
-				int ballsLeft = 6 - ((inning.getTotalOvers() * 6) + inning.getTotalBalls());
-				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_Infobar$All$Normal$ScoreAll$Score$Overs$txt_Overs*GEOM*TEXT SET "
-						+ "BALL" + CricketFunctions.Plural(ballsLeft).toUpperCase() + " LEFT: " + ballsLeft + "\0", print_writers);
+				switch(infobar.getLeft_bottom()) {
+				case "BALL_LEFT":
+					int ballsLeft = 6 - ((inning.getTotalOvers() * 6) + inning.getTotalBalls());
+					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_Infobar$All$Normal$ScoreAll$Score$Overs$txt_Overs*GEOM*TEXT SET "
+							+ (ballsLeft > 0 ? "BALL" + CricketFunctions.Plural(ballsLeft).toUpperCase() + " LEFT: " + ballsLeft:"") + "\0", print_writers);
+					break;
+				case "SUPER_OVER":
+					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_Infobar$All$Normal$ScoreAll$Score$Overs$txt_Overs*GEOM*TEXT SET "
+							+ "SUPER OVER" + "\0", print_writers);
+					break;
+				}
 				break;
 			default:
 				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_Infobar$All$Normal$ScoreAll$Score$Overs$txt_Overs*GEOM*TEXT SET " 
@@ -9459,6 +9473,21 @@ public class InfobarGfx
 	public String populateVizInfobarLeftBottom(List<PrintWriter> print_writers, MatchAllData matchAllData,int WhichSide) throws Exception 
 	{
 		switch(config.getBroadcaster()) {
+		case Constants.T20_MUMBAI:
+			inning = matchAllData.getMatch().getInning().stream().filter(inn -> inn.getIsCurrentInning().equalsIgnoreCase(CricketUtil.YES)).findAny().orElse(null);
+			
+			switch(infobar.getLeft_bottom()) {
+			case "BALL_LEFT":
+				int ballsLeft = 6 - ((inning.getTotalOvers() * 6) + inning.getTotalBalls());
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_Infobar$All$Normal$ScoreAll$Score$Overs$txt_Overs*GEOM*TEXT SET "
+						+ (ballsLeft > 0 ? "BALL" + CricketFunctions.Plural(ballsLeft).toUpperCase() + " LEFT: " + ballsLeft:"") + "\0", print_writers);
+				break;
+			case "SUPER_OVER":
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_Infobar$All$Normal$ScoreAll$Score$Overs$txt_Overs*GEOM*TEXT SET "
+						+ "SUPER OVER" + "\0", print_writers);
+				break;
+			}
+			break;
 		case Constants.ICC_U19_2023: 
 			switch(infobar.getLeft_bottom().toUpperCase()) {
 			case "CRR":
@@ -13157,6 +13186,22 @@ public class InfobarGfx
 							+ infoStat.getText1() + "\0", print_writers);
 				}
 				break;
+			case "ST_BAT": case "ST_BALL":
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_Infobar$All$Normal$Analytics$Side" + WhichSide + "$Select_DataType*FUNCTION*Omo*vis_con SET 1\0", print_writers);
+				
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_Infobar$All$Normal$Analytics$Side" + WhichSide + "$2_Line_Text$txt_Title*GEOM*TEXT SET " 
+						+ "STRATEGIC TIMEOUT" + "\0", print_writers);
+				switch(infobar.getFull_section().toUpperCase()) {
+				case "ST_BAT":
+					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_Infobar$All$Normal$Analytics$Side" + WhichSide + "$2_Line_Text$txt_Subtitle*GEOM*TEXT SET " 
+							+ "IS NOW AVAILABLE FOR " + inning.getBatting_team().getTeamName1() + "\0", print_writers);
+					break;
+				case "ST_BALL":
+					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_Infobar$All$Normal$Analytics$Side" + WhichSide + "$2_Line_Text$txt_Subtitle*GEOM*TEXT SET " 
+							+ "IS NOW AVAILABLE FOR " + inning.getBowling_team().getTeamName1() + "\0", print_writers);
+					break;
+				}
+				break;
 			case "COMMENTATORS":
 				String Data = "";
 				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_Infobar$All$Normal$Analytics$Side" + WhichSide + "$Select_DataType*FUNCTION*Omo*vis_con SET 1\0", print_writers);
@@ -13213,7 +13258,7 @@ public class InfobarGfx
 				cal.add(Calendar.DATE, +1);
 				if(fixture.getDate().equalsIgnoreCase(new SimpleDateFormat("dd-MM-yyyy").format(cal.getTime()))) {
 					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_Infobar$All$Normal$Analytics$Side"+ WhichSide + "$Ident$Info$txt_Venue*GEOM*TEXT SET " 
-							+ "TOMORROW - " + fixture.getLocalTime()+" IST" + "\0", print_writers);
+							+ "TOMORROW - " + fixture.getLocalTime() + "\0", print_writers);
 				}else {
 					cal.add(Calendar.DATE, -1);
 					if(fixture.getDate().equalsIgnoreCase(new SimpleDateFormat("dd-MM-yyyy").format(cal.getTime()))) {
@@ -13224,7 +13269,7 @@ public class InfobarGfx
 						String date_data = CricketFunctions.ordinal(Integer.parseInt(dateParts[0])) + " " + Month.of(Integer.parseInt(dateParts[1]));
 						
 						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_Infobar$All$Normal$Analytics$Side"+ WhichSide + "$Ident$Info$txt_Venue*GEOM*TEXT SET " 
-								+ date_data+" - "+ fixture.getLocalTime()+ " IST" + "\0", print_writers);
+								+ date_data+" - "+ fixture.getLocalTime() + "\0", print_writers);
 					}
 				}
 				break;
@@ -15938,8 +15983,8 @@ public class InfobarGfx
 				String targetData = "";
 				
 				if(matchAllData.getSetup().getMatchType().equalsIgnoreCase(CricketUtil.SUPER_OVER) && matchAllData.getSetup().getMaxOvers() == 1) {
-					targetData = inning.getBatting_team().getTeamName1()+ " NEED "+ CricketFunctions.GetTargetData(matchAllData).getTargetRuns() + " RUNS" + " TO WIN " + 
-							String.valueOf("FROM " + matchAllData.getSetup().getMaxOvers()*6)+ " BALLS";
+					targetData = inning.getBatting_team().getTeamName1()+ " NEED "+ CricketFunctions.GetTargetData(matchAllData).getTargetRuns() + " RUN"
+							+ CricketFunctions.Plural(CricketFunctions.GetTargetData(matchAllData).getTargetRuns()).toUpperCase()  + " TO WIN THE SUPER OVER";
 				}else {
 					if(matchAllData.getSetup().getTargetOvers() != null && !matchAllData.getSetup().getTargetOvers().isEmpty()) {
 						targetData = inning.getBatting_team().getTeamName1()+ " NEED "+ CricketFunctions.GetTargetData(matchAllData).getTargetRuns() + " RUNS" + " TO WIN " 

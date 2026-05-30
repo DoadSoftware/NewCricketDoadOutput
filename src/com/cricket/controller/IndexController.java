@@ -711,6 +711,9 @@ public class IndexController
 					switch (session_configuration.getBroadcaster()) {
 					case Constants.T20_MUMBAI:
 						switch(command) {
+						case "Alt_1":
+							this_caption.whichSide = 1;
+							break;
 						case "Alt_2": case "Alt_7":
 							this_caption.whichSide = 2;
 							break;
@@ -718,7 +721,7 @@ public class IndexController
 							lastDataPart = this_caption.this_infobarGfx.infobar.getLast_right_full_section();
 							this_caption.whichSide = (lastDataPart != null && !lastDataPart.isEmpty() && !lastDataPart.equalsIgnoreCase("BLANK")) ? 2 : 1;
 							break;
-						case "Alt_3": case "Alt_4": case "Alt_6":
+						case "Alt_3": case "Alt_4": case "Alt_6": case "Alt_9":
 							lastDataPart = this_caption.this_infobarGfx.infobar.getLast_full_section();
 							this_caption.whichSide = (lastDataPart != null && !lastDataPart.isEmpty() && !lastDataPart.equalsIgnoreCase("BLANK")) ? 2 : 1;
 							break;
@@ -1004,13 +1007,13 @@ public class IndexController
 						switch(session_configuration.getBroadcaster()) {
 						case Constants.T20_MUMBAI:
 							switch(valueToProcess.split(",")[0]) {
-							case "Alt_3": case "Alt_4": case "Alt_5": case "Alt_6": case "Alt_8":
+							case "Alt_3": case "Alt_4": case "Alt_5": case "Alt_6": case "Alt_8": case "Alt_9":
 							    String lastSection = null;
 							    switch(valueToProcess.split(",")[0]) {
 							        case "Alt_5":
 							            lastSection = this_caption.this_infobarGfx.infobar.getLast_right_full_section();
 							            break;
-							        case "Alt_3": case "Alt_4": case "Alt_6":
+							        case "Alt_3": case "Alt_4": case "Alt_6": case "Alt_9":
 							            lastSection = this_caption.this_infobarGfx.infobar.getLast_full_section();
 							            break;
 							        case "Alt_8":

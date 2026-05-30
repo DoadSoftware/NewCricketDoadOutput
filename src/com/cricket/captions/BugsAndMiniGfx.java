@@ -2184,9 +2184,7 @@ public class BugsAndMiniGfx
 			
 			CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_TargetBug$ColouredBase" +
 					"$img_Base1*TEXTURE*IMAGE SET " + Constants.T20_MUMBAI_Base1 + inning.getBatting_team().getTeamBadge() + "\0",print_writers);
-			
-			CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_TargetBug$Header$txt_Header*GEOM*TEXT SET " +
-					"TARGET" + "\0", print_writers);
+			CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_TargetBug$Header$txt_Header*GEOM*TEXT SET " + "TARGET" + "\0", print_writers);
 			CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_TargetBug$Data$txt_Runs*GEOM*TEXT SET " +
 					CricketFunctions.GetTargetData(matchAllData).getTargetRuns() + "\0", print_writers);
 			break;

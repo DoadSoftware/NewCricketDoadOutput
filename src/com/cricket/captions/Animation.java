@@ -80,7 +80,7 @@ public class Animation
 		switch (config.getBroadcaster().toUpperCase()) {
 		case Constants.T20_MUMBAI:
 			switch (whatToProcess.split(",")[0]) {
-			case "Alt_0": case "Alt_2": case "Alt_3": case "Alt_4": case "Alt_5": case "Alt_6": case "Alt_7": case "Alt_8": case "Alt_9":
+			case "Alt_0": case "Alt_1": case "Alt_2": case "Alt_3": case "Alt_4": case "Alt_5": case "Alt_6": case "Alt_7": case "Alt_8": case "Alt_9":
 			case "Control_F12": case "Shift_F12":
 				return Constants.INFO_BAR;
 			case "F1": case "Control_Shift_F1": case "F2": case "Control_F11": case "F4": case "Shift_K": case "Shift_T": case "Control_F7":
@@ -7886,7 +7886,8 @@ public class Animation
 			processAnimation(Constants.FRONT, print_writers, "anim_Infobar$Section4$In_Out", "START");
 			infobar.setRight_full_section(whatToProcess.split(",")[2]);
 			break;
-		case "Alt_3": case "Alt_4": case "Alt_6":
+		case "Alt_3": case "Alt_4": case "Alt_6": case "Alt_9":
+			processAnimation(Constants.FRONT, print_writers, "anim_Infobar$OutForAnalytics$In_Out", "START");
 			processAnimation(Constants.FRONT, print_writers, "anim_Infobar$Analytics$In_Out", "START");
 			infobar.setFull_section(whatToProcess.split(",")[2]);
 			break;
@@ -7952,7 +7953,7 @@ public class Animation
 			break;
 			
 		case "w": case "f": case "s": case "0": case "8":
-			String whichData = Map.of("s","SIX", "w","WICKET", "f","FOUR", "0","HAT-TRICK", "8","ON HAT-TRICK").getOrDefault(whatToProcess.split(",")[0], "");
+			String whichData = Map.of("s","SIX", "w","WICKET", "f","FOUR", "0","HAT-TRICK", "8","ON A HAT-TRICK").getOrDefault(whatToProcess.split(",")[0], "");
 			caption.this_infobarGfx.TeamWipeColor(print_writers, whatToProcess.split(",")[0]);
 			CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_Infobar$All$Normal$DisruptiveAnimations$select_Style"
 					+ "*FUNCTION*Omo*vis_con SET 1\0", print_writers);
@@ -8432,10 +8433,12 @@ public class Animation
 			processAnimation(Constants.FRONT, print_writers, "anim_Infobar$Section4", "SHOW 0.0");
 			infobar.setRight_full_section(null);
 			break;
-		case "Alt_3": case "Alt_4": case "Alt_6":
+		case "Alt_3": case "Alt_4": case "Alt_6": case "Alt_9":
 			processAnimation(Constants.FRONT, print_writers, "anim_Infobar$Analytics$In_Out", "CONTINUE");
+			processAnimation(Constants.FRONT, print_writers, "anim_Infobar$OutForAnalytics$In_Out", "CONTINUE");
 			TimeUnit.MILLISECONDS.sleep(700);
 			processAnimation(Constants.FRONT, print_writers, "anim_Infobar$Analytics", "SHOW 0.0");
+			processAnimation(Constants.FRONT, print_writers, "anim_Infobar$OutForAnalytics", "SHOW 0.0");
 			infobar.setFull_section(null);
 			break;
 		case "Alt_8":
@@ -8782,7 +8785,7 @@ public class Animation
 			processAnimation(Constants.FRONT, print_writers, "anim_Infobar$Change_Section4", "START");
 			infobar.setRight_full_section(whatToProcess.split(",")[2]);
 			break;
-		case "Alt_3": case "Alt_4": case "Alt_6":
+		case "Alt_3": case "Alt_4": case "Alt_6": case "Alt_9":
 			processAnimation(Constants.FRONT, print_writers, "anim_Infobar$Analytics$Change", "START");
 			infobar.setFull_section(whatToProcess.split(",")[2]);
 			break;
@@ -9000,7 +9003,7 @@ public class Animation
 			TimeUnit.MILLISECONDS.sleep(500);
 			processAnimation(Constants.FRONT, print_writers, "anim_Infobar$Change_Section4", "SHOW 0.0");
 			break;
-		case "Alt_3": case "Alt_4": case "Alt_6":
+		case "Alt_3": case "Alt_4": case "Alt_6": case "Alt_9":
 			TimeUnit.MILLISECONDS.sleep(500);
 			processAnimation(Constants.FRONT, print_writers, "anim_Infobar$Analytics$Change", "SHOW 0.0");
 			break;
@@ -12908,7 +12911,7 @@ public class Animation
 						previewCommand = previewCommand + " Change_Fullframes$PhasewiseRunRates 1.680 Change_Fullframes$PhasewiseRunRates$Change_Out 0.600 Change_Fullframes$PhasewiseRunRates$Change_In 1.680";
 						break;
 					case "F4":
-						previewCommand = previewCommand + " Change_Fullframes$Partnership 1.280 Change_Fullframes$Partnership$Change_Out 0.540 Change_Fullframes$Partnership$Change_In 1.280";
+						previewCommand = previewCommand + " Change_Fullframes$PartnershipList 1.280 Change_Fullframes$PartnershipList$Change_Out 0.540 Change_Fullframes$PartnershipList$Change_In 1.280";
 						break;
 					case "Alt_F9":
 						previewCommand = previewCommand + " Change_Fullframes$Team 1.240 Change_Fullframes$Team$Change_Out 0.520 Change_Fullframes$Team$Change_In 1.240";
@@ -14412,7 +14415,8 @@ public class Animation
 				if(whatToProcess.contains(",")) {
 					switch(whatToProcess.split(",")[0]) {
 					case "Shift_F1": case "Shift_F2":
-						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER PREVIEW SCENE*/Default/gfx_Overlays C:/Temp/Preview.tga anim_Minis$In_Out$In 1.780\0", print_writer);
+						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER PREVIEW SCENE*/Default/gfx_Overlays C:/Temp/Preview.tga anim_Minis 2.800 anim_Minis$In_Out 2.000 "
+								+ "anim_Minis$In_Out$In 1.780\0", print_writer);
 						break;
 					case "Alt_F7":
 						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER PREVIEW SCENE*/Default/gfx_Overlays C:/Temp/Preview.tga "

@@ -516,6 +516,24 @@ function processUserSelectionData(whatToProcess,dataToProcess)
 					break;
 				 }
 				break;
+			case 'Alt_1':
+				switch($('#selected_broadcaster').val().toUpperCase()){
+				case 'T20_MUMBAI':
+					if(session_match.setup.matchType == 'SUPER_OVER'){
+						session_match.match.inning.forEach(function(inn){
+							if(inn.isCurrentInning == 'YES' && session_match.setup.matchType != 'TEST' && session_match.setup.matchType != 'FC'){
+								if(inn.inningNumber == 2){
+									addItemsToList(dataToProcess,null);
+								}
+							}
+						});
+					} 
+					break;
+				default:
+					addItemsToList(dataToProcess,null); 
+					break;
+				}
+				break;
 			case 'Alt_F9':
 				switch($('#selected_broadcaster').val().toUpperCase()){
 				case 'ICC-U19-2023': case 'T20_MUMBAI':
@@ -3381,87 +3399,105 @@ function addItemsToList(whatToProcess,dataToProcess)
 		break;
 		case 'Alt_1':
 			switch($('#selected_broadcaster').val().toUpperCase()){
-				case 'VIDARBHA':
-				header_text.innerHTML = 'INFOBAR MIDDLE';
-				select = document.createElement('select');
-				select.id = 'selectMiddleStat';
-				select.name = select.id;
-				
-				/*option = document.createElement('option');
-				option.value = 'CURR_PARTNERSHIP';
-				option.text = 'Current Partnership';
-				select.appendChild(option);*/
-				if(session_match.setup.matchType == 'SUPER_OVER'){
+				case 'T20_MUMBAI':
+					header_text.innerHTML = 'INFOBAR LEFT';
+					
+					select = document.createElement('select');
+					select.id = 'selectMiddleStat';
+					select.name = select.id;
+					
 					option = document.createElement('option');
-					option.value = 'THIS_OVER';
-					option.text = 'This Over';
+					option.value = 'SUPER_OVER';
+					option.text = 'SUPER_OVER';
 					select.appendChild(option);
-				}
-				
-				option = document.createElement('option');
-				option.value = 'BOUNDARY';
-				option.text = 'Inning Boundaries';
-				select.appendChild(option);
-				
-				option = document.createElement('option');
-				option.value = 'REVIEW';
-				option.text = 'Review';
-				select.appendChild(option);
-			
-				option = document.createElement('option');
-				option.value = 'BALLS_SINCE_LAST_BOUNDARY';
-				option.text = 'Ball Since Last Boundary';
-				select.appendChild(option);	
-				
-				option = document.createElement('option');
-				option.value = 'LAST_X_BALLS';
-				option.text = 'Last x Balls';
-				select.appendChild(option);
-				
-				option = document.createElement('option');
-				option.value = 'AT_THIS_STAGE';
-				option.text = 'At This Stage';
-				select.appendChild(option);
-				
-				option = document.createElement('option');
-				option.value = 'EXTRAS';
-				option.text = 'Extras';
-				select.appendChild(option);
-	
-				option = document.createElement('option');
-				option.value = 'LAST_WICKET';
-				option.text = 'Last Wicket';
-				select.appendChild(option);
-				
-				session_match.match.inning.forEach(function(inn,index,arr){
-					if(inn.isCurrentInning == 'YES'){
-						if(inn.inningNumber == 1){
-							
-							option = document.createElement('option');
-							option.value = 'PROJECTED';
-							option.text = 'Projected Score';
-							select.appendChild(option);
-							
-						}
-						else{
-							/*option = document.createElement('option');
-							option.value = 'TARGET';
-							option.text = 'Target';
-							select.appendChild(option);*/
-							
-							option = document.createElement('option');
-							option.value = 'EQUATION';
-							option.text = 'Equation';
-							select.appendChild(option);
-							
-							option = document.createElement('option');
-							option.value = 'RESULT';
-							option.text = 'Result';
-							select.appendChild(option);
-						}
+					
+					option = document.createElement('option');
+					option.value = 'BALL_LEFT';
+					option.text = 'BALL_LEFT';
+					select.appendChild(option);
+												
+					break;
+				case 'VIDARBHA':
+					header_text.innerHTML = 'INFOBAR MIDDLE';
+					select = document.createElement('select');
+					select.id = 'selectMiddleStat';
+					select.name = select.id;
+					
+					/*option = document.createElement('option');
+					option.value = 'CURR_PARTNERSHIP';
+					option.text = 'Current Partnership';
+					select.appendChild(option);*/
+					if(session_match.setup.matchType == 'SUPER_OVER'){
+						option = document.createElement('option');
+						option.value = 'THIS_OVER';
+						option.text = 'This Over';
+						select.appendChild(option);
 					}
-				});
-				break;
+					
+					option = document.createElement('option');
+					option.value = 'BOUNDARY';
+					option.text = 'Inning Boundaries';
+					select.appendChild(option);
+					
+					option = document.createElement('option');
+					option.value = 'REVIEW';
+					option.text = 'Review';
+					select.appendChild(option);
+				
+					option = document.createElement('option');
+					option.value = 'BALLS_SINCE_LAST_BOUNDARY';
+					option.text = 'Ball Since Last Boundary';
+					select.appendChild(option);	
+					
+					option = document.createElement('option');
+					option.value = 'LAST_X_BALLS';
+					option.text = 'Last x Balls';
+					select.appendChild(option);
+					
+					option = document.createElement('option');
+					option.value = 'AT_THIS_STAGE';
+					option.text = 'At This Stage';
+					select.appendChild(option);
+					
+					option = document.createElement('option');
+					option.value = 'EXTRAS';
+					option.text = 'Extras';
+					select.appendChild(option);
+		
+					option = document.createElement('option');
+					option.value = 'LAST_WICKET';
+					option.text = 'Last Wicket';
+					select.appendChild(option);
+					
+					session_match.match.inning.forEach(function(inn,index,arr){
+						if(inn.isCurrentInning == 'YES'){
+							if(inn.inningNumber == 1){
+								
+								option = document.createElement('option');
+								option.value = 'PROJECTED';
+								option.text = 'Projected Score';
+								select.appendChild(option);
+								
+							}
+							else{
+								/*option = document.createElement('option');
+								option.value = 'TARGET';
+								option.text = 'Target';
+								select.appendChild(option);*/
+								
+								option = document.createElement('option');
+								option.value = 'EQUATION';
+								option.text = 'Equation';
+								select.appendChild(option);
+								
+								option = document.createElement('option');
+								option.value = 'RESULT';
+								option.text = 'Result';
+								select.appendChild(option);
+							}
+						}
+					});
+					break;
 				case 'ISPL':
 					header_text.innerHTML = 'INFOBAR MIDDLE';
 					select = document.createElement('select');
@@ -3756,7 +3792,8 @@ function addItemsToList(whatToProcess,dataToProcess)
 					break;	
 				}
 				
-				if($('#selected_broadcaster').val() != 'ISPL' && $('#selected_broadcaster').val() != 'VIDARBHA'){
+				if($('#selected_broadcaster').val() != 'ISPL' && $('#selected_broadcaster').val() != 'VIDARBHA' 
+					&& $('#selected_broadcaster').val() != 'T20_MUMBAI'){
 					option = document.createElement('option');
 					option.value = 'CRR';
 					option.text = 'Run Rate';
@@ -5080,9 +5117,19 @@ function addItemsToList(whatToProcess,dataToProcess)
 					option.text = 'FreeText';
 					select.appendChild(option);
 					
-					option = document.createElement('option');
+					/*option = document.createElement('option');
 					option.value = 'FreeTextDb';
 					option.text = 'FreeTextDb';
+					select.appendChild(option);*/
+					
+					option = document.createElement('option');
+					option.value = 'ST_BAT';
+					option.text = 'Strategic TimeOut Bat';
+					select.appendChild(option);
+					
+					option = document.createElement('option');
+					option.value = 'ST_BALL';
+					option.text = 'Strategic TimeOut Ball';
 					select.appendChild(option);
 					
 					option = document.createElement('option');
@@ -6037,7 +6084,8 @@ function addItemsToList(whatToProcess,dataToProcess)
 		case 'Alt_9':
 			switch($('#selected_broadcaster').val().toUpperCase()){
 			case 'ICC-U19-2023': case 'BENGAL-T20': case 'NPL': case 'MPL': case 'LEGENDS-90': case 'APL': case 'ISPL': case 'VIDARBHA':
-				header_text.innerHTML = 'MIDDLE INFOBAR SECTION - FREE TEXT';
+			case "T20_MUMBAI":
+				header_text.innerHTML = 'INFOBAR SECTION - FREE TEXT';
 						
 				select = document.createElement('select');
 				select.id = 'selectInfoBarStats';

@@ -1061,7 +1061,12 @@ public class Caption
 				case Constants.BENGAL_T20:
 					this_infobarGfx.infobar.setLeft_bottom(whatToProcess.split(",")[2]);
 					status = this_infobarGfx.populateVizInfobarLeftBottom(print_writers, matchAllData, whichSide);
-					break;	
+					break;
+				case Constants.T20_MUMBAI:
+					System.out.println(whatToProcess.split(",")[2]);
+					this_infobarGfx.infobar.setLeft_bottom(whatToProcess.split(",")[2]);
+					status = this_infobarGfx.populateVizInfobarLeftBottom(print_writers, matchAllData, whichSide);
+					break;
 				}
 				break;
 			case "Control_F8":
@@ -1881,9 +1886,9 @@ public class Caption
 					}
 					break;
 				case Constants.T20_MUMBAI:
-					this_infobarGfx.infobar.setRight_section("FREE_TEXT");
+					this_infobarGfx.infobar.setFull_section("FreeTextDb");
 					this_infobarGfx.infobarStatsId = Integer.valueOf(whatToProcess.split(",")[2]);
-					status = this_infobarGfx.populateVizInfobarRightSection(false, print_writers, matchAllData, whichSide, 1);
+					status = this_infobarGfx.populateFullSection(false,print_writers, matchAllData, whichSide);
 					break;
 				case Constants.BENGAL_T20:
 					this_infobarGfx.infobar.setMiddle_section("FREE_TEXT");
