@@ -2599,10 +2599,13 @@ public class Animation
 			this.whichGraphicOnScreen = whatToProcess;
 			break;
 		case "Control_Shift_O":
+			AnimateIn("ArrowDown,", print_writers, config); // Push infobar
 			processAnimation(Constants.FRONT, print_writers, "LT_PlayingXI", "START");
 			this.whichGraphicOnScreen = whatToProcess;
 			break;	
-		 case "Shift_I":	
+		 case "Shift_I":
+			 AnimateIn(Constants.SHRUNK_INFOBAR + ",", print_writers, config); // Shrink infobar
+			 TimeUnit.MILLISECONDS.sleep(1000);
 			 processAnimation(Constants.FRONT, print_writers, "LT_Impact", "START");
 			 this.whichGraphicOnScreen = whatToProcess;
 			 break;
@@ -2817,17 +2820,19 @@ public class Animation
 				TimeUnit.MILLISECONDS.sleep(800);
 			}
 			break;
-		case "w": case "i": case "f": case "s": case "0": case ";": //case "9":
+		case "w": case "i": case "f": case "s": case ";": //case "9":
 			if(whatToProcess.split(",")[0].equalsIgnoreCase("w")) {
 				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$InfoBar$WIPES$Select*FUNCTION*Omo*vis_con SET 2 \0", print_writers);
 			}else if(whatToProcess.split(",")[0].equalsIgnoreCase("i")) {
+				
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$InfoBar$All$CenterGRp$Main$WIPES$FreeHit"
+						+ "$WipeBase" + "*TEXTURE*IMAGE SET " + Constants.VIDARBHA_BASE2 + "TLogo" + "\0", print_writers);
+				TimeUnit.MILLISECONDS.sleep(500);
 				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$InfoBar$WIPES$Select*FUNCTION*Omo*vis_con SET 1 \0", print_writers);
 			}else if(whatToProcess.split(",")[0].equalsIgnoreCase("f")) {
 				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$InfoBar$WIPES$Select*FUNCTION*Omo*vis_con SET 3 \0", print_writers);
 			}else if(whatToProcess.split(",")[0].equalsIgnoreCase("s")) {
 				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$InfoBar$WIPES$Select*FUNCTION*Omo*vis_con SET 4 \0", print_writers);
-			}else if(whatToProcess.split(",")[0].equalsIgnoreCase("0")) {
-				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$InfoBar$WIPES$Select*FUNCTION*Omo*vis_con SET 5 \0", print_writers);
 			}else if(whatToProcess.split(",")[0].equalsIgnoreCase(";")) {
 				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$InfoBar$WIPES$Select*FUNCTION*Omo*vis_con SET 6 \0", print_writers);
 			}
@@ -3016,15 +3021,19 @@ public class Animation
 				break;
 			case "Control_Shift_O":
 				processAnimation(Constants.FRONT, print_writers, "LT_PlayingXI", "CONTINUE");
+				TimeUnit.MILLISECONDS.sleep(500);
+				AnimateIn("ArrowUp,", print_writers, config); // Restore infobar
 				this.whichGraphicOnScreen = "";
 				break;
 			case "Shift_I":	
 				 processAnimation(Constants.FRONT, print_writers, "LT_Impact", "CONTINUE");
-				 this.whichGraphicOnScreen = whatToProcess;
+				 TimeUnit.MILLISECONDS.sleep(1000);
+				AnimateIn(Constants.SHRUNK_INFOBAR + ",", print_writers, config); // Restore infobar
+				 this.whichGraphicOnScreen = "";
 				 break;	
 			 case "Control_4": case "6":	
 				 processAnimation(Constants.FRONT, print_writers, "PopUps", "CONTINUE");
-				 this.whichGraphicOnScreen = whatToProcess;
+				 this.whichGraphicOnScreen = "";
 				 break;  
 			case "F5": case "F6": case "F9": case "Control_F2": case "Alt_Shift_F3":
 			case "Control_F5": case "Control_F9": case "Control_a":  case "Control_F3": case "Alt_o":
@@ -13395,6 +13404,9 @@ public class Animation
 						previewCommands = "LT_Impact 2.200 LT_Impact$Essentials 2.200 LT_Impact$Essentials$In 1.980 LT_Impact$Row 2.200"
 								+ " LT_Impact$Row$In 1.640";
 						break;
+					case "9": case "Alt_Shift_Q":
+						previewCommands = "Plotter 1.000";
+						break;
 					case "Control_Shift_O":
 						previewCommands = "LT_PlayingXI 2.200 LT_PlayingXI$Essentials 2.200 LT_PlayingXI$Essentials$In 2.100 LT_PlayingXI$Row 2.200"
 								+ " LT_PlayingXI$Row$In 1.400";
@@ -13457,15 +13469,38 @@ public class Animation
 						break;	
 					}
 				}
-				if(match.getSetup().getMatchType().equalsIgnoreCase(CricketUtil.SUPER_OVER)) {
-					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER PREVIEW SCENE*/Default/Overlays_SuperOver "
-					    	+ "C:/Temp/Preview.tga " + previewCommands + " \0", print_writer);
-				}else {
-					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER PREVIEW SCENE*/Default/Overlays "
-					    	+ "C:/Temp/Preview.tga " + previewCommands + " \0", print_writer);
+				
+				switch(whatToProcess.split(",")[0]) {
+				 case "Alt_Shift_Q":
+					if(match.getSetup().getMatchType().equalsIgnoreCase(CricketUtil.SUPER_OVER)) {
+						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER PREVIEW SCENE*/Default/Overlays_SuperOver "
+						    	+ "C:/Temp/Preview.tga " + previewCommands + " \0", print_writer);
+					}else {
+						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER PREVIEW SCENE*/Default/FieldDimesnsion "
+						    	+ "C:/Temp/Preview.tga " + previewCommands + " \0", print_writer);
+					}
+					break;
+				 case "9":
+					if(match.getSetup().getMatchType().equalsIgnoreCase(CricketUtil.SUPER_OVER)) {
+						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER PREVIEW SCENE*/Default/Overlays_SuperOver "
+						    	+ "C:/Temp/Preview.tga " + previewCommands + " \0", print_writer);
+					}else {
+						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER PREVIEW SCENE*/Default/FieldPlotter_LLC "
+						    	+ "C:/Temp/Preview.tga " + previewCommands + " \0", print_writer);
+					}	
+					break;
+				default:
+					if(match.getSetup().getMatchType().equalsIgnoreCase(CricketUtil.SUPER_OVER)) {
+						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER PREVIEW SCENE*/Default/Overlays_SuperOver "
+						    	+ "C:/Temp/Preview.tga " + previewCommands + " \0", print_writer);
+					}else {
+						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER PREVIEW SCENE*/Default/Overlays "
+						    	+ "C:/Temp/Preview.tga " + previewCommands + " \0", print_writer);
+					}
+					break;
 				}
-			    
-				break;	
+				
+			    break;	
 			case Constants.T20_MUMBAI:
 				if(whichside == 1) {
 					System.out.println("whatToProcess - " + whatToProcess);

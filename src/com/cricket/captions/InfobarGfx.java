@@ -1828,10 +1828,18 @@ public class InfobarGfx
 				if (matchAllData.getSetup().getTargetOvers() != null && !matchAllData.getSetup().getTargetOvers().isEmpty()) {
 					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$InfoBar$CenterGRp$Main$BattingTeamGrp$ScoreGrpAll$DLS$Select"
 							+ "*FUNCTION*Omo*vis_con SET 1\0", print_writers);
-					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$InfoBar$CenterGRp$Main$BattingTeamGrp$ScoreGrpAll$DLS$txt_DLS"
-							+ "*GEOM*TEXT SET (" + Integer.valueOf(matchAllData.getSetup().getTargetOvers()) + (matchAllData.getSetup().getTargetType() 
-									!= null && !matchAllData.getSetup().getTargetType().isEmpty()?matchAllData.getSetup().getTargetType().toUpperCase()
-											:"") + ")" + "\0", print_writers);
+//					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$InfoBar$CenterGRp$Main$BattingTeamGrp$ScoreGrpAll$DLS$txt_DLS"
+//							+ "*GEOM*TEXT SET (" + Integer.valueOf(matchAllData.getSetup().getTargetOvers()) + (matchAllData.getSetup().getTargetType() 
+//									!= null && !matchAllData.getSetup().getTargetType().isEmpty()?matchAllData.getSetup().getTargetType().toUpperCase()
+//											:"") + ")" + "\0", print_writers);
+					
+					CricketFunctions.DoadWriteCommandToAllViz(
+						    "-1 RENDERER*FRONT_LAYER*TREE*$InfoBar$CenterGRp$Main$BattingTeamGrp$ScoreGrpAll$DLS$txt_DLS"
+						    + "*GEOM*TEXT SET (" + Integer.valueOf(matchAllData.getSetup().getTargetOvers()) + ")"
+						    + (matchAllData.getSetup().getTargetType() != null && !matchAllData.getSetup().getTargetType().isEmpty()
+						        ? " " + matchAllData.getSetup().getTargetType().toUpperCase()
+						        : "")
+						    + "\0", print_writers);
 				}else {
 					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$InfoBar$CenterGRp$Main$BattingTeamGrp$ScoreGrpAll$DLS$Select"
 							+ "*FUNCTION*Omo*vis_con SET 0\0", print_writers);
