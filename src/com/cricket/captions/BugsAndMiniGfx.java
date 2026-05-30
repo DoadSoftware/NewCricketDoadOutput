@@ -2210,9 +2210,7 @@ public class BugsAndMiniGfx
 			CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$SixDistance$TextAll$Header_In$txt_Header"
 					+ "*GEOM*TEXT SET " + "SIX DISTANCE" + "\0", print_writers);
 			CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$SixDistance$TextAll$Distance$txt_Distance"
-					+ "*FUNCTION*Counter*number SET " + whatToProcess.split(",")[2] + "\0", print_writers);
-			CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$SixDistance$TextAll$Distance$txt_Distance"
-					+ "*FUNCTION*Counter*initialize INVOKE\0", print_writers);
+					+ "*ANIMATION*KEY*$S*VALUE SET " + whatToProcess.split(",")[2] + "\0", print_writers);
 			
 			CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$SixDistance$TextAll$Distance$Meters"
 					+ "*GEOM*TEXT SET METRES\0", print_writers);

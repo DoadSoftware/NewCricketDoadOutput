@@ -18818,8 +18818,8 @@ public class LowerThirdGfx
 			match_name = "MATCH " + fixture.getMatchnumber();
 		}
 		
-		Player HomeCaptain = Players.get(Integer.valueOf(fixture.getHome_Team().getCaptains())-1);
-		Player AwayCaptain = Players.get(Integer.valueOf(fixture.getAway_Team().getCaptains())-1);
+//		Player HomeCaptain = Players.get(Integer.valueOf(fixture.getHome_Team().getCaptains())-1);
+//		Player AwayCaptain = Players.get(Integer.valueOf(fixture.getAway_Team().getCaptains())-1);
 		
 		for(int i=1;i<=2;i++) {
 			
@@ -18866,10 +18866,10 @@ public class LowerThirdGfx
 					+ "$txt_LastName*GEOM*TEXT SET " + team.getTeamName3() + "\0", print_writers);
 		}
 		
-		CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Ident$Main$Centre$1$Line1*GEOM*TEXT SET "+
-				match_name +"\0", print_writers);
-		CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Ident$Main$Centre$3$Line3*GEOM*TEXT SET "+
-				fixture.getVenue()  +"\0", print_writers);
+//		CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Ident$Main$Centre$1$Line1*GEOM*TEXT SET "+
+//				match_name +"\0", print_writers);
+//		CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Ident$Main$Centre$3$Line3*GEOM*TEXT SET "+
+//				fixture.getVenue()  +"\0", print_writers);
 		Calendar cal_mumbai = Calendar.getInstance();
 		cal_mumbai.add(Calendar.DATE, +1);
 		if(fixture.getDate().equalsIgnoreCase(new SimpleDateFormat("dd-MM-yyyy").format(cal_mumbai.getTime()))) {
@@ -18878,8 +18878,8 @@ public class LowerThirdGfx
 		}else {
 			cal_mumbai.add(Calendar.DATE, -1);
 			if(fixture.getDate().equalsIgnoreCase(new SimpleDateFormat("dd-MM-yyyy").format(cal_mumbai.getTime()))) {
-				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Ident$Main$Centre$4$Line4*GEOM*TEXT SET \0", print_writers);
-				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Ident$Main$Centre$2$Line2*GEOM*TEXT SET UP-NEXT\0", print_writers);
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_Lt_Ident$Ident$Info$Side" + whichSide
+						+ "$txt_Info*GEOM*TEXT SET UP-NEXT," + fixture.getVenue() + "\0", print_writers);
 			}else {
 				newDate = fixture.getDate().split("-")[0];
 				if(Integer.valueOf(newDate) < 10) {
@@ -18887,8 +18887,8 @@ public class LowerThirdGfx
 				}
 				date_data = newDate + dateSuffix[Integer.valueOf(newDate)] + " " + Month.of(Integer.valueOf(fixture.getDate().split("-")[1]));
 				
-				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Ident$Main$Centre$4$Line4*GEOM*TEXT SET " + fixture.getLocalTime() + "\0", print_writers);
-				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Ident$Main$Centre$2$Line2*GEOM*TEXT SET " + date_data + "\0", print_writers);
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_Lt_Ident$Ident$Info$Side" + whichSide
+						+ "$txt_Info*GEOM*TEXT SET " + date_data + ", " + fixture.getVenue() + "\0", print_writers);
 			}
 		}
 		return Constants.OK;
