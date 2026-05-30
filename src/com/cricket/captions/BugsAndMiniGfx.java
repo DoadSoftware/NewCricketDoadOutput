@@ -2166,6 +2166,9 @@ public class BugsAndMiniGfx
 //				}
 //			}
 			
+			CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_TargetBug$ColouredBase" +
+					"$img_Base1*TEXTURE*IMAGE SET " + Constants.T20_MUMBAI_Base1 + inning.getBatting_team().getTeamBadge() + "\0",print_writers);
+			
 			CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_TargetBug$Header$txt_Header*GEOM*TEXT SET " +
 					"TARGET" + "\0", print_writers);
 			CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_TargetBug$Data$txt_Runs*GEOM*TEXT SET " +
@@ -2207,7 +2210,10 @@ public class BugsAndMiniGfx
 			CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$SixDistance$TextAll$Header_In$txt_Header"
 					+ "*GEOM*TEXT SET " + "SIX DISTANCE" + "\0", print_writers);
 			CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$SixDistance$TextAll$Distance$txt_Distance"
-					+ "*GEOM*TEXT SET " + whatToProcess.split(",")[2] + "\0", print_writers);
+					+ "*FUNCTION*Counter*number SET " + whatToProcess.split(",")[2] + "\0", print_writers);
+			CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$SixDistance$TextAll$Distance$txt_Distance"
+					+ "*FUNCTION*Counter*initialize INVOKE\0", print_writers);
+			
 			CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$SixDistance$TextAll$Distance$Meters"
 					+ "*GEOM*TEXT SET METRES\0", print_writers);
 			break;

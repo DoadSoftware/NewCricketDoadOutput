@@ -8156,7 +8156,7 @@ public class Animation
 			break;
 			
 		case "Control_Shift_M": case "Control_Shift_L":
-			processAnimation(Constants.FRONT, print_writers, "L3MatchIdent", "START");
+			processAnimation(Constants.FRONT, print_writers, "anim_LT_Ident", "START");
 			this.whichGraphicOnScreen = whatToProcess;
 			break;
 		case "Alt_Shift_N":case "Alt_Shift_M":
@@ -8476,7 +8476,7 @@ public class Animation
 			break;
 
 		case "Control_Shift_M": case "Control_Shift_L":
-			processAnimation(Constants.FRONT, print_writers, "L3MatchIdent", "CONTINUE");
+			processAnimation(Constants.FRONT, print_writers, "anim_LT_Ident", "CONTINUE");
 			this.whichGraphicOnScreen = "";
 			break;
 			
@@ -13445,7 +13445,7 @@ public class Animation
 					System.out.println("whatToProcess - " + whatToProcess);
 					switch(whatToProcess.split(",")[0]) {
 					case "Control_Shift_M": case "Control_Shift_L":
-						previewCommands = "L3MatchIdent 1.840";
+						previewCommands = "anim_LT_Ident 2.900 anim_LT_Ident$InOut 2.900 anim_LT_Ident$InOut$In 2.680";
 						break;
 					case "Control_Shift_O":
 						previewCommands = "anim_Lt_BattingCard$InOut$In 2.080";
