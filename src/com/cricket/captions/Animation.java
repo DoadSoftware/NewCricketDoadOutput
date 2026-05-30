@@ -8005,7 +8005,7 @@ public class Animation
 		
 		case "Shift_F1":  case "Shift_F2":
 			T20_MumbaiAnimateIn(Constants.SHRUNK_INFOBAR, print_writers, config);
-			processAnimation(Constants.FRONT, print_writers, "MiniBowling", "START");
+			processAnimation(Constants.FRONT, print_writers, "anim_Minis", "START");
 			this.whichGraphicOnScreen = whatToProcess;
 			break;
 		case "Alt_F7":
@@ -8414,11 +8414,11 @@ public class Animation
 			break;
 		
 		case "Shift_F1":  case "Shift_F2":
-			processAnimation(Constants.FRONT, print_writers, "MiniBowling", "CONTINUE");
+			processAnimation(Constants.FRONT, print_writers, "anim_Minis", "CONTINUE");
 			T20_MumbaiAnimateIn(Constants.SHRUNK_INFOBAR, print_writers, config);
 			this.whichGraphicOnScreen = "";
 			TimeUnit.MILLISECONDS.sleep(1000);
-			processAnimation(Constants.FRONT, print_writers, "MiniBowling", "SHOW 0.0");
+			processAnimation(Constants.FRONT, print_writers, "anim_Minis", "SHOW 0.0");
 			break;
 		case "Alt_F7":
 			processAnimation(Constants.FRONT, print_writers, "MiniPointsTable", "CONTINUE");
@@ -11755,6 +11755,7 @@ public class Animation
 				processAnimation(Constants.FRONT, print_writers, "anim_TargetBug", "SHOW 0.0");
 				processAnimation(Constants.FRONT, print_writers, "anim_BoundaryCounter", "SHOW 0.0");
 				processAnimation(Constants.FRONT, print_writers, "anim_SixDistance", "SHOW 0.0");
+				processAnimation(Constants.FRONT, print_writers, "anim_Minis", "SHOW 0.0");
 				
 				processAnimation(Constants.BACK, print_writers, "Loop", "SHOW 0.0");
 				processAnimation(Constants.BACK, print_writers, "AUDIO", "SHOW 0.0");
@@ -14175,12 +14176,12 @@ public class Animation
 				if(whatToProcess.contains(",")) {
 					switch(whatToProcess.split(",")[0]) {
 					case "Shift_F1": case "Shift_F2":
-						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER PREVIEW SCENE*/T20/Scenes/Ticker C:/Temp/Preview.tga "
-								+ "SrinkInfobar 1.180 MiniBowling 2.480\0", print_writer);
+						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER PREVIEW SCENE*/Default/gfx_Overlays C:/Temp/Preview.tga "
+								+ "anim_Minis 2.000 anim_Minis$In_Out 2.000 anim_Minis$In_Out$In 2.000\0", print_writer);
 						break;
 					case "Alt_F7":
-						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER PREVIEW SCENE*/T20/Scenes/Ticker C:/Temp/Preview.tga "
-								+ "SrinkInfobar 1.180 MiniPointsTable 2.480\0", print_writer);
+						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER PREVIEW SCENE*/Default/gfx_Overlays C:/Temp/Preview.tga "
+								+ "anim_Minis 2.000 anim_Minis$In_Out 2.000 anim_Minis$In_Out$In 2.000\0", print_writer);
 						break;
 					}
 				}
