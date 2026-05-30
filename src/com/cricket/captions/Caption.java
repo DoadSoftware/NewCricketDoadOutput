@@ -673,8 +673,9 @@ public class Caption
 				status = this_fullFramesGfx.populateMatchStatsSummary(whichSide, whatToProcess.split(",")[0], matchAllData, Integer.valueOf(whatToProcess.split(",")[1]));
 				break;
 			case "Control_F11": //MATCH SUMMARY
+				System.out.println("whatToProcess - " + whatToProcess);
 				switch(config.getBroadcaster()) {
-				case Constants.BENGAL_T20: case Constants.NPL: case Constants.ISPL: case Constants.MPL: case Constants.APL: 
+				case Constants.BENGAL_T20: case Constants.NPL: case Constants.ISPL: case Constants.MPL: case Constants.APL: case Constants.T20_MUMBAI:
 					this_fullFramesGfx.WhichType = whatToProcess.split(",")[2];
 					break;
 				}

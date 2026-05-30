@@ -405,11 +405,11 @@ function processUserSelectionData(whatToProcess,dataToProcess)
 				break;
 			case 'Control_F11':
 				switch($('#selected_broadcaster').val().toUpperCase()){
-				case 'ICC-U19-2023': case 'LEGENDS-90': case 'T20_MUMBAI': case 'VIDARBHA':
+				case 'ICC-U19-2023': case 'LEGENDS-90': case 'VIDARBHA':
 					dataToProcess = dataToProcess + ',' + document.getElementById('which_inning').value;
 					processCricketProcedures("POPULATE-GRAPHICS", dataToProcess);
 					break;
-				case 'BENGAL-T20': case 'NPL': case 'ISPL':  case 'MPL': case 'APL':
+				case 'BENGAL-T20': case 'NPL': case 'ISPL':  case 'MPL': case 'APL': case 'T20_MUMBAI':
 					addItemsToList(dataToProcess,null);
 					break;
 				}
@@ -2554,7 +2554,7 @@ function addItemsToList(whatToProcess,dataToProcess)
 			select.name = select.id;
 			
 			switch($('#selected_broadcaster').val().toUpperCase()){
-			case 'ISPL':
+			case 'ISPL': case 'T20_MUMBAI':
 				option = document.createElement('option');
 	            option.value = 'normalsummary';
 	            option.text = 'Normal Summary';
@@ -7880,7 +7880,7 @@ function addItemsToList(whatToProcess,dataToProcess)
 			switch(whatToProcess) {
 				case 'Shift_F11':
 					switch($('#selected_broadcaster').val().toUpperCase()){
-					case 'ISPL':
+					case 'ISPL': case 'T20_MUMBAI':
 						select = document.createElement('select');
 						select.id = 'selectpreSummary';
 						select.name = select.id;
