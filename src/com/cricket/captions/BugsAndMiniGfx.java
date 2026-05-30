@@ -1983,6 +1983,22 @@ public class BugsAndMiniGfx
 	}
 	public String T20MumbaiBugBody(int WhichSide, String whatToProcess,MatchAllData matchAllData) {
 		switch (whatToProcess.split(",")[0]) {
+		case "Shift_F":
+			
+			CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_Bug$All$Text$txt_FirstName*ACTIVE SET 0\0", print_writers);
+			CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_Bug$All$Text$txt_LastName*ACTIVE SET 1\0", print_writers);
+			CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_Bug$All$Text$txt_Runs*ACTIVE SET 1\0", print_writers);
+			CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_Bug$All$Text$txt_Balls*ACTIVE SET 1\0", print_writers);
+			CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_Bug$All$Text$txt_Sub*ACTIVE SET 0\0", print_writers);
+			
+			CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_Bug$All$Text$txt_LastName"
+					+ "*GEOM*TEXT SET " + battingCard.getPlayer().getFull_name() + "\0", print_writers);
+			
+			CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_Bug$All$Text$txt_Runs*GEOM*TEXT SET " +
+					battingCard.getRuns() + "(" + battingCard.getBalls() + ")" +"\0", print_writers);
+			CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_Bug$All$Text$txt_Balls*GEOM*TEXT SET " +
+					battingCard.getHowOutText() + "\0", print_writers);
+			break;
 		case "Alt_p":
 			CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_TossBug"
 					+ "$txt_Info*GEOM*TEXT SET " + team.getTeamName1() + " WON THE TOSS "
@@ -2348,35 +2364,37 @@ public class BugsAndMiniGfx
 			CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_Bug$All$Text$txt_Sub*ACTIVE SET 0\0", print_writers);
 			break;
 		case "Control_y":
-			CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_Bug$All$Text$txt_FirstName*ACTIVE SET 1\0", print_writers);
 			CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_Bug$All$Text$txt_LastName*ACTIVE SET 1\0", print_writers);
 			CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_Bug$All$Text$txt_Runs*ACTIVE SET 1\0", print_writers);
+			CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_Bug$All$Text$txt_Sub*ACTIVE SET 1\0", print_writers);
 			
 			CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_Bug$All$Text$txt_FirstName"
-					+ "*GEOM*TEXT SET " + inning.getBatting_team().getTeamName1() +"\0", print_writers);
-			CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_Bug$All$Text$txt_LastName*GEOM*TEXT SET POWERPLAY\0", print_writers);
+					+ "*ACTIVE SET 0\0", print_writers);
+			CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_Bug$All$Text$txt_LastName"
+					+ "*GEOM*TEXT SET " + inning.getBatting_team().getTeamName1() + "\0", print_writers);
 			
 			CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_Bug$All$Text$txt_Runs*GEOM*TEXT SET " +
 					CricketFunctions.getPowerPlayScore(inning, inning.getInningNumber(), "-", matchAllData) +"\0", print_writers);
 			CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_Bug$All$Text$txt_Balls*ACTIVE SET 0\0", print_writers);
-			CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_Bug$All$Text$txt_Sub*ACTIVE SET 0\0", print_writers);
+			CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_Bug$All$Text$txt_Sub*GEOM*TEXT SET POWERPLAY\0", print_writers);
+			
 			break;
 		case "h":
-			CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_Bug$All$Text$txt_FirstName*ACTIVE SET 1\0", print_writers);
 			CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_Bug$All$Text$txt_LastName*ACTIVE SET 1\0", print_writers);
 			CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_Bug$All$Text$txt_Runs*ACTIVE SET 1\0", print_writers);
 			CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_Bug$All$Text$txt_Balls*ACTIVE SET 1\0", print_writers);
+			CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_Bug$All$Text$txt_Sub*ACTIVE SET 1\0", print_writers);
 			
 			CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_Bug$All$Text$txt_FirstName"
-					+ "*GEOM*TEXT SET " + inning.getBatting_team().getTeamName1() +"\0", print_writers);
+					+ "*ACTIVE SET 0\0", print_writers);
 			CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_Bug$All$Text$txt_LastName"
-					+ "*GEOM*TEXT SET HIGHLIGHTS\0", print_writers);
+					+ "*GEOM*TEXT SET " + inning.getBatting_team().getTeamName1() + "\0", print_writers);
 			
 			CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_Bug$All$Text$txt_Runs*GEOM*TEXT SET " +
 					CricketFunctions.getTeamScore(inning, "-", false) +"\0", print_writers);
 			CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_Bug$All$Text$txt_Balls*GEOM*TEXT SET " +
 					CricketFunctions.OverBalls(inning.getTotalOvers(), inning.getTotalBalls()) + "\0", print_writers);
-			CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_Bug$All$Text$txt_Sub*ACTIVE SET 0\0", print_writers);
+			CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_Bug$All$Text$txt_Sub*GEOM*TEXT SET HIGHLIGHTS\0", print_writers);
 			break;
 		case "r":
 			CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_Bug$All$Text$txt_FirstName*ACTIVE SET 1\0", print_writers);

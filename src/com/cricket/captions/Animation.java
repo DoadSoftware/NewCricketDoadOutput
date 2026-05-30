@@ -8204,6 +8204,7 @@ public class Animation
 			break;
 			
 		case "Control_Shift_M": case "Control_Shift_L":
+			T20_MumbaiAnimateIn("ArrowDown,", print_writers, config); // Push infobar
 			if(audioenabled.equalsIgnoreCase("TRUE")) {
 				processAnimation(Constants.FRONT, print_writers, "sfx_In", "START");
 			}
@@ -8565,7 +8566,7 @@ public class Animation
 			}
 			T20_MumbaiAnimateIn(Constants.SHRUNK_INFOBAR, print_writers, config); // Push infobar
 			this.whichGraphicOnScreen = "";
-			TimeUnit.MILLISECONDS.sleep(2500);
+			TimeUnit.MILLISECONDS.sleep(1500);
 			processAnimation(Constants.FRONT, print_writers, "anim_LT_NameSuper", "SHOW 0.0");
 			processAnimation(Constants.FRONT, print_writers, "MoveForNameSuper", "SHOW 0.0");
 			break;
@@ -8605,6 +8606,7 @@ public class Animation
 			processAnimation(Constants.FRONT, print_writers, "anim_LT_Ident", "CONTINUE");
 			this.whichGraphicOnScreen = "";
 			TimeUnit.MILLISECONDS.sleep(2500);
+			T20_MumbaiAnimateIn("ArrowUp,", print_writers, config); // Push infobar
 			processAnimation(Constants.FRONT, print_writers, "anim_LT_Ident", "SHOW 0.0");
 			break;
 			
@@ -13680,19 +13682,19 @@ public class Animation
 					System.out.println("whatToProcess - " + whatToProcess);
 					switch(whatToProcess.split(",")[0]) {
 					case "Control_Shift_M": case "Control_Shift_L":
-						previewCommands = "anim_LT_Ident 2.900 anim_LT_Ident$InOut 2.900 anim_LT_Ident$InOut$In 2.680";
+						previewCommands = "anim_Infobar$Push 0.500 anim_LT_Ident 2.900 anim_LT_Ident$InOut 2.900 anim_LT_Ident$InOut$In 2.680";
 						break;
 					case "Control_Shift_O":
 						previewCommands = "anim_Lt_BattingCard$InOut$In 2.080";
 						break;
 					case "Shift_I":
-						previewCommands = "SrinkInfobar 1.180 ImpactPlayer$IN-OUT 2.460";
+						previewCommands = "anim_Infobar$Push 0.500 ImpactPlayer$IN-OUT 2.460";
 						break;
 					case "Control_F6": case "F6": case "Shift_F6":
-						previewCommands = "anim_Infobar$Shrink 0.500 anim_LT_HowOut 2.080 anim_LT_HowOut$InOut 2.080 anim_LT_HowOut$InOut$In 2.080";
+						previewCommands = "anim_Infobar$Push 0.500 anim_LT_HowOut 2.080 anim_LT_HowOut$InOut 2.080 anim_LT_HowOut$InOut$In 2.080";
 						break;
 					case "F8": case "Alt_F8": case "F10":
-						previewCommands = "anim_Infobar$Shrink 0.500 anim_LT_NameSuper 2.080 anim_LT_NameSuper$InOut 2.080 anim_LT_NameSuper$InOut$Essentials 2.080 "
+						previewCommands = "anim_Infobar$Push 0.500 anim_LT_NameSuper 2.080 anim_LT_NameSuper$InOut 2.080 anim_LT_NameSuper$InOut$Essentials 2.080 "
 								+ "anim_LT_NameSuper$InOut$Essentials$In 2.080 anim_LT_NameSuper$InOut$Colours 2.080 anim_LT_NameSuper$InOut$Colours$In 1.600 "
 								+ "anim_LT_NameSuper$InOut$Logo 2.080 anim_LT_NameSuper$InOut$Logo$In 1.800 anim_LT_NameSuper$InOut$Name 2.080 anim_LT_NameSuper$InOut$Name$In 1.700 "
 								+ "anim_LT_NameSuper$InOut$Info 2.080 anim_LT_NameSuper$InOut$Info$In 2.080";
@@ -13701,7 +13703,7 @@ public class Animation
 					case "F7": case "F11": case "Control_a": case "q": case "u": case "Control_q": case "Shift_F3": case "Control_F3":
 					case "Shift_B": case "Alt_Shift_F3":case "Alt_Shift_O": case "Control_s": case "Control_f": case "Control_i":
 					case "Control_F5":case "Control_F9": case "d": case "e":case "Alt_F1": case "Alt_F2":
-						previewCommands = "anim_Infobar$Shrink 0.500 anim_LowerThird 2.080 anim_LowerThird$InOut 2.080 anim_LowerThird$InOut$Essentials 2.080 "
+						previewCommands = "anim_Infobar$Push 0.500 anim_LowerThird 2.080 anim_LowerThird$InOut 2.080 anim_LowerThird$InOut$Essentials 2.080 "
 								+ "anim_LowerThird$InOut$Essentials$In 2.080 anim_LowerThird$InOut$Colours 2.080 anim_LowerThird$InOut$Colours$In 1.600 "
 								+ "anim_LowerThird$InOut$Logo 2.080 anim_LowerThird$InOut$Logo$In 1.800 anim_LowerThird$InOut$TopLine 2.080 anim_LowerThird$InOut$TopLine$In 1.700 "
 								+ "anim_LowerThird$InOut$Subline 2.080 anim_LowerThird$InOut$Subline$In 2.080";
@@ -14410,8 +14412,7 @@ public class Animation
 				if(whatToProcess.contains(",")) {
 					switch(whatToProcess.split(",")[0]) {
 					case "Shift_F1": case "Shift_F2":
-						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER PREVIEW SCENE*/Default/gfx_Overlays C:/Temp/Preview.tga "
-								+ "anim_Minis 2.000 anim_Minis$In_Out 2.000 anim_Minis$In_Out$In 2.000\0", print_writer);
+						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER PREVIEW SCENE*/Default/gfx_Overlays C:/Temp/Preview.tga anim_Minis$In_Out$In 1.780\0", print_writer);
 						break;
 					case "Alt_F7":
 						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER PREVIEW SCENE*/Default/gfx_Overlays C:/Temp/Preview.tga "

@@ -482,7 +482,7 @@ function processUserSelectionData(whatToProcess,dataToProcess)
 				break;
 			case 'Control_Shift_M':
 				switch($('#selected_broadcaster').val().toUpperCase()){
-				case 'T20_MUMBAI':
+				case 'XYZ':
 					processCricketProcedures("POPULATE-GRAPHICS",dataToProcess + ',' + document.getElementById('which_inning').value);
 					break;
 				default :
@@ -1872,29 +1872,67 @@ function addItemsToList(whatToProcess,dataToProcess)
 		case 'Control_Shift_M':
 			header_text.innerHTML = 'LT MATCH IDENT';
 			
-			select = document.createElement('select');
-			select.id = 'selectMatchData';
-			select.name = select.id;
+			switch($('#selected_broadcaster').val().toUpperCase()){
+			case 'T20_MUMBAI':
+				select = document.createElement('select');
+				select.id = 'selectMatchData';
+				select.name = select.id;
 
-			option = document.createElement('option');
-			option.value = 'Venue';
-			option.text = 'Venue' ;
-			select.appendChild(option);
+				
+				session_match.match.inning.forEach(function(inn){
+					if(inn.isCurrentInning == 'YES'){
+						if(inn.inningNumber == 1){	
+							option = document.createElement('option');
+							option.value = 'VENUE';
+							option.text = 'VENUE';
+							select.appendChild(option);
+				
+							option = document.createElement('option');
+							option.value = 'SCORE';
+							option.text = 'INNING SCORE';
+							select.appendChild(option);
+						}
+						else{
+							option = document.createElement('option');
+							option.value = 'VENUE';
+							option.text = 'VENUE';
+							select.appendChild(option);
+							
+							option = document.createElement('option');
+							option.value = 'EQUATION';
+							option.text = 'EQUATION';
+							select.appendChild(option);
+						}
+					}
+				});
+				break;
+			default :
+				select = document.createElement('select');
+				select.id = 'selectMatchData';
+				select.name = select.id;
+
+				option = document.createElement('option');
+				option.value = 'Venue';
+				option.text = 'Venue' ;
+				select.appendChild(option);
+				
+				option = document.createElement('option');
+				option.value = 'Toss';
+				option.text = 'Toss' ;
+				select.appendChild(option);
+				
+				option = document.createElement('option');
+				option.value = 'Target';
+				option.text = 'Target' ;
+				select.appendChild(option);
+				
+				option = document.createElement('option');
+				option.value = 'Result';
+				option.text = 'Result' ;
+				select.appendChild(option);
+				break;
+		 	}
 			
-			option = document.createElement('option');
-			option.value = 'Toss';
-			option.text = 'Toss' ;
-			select.appendChild(option);
-			
-			option = document.createElement('option');
-			option.value = 'Target';
-			option.text = 'Target' ;
-			select.appendChild(option);
-			
-			option = document.createElement('option');
-			option.value = 'Result';
-			option.text = 'Result' ;
-			select.appendChild(option);
 			
 			row.insertCell(cellCount).appendChild(select);
 			cellCount = cellCount + 1;
