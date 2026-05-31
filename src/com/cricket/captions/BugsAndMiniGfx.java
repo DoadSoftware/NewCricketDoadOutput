@@ -940,15 +940,21 @@ public class BugsAndMiniGfx
 			switch (whatToProcess.split(",")[0]) {
 			case "Control_Shift_U_change_on": // POP-Up
 				
-				if(config.getPrimaryIpAddress().equalsIgnoreCase(Constants.LOCALHOST)) {
-					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_PopUpBug$PlayerImage$Side" + WhichSide + "$img_Player*TEXTURE*IMAGE SET "
-							+ Constants.T20_MUMBAI_PHOTO_PATH + Constants.LEFT_1024 + inning.getBatting_team().getTeamName4() + "\\\\" + battingCard.getPlayer().getPhoto()
-							+ CricketUtil.PNG_EXTENSION + " \0", print_writers);
-				}else {
-					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_PopUpBug$PlayerImage$Side" + WhichSide + "$img_Player*TEXTURE*IMAGE SET "
-							+ "\\\\" + config.getPrimaryIpAddress() + Constants.T20_MUMBAI_PHOTO_PATH_NETWORK + Constants.LEFT_1024 + inning.getBatting_team().getTeamName4()
-							+ "\\\\" + battingCard.getPlayer().getPhoto() + CricketUtil.PNG_EXTENSION+ " \0", print_writers);
-				}
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_PopUpBug$PlayerImage$Side" + WhichSide + "$img_Player*TEXTURE*IMAGE SET " 
+						+ (config.getPrimaryIpAddress().equalsIgnoreCase(Constants.LOCALHOST) ? Constants.T20_MUMBAI_PHOTO_PATH : "\\\\" + config.getPrimaryIpAddress() + "\\\\" 
+						+ Constants.T20_MUMBAI_PHOTO_PATH_NETWORK) + (config.getCategory().equalsIgnoreCase("MEN") ? "\\\\" + "MEN" : "\\\\" + "WOMEN") + Constants.STRAIGHT_1024 
+						+ inning.getBatting_team().getTeamName4() + "\\" + battingCard.getPlayer().getPhoto() + CricketUtil.PNG_EXTENSION
+						+ " \0", print_writers);
+				
+//				if(config.getPrimaryIpAddress().equalsIgnoreCase(Constants.LOCALHOST)) {
+//					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_PopUpBug$PlayerImage$Side" + WhichSide + "$img_Player*TEXTURE*IMAGE SET "
+//							+ Constants.T20_MUMBAI_PHOTO_PATH + Constants.LEFT_1024 + inning.getBatting_team().getTeamName4() + "\\\\" + battingCard.getPlayer().getPhoto()
+//							+ CricketUtil.PNG_EXTENSION + " \0", print_writers);
+//				}else {
+//					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_PopUpBug$PlayerImage$Side" + WhichSide + "$img_Player*TEXTURE*IMAGE SET "
+//							+ "\\\\" + config.getPrimaryIpAddress() + Constants.T20_MUMBAI_PHOTO_PATH_NETWORK + Constants.LEFT_1024 + inning.getBatting_team().getTeamName4()
+//							+ "\\\\" + battingCard.getPlayer().getPhoto() + CricketUtil.PNG_EXTENSION+ " \0", print_writers);
+//				}
 				
 				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_PopUpBug$ColouredBase$Side" + WhichSide + "$img_Base1*TEXTURE*IMAGE SET "
 						+ Constants.T20_MUMBAI_Base1 + inning.getBatting_team().getTeamBadge() + " \0", print_writers);
@@ -1016,15 +1022,21 @@ public class BugsAndMiniGfx
 				break;
 			case "Control_Shift_V_change_on":
 				
-				if(config.getPrimaryIpAddress().equalsIgnoreCase(Constants.LOCALHOST)) {
-					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_PopUpBug$PlayerImage$Side" + WhichSide + "$img_Player*TEXTURE*IMAGE SET "
-							+ Constants.T20_MUMBAI_PHOTO_PATH + Constants.LEFT_1024 + inning.getBowling_team().getTeamName4() + "\\\\" + bowlingCard.getPlayer().getPhoto()
-							+ CricketUtil.PNG_EXTENSION + " \0", print_writers);
-				}else {
-					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_PopUpBug$PlayerImage$Side" + WhichSide + "$img_Player*TEXTURE*IMAGE SET "
-							+ "\\\\" + config.getPrimaryIpAddress() + Constants.T20_MUMBAI_PHOTO_PATH_NETWORK + Constants.LEFT_1024 + inning.getBowling_team().getTeamName4()
-							+ "\\\\" + bowlingCard.getPlayer().getPhoto() + CricketUtil.PNG_EXTENSION+ " \0", print_writers);
-				}
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_PopUpBug$PlayerImage$Side" + WhichSide + "$img_Player*TEXTURE*IMAGE SET " 
+						+ (config.getPrimaryIpAddress().equalsIgnoreCase(Constants.LOCALHOST) ? Constants.T20_MUMBAI_PHOTO_PATH : "\\\\" + config.getPrimaryIpAddress() + "\\\\" 
+						+ Constants.T20_MUMBAI_PHOTO_PATH_NETWORK) + (config.getCategory().equalsIgnoreCase("MEN") ? "\\\\" + "MEN" : "\\\\" + "WOMEN") + Constants.STRAIGHT_1024 
+						+ inning.getBowling_team().getTeamName4() + "\\" + bowlingCard.getPlayer().getPhoto() + CricketUtil.PNG_EXTENSION
+						+ " \0", print_writers);
+				
+//				if(config.getPrimaryIpAddress().equalsIgnoreCase(Constants.LOCALHOST)) {
+//					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_PopUpBug$PlayerImage$Side" + WhichSide + "$img_Player*TEXTURE*IMAGE SET "
+//							+ Constants.T20_MUMBAI_PHOTO_PATH + Constants.LEFT_1024 + inning.getBowling_team().getTeamName4() + "\\\\" + bowlingCard.getPlayer().getPhoto()
+//							+ CricketUtil.PNG_EXTENSION + " \0", print_writers);
+//				}else {
+//					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_PopUpBug$PlayerImage$Side" + WhichSide + "$img_Player*TEXTURE*IMAGE SET "
+//							+ "\\\\" + config.getPrimaryIpAddress() + Constants.T20_MUMBAI_PHOTO_PATH_NETWORK + Constants.LEFT_1024 + inning.getBowling_team().getTeamName4()
+//							+ "\\\\" + bowlingCard.getPlayer().getPhoto() + CricketUtil.PNG_EXTENSION+ " \0", print_writers);
+//				}
 				
 				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_PopUpBug$ColouredBase$Side" + WhichSide + "$img_Base1*TEXTURE*IMAGE SET "
 						+ Constants.T20_MUMBAI_Base1 + inning.getBowling_team().getTeamBadge() + " \0", print_writers);
@@ -2030,13 +2042,13 @@ public class BugsAndMiniGfx
 				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_BoundaryCounter$Header"
 						+ "$txt_Header1*GEOM*TEXT SET TOURNAMENT\0", print_writers);
 				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_BoundaryCounter$Header"
-						+ "$txt_Header2*GEOM*TEXT SET SIX COUNTER\0", print_writers);
+						+ "$txt_Header2*GEOM*TEXT SET SIXES\0", print_writers);
 				break;
 			case "Control_4":
 				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_BoundaryCounter$Header"
 						+ "$txt_Header1*GEOM*TEXT SET TOURNAMENT\0", print_writers);
 				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_BoundaryCounter$Header"
-						+ "$txt_Header2*GEOM*TEXT SET FOUR COUNTER\0", print_writers);
+						+ "$txt_Header2*GEOM*TEXT SET FOURS\0", print_writers);
 				break;
 			}
 					
@@ -2056,15 +2068,22 @@ public class BugsAndMiniGfx
 					+ "$Units$Side2$txt_Units*GEOM*TEXT SET "+this_data_str.get(1).split(",")[2] + "\0", print_writers);
 			break;	
 		case "Control_Shift_U": // POP-Up
-			if(config.getPrimaryIpAddress().equalsIgnoreCase(Constants.LOCALHOST)) {
-				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_PopUpBug$PlayerImage$Side" + WhichSide + "$img_Player*TEXTURE*IMAGE SET "
-						+ Constants.T20_MUMBAI_PHOTO_PATH + Constants.LEFT_1024 + inning.getBatting_team().getTeamName4() + "\\\\" + battingCard.getPlayer().getPhoto()
-						+ CricketUtil.PNG_EXTENSION + " \0", print_writers);
-			}else {
-				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_PopUpBug$PlayerImage$Side" + WhichSide + "$img_Player*TEXTURE*IMAGE SET "
-						+ "\\\\" + config.getPrimaryIpAddress() + Constants.T20_MUMBAI_PHOTO_PATH_NETWORK + Constants.LEFT_1024 + inning.getBatting_team().getTeamName4()
-						+ "\\\\" + battingCard.getPlayer().getPhoto() + CricketUtil.PNG_EXTENSION+ " \0", print_writers);
-			}
+			
+			CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_PopUpBug$PlayerImage$Side" + WhichSide + "$img_Player*TEXTURE*IMAGE SET " 
+					+ (config.getPrimaryIpAddress().equalsIgnoreCase(Constants.LOCALHOST) ? Constants.T20_MUMBAI_PHOTO_PATH : "\\\\" + config.getPrimaryIpAddress() + "\\\\" 
+					+ Constants.T20_MUMBAI_PHOTO_PATH_NETWORK) + (config.getCategory().equalsIgnoreCase("MEN") ? "\\\\" + "MEN" : "\\\\" + "WOMEN") + Constants.STRAIGHT_1024 
+					+ inning.getBatting_team().getTeamName4() + "\\" + battingCard.getPlayer().getPhoto() + CricketUtil.PNG_EXTENSION
+					+ " \0", print_writers);
+			
+//			if(config.getPrimaryIpAddress().equalsIgnoreCase(Constants.LOCALHOST)) {
+//				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_PopUpBug$PlayerImage$Side" + WhichSide + "$img_Player*TEXTURE*IMAGE SET "
+//						+ Constants.T20_MUMBAI_PHOTO_PATH + Constants.LEFT_1024 + inning.getBatting_team().getTeamName4() + "\\\\" + battingCard.getPlayer().getPhoto()
+//						+ CricketUtil.PNG_EXTENSION + " \0", print_writers);
+//			}else {
+//				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_PopUpBug$PlayerImage$Side" + WhichSide + "$img_Player*TEXTURE*IMAGE SET "
+//						+ "\\\\" + config.getPrimaryIpAddress() + Constants.T20_MUMBAI_PHOTO_PATH_NETWORK + Constants.LEFT_1024 + inning.getBatting_team().getTeamName4()
+//						+ "\\\\" + battingCard.getPlayer().getPhoto() + CricketUtil.PNG_EXTENSION+ " \0", print_writers);
+//			}
 			
 			CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_PopUpBug$ColouredBase$Side" + WhichSide + "$img_Base1*TEXTURE*IMAGE SET "
 					+ Constants.T20_MUMBAI_Base1 + inning.getBatting_team().getTeamBadge() + " \0", print_writers);
@@ -2128,15 +2147,22 @@ public class BugsAndMiniGfx
 			}
 			break;
 		case "Control_Shift_V":
-			if(config.getPrimaryIpAddress().equalsIgnoreCase(Constants.LOCALHOST)) {
-				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_PopUpBug$PlayerImage$Side" + WhichSide + "$img_Player*TEXTURE*IMAGE SET "
-						+ Constants.T20_MUMBAI_PHOTO_PATH + Constants.LEFT_1024 + inning.getBowling_team().getTeamName4() + "\\\\" + bowlingCard.getPlayer().getPhoto()
-						+ CricketUtil.PNG_EXTENSION + " \0", print_writers);
-			}else {
-				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_PopUpBug$PlayerImage$Side" + WhichSide + "$img_Player*TEXTURE*IMAGE SET "
-						+ "\\\\" + config.getPrimaryIpAddress() + Constants.T20_MUMBAI_PHOTO_PATH_NETWORK + Constants.LEFT_1024 + inning.getBowling_team().getTeamName4()
-						+ "\\\\" + bowlingCard.getPlayer().getPhoto() + CricketUtil.PNG_EXTENSION+ " \0", print_writers);
-			}
+			
+			CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_PopUpBug$PlayerImage$Side" + WhichSide + "$img_Player*TEXTURE*IMAGE SET " 
+					+ (config.getPrimaryIpAddress().equalsIgnoreCase(Constants.LOCALHOST) ? Constants.T20_MUMBAI_PHOTO_PATH : "\\\\" + config.getPrimaryIpAddress() + "\\\\" 
+					+ Constants.T20_MUMBAI_PHOTO_PATH_NETWORK) + (config.getCategory().equalsIgnoreCase("MEN") ? "\\\\" + "MEN" : "\\\\" + "WOMEN") + Constants.STRAIGHT_1024 
+					+ inning.getBowling_team().getTeamName4() + "\\" + bowlingCard.getPlayer().getPhoto() + CricketUtil.PNG_EXTENSION
+					+ " \0", print_writers);
+			
+//			if(config.getPrimaryIpAddress().equalsIgnoreCase(Constants.LOCALHOST)) {
+//				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_PopUpBug$PlayerImage$Side" + WhichSide + "$img_Player*TEXTURE*IMAGE SET "
+//						+ Constants.T20_MUMBAI_PHOTO_PATH + Constants.LEFT_1024 + inning.getBowling_team().getTeamName4() + "\\\\" + bowlingCard.getPlayer().getPhoto()
+//						+ CricketUtil.PNG_EXTENSION + " \0", print_writers);
+//			}else {
+//				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_PopUpBug$PlayerImage$Side" + WhichSide + "$img_Player*TEXTURE*IMAGE SET "
+//						+ "\\\\" + config.getPrimaryIpAddress() + Constants.T20_MUMBAI_PHOTO_PATH_NETWORK + Constants.LEFT_1024 + inning.getBowling_team().getTeamName4()
+//						+ "\\\\" + bowlingCard.getPlayer().getPhoto() + CricketUtil.PNG_EXTENSION+ " \0", print_writers);
+//			}
 			
 			CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_PopUpBug$ColouredBase$Side" + WhichSide + "$img_Base1*TEXTURE*IMAGE SET "
 					+ Constants.T20_MUMBAI_Base1 + inning.getBowling_team().getTeamBadge() + " \0", print_writers);

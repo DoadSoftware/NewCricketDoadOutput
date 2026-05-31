@@ -1124,7 +1124,7 @@ public class LowerThirdGfx
 //		Team team = Teams.stream().filter(tm -> tm.getTeamId() == outPlayer.getTeamId()).findAny().orElse(null);
 		
 		lowerThird = new LowerThird(outPlayer.getFirstname(), outPlayer.getSurname(), outPlayer.getPhoto(), inPlayer.getFirstname(), inPlayer.getSurname(), 
-				inPlayer.getPhoto(), 2, outPlayer.getRole() + "-" + inPlayer.getRole(), team.getTeamBadge(), null, null, null, null, null);
+				inPlayer.getPhoto(), 2, outPlayer.getRole() + "-" + inPlayer.getRole(), team.getTeamBadge(), new String[]{team.getTeamName4()}, null, null, null, null);
 		
 		if(config.getCategory().equalsIgnoreCase("MEN")) {
 			logoCategory = "M";
@@ -20981,17 +20981,22 @@ public class LowerThirdGfx
 					+ Constants.T20_MUMBAI_Base1 + lowerThird.getWhichTeamFlag() + " \0", print_writers);
 			CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_Impact$WipeAll$InWipe$img_Base1*TEXTURE*IMAGE SET " 
 					+ Constants.T20_MUMBAI_Base1 + lowerThird.getWhichTeamFlag() + " \0", print_writers);
-			
+				
+			CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_Impact$Image$SubPlayer$img_Player*TEXTURE*IMAGE SET " 
+					+ (config.getPrimaryIpAddress().equalsIgnoreCase(Constants.LOCALHOST) ? Constants.T20_MUMBAI_PHOTO_PATH : "\\\\" + config.getPrimaryIpAddress() + "\\\\" 
+					+ Constants.T20_MUMBAI_PHOTO_PATH_NETWORK) + (config.getCategory().equalsIgnoreCase("MEN") ? "\\\\" + "MEN" : "\\\\" + "WOMEN") + Constants.STRAIGHT_1024 
+					+ lowerThird.getTitlesText()[0] + "\\" + lowerThird.getSurName() + CricketUtil.PNG_EXTENSION
+					+ " \0", print_writers);
 			//OUT player
-			if(config.getPrimaryIpAddress().equalsIgnoreCase(Constants.LOCALHOST)) {
-				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_Impact$Image$SubPlayer$img_Player*TEXTURE*IMAGE SET " 
-						+ Constants.T20_MUMBAI_PHOTO_PATH + Constants.STRAIGHT_1024 + lowerThird.getWhichTeamFlag() + "\\\\" + lowerThird.getSurName() + CricketUtil.PNG_EXTENSION 
-						+ " \0", print_writers);
-			}else {
-				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_Impact$Image$SubPlayer$img_Player*TEXTURE*IMAGE SET " 
-						+ "\\\\" + config.getPrimaryIpAddress() + Constants.T20_MUMBAI_PHOTO_PATH_NETWORK + Constants.STRAIGHT_1024 + lowerThird.getWhichTeamFlag() + "\\" 
-						+ lowerThird.getSurName() + CricketUtil.PNG_EXTENSION+ " \0", print_writers);
-			}
+//			if(config.getPrimaryIpAddress().equalsIgnoreCase(Constants.LOCALHOST)) {
+//				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_Impact$Image$SubPlayer$img_Player*TEXTURE*IMAGE SET " 
+//						+ Constants.T20_MUMBAI_PHOTO_PATH + Constants.STRAIGHT_1024 + lowerThird.getWhichTeamFlag() + "\\\\" + lowerThird.getSurName() + CricketUtil.PNG_EXTENSION 
+//						+ " \0", print_writers);
+//			}else {
+//				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_Impact$Image$SubPlayer$img_Player*TEXTURE*IMAGE SET " 
+//						+ "\\\\" + config.getPrimaryIpAddress() + Constants.T20_MUMBAI_PHOTO_PATH_NETWORK + Constants.STRAIGHT_1024 + lowerThird.getWhichTeamFlag() + "\\" 
+//						+ lowerThird.getSurName() + CricketUtil.PNG_EXTENSION+ " \0", print_writers);
+//			}
 			
 			if(outPlayer.getRole().equalsIgnoreCase("BATSMAN") || outPlayer.getRole().equalsIgnoreCase("BATTER") || outPlayer.getRole().equalsIgnoreCase("BAT/KEEPER")) {
 				if(outPlayer.getBattingStyle().equalsIgnoreCase("LHB")) {
@@ -21056,16 +21061,22 @@ public class LowerThirdGfx
 					+ (lowerThird.getFirstName() != null ? lowerThird.getFirstName() : "") + " \0", print_writers);
 			
 			
+			CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_Impact$Image$ImpactPlayer$img_Player*TEXTURE*IMAGE SET " 
+					+ (config.getPrimaryIpAddress().equalsIgnoreCase(Constants.LOCALHOST) ? Constants.T20_MUMBAI_PHOTO_PATH : "\\\\" + config.getPrimaryIpAddress() + "\\\\" 
+					+ Constants.T20_MUMBAI_PHOTO_PATH_NETWORK) + (config.getCategory().equalsIgnoreCase("MEN") ? "\\\\" + "MEN" : "\\\\" + "WOMEN") + Constants.STRAIGHT_1024 
+					+ lowerThird.getTitlesText()[0] + "\\" + lowerThird.getBallsFacedText() + CricketUtil.PNG_EXTENSION
+					+ " \0", print_writers);
+			
 			//IN player
-			if(config.getPrimaryIpAddress().equalsIgnoreCase(Constants.LOCALHOST)) {
-				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_Impact$Image$ImpactPlayer$img_Player*TEXTURE*IMAGE SET " 
-						+ Constants.T20_MUMBAI_PHOTO_PATH + Constants.STRAIGHT_1024 + lowerThird.getWhichTeamFlag() + "\\\\" + lowerThird.getBallsFacedText() + CricketUtil.PNG_EXTENSION 
-						+ " \0", print_writers);
-			}else {
-				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_Impact$Image$ImpactPlayer$img_Player*TEXTURE*IMAGE SET " 
-						+ "\\\\" + config.getPrimaryIpAddress() + Constants.T20_MUMBAI_PHOTO_PATH_NETWORK + Constants.STRAIGHT_1024 + lowerThird.getWhichTeamFlag() + "\\" 
-						+ lowerThird.getBallsFacedText() + CricketUtil.PNG_EXTENSION+ " \0", print_writers);
-			}
+//			if(config.getPrimaryIpAddress().equalsIgnoreCase(Constants.LOCALHOST)) {
+//				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_Impact$Image$ImpactPlayer$img_Player*TEXTURE*IMAGE SET " 
+//						+ Constants.T20_MUMBAI_PHOTO_PATH + Constants.STRAIGHT_1024 + lowerThird.getWhichTeamFlag() + "\\\\" + lowerThird.getBallsFacedText() + CricketUtil.PNG_EXTENSION 
+//						+ " \0", print_writers);
+//			}else {
+//				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_Impact$Image$ImpactPlayer$img_Player*TEXTURE*IMAGE SET " 
+//						+ "\\\\" + config.getPrimaryIpAddress() + Constants.T20_MUMBAI_PHOTO_PATH_NETWORK + Constants.STRAIGHT_1024 + lowerThird.getWhichTeamFlag() + "\\" 
+//						+ lowerThird.getBallsFacedText() + CricketUtil.PNG_EXTENSION+ " \0", print_writers);
+//			}
 			
 			if(inPlayer.getRole().equalsIgnoreCase("BATSMAN") || inPlayer.getRole().equalsIgnoreCase("BATTER") || inPlayer.getRole().equalsIgnoreCase("BAT/KEEPER")) {
 				if(inPlayer.getBattingStyle().equalsIgnoreCase("LHB")) {

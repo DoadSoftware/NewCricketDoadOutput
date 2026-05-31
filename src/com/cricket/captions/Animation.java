@@ -8105,7 +8105,7 @@ public class Animation
 			if(audioenabled.equalsIgnoreCase("TRUE")) {
 				processAnimation(Constants.FRONT, print_writers, "sfx_In", "START");
 			}
-			processAnimation(Constants.FRONT, print_writers, "anim_Minis", "START");
+			processAnimation(Constants.FRONT, print_writers, "anim_Minis$In_Out", "START");
 			this.whichGraphicOnScreen = whatToProcess;
 			break;
 		case "Alt_F7":
@@ -14619,13 +14619,14 @@ public class Animation
 				if(whatToProcess.contains(",")) {
 					switch(whatToProcess.split(",")[0]) {
 					case "Shift_F1": case "Shift_F2":
-						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER PREVIEW SCENE*/Default/gfx_Overlays C:/Temp/Preview.tga anim_Minis 2.800 anim_Minis$In_Out 2.000 "
-								+ "anim_Minis$In_Out$In 1.780\0", print_writer);
+						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER PREVIEW SCENE*/Default/gfx_Overlays C:/Temp/Preview.tga anim_Minis 2.000 anim_Minis$In_Out 2.000 "
+								+ "anim_Minis$In_Out$Essentials 1.780 anim_Minis$In_Out$Essentials$In 1.780 anim_Minis$In_Out$Header 2.000 anim_Minis$In_Out$Header$In 0.900 "
+								+ "anim_Minis$In_Out$Data 2.000 anim_Minis$In_Out$Data$In 1.360\0", print_writer);
 						break;
-					case "Alt_F7":
-						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER PREVIEW SCENE*/Default/gfx_Overlays C:/Temp/Preview.tga "
-								+ "anim_Minis 2.000 anim_Minis$In_Out 2.000 anim_Minis$In_Out$In 2.000\0", print_writer);
-						break;
+//					case "Alt_F7":
+//						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER PREVIEW SCENE*/Default/gfx_Overlays C:/Temp/Preview.tga "
+//								+ "anim_Minis 2.000 anim_Minis$In_Out 2.000 anim_Minis$In_Out$In 2.000\0", print_writer);
+//						break;
 					}
 				}
 				break;
