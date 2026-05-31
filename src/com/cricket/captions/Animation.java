@@ -83,10 +83,10 @@ public class Animation
 			case "Alt_0": case "Alt_1": case "Alt_2": case "Alt_3": case "Alt_4": case "Alt_5": case "Alt_6": case "Alt_7": case "Alt_8": case "Alt_9":
 			case "Control_F12": case "Shift_F12":
 				return Constants.INFO_BAR;
-			case "F1": case "Control_Shift_F1": case "F2": case "Control_F11": case "F4": case "Shift_K": case "Shift_T": case "Control_F7":
-			case "m": case "Control_m": case "Shift_F11": case "Shift_F10": case "p": case "Alt_Shift_J": case "z": case "x": case "c": case "v":
-			case "Control_z": case "Control_x": case "Control_F1": case "Control_b": case "Alt_F9": case "Shift_F8": case "Control_F10":
-			case "Control_Shift_F2": case "Shift_D": case "Alt_Shift_F10": case "Alt_Shift_F12": case "Control_d": case "Control_e":
+			case "F1": case "Control_Shift_F1": case "F2": case "Control_F11": case "F4": case "Shift_K": case "Shift_T": case "Control_F7": case "m": case "Control_m": 
+			case "Shift_F11": case "Shift_F10": case "p": case "Alt_Shift_J": case "z": case "x": case "c": case "v": case "Control_z": case "Control_x": case "Control_F1": 
+			case "Control_b": case "Alt_F9": case "Shift_F8": case "Control_F10": case "Control_Shift_F2": case "Shift_D": case "Alt_Shift_F10": case "Alt_Shift_F12": 
+			case "Control_d": case "Control_e": case "Alt_Shift_F9": case "Alt_Shift_F2":
 				return Constants.FULL_FRAMER;
 			case "F5": case "F9": case "l": case "Shift_F5": case "Shift_F9": case "Control_h": case "Alt_F12": case "Control_Shift_M": 
 			case "Control_Shift_O": case "Control_Shift_L": case "F7": case "F11": case "Control_a": case "q": case "u": case "Control_q":
@@ -8148,9 +8148,16 @@ public class Animation
 			}
 			processAnimation(Constants.FRONT, print_writers, "anim_TargetBug$In_Out", "START");
 			this.whichGraphicOnScreen = whatToProcess;
-			break;	
+			break;
+		case "r":
+			if(audioenabled.equalsIgnoreCase("TRUE")) {
+				processAnimation(Constants.FRONT, print_writers, "sfx_In", "START");
+			}
+			processAnimation(Constants.FRONT, print_writers, "Anim_DRS_Bug$In_Out", "START");
+			this.whichGraphicOnScreen = whatToProcess;
+			break;
 		case "h": case "Control_y": case "Control_k": case "Shift_F4": case "Shift_O": case "y": case "g": case "k":
-		case "Control_Shift_R": case "Control_Shift_J": case "r":
+		case "Control_Shift_R": case "Control_Shift_J":
 			if(audioenabled.equalsIgnoreCase("TRUE")) {
 				processAnimation(Constants.FRONT, print_writers, "sfx_In", "START");
 			}
@@ -8448,7 +8455,8 @@ public class Animation
 			
 		case "F1": case "Control_Shift_F1": case "F2": case "Control_F11": case "Shift_F11": case "F4": case "Shift_K": 
 		case "Control_F7": case "Shift_F10": case "p": case "Alt_Shift_J": case "Control_F1": case "Alt_F9": case "Shift_F8":
-		case "Control_F10": case "Control_Shift_F2": case "Alt_Shift_F10": case "Alt_Shift_F12":
+		case "Control_F10": case "Control_Shift_F2": case "Alt_Shift_F10": case "Alt_Shift_F12": case "Alt_Shift_F9":
+		case "Alt_Shift_F2":
 			T20_MumbaiAnimateIn("ArrowDown,", print_writers, config); // Push infobar
 			if(audioenabled.equalsIgnoreCase("TRUE")) {
 				processAnimation(Constants.BACK, print_writers, "AUDIO$sfx_FF_In", "START");
@@ -8481,6 +8489,12 @@ public class Animation
 				break;
 			case "Alt_Shift_F12":
 				processAnimation(Constants.BACK, print_writers, "anim_FullFrames$In_Out$Main$PhasewiseRunRates", "START");
+				break;
+			case "Alt_Shift_F9":
+				processAnimation(Constants.BACK, print_writers, "anim_FullFrames$In_Out$Main$PhasewiseSummary", "START");
+				break;
+			case "Alt_Shift_F2":
+				processAnimation(Constants.BACK, print_writers, "anim_FullFrames$In_Out$Main$BattingComparison", "START");
 				break;
 			case "F4":
 				processAnimation(Constants.BACK, print_writers, "anim_FullFrames$In_Out$Main$PartnershipList", "START");
@@ -8659,8 +8673,19 @@ public class Animation
 			TimeUnit.MILLISECONDS.sleep(2500);
 			processAnimation(Constants.FRONT, print_writers, "anim_TargetBug$In_Out", "SHOW 0.0");
 			break;
+			
+		case "r":
+			if(audioenabled.equalsIgnoreCase("TRUE")) {
+				processAnimation(Constants.FRONT, print_writers, "sfx_Out", "START");
+			}
+			processAnimation(Constants.FRONT, print_writers, "Anim_DRS_Bug$In_Out", "CONTINUE");
+			TimeUnit.MILLISECONDS.sleep(800);
+			processAnimation(Constants.FRONT, print_writers, "Anim_DRS_Bug", "SHOW 0.0");
+			this.whichGraphicOnScreen = "";
+			break;
+			
 		case "h": case "Control_y": case "Control_k": case "Shift_F4": case "Shift_O": case "y": case "g": case "k":
-		case "Control_Shift_R": case "Control_Shift_J": case "r":
+		case "Control_Shift_R": case "Control_Shift_J":
 			if(audioenabled.equalsIgnoreCase("TRUE")) {
 				processAnimation(Constants.FRONT, print_writers, "sfx_Out", "START");
 			}
@@ -8873,7 +8898,7 @@ public class Animation
 			
 		case "F1": case "Control_Shift_F1": case "F2": case "Control_F11": case "F4": case "Shift_K": case "Shift_T": case "Control_F7":
 		case "Shift_F10": case "Shift_F11": case "p": case "Alt_Shift_J": case "Control_F1": case "Alt_F9": case "Shift_F8": case "Control_F10":
-		case "Control_Shift_F2": case "Alt_Shift_F10": case "Alt_Shift_F12":
+		case "Control_Shift_F2": case "Alt_Shift_F10": case "Alt_Shift_F12": case "Alt_Shift_F9": case "Alt_Shift_F2":
 			if(audioenabled.equalsIgnoreCase("TRUE")) {
 				processAnimation(Constants.BACK, print_writers, "AUDIO$sfx_FF_Out", "START");
 			}
@@ -8895,6 +8920,12 @@ public class Animation
 				break;
 			case "Alt_Shift_F12":
 				processAnimation(Constants.BACK, print_writers, "anim_FullFrames$In_Out$Main$PhasewiseRunRates", "CONTINUE");
+				break;
+			case "Alt_Shift_F9":
+				processAnimation(Constants.BACK, print_writers, "anim_FullFrames$In_Out$Main$PhasewiseSummary", "CONTINUE");
+				break;
+			case "Alt_Shift_F2":
+				processAnimation(Constants.BACK, print_writers, "anim_FullFrames$In_Out$Main$BattingComparison", "CONTINUE");
 				break;
 			case "F4":
 				processAnimation(Constants.BACK, print_writers, "anim_FullFrames$In_Out$Main$PartnershipList", "CONTINUE");
@@ -8993,7 +9024,7 @@ public class Animation
 			break;
 			
 		case "r":
-			processAnimation(Constants.FRONT, print_writers, "BtmChangeon", "START");
+			processAnimation(Constants.FRONT, print_writers, "DRS_Change", "START");
 			break;
 		case "F8": case "Alt_F8": case "F10": case "Control_F9":case "Control_F5":
 			if(audioenabled.equalsIgnoreCase("TRUE")) {
@@ -9028,7 +9059,7 @@ public class Animation
 			
 		case "F1": case "Control_Shift_F1": case "F2": case "Control_F11": case "F4": case "Shift_K": case "Shift_T":case "Control_F7":
 		case "Shift_F10": case "Shift_F11": case "p": case "Alt_Shift_J": case "Control_F1": case "Alt_F9": case "Shift_F8": case "Control_F10":
-		case "Control_Shift_F2": case "Alt_Shift_F10": case "Alt_Shift_F12":
+		case "Control_Shift_F2": case "Alt_Shift_F10": case "Alt_Shift_F12": case "Alt_Shift_F9": case "Alt_Shift_F2":
 			if(audioenabled.equalsIgnoreCase("TRUE")) {
 				processAnimation(Constants.BACK, print_writers, "AUDIO$sfx_FF_Change", "START");
 			}
@@ -9070,6 +9101,12 @@ public class Animation
 					break;
 				case "Alt_Shift_F12":
 					processAnimation(Constants.BACK, print_writers, "Change_Fullframes$PhasewiseRunRates", "START");
+					break;
+				case "Alt_Shift_F9":
+					processAnimation(Constants.BACK, print_writers, "Change_Fullframes$PhasewiseSummary", "START");
+					break;
+				case "Alt_Shift_F2":
+					processAnimation(Constants.BACK, print_writers, "Change_Fullframes$BattingComparison", "START");
 					break;
 				case "F4":
 					processAnimation(Constants.BACK, print_writers, "Change_Fullframes$PartnershipList", "START");
@@ -9133,6 +9170,12 @@ public class Animation
 					break;
 				case "Alt_Shift_F12":
 					processAnimation(Constants.BACK, print_writers, "Change_Fullframes$PhasewiseRunRates", "START");
+					break;
+				case "Alt_Shift_F9":
+					processAnimation(Constants.BACK, print_writers, "Change_Fullframes$PhasewiseSummary", "START");
+					break;
+				case "Alt_Shift_F2":
+					processAnimation(Constants.BACK, print_writers, "Change_Fullframes$BattingComparison", "START");
 					break;
 				case "F4":
 					processAnimation(Constants.BACK, print_writers, "Change_Fullframes$PartnershipList", "START");
@@ -9211,7 +9254,7 @@ public class Animation
 			break;
 			
 		case "r":
-			processAnimation(Constants.FRONT, print_writers, "BtmChangeon", "SHOW 0.0");
+			processAnimation(Constants.FRONT, print_writers, "DRS_Change", "SHOW 0.0");
 			this.whichGraphicOnScreen = whatToProcess;
 			break;
 		case "F8": case "Alt_F8": case "F10": case "Control_F9":case "Control_F5":
@@ -9247,7 +9290,7 @@ public class Animation
 			
 		case "F1": case "Control_Shift_F1": case "F2": case "Control_F11": case "F4": case "Shift_K": case "Shift_T":case "Control_F7": 
 		case "Shift_F11": case "Shift_F10": case "p": case "Control_F1": case "Alt_F9": case "Shift_F8": case "Control_F10": 
-		case "Control_Shift_F2": case "Alt_Shift_F10": case "Alt_Shift_F12":
+		case "Control_Shift_F2": case "Alt_Shift_F10": case "Alt_Shift_F12": case "Alt_Shift_F9": case "Alt_Shift_F2":
 			processAnimation(Constants.BACK, print_writers, "Change_Fullframes$Elements", "SHOW 0.0");
 			processAnimation(Constants.BACK, print_writers, "Change_Fullframes$ColourBase", "SHOW 0.0");
 			processAnimation(Constants.BACK, print_writers, "Change_Fullframes$VerticalText", "SHOW 0.0");
@@ -9274,6 +9317,12 @@ public class Animation
 				break;
 			case "Alt_Shift_F12":
 				processAnimation(Constants.BACK, print_writers, "Change_Fullframes$PhasewiseRunRates", "SHOW 0.0");
+				break;
+			case "Alt_Shift_F9":
+				processAnimation(Constants.BACK, print_writers, "Change_Fullframes$PhasewiseSummary", "SHOW 0.0");
+				break;
+			case "Alt_Shift_F2":
+				processAnimation(Constants.BACK, print_writers, "Change_Fullframes$BattingComparison", "SHOW 0.0");
 				break;
 			case "F4":
 				processAnimation(Constants.BACK, print_writers, "Change_Fullframes$Partnership", "SHOW 0.0");
@@ -9334,6 +9383,14 @@ public class Animation
 			case "Alt_Shift_F12":
 				processAnimation(Constants.BACK, print_writers, "anim_FullFrames$In_Out$Main$PhasewiseRunRates", "SHOW 2.820");
 				processAnimation(Constants.BACK, print_writers, "Change_Fullframes$PhasewiseRunRates", "SHOW 0.0");
+				break;
+			case "Alt_Shift_F9":
+				processAnimation(Constants.BACK, print_writers, "anim_FullFrames$In_Out$Main$PhasewiseSummary", "SHOW 2.820");
+				processAnimation(Constants.BACK, print_writers, "Change_Fullframes$PhasewiseSummary", "SHOW 0.0");
+				break;
+			case "Alt_Shift_F2":
+				processAnimation(Constants.BACK, print_writers, "anim_FullFrames$In_Out$Main$BattingComparison", "SHOW 2.820");
+				processAnimation(Constants.BACK, print_writers, "Change_Fullframes$BattingComparison", "SHOW 0.0");
 				break;
 			case "F4":
 				processAnimation(Constants.BACK, print_writers, "anim_FullFrames$In_Out$Main$PartnershipList", "SHOW 2.820");
@@ -12946,7 +13003,7 @@ public class Animation
 				
 			case "F1": case "Control_Shift_F1": case "F2": case "Control_F11": case "F4": case "Shift_K": case "Control_F7": case "Shift_T": case "Shift_F10": 
 			case "Shift_F11": case "p": case "Alt_Shift_J": case "Control_F1": case "Alt_F9": case "Shift_F8": case "Control_F10": case "Control_Shift_F2":
-			case "Alt_Shift_F10": case "Alt_Shift_F12":
+			case "Alt_Shift_F10": case "Alt_Shift_F12": case "Alt_Shift_F9": case "Alt_Shift_F2":
 				previewCommand = "anim_Infobar$Push 0.500 anim_FullFrames$In_Out$Essentials$In 2.300 anim_FullFrames$In_Out$Elemnets$In 2.500 anim_FullFrames$In_Out$ColourBase$In 2.400 "
 						+ "anim_FullFrames$In_Out$VerticalText$In 2.200 anim_FullFrames$In_Out$Logo$In 2.000 anim_FullFrames$In_Out$Header$In 2.300 anim_FullFrames$In_Out$SubHeader$In 2.500 "
 						+ "anim_FullFrames$In_Out$Footer$In 2.140 ";
@@ -12968,6 +13025,12 @@ public class Animation
 					break;
 				case "Alt_Shift_F12":
 					previewCommand = previewCommand + "anim_FullFrames$In_Out$Main$PhasewiseRunRates$In 2.580";
+					break;
+				case "Alt_Shift_F9":
+					previewCommand = previewCommand + "anim_FullFrames$In_Out$Main$PhasewiseSummary$In 1.920";
+					break;
+				case "Alt_Shift_F2":
+					previewCommand = previewCommand + "anim_FullFrames$In_Out$Main$BattingComparison$In 2.580";
 					break;
 				case "F4":
 					previewCommand = previewCommand + "anim_FullFrames$In_Out$Main$PartnershipList$In 2.180";
@@ -13000,7 +13063,7 @@ public class Animation
 					
 					break;
 				case "Control_F1":
-					previewCommand = previewCommand + "anim_FullFrames$In_Out$Main$Manhattan$In 2.580";
+					previewCommand = previewCommand + "anim_FullFrames$In_Out$Main$ImageBattingCard$In 2.566";
 					break;
 				}
 				break;
@@ -13014,7 +13077,7 @@ public class Animation
 			
 			case "F1": case "Control_Shift_F1": case "F2": case "Control_F11": case "F4": case "Shift_K": case "Shift_T":case "Control_F7":
 			case "Shift_F10": case "Shift_F11": case "p": case "Alt_Shift_J": case "Control_F1": case "Alt_F9": case "Shift_F8": case "Control_F10":
-			case "Control_Shift_F2": case "Alt_Shift_F10": case "Alt_Shift_F12":
+			case "Control_Shift_F2": case "Alt_Shift_F10": case "Alt_Shift_F12": case "Alt_Shift_F9": case "Alt_Shift_F2":
 				
 				previewCommand = "Change_Fullframes$Elements 1.700 Change_Fullframes$Elements$Change_Out 0.680 Change_Fullframes$Elements$Change_In 1.700 "
 						+ "Change_Fullframes$ColourBase 1.500 Change_Fullframes$ColourBase$Change_Out 0.800 Change_Fullframes$ColourBase$Change_In 1.500 "
@@ -13047,6 +13110,12 @@ public class Animation
 					break;
 				case "Alt_Shift_F12":
 					previewCommand = previewCommand + " Change_Fullframes$PhasewiseRunRates 1.680 Change_Fullframes$PhasewiseRunRates$Change_Out 0.600 Change_Fullframes$PhasewiseRunRates$Change_In 1.680";
+					break;
+				case "Alt_Shift_F9":
+					previewCommand = previewCommand + " Change_Fullframes$PhasewiseSummary 1.000 Change_Fullframes$PhasewiseSummary$Change_Out 0.500 Change_Fullframes$PhasewiseSummary$Change_In 1.000";
+					break;
+				case "Alt_Shift_F2":
+					previewCommand = previewCommand + " Change_Fullframes$BattingComparison 1.680 Change_Fullframes$BattingComparison$Change_Out 0.600 Change_Fullframes$BattingComparison$Change_In 1.680";
 					break;
 				case "F4":
 					previewCommand = previewCommand + " Change_Fullframes$PartnershipList 1.280 Change_Fullframes$PartnershipList$Change_Out 0.540 "
@@ -13110,6 +13179,12 @@ public class Animation
 						break;
 					case "Alt_Shift_F12":
 						previewCommand = previewCommand + " Change_Fullframes$PhasewiseRunRates 1.680 Change_Fullframes$PhasewiseRunRates$Change_Out 0.600 Change_Fullframes$PhasewiseRunRates$Change_In 1.680";
+						break;
+					case "Alt_Shift_F9":
+						previewCommand = previewCommand + " Change_Fullframes$PhasewiseSummary 1.000 Change_Fullframes$PhasewiseSummary$Change_Out 0.500 Change_Fullframes$PhasewiseSummary$Change_In 1.000";
+						break;
+					case "Alt_Shift_F2":
+						previewCommand = previewCommand + " Change_Fullframes$BattingComparison 1.680 Change_Fullframes$BattingComparison$Change_Out 0.600 Change_Fullframes$BattingComparison$Change_In 1.680";
 						break;
 					case "F4":
 						previewCommand = previewCommand + " Change_Fullframes$PartnershipList 1.280 Change_Fullframes$PartnershipList$Change_Out 0.540 Change_Fullframes$PartnershipList$Change_In 1.280";

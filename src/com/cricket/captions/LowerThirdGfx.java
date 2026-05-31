@@ -21510,9 +21510,9 @@ public class LowerThirdGfx
 							CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_LT_BattingCard$PlayerAll" + containerName + "$Grp" + j + "$Data$select_DataStyle"
 									+ "*FUNCTION*Omo*vis_con SET 0\0", print_writers);
 							CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_LT_BattingCard$PlayerAll" + containerName + "$Grp" + j + "$Data$Stats$txt_StatHead"
-									+ "*GEOM*TEXT SET " + "IN AT " + "\0", print_writers);
+									+ "*GEOM*TEXT SET " + player.getBattingStyle().toUpperCase() + "\0", print_writers);
 							CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_LT_BattingCard$PlayerAll" + containerName + "$Grp" + j + "$Data$Stats$txt_StatValue"
-									+ "*GEOM*TEXT SET " + j + "\0", print_writers);
+									+ "*GEOM*TEXT SET \0", print_writers);
 							CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_LT_BattingCard$PlayerAll" + containerName + "$Grp" + j + "$Data$Stats$img_Base1"
 									+ "*TEXTURE*IMAGE SET " + Constants.T20_MUMBAI_Base1 + team.getTeamBadge() + "\0", print_writers);
 						}

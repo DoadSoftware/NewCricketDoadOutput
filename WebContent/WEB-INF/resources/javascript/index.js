@@ -1,4 +1,4 @@
-   var session_match, session_caption, session_animation,isSplitScorecard = false;
+var session_match, session_caption, session_animation,isSplitScorecard = false;
 var selected_options = [];
 let TeamScore = "";
 function processWaitingButtonSpinner(whatToProcess) 
@@ -577,7 +577,8 @@ function processUserSelectionData(whatToProcess,dataToProcess)
 			case '.': case '/': case 'Shift_V': case 'Alt_i': case 'b': case 'Shift_B': case 'Control_Shift_B': case 'Alt_Shift_F3': case 'Control_Shift_R': 
 			case 'Control_Shift_F3': case 'Control_Shift_H': case "Control_Shift_I": case "Alt_Shift_D":case "Alt_Shift_E":case "Alt_Shift_F":case "Alt_Shift_G":
 			case "Alt_Shift_H": case "Control_Shift_A": case 'Control_6': case "Alt_Shift_O": case 'Alt_F5': case 'Control_Alt_F1': case 'Control_Alt_F2': 
-			case 'Control_Shift_K': case "Alt_Shift_F8": case "Alt_k": case 'Alt_Shift_F11': case 'Alt_Shift_F10': case 'Alt_Shift_F12':
+			case 'Control_Shift_K': case "Alt_Shift_F8": case "Alt_k": case 'Alt_Shift_F11': case 'Alt_Shift_F10': case 'Alt_Shift_F12': case 'Alt_Shift_F9':
+			case 'Alt_Shift_F2':
 				/*switch(dataToProcess){
 				case 'Shift_F':
 					count++;
@@ -2112,15 +2113,15 @@ function addItemsToList(whatToProcess,dataToProcess)
 				select = document.createElement('select');
 				select.id = 'selectPhotoImpact';
 				select.name = select.id;
-				
-				option = document.createElement('option');
-				option.value = 'WITHOUT_PHOTO';
-				option.text = 'WITHOUT PHOTO' ;
-				select.appendChild(option);
 	
 				option = document.createElement('option');
 				option.value = 'WITH_PHOTO';
 				option.text = 'WITH PHOTO' ;
+				select.appendChild(option);
+				
+				option = document.createElement('option');
+				option.value = 'WITHOUT_PHOTO';
+				option.text = 'WITHOUT PHOTO' ;
 				select.appendChild(option);
 				
 				select.setAttribute('onchange',"setDropdownOptionToSelectOptionArray(this, 3)");
@@ -3445,74 +3446,69 @@ function addItemsToList(whatToProcess,dataToProcess)
 						option.value = 'THIS_OVER';
 						option.text = 'This Over';
 						select.appendChild(option);
-				}
+					}
+					
+					option = document.createElement('option');
+					option.value = 'BOUNDARY';
+					option.text = 'Inning Boundaries';
+					select.appendChild(option);
+					
+					option = document.createElement('option');
+					option.value = 'REVIEW';
+					option.text = 'Review';
+					select.appendChild(option);
 				
-				option = document.createElement('option');
-				option.value = 'BOUNDARY';
-				option.text = 'Inning Boundaries';
-				select.appendChild(option);
-				
-				option = document.createElement('option');
-				option.value = 'REVIEW';
-				option.text = 'Review';
-				select.appendChild(option);
-			
-				option = document.createElement('option');
-				option.value = 'BALLS_SINCE_LAST_BOUNDARY';
-				option.text = 'Ball Since Last Boundary';
-				select.appendChild(option);	
-				
-				option = document.createElement('option');
-				option.value = 'LAST_X_BALLS';
-				option.text = 'Last x Balls';
-				select.appendChild(option);
-				
-				option = document.createElement('option');
-				option.value = 'AT_THIS_STAGE';
-				option.text = 'At This Stage';
-				select.appendChild(option);
-				
-				option = document.createElement('option');
-				option.value = 'EXTRAS';
-				option.text = 'Extras';
-				select.appendChild(option);
-	
-				option = document.createElement('option');
-				option.value = 'LAST_WICKET';
-				option.text = 'Last Wicket';
-				select.appendChild(option);
-				
-				session_match.match.inning.forEach(function(inn,index,arr){
-					if(inn.isCurrentInning == 'YES'){
-						if(inn.inningNumber == 1){
-							
-							option = document.createElement('option');
-							option.value = 'PROJECTED';
-							option.text = 'Projected Score';
-							select.appendChild(option);
-							
-						}
-						else{
-							/*option = document.createElement('option');
-							option.value = 'TARGET';
-							option.text = 'Target';
-							select.appendChild(option);*/
-							
-							option = document.createElement('option');
-							option.value = 'EQUATION';
-							option.text = 'Equation';
-							select.appendChild(option);
-							
-							option = document.createElement('option');
-							option.value = 'RESULT';
-							option.text = 'Result';
-							select.appendChild(option);
-							
-							option = document.createElement('option');
-							option.value = 'DLS_PAR_SCORE';
-							option.text = 'D/L Par Score';
-							select.appendChild(option);
-						}
+					option = document.createElement('option');
+					option.value = 'BALLS_SINCE_LAST_BOUNDARY';
+					option.text = 'Ball Since Last Boundary';
+					select.appendChild(option);	
+					
+					option = document.createElement('option');
+					option.value = 'LAST_X_BALLS';
+					option.text = 'Last x Balls';
+					select.appendChild(option);
+					
+					option = document.createElement('option');
+					option.value = 'AT_THIS_STAGE';
+					option.text = 'At This Stage';
+					select.appendChild(option);
+					
+					option = document.createElement('option');
+					option.value = 'EXTRAS';
+					option.text = 'Extras';
+					select.appendChild(option);
+		
+					option = document.createElement('option');
+					option.value = 'LAST_WICKET';
+					option.text = 'Last Wicket';
+					select.appendChild(option);
+					
+					session_match.match.inning.forEach(function(inn,index,arr){
+						if(inn.isCurrentInning == 'YES'){
+							if(inn.inningNumber == 1){
+								
+								option = document.createElement('option');
+								option.value = 'PROJECTED';
+								option.text = 'Projected Score';
+								select.appendChild(option);
+								
+							}
+							else{
+								/*option = document.createElement('option');
+								option.value = 'TARGET';
+								option.text = 'Target';
+								select.appendChild(option);*/
+								
+								option = document.createElement('option');
+								option.value = 'EQUATION';
+								option.text = 'Equation';
+								select.appendChild(option);
+								
+								option = document.createElement('option');
+								option.value = 'RESULT';
+								option.text = 'Result';
+								select.appendChild(option);
+							}
 						}
 					});
 					break;
@@ -6143,7 +6139,7 @@ function addItemsToList(whatToProcess,dataToProcess)
 				option.text = 'League Promotion';
 				select.appendChild(option);
 				
-				/*option = document.createElement('option');
+				option = document.createElement('option');
 				option.value = 'PLAYER_BUILDUP_BAT';
 				option.text = 'Player Build-Up Bat';
 				select.appendChild(option);
@@ -6151,7 +6147,7 @@ function addItemsToList(whatToProcess,dataToProcess)
 				option = document.createElement('option');
 				option.value = 'PLAYER_BUILDUP_BALL';
 				option.text = 'Player Build-Up Ball';
-				select.appendChild(option);*/
+				select.appendChild(option);
 				
 				option = document.createElement('option');
 				option.value = 'TEAM_BUILDUP_HOME';
@@ -6184,20 +6180,20 @@ function addItemsToList(whatToProcess,dataToProcess)
 	    				(this.value || $(this).find('option').first().val()));
 					}
 					else if(this.value == 'PLAYER_BUILDUP_BAT' || this.value == 'PLAYER_BUILDUP_BALL'){
+						row.insertCell(1).id = 'FreeText';
+			 			cellCount = cellCount + 1;
+						processCricketProcedures("GRAPHICS-OPTIONS_DATA", whatToProcess + "," +
+	    				(this.value || $(this).find('option').first().val()));
+						
 						let xballselect  = document.createElement('select');
 						xballselect.id = 'selectFreeText';
 						xballselect.name = xballselect.id;
 						
 						let selectedValue = this.value; 
 						
-						option = document.createElement('option');
-						option.value = '0';
-						option.text = 'Select Player';	
-						xballselect.appendChild(option);
-						
 						session_match.match.inning.forEach(function(inn){
 						if(inn.isCurrentInning == 'YES'){
-								if(selectedValue == 'PLAYER_BUILDUP_BAT'){
+							   if(selectedValue == 'PLAYER_BUILDUP_BAT'){
 									inn.battingCard.forEach(function(bc){
 										option = document.createElement('option');
 										option.value = bc.playerId;
@@ -6214,22 +6210,29 @@ function addItemsToList(whatToProcess,dataToProcess)
 								}
 							}
 						});
-						xballselect.setAttribute('onchange',"setDropdownOptionToSelectOptionArray(this, 1)");
-						row.insertCell(1).appendChild(xballselect);
-						setDropdownOptionToSelectOptionArray($(xballselect),1);
+						xballselect.setAttribute('onchange',"setDropdownOptionToSelectOptionArray(this, 2)");
+						row.insertCell(2).appendChild(xballselect);
+						cellCount = cellCount + 1;
+						setDropdownOptionToSelectOptionArray($(xballselect),2);
 						
-						row.insertCell(2).id = 'FreeText';	
-			 			cellCount = 3;
-						$(xballselect).on('change', function () {
-						    let playerId = xballselect.value;
-						    processCricketProcedures(
-						        "GRAPHICS-OPTIONS_DATA",
-						        whatToProcess + "," + selectedValue + "," + playerId
-						    );
-						});
+						let imageselect  = document.createElement('select');
+						imageselect.id = 'selectimage';
+						imageselect.name = imageselect.id;
 						
-						/*processCricketProcedures("GRAPHICS-OPTIONS_DATA", whatToProcess + "," +
-	    				(selectedValue + "," + playerId || $(this).find('option').first().val()));*/
+						option = document.createElement('option');
+						option.value = 'WITHOUT';
+						option.text = 'Without Player';	
+						imageselect.appendChild(option);
+						
+						option = document.createElement('option');
+						option.value = 'WITH';
+						option.text = 'With Player';	
+						imageselect.appendChild(option);
+						
+						imageselect.setAttribute('onchange',"setDropdownOptionToSelectOptionArray(this, 3)");
+						row.insertCell(3).appendChild(imageselect);
+						cellCount = cellCount + 1;
+						setDropdownOptionToSelectOptionArray($(imageselect),3);
 					}
 				});
 				select.dispatchEvent(new Event('change'));

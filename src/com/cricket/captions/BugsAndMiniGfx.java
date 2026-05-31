@@ -2307,21 +2307,10 @@ public class BugsAndMiniGfx
 					+ "*ACTIVE SET 0\0", print_writers);
 			CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_Bug$All$Text$txt_LastName"
 					+ "*GEOM*TEXT SET " + battingCard.getPlayer().getFull_name() +"\0", print_writers);
-			
-			if(battingCard.getSixes() != 0 && battingCard.getFours() != 0) {
-				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_Bug$All$Text$txt_Sub*GEOM*TEXT SET "
-						+ battingCard.getFours() + " FOUR" + CricketFunctions.Plural(battingCard.getFours()).toUpperCase() + "    "
-						+ battingCard.getSixes() + (battingCard.getSixes() == 1?" SIX":" SIXES") +"\0", print_writers);
-			}else if(battingCard.getFours() != 0) {
-				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_Bug$All$Text$txt_Sub*GEOM*TEXT SET "
-						+ battingCard.getFours() + " FOUR" + CricketFunctions.Plural(battingCard.getFours()).toUpperCase() +"\0", print_writers);
-			}else if(battingCard.getSixes() != 0) {
-				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_Bug$All$Text$txt_Sub*GEOM*TEXT SET "
-						+ battingCard.getSixes() + (battingCard.getSixes() == 1?" SIX":" SIXES") +"\0", print_writers);
-			}else {
-				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_Bug$All$Text$txt_Sub*GEOM*TEXT SET "
-						+ "S/R - " + CricketFunctions.generateStrikeRate(battingCard.getRuns(), battingCard.getBalls(), 1) +"\0", print_writers);
-			}
+			CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_Bug$All$Text$txt_Sub*GEOM*TEXT SET "
+					+ "FOUR" + CricketFunctions.Plural(battingCard.getFours()).toUpperCase() + ": " + battingCard.getFours() 
+					+ " | " + (battingCard.getSixes() == 1?" SIX: ":" SIXES: ") + battingCard.getSixes() + " | " + "S/R: " 
+					+ CricketFunctions.generateStrikeRate(battingCard.getRuns(), battingCard.getBalls(), 1) +"\0", print_writers);
 			
 			CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_Bug$All$Text$txt_Runs*GEOM*TEXT SET " + (battingCard.
 				getStatus().equalsIgnoreCase(CricketUtil.NOT_OUT)? battingCard.getRuns() + "*":battingCard.getRuns()) +"\0", print_writers);
@@ -2441,20 +2430,10 @@ public class BugsAndMiniGfx
 			CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_Bug$All$Text$txt_Sub*GEOM*TEXT SET HIGHLIGHTS\0", print_writers);
 			break;
 		case "r":
-			CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_Bug$All$Text$txt_FirstName*ACTIVE SET 1\0", print_writers);
-			CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_Bug$All$Text$txt_LastName*ACTIVE SET 1\0", print_writers);
-			CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_Bug$All$Text$txt_Runs*ACTIVE SET 1\0", print_writers);
-			
-			CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_Bug$All$Text$txt_FirstName"
-					+ "*GEOM*TEXT SET " + team.getTeamName1() + "\0", print_writers);
-			
-			CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_Bug$All$Text$txt_LastName*GEOM*TEXT SET " +
-					"REVIEW" +"\0", print_writers);
-			CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_Bug$All$Text$txt_Runs*GEOM*TEXT SET " +
-					reviewData + "\0", print_writers);
-			
-			CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_Bug$All$Text$txt_Balls*ACTIVE SET 0\0", print_writers);
-			CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_Bug$All$Text$txt_Sub*ACTIVE SET 0\0", print_writers);
+			CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_DRS_Bug$TopLine$Text$txt_TeamName*GEOM*TEXT SET " 
+					+ team.getTeamBadge() + " REVIEW" + "\0", print_writers);
+			CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_DRS_Bug$BottomLine$Text$Side" + WhichSide 
+					+ "$txt_Info*GEOM*TEXT SET " + reviewData + "\0", print_writers);
 			break;
 		}
 		return Constants.OK;	

@@ -294,10 +294,8 @@ public class Caption
 			case "r":
 				switch (config.getBroadcaster()) {
 				case Constants.T20_MUMBAI:
-					System.out.println(whatToProcess);
 					status = this_bugsAndMiniGfx.populateBugReview(whatToProcess, whichSide, matchAllData);
 					break;
-
 				default:
 					status = this_fullFramesGfx.populatePOTT(whichSide, whatToProcess.split(",")[0], matchAllData, 0);
 					break;
@@ -428,6 +426,12 @@ public class Caption
 			case "Alt_Shift_F12":
 				status = this_fullFramesGfx.populateFFPhaseWiseRunRate(whichSide, whatToProcess.split(",")[0],matchAllData,Integer.valueOf(whatToProcess.split(",")[1]));
 				break;
+			case "Alt_Shift_F9":
+				status = this_fullFramesGfx.populateFFPhaseWiseSummary(whichSide, whatToProcess.split(",")[0],matchAllData,Integer.valueOf(whatToProcess.split(",")[1]));
+				break;
+			 case "Alt_Shift_F2":
+				 status = this_fullFramesGfx.populateFFBattingComparison(whichSide, whatToProcess.split(",")[0],matchAllData,Integer.valueOf(whatToProcess.split(",")[1]));
+					break;
 				
 			case "Control_Shift_I": // Bowling FF
 				status = this_fullFramesGfx.populateFFInningSummary(whichSide, whatToProcess.split(",")[0], matchAllData, 
@@ -1924,7 +1928,9 @@ public class Caption
 				    	this_infobarGfx.infobarStatsId = Integer.valueOf(whatToProcess.split(",")[3]);
 				        break;
 				    case "PLAYER_BUILDUP_BAT": case "PLAYER_BUILDUP_BALL":
-				    	this_infobarGfx.infobarStatsId = Integer.valueOf(whatToProcess.split(",")[4]);
+				    	this_infobarGfx.infobarStatsId = Integer.valueOf(whatToProcess.split(",")[3]);
+				    	this_infobarGfx.FirstPlayerId = Integer.valueOf(whatToProcess.split(",")[4]);
+				    	this_infobarGfx.WhichProfile = whatToProcess.split(",")[5];
 				    	break;
 				    }
 					this_infobarGfx.infobar.setFull_promo_section(whatToProcess.split(",")[2]);
