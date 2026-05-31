@@ -52,6 +52,9 @@ public class Infobar {
 	private String full_section;
 	private String last_full_section;
 	
+	private String full_promo_section;
+	private String last_full_promo_section;
+	
 	private String right_full_section;
 	private String last_right_full_section;
 	
@@ -379,6 +382,18 @@ public class Infobar {
 	}
 	public void setLast_right_full_section(String last_right_full_section) {
 		this.last_right_full_section = last_right_full_section;
+	}
+	public String getFull_promo_section() {
+		return full_promo_section;
+	}
+	public void setFull_promo_section(String full_promo_section) {
+		this.full_promo_section = full_promo_section;
+	}
+	public String getLast_full_promo_section() {
+		return last_full_promo_section;
+	}
+	public void setLast_full_promo_section(String last_full_promo_section) {
+		this.last_full_promo_section = last_full_promo_section;
 	}
 	
 }

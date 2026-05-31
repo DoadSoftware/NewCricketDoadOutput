@@ -1917,6 +1917,19 @@ public class Caption
 				break;
 			case "Alt_0":
 				switch (config.getBroadcaster().toUpperCase()) {
+				case Constants.T20_MUMBAI:
+					System.out.println("whatToProcess - " + whatToProcess);
+					switch(whatToProcess.split(",")[2]) {
+				    case "LEAGUE_PROMOTION":
+				    	this_infobarGfx.infobarStatsId = Integer.valueOf(whatToProcess.split(",")[3]);
+				        break;
+				    case "PLAYER_BUILDUP_BAT": case "PLAYER_BUILDUP_BALL":
+				    	this_infobarGfx.infobarStatsId = Integer.valueOf(whatToProcess.split(",")[4]);
+				    	break;
+				    }
+					this_infobarGfx.infobar.setFull_promo_section(whatToProcess.split(",")[2]);
+					status = this_infobarGfx.t20MumbaiFullPromoSection(false, print_writers, matchAllData, whichSide);
+					break;
 				case Constants.ICC_U19_2023: case Constants.NPL: case Constants.ISPL: case Constants.LEGENDS: case Constants.MPL:
 				case Constants.APL: case Constants.VIDARBHA:
 					if(config.getWhichInfobar().equalsIgnoreCase("LOF_INFOBAR")) {
@@ -1952,11 +1965,6 @@ public class Caption
 						this_infobarGfx.Comms_Name = whatToProcess;
 						status = this_infobarGfx.populateVizInfobarMiddleSection(print_writers, matchAllData, whichSide);
 					}
-					break;
-				case Constants.T20_MUMBAI:
-					this_infobarGfx.infobar.setRight_section("COMMENTATORS");
-					this_infobarGfx.Comms_Name = whatToProcess;
-					status = this_infobarGfx.populateVizInfobarRightSection(false, print_writers, matchAllData, whichSide, 1);
 					break;
 				case Constants.BENGAL_T20:
 					this_infobarGfx.infobar.setMiddle_section("COMMENTATORS");

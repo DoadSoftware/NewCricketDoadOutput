@@ -86,7 +86,7 @@ public class Animation
 			case "F1": case "Control_Shift_F1": case "F2": case "Control_F11": case "F4": case "Shift_K": case "Shift_T": case "Control_F7":
 			case "m": case "Control_m": case "Shift_F11": case "Shift_F10": case "p": case "Alt_Shift_J": case "z": case "x": case "c": case "v":
 			case "Control_z": case "Control_x": case "Control_F1": case "Control_b": case "Alt_F9": case "Shift_F8": case "Control_F10":
-			case "Control_Shift_F2": case "Shift_D": case "Alt_Shift_F10": case "Alt_Shift_F12":
+			case "Control_Shift_F2": case "Shift_D": case "Alt_Shift_F10": case "Alt_Shift_F12": case "Control_d": case "Control_e":
 				return Constants.FULL_FRAMER;
 			case "F5": case "F9": case "l": case "Shift_F5": case "Shift_F9": case "Control_h": case "Alt_F12": case "Control_Shift_M": 
 			case "Control_Shift_O": case "Control_Shift_L": case "F7": case "F11": case "Control_a": case "q": case "u": case "Control_q":
@@ -7956,6 +7956,11 @@ public class Animation
 			}
 			break;
 			
+		case "Alt_0":
+			processAnimation(Constants.FRONT, print_writers, "anim_Infobar$OutForAnalytics$In_Out", "START");
+			processAnimation(Constants.FRONT, print_writers, "anim_Infobar$Promo_Graphics$In_Out", "START");
+			infobar.setFull_promo_section(whatToProcess.split(",")[2]);
+			break;
 		case "Alt_5":
 			processAnimation(Constants.FRONT, print_writers, "anim_Infobar$Section4$In_Out", "START");
 			infobar.setRight_full_section(whatToProcess.split(",")[2]);
@@ -8022,6 +8027,7 @@ public class Animation
 				processAnimation(Constants.FRONT, print_writers, "Disruptives$InOut", "CONTINUE");
 				TimeUnit.MILLISECONDS.sleep(2000);
 				processAnimation(Constants.FRONT, print_writers, "Disruptives", "SHOW 0.0");
+				processAnimation(Constants.FRONT, print_writers, "DisruptivesLoop", "SHOW 0.0");
 				this.infobar.setFreeHit_on_screen(false);
 			}
 			break;
@@ -8045,6 +8051,9 @@ public class Animation
 				processAnimation(Constants.FRONT, print_writers, "DisruptivesLoop", "START");
 				TimeUnit.MILLISECONDS.sleep(3000);
 				processAnimation(Constants.FRONT, print_writers, "Disruptives$InOut", "CONTINUE");
+				TimeUnit.MILLISECONDS.sleep(2000);
+				processAnimation(Constants.FRONT, print_writers, "Disruptives", "SHOW 0.0");
+				processAnimation(Constants.FRONT, print_writers, "DisruptivesLoop", "SHOW 0.0");
 			}
 			break;
 		case "Control_F12":
@@ -8384,7 +8393,7 @@ public class Animation
 			processAnimation(Constants.BACK, print_writers, "anim_Profile$In_Out$In", "START");
 			processAnimation(Constants.BACK, print_writers, "Loop", "START");
 			this.whichGraphicOnScreen = whatToProcess;
-			TimeUnit.MILLISECONDS.sleep(1500);
+			TimeUnit.MILLISECONDS.sleep(2700);
 			processAnimation(Constants.BACK, print_writers, "anim_Profile$In_Out", "SHOW 2.520");
 			break;
 		case "Control_b":
@@ -8549,6 +8558,14 @@ public class Animation
 			ExtraInfoOnScreen = false;
 			break;
 			
+		case "Alt_0":
+			processAnimation(Constants.FRONT, print_writers, "anim_Infobar$Promo_Graphics$In_Out", "CONTINUE");
+			processAnimation(Constants.FRONT, print_writers, "anim_Infobar$OutForAnalytics$In_Out", "CONTINUE");
+			TimeUnit.MILLISECONDS.sleep(700);
+			processAnimation(Constants.FRONT, print_writers, "anim_Infobar$Promo_Graphics", "SHOW 0.0");
+			processAnimation(Constants.FRONT, print_writers, "anim_Infobar$OutForAnalytics", "SHOW 0.0");
+			infobar.setFull_promo_section(null);
+			break;
 		case "Alt_5":
 			processAnimation(Constants.FRONT, print_writers, "anim_Infobar$Section4$In_Out", "CONTINUE");
 			TimeUnit.MILLISECONDS.sleep(700);
@@ -8945,6 +8962,10 @@ public class Animation
 			processAnimation(Constants.FRONT, print_writers, "Change_Section1", "START");
 			caption.this_infobarGfx.infobar.setLast_middle_section(caption.this_infobarGfx.infobar.getMiddle_section());
 			break;
+		case "Alt_0":
+			processAnimation(Constants.FRONT, print_writers, "anim_Infobar$Promo_Graphics$Change", "START");
+			infobar.setFull_promo_section(whatToProcess.split(",")[2]);
+			break;
 		case "Alt_5":
 			processAnimation(Constants.FRONT, print_writers, "anim_Infobar$Change_Section4", "START");
 			infobar.setRight_full_section(whatToProcess.split(",")[2]);
@@ -9031,8 +9052,8 @@ public class Animation
 					break;
 				case "Control_Shift_F1": case "Control_Shift_F2":
 					processAnimation(Constants.BACK, print_writers, "Change_Fullframes$SplitCard", "START");
-					if(!whichGraphicOnScreen.split(",")[0].equalsIgnoreCase("Control_Shift_F1") && 
-							!whichGraphicOnScreen.split(",")[0].equalsIgnoreCase("Control_Shift_F2")) {
+					if(!whatToProcess.split(",")[0].split(",")[0].equalsIgnoreCase("Control_Shift_F1") && 
+							!whatToProcess.split(",")[0].split(",")[0].equalsIgnoreCase("Control_Shift_F2")) {
 						if(!whichGraphicOnScreen.split(",")[0].equalsIgnoreCase(whatToProcess.split(",")[0])) {
 							processAnimation(Constants.BACK, print_writers, "MoveForSplitCard", "CONTINUE REVERSE");
 						}
@@ -9162,6 +9183,10 @@ public class Animation
 			break;
 		case "Alt_2":
 			processAnimation(Constants.FRONT, print_writers, "Change_Section1", "SHOW 0.0");
+			break;
+		case "Alt_0":
+			TimeUnit.MILLISECONDS.sleep(500);
+			processAnimation(Constants.FRONT, print_writers, "anim_Infobar$Promo_Graphics$Change", "SHOW 0.0");
 			break;
 		case "Alt_5":
 			TimeUnit.MILLISECONDS.sleep(500);
@@ -12997,14 +13022,19 @@ public class Animation
 						+ "Change_Fullframes$Logo 1.320 Change_Fullframes$Logo$Change_Out 0.400 Change_Fullframes$Logo$Change_In 1.320 "
 						+ "Change_Fullframes$Header 1.300 Change_Fullframes$Header$Change_Out 0.580 Change_Fullframes$Header$Change_In 1.300 "
 						+ "Change_Fullframes$SubHeader 1.300 Change_Fullframes$SubHeader$Change_Out 0.580 Change_Fullframes$SubHeader$Change_In 1.300 "
-						+ "Change_Fullframes$Footer 0.500 Change_Fullframes$Footer$Change_Out 0.300 Change_Fullframes$Footer$Change_In 0.500";
+						+ "Change_Fullframes$Footer 1.000 Change_Fullframes$Footer$Change_Out 0.300 Change_Fullframes$Footer$Change_In 1.000";
 					
 				switch (whichGraphicOnScreen.split(",")[0]) {
 				case "F1":
 					previewCommand = previewCommand + " Change_Fullframes$BattingCard 1.280 Change_Fullframes$BattingCard$Change_Out 0.540 Change_Fullframes$BattingCard$Change_In 1.280";
 					break;
 				case "Control_Shift_F1": case "Control_Shift_F2":
-					previewCommand = previewCommand + " Change_Fullframes$SplitCard 1.300 Change_Fullframes$SplitCard$Change_Out 0.540 Change_Fullframes$SplitCard$Change_In 1.300 MoveForSplitCard 0.603";
+					previewCommand = previewCommand + " Change_Fullframes$SplitCard 1.300 Change_Fullframes$SplitCard$Change_Out 0.540 Change_Fullframes$SplitCard$Change_In 1.300";
+					if(!whatToProcess.split(",")[0].split(",")[0].equalsIgnoreCase("Control_Shift_F1") && !whatToProcess.split(",")[0].split(",")[0].equalsIgnoreCase("Control_Shift_F2")) {
+						if(!whichGraphicOnScreen.split(",")[0].equalsIgnoreCase(whatToProcess.split(",")[0])) {
+							previewCommand = previewCommand + " MoveForSplitCard 0.0";
+						}
+					}
 					break;
 				case "F2":
 					previewCommand = previewCommand + " Change_Fullframes$BowlingCard 1.280 Change_Fullframes$BowlingCard$Change_Out 0.540 Change_Fullframes$BowlingCard$Change_In 1.280";
@@ -13062,8 +13092,9 @@ public class Animation
 						previewCommand = previewCommand + " Change_Fullframes$BattingCard 1.280 Change_Fullframes$BattingCard$Change_Out 0.540 Change_Fullframes$BattingCard$Change_In 1.280";
 						break;
 					case "Control_Shift_F1": case "Control_Shift_F2":
+						previewCommand = previewCommand + " Change_Fullframes$SplitCard 1.300 Change_Fullframes$SplitCard$Change_Out 0.540 Change_Fullframes$SplitCard$Change_In 1.300";
 						if(!whichGraphicOnScreen.split(",")[0].equalsIgnoreCase("Control_Shift_F1") && !whichGraphicOnScreen.split(",")[0].equalsIgnoreCase("Control_Shift_F2")) {
-							previewCommand = previewCommand + " Change_Fullframes$SplitCard 1.300 Change_Fullframes$SplitCard$Change_Out 0.540 Change_Fullframes$SplitCard$Change_In 1.300 MoveForSplitCard 0.603";
+							previewCommand = previewCommand + " MoveForSplitCard 0.603";
 						}
 						break;
 					case "F2":

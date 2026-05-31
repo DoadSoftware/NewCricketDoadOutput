@@ -821,6 +821,18 @@ function processCricketProcedures(whatToProcess,dataToProcess)
 				        }
 				        return;
 				    }
+					if (valueToProcess.includes("Alt_0")) {
+				        if (valueToProcess.includes("LEAGUE_PROMOTION")) {
+							setInfoBarStatsDropdown("LEAGUE_PROMOTION", data);
+				        }
+						if (valueToProcess.includes("PLAYER_BUILDUP_BAT")) {
+							setInfoBarStatsDropdown("PLAYER_BUILDUP_BAT", data);
+				        }
+						if (valueToProcess.includes("PLAYER_BUILDUP_BALL")) {
+							setInfoBarStatsDropdown("PLAYER_BUILDUP_BALL", data);
+				        }
+				        return;
+				    }
 				    // Commentators / FreeTextDb
 				    if (valueToProcess.includes("Alt_6")) {
 				        let processValue = valueToProcess.toUpperCase();
@@ -955,7 +967,8 @@ function setCommentators(type, data) {
 }
 
 function setInfoBarStatsDropdown(type, data) {
-  if (type === "FreeTextDb" && Array.isArray(data)) {
+  if ((type === "FreeTextDb" || type === "LEAGUE_PROMOTION" || type === "PLAYER_BUILDUP_BAT" 
+		|| type === "PLAYER_BUILDUP_BALL") && Array.isArray(data)) {
 	
 	const freeTextCells = [
 	      document.getElementById('FreeText')
@@ -6089,7 +6102,7 @@ function addItemsToList(whatToProcess,dataToProcess)
 		case 'Alt_9':
 			switch($('#selected_broadcaster').val().toUpperCase()){
 			case 'ICC-U19-2023': case 'BENGAL-T20': case 'NPL': case 'MPL': case 'LEGENDS-90': case 'APL': case 'ISPL': case 'VIDARBHA':
-			case "T20_MUMBAI":
+			case 'T20_MUMBAI':
 				header_text.innerHTML = 'INFOBAR SECTION - FREE TEXT';
 						
 				select = document.createElement('select');
@@ -6113,6 +6126,114 @@ function addItemsToList(whatToProcess,dataToProcess)
 			
 		case 'Alt_0':
 			switch($('#selected_broadcaster').val().toUpperCase()){
+			case 'T20_MUMBAI':
+				header_text.innerHTML = 'FULL PROMO INFOBAR SECTION';
+						
+				select = document.createElement('select');
+				select.id = 'selectRightSection';
+				select.name = select.id;
+				
+				option = document.createElement('option');
+				option.value = 'BLANK';
+				option.text = 'Blank';
+				select.appendChild(option);
+				
+				option = document.createElement('option');
+				option.value = 'LEAGUE_PROMOTION';
+				option.text = 'League Promotion';
+				select.appendChild(option);
+				
+				/*option = document.createElement('option');
+				option.value = 'PLAYER_BUILDUP_BAT';
+				option.text = 'Player Build-Up Bat';
+				select.appendChild(option);
+				
+				option = document.createElement('option');
+				option.value = 'PLAYER_BUILDUP_BALL';
+				option.text = 'Player Build-Up Ball';
+				select.appendChild(option);*/
+				
+				option = document.createElement('option');
+				option.value = 'TEAM_BUILDUP_HOME';
+				option.text = 'team Build-Up Home';
+				select.appendChild(option);
+				
+				option = document.createElement('option');
+				option.value = 'TEAM_BUILDUP_AWAY';
+				option.text = 'team Build-Up Away';
+				select.appendChild(option);
+				
+				select.setAttribute('onchange',"setDropdownOptionToSelectOptionArray(this, 0)");
+				row.insertCell(cellCount).appendChild(select);
+				setDropdownOptionToSelectOptionArray($(select),0);
+				cellCount = cellCount + 1
+				
+				select.addEventListener('change', function () {
+					['selectFreeText', 'selectFreeText1', 'FreeText'].forEach(id => {
+					    const el = document.getElementById(id);
+					    if (el) {
+					        id === 'selectFreeText' || id === 'selectFreeText1' ? el.parentElement.remove() : el.remove();
+					    }
+					});
+ 
+					//it will show text value (UI VALUE):this.options[this.selectedIndex].text.toUpperCase()
+					if(this.value == 'LEAGUE_PROMOTION'){
+						row.insertCell(1).id = 'FreeText';
+			 			cellCount = 2;
+						processCricketProcedures("GRAPHICS-OPTIONS_DATA", whatToProcess + "," +
+	    				(this.value || $(this).find('option').first().val()));
+					}
+					else if(this.value == 'PLAYER_BUILDUP_BAT' || this.value == 'PLAYER_BUILDUP_BALL'){
+						let xballselect  = document.createElement('select');
+						xballselect.id = 'selectFreeText';
+						xballselect.name = xballselect.id;
+						
+						let selectedValue = this.value; 
+						
+						option = document.createElement('option');
+						option.value = '0';
+						option.text = 'Select Player';	
+						xballselect.appendChild(option);
+						
+						session_match.match.inning.forEach(function(inn){
+						if(inn.isCurrentInning == 'YES'){
+								if(selectedValue == 'PLAYER_BUILDUP_BAT'){
+									inn.battingCard.forEach(function(bc){
+										option = document.createElement('option');
+										option.value = bc.playerId;
+										option.text = bc.player.full_name + " - " + bc.status;	
+										xballselect.appendChild(option);
+									});
+								}else{
+									inn.bowlingCard.forEach(function(boc){
+										option = document.createElement('option');
+										option.value = boc.playerId;
+										option.text = boc.player.full_name;	
+										xballselect.appendChild(option);
+									});
+								}
+							}
+						});
+						xballselect.setAttribute('onchange',"setDropdownOptionToSelectOptionArray(this, 1)");
+						row.insertCell(1).appendChild(xballselect);
+						setDropdownOptionToSelectOptionArray($(xballselect),1);
+						
+						row.insertCell(2).id = 'FreeText';	
+			 			cellCount = 3;
+						$(xballselect).on('change', function () {
+						    let playerId = xballselect.value;
+						    processCricketProcedures(
+						        "GRAPHICS-OPTIONS_DATA",
+						        whatToProcess + "," + selectedValue + "," + playerId
+						    );
+						});
+						
+						/*processCricketProcedures("GRAPHICS-OPTIONS_DATA", whatToProcess + "," +
+	    				(selectedValue + "," + playerId || $(this).find('option').first().val()));*/
+					}
+				});
+				select.dispatchEvent(new Event('change'));
+				break;
 			case 'ICC-U19-2023': case 'BENGAL-T20': case 'NPL': case 'MPL': case 'LEGENDS-90': case 'APL': case 'ISPL': case "VIDARBHA":
 				header_text.innerHTML = 'MIDDLE INFOBAR SECTION - COMMANTATORS';
 						
@@ -9396,7 +9517,7 @@ function addItemsToList(whatToProcess,dataToProcess)
 							['IT20', 'T20I'],
 							['MT20 SEASON 3', 'MT20 SEASON 3'],
 							['IPL 2026', 'IPL 2026'],
-							['IPL', 'IPL']
+							['IPL', 'IPL'],
 							['WPL', 'WPL']
 						].forEach(([value, text]) => addOption(value, text));
 						break;
@@ -9721,7 +9842,7 @@ function addItemsToList(whatToProcess,dataToProcess)
 								['IT20', 'T20I'],
 								['MT20 SEASON 3', 'MT20 SEASON 3'],
 								['IPL 2026', 'IPL 2026'],
-								['IPL', 'IPL']
+								['IPL', 'IPL'],
 								['WPL', 'WPL']
 							].forEach(([value, text]) => addOption(value, text));
 							break;

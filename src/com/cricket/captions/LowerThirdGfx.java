@@ -13406,10 +13406,7 @@ public class LowerThirdGfx
 			CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_LT_BattingCard$CommonElements$LogoWipe$InLogo$img_Logo"
 					+ "*TEXTURE*IMAGE SET " + Constants.T20_MUMBAI_Logos + lowerThird.getWhichTeamFlag() + "\0", print_writers);
 			
-			CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_LT_BattingCard$ScoreAll$img_Text$txt_Team1*GEOM*TEXT SET " 
-					+ team.getTeamName1() + "\0", print_writers);
-			CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_LT_BattingCard$ScoreAll$Team2$txt_Team2*GEOM*TEXT SET \0", print_writers);
-			CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_LT_BattingCard$ScoreAll$Team2$v*GEOM*TEXT SET \0", print_writers);
+			CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_LT_BattingCard$ScoreAll$txt_Team1*GEOM*TEXT SET " + team.getTeamName1() + "\0", print_writers);
 			
 			if(WhichProfile.equalsIgnoreCase("ROLES")) {
 				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_LT_BattingCard$ScoreAll$TeamScore$txt_Score*GEOM*TEXT SET \0", print_writers);
@@ -19150,8 +19147,6 @@ public class LowerThirdGfx
 		case "Control_Shift_O":
 			CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_LT_BattingCard$CommonElements$TeamBase$img_Base1"
 					+ "*TEXTURE*IMAGE SET " + Constants.T20_MUMBAI_Base1 + color + "\0",print_writers);
-			CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_LT_BattingCard$ScoreAll$img_Text"
-					+ "*TEXTURE*IMAGE SET " + Constants.T20_MUMBAI_Text + "Event" + "\0",print_writers);
 			CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_LT_BattingCard$ScoreAll$TeamScore$img_Text"
 					+ "*TEXTURE*IMAGE SET " + Constants.T20_MUMBAI_Text + color + "\0",print_writers);
 			break;
@@ -21454,10 +21449,9 @@ public class LowerThirdGfx
 					row_id= row_id + 1;
 					player = PlayersList.stream().filter(plyr -> plyr.getPlayerId() == inning.getBattingCard().get(row_id-1).getPlayerId()).findAny().orElse(null);
 					if(player == null) {
-						player = otherSquad.stream().filter(plyr -> plyr.getPlayerId() == inning.getBattingCard().get(row_id-1).getPlayerId()).findAny().orElse(null);
-						
+						player = Players.stream().filter(plyr -> plyr.getPlayerId() == inning.getBattingCard().get(row_id-1).getPlayerId()).findAny().orElse(null);
 						if(player == null) {
-							return "Player not found in squad and Subs"; 
+							return "Player not found in squad & DB"; 
 						}
 					}
 					if(!CricketFunctions.checkBatAndBallImpactInOutPlayer(event, bc.getPlayerId()).isEmpty()) {

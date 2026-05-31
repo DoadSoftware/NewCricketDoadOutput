@@ -723,6 +723,10 @@ public class IndexController
 							lastDataPart = this_caption.this_infobarGfx.infobar.getLast_right_full_section();
 							this_caption.whichSide = (lastDataPart != null && !lastDataPart.isEmpty() && !lastDataPart.equalsIgnoreCase("BLANK")) ? 2 : 1;
 							break;
+						case "Alt_0":
+							lastDataPart = this_caption.this_infobarGfx.infobar.getLast_full_promo_section();
+							this_caption.whichSide = (lastDataPart != null && !lastDataPart.isEmpty() && !lastDataPart.equalsIgnoreCase("BLANK")) ? 2 : 1;
+							break;
 						case "Alt_3": case "Alt_4": case "Alt_6": case "Alt_9":
 							lastDataPart = this_caption.this_infobarGfx.infobar.getLast_full_section();
 							this_caption.whichSide = (lastDataPart != null && !lastDataPart.isEmpty() && !lastDataPart.equalsIgnoreCase("BLANK")) ? 2 : 1;
@@ -930,6 +934,11 @@ public class IndexController
 				this_caption.PopulateGraphics("Alt_6," + Inn_Number + ",BLANK", session_match);
 				this_animation.AnimateOut("Alt_6," + Inn_Number + ",BLANK", print_writers, session_configuration);
 			}
+			
+			if(this_caption.this_infobarGfx.infobar.getLast_full_promo_section() != null && !this_caption.this_infobarGfx.infobar.getLast_full_promo_section().isEmpty()) {
+				this_caption.PopulateGraphics("Alt_0," + Inn_Number + ",BLANK", session_match);
+				this_animation.AnimateOut("Alt_0," + Inn_Number + ",BLANK", print_writers, session_configuration);
+			}
 			break;
 		}
 	}
@@ -1009,18 +1018,21 @@ public class IndexController
 						switch(session_configuration.getBroadcaster()) {
 						case Constants.T20_MUMBAI:
 							switch(valueToProcess.split(",")[0]) {
-							case "Alt_3": case "Alt_4": case "Alt_5": case "Alt_6": case "Alt_8": case "Alt_9":
+							case "Alt_0": case "Alt_3": case "Alt_4": case "Alt_5": case "Alt_6": case "Alt_8": case "Alt_9":
 							    String lastSection = null;
 							    switch(valueToProcess.split(",")[0]) {
-							        case "Alt_5":
-							            lastSection = this_caption.this_infobarGfx.infobar.getLast_right_full_section();
-							            break;
-							        case "Alt_3": case "Alt_4": case "Alt_6": case "Alt_9":
-							            lastSection = this_caption.this_infobarGfx.infobar.getLast_full_section();
-							            break;
-							        case "Alt_8":
-							            lastSection = this_caption.this_infobarGfx.infobar.getLast_right_section();
-							            break;
+						    	case "Alt_0":
+						    		lastSection = this_caption.this_infobarGfx.infobar.getLast_full_promo_section();
+						    		break;
+						        case "Alt_5":
+						            lastSection = this_caption.this_infobarGfx.infobar.getLast_right_full_section();
+						            break;
+						        case "Alt_3": case "Alt_4": case "Alt_6": case "Alt_9":
+						            lastSection = this_caption.this_infobarGfx.infobar.getLast_full_section();
+						            break;
+						        case "Alt_8":
+						            lastSection = this_caption.this_infobarGfx.infobar.getLast_right_section();
+						            break;
 							    }
 							    
 							    if(lastSection != null && !lastSection.trim().isEmpty()) {
@@ -1028,7 +1040,14 @@ public class IndexController
 							            this_animation.AnimateIn(valueToProcess,print_writers,session_configuration);
 							        } else {
 							            this_animation.ChangeOn(valueToProcess,print_writers,session_configuration);
-							            TimeUnit.MILLISECONDS.sleep(700);
+							            switch(valueToProcess.split(",")[0]) {
+							            case "Alt_0":
+							            	TimeUnit.MILLISECONDS.sleep(2200);
+							            	break;
+							            default:
+							            	TimeUnit.MILLISECONDS.sleep(700);
+							            	break;
+							            }
 							            this_caption.whichSide = 1;
 							            this_caption.PopulateGraphics(valueToProcess,session_match);
 							            this_animation.CutBack(valueToProcess,print_writers,session_configuration);
@@ -1213,7 +1232,19 @@ public class IndexController
 		case "Alt_9":
 			return (List<T>) session_infoBarStats;
 		case "Alt_0":
-			return (List<T>) session_commentator;
+			switch(session_configuration.getBroadcaster()) {
+			case Constants.T20_MUMBAI:
+			  if(whatToProcess.contains(",")) {
+		  		switch (whatToProcess.split(",")[1]) {
+		  		 case "LEAGUE_PROMOTION": case "PLAYER_BUILDUP_BAT": case "PLAYER_BUILDUP_BALL":
+		  			return (List<T>) session_infoBarStats;
+		  		 }
+				}
+				break;
+			default:
+				return (List<T>) session_commentator;
+			}
+			break;
 		case "Alt_2":
 			if(whatToProcess.contains(",")) {
 	  			switch (whatToProcess.split(",")[1]) {
