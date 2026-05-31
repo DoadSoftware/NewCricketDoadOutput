@@ -8246,7 +8246,7 @@ public class LowerThirdGfx
 						2, "" ,logoCategory,null,null,new String[]{inning.getBowling_team().getTeamName1(), 
 						" WERE ",  String.valueOf(in_data.split(",")[0] + "-" + in_data.split(",")[1]),inning.getBatting_team().getTeamName1(), 
 						" ARE ", String.valueOf(inning.getTotalRuns() + "-" + inning.getTotalWickets())},new String[]{"FOURS" + "," + String.valueOf(in_data.split(",")[3]), String.valueOf(inning.getTotalFours()),
-								"SIXES" + "," + String.valueOf(in_data.split(",")[2]) , String.valueOf(inning.getTotalSixes()),"",""},new String[] {"100","406.0","515.0","585.0","675","800"});
+								"SIXES" + "," + String.valueOf(in_data.split(",")[2]) , String.valueOf(inning.getTotalSixes()),"",""},null);
 				break;	
 			}
 			
