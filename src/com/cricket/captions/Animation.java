@@ -8019,7 +8019,6 @@ public class Animation
 			break;
 		
 		case "Shift_F1":  case "Shift_F2":
-			T20_MumbaiAnimateIn(Constants.SHRUNK_INFOBAR, print_writers, config);
 			if(audioenabled.equalsIgnoreCase("TRUE")) {
 				processAnimation(Constants.FRONT, print_writers, "sfx_In", "START");
 			}
@@ -8027,7 +8026,6 @@ public class Animation
 			this.whichGraphicOnScreen = whatToProcess;
 			break;
 		case "Alt_F7":
-			T20_MumbaiAnimateIn(Constants.SHRUNK_INFOBAR, print_writers, config);
 			processAnimation(Constants.FRONT, print_writers, "MiniPointsTable", "START");
 			this.whichGraphicOnScreen = whatToProcess;
 			break;
@@ -8044,12 +8042,26 @@ public class Animation
 			if(audioenabled.equalsIgnoreCase("TRUE")) {
 				processAnimation(Constants.FRONT, print_writers, "sfx_In", "START");
 			}
+			if(infobar.getInfobar_status() != null) {
+				if(!infobar.getInfobar_status().equalsIgnoreCase(Constants.FORCED+Constants.SHRUNK_INFOBAR)) {
+					AnimateIn("ArrowLeft" + ",", print_writers, config); // Shrink infobar
+					TimeUnit.MILLISECONDS.sleep(1000);
+					infobar.setInfobar_status(Constants.SHRUNK_INFOBAR);
+				}
+			}
 			processAnimation(Constants.FRONT, print_writers, "anim_SixDistance$In_Out", "START");
 			this.whichGraphicOnScreen = whatToProcess;
 			break;
 		case "Control_Shift_F3":
 			if(audioenabled.equalsIgnoreCase("TRUE")) {
 				processAnimation(Constants.FRONT, print_writers, "sfx_In", "START");
+			}
+			if(infobar.getInfobar_status() != null) {
+				if(!infobar.getInfobar_status().equalsIgnoreCase(Constants.FORCED+Constants.SHRUNK_INFOBAR)) {
+					AnimateIn("ArrowLeft" + ",", print_writers, config); // Shrink infobar
+					TimeUnit.MILLISECONDS.sleep(1000);
+					infobar.setInfobar_status(Constants.SHRUNK_INFOBAR);
+				}
 			}
 			processAnimation(Constants.FRONT, print_writers, "anim_TargetBug$In_Out", "START");
 			this.whichGraphicOnScreen = whatToProcess;
@@ -8063,7 +8075,15 @@ public class Animation
 			this.whichGraphicOnScreen = whatToProcess;
 			break;
 		case "Control_Shift_U": case "Control_Shift_V":
-			T20_MumbaiAnimateIn(Constants.SHRUNK_INFOBAR, print_writers, config);
+			
+			if(infobar.getInfobar_status() != null) {
+				if(!infobar.getInfobar_status().equalsIgnoreCase(Constants.FORCED+Constants.SHRUNK_INFOBAR)) {
+					AnimateIn("ArrowLeft" + ",", print_writers, config); // Shrink infobar
+					TimeUnit.MILLISECONDS.sleep(1000);
+					infobar.setInfobar_status(Constants.SHRUNK_INFOBAR);
+				}
+			}
+			
 			if(audioenabled.equalsIgnoreCase("TRUE")) {
 				processAnimation(Constants.FRONT, print_writers, "sfx_In", "START");
 			}
@@ -8071,7 +8091,13 @@ public class Animation
 			this.whichGraphicOnScreen = whatToProcess;
 			break;
 		case "6": case "Control_4":
-			T20_MumbaiAnimateIn(Constants.SHRUNK_INFOBAR, print_writers, config);
+			if(infobar.getInfobar_status() != null) {
+				if(!infobar.getInfobar_status().equalsIgnoreCase(Constants.FORCED+Constants.SHRUNK_INFOBAR)) {
+					AnimateIn("ArrowLeft" + ",", print_writers, config); // Shrink infobar
+					TimeUnit.MILLISECONDS.sleep(1000);
+					infobar.setInfobar_status(Constants.SHRUNK_INFOBAR);
+				}
+			}
 			if(audioenabled.equalsIgnoreCase("TRUE")) {
 				processAnimation(Constants.FRONT, print_writers, "sfx_In", "START");
 			}
@@ -8099,6 +8125,13 @@ public class Animation
 			if(this.infobar.isInfobar_on_screen() == true) {
 				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_Impact$Move_X_ForShrink"
 						+ "*TRANSFORMATION*POSITION*X SET 0\0", print_writers);
+				
+				if(!infobar.getInfobar_status().equalsIgnoreCase(Constants.FORCED+Constants.SHRUNK_INFOBAR)) {
+					AnimateIn("ArrowLeft" + ",", print_writers, config); // Shrink infobar
+					TimeUnit.MILLISECONDS.sleep(1000);
+					infobar.setInfobar_status(Constants.SHRUNK_INFOBAR);
+				}
+				
 			}else {
 				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_Impact$Move_X_ForShrink"
 						+ "*TRANSFORMATION*POSITION*X SET -600\0", print_writers);
@@ -8111,7 +8144,7 @@ public class Animation
 				processAnimation(Constants.FRONT, print_writers, "anim_Impact$SubToImpact", "START");
 				this.whichGraphicOnScreen = whatToProcess;
 			}else {
-				T20_MumbaiAnimateIn(Constants.SHRUNK_INFOBAR, print_writers, config);
+				
 				if(audioenabled.equalsIgnoreCase("TRUE")) {
 					processAnimation(Constants.FRONT, print_writers, "sfx_In", "START");
 				}
@@ -8123,16 +8156,22 @@ public class Animation
 			if(this.infobar.isInfobar_on_screen() == true) {
 				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_LtHowOut$Move_X_ForShrink"
 						+ "*TRANSFORMATION*POSITION*X SET 0\0", print_writers);
+				
+				if(!infobar.getInfobar_status().equalsIgnoreCase(Constants.FORCED+Constants.SHRUNK_INFOBAR)) {
+					AnimateIn("ArrowLeft" + ",", print_writers, config); // Shrink infobar
+					TimeUnit.MILLISECONDS.sleep(1000);
+					infobar.setInfobar_status(Constants.SHRUNK_INFOBAR);
+				}
+				
 			}else {
 				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_LtHowOut$Move_X_ForShrink"
 						+ "*TRANSFORMATION*POSITION*X SET -495\0", print_writers);
 			}
 			
-			T20_MumbaiAnimateIn(Constants.SHRUNK_INFOBAR, print_writers, config); // Push infobar
-			if(this.infobar.isInfobar_on_screen() == true ||this.specialBugOnScreen.equalsIgnoreCase(CricketUtil.TOSS)) {
+			
+			if(this.specialBugOnScreen.equalsIgnoreCase(CricketUtil.TOSS)) {
 				processAnimation(Constants.FRONT, print_writers, "anim_Infobar$Shrink", "START");
 			}
-			TimeUnit.MILLISECONDS.sleep(1000);
 			if(audioenabled.equalsIgnoreCase("TRUE")) {
 				processAnimation(Constants.FRONT, print_writers, "sfx_In", "START");
 			}
@@ -8144,15 +8183,17 @@ public class Animation
 			if(this.infobar.isInfobar_on_screen() == true) {
 				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_NameSuper$Move_X_ForShrink"
 						+ "*TRANSFORMATION*POSITION*X SET 0\0", print_writers);
+				
+				if(!infobar.getInfobar_status().equalsIgnoreCase(Constants.FORCED+Constants.SHRUNK_INFOBAR)) {
+					AnimateIn("ArrowLeft" + ",", print_writers, config); // Shrink infobar
+					infobar.setInfobar_status(Constants.SHRUNK_INFOBAR);
+				}
+				
 			}else {
 				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_NameSuper$Move_X_ForShrink"
 						+ "*TRANSFORMATION*POSITION*X SET -495\0", print_writers);
 			}
 			
-			T20_MumbaiAnimateIn(Constants.SHRUNK_INFOBAR, print_writers, config); // Push infobar
-			if(this.infobar.isInfobar_on_screen() == true) {
-				processAnimation(Constants.FRONT, print_writers, "anim_Infobar$Shrink", "START");
-			}
 			if(this.specialBugOnScreen.equalsIgnoreCase(CricketUtil.TOSS)) {
 				processAnimation(Constants.FRONT, print_writers, "MoveForNameSuper", "START");
 			}
@@ -8171,19 +8212,26 @@ public class Animation
 			if(this.infobar.isInfobar_on_screen() == true) {
 				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_LowerThird$Move_X_ForShrink"
 						+ "*TRANSFORMATION*POSITION*X SET 0\0", print_writers);
+				
+				if(!infobar.getInfobar_status().equalsIgnoreCase(Constants.FORCED+Constants.SHRUNK_INFOBAR)) {
+					AnimateIn("ArrowLeft" + ",", print_writers, config); // Shrink infobar
+					infobar.setInfobar_status(Constants.SHRUNK_INFOBAR);
+				}
+				
 			}else {
 				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_LowerThird$Move_X_ForShrink"
 						+ "*TRANSFORMATION*POSITION*X SET -286\0", print_writers);
 			}
 			
-			T20_MumbaiAnimateIn(Constants.SHRUNK_INFOBAR, print_writers, config); // Push infobar
-			if(this.infobar.isInfobar_on_screen() == true ||this.specialBugOnScreen.equalsIgnoreCase(CricketUtil.TOSS)) {
+			if(this.specialBugOnScreen.equalsIgnoreCase(CricketUtil.TOSS)) {
 				processAnimation(Constants.FRONT, print_writers, "anim_Infobar$Shrink", "START");
 			}
+			
 			TimeUnit.MILLISECONDS.sleep(1000);
 			if(audioenabled.equalsIgnoreCase("TRUE")) {
 				processAnimation(Constants.FRONT, print_writers, "sfx_In", "START");
 			}
+			
 			processAnimation(Constants.FRONT, print_writers, "anim_LowerThird$InOut$Essentials", "START");
 			processAnimation(Constants.FRONT, print_writers, "anim_LowerThird$InOut$Colours", "START");
 			processAnimation(Constants.FRONT, print_writers, "anim_LowerThird$InOut$Logo", "START");
@@ -8465,7 +8513,11 @@ public class Animation
 			}
 			processAnimation(Constants.FRONT, print_writers, "anim_Pop_Up", "CONTINUE");
 			TimeUnit.MILLISECONDS.sleep(1000);
-			T20_MumbaiAnimateIn(Constants.SHRUNK_INFOBAR, print_writers, config);
+			if(infobar.getInfobar_status() != null) {
+				if(!infobar.getInfobar_status().equalsIgnoreCase(Constants.FORCED + Constants.SHRUNK_INFOBAR)) {
+					T20_MumbaiAnimateIn("ArrowRight,", print_writers, config);
+				}
+			}
 			TimeUnit.MILLISECONDS.sleep(2500);
 			processAnimation(Constants.FRONT, print_writers, "anim_Pop_Up", "SHOW 0.0");
 			processAnimation(Constants.FRONT, print_writers, "Change_PopUp", "SHOW 0.0");
@@ -8477,7 +8529,13 @@ public class Animation
 			}
 			processAnimation(Constants.FRONT, print_writers, "anim_BoundaryCounter$In_Out", "CONTINUE");
 			this.whichGraphicOnScreen = "";
-			T20_MumbaiAnimateIn(Constants.SHRUNK_INFOBAR, print_writers, config);
+			TimeUnit.MILLISECONDS.sleep(2500);
+			if(infobar.getInfobar_status() != null) {
+				if(!infobar.getInfobar_status().equalsIgnoreCase(Constants.FORCED + Constants.SHRUNK_INFOBAR)) {
+					T20_MumbaiAnimateIn("ArrowRight,", print_writers, config);
+				}
+			}
+			
 			TimeUnit.MILLISECONDS.sleep(500);
 			processAnimation(Constants.FRONT, print_writers, "Change", "SHOW 0.0");
 			processAnimation(Constants.FRONT, print_writers, "anim_BoundaryCounter", "SHOW 0.0");
@@ -8488,6 +8546,10 @@ public class Animation
 			}
 			processAnimation(Constants.FRONT, print_writers, "anim_SixDistance$In_Out", "CONTINUE");
 			this.whichGraphicOnScreen = "";
+			TimeUnit.MILLISECONDS.sleep(1800);
+			if(!this.infobar.isInfobar_pushed()) {
+				T20_MumbaiAnimateIn("ArrowUp,", print_writers, config); // Push infobar
+			}
 			TimeUnit.MILLISECONDS.sleep(2500);
 			processAnimation(Constants.FRONT, print_writers, "anim_SixDistance$In_Out", "SHOW 0.0");
 			break;
@@ -8497,6 +8559,12 @@ public class Animation
 			}
 			processAnimation(Constants.FRONT, print_writers, "anim_TargetBug$In_Out", "CONTINUE");
 			this.whichGraphicOnScreen = "";
+			TimeUnit.MILLISECONDS.sleep(1000);
+			if(infobar.getInfobar_status() != null) {
+				if(!infobar.getInfobar_status().equalsIgnoreCase(Constants.FORCED + Constants.SHRUNK_INFOBAR)) {
+					T20_MumbaiAnimateIn("ArrowRight,", print_writers, config);
+				}
+			}
 			TimeUnit.MILLISECONDS.sleep(2500);
 			processAnimation(Constants.FRONT, print_writers, "anim_TargetBug$In_Out", "SHOW 0.0");
 			break;
@@ -8523,14 +8591,12 @@ public class Animation
 				processAnimation(Constants.FRONT, print_writers, "sfx_Out", "START");
 			}
 			processAnimation(Constants.FRONT, print_writers, "anim_Minis", "CONTINUE");
-			T20_MumbaiAnimateIn(Constants.SHRUNK_INFOBAR, print_writers, config);
 			this.whichGraphicOnScreen = "";
 			TimeUnit.MILLISECONDS.sleep(1000);
 			processAnimation(Constants.FRONT, print_writers, "anim_Minis", "SHOW 0.0");
 			break;
 		case "Alt_F7":
 			processAnimation(Constants.FRONT, print_writers, "MiniPointsTable", "CONTINUE");
-			T20_MumbaiAnimateIn(Constants.SHRUNK_INFOBAR, print_writers, config);
 			this.whichGraphicOnScreen = "";
 			TimeUnit.MILLISECONDS.sleep(1000);
 			processAnimation(Constants.FRONT, print_writers, "MiniPointsTable", "SHOW 0.0");
@@ -8543,7 +8609,11 @@ public class Animation
 			processAnimation(Constants.FRONT, print_writers, "anim_Impact$In_Out", "CONTINUE");
 			this.whichGraphicOnScreen = "";
 			TimeUnit.MILLISECONDS.sleep(1800);
-			T20_MumbaiAnimateIn(Constants.SHRUNK_INFOBAR, print_writers, config); // Push infobar
+			if(infobar.getInfobar_status() != null) {
+				if(!infobar.getInfobar_status().equalsIgnoreCase(Constants.FORCED + Constants.SHRUNK_INFOBAR)) {
+					T20_MumbaiAnimateIn("ArrowRight,", print_writers, config);
+				}
+			}
 			processAnimation(Constants.FRONT, print_writers, "anim_Impact", "SHOW 0.0");
 			break;	
 		
@@ -8552,8 +8622,12 @@ public class Animation
 				processAnimation(Constants.FRONT, print_writers, "sfx_Out", "START");
 			}
 			processAnimation(Constants.FRONT, print_writers, "anim_LT_HowOut$InOut", "CONTINUE");
-			TimeUnit.MILLISECONDS.sleep(1000);
-			T20_MumbaiAnimateIn(Constants.SHRUNK_INFOBAR, print_writers, config); // Push infobar
+			TimeUnit.MILLISECONDS.sleep(1400);
+			if(infobar.getInfobar_status() != null) {
+				if(!infobar.getInfobar_status().equalsIgnoreCase(Constants.FORCED + Constants.SHRUNK_INFOBAR)) {
+					T20_MumbaiAnimateIn("ArrowRight,", print_writers, config);
+				}
+			}
 			this.whichGraphicOnScreen = "";
 			TimeUnit.MILLISECONDS.sleep(2500);
 			processAnimation(Constants.FRONT, print_writers, "anim_LT_HowOut$InOut", "SHOW 0.0");
@@ -8567,7 +8641,13 @@ public class Animation
 			if(this.specialBugOnScreen.equalsIgnoreCase(CricketUtil.TOSS)) {
 				processAnimation(Constants.FRONT, print_writers, "MoveForNameSuper", "CONTINUE REVERSE");
 			}
-			T20_MumbaiAnimateIn(Constants.SHRUNK_INFOBAR, print_writers, config); // Push infobar
+			
+			if(infobar.getInfobar_status() != null) {
+				if(!infobar.getInfobar_status().equalsIgnoreCase(Constants.FORCED + Constants.SHRUNK_INFOBAR)) {
+					T20_MumbaiAnimateIn("ArrowRight,", print_writers, config);
+				}
+			}
+			
 			this.whichGraphicOnScreen = "";
 			TimeUnit.MILLISECONDS.sleep(1500);
 			processAnimation(Constants.FRONT, print_writers, "anim_LT_NameSuper", "SHOW 0.0");
@@ -8586,7 +8666,11 @@ public class Animation
 			processAnimation(Constants.FRONT, print_writers, "anim_LowerThird$InOut$TopLine", "CONTINUE");
 			processAnimation(Constants.FRONT, print_writers, "anim_LowerThird$InOut$Subline", "CONTINUE");
 			TimeUnit.MILLISECONDS.sleep(1800);
-			T20_MumbaiAnimateIn(Constants.SHRUNK_INFOBAR, print_writers, config); // Push infobar
+			if(infobar.getInfobar_status() != null) {
+				if(!infobar.getInfobar_status().equalsIgnoreCase(Constants.FORCED + Constants.SHRUNK_INFOBAR)) {
+					T20_MumbaiAnimateIn("ArrowRight,", print_writers, config);
+				}
+			}
 			this.whichGraphicOnScreen = "";
 			TimeUnit.MILLISECONDS.sleep(2500);
 			processAnimation(Constants.FRONT, print_writers, "anim_LowerThird", "SHOW 0.0");
@@ -8609,7 +8693,11 @@ public class Animation
 			processAnimation(Constants.FRONT, print_writers, "anim_LT_Ident", "CONTINUE");
 			this.whichGraphicOnScreen = "";
 			TimeUnit.MILLISECONDS.sleep(2500);
-			T20_MumbaiAnimateIn("ArrowUp,", print_writers, config); // Push infobar
+			
+			if(!this.infobar.isInfobar_pushed()) {
+				T20_MumbaiAnimateIn("ArrowUp,", print_writers, config); // Push infobar
+			}
+			
 			processAnimation(Constants.FRONT, print_writers, "anim_LT_Ident", "SHOW 0.0");
 			break;
 			
@@ -8633,7 +8721,9 @@ public class Animation
 			processAnimation(Constants.FRONT, print_writers, "anim_Lt_BattingCard$InOut", "CONTINUE");
 			this.whichGraphicOnScreen = "";
 			TimeUnit.MILLISECONDS.sleep(500);
-			T20_MumbaiAnimateIn("ArrowUp,", print_writers, config); // Push infobar
+			if(!this.infobar.isInfobar_pushed()) {
+				T20_MumbaiAnimateIn("ArrowUp,", print_writers, config); // Push infobar
+			}
 			processAnimation(Constants.FRONT, print_writers, "anim_Lt_BattingCard", "SHOW 0.0");
 			break;
 			
@@ -13691,7 +13781,7 @@ public class Animation
 						previewCommands = "anim_Lt_BattingCard$InOut$In 2.080";
 						break;
 					case "Shift_I":
-						previewCommands = "anim_Infobar$Push 0.500 ImpactPlayer$IN-OUT 2.460";
+						previewCommands = "anim_Infobar$Push 0.500 anim_Impact$In_Out$In 2.000";
 						break;
 					case "Control_F6": case "F6": case "Shift_F6":
 						previewCommands = "anim_Infobar$Push 0.500 anim_LT_HowOut 2.080 anim_LT_HowOut$InOut 2.080 anim_LT_HowOut$InOut$In 2.080";

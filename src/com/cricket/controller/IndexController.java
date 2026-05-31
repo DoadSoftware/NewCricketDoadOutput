@@ -290,8 +290,6 @@ public class IndexController
 	    // COMMON VARIABLES
 	    boolean isArchive = select_type != null && !select_type.trim().isEmpty() && !select_type.equals(",");
 	    String seriesType = isArchive ? select_type.split(",", -1)[0]: "";
-	    basePath = isArchive ? CricketUtil.CRICKET_ARCHIVE_DIRECTORY + CricketUtil.ARCHIVE_MATCHES_DIRECTORY 
-				+ seriesType + "/" : CricketUtil.CRICKET_DIRECTORY;
 	    
 	    if (Category.equalsIgnoreCase("men")) {
 	    	basePath = "C:\\Sports\\CricketMen\\";
@@ -299,6 +297,10 @@ public class IndexController
 	    } else if (Category.equalsIgnoreCase("women")) {
 	    	basePath = "C:\\Sports\\CricketWomen\\";
 	    	DatabaseContextHolder.setDb("WOMEN");
+	    }else {
+	    	basePath = isArchive ? CricketUtil.CRICKET_ARCHIVE_DIRECTORY + CricketUtil.ARCHIVE_MATCHES_DIRECTORY 
+					+ seriesType + "/" : CricketUtil.CRICKET_DIRECTORY;
+	    	DatabaseContextHolder.setDb("LOCAL");
 	    }
 	    
 	    speedFile = new File(basePath + "Speed\\SPEED.txt");
