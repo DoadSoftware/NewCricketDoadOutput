@@ -1275,6 +1275,13 @@ public class BugsAndMiniGfx
 
 	    switch (whatToProcess.split(",")[0]) {
 		case "Control_4":
+			
+			CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Sponsor_Pop$Side" + WhichSide +
+					"$Select*FUNCTION*Omo*vis_con SET 1\0", print_writers);
+        	
+        	CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Sponsor_Pop$Side" + WhichSide +
+					"$Select$2$img_Sponsor*TEXTURE*IMAGE SET " + Constants.SPONSERS_PATH + "EaseMyTrip"  + "\0", print_writers);
+        	
 			CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$PopUps$Select*FUNCTION*Omo*vis_con SET 0\0", print_writers);
 			CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$PopUps$Tournament_Sixes$band"
 					+ "$txt_Header*GEOM*TEXT SET TOURNAMENT FOURS\0", print_writers);
@@ -1300,6 +1307,13 @@ public class BugsAndMiniGfx
 			
 			break;	
 		case "6":
+			
+			CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Sponsor_Pop$Side" + WhichSide +
+					"$Select*FUNCTION*Omo*vis_con SET 1\0", print_writers);
+        	
+        	CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Sponsor_Pop$Side" + WhichSide +
+					"$Select$2$img_Sponsor*TEXTURE*IMAGE SET " + Constants.SPONSERS_PATH + "Chirayu"  + "\0", print_writers);
+        	
 			CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$PopUps$Select*FUNCTION*Omo*vis_con SET 0\0", print_writers);
 			CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$PopUps$Tournament_Sixes"
 					+ "$txt_Header*GEOM*TEXT SET TOURNAMENT SIXES\0", print_writers);
@@ -1518,6 +1532,12 @@ public class BugsAndMiniGfx
 				break;
 	        case "Control_y":
 	            
+	        	CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Sponsor_Bug$Side" + WhichSide +
+						"$Select*FUNCTION*Omo*vis_con SET 1\0", print_writers);
+	        	
+	        	CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Sponsor_Bug$Side" + WhichSide +
+						"$Select$2$img_Sponsor*TEXTURE*IMAGE SET " + Constants.SPONSERS_PATH + "Armour"  + "\0", print_writers);
+	        	
 	            CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Bugs_All$Right_Section$img_Base1*TEXTURE*IMAGE SET "
 	                    + Constants.VIDARBHA_BASE1 + inning.getBatting_team().getTeamBadge() + "\0", print_writers);
 	            CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Bugs_All$HeaderBand$img_Base2*TEXTURE*IMAGE SET "

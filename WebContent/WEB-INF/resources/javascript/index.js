@@ -2099,15 +2099,15 @@ function addItemsToList(whatToProcess,dataToProcess)
 				select = document.createElement('select');
 				select.id = 'selectPhotoImpact';
 				select.name = select.id;
-	
-				option = document.createElement('option');
-				option.value = 'WITH_PHOTO';
-				option.text = 'WITH PHOTO' ;
-				select.appendChild(option);
 				
 				option = document.createElement('option');
 				option.value = 'WITHOUT_PHOTO';
 				option.text = 'WITHOUT PHOTO' ;
+				select.appendChild(option);
+	
+				option = document.createElement('option');
+				option.value = 'WITH_PHOTO';
+				option.text = 'WITH PHOTO' ;
 				select.appendChild(option);
 				
 				select.setAttribute('onchange',"setDropdownOptionToSelectOptionArray(this, 3)");
@@ -3432,69 +3432,74 @@ function addItemsToList(whatToProcess,dataToProcess)
 						option.value = 'THIS_OVER';
 						option.text = 'This Over';
 						select.appendChild(option);
-					}
-					
-					option = document.createElement('option');
-					option.value = 'BOUNDARY';
-					option.text = 'Inning Boundaries';
-					select.appendChild(option);
-					
-					option = document.createElement('option');
-					option.value = 'REVIEW';
-					option.text = 'Review';
-					select.appendChild(option);
+				}
 				
-					option = document.createElement('option');
-					option.value = 'BALLS_SINCE_LAST_BOUNDARY';
-					option.text = 'Ball Since Last Boundary';
-					select.appendChild(option);	
-					
-					option = document.createElement('option');
-					option.value = 'LAST_X_BALLS';
-					option.text = 'Last x Balls';
-					select.appendChild(option);
-					
-					option = document.createElement('option');
-					option.value = 'AT_THIS_STAGE';
-					option.text = 'At This Stage';
-					select.appendChild(option);
-					
-					option = document.createElement('option');
-					option.value = 'EXTRAS';
-					option.text = 'Extras';
-					select.appendChild(option);
-		
-					option = document.createElement('option');
-					option.value = 'LAST_WICKET';
-					option.text = 'Last Wicket';
-					select.appendChild(option);
-					
-					session_match.match.inning.forEach(function(inn,index,arr){
-						if(inn.isCurrentInning == 'YES'){
-							if(inn.inningNumber == 1){
-								
-								option = document.createElement('option');
-								option.value = 'PROJECTED';
-								option.text = 'Projected Score';
-								select.appendChild(option);
-								
-							}
-							else{
-								/*option = document.createElement('option');
-								option.value = 'TARGET';
-								option.text = 'Target';
-								select.appendChild(option);*/
-								
-								option = document.createElement('option');
-								option.value = 'EQUATION';
-								option.text = 'Equation';
-								select.appendChild(option);
-								
-								option = document.createElement('option');
-								option.value = 'RESULT';
-								option.text = 'Result';
-								select.appendChild(option);
-							}
+				option = document.createElement('option');
+				option.value = 'BOUNDARY';
+				option.text = 'Inning Boundaries';
+				select.appendChild(option);
+				
+				option = document.createElement('option');
+				option.value = 'REVIEW';
+				option.text = 'Review';
+				select.appendChild(option);
+			
+				option = document.createElement('option');
+				option.value = 'BALLS_SINCE_LAST_BOUNDARY';
+				option.text = 'Ball Since Last Boundary';
+				select.appendChild(option);	
+				
+				option = document.createElement('option');
+				option.value = 'LAST_X_BALLS';
+				option.text = 'Last x Balls';
+				select.appendChild(option);
+				
+				option = document.createElement('option');
+				option.value = 'AT_THIS_STAGE';
+				option.text = 'At This Stage';
+				select.appendChild(option);
+				
+				option = document.createElement('option');
+				option.value = 'EXTRAS';
+				option.text = 'Extras';
+				select.appendChild(option);
+	
+				option = document.createElement('option');
+				option.value = 'LAST_WICKET';
+				option.text = 'Last Wicket';
+				select.appendChild(option);
+				
+				session_match.match.inning.forEach(function(inn,index,arr){
+					if(inn.isCurrentInning == 'YES'){
+						if(inn.inningNumber == 1){
+							
+							option = document.createElement('option');
+							option.value = 'PROJECTED';
+							option.text = 'Projected Score';
+							select.appendChild(option);
+							
+						}
+						else{
+							/*option = document.createElement('option');
+							option.value = 'TARGET';
+							option.text = 'Target';
+							select.appendChild(option);*/
+							
+							option = document.createElement('option');
+							option.value = 'EQUATION';
+							option.text = 'Equation';
+							select.appendChild(option);
+							
+							option = document.createElement('option');
+							option.value = 'RESULT';
+							option.text = 'Result';
+							select.appendChild(option);
+							
+							option = document.createElement('option');
+							option.value = 'DLS_PAR_SCORE';
+							option.text = 'D/L Par Score';
+							select.appendChild(option);
+						}
 						}
 					});
 					break;

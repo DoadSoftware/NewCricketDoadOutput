@@ -40,6 +40,7 @@ public class Constants
 	public final static String TEXT_PATH = "IMAGE*/Default/Essentials/Text";
 	
 	public final static String ICONS_PATH = "IMAGE*/Default/Essentials/Icons/";
+	public final static String SPONSERS_PATH = "IMAGE*/Default/Essentials/Sponsors/";
 	public final static String ISPL_PHOTO_PATH = "C:\\\\Images\\\\ISPL\\\\PHOTOS\\";
 	public final static String Local_ISPL_PHOTOS_PATH = "\\\\c\\\\Images\\\\ISPL\\\\PHOTOS\\\\";
 

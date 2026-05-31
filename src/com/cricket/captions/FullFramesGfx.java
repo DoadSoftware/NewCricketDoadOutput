@@ -17926,6 +17926,14 @@ public class FullFramesGfx
 	    int omo_num = 0, Top_Score = 50, impactOutPlayerId = 0;
 	    double Mult = 0, ScaleFac1 = 0, ScaleFac2 = 0;
 	    String Left_Batsman = "", Right_Batsman = "";
+	    
+	    
+	    CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$Sponsors$Side" + WhichSide 
+				+ "$Select*FUNCTION*Omo*vis_con SET 0 \0", print_writers);
+		
+		CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$Sponsors$Side" + WhichSide +
+				"$Select$1$img_Sponsor*TEXTURE*IMAGE SET " + Constants.SPONSERS_PATH + "Pagariya"  + "\0", print_writers);
+		
 
 	    omo = 5;
 	    Mult = 55;
@@ -21549,6 +21557,14 @@ public class FullFramesGfx
 			return LegendScoreCardBody(WhichSide, whatToProcess, matchAllData, WhichInning);
 			
 		case Constants.VIDARBHA:
+			
+			CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$Sponsors$Side" + WhichSide 
+					+ "$Select*FUNCTION*Omo*vis_con SET 0 \0", print_writers);
+			
+			CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$Sponsors$Side" + WhichSide +
+					"$Select$1$img_Sponsor*TEXTURE*IMAGE SET " + Constants.SPONSERS_PATH + "Toyota"  + "\0", print_writers);
+			
+			
 			CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$AllGraphics$Side" + WhichSide 
 					+ "$Select_Graphics*FUNCTION*Omo*vis_con SET 0 \0", print_writers);
 			
@@ -24231,6 +24247,12 @@ public class FullFramesGfx
 	public String BowlingCardBody(int WhichSide, String whatToProcess, MatchAllData matchAllData, int WhichInning) throws InterruptedException {
 		switch (config.getBroadcaster().toUpperCase()) {
 		case Constants.VIDARBHA:
+			
+			CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$Sponsors$Side" + WhichSide 
+					+ "$Select*FUNCTION*Omo*vis_con SET 0 \0", print_writers);
+			
+			CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$Sponsors$Side" + WhichSide +
+					"$Select$1$img_Sponsor*TEXTURE*IMAGE SET " + Constants.SPONSERS_PATH + "Swiggy"  + "\0", print_writers);
 			
 			CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$AllGraphics$Side" + WhichSide 
 					+ "$Select_Graphics*FUNCTION*Omo*vis_con SET 1 \0", print_writers);

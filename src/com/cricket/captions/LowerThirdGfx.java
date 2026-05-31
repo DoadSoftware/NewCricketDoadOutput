@@ -19686,6 +19686,12 @@ public class LowerThirdGfx
 	            break;
 
 	        case "Shift_F3":
+//	        	CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Sponsor_LT$Side" + WhichSide +
+//						"$Select*FUNCTION*Omo*vis_con SET 0\0", print_writers);
+	        	
+//	        	CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Sponsor_LT$Side" + WhichSide +
+//						"$Select$1$img_Sponsor*TEXTURE*IMAGE SET " + Constants.SPONSERS_PATH + "NewEra"  + "\0", print_writers);
+	        	
 	            CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$All_LowerThirds$MoveForShrink$SubLines$Side" + WhichSide +
 	                    "$Select_Subline$2$Data$Title*ACTIVE SET 0 \0", print_writers);
 	            CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$All_LowerThirds$MoveForShrink$SubLines$Side" + WhichSide +
