@@ -14189,10 +14189,13 @@ public class Animation
 						previewCommand = "anim_TossBug 0.500 anim_TossBug$InOut 0.500 anim_TossBug$InOut$In 0.500";
 						break;
 					case "Control_Shift_F3":
-						previewCommand = "anim_TargetBug 1.300 anim_TargetBug$In_Out 1.300 anim_TargetBug$In_Out$In 1.300";
+						previewCommand = "anim_Infobar$Shrink 0.500 anim_TargetBug 1.300 anim_TargetBug$In_Out 1.300 anim_TargetBug$In_Out$In 1.300";
+						break;
+					case "Shift_C":
+						previewCommand = "anim_SixDistance 1.480 anim_SixDistance$In_Out 1.480 anim_SixDistance$In_Out$In 1.480";
 						break;
 					case "h": case "Control_y": case "Control_k": case "Shift_F4": case "Shift_O": case "y": case "g": case "k":
-					case "Shift_C": case "Control_Shift_R": case "Control_Shift_J": case "r":
+					case "Control_Shift_R": case "Control_Shift_J": case "r":
 						previewCommand = "Anim_Bugs 0.500 Anim_Bugs$In_Out 0.500 Anim_Bugs$In_Out$In 0.500";
 						break;
 					case "Control_Shift_U": case "Control_Shift_V":
