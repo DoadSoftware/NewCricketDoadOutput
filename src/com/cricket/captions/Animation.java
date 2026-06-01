@@ -9068,6 +9068,7 @@ public class Animation
 		case "r":
 			processAnimation(Constants.FRONT, print_writers, "DRS_Change", "START");
 			break;
+			
 		case "F8": case "Alt_F8": case "F10": case "Control_F9":case "Control_F5":
 			if(audioenabled.equalsIgnoreCase("TRUE")) {
 				processAnimation(Constants.FRONT, print_writers, "sfx_Change", "START");
@@ -9315,9 +9316,11 @@ public class Animation
 			processAnimation(Constants.FRONT, print_writers, "DRS_Change", "SHOW 0.0");
 			this.whichGraphicOnScreen = whatToProcess;
 			break;
+			
 		case "F8": case "Alt_F8": case "F10": case "Control_F9":case "Control_F5":
 			processAnimation(Constants.FRONT, print_writers, "Change_LT_NameSuper", "SHOW 0.0");
-			break;	
+			break;
+			
 		case "F5":case "F9":case "l":case "Shift_F5":case "Shift_F9":case "Control_h":case "Alt_F12":case "F7": case "F11":
 		case "Control_a": case "u": case "q": case "Control_q": case "Shift_F3": case "Control_F3": case "Shift_B":
 		case "Alt_Shift_F3":case "Alt_Shift_O":case "d": case "e": case "Control_i":
@@ -14551,8 +14554,11 @@ public class Animation
 					case "Shift_C":
 						previewCommand = "anim_SixDistance 1.480 anim_SixDistance$In_Out 1.480 anim_SixDistance$In_Out$In 1.480";
 						break;
+					case "r":
+						previewCommand = "Anim_DRS_Bug$In_Out$In 0.500";
+						break;
 					case "h": case "Control_y": case "Control_k": case "Shift_F4": case "Shift_O": case "y": case "g": case "k":
-					case "Control_Shift_R": case "Control_Shift_J": case "r":
+					case "Control_Shift_R": case "Control_Shift_J":
 						previewCommand = "Anim_Bugs 0.500 Anim_Bugs$In_Out 0.500 Anim_Bugs$In_Out$In 0.500";
 						break;
 					case "Control_Shift_U": case "Control_Shift_V":
@@ -14579,7 +14585,7 @@ public class Animation
 				}else if(whichside == 2) {
 					switch(whatToProcess.split(",")[0]) {
 					case "r":
-						previewCommand = "SrinkInfobar 1.180 TeamBug 1.880 BtmChangeon 0.720";
+						previewCommand = "DRS_Change 0.500";
 						break;
 					case "Control_Shift_U": case "Control_Shift_V": case "Control_Shift_U_change_on": case "Control_Shift_V_change_on":
 						previewCommand = "anim_Infobar$Shrink 0.500 Change_PopUp 0.800 Change_PopUp$ColouredBase 0.800 Change_PopUp$Image 0.800 Change_PopUp$Name 0.800 Change_PopUp$Data 0.800";

@@ -25828,9 +25828,9 @@ public class FullFramesGfx
 					"$Title$img_Text1*TEXTURE*IMAGE SET " + Constants.T20_MUMBAI_Text1 + inning.getBatting_team().getTeamBadge() + "\0", print_writers);
 			
 			CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_FullFrames$All_Graphics$Side" + WhichSide + "$InningsSummary$Team1" + 
-					"$Title$Scores$txt_Scores*GEOM*TEXT SET " + CricketFunctions.getTeamScore(inning,"-", false) + "\0", print_writers);
+					"$Title$txt_Scores*GEOM*TEXT SET " + CricketFunctions.getTeamScore(inning,"-", false) + "\0", print_writers);
 			CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_FullFrames$All_Graphics$Side" + WhichSide + "$InningsSummary$Team1" + 
-					"$Title$Scores$txt_OversHead*GEOM*TEXT SET OVERS\0", print_writers);
+					"$Title$Overs$txt_OversHead*GEOM*TEXT SET OVERS\0", print_writers);
 			
 			CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_FullFrames$All_Graphics$Side" + WhichSide + "$InningsSummary$Team1" + 
 					"$Title$RunRate$txt_RunRateHead*GEOM*TEXT SET RUN RATE:\0", print_writers);
@@ -25847,7 +25847,7 @@ public class FullFramesGfx
 			}
 			
 			CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_FullFrames$All_Graphics$Side" + WhichSide + "$InningsSummary$Team1" + 
-					"$Title$Scores$txt_OversValue*GEOM*TEXT SET " + CricketFunctions.OverBalls(inning.getTotalOvers(), inning.getTotalBalls()) + dls_data + "\0", print_writers);
+					"$Title$txt_OversValue*GEOM*TEXT SET " + CricketFunctions.OverBalls(inning.getTotalOvers(), inning.getTotalBalls()) + dls_data + "\0", print_writers);
 			rowId = 0;
 			if(inning.getBattingCard() != null) {
 				Collections.sort(inning.getBattingCard(),new CricketFunctions.BatsmenScoreComparator());
@@ -25983,8 +25983,6 @@ public class FullFramesGfx
 								"$Row" + rowId + "$Bowler$txt_Name*GEOM*TEXT SET " + boc.getPlayer().getTicker_name() + "\0", print_writers);
 						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_FullFrames$All_Graphics$Side" + WhichSide + "$InningsSummary$Team1" + 
 								"$Row" + rowId + "$Bowler$Data$Score$txt_Runs*GEOM*TEXT SET " + boc.getWickets() + "-" + boc.getRuns() + "\0", print_writers);
-						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_FullFrames$All_Graphics$Side" + WhichSide + "$InningsSummary$Team1" + 
-								"$Row" + rowId + "$Bowler$Data$Score$txt_NotOutStar*GEOM*TEXT SET \0", print_writers);
 						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_FullFrames$All_Graphics$Side" + WhichSide + "$InningsSummary$Team1" + 
 								"$Row" + rowId + "$Bowler$Data$Score$txt_Balls*GEOM*TEXT SET " + CricketFunctions.OverBalls(boc.getOvers(),boc.getBalls()) + "\0", print_writers);
 						
