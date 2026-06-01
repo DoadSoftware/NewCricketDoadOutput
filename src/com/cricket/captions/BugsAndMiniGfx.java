@@ -704,6 +704,8 @@ public class BugsAndMiniGfx
 			if(team == null) {
 				return "bugsDB: Flag in database is returning NULL";
 			}
+		}else {
+			 homecolor = "TLogo";
 		}
 		
 		if(PopulateBugBody(WhichSide, whatToProcess,matchAllData) == Constants.OK) {
@@ -1953,26 +1955,34 @@ public class BugsAndMiniGfx
 	            CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Bugs_All$MainTxt_Grp$Side" + WhichSide + "$Data$img_text1$txt_Sub*"
 	                    + "TEXTURE*IMAGE SET " + Constants.VIDARBHA_TEXT1 + homecolor + "\0", print_writers);
 
-	            if (bug.getSponsor() != null) {
-	                if (config.getSecondaryIpAddress() != null) {
-	                    CricketFunctions.DoadWriteCommandToSelectedViz(2, "-1 RENDERER*FRONT_LAYER*TREE*$Bugs_All$SubText$Side" + WhichSide
-	                            + "$img_Sponsor*ACTIVE SET 0 \0", print_writers);
-	                }
-	                CricketFunctions.DoadWriteCommandToSelectedViz(1, "-1 RENDERER*FRONT_LAYER*TREE*$Bugs_All$SubText$Side" + WhichSide
-	                        + "$img_Sponsor*ACTIVE SET 1 \0", print_writers);
-	            } else {
-	                CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Bugs_All$SubText$Side" + WhichSide
-	                        + "$img_Sponsor*ACTIVE SET 0 \0", print_writers);
-	            }
+//	            if (bug.getSponsor() != null) {
+//	                if (config.getSecondaryIpAddress() != null) {
+//	                    CricketFunctions.DoadWriteCommandToSelectedViz(2, "-1 RENDERER*FRONT_LAYER*TREE*$Bugs_All$SubText$Side" + WhichSide
+//	                            + "$img_Sponsor*ACTIVE SET 0 \0", print_writers);
+//	                }
+//	                CricketFunctions.DoadWriteCommandToSelectedViz(1, "-1 RENDERER*FRONT_LAYER*TREE*$Bugs_All$SubText$Side" + WhichSide
+//	                        + "$img_Sponsor*ACTIVE SET 1 \0", print_writers);
+//	            } else {
+//	                CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Bugs_All$SubText$Side" + WhichSide
+//	                        + "$img_Sponsor*ACTIVE SET 0 \0", print_writers);
+//	            }
 
 	            if (bug.getFlag() != null) {
 	                CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Bugs_All$MainTxt_Grp$Side" + WhichSide
-	                        + "$img_Logo*ACTIVE SET 1 \0", print_writers);
-	                CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Bugs_All$MainTxt_Grp$Side" + WhichSide
 	                        + "$img_Logo*TEXTURE*IMAGE SET " + Constants.VIDARBHA_LOGO_PATH + homecolor + "\0", print_writers);
 	            } else {
-	                CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Bugs_All$MainTxt_Grp$Side" + WhichSide
-	                        + "$img_Flag*ACTIVE SET 0 \0", print_writers);
+	            	 CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Bugs_All$Right_Section$img_Base1*TEXTURE*IMAGE SET "
+	 	                    + Constants.VIDARBHA_BASE1 + "TLogo" + "\0", print_writers);
+	 	            CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Bugs_All$HeaderBand$img_Base2*TEXTURE*IMAGE SET "
+	 	                    + Constants.VIDARBHA_BASE2 + "TLogo" + "\0", print_writers);
+
+	 	            CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Bugs_All$MainTxt_Grp$Side" + WhichSide + "$Data$img_text1*TEXTURE*IMAGE SET "
+	 	                    + Constants.VIDARBHA_TEXT1 + "TLogo" + "\0", print_writers);
+	 	            CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Bugs_All$MainTxt_Grp$Side" + WhichSide + "$Data$img_text1$txt_Sub*"
+	 	                    + "TEXTURE*IMAGE SET " + Constants.VIDARBHA_TEXT1 + "TLogo" + "\0", print_writers);
+	            	
+	            	 CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Bugs_All$MainTxt_Grp$Side" + WhichSide
+		                        + "$img_Logo*TEXTURE*IMAGE SET " + Constants.VIDARBHA_LOGO_PATH + "TLogo" + "\0", print_writers);
 	            }
 
 	            if (bug.getText4() != null) {

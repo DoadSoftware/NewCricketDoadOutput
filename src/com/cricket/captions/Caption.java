@@ -1939,8 +1939,6 @@ public class Caption
 				case Constants.ICC_U19_2023: case Constants.NPL: case Constants.ISPL: case Constants.LEGENDS: case Constants.MPL:
 				case Constants.APL: case Constants.VIDARBHA:
 					if(config.getWhichInfobar().equalsIgnoreCase("LOF_INFOBAR")) {
-						
-						System.out.println("IF");
 						if(this_lofInfobarGfx.infobar.getFull_section() != null && !this_lofInfobarGfx.infobar.getFull_section().isEmpty()) {
 							if(!this_lofInfobarGfx.infobar.getFull_section().equalsIgnoreCase("COMMENTATORS")) {
 								whichSide = 2;
@@ -1956,16 +1954,30 @@ public class Caption
 						status = this_lofInfobarGfx.populateFullSection(print_writers, matchAllData, whichSide);
 						
 					}else {
-						if(this_infobarGfx.infobar.getMiddle_section() != null && !this_infobarGfx.infobar.getMiddle_section().isEmpty()) {
-							if(!this_infobarGfx.infobar.getMiddle_section().equalsIgnoreCase("COMMENTATORS")) {
-								whichSide = 1;
+						switch (config.getBroadcaster().toUpperCase()) {
+						case Constants.VIDARBHA:
+							if(this_infobarGfx.infobar.getMiddle_section() != null && !this_infobarGfx.infobar.getMiddle_section().isEmpty()) {
+								if(!this_infobarGfx.infobar.getMiddle_section().equalsIgnoreCase("COMMENTATORS")) {
+									whichSide = 1;
+								}else {
+									whichSide = 2;
+								}
 							}else {
-								whichSide = 2;
+								whichSide = 1;
 							}
-						}else {
-							whichSide = 1;
+							break;
+						default:
+							if(this_infobarGfx.infobar.getMiddle_section() != null && !this_infobarGfx.infobar.getMiddle_section().isEmpty()) {
+								if(!this_infobarGfx.infobar.getMiddle_section().equalsIgnoreCase("BATSMAN")) {
+									whichSide = 1;
+								}else {
+									whichSide = 2;
+								}
+							}else {
+								whichSide = 1;
+							}
+							break;
 						}
-						
 						System.out.println(this_infobarGfx.infobar.getMiddle_section());
 						this_infobarGfx.infobar.setMiddle_section("COMMENTATORS");
 						this_infobarGfx.Comms_Name = whatToProcess;

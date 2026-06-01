@@ -2633,16 +2633,16 @@ public class Animation
 			AnimateIn(Constants.SHRUNK_INFOBAR + ",", print_writers, config); // Shrink infobar
 			TimeUnit.MILLISECONDS.sleep(1000);
 			
-//			switch (whatToProcess.split(",")[0]) {
-//			case "Shift_F3":
-//				processAnimation(Constants.FRONT, print_writers, "Sponsor_LT$In_Out", "START");
-//				break;
-//				default:
-//				processAnimation(Constants.FRONT, print_writers, "Sponsor_LT$In_Out", "SHOW 0.0");
-//				break;
-//					
-//			}
-			processAnimation(Constants.FRONT, print_writers, "Sponsor_LT$In_Out", "SHOW 0.0");
+			switch (whatToProcess.split(",")[0]) {
+			case "Shift_F3":
+				processAnimation(Constants.FRONT, print_writers, "Sponsor_LT$In_Out", "START");
+				break;
+				default:
+				processAnimation(Constants.FRONT, print_writers, "Sponsor_LT", "SHOW 0.0");
+				break;
+					
+			}
+		//	processAnimation(Constants.FRONT, print_writers, "Sponsor_LT$In_Out", "SHOW 0.0");
 			processAnimation(Constants.FRONT, print_writers, "anim_Lower_Third", "START");
 			processAnimation(Constants.FRONT, print_writers, "Anim_LtChange$Lt_X_Position", "START");
 			processAnimation(Constants.FRONT, print_writers, "anim_Lower_Third$Top_Header", "SHOW 0.0");
@@ -3084,23 +3084,23 @@ public class Animation
 			case "Shift_R": case "Shift_U": case "Alt_w": case "Control_j": case "Alt_i": case "Alt_j": case "b": case "Control_i": 
 			case "Alt_Shift_D":case "Alt_Shift_E":case "Alt_Shift_F":case "Alt_Shift_G":case "Alt_Shift_H":
 			case "Control_u": case "Shift_G": case "Shift_W":case "Control_Shift_X": 
-//				 switch (whatToProcess.split(",")[0]) {
-//					case "Shift_F3":
-//						processAnimation(Constants.FRONT, print_writers, "Sponsor_LT$In_Out", "CONTINUE");
-//						break;
-//						default:
-//						processAnimation(Constants.FRONT, print_writers, "Sponsor_LT$In_Out", "SHOW 0.0");
-//						break;
-//							
-//					}	
-				processAnimation(Constants.FRONT, print_writers, "Sponsor_LT$In_Out", "SHOW 0.0");
+				 switch (whatToProcess.split(",")[0]) {
+					case "Shift_F3":
+						processAnimation(Constants.FRONT, print_writers, "Sponsor_LT$In_Out", "CONTINUE");
+						break;
+						default:
+						processAnimation(Constants.FRONT, print_writers, "Sponsor_LT$In_Out", "SHOW 0.0");
+						break;
+							
+					}	
+				
 				processAnimation(Constants.FRONT, print_writers, "anim_Lower_Third", "CONTINUE");
 				processAnimation(Constants.FRONT, print_writers, "Anim_LtChange$Lt_X_Position", "CONTINUE REVERSE");
 				processAnimation(Constants.FRONT, print_writers, "anim_Lower_Third$Top_Header", "SHOW 2.680");
 				TimeUnit.MILLISECONDS.sleep(1000);
 				AnimateIn(Constants.SHRUNK_INFOBAR + ",", print_writers, config); // Restore infobar
 				this.whichGraphicOnScreen = "";
-				processAnimation(Constants.FRONT, print_writers, "Sponsor_LT$In_Out", "SHOW 0.0");
+				processAnimation(Constants.FRONT, print_writers, "Sponsor_LT", "SHOW 0.0");
 				break;
 			 case "Alt_F8": case "F8": case "F10": case "j": case "Alt_a": case "Alt_s":
 				 processAnimation(Constants.FRONT, print_writers, "anim_Lower_Third", "CONTINUE");

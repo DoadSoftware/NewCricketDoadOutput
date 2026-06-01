@@ -8326,6 +8326,31 @@ public class LowerThirdGfx
 			}
 			
 			switch (config.getBroadcaster().toUpperCase()) {
+			case Constants.LEGENDS:
+			    switch (WhichProfile.toUpperCase()) {
+			    case "BPL_CAREER":
+			         statsType = statsTypes.stream()
+			            .filter(st -> st.getStats_short_name().equalsIgnoreCase("BPL_CAREER"))
+			            .findAny().orElse(null);
+			        if (statsType == null) {
+			            return "InfoBarPlayerProfile: Stats Type not found for profile [" + WhichProfile + "]";
+			        }
+			        
+			        stat = statistics.stream()
+			            .filter(st -> st.getPlayer_id() == FirstPlayerId && statsType.getStats_id() == st.getStats_type_id())
+			            .findAny().orElse(null);
+			        if (stat == null) {
+			            return "InfoBarPlayerProfile: Stats not found for Player Id [" + FirstPlayerId + "]";
+			        }
+			        
+			        statsType = statsTypes.stream().filter(st -> st.getStats_short_name().equalsIgnoreCase("DT20")).findAny().orElse(null);
+					stat.setStats_type(statsType);
+			        stat = CricketFunctions.updateTournamentWithH2h(stat, headToHead, matchAllData, CricketUtil.FULL);
+			        stat = CricketFunctions.updateStatisticsWithMatchData(stat, matchAllData, CricketUtil.FULL);
+			        break;
+
+			    }
+			    break;
 			case Constants.VIDARBHA:
 			    switch (WhichProfile.toUpperCase()) {
 			    case "VIDARBHA_CAREER":
@@ -8628,6 +8653,8 @@ public class LowerThirdGfx
 						short_name =  "APL CAREER";
 					}else if(WhichProfile.equalsIgnoreCase("VIDARBHA_CAREER")) {
 						short_name =  "VPL T20 CAREER";
+					}else if(WhichProfile.equalsIgnoreCase("BPL_CAREER")) {
+						short_name =  "BPL CAREER";
 					}else if(WhichProfile.equalsIgnoreCase("NPL S1")) {
 						short_name =  "NPL SEASON 1";
 					}else if(WhichProfile.equalsIgnoreCase("IPL 2026")) {
@@ -8818,8 +8845,11 @@ public class LowerThirdGfx
 							new String[] {"145","260","369","500","607","684"});
 					break;
 				case Constants.LEGENDS:
-					if(WhichProfile.equalsIgnoreCase("DT20")) {
-						short_name =  "T20 CAREER";
+					
+					if(WhichProfile.equalsIgnoreCase("BPL_CAREER")) {
+						short_name =  "BPL CAREER";
+					}else if(WhichProfile.equalsIgnoreCase("DT20")) {
+						short_name =  "T20s CAREER";
 					}else {
 						short_name = "T20I CAREER";
 					}
@@ -19679,11 +19709,11 @@ public class LowerThirdGfx
 	            break;
 
 	        case "Shift_F3":
-//	        	CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Sponsor_LT$Side" + WhichSide +
-//						"$Select*FUNCTION*Omo*vis_con SET 0\0", print_writers);
+	        	CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Sponsor_LT$Side" + WhichSide +
+						"$Select*FUNCTION*Omo*vis_con SET 0\0", print_writers);
 	        	
-//	        	CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Sponsor_LT$Side" + WhichSide +
-//						"$Select$1$img_Sponsor*TEXTURE*IMAGE SET " + Constants.SPONSERS_PATH + "NewEra"  + "\0", print_writers);
+	        	CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Sponsor_LT$Side" + WhichSide +
+						"$Select$1$img_Sponsor*TEXTURE*IMAGE SET " + Constants.SPONSERS_PATH + "Campa"  + "\0", print_writers);
 	        	
 	            CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$All_LowerThirds$MoveForShrink$SubLines$Side" + WhichSide +
 	                    "$Select_Subline$2$Data$Title*ACTIVE SET 0 \0", print_writers);

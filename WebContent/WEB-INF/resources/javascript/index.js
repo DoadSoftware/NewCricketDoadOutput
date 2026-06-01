@@ -9179,7 +9179,13 @@ function addItemsToList(whatToProcess,dataToProcess)
 						  option.value = value;
 						  option.text = text;
 						  select.appendChild(option);
+						  
+						 
 					});
+					option = document.createElement('option');
+					option.value = 'BPL_CAREER';
+					option.text = 'BPL CAREER';
+					select.appendChild(option);
 					break;
 				case 'NPL': case 'MPL': case 'APL':	case 'VIDARBHA':		
 					if($('#selected_broadcaster').val().toUpperCase()=='MPL'){
@@ -9212,8 +9218,7 @@ function addItemsToList(whatToProcess,dataToProcess)
 							option.value = 'IPL';
 							option.text = 'IPL';
 							select.appendChild(option);
-						}
-					
+					}
 					option = document.createElement('option');
 					option.value = 'DT20';
 					option.text = 'DT20';
@@ -10020,6 +10025,10 @@ function addItemsToList(whatToProcess,dataToProcess)
 						  option.text = text;
 						  select.appendChild(option);
 					});
+					option = document.createElement('option');
+					option.value = 'BPL_CAREER';
+					option.text = 'BPL CAREER';
+					select.appendChild(option);
 					break;
 				case 'NPL': case 'MPL': case 'APL': case 'VIDARBHA':
 					if($('#selected_broadcaster').val().toUpperCase()=='MPL'){

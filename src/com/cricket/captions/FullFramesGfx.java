@@ -660,7 +660,7 @@ public class FullFramesGfx
 			return "populatePlayerProfile: Player id [" + whatToProcess.split(",")[2] + "] from database is returning NULL";
 		}
 		
-		if(!WhichProfile.equalsIgnoreCase("NPL_CAREER") && !WhichProfile.equalsIgnoreCase("APL_CAREER") 
+		if(!WhichProfile.equalsIgnoreCase("NPL_CAREER") && !WhichProfile.equalsIgnoreCase("BPL_CAREER") &&  !WhichProfile.equalsIgnoreCase("APL_CAREER") 
 				&& !WhichProfile.equalsIgnoreCase("T20 MUMBAI") && !WhichProfile.equalsIgnoreCase("VIDARBHA_CAREER")) {
 			statsType = statsTypes.stream().filter(stype -> stype.getStats_short_name().equalsIgnoreCase(WhichProfile)).findAny().orElse(null);
 			if(statsTypes == null) {
@@ -674,6 +674,31 @@ public class FullFramesGfx
 		}
 		
 		switch (config.getBroadcaster().toUpperCase()) {
+		case Constants.LEGENDS:
+		    switch (WhichProfile.toUpperCase()) {
+		    case "BPL_CAREER":
+		         statsType = statsTypes.stream()
+		            .filter(st -> st.getStats_short_name().equalsIgnoreCase("BPL_CAREER"))
+		            .findAny().orElse(null);
+		        if (statsType == null) {
+		            return "InfoBarPlayerProfile: Stats Type not found for profile [" + WhichProfile + "]";
+		        }
+		        
+		        stat = statistics.stream()
+		            .filter(st -> st.getPlayer_id() == FirstPlayerId && statsType.getStats_id() == st.getStats_type_id())
+		            .findAny().orElse(null);
+		        if (stat == null) {
+		            return "InfoBarPlayerProfile: Stats not found for Player Id [" + FirstPlayerId + "]";
+		        }
+		        
+		        statsType = statsTypes.stream().filter(st -> st.getStats_short_name().equalsIgnoreCase("DT20")).findAny().orElse(null);
+				stat.setStats_type(statsType);
+		        stat = CricketFunctions.updateTournamentWithH2h(stat, headToHead, matchAllData, CricketUtil.FULL);
+		        stat = CricketFunctions.updateStatisticsWithMatchData(stat, matchAllData, CricketUtil.FULL);
+		        break;
+
+		    }
+		    break;
 		case Constants.VIDARBHA:
 		    switch (WhichProfile.toUpperCase()) {
 		    case "VIDARBHA_CAREER":
@@ -5508,12 +5533,15 @@ public class FullFramesGfx
 				
 				switch (whatToProcess) {
 				case "Control_d": case "Control_e":
-					if(statsType.getStats_short_name().equalsIgnoreCase(CricketUtil.DT20)) {
+					if(WhichProfile.equalsIgnoreCase("DT20")) {
 						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$All$SubHeader$Side" + WhichSide 
 								+ "$txt_SubHeader*GEOM*TEXT SET T20 CAREER\0", print_writers);
-					}else {
+					}else if(WhichProfile.equalsIgnoreCase("IT20")){
 						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$All$SubHeader$Side" + WhichSide 
 								+ "$txt_SubHeader*GEOM*TEXT SET T20I CAREER\0", print_writers);
+					}else if(WhichProfile.equalsIgnoreCase("BPL_CAREER")){
+						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$All$SubHeader$Side" + WhichSide 
+								+ "$txt_SubHeader*GEOM*TEXT SET BPL CAREER\0", print_writers);
 					}
 					
 					break;
@@ -5706,6 +5734,8 @@ public class FullFramesGfx
 						short_name =  "NPL CAREER";
 					}else if(WhichProfile.equalsIgnoreCase("APL_CAREER")) {
 						short_name =  "APL CAREER";
+					}else if(WhichProfile.equalsIgnoreCase("BPL_CAREER")) {
+						short_name =  "BPL CAREER";
 					}else if(WhichProfile.equalsIgnoreCase("IPL 2025")) {
 						short_name =  "IPL 2025";
 					}else if(WhichProfile.equalsIgnoreCase("NPL S1")) {
