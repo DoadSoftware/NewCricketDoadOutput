@@ -1094,7 +1094,14 @@ public class IndexController
 						this_animation.Lof_ISPL_CutBack(valueToProcess, print_writers, session_configuration);
 					}else {
 						this_animation.ChangeOn(valueToProcess, print_writers, session_configuration);
-						TimeUnit.MILLISECONDS.sleep(2000);
+						switch (valueToProcess.split(",")[0]) {
+						case "Shift_T":
+							TimeUnit.MILLISECONDS.sleep(2300);
+							break;
+						default:
+							TimeUnit.MILLISECONDS.sleep(2000);
+							break;
+						}
 						this_caption.whichSide = 1;
 						this_caption.PopulateGraphics(valueToProcess, session_match);
 						this_animation.CutBack(valueToProcess, print_writers, session_configuration);
