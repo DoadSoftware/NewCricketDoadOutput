@@ -14123,6 +14123,8 @@ public class InfobarGfx
 
 				switch (infobar.getFull_section().toUpperCase()) {
 				case "BAT_PROFILE_CAREER":
+					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_Infobar$All$Normal$Analytics$Side" + WhichSide + "$PlayerCareer$img_Icon"
+							+ "*TEXTURE*IMAGE SET " + Constants.T20_MUMBAI_ICONS + "Batsman_Lefthand" + "\0", print_writers);
 					switch(WhichProfile) {
 					case "T20_MUMBAI_BOUNDARY": case "T20_MUMBAI_BOUNDARY_CAREER":
 						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_Infobar$All$Normal$Analytics$Side" + WhichSide + "$PlayerCareer$Stats$"
@@ -14175,6 +14177,8 @@ public class InfobarGfx
 					}
 					break;
 				case "BALL_PROFILE_CAREER":
+					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_Infobar$All$Normal$Analytics$Side" + WhichSide + "$PlayerCareer$img_Icon"
+							+ "*TEXTURE*IMAGE SET " + Constants.T20_MUMBAI_ICONS + "Bowler" + "\0", print_writers);
 					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_Infobar$All$Normal$Analytics$Side" + WhichSide + "$PlayerCareer$Stats$"
 							+ "Stat_1*ACTIVE SET 1\0", print_writers);
 					
