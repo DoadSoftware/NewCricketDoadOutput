@@ -4290,15 +4290,11 @@ public class LowerThirdGfx
 								inning.getBatting_team().getTeamBadge(),null,null,new String[]{String.valueOf(summary),String.valueOf(" FROM " + 
 										CricketFunctions.GetTargetData(matchAllData).getTargetOvers())+ " OVERS",runRate},null,null);
 					}
-					if(matchAllData.getSetup().getTargetType().toUpperCase().equalsIgnoreCase("VJD")) {
-						
-						lowerThird = new LowerThird("", "TARGET","","", "", "",1,"",inning.getBatting_team().getTeamBadge(),null,null,
-								new String[]{String.valueOf(summary),String.valueOf(" FROM " + CricketFunctions.GetTargetData(matchAllData).getTargetOvers())+ " OVERS",runRate + " (VJD)"},null,null);
-						
-					}else if(matchAllData.getSetup().getTargetType().toUpperCase().equalsIgnoreCase("DLS")) {
-						
-						lowerThird = new LowerThird("", "TARGET","","", "", "",1,"",inning.getBatting_team().getTeamBadge(),null,null,
-								new String[]{String.valueOf(summary),String.valueOf(" FROM " + CricketFunctions.GetTargetData(matchAllData).getTargetOvers())+ " OVERS",runRate + " (DLS)"},null,null);
+					
+					if(matchAllData.getSetup().getTargetType() != null && !matchAllData.getSetup().getTargetType().isEmpty()) {
+						lowerThird = new LowerThird("", "TARGET","","", "", "",1,"",inning.getBatting_team().getTeamBadge(),null,null, new String[]{String.valueOf(summary),
+								String.valueOf(" FROM " + CricketFunctions.GetTargetData(matchAllData).getTargetOvers())+ " OVERS",runRate + " (" 
+										+ matchAllData.getSetup().getTargetType().toUpperCase() + ")"},null,null);
 					}
 				}else {
 					summary = "NEED " + CricketFunctions.GetTargetData(matchAllData).getTargetRuns() + " RUNS" + " TO WIN";
@@ -6568,6 +6564,7 @@ public class LowerThirdGfx
 		if(status == Constants.OK) {
 			switch (config.getBroadcaster().toUpperCase()) {
 			case Constants.BENGAL_T20: case Constants.ICC_U19_2023: case Constants.ISPL: case Constants.LEGENDS: case Constants.VIDARBHA:
+			case Constants.T20_MUMBAI:
 				HideAndShowL3rdSubStrapContainers(WhichSide);
 				break;
 			case Constants.NPL: case Constants.APL:
@@ -6665,6 +6662,7 @@ public class LowerThirdGfx
 		if(status == Constants.OK) {
 			switch (config.getBroadcaster().toUpperCase()) {
 			case Constants.BENGAL_T20: case Constants.ICC_U19_2023: case Constants.ISPL: case Constants.LEGENDS: case Constants.VIDARBHA:
+			case Constants.T20_MUMBAI:
 				HideAndShowL3rdSubStrapContainers(WhichSide);
 				break;
 			}

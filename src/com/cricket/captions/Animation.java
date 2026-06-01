@@ -8020,7 +8020,6 @@ public class Animation
 				}
 				if(this.infobar.isInfobar_on_screen() == true && !this.infobar.isInfobar_pushed()) {
 					processAnimation(Constants.FRONT, print_writers, "Disruptives$InOut", "START");
-					processAnimation(Constants.FRONT, print_writers, "DisruptivesLoop", "START");
 					this.infobar.setFreeHit_on_screen(true);
 				}
 			}else {
@@ -8048,7 +8047,6 @@ public class Animation
 			
 			if(this.infobar.isInfobar_on_screen() == true && !this.infobar.isInfobar_pushed()) {
 				processAnimation(Constants.FRONT, print_writers, "Disruptives$InOut", "START");
-				processAnimation(Constants.FRONT, print_writers, "DisruptivesLoop", "START");
 				TimeUnit.MILLISECONDS.sleep(3000);
 				processAnimation(Constants.FRONT, print_writers, "Disruptives$InOut", "CONTINUE");
 				TimeUnit.MILLISECONDS.sleep(2000);
