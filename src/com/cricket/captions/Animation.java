@@ -14552,7 +14552,7 @@ public class Animation
 						previewCommand = "anim_Infobar$Shrink 0.500 anim_TargetBug 1.300 anim_TargetBug$In_Out 1.300 anim_TargetBug$In_Out$In 1.300";
 						break;
 					case "Shift_C":
-						previewCommand = "anim_SixDistance 1.480 anim_SixDistance$In_Out 1.480 anim_SixDistance$In_Out$In 1.480";
+						previewCommand = "anim_SixDistance$In_Out$Essentials$In 0.300 anim_SixDistance$In_Out$Ball$In 1.480 anim_SixDistance$In_Out$Data$In 0.800";
 						break;
 					case "r":
 						previewCommand = "Anim_DRS_Bug$In_Out$In 0.500";
@@ -14781,9 +14781,8 @@ public class Animation
 				if(whatToProcess.contains(",")) {
 					switch(whatToProcess.split(",")[0]) {
 					case "Shift_F1": case "Shift_F2":
-						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER PREVIEW SCENE*/Default/gfx_Overlays C:/Temp/Preview.tga anim_Minis 2.000 anim_Minis$In_Out 2.000 "
-								+ "anim_Minis$In_Out$Essentials 1.780 anim_Minis$In_Out$Essentials$In 1.780 anim_Minis$In_Out$Header 2.000 anim_Minis$In_Out$Header$In 0.900 "
-								+ "anim_Minis$In_Out$Data 2.000 anim_Minis$In_Out$Data$In 1.360\0", print_writer);
+						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER PREVIEW SCENE*/Default/gfx_Overlays C:/Temp/Preview.tga anim_Minis 2.800 anim_Minis$In_Out$Essentials$In 1.780 "
+								+ "anim_Minis$In_Out$Header$In 0.900 anim_Minis$In_Out$Data$In 1.360\0", print_writer);
 						break;
 //					case "Alt_F7":
 //						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER PREVIEW SCENE*/Default/gfx_Overlays C:/Temp/Preview.tga "
