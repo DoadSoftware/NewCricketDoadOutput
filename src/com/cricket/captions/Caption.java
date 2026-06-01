@@ -1528,7 +1528,7 @@ public class Caption
 							status = Constants.OK;
 						}else {
 							switch(whatToProcess.split(",")[2]) {
-							    case "Commentators":
+							    case "Commentators": case "Commentators_English": case "Commentators_Marathi":
 							    	this_infobarGfx.Comms_Name = String.join(",", Arrays.asList(whatToProcess.split(",")).subList(whatToProcess.
 											split(",").length - 3, whatToProcess.split(",").length));
 							        break;

@@ -596,11 +596,31 @@ public class IndexController
 	    return objectMapper.writeValueAsString(session_configuration);
 	}
 	private String handleDbRead() throws Exception {
+		if (session_configuration.getCategory().equalsIgnoreCase("men")) {
+	    	basePath = "C:\\Sports\\CricketMen\\";
+	    	DatabaseContextHolder.setDb("MEN");
+	    } else if (session_configuration.getCategory().equalsIgnoreCase("women")) {
+	    	basePath = "C:\\Sports\\CricketWomen\\";
+	    	DatabaseContextHolder.setDb("WOMEN");
+	    }else {
+	    	basePath = CricketUtil.CRICKET_DIRECTORY;
+	    	DatabaseContextHolder.setDb("LOCAL");
+	    }
+		
 	    GetVariousDBData("ONLY_DB",session_configuration,headToHead);
 	    return objectMapper.writeValueAsString(session_match);
 	}
 	private String handleReReadData() throws Exception {
-		System.out.println(basePath);
+		if (session_configuration.getCategory().equalsIgnoreCase("men")) {
+	    	basePath = "C:\\Sports\\CricketMen\\";
+	    	DatabaseContextHolder.setDb("MEN");
+	    } else if (session_configuration.getCategory().equalsIgnoreCase("women")) {
+	    	basePath = "C:\\Sports\\CricketWomen\\";
+	    	DatabaseContextHolder.setDb("WOMEN");
+	    }else {
+	    	basePath = CricketUtil.CRICKET_DIRECTORY;
+	    	DatabaseContextHolder.setDb("LOCAL");
+	    }
 		
 	    HeadToHead extractedH2H = CricketFunctions.extractHeadToHead(session_match,cricketService, basePath);
 	    headToHead.setH2hPlayer(extractedH2H.getH2hPlayer());
@@ -1263,7 +1283,7 @@ public class IndexController
 		case "Alt_6":
 		 if(whatToProcess.contains(",")) {
   			switch (whatToProcess.split(",")[1]) {
-  			case "Commentators":
+  			case "Commentators": case "Commentators_English": case "Commentators_Marathi":
   				return (List<T>) session_commentator;
   			case "FreeTextDb":
   				return (List<T>) session_infoBarStats;
@@ -1452,7 +1472,7 @@ public class IndexController
 
 	    loadSessionData();
 	    if (new File(basePath + "ParScores BB.html").exists() && session_match != null) {
-	        session_dls = CricketFunctions.populateDuckWorthLewis(session_match);
+	        session_dls = CricketFunctions.populateDuckWorthLewis(session_match, basePath);
 	    }
 	    switch (typeOfUpdate) {
 	    case "ONLY_DB":
@@ -1521,7 +1541,7 @@ public class IndexController
 	}
 
 	private void updateGraphicsData(Configuration config) {
-
+		
 	    String whichInfobar = config.getWhichInfobar();
 
 	    // =====================================================

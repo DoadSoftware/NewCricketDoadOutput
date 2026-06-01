@@ -88,11 +88,11 @@ public class Animation
 			case "Control_b": case "Alt_F9": case "Shift_F8": case "Control_F10": case "Control_Shift_F2": case "Shift_D": case "Alt_Shift_F10": case "Alt_Shift_F12": 
 			case "Control_d": case "Control_e": case "Alt_Shift_F9": case "Alt_Shift_F2":
 				return Constants.FULL_FRAMER;
-			case "F5": case "F9": case "l": case "Shift_F5": case "Shift_F9": case "Control_h": case "Alt_F12": case "Control_Shift_M": 
-			case "Control_Shift_O": case "Control_Shift_L": case "F7": case "F11": case "Control_a": case "q": case "u": case "Control_q":
-			case "F8": case "Alt_F8": case "F10": case "j":case "Shift_F3": case "Control_F3": case "Shift_B": case "Control_F6": case "F6":
-			case "Alt_Shift_F3":case "Shift_F6":case "Alt_Shift_O":case "Control_F5":case "Control_F9": case "d": case "e": case "Shift_I":
-			case "Alt_F1": case "Alt_F2": case "Control_Shift_Q": case "Control_i": case "Control_shift_O":
+			case "F5": case "F9": case "l": case "Shift_F5": case "Shift_F9": case "Control_h": case "Alt_F12": case "Control_Shift_M": case "Control_Shift_O": 
+			case "Control_Shift_L": case "F7": case "F11": case "Control_a": case "q": case "u": case "Control_q": case "F8": case "Alt_F8": case "F10": case "j":
+			case "Shift_F3": case "Control_F3": case "Shift_B": case "Control_F6": case "F6": case "Alt_Shift_F3":case "Shift_F6":case "Alt_Shift_O": 
+			case "Control_F5":case "Control_F9": case "d": case "e": case "Shift_I": case "Alt_F1": case "Alt_F2": case "Control_Shift_Q": case "Control_i": 
+			case "Control_s": case "Control_f":
 				return Constants.LOWER_THIRD;
 			case "Alt_p": case "r": case "h": case "Control_y": case "Control_k": case "Shift_F4": case "Shift_O": case "y": case "g": case "k":
 			case "Shift_C": case "Control_Shift_F3": case "Control_Shift_R": case "Control_Shift_J":
@@ -8179,13 +8179,6 @@ public class Animation
 			this.whichGraphicOnScreen = whatToProcess;
 			break;
 		case "6": case "Control_4":
-			if(infobar.getInfobar_status() != null) {
-				if(!infobar.getInfobar_status().equalsIgnoreCase(Constants.FORCED+Constants.SHRUNK_INFOBAR)) {
-					AnimateIn("ArrowLeft" + ",", print_writers, config); // Shrink infobar
-					TimeUnit.MILLISECONDS.sleep(1000);
-					infobar.setInfobar_status(Constants.SHRUNK_INFOBAR);
-				}
-			}
 			if(audioenabled.equalsIgnoreCase("TRUE")) {
 				processAnimation(Constants.FRONT, print_writers, "sfx_In", "START");
 			}
@@ -8412,34 +8405,22 @@ public class Animation
 		case "Shift_T":
 			if(whichGraphicOnScreen.contains("Shift_T")){
 				footercount++;
-				if(footercount == 1) {
-					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_ImageLineup$All_Graphics$Side2$select_PlayerNumber"
-							+ "*FUNCTION*Omo*vis_con SET 1\0", print_writers);
-				}else if(footercount == 2) {
-					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_ImageLineup$All_Graphics$Side2$select_PlayerNumber"
-							+ "*FUNCTION*Omo*vis_con SET 2\0", print_writers);
-				}
 				
-				processAnimation(Constants.BACK, print_writers, "Change_Image_Lineup$Image_Lineup", "CONTINUE");
-				if(footercount == 2 && !caption.this_fullFramesGfx.containerName_2.isEmpty()) {
-//					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$Fullframers$Body$Side1$PlayingXI$Footer$Select2"
-//							+ "*FUNCTION*Omo*vis_con SET 1\0", print_writers);
-//					processAnimation(Constants.BACK, print_writers, "PlayingXI_FooterChgOn", "CONTINUE");
+				if(footercount < 3) {
+					processAnimation(Constants.BACK, print_writers, "anim_Image_Lineup$In_Out", "CONTINUE");
+					
+					if(footercount == 2 && !caption.this_fullFramesGfx.containerName_2.isEmpty()) {
+						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_ImageLineup$Footer$Side2$select_FooterType"
+								+ "*FUNCTION*Omo*vis_con SET 1\0", print_writers);
+						processAnimation(Constants.BACK, print_writers, "Change_Image_Lineup", "CONTINUE");
+						
+						TimeUnit.MILLISECONDS.sleep(1000);
+						
+						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_ImageLineup$Footer$Side1$select_FooterType"
+								+ "*FUNCTION*Omo*vis_con SET 1\0", print_writers);
+						processAnimation(Constants.BACK, print_writers, "Change_Image_Lineup", "SHOW 0.0");
+					}
 				}
-				
-				if(audioenabled.equalsIgnoreCase("TRUE")) {
-					processAnimation(Constants.BACK, print_writers, "AUDIO$sfx_FF_Change", "START");
-				}
-				TimeUnit.MILLISECONDS.sleep(2300);
-				if(footercount == 1) {
-					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_ImageLineup$All_Graphics$Side1$select_PlayerNumber"
-							+ "*FUNCTION*Omo*vis_con SET 1\0", print_writers);
-				}else if(footercount == 2) {
-					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_ImageLineup$All_Graphics$Side1$select_PlayerNumber"
-							+ "*FUNCTION*Omo*vis_con SET 2\0", print_writers);
-				}
-				
-				processAnimation(Constants.BACK, print_writers, "Change_Image_Lineup$Image_Lineup", "SHOW 0.0");
 			}else {
 				footercount = 0;
 				if(audioenabled.equalsIgnoreCase("TRUE")) {
@@ -8537,7 +8518,7 @@ public class Animation
 				processAnimation(Constants.BACK, print_writers, "anim_FullFrames$In_Out$Main$Manhattan", "START");
 				break;
 			case "p":
-				processAnimation(Constants.BACK, print_writers, "FullFramers$Main$PointsTable", "START");
+				processAnimation(Constants.BACK, print_writers, "anim_FullFrames$In_Out$Main$Standings", "START");
 				break;
 			case "Alt_Shift_J":
 				processAnimation(Constants.BACK, print_writers, "FullFramers$Main$BatManhatton", "START");
@@ -8653,13 +8634,6 @@ public class Animation
 			}
 			processAnimation(Constants.FRONT, print_writers, "anim_BoundaryCounter$In_Out", "CONTINUE");
 			this.whichGraphicOnScreen = "";
-			TimeUnit.MILLISECONDS.sleep(2500);
-			if(infobar.getInfobar_status() != null) {
-				if(!infobar.getInfobar_status().equalsIgnoreCase(Constants.FORCED + Constants.SHRUNK_INFOBAR)) {
-					T20_MumbaiAnimateIn("ArrowRight,", print_writers, config);
-				}
-			}
-			
 			TimeUnit.MILLISECONDS.sleep(500);
 			processAnimation(Constants.FRONT, print_writers, "Change", "SHOW 0.0");
 			processAnimation(Constants.FRONT, print_writers, "anim_BoundaryCounter", "SHOW 0.0");
@@ -8908,22 +8882,14 @@ public class Animation
 				processAnimation(Constants.BACK, print_writers, "AUDIO$sfx_FF_Out", "START");
 			}
 			
-			processAnimation(Constants.BACK, print_writers, "anim_Image_Lineup$In_Out$Essentials", "CONTINUE");
-			processAnimation(Constants.BACK, print_writers, "anim_Image_Lineup$In_Out$Elemnets", "CONTINUE");
-			processAnimation(Constants.BACK, print_writers, "anim_Image_Lineup$In_Out$ColourBase", "CONTINUE");
-			processAnimation(Constants.BACK, print_writers, "anim_Image_Lineup$In_Out$VerticalText", "CONTINUE");
-			processAnimation(Constants.BACK, print_writers, "anim_Image_Lineup$In_Out$Logo", "CONTINUE");
-			processAnimation(Constants.BACK, print_writers, "anim_Image_Lineup$In_Out$Header", "CONTINUE");
-			processAnimation(Constants.BACK, print_writers, "anim_Image_Lineup$In_Out$SubHeader", "CONTINUE");
-			processAnimation(Constants.BACK, print_writers, "anim_Image_Lineup$In_Out$Image_Lineup", "CONTINUE");
-			processAnimation(Constants.BACK, print_writers, "anim_Image_Lineup$In_Out$Footer", "CONTINUE");
-			processAnimation(Constants.BACK, print_writers, "anim_Image_Lineup$In_Out$Wipe", "CONTINUE");
+			processAnimation(Constants.BACK, print_writers, "anim_Image_Lineup$In_Out", "CONTINUE");
 			
 			TimeUnit.MILLISECONDS.sleep(1000);
 			T20_MumbaiAnimateIn("ArrowUp,", print_writers, config); // Push infobar
 			this.whichGraphicOnScreen = "";
 			TimeUnit.MILLISECONDS.sleep(1000);
 			processAnimation(Constants.BACK, print_writers, "anim_Image_Lineup", "SHOW 0.0");
+			processAnimation(Constants.BACK, print_writers, "Change_Image_Lineup", "SHOW 0.0");
 			break;
 			
 		case "z": case "x": case "c": case "v": case "Control_z": case "Control_x":
@@ -8994,7 +8960,7 @@ public class Animation
 				processAnimation(Constants.BACK, print_writers, "anim_FullFrames$In_Out$Main$Manhattan", "CONTINUE");
 				break;
 			case "p":
-				processAnimation(Constants.BACK, print_writers, "FullFramers$Main$PointsTable", "CONTINUE");
+				processAnimation(Constants.BACK, print_writers, "anim_FullFrames$In_Out$Main$Standings", "CONTINUE");
 				break;
 			case "Alt_Shift_J":
 				processAnimation(Constants.BACK, print_writers, "FullFramers$Main$BatManhatton", "CONTINUE");
@@ -9193,7 +9159,7 @@ public class Animation
 					processAnimation(Constants.BACK, print_writers, "Change_Fullframes$Manhattan", "START");
 					break;
 				case "p":
-					processAnimation(Constants.BACK, print_writers, "Change$PointsTable", "START");
+					processAnimation(Constants.BACK, print_writers, "Change_Fullframes$Standings", "START");
 					break;
 				case "Alt_Shift_J":
 					processAnimation(Constants.BACK, print_writers, "Change$BatManhatton", "START");
@@ -9261,7 +9227,7 @@ public class Animation
 					processAnimation(Constants.BACK, print_writers, "Change_Fullframes$Manhattan", "START");
 					break;
 				case "p":
-					processAnimation(Constants.BACK, print_writers, "Change$PointsTable", "START");
+					processAnimation(Constants.BACK, print_writers, "Change_Fullframes$Standings", "START");
 					break;
 				case "Alt_Shift_J":
 					processAnimation(Constants.BACK, print_writers, "Change$BatManhatton", "START");
@@ -9421,7 +9387,7 @@ public class Animation
 				processAnimation(Constants.BACK, print_writers, "Change_Fullframes$Manhattan", "SHOW 0.0");
 				break;
 			case "p":
-				processAnimation(Constants.BACK, print_writers, "Change$PointsTable", "SHOW 0.0");
+				processAnimation(Constants.BACK, print_writers, "Change_Fullframes$Standings", "SHOW 0.0");
 				break;
 			case "Alt_Shift_J":
 				processAnimation(Constants.BACK, print_writers, "Change$BatManhatton", "SHOW 0.0");
@@ -9493,12 +9459,12 @@ public class Animation
 				processAnimation(Constants.BACK, print_writers, "Change_Fullframes$Manhattan", "SHOW 0.0");
 				break;
 			case "p":
-				processAnimation(Constants.BACK, print_writers, "FullFramers$Main$PointsTable", "SHOW 1.480");
-				processAnimation(Constants.BACK, print_writers, "Change$PointsTable", "SHOW 0.0");
+				processAnimation(Constants.BACK, print_writers, "anim_FullFrames$In_Out$Main$Standings", "SHOW 2.820");
+				processAnimation(Constants.BACK, print_writers, "Change_Fullframes$Standings", "SHOW 0.0");
 				break;
 			case "Alt_Shift_J":
-				processAnimation(Constants.BACK, print_writers, "FullFramers$Main$BatManhatton", "SHOW 1.480");
-				processAnimation(Constants.BACK, print_writers, "Change$BatManhatton", "SHOW 0.0");
+				processAnimation(Constants.BACK, print_writers, "FullFramers$Main$Standings", "SHOW 1.480");
+				processAnimation(Constants.BACK, print_writers, "Change$Standings", "SHOW 0.0");
 				break;
 			case "Control_F1":
 				processAnimation(Constants.BACK, print_writers, "anim_FullFrames$In_Out$Main$ImageBattingCard", "SHOW 2.820");
@@ -13131,7 +13097,7 @@ public class Animation
 					previewCommand = previewCommand + "anim_FullFrames$In_Out$Main$Manhattan$In 2.580 anim_FullFrames$In_Out$Main$Manhattan$In$Runs 2.580";
 					break;
 				case "p":
-					
+					previewCommand = previewCommand + "anim_FullFrames$In_Out$Main$Standings$In 2.020";
 					break;
 				case "Alt_Shift_J":
 					
@@ -13229,7 +13195,7 @@ public class Animation
 							+ "Change_Fullframes$Manhattan$Change_In$Runs 1.680";
 					break;
 				case "p":
-					
+					previewCommand = previewCommand + " Change_Fullframes$Standings 1.120 Change_Fullframes$Standings$Out 0.460 Change_Fullframes$Standings$In 1.120";
 					break;
 				case "Alt_Shift_J":
 					
@@ -13298,7 +13264,7 @@ public class Animation
 								+ "Change_Fullframes$Manhattan$Change_In$Runs 1.680";
 						break;
 					case "p":
-						
+						previewCommand = previewCommand + " Change_Fullframes$Standings 1.120 Change_Fullframes$Standings$Out 0.460 Change_Fullframes$Standings$In 1.120";
 						break;
 					case "Alt_Shift_J":
 						
@@ -14062,10 +14028,9 @@ public class Animation
 								+ "anim_LT_NameSuper$InOut$Logo 2.080 anim_LT_NameSuper$InOut$Logo$In 1.800 anim_LT_NameSuper$InOut$Name 2.080 anim_LT_NameSuper$InOut$Name$In 1.700 "
 								+ "anim_LT_NameSuper$InOut$Info 2.080 anim_LT_NameSuper$InOut$Info$In 2.080";
 						break;
-					case "F5": case "F9": case "l": case "Shift_F5": case "Shift_F9": case "Control_h": case "Alt_F12":
-					case "F7": case "F11": case "Control_a": case "q": case "u": case "Control_q": case "Shift_F3": case "Control_F3":
-					case "Shift_B": case "Alt_Shift_F3":case "Alt_Shift_O": case "Control_s": case "Control_f": case "Control_i":
-					case "d": case "e":case "Alt_F1": case "Alt_F2":
+					case "F5": case "F9": case "l": case "Shift_F5": case "Shift_F9": case "Control_h": case "Alt_F12": case "F7": case "F11": case "Control_a": case "q": case "u": 
+					case "Control_q": case "Shift_F3": case "Control_F3": case "Shift_B": case "Alt_Shift_F3":case "Alt_Shift_O": case "Control_s": case "Control_f": case "Control_i":
+					case "d": case "e":case "Alt_F1": case "Alt_F2": case "Control_Shift_Q":
 						previewCommands = "anim_Infobar$Push 0.500 anim_LowerThird 2.080 anim_LowerThird$InOut 2.080 anim_LowerThird$InOut$Essentials 2.080 "
 								+ "anim_LowerThird$InOut$Essentials$In 2.080 anim_LowerThird$InOut$Colours 2.080 anim_LowerThird$InOut$Colours$In 1.600 "
 								+ "anim_LowerThird$InOut$Logo 2.080 anim_LowerThird$InOut$Logo$In 1.800 anim_LowerThird$InOut$TopLine 2.080 anim_LowerThird$InOut$TopLine$In 1.700 "

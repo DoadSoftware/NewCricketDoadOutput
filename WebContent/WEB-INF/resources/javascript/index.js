@@ -838,10 +838,18 @@ function processCricketProcedures(whatToProcess,dataToProcess)
 				    // Commentators / FreeTextDb
 				    if (valueToProcess.includes("Alt_6")) {
 				        let processValue = valueToProcess.toUpperCase();
-				        if (processValue.includes("COMMENTATORS")) {
-				            setCommentators("Commentators", data);
-				            return; // IMPORTANT
-				        }
+						if (processValue.includes("COMMENTATORS_ENGLISH")) {
+						    setCommentators("Commentators_English", data);
+						    return;
+						}
+						if (processValue.includes("COMMENTATORS_MARATHI")) {
+						    setCommentators("Commentators_Marathi", data);
+						    return;
+						}
+						if (processValue.includes("COMMENTATORS")) {
+						    setCommentators("Commentators", data);
+						    return;
+						}
 				        if (processValue.includes("FREETEXTDB")) {
 				            setInfoBarStatsDropdown("FreeTextDb", data);
 				            return; // IMPORTANT
@@ -919,7 +927,7 @@ function removeSelectDuplicates(select_id)
 }
 
 function setCommentators(type, data) {
-  if (type === "Commentators" && Array.isArray(data)) {
+  if ((type === "Commentators"||type === "Commentators_English"||type === "Commentators_Marathi") && Array.isArray(data)) {
     const commentatorCells = [
       document.getElementById('Player1'),
       document.getElementById('Player2'),
@@ -947,10 +955,31 @@ function setCommentators(type, data) {
       // Use the passed data array here
       data.forEach(comm => {
         if (comm.useThis === 'Yes') {
-          const option = document.createElement('option');
-          option.value = comm.commentatorId;
-          option.text = comm.commentatorName;
-          commSelect.appendChild(option);
+			switch($('#selected_broadcaster').val().toUpperCase()){
+			case 'T20_MUMBAI':
+				if(type === "Commentators_English"){
+					if (comm.photoName === 'ENGLISH'){
+						const option = document.createElement('option');
+						option.value = comm.commentatorId;
+						option.text = comm.commentatorName;
+						commSelect.appendChild(option);
+					}
+				}else{
+					if (comm.photoName === 'MARATHI'){
+						const option = document.createElement('option');
+						option.value = comm.commentatorId;
+						option.text = comm.commentatorName;
+						commSelect.appendChild(option);
+					}
+				}
+				break;
+			default :
+				const option = document.createElement('option');
+				option.value = comm.commentatorId;
+				option.text = comm.commentatorName;
+				commSelect.appendChild(option);
+				break;
+		 	}
         }
       });
       commSelect.selectedIndex = 0;
@@ -2114,15 +2143,15 @@ function addItemsToList(whatToProcess,dataToProcess)
 				select = document.createElement('select');
 				select.id = 'selectPhotoImpact';
 				select.name = select.id;
-	
-				option = document.createElement('option');
-				option.value = 'WITH_PHOTO';
-				option.text = 'WITH PHOTO' ;
-				select.appendChild(option);
 				
 				option = document.createElement('option');
 				option.value = 'WITHOUT_PHOTO';
 				option.text = 'WITHOUT PHOTO' ;
+				select.appendChild(option);
+	
+				option = document.createElement('option');
+				option.value = 'WITH_PHOTO';
+				option.text = 'WITH PHOTO' ;
 				select.appendChild(option);
 				
 				select.setAttribute('onchange',"setDropdownOptionToSelectOptionArray(this, 3)");
@@ -5147,9 +5176,19 @@ function addItemsToList(whatToProcess,dataToProcess)
 					option.text = 'Strategic TimeOut Ball';
 					select.appendChild(option);
 					
-					option = document.createElement('option');
+					/*option = document.createElement('option');
 					option.value = 'Commentators';
 					option.text = 'Commentators';
+					select.appendChild(option);*/
+					
+					option = document.createElement('option');
+					option.value = 'Commentators_English';
+					option.text = 'Commentators English';
+					select.appendChild(option);
+					
+					option = document.createElement('option');
+					option.value = 'Commentators_Marathi';
+					option.text = 'Commentators Marathi';
 					select.appendChild(option);
 					
 					option = document.createElement('option');
@@ -5272,7 +5311,7 @@ function addItemsToList(whatToProcess,dataToProcess)
 						row.insertCell(2).appendChild(label2).appendChild(ftheader2);
 					    setTextBoxOptionToSelectOptionArray1(2);
 				   		cellCount = 3;
-					}else if(this.value == 'Commentators'){
+					}else if(this.value == 'Commentators' || this.value == 'Commentators_English' || this.value == 'Commentators_Marathi'){
 						row.insertCell(1).id = 'Player1';
 			 			row.insertCell(2).id = 'Player2';
 			 			row.insertCell(3).id = 'Player3';

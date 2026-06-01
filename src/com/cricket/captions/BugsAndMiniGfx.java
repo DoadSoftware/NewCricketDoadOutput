@@ -2267,7 +2267,7 @@ public class BugsAndMiniGfx
 			CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_Bug$All$Text$txt_FirstName*ACTIVE SET 0\0", print_writers);
 			CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_Bug$All$Text$txt_LastName*ACTIVE SET 1\0", print_writers);
 			
-			stats_text = CricketFunctions.GenerateMatchSummaryStatus(inning.getInningNumber(), matchAllData, CricketUtil.SHORT, "", config.getBroadcaster(), 
+			stats_text = CricketFunctions.GenerateMatchSummaryStatus(inning.getInningNumber(), matchAllData, CricketUtil.FULL, "", config.getBroadcaster(), 
 					true).getTargetOrResult().toUpperCase();
 			
 			System.out.println("stats_text = " + stats_text);
