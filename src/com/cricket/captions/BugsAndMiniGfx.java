@@ -2043,14 +2043,19 @@ public class BugsAndMiniGfx
 			switch (whatToProcess.split(",")[0]) {
 			case "6":
 				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_BoundaryCounter$Header"
+						+ "$select_Sponsor*FUNCTION*Omo*vis_con SET 1\0", print_writers);
+				
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_BoundaryCounter$Header$WithSponsor"
 						+ "$txt_Header1*GEOM*TEXT SET TOURNAMENT\0", print_writers);
-				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_BoundaryCounter$Header"
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_BoundaryCounter$Header$WithSponsor"
 						+ "$txt_Header2*GEOM*TEXT SET SIXES\0", print_writers);
 				break;
 			case "Control_4":
 				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_BoundaryCounter$Header"
+						+ "$select_Sponsor*FUNCTION*Omo*vis_con SET 0\0", print_writers);
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_BoundaryCounter$Header$WithoutSponsor"
 						+ "$txt_Header1*GEOM*TEXT SET TOURNAMENT\0", print_writers);
-				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_BoundaryCounter$Header"
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_BoundaryCounter$Header$WithoutSponsor"
 						+ "$txt_Header2*GEOM*TEXT SET FOURS\0", print_writers);
 				break;
 			}

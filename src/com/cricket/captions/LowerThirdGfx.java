@@ -21420,6 +21420,8 @@ public class LowerThirdGfx
 						if(plyr.getCaptainWicketKeeper().equalsIgnoreCase(CricketUtil.CAPTAIN)){
 							CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_LT_BattingCard$PlayerAll$11Players$Grp" + j + "$Icons$select_Captain"
 									+ "*FUNCTION*Omo*vis_con SET 1\0", print_writers);
+							CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_LT_BattingCard$PlayerAll$11Players$Grp" + j + "$Icons$Captain$img_Captain"
+									+ "*TEXTURE*IMAGE SET "+Constants.T20_MUMBAI_ICONS+"CaptainIcon"+"\0", print_writers);
 						}else if(plyr.getCaptainWicketKeeper().equalsIgnoreCase(CricketUtil.WICKET_KEEPER)) {
 							CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_LT_BattingCard$PlayerAll$11Players$Grp" + j + "$Icons$select_Captain"
 									+ "*FUNCTION*Omo*vis_con SET 0\0", print_writers);
@@ -21431,11 +21433,24 @@ public class LowerThirdGfx
 									+ "*FUNCTION*Omo*vis_con SET 1\0", print_writers);
 							CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_LT_BattingCard$PlayerAll$11Players$Grp" + j + "$Icons$img_Role"
 									+ "*TEXTURE*IMAGE SET "+Constants.T20_MUMBAI_ICONS+"Keeper"+"\0", print_writers);
+							CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_LT_BattingCard$PlayerAll$11Players$Grp" + j + "$Icons$Captain$img_Captain"
+									+ "*TEXTURE*IMAGE SET "+Constants.T20_MUMBAI_ICONS+"CaptainIcon"+"\0", print_writers);
 						}
 					}else {
 						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_LT_BattingCard$PlayerAll$11Players$Grp" + j + "$Icons$select_Captain"
 								+ "*FUNCTION*Omo*vis_con SET 0\0", print_writers);
 					}
+					
+					if(plyr.getZone() != null) {
+						if(plyr.getZone().equalsIgnoreCase("U19")) {
+							
+							CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_LT_BattingCard$PlayerAll$11Players$Grp" + j + "$Icons$select_Captain"
+									+ "*FUNCTION*Omo*vis_con SET 1\0", print_writers);
+							CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_LT_BattingCard$PlayerAll$11Players$Grp" + j + "$Icons$Captain$img_Captain"
+									+ "*TEXTURE*IMAGE SET "+Constants.T20_MUMBAI_ICONS+"U19"+"\0", print_writers);
+						}
+					}
+					
 					j++;
 				}
 			}else {
@@ -21615,6 +21630,8 @@ public class LowerThirdGfx
 						if(player.getCaptainWicketKeeper().equalsIgnoreCase(CricketUtil.CAPTAIN)){
 							CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_LT_BattingCard$PlayerAll" + containerName + "$Grp" + j + "$Icons$select_Captain"
 									+ "*FUNCTION*Omo*vis_con SET 1\0", print_writers);
+							CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_LT_BattingCard$PlayerAll" + containerName + "$Grp" + j + "$Icons$Captain$img_Captain"
+									+ "*TEXTURE*IMAGE SET "+Constants.T20_MUMBAI_ICONS+"CaptainIcon"+"\0", print_writers);
 						}else if(player.getCaptainWicketKeeper().equalsIgnoreCase(CricketUtil.WICKET_KEEPER)) {
 							CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_LT_BattingCard$PlayerAll" + containerName + "$Grp" + j + "$Icons$select_Captain"
 									+ "*FUNCTION*Omo*vis_con SET 0\0", print_writers);
@@ -21626,10 +21643,21 @@ public class LowerThirdGfx
 									+ "*FUNCTION*Omo*vis_con SET 1\0", print_writers);
 							CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_LT_BattingCard$PlayerAll" + containerName + "$Grp" + j + "$Icons$img_Role"
 									+ "*TEXTURE*IMAGE SET "+Constants.T20_MUMBAI_ICONS+"Keeper"+"\0", print_writers);
+							CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_LT_BattingCard$PlayerAll" + containerName + "$Grp" + j + "$Icons$Captain$img_Captain"
+									+ "*TEXTURE*IMAGE SET "+Constants.T20_MUMBAI_ICONS+"CaptainIcon"+"\0", print_writers);
 						}
 					}else {
 						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_LT_BattingCard$PlayerAll" + containerName + "$Grp" + j + "$Icons$select_Captain"
 								+ "*FUNCTION*Omo*vis_con SET 0\0", print_writers);
+					}
+					
+					if(player.getZone() != null) {
+						if(player.getZone().equalsIgnoreCase("U19")) {
+							CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_LT_BattingCard$PlayerAll" + containerName + "$Grp" + j + "$Icons$select_Captain"
+									+ "*FUNCTION*Omo*vis_con SET 1\0", print_writers);
+							CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_LT_BattingCard$PlayerAll" + containerName + "$Grp" + j + "$Icons$Captain$img_Captain"
+									+ "*TEXTURE*IMAGE SET "+Constants.T20_MUMBAI_ICONS+"U19"+"\0", print_writers);
+						}
 					}
 					j++;
 				}
