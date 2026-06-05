@@ -373,8 +373,18 @@ public class Caption
 				status = this_fullFramesGfx.populateLeaderBoardDB(whatToProcess, whichSide);
 				break;
 				
+			case "Alt_Shift_F1":
+				status = this_fullFramesGfx.PopulateFFBattingPhotoCard(whichSide, whatToProcess.split(",")[0], matchAllData, 
+						Integer.valueOf(whatToProcess.split(",")[1]));
+				break;
+			case "Alt_Shift_F2":
+				status = this_fullFramesGfx.PopulateFFBowlingPhotoCard(whichSide, whatToProcess.split(",")[0], matchAllData, 
+						Integer.valueOf(whatToProcess.split(",")[1]));
+				break;
+				
 			case "F1": // Scorecard FF
-				if(config.getBroadcaster().toUpperCase().equalsIgnoreCase(Constants.ISPL)) {
+				switch(config.getBroadcaster()) {
+				case Constants.ISPL:
 					if(whatToProcess.split(",").length>=6) {
 						this_fullFramesGfx.batperformer_id = Integer.valueOf(whatToProcess.split(",")[3]);
 						this_fullFramesGfx.ballperformer_id = Integer.valueOf(whatToProcess.split(",")[4]);
@@ -384,11 +394,11 @@ public class Caption
 						this_fullFramesGfx.WhichScoreCard = whatToProcess.split(",")[2];
 						this_fullFramesGfx.WhichProfile = whatToProcess;
 					}
+					break;
+				case Constants.VIDARBHA:
+					this_fullFramesGfx.WhichScoreCard = whatToProcess.split(",")[2];
+					break;
 				}
-				
-					if(config.getBroadcaster().toUpperCase().equalsIgnoreCase(Constants.VIDARBHA)) {
-						this_fullFramesGfx.WhichScoreCard = whatToProcess.split(",")[2];
-					}
 				status = this_fullFramesGfx.PopulateScorecardFF(whichSide, whatToProcess.split(",")[0], matchAllData, 
 					Integer.valueOf(whatToProcess.split(",")[1]));
 				break;
@@ -429,7 +439,7 @@ public class Caption
 			case "Alt_Shift_F9":
 				status = this_fullFramesGfx.populateFFPhaseWiseSummary(whichSide, whatToProcess.split(",")[0],matchAllData,Integer.valueOf(whatToProcess.split(",")[1]));
 				break;
-			 case "Alt_Shift_F2":
+			 case "Control_Shift_F12":
 				 status = this_fullFramesGfx.populateFFBattingComparison(whichSide, whatToProcess.split(",")[0],matchAllData,Integer.valueOf(whatToProcess.split(",")[1]));
 					break;
 				
@@ -440,10 +450,10 @@ public class Caption
 			case "Alt_F1": // BatGriff
 				switch (config.getBroadcaster().toUpperCase()) {
 				case Constants.BENGAL_T20: case Constants.NPL: case Constants.MPL:case Constants.LEGENDS:
-				case Constants.APL:
+				case Constants.APL: case Constants.T20_MUMBAI:
 					status = this_bugsAndMiniGfx.populateGriff(whatToProcess, whichSide, matchAllData);
 					break;
-				case Constants.ICC_U19_2023: case Constants.T20_MUMBAI:
+				case Constants.ICC_U19_2023:
 					status = this_lowerThirdGfx.PopulateBatBallGriff(whatToProcess,whichSide, matchAllData);
 					break;
 				case Constants.ISPL:
@@ -458,9 +468,10 @@ public class Caption
 			case "Alt_F2": // BallGriff
 				switch (config.getBroadcaster().toUpperCase()) {
 				case Constants.BENGAL_T20: case Constants.NPL: case Constants.MPL:case Constants.LEGENDS:
+				case Constants.T20_MUMBAI:
 					status = this_bugsAndMiniGfx.populateGriff(whatToProcess, whichSide, matchAllData);
 					break;
-				case Constants.ICC_U19_2023: case Constants.T20_MUMBAI:
+				case Constants.ICC_U19_2023:  
 					status = this_lowerThirdGfx.PopulateBatBallGriff(whatToProcess,whichSide, matchAllData);
 					break;
 				case Constants.ISPL:
@@ -789,7 +800,8 @@ public class Caption
 				}
 				
 				if(!config.getBroadcaster().equalsIgnoreCase(Constants.ISPL) && !config.getBroadcaster().equalsIgnoreCase(Constants.LEGENDS) &&
-						!config.getBroadcaster().equalsIgnoreCase(Constants.MPL) && !config.getBroadcaster().equalsIgnoreCase(Constants.VIDARBHA)) {
+						!config.getBroadcaster().equalsIgnoreCase(Constants.MPL) && !config.getBroadcaster().equalsIgnoreCase(Constants.VIDARBHA) && 
+						!config.getBroadcaster().equalsIgnoreCase(Constants.T20_MUMBAI)) {
 					if(whatToProcess.split(",")[0].equalsIgnoreCase("Control_Shift_Z")){
 						this_fullFramesGfx.whichSponsor = whatToProcess.split(",")[3];
 					}else if(whatToProcess.split(",")[0].equalsIgnoreCase("Alt_Shift_W")){
@@ -1530,7 +1542,7 @@ public class Caption
 							switch(whatToProcess.split(",")[2]) {
 							    case "Commentators": case "Commentators_English": case "Commentators_Marathi":
 							    	this_infobarGfx.Comms_Name = String.join(",", Arrays.asList(whatToProcess.split(",")).subList(whatToProcess.
-											split(",").length - 3, whatToProcess.split(",").length));
+											split(",").length - 6, whatToProcess.split(",").length));
 							        break;
 							    case "FreeTextDb":
 							    	this_infobarGfx.infobarStatsId = Integer.valueOf(whatToProcess.split(",")[3]);

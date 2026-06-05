@@ -1221,10 +1221,10 @@ public class IndexController
 	  switch ((whatToProcess.contains(",")?whatToProcess.split(",")[0]:whatToProcess)) {
 	  	case "Alt_3":
 		    StatsType stat = (whatToProcess.split(",").length > 2) ? 
-		            cricketService.getAllStatsType().stream().filter(st -> st.getStats_full_name().equalsIgnoreCase(whatToProcess.split(",")[2]))
+		            cricketService.getAllStatsType().stream().filter(st -> st.getStatsFullName().equalsIgnoreCase(whatToProcess.split(",")[2]))
 		                .findAny().orElse(null) : null;
 		    if (stat != null) {
-		        return (List<T>) cricketService.getAllStats().stream().filter(st -> st.getStats_type_id() == stat.getStats_id())
+		        return (List<T>) cricketService.getAllStats().stream().filter(st -> st.getStats_type_id() == stat.getStatsId())
 		            .collect(Collectors.toList());
 		    }
 		    break;
@@ -1659,6 +1659,7 @@ public class IndexController
                 this_animation.ResetAnimation("CLEAR-ALL",print_writers,session_configuration);
                 this_caption.this_infobarGfx.TournamentColor(print_writers, session_configuration, session_match);
                 this_caption.this_fullFramesGfx.FFTournamentColor(print_writers, session_configuration);
+                this_caption.this_lowerThirdGfx.TournamentColor(print_writers, session_configuration);
 	            break;
 
 	        case Constants.ICC_U19_2023: case Constants.BENGAL_T20: case Constants.NPL: case Constants.LEGENDS:

@@ -376,7 +376,7 @@ function processUserSelectionData(whatToProcess,dataToProcess)
 				case 'ISPL': case 'VIDARBHA':
 					addItemsToList(dataToProcess,null);
 					break;
-				case 'ICC-U19-2023': case 'BENGAL-T20': case 'NPL': case 'LEGENDS-90': case 'MPL': case 'T20_MUMBAI': case 'APL': 
+				case 'ICC-U19-2023': case 'BENGAL-T20': case 'NPL': case 'LEGENDS-90': case 'MPL': case 'APL': case 'T20_MUMBAI':
 					dataToProcess = dataToProcess + ',' + document.getElementById('which_inning').value;
 					processCricketProcedures("POPULATE-GRAPHICS", dataToProcess);
 					break;
@@ -579,7 +579,7 @@ function processUserSelectionData(whatToProcess,dataToProcess)
 			case 'Control_Shift_F3': case 'Control_Shift_H': case "Control_Shift_I": case "Alt_Shift_D":case "Alt_Shift_E":case "Alt_Shift_F":case "Alt_Shift_G":
 			case "Alt_Shift_H": case "Control_Shift_A": case 'Control_6': case "Alt_Shift_O": case 'Alt_F5': case 'Control_Alt_F1': case 'Control_Alt_F2': 
 			case 'Control_Shift_K': case "Alt_Shift_F8": case "Alt_k": case 'Alt_Shift_F11': case 'Alt_Shift_F10': case 'Alt_Shift_F12': case 'Alt_Shift_F9':
-			case 'Alt_Shift_F2':
+			case 'Control_Shift_F12': case 'Alt_Shift_F2': case 'Alt_Shift_F1':
 				/*switch(dataToProcess){
 				case 'Shift_F':
 					count++;
@@ -931,7 +931,10 @@ function setCommentators(type, data) {
     const commentatorCells = [
       document.getElementById('Player1'),
       document.getElementById('Player2'),
-      document.getElementById('Player3')
+      document.getElementById('Player3'),
+	  document.getElementById('Player4'),
+	  document.getElementById('Player5'),
+	  document.getElementById('Player6')
     ];
 
     // Clear each cell and add a commentator dropdown
@@ -964,13 +967,18 @@ function setCommentators(type, data) {
 						option.text = comm.commentatorName;
 						commSelect.appendChild(option);
 					}
-				}else{
+				}else if(type === "Commentators_Marathi"){
 					if (comm.photoName === 'MARATHI'){
 						const option = document.createElement('option');
 						option.value = comm.commentatorId;
 						option.text = comm.commentatorName;
 						commSelect.appendChild(option);
 					}
+				}else{
+					const option = document.createElement('option');
+					option.value = comm.commentatorId;
+					option.text = comm.commentatorName;
+					commSelect.appendChild(option);
 				}
 				break;
 			default :
@@ -2145,15 +2153,15 @@ function addItemsToList(whatToProcess,dataToProcess)
 				select.name = select.id;
 				
 				option = document.createElement('option');
-				option.value = 'WITHOUT_PHOTO';
-				option.text = 'WITHOUT PHOTO' ;
-				select.appendChild(option);
-	
-				option = document.createElement('option');
 				option.value = 'WITH_PHOTO';
 				option.text = 'WITH PHOTO' ;
 				select.appendChild(option);
 				
+				option = document.createElement('option');
+				option.value = 'WITHOUT_PHOTO';
+				option.text = 'WITHOUT PHOTO' ;
+				select.appendChild(option);
+	
 				select.setAttribute('onchange',"setDropdownOptionToSelectOptionArray(this, 3)");
 				row.insertCell(cellCount).appendChild(select);
 				setDropdownOptionToSelectOptionArray($(select),3);
@@ -2692,8 +2700,8 @@ function addItemsToList(whatToProcess,dataToProcess)
 			break;
 			case 'F1':
 				switch($('#selected_broadcaster').val().toUpperCase()){
-					case 'ISPL':
-						if(isSplitScorecard){
+				case 'ISPL':
+					if(isSplitScorecard){
 						select = document.createElement('select');
 						select.id = 'selectBatter';
 						select.name = select.id;
@@ -2806,31 +2814,51 @@ function addItemsToList(whatToProcess,dataToProcess)
 						row.insertCell(cellCount).appendChild(select);
 						setDropdownOptionToSelectOptionArray($(select),0);
 						cellCount = cellCount + 1;
-								}
-						break;
-					case 'VIDARBHA':
-						header_text.innerHTML = 'SCORECARD';
-						select = document.createElement('select');
-						select.id = 'selectScoreCard';
-						select.name = select.id;
-						
-						option = document.createElement('option');
-			            option.value = 'SPLIT';
-			            option.text = 'SPLIT';
-			            select.appendChild(option);
-			            
-						option = document.createElement('option');
-			            option.value = 'NORMAL';
-			            option.text = 'NORMAL';
-			            select.appendChild(option);
-						
-						select.setAttribute('onchange',"setDropdownOptionToSelectOptionArray(this, 0)");
-						row.insertCell(cellCount).appendChild(select);
-						setDropdownOptionToSelectOptionArray($(select),0);
-						cellCount = cellCount + 1;
-				break;
+					}
+					break;
+				case 'VIDARBHA':
+					header_text.innerHTML = 'SCORECARD';
+					select = document.createElement('select');
+					select.id = 'selectScoreCard';
+					select.name = select.id;
+					
+					option = document.createElement('option');
+		            option.value = 'SPLIT';
+		            option.text = 'SPLIT';
+		            select.appendChild(option);
+		            
+					option = document.createElement('option');
+		            option.value = 'NORMAL';
+		            option.text = 'NORMAL';
+		            select.appendChild(option);
+					
+					select.setAttribute('onchange',"setDropdownOptionToSelectOptionArray(this, 0)");
+					row.insertCell(cellCount).appendChild(select);
+					setDropdownOptionToSelectOptionArray($(select),0);
+					cellCount = cellCount + 1;
+					break;
+				case 'T20_MUMBAI':
+					header_text.innerHTML = 'SCORECARD';
+					select = document.createElement('select');
+					select.id = 'selectScoreCard';
+					select.name = select.id;
+					
+					option = document.createElement('option');
+		            option.value = 'TRADITIONAL';
+		            option.text = 'TRADITIONAL';
+		            select.appendChild(option);
+									
+		            option = document.createElement('option');
+		            option.value = 'BATTING_CHANGE_ON';
+		            option.text = 'BATTING CHANGE ON';
+		            select.appendChild(option);
+		            
+					select.setAttribute('onchange',"setDropdownOptionToSelectOptionArray(this, 0)");
+					row.insertCell(cellCount).appendChild(select);
+					setDropdownOptionToSelectOptionArray($(select),0);
+					cellCount = cellCount + 1;
+					break;
 			}
-			
 			break;
 		case 'F2':
 	    	header_text.innerHTML = 'BALL CARD';
@@ -5176,10 +5204,10 @@ function addItemsToList(whatToProcess,dataToProcess)
 					option.text = 'Strategic TimeOut Ball';
 					select.appendChild(option);
 					
-					/*option = document.createElement('option');
+					option = document.createElement('option');
 					option.value = 'Commentators';
 					option.text = 'Commentators';
-					select.appendChild(option);*/
+					select.appendChild(option);
 					
 					option = document.createElement('option');
 					option.value = 'Commentators_English';
@@ -5275,8 +5303,8 @@ function addItemsToList(whatToProcess,dataToProcess)
 				cellCount = cellCount + 1
 				
 				select.addEventListener('change', function () {
-					['selectFreeText', 'selectFreeText1', 'Player1', 'Player2', 'Player3', 'selectPhoto', 'FreeText', 'SponsorValue', 
-						'Promo', 'selectTeams'].forEach(id => {
+					['selectFreeText', 'selectFreeText1', 'Player1', 'Player2', 'Player3','Player1', 'Player2', 'Player3', 
+						'selectPhoto', 'FreeText', 'SponsorValue', 'Promo', 'selectTeams'].forEach(id => {
 					    const el = document.getElementById(id);
 					    if (el) {
 					        id === 'selectFreeText' || id === 'selectFreeText1' ? el.parentElement.remove() : el.remove();
@@ -5311,14 +5339,30 @@ function addItemsToList(whatToProcess,dataToProcess)
 						row.insertCell(2).appendChild(label2).appendChild(ftheader2);
 					    setTextBoxOptionToSelectOptionArray1(2);
 				   		cellCount = 3;
-					}else if(this.value == 'Commentators' || this.value == 'Commentators_English' || this.value == 'Commentators_Marathi'){
+					}else if(this.value == 'Commentators_English' || this.value == 'Commentators_Marathi'){
 						row.insertCell(1).id = 'Player1';
 			 			row.insertCell(2).id = 'Player2';
 			 			row.insertCell(3).id = 'Player3';
 			 			cellCount = 4;
 						processCricketProcedures("GRAPHICS-OPTIONS_DATA", whatToProcess + "," +
 	    				(this.value || $(this).find('option').first().val()));
-					}else if(this.value == 'FreeTextDb'){
+					}else if(this.value == 'Commentators'){
+					    row.insertCell(1).id = 'Player1'; // English 1
+					    row.insertCell(2).id = 'Player2'; // English 2
+					    row.insertCell(3).id = 'Player3'; // English 3
+						let row2 = table.insertRow(row.rowIndex + 1);
+
+					    row2.insertCell(0).innerHTML = ""; // empty first column
+
+					    row2.insertCell(1).id = 'Player4';
+					    row2.insertCell(2).id = 'Player5';
+					    row2.insertCell(3).id = 'Player6';
+					    cellCount = 7;
+
+						processCricketProcedures("GRAPHICS-OPTIONS_DATA", whatToProcess + "," + 
+							(this.value || $(this).find('option').first().val()));
+					}
+					else if(this.value == 'FreeTextDb'){
 						row.insertCell(1).id = 'FreeText';
 			 			cellCount = 2;
 						processCricketProcedures("GRAPHICS-OPTIONS_DATA", whatToProcess + "," +
@@ -5373,8 +5417,9 @@ function addItemsToList(whatToProcess,dataToProcess)
 						let typeselect  = document.createElement('select');
 						typeselect.id = 'selectPhoto';
 						typeselect.name = typeselect.id;
-						[{ value: 'Runs', text: 'Runs' },{ value: 'wickets', text: 'wickets' },
-						{ value: 'fours', text: 'fours' }, { value: 'sixes', text: 'sixes' }].forEach(({ value, text }) => {
+						[{ value: 'Runs', text: 'Runs' },{ value: 'wickets', text: 'wickets' },{ value: 'fours', text: 'fours' }, 
+							{ value: 'sixes', text: 'sixes' }, { value: 'best_sr', text: 'best SR' }, 
+							{ value: 'best_econ', text: 'best economy' }].forEach(({ value, text }) => {
 							  option = document.createElement('option');
 							  option.value = value;
 							  option.text = text;

@@ -39,6 +39,12 @@
 	    text-transform: uppercase;
 	}
 	
+	.heading{
+	    font-size:12px;
+	    font-weight:bold;
+	    margin-bottom:5px;
+	}
+	
 	#stats-container div {
 	    font-size: 22px;
 	    margin-bottom: 5px;

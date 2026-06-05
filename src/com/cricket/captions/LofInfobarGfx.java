@@ -3542,12 +3542,12 @@ public class LofInfobarGfx
 		}
 		
 		if(WhichProfile.equalsIgnoreCase("ISPL S1") || WhichProfile.equalsIgnoreCase("ISPL S2")) {
-			statsType = statsTypes.stream().filter(st -> st.getStats_short_name().equalsIgnoreCase(WhichProfile)).findAny().orElse(null);
+			statsType = statsTypes.stream().filter(st -> st.getStatsShortName().equalsIgnoreCase(WhichProfile)).findAny().orElse(null);
 			if(statsType == null) {
 				return "InfoBarPlayerProfile: Stats Type not found for profile [" + WhichProfile + "]";
 			}
 			
-			stat = statistics.stream().filter(st -> st.getPlayer_id() == FirstPlayerId && statsType.getStats_id() == st.getStats_type_id()).findAny().orElse(null);
+			stat = statistics.stream().filter(st -> st.getPlayer_id() == FirstPlayerId && statsType.getStatsId() == st.getStats_type_id()).findAny().orElse(null);
 			if(stat == null) {
 				return "InfoBarPlayerProfile: Stats not found for Player Id [" + FirstPlayerId + "]";
 			}
@@ -3570,7 +3570,7 @@ public class LofInfobarGfx
 		    BeanUtils.copyProperties(statS1, stat);
 		    stat = CricketFunctions.mergeIsplCareerStats(stat, statS2);
 		    
-			statsType = statsTypes.stream().filter(st -> st.getStats_short_name().equalsIgnoreCase("D10")).findAny().orElse(null);
+			statsType = statsTypes.stream().filter(st -> st.getStatsShortName().equalsIgnoreCase("D10")).findAny().orElse(null);
 			stat.setStats_type(statsType);
 			
 			stat = CricketFunctions.updateTournamentWithH2h(stat, headToHead, matchAllData, CricketUtil.FULL);
@@ -7230,13 +7230,13 @@ public class LofInfobarGfx
 			}
 			
 			if(whatToProcess.split(",")[3].equalsIgnoreCase("ISPL S1") || whatToProcess.split(",")[3].equalsIgnoreCase("ISPL S2")) {
-				statsType = statsTypes.stream().filter(st -> st.getStats_short_name().equalsIgnoreCase(whatToProcess.split(",")[3])).findAny().orElse(null);
+				statsType = statsTypes.stream().filter(st -> st.getStatsShortName().equalsIgnoreCase(whatToProcess.split(",")[3])).findAny().orElse(null);
 				if(statsTypes == null) {
 					statsData.add("InfoBarPlayerProfile: Stats Type not found for profile [" + whatToProcess.split(",")[3] + "]");
 					return (List<T>) statsData;
 				}
 				
-				stat = statistics.stream().filter(st -> st.getPlayer_id() == player.getPlayerId() && statsType.getStats_id() == st.getStats_type_id()).findAny().orElse(null);
+				stat = statistics.stream().filter(st -> st.getPlayer_id() == player.getPlayerId() && statsType.getStatsId() == st.getStats_type_id()).findAny().orElse(null);
 				if(stat == null) {
 					statsData.add("InfoBarPlayerProfile: Stats not found for Player Id [" + whatToProcess.split(",")[2] + "]");
 					return (List<T>) statsData;
@@ -7257,7 +7257,7 @@ public class LofInfobarGfx
 			    BeanUtils.copyProperties(statS1, stat);
 			    stat = CricketFunctions.mergeIsplCareerStats(stat, statS2);
 			    
-				statsType = statsTypes.stream().filter(st -> st.getStats_short_name().equalsIgnoreCase("D10")).findAny().orElse(null);
+				statsType = statsTypes.stream().filter(st -> st.getStatsShortName().equalsIgnoreCase("D10")).findAny().orElse(null);
 				stat.setStats_type(statsType);
 				
 				stat = CricketFunctions.updateTournamentWithH2h(stat, headToHead, matchAllData, CricketUtil.FULL);
