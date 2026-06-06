@@ -92,7 +92,7 @@ public class Caption
 		List<Staff> staff, List<Player> players, List<POTT> pott,List<Playoff> Playoffs, List<String> teamChanges, List<PerformanceBug> performanceBugs, 
 		FullFramesGfx this_fullFramesGfx,LowerThirdGfx this_lowerThirdGfx, InfobarGfx this_infobarGfx,LofInfobarGfx this_lofInfobarGfx , BugsAndMiniGfx this_bugsAndMiniGfx, 
 		int whichSide, String whichGraphhicsOnScreen, String slashOrDash, List<Tournament> tournament, List<BestStats> tapeball,List<DuckWorthLewis> dls, 
-		List<HeadToHeadPlayer> headToHead, List<Tournament> past_tournament_stats, CricketService cricketService) {
+		List<HeadToHeadPlayer> headToHead, List<Tournament> past_tournament_stats, CricketService cricketService, String masterCricketDirectory) {
 	
 		super();
 		this.print_writers = print_writers;
@@ -122,16 +122,16 @@ public class Caption
 		
 		this.dls = dls;
 		this.this_fullFramesGfx = new FullFramesGfx(print_writers, config, statistics, statsTypes, fixTures, Teams, Grounds,tournament, VariousText, 
-				players, pott,Playoffs, teamChanges,headToHead, past_tournament_stats, cricketService);
+				players, pott,Playoffs, teamChanges,headToHead, past_tournament_stats, cricketService, masterCricketDirectory);
 		this.this_lowerThirdGfx = new LowerThirdGfx(print_writers, config, statistics, statsTypes, nameSupers, Teams, Grounds, tournament, tapeball, dls, 
-				staff, players, pott, varioustText, headToHead, past_tournament_stats, cricketService,fixTures);
+				staff, players, pott, varioustText, headToHead, past_tournament_stats, cricketService,fixTures, masterCricketDirectory);
 		this.whichSide = whichSide;
 		this.this_infobarGfx = new InfobarGfx(config, slashOrDash, print_writers, statistics, statsTypes, infobarStats, Grounds, Commentators, dls, 
-				players, headToHead, past_tournament_stats, cricketService, fixTures, Teams);
+				players, headToHead, past_tournament_stats, cricketService, fixTures, Teams, masterCricketDirectory);
 		this.this_lofInfobarGfx = new LofInfobarGfx(config, slashOrDash, print_writers, statistics, statsTypes, infobarStats, Grounds, Commentators, dls, 
-				players, headToHead,past_tournament_stats, cricketService);
+				players, headToHead,past_tournament_stats, cricketService, masterCricketDirectory);
 		this.this_bugsAndMiniGfx = new BugsAndMiniGfx(print_writers, config, bugs, performanceBugs, Teams, VariousText, cricketService, headToHead,
-				statistics, statsTypes, past_tournament_stats,players);
+				statistics, statsTypes, past_tournament_stats,players, masterCricketDirectory);
 		this.status = "";
 	}
 
@@ -746,6 +746,12 @@ public class Caption
 				}
 				break;	
 			case "m": //Match id
+				switch(config.getBroadcaster()) {
+				case Constants.T20_MUMBAI:
+					this_fullFramesGfx.WhichProfile = whatToProcess.split(",")[2];
+					break;
+				}
+				
 				status = this_fullFramesGfx.populateFFMatchId(whichSide,whatToProcess.split(",")[0], matchAllData);
 				break;
 			case "Control_Shift_M": //LT Match id
@@ -777,7 +783,8 @@ public class Caption
 				break;
 				
 			case "Alt_Shift_K": case "Alt_Shift_X": case "Alt_Shift_T": case "Alt_Shift_V":
-				status = this_bugsAndMiniGfx.populateLofLeaderBoard(whichSide, whatToProcess, matchAllData);
+				//status = this_bugsAndMiniGfx.populateLofLeaderBoard(whichSide, whatToProcess, matchAllData);
+				status = this_fullFramesGfx.populateLofLeaderBoard(whichSide, whatToProcess, matchAllData);
 				break;
 			case "Shift_L":
 				this_fullFramesGfx.whichtype = whatToProcess.split(",")[2];

@@ -116,6 +116,7 @@ public class InfobarGfx
 	public Ground ground;
 	public Tournament tournament;
 	public Partnership partnership;
+	public String masterCricketDirectory;
 	
 	public InfobarGfx() {
 		super();
@@ -125,7 +126,7 @@ public class InfobarGfx
 	public InfobarGfx(Configuration config, String slashOrDash, List<PrintWriter> print_writers, List<Statistics> statistics, List<StatsType> statsTypes, 
 			List<InfobarStats> infobarStats, List<Ground> Grounds, List<Commentator> commentators, List<DuckWorthLewis> dls, List<Player> players, 
 			List<HeadToHeadPlayer> headToHead, List<Tournament> past_tournament_stats, CricketService cricketService, List<Fixture> fixtures, 
-			List<Team> teams) {
+			List<Team> teams, String masterCricketDirectory) {
 		super();
 		this.config = config;
 		this.slashOrDash = slashOrDash;
@@ -142,6 +143,7 @@ public class InfobarGfx
 		this.fixtures = fixtures;
 		this.teams = teams;
 		this.cricketService = cricketService;
+		this.masterCricketDirectory = masterCricketDirectory;
 		
 	}
 
@@ -7125,9 +7127,9 @@ public class InfobarGfx
 				LeagueTable leagueTable = null;
 				rowId=0;
 				
-				if(new File(IndexController.basePath + CricketUtil.LEAGUE_TABLE_DIRECTORY + "LeagueTable" + CricketUtil.XML_EXTENSION).exists()) {
+				if(new File(masterCricketDirectory + CricketUtil.LEAGUE_TABLE_DIRECTORY + "LeagueTable" + CricketUtil.XML_EXTENSION).exists()) {
 					leagueTable = (LeagueTable)JAXBContext.newInstance(LeagueTable.class).createUnmarshaller().unmarshal(
-							new File(CricketUtil.CRICKET_DIRECTORY + CricketUtil.LEAGUE_TABLE_DIRECTORY + "LeagueTable" + CricketUtil.XML_EXTENSION));
+							new File(masterCricketDirectory + CricketUtil.LEAGUE_TABLE_DIRECTORY + "LeagueTable" + CricketUtil.XML_EXTENSION));
 				}
 				
 				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_Infobar$All$Normal$Section4$Side" + WhichSide + "$select_DataType*FUNCTION*Omo*vis_con SET 2\0", print_writers);
@@ -8349,7 +8351,7 @@ public class InfobarGfx
 					if(dls.get(i).getOver_left().split("\\.")[0].equalsIgnoreCase(String.valueOf(inning.getTotalOvers()))) {
 						for(int j=0;j<6;j++) {
 							if(inning.getTotalBalls() == j) {
-								this_data_str.add(CricketFunctions.populateDuckWorthLewis(matchAllData,IndexController.basePath).get(i+j).getWkts_down());
+								this_data_str.add(CricketFunctions.populateDuckWorthLewis(matchAllData,masterCricketDirectory).get(i+j).getWkts_down());
 								break;
 							}
 						}
@@ -8504,7 +8506,7 @@ public class InfobarGfx
 					if(dls.get(i).getOver_left().split("\\.")[0].equalsIgnoreCase(String.valueOf(inning.getTotalOvers()))) {
 						for(int j=0;j<6;j++) {
 							if(inning.getTotalBalls() == j) {
-								this_data_str.add(CricketFunctions.populateDuckWorthLewis(matchAllData, IndexController.basePath).get(i+j).getWkts_down());
+								this_data_str.add(CricketFunctions.populateDuckWorthLewis(matchAllData, masterCricketDirectory).get(i+j).getWkts_down());
 								break;
 							}
 						}
@@ -10973,7 +10975,7 @@ public class InfobarGfx
 						if(dls.get(i).getOver_left().split("\\.")[0].equalsIgnoreCase(String.valueOf(inning.getTotalOvers()))) {
 							for(int j=0;j<6;j++) {
 								if(inning.getTotalBalls() == j) {
-									this_data_str.add(CricketFunctions.populateDuckWorthLewis(matchAllData, IndexController.basePath).get(i+j).getWkts_down());
+									this_data_str.add(CricketFunctions.populateDuckWorthLewis(matchAllData, masterCricketDirectory).get(i+j).getWkts_down());
 									break;
 								}
 							}
@@ -12371,7 +12373,7 @@ public class InfobarGfx
 					if(dls.get(i).getOver_left().split("\\.")[0].equalsIgnoreCase(String.valueOf(inning.getTotalOvers()))) {
 						for(int j=0;j<6;j++) {
 							if(inning.getTotalBalls() == j) {
-								this_data_str.add(CricketFunctions.populateDuckWorthLewis(matchAllData, IndexController.basePath).get(i+j).getWkts_down());
+								this_data_str.add(CricketFunctions.populateDuckWorthLewis(matchAllData, masterCricketDirectory).get(i+j).getWkts_down());
 								break;
 							}
 						}
@@ -13372,9 +13374,9 @@ public class InfobarGfx
 				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_Infobar$All$Normal$Analytics$Side" + WhichSide + "$Select_DataType"
 						+ "*FUNCTION*Omo*vis_con SET 16\0", print_writers);
 				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_Infobar$All$Normal$Analytics$Side" + WhichSide + "$CommentatorsBilingual$"
-						+ "Header$txt_Head*GEOM*TEXT SET COMMENTATORS: \0", print_writers);
+						+ "Header$txt_Head*GEOM*TEXT SET COMMENTATORS \0", print_writers);
 				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_Infobar$All$Normal$Analytics$Side" + WhichSide + "$CommentatorsBilingual$"
-						+ "Language1$txt_Language*GEOM*TEXT SET ENGLISH: \0", print_writers);
+						+ "Language1$txt_Language*GEOM*TEXT SET HINGLISH: \0", print_writers);
 				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_Infobar$All$Normal$Analytics$Side" + WhichSide + "$CommentatorsBilingual$"
 						+ "Language2$txt_Language*GEOM*TEXT SET MARATHI: \0", print_writers);
 				
@@ -13850,12 +13852,19 @@ public class InfobarGfx
 				this_data_str = new ArrayList<String>();
 				switch(infobar.getFull_section().toUpperCase()) {
 				case "BATSMANTIMELINE":
-					this_data_str.add(String.join(",", new ArrayList<>(Arrays.asList(IndexController.MatchStats.getPlayerStats().stream()
-					        .filter(ply -> ply.getStatsType().equalsIgnoreCase(CricketUtil.BAT)&& FirstPlayerId == ply.getId())
-					        .findAny().orElse(null).getThisOverTxt().split(","))).stream().map(s -> s.replace("WIDE", "WD")
-					        .replace("NO_BALL", "NB").replace("LEG_BYE", "LB").replace("BYE", "B").replace("PENALTY", "PN")
-					        .replace("LOG_WICKET", "W").replace("WICKET", "W")).collect(Collectors.toList())   // ✅ reverse removed
-					        .toArray(new String[0])));
+//					this_data_str.add(String.join(",", new ArrayList<>(Arrays.asList(IndexController.MatchStats.getPlayerStats().stream()
+//					        .filter(ply -> ply.getStatsType().equalsIgnoreCase(CricketUtil.BAT)&& FirstPlayerId == ply.getId())
+//					        .findAny().orElse(null).getThisOverTxt().split(","))).stream().map(s -> s.replace("WIDE", "WD")
+//					        .replace("NO_BALL", "NB").replace("LEG_BYE", "LB").replace("BYE", "B").replace("PENALTY", "PN")
+//					        .replace("LOG_WICKET", "W").replace("WICKET", "W")).collect(Collectors.toList())   // ✅ reverse removed
+//					        .toArray(new String[0])));
+					this_data_str.add(String.join(",",Arrays.stream(IndexController.MatchStats.getPlayerStats().stream()
+						     .filter(ply -> ply.getStatsType().equalsIgnoreCase(CricketUtil.BAT)&& FirstPlayerId == ply.getId())
+						     .findAny().orElse(null).getThisOverTxt().split(","))
+						     .filter(s -> !s.contains("BYE") && !s.contains("LEG_BYE") && !s.contains("NO_BALL"))
+						     .map(s -> s.replace("WIDE", "WD").replace("LEG_BYE", "LB").replace("BYE", "B")
+						     .replace("NO_BALL", "NB").replace("PENALTY", "PN").replace("LOG_WICKET", "W")
+						     .replace("WICKET", "W")).collect(Collectors.toList())));
 					break;
 				case "BOWLERTIMELINE":
 					this_data_str.add(String.join(",", new ArrayList<>(Arrays.asList(IndexController.MatchStats.getPlayerStats().stream()
@@ -14746,8 +14755,6 @@ public class InfobarGfx
 				break;	
 				
 			case CricketUtil.EXTRAS:
-				String inn1CR="-",inn2CR = "-";
-				
 				inning = matchAllData.getMatch().getInning().stream().filter(inn -> inn.getIsCurrentInning().equalsIgnoreCase(CricketUtil.YES)).findAny().orElse(null);
 				if(inning == null) {
 					return "populateFullSection: Inning returned is NULL";
@@ -14998,7 +15005,7 @@ public class InfobarGfx
 					if(dls.get(i).getOver_left().split("\\.")[0].equalsIgnoreCase(String.valueOf(inning.getTotalOvers()))) {
 						for(int j=0;j<6;j++) {
 							if(inning.getTotalBalls() == j) {
-								this_data_str.add(CricketFunctions.populateDuckWorthLewis(matchAllData, IndexController.basePath).get(i+j).getWkts_down());
+								this_data_str.add(CricketFunctions.populateDuckWorthLewis(matchAllData, masterCricketDirectory).get(i+j).getWkts_down());
 								break;
 							}
 						}

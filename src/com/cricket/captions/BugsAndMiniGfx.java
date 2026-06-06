@@ -113,6 +113,7 @@ public class BugsAndMiniGfx
 	public Bugs bug;
 	public PerformanceBug performanceBug;
 	public Tournament tournament;
+	public String masterCricketDirectory;
 	
 	Set<String> processedMatches = new HashSet<>();
 	Map<String, HeadToHeadPlayer> playerMatchData = new HashMap<>();
@@ -123,7 +124,7 @@ public class BugsAndMiniGfx
 	
 	public BugsAndMiniGfx(List<PrintWriter> print_writers, Configuration config, List<Bugs> bugs, List<PerformanceBug> performanceBugs, List<Team> teams, 
 			List<VariousText> VariousText, CricketService cricketService, List<HeadToHeadPlayer> headToHead, List<Statistics> statistics, List<StatsType> statsTypes, 
-			List<Tournament> past_tournament_stats,List<Player> players) {
+			List<Tournament> past_tournament_stats,List<Player> players, String masterCricketDirectory) {
 		super();
 		this.print_writers = print_writers;
 		this.config = config;
@@ -137,6 +138,7 @@ public class BugsAndMiniGfx
 		this.statsTypes = statsTypes;
 		this.past_tournament_stats = past_tournament_stats;
 		this.Players = players;
+		this.masterCricketDirectory = masterCricketDirectory;
 	}
 	
 	public static String getMatchCode(String matchName) {
@@ -497,9 +499,9 @@ public class BugsAndMiniGfx
 	public String populatePointsTable(String whatToProcess, MatchAllData matchAllData,int WhichSide) throws ParseException, JAXBException, InterruptedException, 
 		StreamReadException, DatabindException, FileNotFoundException, IOException
 	{
-		if(new File(IndexController.basePath + CricketUtil.LEAGUE_TABLE_DIRECTORY + WhichGroup + CricketUtil.XML_EXTENSION).exists()) {
+		if(new File(masterCricketDirectory + CricketUtil.LEAGUE_TABLE_DIRECTORY + WhichGroup + CricketUtil.XML_EXTENSION).exists()) {
 			leagueTable = (LeagueTable)JAXBContext.newInstance(LeagueTable.class).createUnmarshaller().unmarshal(
-					new File(IndexController.basePath + CricketUtil.LEAGUE_TABLE_DIRECTORY + WhichGroup + CricketUtil.XML_EXTENSION));
+					new File(masterCricketDirectory + CricketUtil.LEAGUE_TABLE_DIRECTORY + WhichGroup + CricketUtil.XML_EXTENSION));
 		}
 		
 		if(leagueTable == null) {
@@ -6373,7 +6375,7 @@ public class BugsAndMiniGfx
 									+ inning.getBowling_team().getTeamBadge() + ", FINAL" + " \0",print_writers);
 						}else {
 							CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Minis$Datas$Row" + row_id + "$Out$NotOut$txt_BatterName*GEOM*TEXT SET v " 
-									+ inning.getBowling_team().getTeamBadge() + ", " + getMatchCode(matchAllData.getSetup().getMatchIdent().replace(".json", "")) + " \0",print_writers);
+									+ inning.getBowling_team().getTeamBadge() + " \0",print_writers);
 						}
 						
 						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Minis$Datas$Row" + row_id + "$Out$NotOut$txt_Balls*GEOM*TEXT SET " + bc.getBalls() + "\0",print_writers);
@@ -6409,7 +6411,7 @@ public class BugsAndMiniGfx
 							+ inning.getBowling_team().getTeamBadge() + ", FINAL" + " \0",print_writers);
 				}else {
 					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Minis$Datas$Row" + row_id + "$Out$NotOut$txt_BatterName*GEOM*TEXT SET v " 
-							+ inning.getBowling_team().getTeamBadge() + ", " + getMatchCode(matchAllData.getSetup().getMatchIdent().replace(".json", "")) + " \0",print_writers);
+							+ inning.getBowling_team().getTeamBadge() + " \0",print_writers);
 				}
 				
 				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Minis$Datas$Row" + row_id + "$Out$NotOut$txt_Balls*GEOM*TEXT SET \0",print_writers);
@@ -6603,7 +6605,7 @@ public class BugsAndMiniGfx
 							+ inning.getBatting_team().getTeamBadge() + ", FINAL" + " \0",print_writers);
 				}else {
 					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Minis$Datas$Row" + row_no1 + "$Out$NotOut$txt_BatterName*GEOM*TEXT SET v " 
-							+ inning.getBatting_team().getTeamBadge() + ", " + getMatchCode(matchAllData.getSetup().getMatchIdent().replace(".json", "")) + " \0",print_writers);
+							+ inning.getBatting_team().getTeamBadge() + " \0",print_writers);
 				}
 				
 				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Minis$Datas$Row" + row_no1 + "$Out$NotOut$txt_Balls*GEOM*TEXT SET \0",print_writers);

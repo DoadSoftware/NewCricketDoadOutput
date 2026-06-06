@@ -176,15 +176,17 @@ function initialiseForm(whatToProcess,dataToProcess)
 						});
 					}
 				});
-				inn.bowlingCard.forEach(function(boc){
-					if(boc.status == 'CURRENTBOWLER' || boc.status == 'LASTBOWLER'){
-						document.getElementById('bowler_text').innerHTML = boc.player.full_name + ' ' + boc.wickets 
-									+ '-' + boc.runs + ' [' + boc.overs + '.' + boc.balls + ']'+'&emsp;&ensp;';
-						document.getElementById('thisover_text').innerHTML = 'THIS OVER : ' + thisOverArr.map(s => s.replace("WIDE", "WD")
-								.replace("NO_BALL", "NB").replace("LEG_BYE", "LB").replace("BYE", "B").replace("PENALTY", "PN")
-								.replace("LOG_WICKET", "W").replace("WICKET", "W").replace("BOUNDARY","")).reverse().join(" , ")			
-					}
-				});	
+				if (inn && inn.bowlingCard && Array.isArray(inn.bowlingCard)) {
+				    inn.bowlingCard.forEach(function(boc) {
+				        if (boc.status == 'CURRENTBOWLER' || boc.status == 'LASTBOWLER') {
+				            document.getElementById('bowler_text').innerHTML = boc.player.full_name + ' ' + boc.wickets + '-' + boc.runs +
+				                ' [' + boc.overs + '.' + boc.balls + ']' + '&emsp;&ensp;'; 
+				            document.getElementById('thisover_text').innerHTML = 'THIS OVER : ' + thisOverArr.map(s => s.replace("WIDE", "WD")
+				                    .replace("NO_BALL", "NB").replace("LEG_BYE", "LB").replace("BYE", "B").replace("LOG_WICKET", "W")
+				                    .replace("WICKET", "W").replace("BOUNDARY", "")).reverse().join(" , ");
+				        }
+				    });
+				}
 			}
 		});
 		break;
@@ -542,7 +544,7 @@ function processUserSelectionData(whatToProcess,dataToProcess)
 					break;
 				 }
 				break;
-			case 'Control_F7':
+			case 'Control_F7': case 'm':
 				switch($('#selected_broadcaster').val().toUpperCase()){
 				case 'T20_MUMBAI':
 					addItemsToList(dataToProcess,null); 
@@ -571,7 +573,7 @@ function processUserSelectionData(whatToProcess,dataToProcess)
 				break;
 				
 			//changed shift_f11 to control_f11
-			case 'Shift_F10': case 'm': case 'Control_F1': case 'Control_a': case "Control_Shift_F10": case 'Alt_o':  case 'Shift_F3': case 'd': case 'e': case 'Control_F6': 
+			case 'Shift_F10': case 'Control_F1': case 'Control_a': case "Control_Shift_F10": case 'Alt_o':  case 'Shift_F3': case 'd': case 'e': case 'Control_F6': 
 			case 'Control_k': case 'Control_F10': case 'Control_F3':  case 'a': case 't': case 'n': case 'Shift_F1': case 'Shift_F2': case 'Shift_D': 
 			case 'Control_q': case 'Control_b': case 'o': case 'Control_F2': case 'b': case 'Alt_F11': case 'Shift_U': case 'Alt_j': case 'Alt_h': case 'Alt_Shift_L':	 
 			//case 'Shift_F':
@@ -1517,7 +1519,7 @@ function addItemsToList(whatToProcess,dataToProcess)
 	case "Shift_@": case "Shift_$": case "Control_Shift_@": case "Control_Alt_5": case "Alt_Shift_@": case "Control_Alt_6": case "Control_Alt_9": case "Control_Alt_0":
 	case "Alt_Shift_N": case "Alt_Shift_M":case 'Alt_Shift_Q': case 'Alt_Shift_P': case 'Alt_Shift_K': case 'Alt_Shift_X': case 'Alt_Shift_T': case 'Alt_Shift_V':
 	case 'Alt_Shift_F4':case "Alt_Shift_F5":case 'Alt_Shift_F6':case 'Alt_Shift_F7': case 'Shift_L': case 'h': case 'Control_Shift_(': case 'Shift_M': case 'Control_Alt_7':
-	case 'Control_Alt_8': case 'Alt_x': case 'Alt_f': case 'Control_F7':
+	case 'Control_Alt_8': case 'Alt_x': case 'Alt_f': case 'Control_F7': case 'm':
 	//Shift+2 and Shift+4
 	 //InfoBar LeftBottom-Middle-BatPP-BallPP-LastXBalls-Batsman/Sponsor-RightBottom
 	case "Alt_b": 
@@ -2169,6 +2171,28 @@ function addItemsToList(whatToProcess,dataToProcess)
 				cellCount = cellCount + 1;
 			}
 		    break;
+			
+		case 'm':
+			select = document.createElement('select');
+			select.id = 'selectPhotoImpact';
+			select.name = select.id;
+			
+			option = document.createElement('option');
+			option.value = 'WITHOUT_PHOTO';
+			option.text = 'WITHOUT PHOTO' ;
+			select.appendChild(option);
+			
+			option = document.createElement('option');
+			option.value = 'WITH_PHOTO';
+			option.text = 'WITH PHOTO' ;
+			select.appendChild(option);
+
+			select.setAttribute('onchange',"setDropdownOptionToSelectOptionArray(this, 0)");
+			row.insertCell(cellCount).appendChild(select);
+			setDropdownOptionToSelectOptionArray($(select),0);
+			removeSelectDuplicates(select.id);
+			cellCount = cellCount + 1;
+			break;
 		case 'Control_Shift_D':
 			header_text.innerHTML = 'DOUBLE MATCH IDENT/PROMO';
 			
@@ -10527,7 +10551,7 @@ function addItemsToList(whatToProcess,dataToProcess)
 			case "Alt_Shift_B":	case 'Control_0': case "Shift_@": case "Shift_$": case "Control_Shift_@": case "Control_Alt_5": case "Alt_Shift_@": case "Control_Alt_6":
 			case "Control_Alt_9": case "Control_Alt_0":	case 'r': case "Alt_Shift_N": case "Alt_Shift_M":case 'Alt_Shift_Q': case 'Alt_Shift_P': case 'Alt_Shift_K': 
 			case 'Alt_Shift_X': case 'Alt_Shift_T': case 'Alt_Shift_V':case 'Control_Shift_F5':case "Alt_Shift_F5":case 'Alt_Shift_F4':case 'Alt_Shift_F6':case 'Alt_Shift_F7':
-			case 'Shift_L': case 'h': case 'Control_Shift_(': case 'Shift_M': case 'Control_Alt_7': case 'Control_Alt_8': case 'Alt_x': case 'Alt_f': case 'Control_F7':
+			case 'Shift_L': case 'h': case 'Control_Shift_(': case 'Shift_M': case 'Control_Alt_7': case 'Control_Alt_8': case 'Alt_x': case 'Alt_f': case 'Control_F7': case 'm':
 
 				option = document.createElement('input');
 				option.type = 'button';

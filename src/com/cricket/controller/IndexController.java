@@ -27,10 +27,13 @@ import jakarta.xml.bind.JAXBException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttributes;
+
 import com.cricket.captions.Animation;
 import com.cricket.captions.BugsAndMiniGfx;
 import com.cricket.captions.Caption;
@@ -78,6 +81,7 @@ import com.fasterxml.jackson.databind.DatabindException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 @Controller
+@SessionAttributes(value = {"session_configuration", "session_MasterCricketDirectory"})
 public class IndexController 
 {
 	@Autowired
@@ -128,7 +132,6 @@ public class IndexController
 	private long speed_match_time_stamp = 0;
 	public boolean Plotter_file_change = false;
 	public String expiryDate = "";
-	public static String basePath = "";
 	
 	static {
 	    Map<String, Comparator<Tournament>> map = new HashMap<>();
@@ -171,8 +174,34 @@ public class IndexController
 	    SORT_MAP = Collections.unmodifiableMap(map);
 	}
 	
+	public String switchDbAndDirectory(String whatToProcess, String genderCategory) {
+
+		String baseDir = "";
+		if(whatToProcess.toUpperCase().contains("DIRECTORY")) {
+			if(genderCategory.equalsIgnoreCase("men")) {
+			    baseDir = "C:\\Sports\\CricketMen\\";
+			} else if(genderCategory.equalsIgnoreCase("women")) {
+			    baseDir = "C:\\Sports\\CricketWomen\\";
+			} else {
+			    baseDir = CricketUtil.CRICKET_DIRECTORY;
+			}
+		}
+		if(whatToProcess.toUpperCase().contains("DATABASE")) {
+			if(genderCategory.equalsIgnoreCase("men")) {
+			    DatabaseContextHolder.setDb("MEN");
+			} else if(genderCategory.equalsIgnoreCase("women")) {
+			    DatabaseContextHolder.setDb("WOMEN");
+			} else {
+			    DatabaseContextHolder.setDb("LOCAL");
+			}
+		}
+		return baseDir;
+	}
+	
 	@RequestMapping(value = {"/","/initialise"}, method={RequestMethod.GET,RequestMethod.POST}) 
-	public String initialisePage(ModelMap model, 
+	public String initialisePage(ModelMap model,
+		@ModelAttribute("session_MasterCricketDirectory") String session_MasterCricketDirectory,
+		@ModelAttribute("session_configuration") Configuration session_configuration,
 		@RequestParam(value = "select_type", required = false, defaultValue = "") String select_type) 
 		throws JAXBException, MalformedURLException, IOException, IllegalAccessException, InvocationTargetException 
 	{
@@ -197,7 +226,23 @@ public class IndexController
 		        return name.endsWith(".xml") && pathname.isFile();
 		    }
 		}));
-		DatabaseContextHolder.setDb("LOCAL");
+		
+		if(new File(CricketUtil.CRICKET_DIRECTORY + CricketUtil.CONFIGURATIONS_DIRECTORY + CricketUtil.OUTPUT_XML).exists()) {
+			session_configuration = (Configuration)JAXBContext.newInstance(Configuration.class).createUnmarshaller().unmarshal(
+					new File(CricketUtil.CRICKET_DIRECTORY + CricketUtil.CONFIGURATIONS_DIRECTORY + CricketUtil.OUTPUT_XML));
+		} else {
+			session_configuration = new Configuration();
+			JAXBContext.newInstance(Configuration.class).createMarshaller().marshal(session_configuration, 
+					new File(CricketUtil.CRICKET_DIRECTORY + CricketUtil.CONFIGURATIONS_DIRECTORY + CricketUtil.OUTPUT_XML));
+		}
+		
+		if(session_configuration != null && session_configuration.getCategory() != null) {
+			session_MasterCricketDirectory = switchDbAndDirectory("DIRECTORY_DATABASE", session_configuration.getCategory());
+		}
+		
+		model.addAttribute("session_configuration",session_configuration);
+		model.addAttribute("session_MasterCricketDirectory", session_MasterCricketDirectory);
+		
 		return "initialise";
 	}
 	
@@ -236,7 +281,9 @@ public class IndexController
 	
 	@RequestMapping(value = {"/output"}, method = {RequestMethod.GET, RequestMethod.POST})
 	public String outputPage(ModelMap model,
-
+			@ModelAttribute("session_MasterCricketDirectory") String session_MasterCricketDirectory, 
+			@ModelAttribute("session_configuration") Configuration session_configuration,
+			
 	        @RequestParam(value = "configuration_file_name", required = false, defaultValue = "") String configuration_file_name,
 	        @RequestParam(value = "select_cricket_matches", required = false, defaultValue = "") String selectedMatch,
 	        @RequestParam(value = "select_type", required = false, defaultValue = "") String select_type,
@@ -286,43 +333,33 @@ public class IndexController
 	    }
 
 	    expiryDate = String.valueOf(ChronoUnit.DAYS.between(currentDate, expiryDateLocal));
-
+	    
 	    // COMMON VARIABLES
 	    boolean isArchive = select_type != null && !select_type.trim().isEmpty() && !select_type.equals(",");
 	    String seriesType = isArchive ? select_type.split(",", -1)[0]: "";
 	    
-	    if (Category.equalsIgnoreCase("men")) {
-	    	basePath = "C:\\Sports\\CricketMen\\";
-	    	DatabaseContextHolder.setDb("MEN");
-	    } else if (Category.equalsIgnoreCase("women")) {
-	    	basePath = "C:\\Sports\\CricketWomen\\";
-	    	DatabaseContextHolder.setDb("WOMEN");
-	    }else {
-	    	basePath = isArchive ? CricketUtil.CRICKET_ARCHIVE_DIRECTORY + CricketUtil.ARCHIVE_MATCHES_DIRECTORY 
-					+ seriesType + "/" : CricketUtil.CRICKET_DIRECTORY;
-	    	DatabaseContextHolder.setDb("LOCAL");
-	    }
-	    
-	    speedFile = new File(basePath + "Speed\\SPEED.txt");
-	    System.out.println("basePath - " + basePath);
-	    
-	    // LAST MODIFIED
-	    System.out.println("basePath = " + basePath);
-	    last_match_time_stamp = new File(basePath + CricketUtil.MATCHES_DIRECTORY + selectedMatch).lastModified();
-
 	    // CONFIGURATION
 	    session_configuration = new Configuration(selectedMatch,select_broadcaster,select_second_broadcaster,vizIPAddress,vizPortNumber,
 	            vizLanguage, qtIPAddress, qtPortNumber, primaryVariousOptions, vizSecondaryIPAddress,vizSecondaryPortNumber, vizSecondaryLanguage,
 	            previewOnOrOff,selectInfobar, generateInteractiveFile,Category,seriesType);
-				
-	    session_configuration.setCategory(Category);
-
+		
+	    if(session_configuration != null && session_configuration.getCategory() != null) {
+			session_MasterCricketDirectory = switchDbAndDirectory("DIRECTORY_DATABASE", session_configuration.getCategory());
+		}
+	    
 	    JAXBContext.newInstance(Configuration.class).createMarshaller().marshal(session_configuration,new File(
 	                CricketUtil.CRICKET_SERVER_DIRECTORY + CricketUtil.CONFIGURATIONS_DIRECTORY+ configuration_file_name));
+	   
+	    speedFile = new File(session_MasterCricketDirectory + "Speed\\SPEED.txt");
+	    System.out.println("basePath - " + session_MasterCricketDirectory);
+	    
+	    // LAST MODIFIED
+	    System.out.println("basePath = " + session_MasterCricketDirectory);
+	    last_match_time_stamp = new File(session_MasterCricketDirectory + CricketUtil.MATCHES_DIRECTORY + selectedMatch).lastModified();
 
 	    // PRINT WRITERS + DB
 	    print_writers = CricketFunctions.processPrintWriter(session_configuration);
-	    GetVariousDBData("", session_configuration, headToHead);
+	    GetVariousDBData("", session_configuration, headToHead, session_MasterCricketDirectory);
 
 	    // INITIALIZE OBJECTS
 	    this_scene = new Scene();
@@ -330,15 +367,15 @@ public class IndexController
 	    session_match = new MatchAllData();
 
 	    // LOAD FILES
-	    session_match.setSetup(loadFile(basePath + CricketUtil.SETUP_DIRECTORY + selectedMatch, Setup.class));
-	    session_match.setMatch(loadFile(basePath + CricketUtil.MATCHES_DIRECTORY + selectedMatch,Match.class));
-	    session_match.setEventFile(loadFile(basePath + CricketUtil.EVENT_DIRECTORY + selectedMatch,EventFile.class));
+	    session_match.setSetup(loadFile(session_MasterCricketDirectory + CricketUtil.SETUP_DIRECTORY + selectedMatch, Setup.class));
+	    session_match.setMatch(loadFile(session_MasterCricketDirectory + CricketUtil.MATCHES_DIRECTORY + selectedMatch,Match.class));
+	    session_match.setEventFile(loadFile(session_MasterCricketDirectory + CricketUtil.EVENT_DIRECTORY + selectedMatch,EventFile.class));
 
 	    // INITIALIZE MATCH
 	    if (session_match.getMatch() != null) {
 	        session_match.getMatch().setMatchFileName(selectedMatch);
 	        
-	        initializeMatchData(true,session_match,session_configuration,session_players,session_team,session_ground);
+	        initializeMatchData(true,session_match,session_configuration,session_players,session_team,session_ground,session_MasterCricketDirectory);
 	    }
 
 	    // HEAD TO HEAD
@@ -350,7 +387,7 @@ public class IndexController
 	    }
 
 	    if (headToHead.getH2hPlayer().isEmpty()) {
-	        HeadToHead extractedH2H = CricketFunctions.extractHeadToHead(session_match,cricketService, basePath);
+	        HeadToHead extractedH2H = CricketFunctions.extractHeadToHead(session_match,cricketService, session_MasterCricketDirectory);
 	        headToHead.setH2hPlayer(extractedH2H.getH2hPlayer());
 	        headToHead.setH2hTeam(extractedH2H.getH2hTeam());
 	    }
@@ -359,7 +396,7 @@ public class IndexController
 	        session_match.getMatch().setMatchStats(MatchStats);
 	    }
 
-	    GetVariousDBData("NEW", session_configuration, headToHead);
+	    GetVariousDBData("NEW", session_configuration, headToHead, session_MasterCricketDirectory);
 
 	    // LOAD SCENES
 	    loadScenes(select_broadcaster);
@@ -386,12 +423,15 @@ public class IndexController
 	    model.addAttribute("select_second_broadcaster", select_second_broadcaster);
 	    model.addAttribute("select_broadcaster", select_broadcaster);
 	    model.addAttribute("select_type", select_type);
+	    model.addAttribute("session_MasterCricketDirectory", session_MasterCricketDirectory);
 
 	    return "output";
 	}
 	
 	@RequestMapping(value = {"/processCricketProcedures.html"}, method={RequestMethod.GET,RequestMethod.POST})    
 	public @ResponseBody String processCricketProcedures(
+		@ModelAttribute("session_MasterCricketDirectory") String session_MasterCricketDirectory,
+		@ModelAttribute("session_configuration") Configuration session_configuration,
 		@RequestParam(value = "whatToProcess", required = false, defaultValue = "") String whatToProcess,
 		@RequestParam(value = "valueToProcess", required = false, defaultValue = "") String valueToProcess) 
 			throws Exception 
@@ -402,44 +442,32 @@ public class IndexController
 		switch (process) {
 		case "GET-CATEGORY-DATA":
 		    String category = valueToProcess.trim().toLowerCase(); // "men" or "women"
-
-		    File matchDir;
-		    if (category.equalsIgnoreCase("men")) {
-		        matchDir = new File("C:\\Sports\\CricketMen\\Matches\\");
-		        DatabaseContextHolder.setDb("MEN");
-		    } else if (category.equalsIgnoreCase("women")) {
-		        matchDir = new File("C:\\Sports\\CricketWomen\\Matches\\");
-		        DatabaseContextHolder.setDb("WOMEN");
-		    } else {
-		        matchDir = new File(CricketUtil.CRICKET_SERVER_DIRECTORY + CricketUtil.MATCHES_DIRECTORY);
-		    }
-
-		    File[] files = matchDir.listFiles(f -> f.isFile() && f.getName().toLowerCase().endsWith(".json"));
+		    String baseDir = switchDbAndDirectory("DIRECTORY_DATABASE", category);
+		    File[] files = new File(baseDir + CricketUtil.MATCHES_DIRECTORY).listFiles(f -> f.isFile() && f.getName().toLowerCase().endsWith(".json"));
 		    List<String> matchNames = new ArrayList<>();
 		    if (files != null) {
 		        for (File f : files) {
 		            matchNames.add(f.getName());
 		        }
 		    }
-
 		    Map<String, Object> response = new HashMap<>();
 		    response.put("configuration", session_configuration);
 		    response.put("matchFiles", matchNames);
 		    return objectMapper.writeValueAsString(response);
 		case "HEAD_TO_HEAD_FILE":
-            return handleHeadToHead();
+            return handleHeadToHead(session_MasterCricketDirectory);
         case "GET-CONFIG-DATA":
             return handleConfigData(valueToProcess);
         case "DB_DATA_READ":
-            return handleDbRead();
+            return handleDbRead(session_MasterCricketDirectory);
         case "RE_READ_DATA":
-            return handleReReadData();
+            return handleReReadData(session_MasterCricketDirectory);
         case "TURN_ON_OR_OFF_SPEED":
             return handleSpeedToggle(valueToProcess);
         case "TURN_ON_OR_OFF_AUDIO":
             return handleAudioToggle(valueToProcess);
         case "READ-MATCH-AND-POPULATE":
-            return handleReadMatchAndPopulate();
+            return handleReadMatchAndPopulate(session_MasterCricketDirectory);
             
 		default:
 			switch(session_configuration.getBroadcaster()) {
@@ -486,9 +514,9 @@ public class IndexController
 			}
 			
 			if(process.contains("GRAPHICS-OPTIONS") || process.contains("GRAPHICS-OPTIONS_DATA")) {
-				return objectMapper.writeValueAsString(GetGraphicOption(valueToProcess,session_configuration, headToHead));
+				return objectMapper.writeValueAsString(GetGraphicOption(valueToProcess,session_configuration, headToHead, session_MasterCricketDirectory));
 			}else if(process.contains("POPULATE-GRAPHICS")) {
-				return handlePopulateGraphics(valueToProcess);
+				return handlePopulateGraphics(valueToProcess, session_MasterCricketDirectory);
 			}
 			else if(process.contains("ANIMATE-IN-GRAPHICS") || process.contains("ANIMATE-OUT-GRAPHICS") || 
 					process.contains("ANIMATE-OUT-INFOBAR") || process.contains("QUIDICH-COMMANDS") || 
@@ -507,7 +535,7 @@ public class IndexController
 					}
 				}
 				
-				processAnimations(process, session_configuration, valueToProcess, print_writers, headToHead);
+				processAnimations(process, session_configuration, valueToProcess, print_writers, headToHead, session_MasterCricketDirectory);
 			}else if(process.contains("ANIMATE-OUT-SECOND_PLAYING")) {
 				switch (session_configuration.getBroadcaster()) {
 				case Constants.BENGAL_T20:
@@ -568,7 +596,7 @@ public class IndexController
 					return objectMapper.writeValueAsString(this_caption.this_infobarGfx.GetPreviewData(valueToProcess,session_configuration,session_match));
 				}
 			}else if(whatToProcess.contains("ANIMATE-OUT-ALL_INFOBAR_PART")) {
-				infobarAnimateOutAllSection(session_configuration, session_match, print_writers, headToHead);
+				infobarAnimateOutAllSection(session_configuration, session_match, print_writers, headToHead, session_MasterCricketDirectory);
 			}
 			else if(process.toUpperCase().equalsIgnoreCase("POPULATE-PROFILE_IN_AT")) {
 				this_animation.processT20_MumbaiFullFramesPreview(this_animation.whichGraphicOnScreen, print_writers, 2, session_configuration,"");
@@ -586,8 +614,8 @@ public class IndexController
 		}
 	}
 	
-	private String handleHeadToHead() throws Exception {
-	    CricketFunctions.exportMatchData(session_match, basePath);
+	private String handleHeadToHead(String session_MasterCricketDirectory) throws Exception {
+	    CricketFunctions.exportMatchData(session_match, session_MasterCricketDirectory);
 	    return objectMapper.writeValueAsString(session_match);
 	}
 	private String handleConfigData(String valueToProcess)throws Exception {
@@ -595,38 +623,19 @@ public class IndexController
 	                    .unmarshal(new File(CricketUtil.CRICKET_DIRECTORY + CricketUtil.CONFIGURATIONS_DIRECTORY + valueToProcess));
 	    return objectMapper.writeValueAsString(session_configuration);
 	}
-	private String handleDbRead() throws Exception {
-		if (session_configuration.getCategory().equalsIgnoreCase("men")) {
-	    	basePath = "C:\\Sports\\CricketMen\\";
-	    	DatabaseContextHolder.setDb("MEN");
-	    } else if (session_configuration.getCategory().equalsIgnoreCase("women")) {
-	    	basePath = "C:\\Sports\\CricketWomen\\";
-	    	DatabaseContextHolder.setDb("WOMEN");
-	    }else {
-	    	basePath = CricketUtil.CRICKET_DIRECTORY;
-	    	DatabaseContextHolder.setDb("LOCAL");
-	    }
+	private String handleDbRead(String session_MasterCricketDirectory) throws Exception {
+		switchDbAndDirectory("DATABASE", session_configuration.getCategory());
 		
-	    GetVariousDBData("ONLY_DB",session_configuration,headToHead);
+	    GetVariousDBData("ONLY_DB", session_configuration, headToHead, session_MasterCricketDirectory);
 	    return objectMapper.writeValueAsString(session_match);
 	}
-	private String handleReReadData() throws Exception {
-		if (session_configuration.getCategory().equalsIgnoreCase("men")) {
-	    	basePath = "C:\\Sports\\CricketMen\\";
-	    	DatabaseContextHolder.setDb("MEN");
-	    } else if (session_configuration.getCategory().equalsIgnoreCase("women")) {
-	    	basePath = "C:\\Sports\\CricketWomen\\";
-	    	DatabaseContextHolder.setDb("WOMEN");
-	    }else {
-	    	basePath = CricketUtil.CRICKET_DIRECTORY;
-	    	DatabaseContextHolder.setDb("LOCAL");
-	    }
-		
+	private String handleReReadData(String session_MasterCricketDirectory) throws Exception {
+		String basePath = switchDbAndDirectory("DIRECTORY_DATABASE", session_configuration.getCategory());
 	    HeadToHead extractedH2H = CricketFunctions.extractHeadToHead(session_match,cricketService, basePath);
 	    headToHead.setH2hPlayer(extractedH2H.getH2hPlayer());
 	    headToHead.setH2hTeam(extractedH2H.getH2hTeam());
 
-	    GetVariousDBData("UPDATE",session_configuration,headToHead);
+	    GetVariousDBData("UPDATE", session_configuration, headToHead, basePath);
 	    return objectMapper.writeValueAsString(session_match);
 	}
 	private String handleSpeedToggle(String valueToProcess) {
@@ -639,24 +648,24 @@ public class IndexController
 	    return null;
 	}
 
-	private String handleReadMatchAndPopulate() throws Exception {
+	private String handleReadMatchAndPopulate(String session_MasterCricketDirectory) throws Exception {
 	    if (session_match == null || session_match.getMatch() == null) {
 	        return objectMapper.writeValueAsString(null);
 	    }
-	    File matchFile = new File(basePath + CricketUtil.MATCHES_DIRECTORY+ session_match.getMatch().getMatchFileName());
+	    File matchFile = new File(session_MasterCricketDirectory + CricketUtil.MATCHES_DIRECTORY+ session_match.getMatch().getMatchFileName());
 
 	    if (last_match_time_stamp != matchFile.lastModified()) {
 	        session_match = CricketFunctions.populateMatchVariables(CricketFunctions.readOrSaveMatchFile(CricketUtil.READ,
-	                                CricketUtil.MATCH + "," + CricketUtil.EVENT,session_match,session_configuration,basePath),
+	                                CricketUtil.MATCH + "," + CricketUtil.EVENT,session_match,session_configuration,session_MasterCricketDirectory),
 	                        session_players,session_team,session_ground);
 	        session_match.getSetup().setGenerateInteractiveFile(session_configuration.getGenerateInteractiveFile());
 	        last_match_time_stamp = matchFile.lastModified();
 	        MatchStats = CricketFunctions.getAllEvents(session_match,session_configuration.getBroadcaster(),session_match.getEventFile().getEvents());
-	        CricketFunctions.getInteractive(session_match,"FULL_WRITE", basePath);
+	        CricketFunctions.getInteractive(session_match,"FULL_WRITE", session_MasterCricketDirectory);
 	        session_match.getMatch().setMatchStats(MatchStats);
 	        updateInfobar();
 	    }
-	    handleSpeedGraphics();
+	    handleSpeedGraphics(session_MasterCricketDirectory);
 	    handleFieldPlotter();
 	    return objectMapper.writeValueAsString(session_match);
 	}
@@ -667,7 +676,7 @@ public class IndexController
 	        this_caption.this_infobarGfx.updateInfobar(print_writers, session_match);
 	    }
 	}
-	private void handleSpeedGraphics() throws Exception {
+	private void handleSpeedGraphics(String session_MasterCricketDirectory) throws Exception {
 	    if (!show_speed || !speedFile.exists()) {
 	        return;
 	    }
@@ -684,7 +693,8 @@ public class IndexController
 
 	    switch (session_configuration.getBroadcaster()) {
 	        case Constants.T20_MUMBAI: case Constants.NPL: case Constants.APL: case Constants.VIDARBHA:
-	            this_caption.this_infobarGfx.speed(CricketFunctions.processPrintWriter(session_configuration).get(0),session_match,session_configuration, basePath);
+	            this_caption.this_infobarGfx.speed(CricketFunctions.processPrintWriter(session_configuration).get(0),session_match,session_configuration, 
+	            		session_MasterCricketDirectory);
 	            break;
 	        case Constants.ISPL:
 	            this_caption.this_lofInfobarGfx.speed(CricketFunctions.processPrintWriter(session_configuration).get(0),session_match);
@@ -713,7 +723,7 @@ public class IndexController
 	        this_caption.this_infobarGfx.updateFieldPlotter(print_writers,session_match);
 	    }
 	}
-	private String handlePopulateGraphics(String valueToProcess)throws Exception {
+	private String handlePopulateGraphics(String valueToProcess, String session_MasterCricketDirectory)throws Exception {
 		String graphicsType = this_animation.getTypeOfGraphicsOnScreen(session_configuration, valueToProcess);
 		String currentGraphicsType = this_animation.getTypeOfGraphicsOnScreen(session_configuration,
 				this_animation.whichGraphicOnScreen);
@@ -780,7 +790,7 @@ public class IndexController
 					break;
 				default:
 					if (this_caption.status.equalsIgnoreCase(Constants.OK)) {
-						processAnimations("ANIMATE-IN-GRAPHICS",session_configuration,valueToProcess,print_writers,headToHead);
+						processAnimations("ANIMATE-IN-GRAPHICS",session_configuration,valueToProcess,print_writers,headToHead,session_MasterCricketDirectory);
 						this_caption.status = CricketUtil.YES;
 					}
 					return objectMapper.writeValueAsString(this_caption);
@@ -788,7 +798,7 @@ public class IndexController
 				break;
 			default:
 				if (this_caption.status.equalsIgnoreCase(Constants.OK)) {
-					processAnimations("ANIMATE-IN-GRAPHICS",session_configuration,valueToProcess,print_writers,headToHead);
+					processAnimations("ANIMATE-IN-GRAPHICS",session_configuration,valueToProcess,print_writers,headToHead,session_MasterCricketDirectory);
 					this_caption.status = CricketUtil.YES;
 				}
 				return objectMapper.writeValueAsString(this_caption);
@@ -908,7 +918,8 @@ public class IndexController
 		}
 	}
 	
-	public void infobarAnimateOutAllSection(Configuration session_configuration, MatchAllData session_match, List<PrintWriter> print_writers, HeadToHead headToHead) throws Exception {
+	public void infobarAnimateOutAllSection(Configuration session_configuration, MatchAllData session_match, List<PrintWriter> print_writers, 
+			HeadToHead headToHead, String session_MasterCricketDirectory) throws Exception {
 		
 		int Inn_Number = session_match.getMatch().getInning().stream().filter(inn -> inn.getIsCurrentInning()
 				.equalsIgnoreCase(CricketUtil.YES)).findAny().orElse(null).getInningNumber();
@@ -926,7 +937,8 @@ public class IndexController
 					this_animation.caption = this_caption;
 					TimeUnit.MILLISECONDS.sleep(1000);
 					processAnimations("ANIMATE-IN-GRAPHICS", session_configuration, "Alt_2," + Inn_Number + 
-							(this_caption.this_infobarGfx.infobar.getOmo_value_bat() == 0 ?",BATSMAN":",PHOTO BATSMAN"), print_writers, headToHead);
+							(this_caption.this_infobarGfx.infobar.getOmo_value_bat() == 0 ?",BATSMAN":",PHOTO BATSMAN"), print_writers, headToHead, 
+							session_MasterCricketDirectory);
 				}
 			}
 			
@@ -935,7 +947,8 @@ public class IndexController
 					this_caption.PopulateGraphics("Alt_8," + Inn_Number + ",BOWLER", session_match);
 					this_animation.caption = this_caption;
 					TimeUnit.MILLISECONDS.sleep(1000);
-					processAnimations("ANIMATE-IN-GRAPHICS", session_configuration, "Alt_8," + Inn_Number + ",BOWLER", print_writers, headToHead);
+					processAnimations("ANIMATE-IN-GRAPHICS", session_configuration, "Alt_8," + Inn_Number + ",BOWLER", print_writers, headToHead, 
+							session_MasterCricketDirectory);
 				}
 			}
 			break;
@@ -964,7 +977,7 @@ public class IndexController
 	}
 	
 	public void processAnimations(String whatToProcess, Configuration session_configuration, String valueToProcess, 
-		List<PrintWriter> print_writers, HeadToHead headToHead) throws Exception
+		List<PrintWriter> print_writers, HeadToHead headToHead, String session_MasterCricketDirectory) throws Exception
 	{
 		if(whatToProcess.contains("ANIMATE-IN-GRAPHICS")) {
 			switch(this_animation.getTypeOfGraphicsOnScreen(session_configuration,valueToProcess)){
@@ -997,7 +1010,7 @@ public class IndexController
 						this_animation.AnimateIn(valueToProcess, print_writers, session_configuration);
 					}
 				}else if(valueToProcess.split(",")[0].equalsIgnoreCase("Alt_e")){
-					GetGraphicOption(valueToProcess,session_configuration, headToHead);
+					GetGraphicOption(valueToProcess,session_configuration, headToHead, session_MasterCricketDirectory);
 				}else {
 					if(session_configuration.getWhichInfobar().equalsIgnoreCase("LOF_INFOBAR")) {	
 						switch(valueToProcess.split(",")[0]) {
@@ -1217,7 +1230,8 @@ public class IndexController
 	}
 	
 	@SuppressWarnings("unchecked")
-	public <T> List<T> GetGraphicOption(String whatToProcess,Configuration session_configuration, HeadToHead headToHead) throws Exception {
+	public <T> List<T> GetGraphicOption(String whatToProcess,Configuration session_configuration, HeadToHead headToHead, 
+			String session_MasterCricketDirectory) throws Exception {
 	  switch ((whatToProcess.contains(",")?whatToProcess.split(",")[0]:whatToProcess)) {
 	  	case "Alt_3":
 		    StatsType stat = (whatToProcess.split(",").length > 2) ? 
@@ -1388,8 +1402,8 @@ public class IndexController
 			mvp_leaderBoard mvp = new mvp_leaderBoard();
 			List<Player> mvp_player = new ArrayList<Player>();
  			
-			if(new File(basePath + CricketUtil.MVP).exists()) {
-				mvp = (objectMapper.readValue(new File(basePath + CricketUtil.MVP), mvp_leaderBoard.class));
+			if(new File(session_MasterCricketDirectory + CricketUtil.MVP).exists()) {
+				mvp = (objectMapper.readValue(new File(session_MasterCricketDirectory + CricketUtil.MVP), mvp_leaderBoard.class));
 			}
 			for (int i = 0; i < mvp.getData().getTop().size(); i++) {
 				String player_id = mvp.getData().getTop().get(i).getPlayerId();
@@ -1463,7 +1477,7 @@ public class IndexController
 		return null;
 	}
 	
-	public void GetVariousDBData(String typeOfUpdate,Configuration config,HeadToHead headToHead)throws Exception {
+	public void GetVariousDBData(String typeOfUpdate,Configuration config,HeadToHead headToHead, String session_MasterCricketDirectory)throws Exception {
 
 	    if (!Set.of(Constants.ICC_U19_2023,Constants.ISPL,Constants.BENGAL_T20,Constants.NPL,Constants.LEGENDS,Constants.T20_MUMBAI,
 	    		Constants.MPL,Constants.APL,Constants.VIDARBHA).contains(config.getBroadcaster())) {
@@ -1471,8 +1485,8 @@ public class IndexController
 	    }
 
 	    loadSessionData();
-	    if (new File(basePath + "ParScores BB.html").exists() && session_match != null) {
-	        session_dls = CricketFunctions.populateDuckWorthLewis(session_match, basePath);
+	    if (new File(session_MasterCricketDirectory + "ParScores BB.html").exists() && session_match != null) {
+	        session_dls = CricketFunctions.populateDuckWorthLewis(session_match, session_MasterCricketDirectory);
 	    }
 	    switch (typeOfUpdate) {
 	    case "ONLY_DB":
@@ -1480,15 +1494,16 @@ public class IndexController
 	        break;
 	    case "NEW":
 	        loadTournamentData(config, headToHead);
-	        this_caption = new Caption(print_writers,config,session_statistics,cricketService.getAllStatsType(),session_name_super,  session_bugs,session_infoBarStats,session_fixture,session_team,session_ground,
-	        		session_variousText,session_commentator, session_staff,session_players,session_pott,session_playoff,session_teamChanges,session_performance_bug,new FullFramesGfx(),new LowerThirdGfx(),
-	        		new InfobarGfx(),new LofInfobarGfx(),new BugsAndMiniGfx(),1,"","-",past_tournament_stats,past_tape,session_dls,headToHead.getH2hPlayer(),past_tournament_stats,cricketService);
+	        this_caption = new Caption(print_writers,config,session_statistics,cricketService.getAllStatsType(),session_name_super,  session_bugs,session_infoBarStats,
+	        		session_fixture,session_team,session_ground,session_variousText,session_commentator, session_staff,session_players,session_pott,session_playoff,
+	        		session_teamChanges,session_performance_bug,new FullFramesGfx(),new LowerThirdGfx(),new InfobarGfx(),new LofInfobarGfx(),new BugsAndMiniGfx(),
+	        		1,"","-",past_tournament_stats,past_tape,session_dls,headToHead.getH2hPlayer(),past_tournament_stats,cricketService,session_MasterCricketDirectory);
 
 	        updateBoundaryData();
 	        updateGraphicsData(config);
 	        break;
 	    case "UPDATE":
-	        initializeMatchData(false, session_match, config, session_players, session_team, session_ground);
+	        initializeMatchData(false, session_match, config, session_players, session_team, session_ground, session_MasterCricketDirectory);
 	        loadTournamentData(config, headToHead);
 	        updateBoundaryData();
 	        updateGraphicsData(config);
@@ -1615,17 +1630,18 @@ public class IndexController
 	}
 	
 	public static MatchAllData initializeMatchData(boolean withMatchStats, MatchAllData session_match,Configuration session_configuration, List<Player> session_players, 
-			List<Team> session_team, List<Ground> session_ground) throws StreamWriteException, DatabindException, JAXBException, IOException, URISyntaxException {
+			List<Team> session_team, List<Ground> session_ground, String session_MasterCricketDirectory) throws StreamWriteException, DatabindException, 
+			JAXBException, IOException, URISyntaxException {
 
 	    if(withMatchStats) {
 	    	MatchStats = CricketFunctions.getAllEvents(session_match,session_configuration.getBroadcaster(),session_match.getEventFile().getEvents());
 	    }
 	    
 	    session_match = CricketFunctions.populateMatchVariables(CricketFunctions.readOrSaveMatchFile(CricketUtil.READ,CricketUtil.SETUP + "," + CricketUtil.MATCH 
-	    			+ "," + CricketUtil.EVENT,session_match,session_configuration, basePath),session_players,session_team,session_ground);
+	    			+ "," + CricketUtil.EVENT,session_match,session_configuration, session_MasterCricketDirectory),session_players,session_team,session_ground);
 	    session_match.getSetup().setMatchFileTimeStamp(new SimpleDateFormat("dd-MM-yyyy HH:mm:ss").format(new Date()));
 	    session_match.getSetup().setGenerateInteractiveFile(session_configuration.getGenerateInteractiveFile());
-	    CricketFunctions.getInteractive(session_match, "FULL_WRITE", basePath);
+	    CricketFunctions.getInteractive(session_match, "FULL_WRITE", session_MasterCricketDirectory);
 
 	    return session_match;
 	}
@@ -1673,5 +1689,12 @@ public class IndexController
 	            break;
 	    }
 	}
-	
+	@ModelAttribute("session_configuration")
+	public Configuration session_configuration(){
+		return new Configuration();
+	} 
+	@ModelAttribute("session_MasterCricketDirectory")
+	public String session_MasterCricketDirectory(){
+		return new String();
+	}
 }

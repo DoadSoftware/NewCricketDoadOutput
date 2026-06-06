@@ -121,6 +121,7 @@ public class LofInfobarGfx
 	public Fixture fixture;
 	public Tournament tournament;
 	public LeagueTable leagueTable;
+	public String masterCricketDirectory;
 	
 	public LofInfobarGfx() {
 		super();
@@ -129,7 +130,7 @@ public class LofInfobarGfx
 
 	public LofInfobarGfx(Configuration config, String slashOrDash, List<PrintWriter> print_writers, List<Statistics> statistics, List<StatsType> statsTypes, 
 			List<InfobarStats> infobarStats, List<Ground> Grounds, List<Commentator> commentators, List<DuckWorthLewis> dls, List<Player> players, 
-			List<HeadToHeadPlayer> headToHead, List<Tournament> past_tournament_stats, CricketService cricketService) {
+			List<HeadToHeadPlayer> headToHead, List<Tournament> past_tournament_stats, CricketService cricketService, String masterCricketDirectory) {
 		super();
 		this.config = config;
 		this.slashOrDash = slashOrDash;
@@ -144,6 +145,7 @@ public class LofInfobarGfx
 		this.headToHead = headToHead;
 		this.past_tournament_stats = past_tournament_stats;
 		this.cricketService = cricketService;
+		this.masterCricketDirectory = masterCricketDirectory;
 		
 	}
 

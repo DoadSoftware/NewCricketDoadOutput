@@ -69,6 +69,7 @@ public class Constants
 	public final static String STRAIGHT_1024 = "\\\\STRAIGHT_1024\\\\";
 	public final static String SMALL_512 = "\\\\SMALL_512\\\\";
 	public final static String BIG_1024 = "\\\\BIG_1024\\\\";
+	public final static String BLANK_IMG = "\\\\Blank";
 	
 	public final static String LOCAL_ICC_U19_2023_PHOTOS_PATH = "c\\Images\\ICC\\U19_MENS";
 	
