@@ -7180,20 +7180,24 @@ public class InfobarGfx
 						
 						if(config.getPrimaryIpAddress().equalsIgnoreCase(Constants.LOCALHOST)) {
 							CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_Infobar$All$Normal$Section4$Side" + WhichSide + "$NextToBat$Image$imgPlayer"
-									+ "*TEXTURE*IMAGE SET " + Constants.T20_MUMBAI_PHOTO_PATH + (config.getCategory().equalsIgnoreCase("MEN") ? "\\\\" + "MEN" : "\\\\" + "WOMEN") 
-									+ "\\\\" + Constants.CENTRE_512 + "\\\\" + inning.getBatting_team().getTeamName4() + "\\\\" + bc.getPlayer().getPhoto() + CricketUtil.PNG_EXTENSION 
-									+ "\0", print_writers);
+									+ "*TEXTURE*IMAGE SET " + Constants.T20_MUMBAI_PHOTO_PATH + (config.getCategory().equalsIgnoreCase("MEN") ? "MEN" : "WOMEN") 
+									+ Constants.BLANK_IMG + CricketUtil.PNG_EXTENSION + "\0", print_writers);
+							
+							CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_Infobar$All$Normal$Section4$Side" + WhichSide + "$NextToBat$Image$imgPlayer"
+									+ "*TEXTURE*IMAGE SET " + Constants.T20_MUMBAI_PHOTO_PATH + (config.getCategory().equalsIgnoreCase("MEN") ? "MEN" : "WOMEN") 
+									+ Constants.CENTRE_512 + inning.getBatting_team().getTeamName4() + "\\\\" + bc.getPlayer().getPhoto() + CricketUtil.PNG_EXTENSION + "\0", print_writers);
 						}else {
 							CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_Infobar$All$Normal$Section4$Side" + WhichSide + "$NextToBat$Image$imgPlayer"
 									+ "*TEXTURE*IMAGE SET " + "\\\\" + config.getPrimaryIpAddress() + "\\\\" + Constants.T20_MUMBAI_PHOTO_PATH_NETWORK + (config.getCategory().equalsIgnoreCase("MEN") 
-									? "\\\\" + "MEN" : "\\\\" + "WOMEN") + "\\\\" + Constants.CENTRE_512 + "\\\\" + inning.getBatting_team().getTeamName4() + "\\\\" + bc.getPlayer().getPhoto() 
-									+ CricketUtil.PNG_EXTENSION + "\0", print_writers);
+									? "MEN" : "WOMEN") + Constants.BLANK_IMG + CricketUtil.PNG_EXTENSION + "\0", print_writers);
+							
+							CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_Infobar$All$Normal$Section4$Side" + WhichSide + "$NextToBat$Image$imgPlayer"
+									+ "*TEXTURE*IMAGE SET " + "\\\\" + config.getPrimaryIpAddress() + "\\\\" + Constants.T20_MUMBAI_PHOTO_PATH_NETWORK + (config.getCategory().equalsIgnoreCase("MEN") 
+									? "MEN" : "WOMEN") + Constants.CENTRE_512 + inning.getBatting_team().getTeamName4() + "\\\\" + bc.getPlayer().getPhoto() + CricketUtil.PNG_EXTENSION + "\0", print_writers);
 						}
 						break;
 					}
 				}
-				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Infobar$Right$Side_" + WhichSide + "$NextToBat$Header$txt_Header"
-						+ "*GEOM*TEXT SET " + "TIMELINE" + "\0", print_writers);
 				break;		
 			case "LAST_WICKET": case "PARTNERSHIP": case CricketUtil.BOUNDARY: case "BALLS_SINCE_LAST_BOUNDARY": case "LAST_X_BALLS": case "TEAMS_RUNS":
 				inning = matchAllData.getMatch().getInning().stream().filter(inn -> inn.getIsCurrentInning().equalsIgnoreCase(CricketUtil.YES)).findAny().orElse(null);
@@ -7278,21 +7282,33 @@ public class InfobarGfx
 					
 					if(config.getPrimaryIpAddress().equalsIgnoreCase(Constants.LOCALHOST)) {
 						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_Infobar$All$Normal$Section4$Side" + WhichSide + "$Partnership$Image$imgPlayer1"
-								+ "*TEXTURE*IMAGE SET " + Constants.T20_MUMBAI_PHOTO_PATH + (config.getCategory().equalsIgnoreCase("MEN") ? "\\\\" + "MEN" : "\\\\" + "WOMEN") 
-								+ "\\\\" + Constants.CENTRE_512 + "\\\\" + inning.getBatting_team().getTeamName4() + "\\\\" + partnership.getFirstPlayer().getPhoto() 
+								+ "*TEXTURE*IMAGE SET " + Constants.T20_MUMBAI_PHOTO_PATH + (config.getCategory().equalsIgnoreCase("MEN") ? "MEN" : "WOMEN") + Constants.BLANK_IMG 
 								+ CricketUtil.PNG_EXTENSION + "\0", print_writers);
 						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_Infobar$All$Normal$Section4$Side" + WhichSide + "$Partnership$Image$imgPlayer2"
-								+ "*TEXTURE*IMAGE SET " + Constants.T20_MUMBAI_PHOTO_PATH + (config.getCategory().equalsIgnoreCase("MEN") ? "\\\\" + "MEN" : "\\\\" + "WOMEN") 
-								+ "\\\\" + Constants.CENTRE_512 + "\\\\" + inning.getBatting_team().getTeamName4() + "\\\\" + partnership.getSecondPlayer().getPhoto() 
+								+ "*TEXTURE*IMAGE SET " + Constants.T20_MUMBAI_PHOTO_PATH + (config.getCategory().equalsIgnoreCase("MEN") ? "MEN" : "WOMEN") + Constants.BLANK_IMG 
 								+ CricketUtil.PNG_EXTENSION + "\0", print_writers);
+						
+						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_Infobar$All$Normal$Section4$Side" + WhichSide + "$Partnership$Image$imgPlayer1"
+								+ "*TEXTURE*IMAGE SET " + Constants.T20_MUMBAI_PHOTO_PATH + (config.getCategory().equalsIgnoreCase("MEN") ? "MEN" : "WOMEN") + Constants.CENTRE_512 
+								+ inning.getBatting_team().getTeamName4() + "\\\\" + partnership.getFirstPlayer().getPhoto() + CricketUtil.PNG_EXTENSION + "\0", print_writers);
+						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_Infobar$All$Normal$Section4$Side" + WhichSide + "$Partnership$Image$imgPlayer2"
+								+ "*TEXTURE*IMAGE SET " + Constants.T20_MUMBAI_PHOTO_PATH + (config.getCategory().equalsIgnoreCase("MEN") ? "MEN" : "WOMEN") + Constants.CENTRE_512 
+								+ inning.getBatting_team().getTeamName4() + "\\\\" + partnership.getSecondPlayer().getPhoto() + CricketUtil.PNG_EXTENSION + "\0", print_writers);
 					}else {
 						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_Infobar$All$Normal$Section4$Side" + WhichSide + "$Partnership$Image$imgPlayer1"
 								+ "*TEXTURE*IMAGE SET " + "\\\\" + config.getPrimaryIpAddress() + "\\\\" + Constants.T20_MUMBAI_PHOTO_PATH_NETWORK + (config.getCategory().equalsIgnoreCase("MEN") 
-								? "\\\\" + "MEN" : "\\\\" + "WOMEN") + "\\\\" + Constants.CENTRE_512 + "\\\\" + inning.getBatting_team().getTeamName4() + "\\\\" + partnership.getFirstPlayer().getPhoto() 
+								? "MEN" : "WOMEN") + Constants.BLANK_IMG + CricketUtil.PNG_EXTENSION + "\0", print_writers);
+						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_Infobar$All$Normal$Section4$Side" + WhichSide + "$Partnership$Image$imgPlayer2"
+								+ "*TEXTURE*IMAGE SET " + "\\\\" + config.getPrimaryIpAddress() + "\\\\" + Constants.T20_MUMBAI_PHOTO_PATH_NETWORK + (config.getCategory().equalsIgnoreCase("MEN") 
+								? "MEN" : "WOMEN") + Constants.BLANK_IMG + CricketUtil.PNG_EXTENSION + "\0", print_writers);
+						
+						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_Infobar$All$Normal$Section4$Side" + WhichSide + "$Partnership$Image$imgPlayer1"
+								+ "*TEXTURE*IMAGE SET " + "\\\\" + config.getPrimaryIpAddress() + "\\\\" + Constants.T20_MUMBAI_PHOTO_PATH_NETWORK + (config.getCategory().equalsIgnoreCase("MEN") 
+								? "MEN" : "WOMEN") + Constants.CENTRE_512 + inning.getBatting_team().getTeamName4() + "\\\\" + partnership.getFirstPlayer().getPhoto() 
 								+ CricketUtil.PNG_EXTENSION + "\0", print_writers);
 						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_Infobar$All$Normal$Section4$Side" + WhichSide + "$Partnership$Image$imgPlayer2"
 								+ "*TEXTURE*IMAGE SET " + "\\\\" + config.getPrimaryIpAddress() + "\\\\" + Constants.T20_MUMBAI_PHOTO_PATH_NETWORK + (config.getCategory().equalsIgnoreCase("MEN") 
-								? "\\\\" + "MEN" : "\\\\" + "WOMEN") + "\\\\" + Constants.CENTRE_512 + "\\\\" + inning.getBatting_team().getTeamName4() + "\\\\" + partnership.getSecondPlayer().getPhoto() 
+								? "MEN" : "WOMEN") + Constants.CENTRE_512 + inning.getBatting_team().getTeamName4() + "\\\\" + partnership.getSecondPlayer().getPhoto() 
 								+ CricketUtil.PNG_EXTENSION + "\0", print_writers);
 					}
 					
@@ -13267,10 +13283,17 @@ public class InfobarGfx
 				}else {
 					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_Infobar$All$Normal$PromoGraphics$Side" + WhichSide + "$PlayerBuild$Players$"
 							+ "select_Style*FUNCTION*Omo*vis_con SET 1\0", print_writers);
-					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_Infobar$All$Normal$PromoGraphics$Side" + WhichSide + "$PlayerBuild$Players$WithImage$img_Player"
-							+ "*TEXTURE*IMAGE SET " + (config.getPrimaryIpAddress().equalsIgnoreCase(Constants.LOCALHOST) ? Constants.T20_MUMBAI_PHOTO_PATH : "\\\\" + config.getPrimaryIpAddress() 
-							+ "\\\\" + Constants.T20_MUMBAI_PHOTO_PATH_NETWORK) + (config.getCategory().equalsIgnoreCase("MEN") ? "\\\\" + "MEN" : "\\\\" + "WOMEN") + Constants.CENTRE_512 
-							+ team.getTeamName4() + "\\" + player.getPhoto() + CricketUtil.PNG_EXTENSION + "\0", print_writers);
+					
+					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_Infobar$All$Normal$PromoGraphics$Side" + WhichSide + "$PlayerBuild$Players$"
+							+ "WithImage$img_Player*TEXTURE*IMAGE SET " + (config.getPrimaryIpAddress().equalsIgnoreCase(Constants.LOCALHOST) ? Constants.T20_MUMBAI_PHOTO_PATH : "\\\\" 
+							+ config.getPrimaryIpAddress() + "\\\\" + Constants.T20_MUMBAI_PHOTO_PATH_NETWORK) + (config.getCategory().equalsIgnoreCase("MEN") ? "MEN" : "WOMEN") 
+							+ Constants.BLANK_IMG + CricketUtil.PNG_EXTENSION + "\0", print_writers);
+					
+					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_Infobar$All$Normal$PromoGraphics$Side" + WhichSide + "$PlayerBuild$Players$"
+							+ "WithImage$img_Player*TEXTURE*IMAGE SET " + (config.getPrimaryIpAddress().equalsIgnoreCase(Constants.LOCALHOST) ? Constants.T20_MUMBAI_PHOTO_PATH : "\\\\" 
+							+ config.getPrimaryIpAddress() + "\\\\" + Constants.T20_MUMBAI_PHOTO_PATH_NETWORK) + (config.getCategory().equalsIgnoreCase("MEN") ? "MEN" : "WOMEN") 
+							+ Constants.CENTRE_512 + team.getTeamName4() + "\\" + player.getPhoto() + CricketUtil.PNG_EXTENSION + "\0", print_writers);
+					
 					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_Infobar$All$Normal$PromoGraphics$Side" + WhichSide + "$PlayerBuild$Players$WithImage$"
 							+ "txt_PlayerFirstName*GEOM*TEXT SET " + (player.getSurname() != null?player.getFirstname():"") + "\0", print_writers);
 					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_Infobar$All$Normal$PromoGraphics$Side" + WhichSide + "$PlayerBuild$Players$WithImage$"
@@ -13280,7 +13303,8 @@ public class InfobarGfx
 				}
 				break;
 			case "TEAM_BUILDUP_HOME": case "TEAM_BUILDUP_AWAY":
-				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_Infobar$All$Normal$PromoGraphics$Side" + WhichSide + "$Select_DataType*FUNCTION*Omo*vis_con SET 1\0", print_writers);
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_Infobar$All$Normal$PromoGraphics$Side" + WhichSide + 
+						"$Select_DataType*FUNCTION*Omo*vis_con SET 1\0", print_writers);
 				List<Player> player = new ArrayList<Player>();
 				switch(infobar.getFull_promo_section().toUpperCase()) {
 				case "TEAM_BUILDUP_HOME":
@@ -13302,8 +13326,13 @@ public class InfobarGfx
 				for(int i=1;i<=player.size();i++) {
 					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_Infobar$All$Normal$PromoGraphics$Side" + WhichSide + "$TeamBuild$Players$Player" 
 							+ i + "$img_Player*TEXTURE*IMAGE SET " + (config.getPrimaryIpAddress().equalsIgnoreCase(Constants.LOCALHOST) ? Constants.T20_MUMBAI_PHOTO_PATH : "\\\\" 
-							+ config.getPrimaryIpAddress() + "\\\\" + Constants.T20_MUMBAI_PHOTO_PATH_NETWORK) + (config.getCategory().equalsIgnoreCase("MEN") ? "\\\\" + "MEN" : "\\\\" 
-							+ "WOMEN") + Constants.CENTRE_512 + team.getTeamName4() + "\\" + player.get(i-1).getPhoto() + CricketUtil.PNG_EXTENSION + "\0", print_writers);
+							+ config.getPrimaryIpAddress() + "\\\\" + Constants.T20_MUMBAI_PHOTO_PATH_NETWORK) + (config.getCategory().equalsIgnoreCase("MEN") ? "MEN" : "WOMEN") 
+							+ Constants.BLANK_IMG + CricketUtil.PNG_EXTENSION + "\0", print_writers);
+					
+					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_Infobar$All$Normal$PromoGraphics$Side" + WhichSide + "$TeamBuild$Players$Player" 
+							+ i + "$img_Player*TEXTURE*IMAGE SET " + (config.getPrimaryIpAddress().equalsIgnoreCase(Constants.LOCALHOST) ? Constants.T20_MUMBAI_PHOTO_PATH : "\\\\" 
+							+ config.getPrimaryIpAddress() + "\\\\" + Constants.T20_MUMBAI_PHOTO_PATH_NETWORK) + (config.getCategory().equalsIgnoreCase("MEN") ? "MEN" : "WOMEN") 
+							+ Constants.CENTRE_512 + team.getTeamName4() + "\\\\" + player.get(i-1).getPhoto() + CricketUtil.PNG_EXTENSION + "\0", print_writers);
 					
 					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_Infobar$All$Normal$PromoGraphics$Side" + WhichSide + "$TeamBuild$Players$Player"
 							+ i + "$txt_PlayerName*GEOM*TEXT SET " + player.get(i-1).getFull_name() + "\0", print_writers);
@@ -13379,8 +13408,6 @@ public class InfobarGfx
 						+ "Language1$txt_Language*GEOM*TEXT SET HINGLISH: \0", print_writers);
 				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_Infobar$All$Normal$Analytics$Side" + WhichSide + "$CommentatorsBilingual$"
 						+ "Language2$txt_Language*GEOM*TEXT SET MARATHI: \0", print_writers);
-				
-				System.out.println(Comms_Name);
 				
 				String[] parts_comm = Comms_Name.split(",");
 				List<String> englishNames = new ArrayList<>();
@@ -14387,7 +14414,7 @@ public class InfobarGfx
 				
 				basePath = config.getPrimaryIpAddress().equalsIgnoreCase(Constants.LOCALHOST) ? Constants.T20_MUMBAI_PHOTO_PATH
 				        : "\\\\" + config.getPrimaryIpAddress() + "\\\\" + Constants.T20_MUMBAI_PHOTO_PATH_NETWORK;
-				basePath = basePath + (config.getCategory().equalsIgnoreCase("MEN") ? "\\\\" + "MEN" : "\\\\" + "WOMEN");
+				basePath = basePath + (config.getCategory().equalsIgnoreCase("MEN") ? "MEN" : "WOMEN");
 				
 			    switch(infobar.getFull_section().toUpperCase()) {
 			    case "BATMILESTONE":
@@ -14396,8 +14423,13 @@ public class InfobarGfx
 					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_Infobar$All$Normal$Analytics$Side" + WhichSide + "$Milestone$Name$txt_Last_Name*GEOM*TEXT SET " 
 			    			+ (battingCard.getPlayer().getSurname() != null ? battingCard.getPlayer().getSurname():"") + "\0", print_writers);
 					
+					fullPath = basePath + Constants.BLANK_IMG + CricketUtil.PNG_EXTENSION;
+				    vizPath = "-1 RENDERER*FRONT_LAYER*TREE*$gfx_Infobar$Normal$Analytics$Side" + WhichSide + "$Milestone$Image";
+				    
+				    CricketFunctions.DoadWriteCommandToAllViz(vizPath + "$img_Player*TEXTURE*IMAGE SET " + fullPath + "\0", print_writers);
+					
 					//Photo
-					fullPath = basePath + "\\\\" + Constants.CENTRE_512 + "\\\\" + inning.getBatting_team().getTeamName4() + "\\\\" + battingCard.getPlayer().getPhoto() + CricketUtil.PNG_EXTENSION;
+					fullPath = basePath + Constants.CENTRE_512 + inning.getBatting_team().getTeamName4() + "\\\\" + battingCard.getPlayer().getPhoto() + CricketUtil.PNG_EXTENSION;
 				    vizPath = "-1 RENDERER*FRONT_LAYER*TREE*$gfx_Infobar$Normal$Analytics$Side" + WhichSide + "$Milestone$Image";
 				    
 				    CricketFunctions.DoadWriteCommandToAllViz(vizPath + "$img_Player*TEXTURE*IMAGE SET " + fullPath + "\0", print_writers);
@@ -14413,8 +14445,13 @@ public class InfobarGfx
 					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_Infobar$All$Normal$Analytics$Side" + WhichSide + "$Milestone$Name$txt_Last_Name*GEOM*TEXT SET " 
 			    			+ (bowlingCard.getPlayer().getSurname() != null ? bowlingCard.getPlayer().getSurname():"") + "\0", print_writers);
 					
+					fullPath = basePath + Constants.BLANK_IMG + CricketUtil.PNG_EXTENSION;
+				    vizPath = "-1 RENDERER*FRONT_LAYER*TREE*$gfx_Infobar$All$Normal$Analytics$Side" + WhichSide + "$Milestone$Image";
+				    
+				    CricketFunctions.DoadWriteCommandToAllViz(vizPath + "$img_Player*TEXTURE*IMAGE SET " + fullPath + "\0", print_writers);
+					
 					//Photo
-					fullPath = basePath + "\\\\" + Constants.CENTRE_512 + "\\\\" + inning.getBowling_team().getTeamName4() + "\\\\" + bowlingCard.getPlayer().getPhoto() + CricketUtil.PNG_EXTENSION;
+					fullPath = basePath + Constants.CENTRE_512 + inning.getBowling_team().getTeamName4() + "\\\\" + bowlingCard.getPlayer().getPhoto() + CricketUtil.PNG_EXTENSION;
 				    vizPath = "-1 RENDERER*FRONT_LAYER*TREE*$gfx_Infobar$All$Normal$Analytics$Side" + WhichSide + "$Milestone$Image";
 				    
 				    CricketFunctions.DoadWriteCommandToAllViz(vizPath + "$img_Player*TEXTURE*IMAGE SET " + fullPath + "\0", print_writers);

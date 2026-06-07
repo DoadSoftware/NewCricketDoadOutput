@@ -568,7 +568,7 @@ function processUserSelectionData(whatToProcess,dataToProcess)
 			case 'Control_Shift_D': case 'Alt_Shift_Z': case 'Control_Shift_F7': case 'Shift_I': case 'Alt_Shift_C': case 'Control_Shift_F2':  case 'Control_Shift_F4':
 			case 'Control_Shift_U': case 'Control_Shift_V': case 'Control_Shift_O':case 'Control_u':case 'Shift_W':case "Alt_b": case "Shift_G": case 'Control_5': 
 			case 'Control_F8': case 'Control_Shift_F11': case 'Alt_/': case "Alt_Shift_B":case 'Alt_Shift_F4':case 'Alt_Shift_F6': case 'Alt_Shift_F7': case 'Shift_L':
-			case 'Alt_x':
+			case 'Alt_x': case 'Alt_Shift_Y':
 				addItemsToList(dataToProcess,null); 
 				break;
 				
@@ -1519,7 +1519,7 @@ function addItemsToList(whatToProcess,dataToProcess)
 	case "Shift_@": case "Shift_$": case "Control_Shift_@": case "Control_Alt_5": case "Alt_Shift_@": case "Control_Alt_6": case "Control_Alt_9": case "Control_Alt_0":
 	case "Alt_Shift_N": case "Alt_Shift_M":case 'Alt_Shift_Q': case 'Alt_Shift_P': case 'Alt_Shift_K': case 'Alt_Shift_X': case 'Alt_Shift_T': case 'Alt_Shift_V':
 	case 'Alt_Shift_F4':case "Alt_Shift_F5":case 'Alt_Shift_F6':case 'Alt_Shift_F7': case 'Shift_L': case 'h': case 'Control_Shift_(': case 'Shift_M': case 'Control_Alt_7':
-	case 'Control_Alt_8': case 'Alt_x': case 'Alt_f': case 'Control_F7': case 'm':
+	case 'Control_Alt_8': case 'Alt_x': case 'Alt_f': case 'Control_F7': case 'm': case 'Alt_Shift_Y':
 	//Shift+2 and Shift+4
 	 //InfoBar LeftBottom-Middle-BatPP-BallPP-LastXBalls-Batsman/Sponsor-RightBottom
 	case "Alt_b": 
@@ -2305,14 +2305,39 @@ function addItemsToList(whatToProcess,dataToProcess)
 			cellCount = cellCount + 1;
 			break;
 			
-		case 'Control_Shift_O': case 'Control_5':
+		case 'Alt_Shift_Y':
+			header_text.innerHTML = 'LINEUP - Subs';
+			
+			select = document.createElement('select');
+			select.id = 'selectTeams';
+			select.name = select.id;
+			
+			option = document.createElement('option');
+			option.value = session_match.setup.homeTeamId;
+			option.text = session_match.setup.homeTeam.teamName1;
+			select.appendChild(option);
+			
+			option = document.createElement('option');
+			option.value = session_match.setup.awayTeamId;
+			option.text = session_match.setup.awayTeam.teamName1;
+			select.appendChild(option);
+			
+			select.setAttribute('onchange',"setDropdownOptionToSelectOptionArray(this, 0)");
+			row.insertCell(cellCount).appendChild(select);
+			setDropdownOptionToSelectOptionArray($(select),0);
+			cellCount = cellCount + 1;
+			break;	
+			
+		case 'Control_Shift_O': case 'Control_5': case 'Alt_Shift_Y':
 			switch(whatToProcess){
 				case 'Control_Shift_O':
 					header_text.innerHTML = 'LINEUP';
 					break;
-				
 				case 'Control_5':
 					header_text.innerHTML = 'INFOBAR LINEUP';
+					break;
+				case 'Alt_Shift_Y':
+					header_text.innerHTML = 'LINEUP - Subs';
 					break;
 			}
 		
@@ -8202,51 +8227,76 @@ function addItemsToList(whatToProcess,dataToProcess)
 			cellCount = cellCount + 1;
 			
 			switch(whatToProcess) {
-				case 'Shift_F11':
-					switch($('#selected_broadcaster').val().toUpperCase()){
-					case 'ISPL': case 'T20_MUMBAI':
-						select = document.createElement('select');
-						select.id = 'selectpreSummary';
-						select.name = select.id;
+			case 'Control_m':
+				switch($('#selected_broadcaster').val().toUpperCase()){
+				case 'T20_MUMBAI':
+					select = document.createElement('select');
+					select.id = 'selectPhotoImpact';
+					select.name = select.id;
 					
-						option = document.createElement('option');
-			            option.value = 'normalsummary';
-			            option.text = 'Normal Summary';
-			            select.appendChild(option);
-			            
-						option = document.createElement('option');
-			            option.value = 'photosummary';
-			            option.text = 'Photo Summary';
-			            select.appendChild(option);
-			            
-			            select.setAttribute('onchange',"setDropdownOptionToSelectOptionArray(this, 1)");
-						row.insertCell(cellCount).appendChild(select);
-						setDropdownOptionToSelectOptionArray($(select),1);
-						cellCount = cellCount + 1;
-					    break;
-							
-					case 'ICC-U19-2023': case 'BENGAL-T20': case 'NPL':  case 'MPL': case 'APL': 
-						select = document.createElement('select');
-						select.id = 'selectpreSummary';
-						select.name = select.id;
+					option = document.createElement('option');
+					option.value = 'WITHOUT_PHOTO';
+					option.text = 'WITHOUT PHOTO' ;
+					select.appendChild(option);
 					
-						option = document.createElement('option');
-			            option.value = 'captain';
-			            option.text = 'Captain';
-			            select.appendChild(option);
-			            
-						option = document.createElement('option');
-			            option.value = 'logo';
-			            option.text = 'logo';
-			            select.appendChild(option);
-			            
-			            select.setAttribute('onchange',"setDropdownOptionToSelectOptionArray(this, 1)");
-						row.insertCell(cellCount).appendChild(select);
-						setDropdownOptionToSelectOptionArray($(select),1);
-						cellCount = cellCount + 1;
-			            break;
-					}
+					option = document.createElement('option');
+					option.value = 'WITH_PHOTO';
+					option.text = 'WITH PHOTO' ;
+					select.appendChild(option);
+
+					select.setAttribute('onchange',"setDropdownOptionToSelectOptionArray(this, 1)");
+					row.insertCell(cellCount).appendChild(select);
+					setDropdownOptionToSelectOptionArray($(select), 1);
+					removeSelectDuplicates(select.id);
+					cellCount = cellCount + 1;
 					break;
+				}
+				break;
+			case 'Shift_F11':
+				switch($('#selected_broadcaster').val().toUpperCase()){
+				case 'ISPL': case 'T20_MUMBAI':
+					select = document.createElement('select');
+					select.id = 'selectpreSummary';
+					select.name = select.id;
+				
+					option = document.createElement('option');
+		            option.value = 'normalsummary';
+		            option.text = 'Normal Summary';
+		            select.appendChild(option);
+		            
+					option = document.createElement('option');
+		            option.value = 'photosummary';
+		            option.text = 'Photo Summary';
+		            select.appendChild(option);
+		            
+		            select.setAttribute('onchange',"setDropdownOptionToSelectOptionArray(this, 1)");
+					row.insertCell(cellCount).appendChild(select);
+					setDropdownOptionToSelectOptionArray($(select),1);
+					cellCount = cellCount + 1;
+				    break;
+						
+				case 'ICC-U19-2023': case 'BENGAL-T20': case 'NPL':  case 'MPL': case 'APL': 
+					select = document.createElement('select');
+					select.id = 'selectpreSummary';
+					select.name = select.id;
+					
+					option = document.createElement('option');
+		            option.value = 'logo';
+		            option.text = 'logo';
+		            select.appendChild(option);
+				
+					option = document.createElement('option');
+		            option.value = 'captain';
+		            option.text = 'Captain';
+		            select.appendChild(option);
+		            
+		            select.setAttribute('onchange',"setDropdownOptionToSelectOptionArray(this, 1)");
+					row.insertCell(cellCount).appendChild(select);
+					setDropdownOptionToSelectOptionArray($(select),1);
+					cellCount = cellCount + 1;
+		            break;
+				}
+				break;
 			}
 			break;
 		case 'y':
@@ -10552,7 +10602,7 @@ function addItemsToList(whatToProcess,dataToProcess)
 			case "Control_Alt_9": case "Control_Alt_0":	case 'r': case "Alt_Shift_N": case "Alt_Shift_M":case 'Alt_Shift_Q': case 'Alt_Shift_P': case 'Alt_Shift_K': 
 			case 'Alt_Shift_X': case 'Alt_Shift_T': case 'Alt_Shift_V':case 'Control_Shift_F5':case "Alt_Shift_F5":case 'Alt_Shift_F4':case 'Alt_Shift_F6':case 'Alt_Shift_F7':
 			case 'Shift_L': case 'h': case 'Control_Shift_(': case 'Shift_M': case 'Control_Alt_7': case 'Control_Alt_8': case 'Alt_x': case 'Alt_f': case 'Control_F7': case 'm':
-
+			case 'Alt_Shift_Y':
 				option = document.createElement('input');
 				option.type = 'button';
 				option.name = 'populate_btn';

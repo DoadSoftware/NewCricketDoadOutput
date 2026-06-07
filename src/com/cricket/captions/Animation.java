@@ -87,13 +87,13 @@ public class Animation
 			case "Shift_F11": case "Shift_F10": case "p": case "Alt_Shift_J": case "z": case "x": case "c": case "v": case "Control_z": case "Control_x": case "Control_F1": 
 			case "Control_b": case "Alt_F9": case "Shift_F8": case "Control_F10": case "Control_Shift_F2": case "Shift_D": case "Alt_Shift_F10": case "Alt_Shift_F12": 
 			case "Control_d": case "Control_e": case "Alt_Shift_F9": case "Control_Shift_F12": case "Alt_Shift_F1": case "Alt_Shift_F2": case "Control_Shift_Z": 
-			case "Control_Shift_Y": case "Alt_Shift_K": case "Alt_Shift_X": case "Alt_Shift_T": case "Alt_Shift_V":
+			case "Control_Shift_Y": case "Alt_Shift_K": case "Alt_Shift_X": case "Alt_Shift_T": case "Alt_Shift_V": case "Shift_P": case "Shift_Q":
 				return Constants.FULL_FRAMER;
 			case "F5": case "F9": case "l": case "Shift_F5": case "Shift_F9": case "Control_h": case "Alt_F12": case "Control_Shift_M": case "Control_Shift_O": 
 			case "Control_Shift_L": case "F7": case "F11": case "Control_a": case "q": case "u": case "Control_q": case "F8": case "Alt_F8": case "F10": case "j":
 			case "Shift_F3": case "Control_F3": case "Shift_B": case "Control_F6": case "F6": case "Alt_Shift_F3":case "Shift_F6":case "Alt_Shift_O": 
 			case "Control_F5":case "Control_F9": case "d": case "e": case "Shift_I": case "Control_Shift_Q": case "Control_i": case "Control_s": case "Control_f": 
-			case "Alt_Shift_B":
+			case "Alt_Shift_B": case "Alt_Shift_Y":
 				return Constants.LOWER_THIRD;
 			case "Alt_p": case "r": case "h": case "Control_y": case "Control_k": case "Shift_F4": case "Shift_O": case "y": case "g": case "k":
 			case "Shift_C": case "Control_Shift_F3": case "Control_Shift_R": case "Control_Shift_J": case "Alt_Shift_N":case "Alt_Shift_M":
@@ -8366,6 +8366,14 @@ public class Animation
 			processAnimation(Constants.FRONT, print_writers, "anim_Lt_BattingCard$InOut", "START");
 			this.whichGraphicOnScreen = whatToProcess;
 			break;
+		case "Alt_Shift_Y":
+			T20_MumbaiAnimateIn("ArrowDown,", print_writers, config); // Push infobar
+			if(audioenabled.equalsIgnoreCase("TRUE")) {
+				processAnimation(Constants.FRONT, print_writers, "sfx_In", "START");
+			}
+			processAnimation(Constants.FRONT, print_writers, "anim_LT_SubOptions$InOut", "START");
+			this.whichGraphicOnScreen = whatToProcess;
+			break;
 			
 		case "m": case "Control_m":
 			T20_MumbaiAnimateIn("ArrowDown,", print_writers, config); // Push infobar
@@ -8390,11 +8398,14 @@ public class Animation
 		case "Control_d": case "Control_e": case "Shift_P": case "Shift_Q":
 			T20_MumbaiAnimateIn(Constants.SHRUNK_INFOBAR, print_writers, config); // Push infobar
 			
-			processAnimation(Constants.BACK, print_writers, "anim_Profile$In_Out$In", "START");
+			processAnimation(Constants.BACK, print_writers, "anim_ProfileChangeOn$In_Out$Essentials", "START");
+			processAnimation(Constants.BACK, print_writers, "anim_ProfileChangeOn$In_Out$Elements", "START");
+			processAnimation(Constants.BACK, print_writers, "anim_ProfileChangeOn$In_Out$ColouredBase", "START");
+			processAnimation(Constants.BACK, print_writers, "anim_ProfileChangeOn$In_Out$Logo", "START");
+			processAnimation(Constants.BACK, print_writers, "anim_ProfileChangeOn$In_Out$Header", "START");
+			processAnimation(Constants.BACK, print_writers, "anim_ProfileChangeOn$In_Out$Data", "START");
 			processAnimation(Constants.BACK, print_writers, "Loop", "START");
 			this.whichGraphicOnScreen = whatToProcess;
-			TimeUnit.MILLISECONDS.sleep(2700);
-			processAnimation(Constants.BACK, print_writers, "anim_Profile$In_Out", "SHOW 2.520");
 			break;
 		case "Control_b":
 			T20_MumbaiAnimateIn(Constants.SHRUNK_INFOBAR, print_writers, config); // Push infobar
@@ -8837,6 +8848,19 @@ public class Animation
 			processAnimation(Constants.FRONT, print_writers, "anim_Lt_BattingCard", "SHOW 0.0");
 			break;
 			
+		case "Alt_Shift_Y":
+			if(audioenabled.equalsIgnoreCase("TRUE")) {
+				processAnimation(Constants.FRONT, print_writers, "sfx_Out", "START");
+			}
+			processAnimation(Constants.FRONT, print_writers, "anim_LT_SubOptions$InOut", "CONTINUE");
+			this.whichGraphicOnScreen = "";
+			TimeUnit.MILLISECONDS.sleep(500);
+			if(!this.infobar.isInfobar_pushed()) {
+				T20_MumbaiAnimateIn("ArrowUp,", print_writers, config); // Push infobar
+			}
+			processAnimation(Constants.FRONT, print_writers, "anim_LT_SubOptions", "SHOW 0.0");
+			break;
+			
 		case "m": case "Control_m":
 			if(audioenabled.equalsIgnoreCase("TRUE")) {
 				processAnimation(Constants.BACK, print_writers, "AUDIO$sfx_FF_Out", "START");
@@ -8862,10 +8886,15 @@ public class Animation
 			break;
 			
 		case "Control_d": case "Control_e": case "Shift_P": case "Shift_Q":
-			processAnimation(Constants.BACK, print_writers, "anim_Profile$In_Out", "CONTINUE");
+			processAnimation(Constants.BACK, print_writers, "anim_ProfileChangeOn$In_Out$Essentials", "CONTINUE");
+			processAnimation(Constants.BACK, print_writers, "anim_ProfileChangeOn$In_Out$Elemnets", "CONTINUE");
+			processAnimation(Constants.BACK, print_writers, "anim_ProfileChangeOn$In_Out$ColourBase", "CONTINUE");
+			processAnimation(Constants.BACK, print_writers, "anim_ProfileChangeOn$In_Out$Logo", "CONTINUE");
+			processAnimation(Constants.BACK, print_writers, "anim_ProfileChangeOn$In_Out$Header", "CONTINUE");
+			processAnimation(Constants.BACK, print_writers, "anim_ProfileChangeOn$In_Out$Data", "CONTINUE");
 			TimeUnit.MILLISECONDS.sleep(1000);
 			T20_MumbaiAnimateIn(Constants.SHRUNK_INFOBAR, print_writers, config); // Push infobar
-			processAnimation(Constants.BACK, print_writers, "anim_Profile", "SHOW 0.0");
+			processAnimation(Constants.BACK, print_writers, "anim_ProfileChangeOn", "SHOW 0.0");
 			this.whichGraphicOnScreen = "";
 			break;
 			
@@ -9063,6 +9092,11 @@ public class Animation
 			processAnimation(Constants.BACK, print_writers, "anim_Profile$InAt_To_Profile", "START");
 			this.whichGraphicOnScreen = whatToProcess;
 			break;
+			
+		case "Control_d": case "Control_e": case "Shift_P": case "Shift_Q":
+			processAnimation(Constants.BACK, print_writers, "Change_Profile", "START");
+			break;
+			
 		case "Shift_T":
 			footercount = 0;
 			if(audioenabled.equalsIgnoreCase("TRUE")) {
@@ -9323,6 +9357,11 @@ public class Animation
 			
 		case "r":
 			processAnimation(Constants.FRONT, print_writers, "DRS_Change", "SHOW 0.0");
+			this.whichGraphicOnScreen = whatToProcess;
+			break;
+			
+		case "Control_d": case "Control_e": case "Shift_P": case "Shift_Q":
+			processAnimation(Constants.BACK, print_writers, "Change_Profile", "SHOW 0.0");
 			this.whichGraphicOnScreen = whatToProcess;
 			break;
 			
@@ -12298,6 +12337,7 @@ public class Animation
 				processAnimation(Constants.FRONT, print_writers, "anim_MiniStandings", "SHOW 0.0");
 				processAnimation(Constants.FRONT, print_writers, "Anim_DRS_Bug", "SHOW 0.0");
 				processAnimation(Constants.FRONT, print_writers, "DRS_Change", "SHOW 0.0");
+				processAnimation(Constants.FRONT, print_writers, "anim_LT_SubOptions", "SHOW 0.0");
 				
 				processAnimation(Constants.BACK, print_writers, "Loop", "SHOW 0.0");
 				processAnimation(Constants.BACK, print_writers, "AUDIO", "SHOW 0.0");
@@ -12311,6 +12351,8 @@ public class Animation
 				processAnimation(Constants.BACK, print_writers, "anim_Image_Lineup", "SHOW 0.0");
 				processAnimation(Constants.BACK, print_writers, "Change_Image_Lineup", "SHOW 0.0");
 				processAnimation(Constants.BACK, print_writers, "anim_LOF_LeaderBoard", "SHOW 0.0");
+				processAnimation(Constants.BACK, print_writers, "anim_ProfileChangeOn", "SHOW 0.0");
+				processAnimation(Constants.BACK, print_writers, "Change_Profile", "SHOW 0.0");
 				
 				
 				this.infobar.setInfobar_on_screen(false);
@@ -13097,7 +13139,8 @@ public class Animation
 				previewCommand = "anim_Target$In_Out$In 2.720";
 				break;
 			case "Control_d": case "Control_e": case "Shift_P": case "Shift_Q":
-				previewCommand = "anim_Profile$In_Out$In 2.500";
+				previewCommand = "anim_ProfileChangeOn$In_Out$Essentials$In 1.560 anim_ProfileChangeOn$In_Out$Elements$In 2.280 anim_ProfileChangeOn$In_Out$ColouredBase$In 2.100 "
+						+ "anim_ProfileChangeOn$In_Out$Logo$In 2.500 anim_ProfileChangeOn$In_Out$Header$In 1.900 anim_ProfileChangeOn$In_Out$Data$In 2.180";
 				break;
 			case "Control_b":
 				previewCommand = "anim_Profile$In_Out$In 2.500";
@@ -13188,6 +13231,11 @@ public class Animation
 			case "Control_b":
 				previewCommand = "anim_Profile$InAt_To_Profile 1.780 anim_Profile$InAt_To_Profile$Wipe 1.260 anim_Profile$InAt_To_Profile$InAt_Out 1.200 "
 						+ "anim_Profile$InAt_To_Profile$ProfileIn 1.780";
+				break;
+			case "Control_d": case "Control_e": case "Shift_P": case "Shift_Q":
+				previewCommand = "Change_Profile$Elements 1.780 Change_Profile$Elements$Change_Out 1.000 Change_Profile$Elements$Change_In 1.780 "
+						+ "Change_Profile$ColouredBase 1.780 Change_Profile$Logo 1.780 Change_Profile$Header 1.000 Change_Profile$Header$Change_Out 0.580 "
+						+ "Change_Profile$Header$Change_In 1.000 Change_Profile$Data 1.000 Change_Profile$Data$Change_Out 0.580 Change_Profile$Data$Change_In 1.000";
 				break;
 			case "Shift_T":
 				previewCommand = "Change_Image_Lineup$Elements 1.700 Change_Image_Lineup$Elements$Change_Out 0.680 Change_Image_Lineup$Elements$Change_In 1.700 "
@@ -14128,6 +14176,9 @@ public class Animation
 						break;
 					case "Control_Shift_O":
 						previewCommands = "anim_Lt_BattingCard$InOut$In 2.080";
+						break;
+					case "Alt_Shift_Y":
+						previewCommands = "anim_LT_SubOptions$InOut$In 2.080";
 						break;
 					case "Shift_I":
 						previewCommands = "anim_Infobar$Push 0.500 anim_Impact$In_Out$In 2.000";

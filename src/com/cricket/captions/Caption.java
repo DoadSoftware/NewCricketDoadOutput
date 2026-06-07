@@ -644,6 +644,9 @@ public class Caption
 			case "Control_Shift_O":
 				status = this_lowerThirdGfx.populateL3rdLineUp(whatToProcess,whichSide,matchAllData);
 				break;
+			case "Alt_Shift_Y":
+				status = this_lowerThirdGfx.populateL3rdSubs(whatToProcess,whichSide,matchAllData);
+				break;
 			case "Alt_f":
 				status = this_bugsAndMiniGfx.populatebugManhattan(whatToProcess,whichSide ,matchAllData,Integer.valueOf(whatToProcess.split(",")[1]));
 				break;
@@ -888,6 +891,12 @@ public class Caption
 				status = this_bugsAndMiniGfx.bugMultiPartnership(whatToProcess,matchAllData,whichSide);
 				break;
 			case "Control_m": //MATCH PROMO
+				switch(config.getBroadcaster()) {
+				case Constants.T20_MUMBAI:
+					this_fullFramesGfx.WhichProfile = whatToProcess.split(",")[3];
+					break;
+				}
+				
 				status = this_fullFramesGfx.populateFFMatchPromo(whichSide, whatToProcess,matchAllData);
 				break;
 			case "Control_Shift_L": // Lt promo

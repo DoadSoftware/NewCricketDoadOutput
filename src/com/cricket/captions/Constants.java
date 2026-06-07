@@ -141,7 +141,7 @@ public class Constants
 	
 	public final static String T20_MUMBAI_TEAMLOGO = "IMAGE*/T20/Assets/TeamLogos/";
 	public final static String T20_MUMBAI_MOMOTEAMLOGO = "IMAGE*/T20/Assets/MonochromeLogos/";
-	public final static String T20_MUMBAI_PHOTO_PATH = "C:\\\\Images\\\\T20_MUMBAI\\\\Photos\\";
+	public final static String T20_MUMBAI_PHOTO_PATH = "C:\\\\Images\\\\T20_MUMBAI\\\\Photos\\\\";
 	public final static String T20_MUMBAI_PHOTO_PATH_NETWORK = "\\\\c\\\\Images\\\\T20_MUMBAI\\\\Photos\\\\";
 	
 	public final static String LEGENDS = "LEGENDS-90";
