@@ -97,7 +97,7 @@ public class Animation
 				return Constants.LOWER_THIRD;
 			case "Alt_p": case "r": case "h": case "Control_y": case "Control_k": case "Shift_F4": case "Shift_O": case "y": case "g": case "k":
 			case "Shift_C": case "Control_Shift_F3": case "Control_Shift_R": case "Control_Shift_J": case "Alt_Shift_N":case "Alt_Shift_M":
-			case "Control_Shift_U": case "Control_Shift_V": case "6": case "Control_4": case "Alt_Shift_E":
+			case "Control_Shift_U": case "Control_Shift_V": case "6": case "Control_4": case "Alt_Shift_E": case "Shift_F":
 			case "Control_Shift_U_change_on": case "Control_Shift_V_change_on":
 				return Constants.BUGS;
 			case "Shift_F1": case "Shift_F2": case "Alt_F7": case "Alt_F1": case "Alt_F2":
@@ -1012,7 +1012,7 @@ public class Animation
 				processAnimation(Constants.BACK, print_writers, "Loop", "START");
 				
 				if(audioenabled.equalsIgnoreCase("TRUE")) {
-					processAnimation(Constants.BACK, print_writers, "Audio$In", "START");
+					processAnimation(Constants.BACK, print_writers, "Audio", "START");
 				}
 				
 				processAnimation(Constants.BACK, print_writers, "Anim_Milestone", "START");
@@ -1025,7 +1025,7 @@ public class Animation
 				processAnimation(Constants.BACK, print_writers, "BG_Scale", "START");
 				
 				if(audioenabled.equalsIgnoreCase("TRUE")) {
-					processAnimation(Constants.BACK, print_writers, "Audio$In", "START");
+					processAnimation(Constants.BACK, print_writers, "Audio", "START");
 				}
 				
 				processAnimation(Constants.BACK, print_writers, "Anim_FullFrames$In_Out$Essentials", "START");
@@ -1046,7 +1046,7 @@ public class Animation
 				processAnimation(Constants.BACK, print_writers, "BG_Scale", "START");
 				
 				if(audioenabled.equalsIgnoreCase("TRUE")) {
-					processAnimation(Constants.BACK, print_writers, "Audio$In", "START");
+					processAnimation(Constants.BACK, print_writers, "Audio", "START");
 				}
 				processAnimation(Constants.BACK, print_writers, "Anim_FullFrames$In_Out$Essentials", "START");
 				processAnimation(Constants.BACK, print_writers, "Anim_FullFrames$In_Out$Header", "START");
@@ -1064,7 +1064,7 @@ public class Animation
 				processAnimation(Constants.BACK, print_writers, "BG_Scale", "START");
 				
 				if(audioenabled.equalsIgnoreCase("TRUE")) {
-					processAnimation(Constants.BACK, print_writers, "Audio$In", "START");
+					processAnimation(Constants.BACK, print_writers, "Audio", "START");
 				}
 				
 				processAnimation(Constants.BACK, print_writers, "Anim_FullFrames$In_Out$Essentials", "START");
@@ -1083,7 +1083,7 @@ public class Animation
 				processAnimation(Constants.BACK, print_writers, "BG_Scale", "START");
 				
 				if(audioenabled.equalsIgnoreCase("TRUE")) {
-					processAnimation(Constants.BACK, print_writers, "Audio$In", "START");
+					processAnimation(Constants.BACK, print_writers, "Audio", "START");
 				}
 				
 				processAnimation(Constants.BACK, print_writers, "Anim_FullFrames$In_Out$Essentials", "START");
@@ -1101,7 +1101,7 @@ public class Animation
 				processAnimation(Constants.BACK, print_writers, "BG_Scale", "START");
 				
 				if(audioenabled.equalsIgnoreCase("TRUE")) {
-					processAnimation(Constants.BACK, print_writers, "Audio$In", "START");
+					processAnimation(Constants.BACK, print_writers, "Audio", "START");
 				}
 				
 				processAnimation(Constants.BACK, print_writers, "Anim_FullFrames$In_Out$Essentials", "START");
@@ -1124,7 +1124,7 @@ public class Animation
 				processAnimation(Constants.BACK, print_writers, "BG_Scale", "START");
 				
 				if(audioenabled.equalsIgnoreCase("TRUE")) {
-					processAnimation(Constants.BACK, print_writers, "Audio$In", "START");
+					processAnimation(Constants.BACK, print_writers, "Audio", "START");
 				}
 				
 				processAnimation(Constants.BACK, print_writers, "Anim_FullFrames$In_Out$Essentials", "START");
@@ -1149,7 +1149,7 @@ public class Animation
 				processAnimation(Constants.BACK, print_writers, "BG_Scale", "START");
 				
 				if(audioenabled.equalsIgnoreCase("TRUE")) {
-					processAnimation(Constants.BACK, print_writers, "Audio$In", "START");
+					processAnimation(Constants.BACK, print_writers, "Audio", "START");
 				}
 				
 				processAnimation(Constants.BACK, print_writers, "Anim_FullFrames$In_Out$Essentials", "START");
@@ -1181,7 +1181,7 @@ public class Animation
 				
 
 				if(audioenabled.equalsIgnoreCase("TRUE")) {
-					processAnimation(Constants.BACK, print_writers, "Audio$In", "START");
+					processAnimation(Constants.BACK, print_writers, "Audio", "START");
 				}
 				
 				this.whichGraphicOnScreen = whatToProcess;
@@ -1194,7 +1194,7 @@ public class Animation
 				
 
 				if(audioenabled.equalsIgnoreCase("TRUE")) {
-					processAnimation(Constants.BACK, print_writers, "Audio$In", "START");
+					processAnimation(Constants.BACK, print_writers, "Audio", "START");
 				}
 				
 				this.whichGraphicOnScreen = whatToProcess;
@@ -1203,6 +1203,10 @@ public class Animation
 				AnimateIn("ArrowDown,", print_writers, config); // Push infobar
 				TimeUnit.MILLISECONDS.sleep(500);
 				processAnimation(Constants.BACK, print_writers, "Loop", "START");
+				
+				if(audioenabled.equalsIgnoreCase("TRUE")) {
+					processAnimation(Constants.BACK, print_writers, "Audio", "START");
+				}
 				
 				processAnimation(Constants.BACK, print_writers, "Anim_FullFrames$In_Out$Essentials", "START");
 				processAnimation(Constants.BACK, print_writers, "Anim_FullFrames$In_Out$Header", "START");
@@ -1227,7 +1231,7 @@ public class Animation
 				case Constants.NPL: case Constants.MPL: case Constants.APL:
 					
 					if(audioenabled.equalsIgnoreCase("TRUE")) {
-						processAnimation(Constants.BACK, print_writers, "Audio$In", "START");
+						processAnimation(Constants.BACK, print_writers, "Audio", "START");
 					}
 					
 					processAnimation(Constants.BACK, print_writers, "Anim_FullFrames$In_Out$Essentials", "START");
@@ -1354,7 +1358,7 @@ public class Animation
 				processAnimation(Constants.BACK, print_writers, "Loop", "START");
 
 				if(audioenabled.equalsIgnoreCase("TRUE")) {
-					processAnimation(Constants.BACK, print_writers, "Audio$In", "START");
+					processAnimation(Constants.BACK, print_writers, "Audio", "START");
 				}
 				
 				AnimateIn("ArrowDown,", print_writers, config); // Push infobar
@@ -8159,7 +8163,7 @@ public class Animation
 			this.whichGraphicOnScreen = whatToProcess;
 			break;
 		case "h": case "Control_y": case "Control_k": case "Shift_F4": case "Shift_O": case "y": case "g": case "k":
-		case "Control_Shift_R": case "Control_Shift_J":
+		case "Control_Shift_R": case "Control_Shift_J": case "Shift_F":
 //			if(audioenabled.equalsIgnoreCase("TRUE")) {
 //				processAnimation(Constants.FRONT, print_writers, "sfx_In", "START");
 //			}
@@ -8692,7 +8696,7 @@ public class Animation
 			break;
 			
 		case "h": case "Control_y": case "Control_k": case "Shift_F4": case "Shift_O": case "y": case "g": case "k":
-		case "Control_Shift_R": case "Control_Shift_J":
+		case "Control_Shift_R": case "Control_Shift_J": case "Shift_F":
 //			if(audioenabled.equalsIgnoreCase("TRUE")) {
 //				processAnimation(Constants.FRONT, print_writers, "sfx_Out", "START");
 //			}
@@ -8833,6 +8837,8 @@ public class Animation
 		case "Alt_Shift_K": case "Alt_Shift_X": case "Alt_Shift_T": case "Alt_Shift_V":
 			processAnimation(Constants.BACK, print_writers, "anim_LOF_LeaderBoard$In_Out", "CONTINUE");
 			this.whichGraphicOnScreen = "";
+			TimeUnit.MILLISECONDS.sleep(1000);
+			processAnimation(Constants.BACK, print_writers, "anim_LOF_LeaderBoard", "SHOW 0.0");
 			break;
 				
 		case "Control_Shift_O":
@@ -13187,7 +13193,7 @@ public class Animation
 					previewCommand = previewCommand + "anim_FullFrames$In_Out$Main$BattingComparison$In 2.580";
 					break;
 				case "Alt_Shift_F1": case "Alt_Shift_F2":
-					previewCommand = previewCommand + "anim_FullFrames$In_Out$Main$ImageCard$In 2.200 MoveForSplitCard 0.603";
+					previewCommand = previewCommand + "anim_FullFrames$In_Out$Main$ImageCard$In 2.200 MoveForImageCard 0.603";
 					break;
 				case "F4":
 					previewCommand = previewCommand + "anim_FullFrames$In_Out$Main$PartnershipList$In 2.180";
@@ -13294,7 +13300,7 @@ public class Animation
 					previewCommand = previewCommand + " Change_Fullframes$ImageCard 1.300 Change_Fullframes$ImageCard$Change_Out 0.640 Change_Fullframes$ImageCard$Change_In 1.300";
 					if(!whatToProcess.split(",")[0].split(",")[0].equalsIgnoreCase("Alt_Shift_F1") && !whatToProcess.split(",")[0].split(",")[0].equalsIgnoreCase("Alt_Shift_F2")) {
 						if(!whichGraphicOnScreen.split(",")[0].equalsIgnoreCase(whatToProcess.split(",")[0])) {
-							previewCommand = previewCommand + " MoveForSplitCard 0.0";
+							previewCommand = previewCommand + " MoveForImageCard 0.0";
 						}
 					}
 					break;
@@ -14688,6 +14694,7 @@ public class Animation
 						previewCommand = "Anim_DRS_Bug$In_Out$In 0.500";
 						break;
 					case "h": case "Control_y": case "Control_k": case "Shift_F4": case "Shift_O": case "y": case "g": case "k": case "Control_Shift_R": case "Control_Shift_J":
+					case "Shift_F":
 						previewCommand = "Anim_Bugs 0.500 Anim_Bugs$In_Out 0.500 Anim_Bugs$In_Out$In 0.500";
 						break;
 					case "Control_Shift_U": case "Control_Shift_V":

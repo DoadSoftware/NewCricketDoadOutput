@@ -1126,15 +1126,23 @@ public class Caption
 						this_infobarGfx.infobar.setLeft_bottom(whatToProcess.split(",")[0]);
 					}
 					
-					if(whatToProcess.contains("RECENT_FORM")) {
-						this_infobarGfx.team_id = Integer.valueOf(whatToProcess.split(",")[3]);
-					}else if(whatToProcess.contains("PROMO")) {
-						this_infobarGfx.fixtureid = Integer.valueOf(whatToProcess.split(",")[3]);
+					switch(whatToProcess.split(",")[2]) {
+				    case "RECENT_FORM":
+				    	this_infobarGfx.team_id = Integer.valueOf(whatToProcess.split(",")[3]);
+				        break;
+				    case "PROMO":
+				    	this_infobarGfx.fixtureid = Integer.valueOf(whatToProcess.split(",")[3]);
+				        break;
+				    case "BATSMANTIMELINE": case "BOWLERTIMELINE": case "INNINGSBUILDER": 
+				    case "BATSMANBOUNDARY": case "BOWLERDOTS":
+				    	this_infobarGfx.FirstPlayerId = Integer.valueOf(whatToProcess.split(",")[3]);
+				        break;
+				    
 					}
 					
 					System.out.println("whatToProcess = " + whatToProcess);
 					this_infobarGfx.infobar.setMiddle_section(whatToProcess.split(",")[2]);
-					status = this_infobarGfx.populateVizInfobarMiddleSection(print_writers,matchAllData, whichSide);
+					status = this_infobarGfx.populateVizInfobarMiddleSection(false, print_writers,matchAllData, whichSide);
 					break;
 					
 				case Constants.BENGAL_T20:
@@ -1165,12 +1173,12 @@ public class Caption
 					
 					if(this_infobarGfx.infobar.getMiddle_section().equalsIgnoreCase(CricketUtil.BATSMAN)) {
 						this_infobarGfx.infobar.setMiddle_section(whatToProcess.split(",")[2]);
-						status = this_infobarGfx.populateVizInfobarMiddleSection(print_writers,matchAllData, 1);
+						status = this_infobarGfx.populateVizInfobarMiddleSection(false,print_writers,matchAllData, 1);
 					}else {
 						if(whatToProcess.split(",")[2].equalsIgnoreCase(CricketUtil.BATSMAN)) {
 							this_infobarGfx.infobar.setMiddle_section(whatToProcess.split(",")[2]);
 							
-							status = this_infobarGfx.populateVizInfobarMiddleSection(print_writers,matchAllData, 1);
+							status = this_infobarGfx.populateVizInfobarMiddleSection(false,print_writers,matchAllData, 1);
 						}else {
 							if(this_infobarGfx.infobar.getMiddle_section() != null && !this_infobarGfx.infobar.getMiddle_section().isEmpty()) {
 								if(!this_infobarGfx.infobar.getMiddle_section().equalsIgnoreCase(whatToProcess.split(",")[2])) {
@@ -1182,7 +1190,7 @@ public class Caption
 								whichSide = 1;
 							}
 							this_infobarGfx.infobar.setMiddle_section(whatToProcess.split(",")[2]);
-							status = this_infobarGfx.populateVizInfobarMiddleSection(print_writers,matchAllData, whichSide);
+							status = this_infobarGfx.populateVizInfobarMiddleSection(false,print_writers,matchAllData, whichSide);
 						}
 						
 						if(this_infobarGfx.infobar.getRight_bottom().trim().isEmpty()) {
@@ -1284,7 +1292,7 @@ public class Caption
 						this_infobarGfx.infobar.setMiddle_section("BAT_PROFILE_CAREER");
 						this_infobarGfx.FirstPlayerId = Integer.valueOf(whatToProcess.split(",")[2]);
 						this_infobarGfx.WhichProfile = whatToProcess.split(",")[3];
-						status = this_infobarGfx.populateVizInfobarMiddleSection(print_writers, matchAllData, whichSide);
+						status = this_infobarGfx.populateVizInfobarMiddleSection(false,print_writers, matchAllData, whichSide);
 						break;
 					}
 				}
@@ -1312,7 +1320,7 @@ public class Caption
 						this_infobarGfx.infobar.setMiddle_section("BALL_PROFILE_CAREER");
 						this_infobarGfx.FirstPlayerId = Integer.valueOf(whatToProcess.split(",")[2]);
 						this_infobarGfx.WhichProfile = whatToProcess.split(",")[3];
-						status = this_infobarGfx.populateVizInfobarMiddleSection(print_writers, matchAllData, whichSide);
+						status = this_infobarGfx.populateVizInfobarMiddleSection(false,print_writers, matchAllData, whichSide);
 						break;
 					}
 				}
@@ -1491,7 +1499,7 @@ public class Caption
 					}else {
 						this_infobarGfx.infobar.setMiddle_section("LAST_X_BALLS");
 						this_infobarGfx.lastXballs = Integer.valueOf(whatToProcess.split(",")[2]);
-						status = this_infobarGfx.populateVizInfobarMiddleSection(print_writers,matchAllData, whichSide);
+						status = this_infobarGfx.populateVizInfobarMiddleSection(false,print_writers,matchAllData, whichSide);
 					}
 					break;
 				default:
@@ -1593,7 +1601,7 @@ public class Caption
 				case Constants.ICC_U19_2023:
 					this_infobarGfx.infobar.setMiddle_section("BATSMAN_SPONSOR");
 					this_infobarGfx.sponsor_omo = Integer.valueOf(whatToProcess.split(",")[2]);
-					status = this_infobarGfx.populateVizInfobarMiddleSection(print_writers, matchAllData, whichSide);
+					status = this_infobarGfx.populateVizInfobarMiddleSection(false,print_writers, matchAllData, whichSide);
 					break;
 				}
 				break;
@@ -1624,7 +1632,7 @@ public class Caption
 						
 						if(this_infobarGfx.infobar.getMiddle_section().trim().isEmpty()) {
 							this_infobarGfx.infobar.setMiddle_section(CricketUtil.BATSMAN);
-							this_infobarGfx.populateVizInfobarMiddleSection(print_writers,matchAllData, 1);
+							this_infobarGfx.populateVizInfobarMiddleSection(false,print_writers,matchAllData, 1);
 						}
 					}
 					
@@ -1914,7 +1922,7 @@ public class Caption
 					}else {
 						this_infobarGfx.infobar.setMiddle_section("FREE_TEXT");
 						this_infobarGfx.infobarStatsId = Integer.valueOf(whatToProcess.split(",")[2]);
-						status = this_infobarGfx.populateVizInfobarMiddleSection(print_writers, matchAllData, whichSide);
+						status = this_infobarGfx.populateVizInfobarMiddleSection(false,print_writers, matchAllData, whichSide);
 					}
 					break;
 				case Constants.T20_MUMBAI:
@@ -1925,7 +1933,7 @@ public class Caption
 				case Constants.BENGAL_T20:
 					this_infobarGfx.infobar.setMiddle_section("FREE_TEXT");
 					this_infobarGfx.infobarStatsId = Integer.valueOf(whatToProcess.split(",")[2]);
-					status = this_infobarGfx.populateVizInfobarMiddleSection(print_writers, matchAllData, whichSide);
+					status = this_infobarGfx.populateVizInfobarMiddleSection(false,print_writers, matchAllData, whichSide);
 					break;	
 //				case Constants.ISPL:
 //					if(this_infobarGfx.infobar.getFull_section() != null && !this_infobarGfx.infobar.getFull_section().isEmpty()) {
@@ -2009,13 +2017,13 @@ public class Caption
 						System.out.println(this_infobarGfx.infobar.getMiddle_section());
 						this_infobarGfx.infobar.setMiddle_section("COMMENTATORS");
 						this_infobarGfx.Comms_Name = whatToProcess;
-						status = this_infobarGfx.populateVizInfobarMiddleSection(print_writers, matchAllData, whichSide);
+						status = this_infobarGfx.populateVizInfobarMiddleSection(false,print_writers, matchAllData, whichSide);
 					}
 					break;
 				case Constants.BENGAL_T20:
 					this_infobarGfx.infobar.setMiddle_section("COMMENTATORS");
 					this_infobarGfx.Comms_Name = whatToProcess;
-					status = this_infobarGfx.populateVizInfobarMiddleSection(print_writers, matchAllData, whichSide);
+					status = this_infobarGfx.populateVizInfobarMiddleSection(false,print_writers, matchAllData, whichSide);
 					break;	
 //				case Constants.ISPL:
 //					if(this_infobarGfx.infobar.getFull_section() != null && !this_infobarGfx.infobar.getFull_section().isEmpty()) {

@@ -3375,7 +3375,7 @@ public class LowerThirdGfx
 				getImpact(0,print_writers,matchAllData,WhichSide,"");
 				 lowerThird = new LowerThird("FALL OF WICKETS", inning.getBatting_team().getTeamName2(), inning.getBatting_team().getTeamName3(),"", 
 							CricketFunctions.getTeamScore(inning, "-", false) , String.valueOf(inning.getTotalWickets()),
-							2,"",inning.getBatting_team().getTeamName4(),fowNumber,fowData,new String[]{"WKTS","SCORE"},null,
+							2,"",inning.getBatting_team().getTeamBadge(),fowNumber,fowData,new String[]{"WKTS","SCORE"},null,
 							new String[] {"82","158","236","316","400","480","558","641","722","807"});
 					break;
 			case Constants.LEGENDS:
@@ -4881,137 +4881,45 @@ public class LowerThirdGfx
 			logoCategory = "";
 		}
 		
-		String path = "C:\\Sports\\Cricket\\Speed\\" + matchAllData.getMatch().getMatchFileName().replace(".json", ".txt");
-        File file = new File(path);
-        
-		List<Double> speed = CricketFunctions.getLastSpellSpeeds(matchAllData.getEventFile().getEvents());
-		Collections.reverse(speed);
-		String over = "",ball="",speed_data="";
-		int Curr_Over = 0;
-//		String[] speedData = new String[speed.size()];
-//		String[] speedNumber = new String[speed.size()];
-		
-		List<String> speedDataArray = new ArrayList<>();
-        List<String> speedNumberArray = new ArrayList<>();
-        
 		if (matchAllData == null || matchAllData.getMatch() == null || matchAllData.getMatch().getInning() == null) {
 			return status;
 		} else {
 			
-			inning = matchAllData.getMatch().getInning().stream().filter(inn -> inn.getIsCurrentInning().equalsIgnoreCase(CricketUtil.YES)).findAny().orElse(null);
-			
+			inning = matchAllData.getMatch().getInning().stream().filter(inn -> inn.getIsCurrentInning().equalsIgnoreCase(CricketUtil.YES))
+					.findAny().orElse(null);
 			if(inning == null) {
 				return "populateThisSpeed: Inning is Not Found";
 			}
-			
-			
 			bowlingCard = inning.getBowlingCard().stream().filter(bc -> bc.getStatus().equalsIgnoreCase(CricketUtil.LAST + CricketUtil.BOWLER) ||
 					bc.getStatus().equalsIgnoreCase(CricketUtil.CURRENT + CricketUtil.BOWLER)).findAny().orElse(null);
+			
 			if(bowlingCard == null) {
 				return status;
-			}			
-			team = Teams.stream().filter(tm -> tm.getTeamId() == bowlingCard.getPlayer().getTeamId()).findAny().orElse(null);
-			if(team == null) {
-				return "populateThisSpeed: TEAM is Not Found";
 			}
-			
-			if(!file.exists()) {
-				return "populateThisSpeed: File Not Found";
-			}
-			
-			Curr_Over = inning.getTotalOvers();
-			for(BowlingCard boc : inning.getBowlingCard()) {
-        		if(boc.getStatus().equalsIgnoreCase(CricketUtil.CURRENT + CricketUtil.BOWLER)) {
-        			Curr_Over = inning.getTotalOvers() + 1;
-        			break;
-        		}
-        	}
-			
-			try {
-	            BufferedReader br = new BufferedReader(
-	                    new FileReader(file)
-	            );
-
-	            String line;
-
-	            while ((line = br.readLine()) != null) {
-
-	                // Over=1,Ball=1,Speed=60.4
-	                String[] parts = line.split(",");
-	                if(inning.getInningNumber() == Integer.valueOf(parts[0].split("=")[1])) {
-	                	if(Curr_Over == Integer.valueOf(parts[1].split("=")[1])) {
-	                		over = parts[1].split("=")[1];
-			                ball = parts[2].split("=")[1];
-			                speed_data = parts[3].split("=")[1];
-			                
-			                
-			                speedDataArray.add(speed_data);  // 60.4, 84.6 ...
-			                speedNumberArray.add(over + "." + ball); // 1.1, 1.2 ...
-	                	}
-	                }
-	            }
-
-	            br.close();
-
-	        } catch (Exception e) {
-	            e.printStackTrace();
-	        }
-
-	        
-	        
-//			for(int id=0;id<speed.size();id++) {
-//				speedData[id] = String.valueOf(speed.get(id));
-//				speedNumber[id] = String.valueOf(id+1);
-//			}
 		}
 		
-		// Convert to arrays if needed
-        String[] speedData = speedDataArray.toArray(new String[0]);
-        String[] speedNumber = speedNumberArray.toArray(new String[0]);
-		
-        if(speedData.length > 10) {
-			return "populateThisSpeed: Can't Display Speed More than 10";
+		if(bowlingCard.getSpeeds()== null) {
+			return "Speed is null";
 		}
-        
-//		if(bowlingCard.getSpeeds()== null) {
-//			return "Speed is null";
-//		}
+		Speed = CricketFunctions.getThisOverSpeeds(bowlingCard, inning);
 		
-//		Speed = bowlingCard.getSpeeds().stream()
-//			    .filter(s -> (s.getOverNumber() == bowlingCard.getOvers())||(s.getOverNumber() == bowlingCard.getOvers()-1 && s.getBallNumber()>0))
-//			    .collect(Collectors.toList());
-
-//		if(Speed.size()>10) {
-//			return "Can't show This over has more than 10 balls";
-//		}
+		if(Speed== null) {
+			return "This Over Speed is null";
+		}
+		String[] balls = new String[Speed.size()];
+		String[] speed = new String[Speed.size()];
 		
-		numbers.clear(); 
-				
-//		String fileName = "C:\\Sports\\Cricket\\Speed.txt"; // Ensure the file exists in the correct path
-//        try (BufferedReader br = new BufferedReader(new FileReader(fileName))) {
-//            String line;
-//            
-//            while ((line = br.readLine()) != null) { // Read file line by line
-//                String[] values = line.split(","); // Split by comma
-//                
-//                for (String value : values) {
-//                    numbers.add(Double.parseDouble(value.trim())); // Convert to Double
-//                }
-//                
-//                // Print or process the numbers
-//                System.out.println("Read values: " + numbers.size());
-//            }
-//            
-//        } catch (IOException | NumberFormatException e) {
-//            e.printStackTrace();
-//        }
+		for(int i=0;i<=Speed.size()-1;i++) {
+			balls[i] = String.valueOf(i+1);
+			speed[i] = String.valueOf(Speed.get(i).getSpeedValue());
+		}
 		
 		switch (config.getBroadcaster().toUpperCase()) {
 		case Constants.NPL: case Constants.MPL: case Constants.APL:
 			lowerThird = new LowerThird("SPEEDS THIS OVER",bowlingCard.getPlayer().getFirstname(), bowlingCard.getPlayer().getSurname(),
-					CricketFunctions.OverBalls(bowlingCard.getOvers(), bowlingCard.getBalls()), String.valueOf(bowlingCard.getWickets()), String.valueOf(bowlingCard.getRuns()),
-					10,"",team.getTeamBadge(),speedNumber,speedData,new String[]{"BALLS","SPEED"},new String[] {"WITH_TITLE"},
-					new String[] {"-19","33","86","142","194","246","295","345","396","446"});
+					CricketFunctions.OverBalls(bowlingCard.getOvers(), bowlingCard.getBalls()), String.valueOf(bowlingCard.getWickets()), 
+					String.valueOf(bowlingCard.getRuns()),10,"",inning.getBowling_team().getTeamBadge(),balls,speed,new String[]{"BALLS","SPEED"},
+					new String[] {"WITH_TITLE"},new String[] {"-19","33","86","142","194","246","295","345","396","446"});
 			break;
 		case Constants.ISPL:
 //			numbers = CricketFunctions.ThisOverSpeed(bowlingCard);
@@ -5020,36 +4928,36 @@ public class LowerThirdGfx
 //					null,null,null,
 //					new String[] {"-527.0","-398.0","-259.0","-130.0","9.0","132.0","239.0","358.0","479.0","592.0"});
 			
-			if(speedData.length == 1) {
+			if(speed.length == 1) {
 				lowerThird = new LowerThird("", "SPEEDS", "","THIS OVER", "", "", 2, "", inning.getBowling_team().getTeamName4(),null,
-						speedData,null,null,new String[] {"-544"});
-			}else if(speedData.length == 2) {
+						speed,null,null,new String[] {"-544"});
+			}else if(speed.length == 2) {
 				lowerThird = new LowerThird("", "SPEEDS", "","THIS OVER", "", "", 2, "", inning.getBowling_team().getTeamName4(),null,
-						speedData,null,null,new String[] {"-157","215"});
-			}else if(speedData.length == 3) {
+						speed,null,null,new String[] {"-157","215"});
+			}else if(speed.length == 3) {
 				lowerThird = new LowerThird("", "SPEEDS", "","THIS OVER", "", "", 2, "", inning.getBowling_team().getTeamName4(),null,
-						speedData,null,null,new String[] {"-348","10","365"});
-			}else if(speedData.length == 4) {
+						speed,null,null,new String[] {"-348","10","365"});
+			}else if(speed.length == 4) {
 				lowerThird = new LowerThird("", "SPEEDS", "","THIS OVER", "", "", 2, "", inning.getBowling_team().getTeamName4(),null,
-						speedData,null,null,new String[] {"-478","-158","197","524"});
-			}else if(speedData.length == 5) {
+						speed,null,null,new String[] {"-478","-158","197","524"});
+			}else if(speed.length == 5) {
 				lowerThird = new LowerThird("", "SPEEDS", "","THIS OVER", "", "", 2, "", inning.getBowling_team().getTeamName4(),null,
-						speedData,null,null,new String[] {"-506","-270","-4","283","544"});
-			}else if(speedData.length == 6) {
+						speed,null,null,new String[] {"-506","-270","-4","283","544"});
+			}else if(speed.length == 6) {
 				lowerThird = new LowerThird("", "SPEEDS", "","THIS OVER", "", "", 2, "", inning.getBowling_team().getTeamName4(),null,
-						speedData,null,null,new String[] {"-500","-290","-75","160","370","550"});
-			}else if(speedData.length == 7) {
+						speed,null,null,new String[] {"-500","-290","-75","160","370","550"});
+			}else if(speed.length == 7) {
 				lowerThird = new LowerThird("", "SPEEDS", "","THIS OVER", "", "", 2, "", inning.getBowling_team().getTeamName4(),null,
-						speedData,null,null,new String[] {"-511","-339","-160","38","218","403","567"});
-			}else if(speedData.length == 8) {
+						speed,null,null,new String[] {"-511","-339","-160","38","218","403","567"});
+			}else if(speed.length == 8) {
 				lowerThird = new LowerThird("", "SPEEDS", "","THIS OVER", "", "", 2, "", inning.getBowling_team().getTeamName4(),null,
-						speedData,null,null,new String[] {"-536","-390","-229","-52","112","273","437","582"});
-			}else if(speedData.length == 9) {
+						speed,null,null,new String[] {"-536","-390","-229","-52","112","273","437","582"});
+			}else if(speed.length == 9) {
 				lowerThird = new LowerThird("", "SPEEDS", "","THIS OVER", "", "", 2, "", inning.getBowling_team().getTeamName4(),null,
-						speedData,null,null,new String[] {"-531","-410","-273","-133","15","148","285","441","582"});
-			}else if(speedData.length == 10) {
+						speed,null,null,new String[] {"-531","-410","-273","-133","15","148","285","441","582"});
+			}else if(speed.length == 10) {
 				lowerThird = new LowerThird("", "SPEEDS", "","THIS OVER", "", "", 2, "", inning.getBowling_team().getTeamName4(),null,
-						speedData,null,null,new String[] {"-531.0","-411.0","-290.0","-172.0","-44","80","197","330","458","578"});
+						speed,null,null,new String[] {"-531.0","-411.0","-290.0","-172.0","-44","80","197","330","458","578"});
 			}
 			
 //			lowerThird = new LowerThird("", "THIS OVER SPEED", "","", "", 
@@ -24326,7 +24234,7 @@ public class LowerThirdGfx
 		if(bowlingCard.getSpeeds()== null) {
 			return "Speed is null";
 		}
-		Speed = CricketFunctions.getThisOverSpeeds(bowlingCard);
+		Speed = CricketFunctions.getThisOverSpeeds(bowlingCard, inning);
 		
 		for(Speed speed : Speed) {
 			System.out.println(speed.toString());
@@ -24668,7 +24576,7 @@ public class LowerThirdGfx
 				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_LT_SubOptions$PlayerAll" + containerName + "$Grp" + (i+1) + 
 						"$NameGrp$txt_Name*GEOM*TEXT SET " + playerSub.get(i).getTicker_name() + "\0", print_writers);
 				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_LT_SubOptions$PlayerAll" + containerName + "$Grp" + (i+1) + 
-						"$Data$txt_StatHead*GEOM*TEXT SET " + CricketFunctions.RoleType(playerSub.get(i).getRole().toUpperCase()) + "\0", print_writers);
+						"$Data$txt_StatHead*GEOM*TEXT SET " + playerSub.get(i).getBattingStyle().toUpperCase() + "\0", print_writers);
 				
 				if(playerSub.get(i).getRole().equalsIgnoreCase("BATSMAN") || playerSub.get(i).getRole().equalsIgnoreCase("BATTER") || 
 						playerSub.get(i).getRole().equalsIgnoreCase("BAT/KEEPER")) {

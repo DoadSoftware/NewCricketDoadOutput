@@ -4441,12 +4441,13 @@ function addItemsToList(whatToProcess,dataToProcess)
 					option.text = 'RECENT FORM';
 					select.appendChild(option);
 					
+					option = document.createElement('option');
+					option.value = 'TIMELINE';
+					option.text = 'TIMELINE';
+					select.appendChild(option);
+					
 					switch($('#selected_broadcaster').val().toUpperCase()){
 					case 'MPL': case 'NPL': //case 'APL':
-						option = document.createElement('option');
-						option.value = 'TIMELINE';
-						option.text = 'TIMELINE';
-						select.appendChild(option);
 						
 						option = document.createElement('option');
 						option.value = 'NEXT_TO_BAT';
@@ -4455,14 +4456,39 @@ function addItemsToList(whatToProcess,dataToProcess)
 						break;
 					}
 					
-					/*option = document.createElement('option');
+					option = document.createElement('option');
 					option.value = 'SPEED_THIS_OVER';
 					option.text = 'Speed This Over';
-					select.appendChild(option);*/
+					select.appendChild(option);
 					
 					option = document.createElement('option');
 					option.value = 'INNING_DOTS';
 					option.text = 'Innings Dots';
+					select.appendChild(option);
+					
+					option = document.createElement('option');
+					option.value = 'BATSMANTIMELINE';
+					option.text = 'BatsMan TimeLine';
+					select.appendChild(option);
+					
+					option = document.createElement('option');
+					option.value = 'BOWLERTIMELINE';
+					option.text = 'Bowler TimeLine';
+					select.appendChild(option);
+					
+					option = document.createElement('option');
+					option.value = 'INNINGSBUILDER';
+					option.text = 'Player Innings Builder';
+					select.appendChild(option);
+					
+					option = document.createElement('option');
+					option.value = 'BATSMANBOUNDARY';
+					option.text = 'BatsMan Boundary';
+					select.appendChild(option);
+					
+					option = document.createElement('option');
+					option.value = 'BOWLERDOTS';
+					option.text = 'Bowler Dots';
 					select.appendChild(option);
 					
 					option = document.createElement('option');
@@ -4729,9 +4755,11 @@ function addItemsToList(whatToProcess,dataToProcess)
 			select.addEventListener('change', function () {
 				const selectedValue = this.value;
 				// 🔁 Clean up any previously added special dropdowns
-				['selectScope', 'selectTeams', 'selectTeamids_in', 'Promo'].forEach(id => {
+				['selectScope', 'selectTeams', 'selectTeamids_in', 'Promo', 'selectFreeText'].forEach(id => {
 					let existing = document.getElementById(id);
-					if (existing) existing.parentElement.remove();
+					if (existing) {
+					    existing.remove();
+					}
 				});
 				if (selectedValue === 'BowlerVsBatsman' || selectedValue === 'BatsmanVsBowler') {
 					// === 1. Scope Dropdown: This Match / This Series ===
@@ -4840,7 +4868,41 @@ function addItemsToList(whatToProcess,dataToProcess)
 					processCricketProcedures("GRAPHICS-OPTIONS_DATA", whatToProcess + "," +
     				(selectedValue || $(this).find('option').first().val()));
 				}
-				
+				else if(this.value == 'BATSMANTIMELINE' || this.value == 'BOWLERTIMELINE' || this.value == 'INNINGSBUILDER'
+							|| this.value == 'BATSMANBOUNDARY' || this.value == 'BOWLERDOTS'){
+					let xballselect  = document.createElement('select');
+					xballselect.id = 'selectFreeText';
+					xballselect.name = xballselect.id;
+					
+					let selectedValue = this.value; 
+					
+					session_match.match.inning.forEach(function(inn){
+					if(inn.isCurrentInning == 'YES'){
+						if(selectedValue == 'BATSMANTIMELINE' || selectedValue == 'INNINGSBUILDER' 
+							|| selectedValue == 'BATSMANBOUNDARY'){
+							inn.battingCard.forEach(function(bc){
+								if(bc.status == 'NOT OUT'){
+									option = document.createElement('option');
+									option.value = bc.playerId;
+									option.text = bc.player.full_name + " - " + bc.status;	
+									xballselect.appendChild(option);	
+								}
+							});
+						}else{
+							inn.bowlingCard.forEach(function(boc){
+								option = document.createElement('option');
+								option.value = boc.playerId;
+								option.text = boc.player.full_name;	
+								xballselect.appendChild(option);
+							});
+						}
+					}
+					});
+					xballselect.setAttribute('onchange',"setDropdownOptionToSelectOptionArray(this, 1)");
+					row.insertCell(1).appendChild(xballselect);
+					setDropdownOptionToSelectOptionArray($(xballselect),1);
+					cellCount = 2;
+				}
 			});
 			break;
 		case 'Control_Shift_(':

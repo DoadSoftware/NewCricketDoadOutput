@@ -2439,7 +2439,7 @@ public class BugsAndMiniGfx
 					+ "*GEOM*TEXT SET " + partnership.getFirstPlayer().getTicker_name() + " & " + partnership.getSecondPlayer().getTicker_name() + "\0", print_writers);
 			
 			CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_Bug$All$Text$txt_Runs*GEOM*TEXT SET " +
-					(partnership.getPartnershipNumber()==0? "":partnership.getTotalRuns()) +"\0", print_writers);
+					(partnership.getPartnershipNumber()==0 ? "" : partnership.getTotalRuns() + "*") +"\0", print_writers);
 			CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_Bug$All$Text$txt_Balls*GEOM*TEXT SET " +
 					partnership.getTotalBalls() + "\0", print_writers);
 			CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_Bug$All$Text$txt_Sub*ACTIVE SET 0\0", print_writers);
