@@ -11291,7 +11291,7 @@ public class InfobarGfx
 					}
 					
 					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Infobar$Right$Side_" + WhichSide + "$Basic$txt_Top*GEOM*TEXT SET " + 
-							matchname + " - " + fixture.getHome_Team().getTeamName1() + " v " + fixture.getAway_Team().getTeamName1() + "\0", print_writers);
+							matchname + " - " + fixture.getHome_Team().getTeamName3() + " v " + fixture.getAway_Team().getTeamName3() + "\0", print_writers);
 					break;
 					
 				case "IDENT_TEAM": case "IDENT_TOURNAMENT":

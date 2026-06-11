@@ -1504,7 +1504,7 @@ function addItemsToList(whatToProcess,dataToProcess)
 	case 'Shift_C': case 'Control_Shift_Q': case 'Control_Shift_O': case 'Control_Shift_J':case 'Control_Shift_F5':
 	case 'Control_m': case 'F4': case 'F5': case 'F6': case 'Alt_w': case 'Control_j': case 'F8': case 'F9': case 'F10': case 'F7': case 'F11':
 	case 'Control_F5': case 'Control_F9': case 'Shift_T': case 'u': case 'p': case 'Control_p': case 'Control_d': case 'Control_e': case 'Shift_F8':
-	case 'z': case 'x': case 'c': case 'v': case 'Shift_F11': case 'Control_y': case 'Alt_F8': case 'Alt_F1': case 'Alt_F2':
+	case 'z': case 'x': case 'c': case 'v': case 'Shift_F11': case 'Control_y': case 'Alt_F8': case 'Alt_F1': case 'Alt_F2': case 'Alt_Shift_U': case 'Alt_Shift_I':
 	case 'Shift_K': case 'Shift_O': case 'k': case 'Shift_Y': case 'g': case 'y': case 'Shift_F5': case 'Shift_F9': case 'Control_h': case 'Control_g': case 'q':
 	case 'j': case 'Shift_F6': case 'Control_s':  case 'Control_f': case 'Alt_F12': case 'l': case 'Shift_E': case 'Alt_F9':
 	case 'F12': case 'Alt_1': case 'Alt_2': case 'Alt_3': case 'Alt_4': case 'Alt_5': case 'Alt_6': case 'Alt_7': case 'Alt_8': case 'Alt_9': case 'Alt_0':
@@ -7642,7 +7642,7 @@ function addItemsToList(whatToProcess,dataToProcess)
 		
 		case 'z': case 'x': case 'c': case 'v': case 'Control_z': case 'Control_x': case 'Control_c': case 'Control_v': case 'Control_Shift_Z': case 'Control_Shift_Y':
 		case "Shift_@": case "Shift_$": case "Control_Shift_@": case "Control_Alt_5": case "Alt_Shift_@": case "Control_Alt_6": case "Control_Alt_9": case "Control_Alt_0":
-		case 'Alt_Shift_K': case 'Alt_Shift_X': case 'Alt_Shift_T': case 'Alt_Shift_V': case 'Control_Alt_7':
+		case 'Alt_Shift_K': case 'Alt_Shift_X': case 'Alt_Shift_T': case 'Alt_Shift_V': case 'Control_Alt_7': case 'Alt_Shift_U': case 'Alt_Shift_I':
 			switch(whatToProcess) {
 			case 'z': case "Shift_@": case 'Alt_Shift_K':
 				header_text.innerHTML = 'LEADERBOARD - MOST RUNS';
@@ -7674,6 +7674,10 @@ function addItemsToList(whatToProcess,dataToProcess)
 			case 'Control_Shift_Y': case "Control_Alt_0":
 				header_text.innerHTML = 'LEADERBOARD - BEST ECONOMY'
 				break;
+			case 'Alt_Shift_U': case 'Alt_Shift_I':
+				header_text.innerHTML = 'LEADERBOARD - MOST DOTS'
+				break;
+						
 			}
 			let num = 0;
 			switch(whatToProcess){
@@ -9392,6 +9396,11 @@ function addItemsToList(whatToProcess,dataToProcess)
 					});
 					break;
 				case 'LEGENDS-90':
+					option = document.createElement('option');
+					option.value = 'BPL_CAREER';
+					option.text = 'BPL CAREER';
+					select.appendChild(option);
+										
 					[ { value: 'DT20', text: 'T20' },
 					 { value: 'IT20', text: 'T20i' }
 					].forEach(({ value, text }) => {
@@ -9402,10 +9411,7 @@ function addItemsToList(whatToProcess,dataToProcess)
 						  
 						 
 					});
-					option = document.createElement('option');
-					option.value = 'BPL_CAREER';
-					option.text = 'BPL CAREER';
-					select.appendChild(option);
+					
 					break;
 				case 'NPL': case 'MPL': case 'APL':	case 'VIDARBHA':		
 					if($('#selected_broadcaster').val().toUpperCase()=='MPL'){
@@ -9885,13 +9891,28 @@ function addItemsToList(whatToProcess,dataToProcess)
 			select.appendChild(option);
 			
 			option = document.createElement('option');
-			option.value = 'Gully to Glory Award';
-			option.text = 'Gully to Glory Award';
+			option.value = 'Player Of The Match';
+			option.text = 'Player Of The Match';
 			select.appendChild(option);
 			
 			option = document.createElement('option');
-			option.value = 'Player Of The Match';
-			option.text = 'Player Of The Match';
+			option.value = 'BEST BOWLER OF THE MATCH';
+			option.text = 'BEST BOWLER OF THE MATCH';
+			select.appendChild(option);
+			
+			option = document.createElement('option');
+			option.value = 'BEST STRIKER OF THE MATCH';
+			option.text = 'BEST STRIKER OF THE MATCH';
+			select.appendChild(option);
+			
+			option = document.createElement('option');
+			option.value = 'GREEN DOT BALLS OF MATCH';
+			option.text = 'GREEN DOT BALLS OF MATCH';
+			select.appendChild(option);
+			
+			option = document.createElement('option');
+			option.value = 'Gully to Glory Award';
+			option.text = 'Gully to Glory Award';
 			select.appendChild(option);
 			
 			option = document.createElement('option');
@@ -10237,6 +10258,11 @@ function addItemsToList(whatToProcess,dataToProcess)
 					});
 					break;
 				case 'LEGENDS-90':
+					option = document.createElement('option');
+					option.value = 'BPL_CAREER';
+					option.text = 'BPL CAREER';
+					select.appendChild(option);
+										
 					[ { value: 'DT20', text: 'T20' },
 					  { value: 'IT20', text: 'T20i' }
 					].forEach(({ value, text }) => {
@@ -10245,10 +10271,7 @@ function addItemsToList(whatToProcess,dataToProcess)
 						  option.text = text;
 						  select.appendChild(option);
 					});
-					option = document.createElement('option');
-					option.value = 'BPL_CAREER';
-					option.text = 'BPL CAREER';
-					select.appendChild(option);
+					
 					break;
 				case 'NPL': case 'MPL': case 'APL': case 'VIDARBHA':
 					if($('#selected_broadcaster').val().toUpperCase()=='MPL'){
@@ -10628,7 +10651,7 @@ function addItemsToList(whatToProcess,dataToProcess)
 			
 				if(whatToProcess == 'z' || whatToProcess == 'x' || whatToProcess == 'c' || whatToProcess == 'v' || 
 					whatToProcess == 'Control_z' || whatToProcess == 'Control_x' || whatToProcess == 'Control_Shift_Z' || whatToProcess == 'Control_Shift_Y' || 
-					whatToProcess == 'Control_Shift_F8'){
+					whatToProcess == 'Control_Shift_F8' || whatToProcess == 'Alt_Shift_U' || whatToProcess == 'Alt_Shift_I'){
 					option = document.createElement('input');
 					option.type = 'button';
 					option.name = 'highlightLeader';
@@ -10650,7 +10673,7 @@ function addItemsToList(whatToProcess,dataToProcess)
 			case 'Control_F5': case 'Control_F9': case 'Shift_T': case 'u': case 'p': case 'Control_p': case 'Control_d': case 'Control_e': case 'z': 
 			case 'x': case 'c': case 'v': case 'Shift_F11': case 'Control_y': case 'Alt_F8': case 'Alt_F1': case 'Alt_F2': case 'Shift_K': case 'Shift_O': 
 			case 'k': case 'Shift_Y': case 'g': case 'y': case 'Shift_F5': case 'Shift_F9': case 'Control_h': case 'Control_g': case 'q': case 'j': case 'Shift_F6': case 'Shift_F8':
-			case 'Control_s':  case 'Control_f': case 'Alt_F12': case 'l': case 'Shift_E': case 'Alt_F9':  
+			case 'Control_s':  case 'Control_f': case 'Alt_F12': case 'l': case 'Shift_E': case 'Alt_F9': case 'Alt_Shift_U': case 'Alt_Shift_I':
 			case 'F12': case 'Alt_1': case 'Alt_2': case 'Alt_3': case 'Alt_4': case 'Alt_5': case 'Alt_6': case 'Alt_7': case 'Alt_8': case 'Alt_9': case 'Alt_0':
 			case 'Alt_m': case 'Alt_n': case 'Control_b': case 'Alt_p': case 'Alt_F10': case 'Alt_d': case 'Shift_F4': case 'Alt_a': case 'Alt_s': case 'Shift_P': 
 			case 'Shift_Q': case 'Alt_z': case 'Control_c': case 'Control_v': case 'Control_z': case 'Control_x': case 'Alt_q': case 'Shift_F': case 'Alt_F6': 

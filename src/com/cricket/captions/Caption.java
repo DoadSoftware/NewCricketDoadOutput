@@ -794,7 +794,8 @@ public class Caption
 				status = this_fullFramesGfx.populateLeaderBoard(whichSide, whatToProcess, matchAllData, 0);
 				break;
 			case "z": case "x": case "c": case "v": case "Control_z": case "Control_x": case "Control_c": case "Control_v": case "Shift_V":
-			case "Shift_Z": case "Shift_X": case "Control_Shift_Z": case "Control_Shift_Y": case "Alt_Shift_W": case "Control_Shift_F8":	
+			case "Shift_Z": case "Shift_X": case "Control_Shift_Z": case "Control_Shift_Y": case "Alt_Shift_W": case "Control_Shift_F8":
+			case "Alt_Shift_U":	case "Alt_Shift_I":	
 				
 				System.out.println("wtp = " + whatToProcess);
 				if(whatToProcess.split(",")[0].equalsIgnoreCase("Shift_Z") || whatToProcess.split(",")[0].equalsIgnoreCase("Shift_X")) {
