@@ -1243,7 +1243,7 @@ public class IndexController
 		            cricketService.getAllStatsType().stream().filter(st -> st.getStatsFullName().equalsIgnoreCase(whatToProcess.split(",")[2]))
 		                .findAny().orElse(null) : null;
 		    if (stat != null) {
-		        return (List<T>) cricketService.getAllStats().stream().filter(st -> st.getStats_type_id() == stat.getStatsId())
+		        return (List<T>) cricketService.getAllStats().stream().filter(st -> st.getStatsTypeId() == stat.getStatsId())
 		            .collect(Collectors.toList());
 		    }
 		    break;
@@ -1324,8 +1324,8 @@ public class IndexController
 			database_statistics = getPlayerFromMatchData(whatToProcess ,session_match);
 			for(Statistics stats : session_statistics) {
 				for(int i=0;i<=database_statistics.size()-1;i++) {
-					if(database_statistics.get(i).getPlayerId() == stats.getPlayer_id()) {
-						stats.setStats_type(cricketService.getStatsType(stats.getStats_type_id()));
+					if(database_statistics.get(i).getPlayerId() == stats.getPlayerID()) {
+						stats.setStats_type(cricketService.getStatsType(stats.getStatsTypeId()));
 						database_statistics.get(i).getStatsList().add(stats);
 					}
 				}
@@ -1338,8 +1338,8 @@ public class IndexController
 			
 			for(Statistics stats : session_statistics) {
 				for(int i=0;i<=statistics.size()-1;i++) {
-					if(statistics.get(i).getPlayerId() == stats.getPlayer_id()) {
-						stats.setStats_type(cricketService.getStatsType(stats.getStats_type_id()));
+					if(statistics.get(i).getPlayerId() == stats.getPlayerID()) {
+						stats.setStats_type(cricketService.getStatsType(stats.getStatsTypeId()));
 						stats = CricketFunctions.updateTournamentWithH2h(stats, headToHead.getH2hPlayer(), session_match, CricketUtil.FULL);
 						stats = CricketFunctions.updateStatisticsWithMatchData(stats, session_match, CricketUtil.FULL);
 						statistics.get(i).setStats(stats);

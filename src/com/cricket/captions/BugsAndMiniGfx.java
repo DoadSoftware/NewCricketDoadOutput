@@ -9562,7 +9562,7 @@ public class BugsAndMiniGfx
 			if(statsType == null) {
 				return "InfoBarPlayerProfile: Stats Type not found for profile [" + WhichProfile + "]";
 			}
-			stat = statistics.stream().filter(st -> st.getPlayer_id() == FirstPlayerId && statsType.getStatsId() == st.getStats_type_id()).findAny().orElse(null);
+			stat = statistics.stream().filter(st -> st.getPlayerID() == FirstPlayerId && statsType.getStatsId() == st.getStatsTypeId()).findAny().orElse(null);
 			if(stat == null) {
 				return "InfoBarPlayerProfile: Stats not found for Player Id [" + FirstPlayerId + "]";
 			}
@@ -9647,7 +9647,7 @@ public class BugsAndMiniGfx
 			if(statsType == null) {
 				return "InfoBarPlayerProfile: Stats Type not found for profile [" + WhichProfile + "]";
 			}
-			stat = statistics.stream().filter(st -> st.getPlayer_id() == FirstPlayerId && statsType.getStatsId() == st.getStats_type_id()).findAny().orElse(null);
+			stat = statistics.stream().filter(st -> st.getPlayerID() == FirstPlayerId && statsType.getStatsId() == st.getStatsTypeId()).findAny().orElse(null);
 			if(stat == null) {
 				return "InfoBarPlayerProfile: Stats not found for Player Id [" + FirstPlayerId + "]";
 			}
@@ -9690,12 +9690,12 @@ public class BugsAndMiniGfx
 				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$PlayerBio$Body$CurrentLeader$Stats$Data$Row2$Value*GEOM*TEXT SET " + 
 						(stat.getRuns() != 0 ? stat.getRuns() : "-")+ "\0", print_writers);
 				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$PlayerBio$Body$CurrentLeader$Stats$Data$Row3$Value*GEOM*TEXT SET " + 
-						CricketFunctions.generateStrikeRate(stat.getRuns(), stat.getBalls_faced(), 0)+ "\0", print_writers);
+						CricketFunctions.generateStrikeRate(stat.getRuns(), stat.getBallsFaced(), 0)+ "\0", print_writers);
 				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$PlayerBio$Body$CurrentLeader$Stats$Data$Row4$Value*GEOM*TEXT SET " + 
 						(stat.getFifties() == 0 && stat.getHundreds() == 0 ? "-" : (stat.getFifties() != 0 ? stat.getFifties() : "-") 
 								+ "/" + (stat.getHundreds() != 0 ? stat.getHundreds() : "-")) + "\0", print_writers);
 				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$PlayerBio$Body$CurrentLeader$Stats$Data$Row5$Value*GEOM*TEXT SET " + 
-						(stat.getBest_score() != null ? stat.getBest_score() : "-")+ "\0", print_writers);	
+						(stat.getBestScore() != null ? stat.getBestScore() : "-")+ "\0", print_writers);	
 			}
 			break;
 		case "Alt_Shift_M":
@@ -9727,11 +9727,11 @@ public class BugsAndMiniGfx
 				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$PlayerBio$Body$CurrentLeader$Stats$Data$Row2$Value*GEOM*TEXT SET " + 
 						(stat.getWickets() != 0 ? stat.getWickets() : "-")+ "\0", print_writers);
 				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$PlayerBio$Body$CurrentLeader$Stats$Data$Row3$Value*GEOM*TEXT SET " + 
-						CricketFunctions.getEconomy(stat.getRuns_conceded(), stat.getBalls_bowled(), 2, "-") + "\0", print_writers);
+						CricketFunctions.getEconomy(stat.getRunsConceded(), stat.getBallsBowled(), 2, "-") + "\0", print_writers);
 				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$PlayerBio$Body$CurrentLeader$Stats$Data$Row4$Value*GEOM*TEXT SET " + 
-						(stat.getPlus_3() != 0 ? stat.getPlus_3() : "-")  + "\0", print_writers);
+						(stat.getPlus3() != 0 ? stat.getPlus3() : "-")  + "\0", print_writers);
 				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$PlayerBio$Body$CurrentLeader$Stats$Data$Row5$Value*GEOM*TEXT SET " + 
-						(stat.getBest_figures() != null ? stat.getBest_figures() : "-")+ "\0", print_writers);	
+						(stat.getBestFigures() != null ? stat.getBestFigures() : "-")+ "\0", print_writers);	
 			}
 			break;
 		}

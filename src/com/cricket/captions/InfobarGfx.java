@@ -5287,7 +5287,7 @@ public class InfobarGfx
 								CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_Infobar$Main$Fade_For_Shrink$TeamGrp2$Fade_For_Analytics$Fade_For_Section_2$"
 										+ "Stats$Side2$Free_Text$img_Text1*TEXTURE*IMAGE SET " + Constants.BENGAL_TEXT_PATH + "1/" + inning.getBowling_team().getTeamName4() + "\0", print_writers);
 //								CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$All_Infobar$Main$Fade_For_Shrink$TeamGrp2$Fade_For_Section_2"
-//										+ "$Stats$Side2$Slect_Type$Free_Text$txt_TeamName*GEOM*TEXT SET " + "THIS OVER: " + CricketFunctions.processThisOverRunsCount(infobar.getPlayer_id(),matchAllData.getEventFile().getEvents()).split("-")[0] + " \0", print_writers);
+//										+ "$Stats$Side2$Slect_Type$Free_Text$txt_TeamName*GEOM*TEXT SET " + "THIS OVER: " + CricketFunctions.processThisOverRunsCount(infobar.getPlayerID(),matchAllData.getEventFile().getEvents()).split("-")[0] + " \0", print_writers);
 								CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$All_Infobar$Main$Fade_For_Shrink$TeamGrp2$Fade_For_Section_2"
 										+ "$Stats$Side2$Slect_Type*FUNCTION*Omo*vis_con SET 1 \0", print_writers);
 								if(!infobar.getRight_bottom().equalsIgnoreCase(CricketUtil.OVER)) {
@@ -5297,14 +5297,14 @@ public class InfobarGfx
 								CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_Infobar$Main$Fade_For_Shrink$TeamGrp2$Fade_For_Analytics$Fade_For_Section_2$"
 										+ "Stats$Side1$Free_Text$img_Text1*TEXTURE*IMAGE SET " + Constants.BENGAL_TEXT_PATH + "1/" + inning.getBowling_team().getTeamName4() + "\0", print_writers);
 //								CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$All_Infobar$Main$Fade_For_Shrink$TeamGrp2$Fade_For_Section_2"
-//										+ "$Stats$Side1$Slect_Type$Free_Text$txt_TeamName*GEOM*TEXT SET " + "THIS OVER: " + CricketFunctions.processThisOverRunsCount(infobar.getPlayer_id(),matchAllData.getEventFile().getEvents()).split("-")[0] + " \0", print_writers);
+//										+ "$Stats$Side1$Slect_Type$Free_Text$txt_TeamName*GEOM*TEXT SET " + "THIS OVER: " + CricketFunctions.processThisOverRunsCount(infobar.getPlayerID(),matchAllData.getEventFile().getEvents()).split("-")[0] + " \0", print_writers);
 								CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$All_Infobar$Main$Fade_For_Shrink$TeamGrp2$Fade_For_Section_2"
 										+ "$Stats$Side1$Slect_Type*FUNCTION*Omo*vis_con SET 1 \0", print_writers);
 								TimeUnit.MILLISECONDS.sleep(600);
 								this_animation.processAnimation(Constants.FRONT, print_writers, "anim_Infobar$Section1_Change", "SHOW 0.0");
 								isThisOverLimitExceed = false;
 							}
-//							String this_over_runs = CricketFunctions.processThisOverRunsCount(infobar.getPlayer_id(),matchAllData.getEventFile().getEvents()).split("-")[0];
+//							String this_over_runs = CricketFunctions.processThisOverRunsCount(infobar.getPlayerID(),matchAllData.getEventFile().getEvents()).split("-")[0];
 //							CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$All_Infobar$Main$Fade_For_Shrink$TeamGrp2$Fade_For_Section_2"
 //									+ "$Stats$Side1$Slect_Type$Free_Text$txt_TeamName*GEOM*TEXT SET " + "THIS OVER: " + this_over_runs + " \0", print_writers);
 						}
@@ -7728,7 +7728,7 @@ public class InfobarGfx
 					if(statsType == null) {
 						return "InfoBarPlayerProfile: Stats Type not found for profile [" + WhichProfile + "]";
 					}
-					stat = statistics.stream().filter(st -> st.getPlayer_id() == FirstPlayerId && statsType.getStatsId() == st.getStats_type_id()).findAny().orElse(null);
+					stat = statistics.stream().filter(st -> st.getPlayerID() == FirstPlayerId && statsType.getStatsId() == st.getStatsTypeId()).findAny().orElse(null);
 					if(stat == null) {
 						return "InfoBarPlayerProfile: Stats not found for Player Id [" + FirstPlayerId + "]";
 					}
@@ -7813,7 +7813,7 @@ public class InfobarGfx
 					if(statsType == null) {
 						return "InfoBarPlayerProfile: Stats Type not found for profile [" + WhichProfile + "]";
 					}
-					stat = statistics.stream().filter(st -> st.getPlayer_id() == FirstPlayerId && statsType.getStatsId() == st.getStats_type_id()).findAny().orElse(null);
+					stat = statistics.stream().filter(st -> st.getPlayerID() == FirstPlayerId && statsType.getStatsId() == st.getStatsTypeId()).findAny().orElse(null);
 					if(stat == null) {
 						return "InfoBarPlayerProfile: Stats not found for Player Id [" + FirstPlayerId + "]";
 					}
@@ -7887,7 +7887,7 @@ public class InfobarGfx
 						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$object$Right$Side" + WhichSide + "$Career$Btm$Wickets$Value*GEOM*TEXT SET " 
 								+ stat.getRuns() + "\0", print_writers);
 						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$object$Right$Side" + WhichSide + "$Career$Btm$Economy$Value*GEOM*TEXT SET " 
-								+ CricketFunctions.generateStrikeRate(stat.getRuns(), stat.getBalls_faced(), 0) + "\0", print_writers);
+								+ CricketFunctions.generateStrikeRate(stat.getRuns(), stat.getBallsFaced(), 0) + "\0", print_writers);
 					}
 					break;
 				case "BALL_PROFILE_CAREER":
@@ -7911,7 +7911,7 @@ public class InfobarGfx
 						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$object$Right$Side" + WhichSide + "$Career$Btm$Wickets$Value*GEOM*TEXT SET " 
 								+ stat.getWickets() + "\0", print_writers);
 						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$object$Right$Side" + WhichSide + "$Career$Btm$Economy$Value*GEOM*TEXT SET " 
-								+ CricketFunctions.getEconomy(stat.getRuns_conceded(), stat.getBalls_bowled(), 2, slashOrDash) + "\0", print_writers);
+								+ CricketFunctions.getEconomy(stat.getRunsConceded(), stat.getBallsBowled(), 2, slashOrDash) + "\0", print_writers);
 					}
 					break;
 				}
@@ -9025,7 +9025,7 @@ public class InfobarGfx
 					return "InfoBarPlayerProfile: Player Id NOT found [" + FirstPlayerId + "]";
 				}
 				
-				stat = statistics.stream().filter(st -> st.getPlayer_id() == FirstPlayerId).findAny().orElse(null);
+				stat = statistics.stream().filter(st -> st.getPlayerID() == FirstPlayerId).findAny().orElse(null);
 				if(stat == null) {
 					return "InfoBarPlayerProfile: Stats not found for Player Id [" + FirstPlayerId + "]";
 				}
@@ -9035,7 +9035,7 @@ public class InfobarGfx
 					return "InfoBarPlayerProfile: Stats Type not found for profile [" + WhichProfile + "]";
 				}
 				
-				player = CricketFunctions.getPlayerFromMatchData(stat.getPlayer_id(), matchAllData); 
+				player = CricketFunctions.getPlayerFromMatchData(stat.getPlayerID(), matchAllData); 
 				if(player == null) {
 					return "InfoBarPlayerProfile: Player Id not found [" + FirstPlayerId + "]";
 				}
@@ -9087,7 +9087,7 @@ public class InfobarGfx
 					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Infobar$Right$Side_" + WhichSide + "$Analytics_2_Wide$4_Stats$Stat_3"
 							+ "$txt_Desig*GEOM*TEXT SET " + "AVERAGE" + "\0", print_writers);
 					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Infobar$Right$Side_" + WhichSide + "$Analytics_2_Wide$4_Stats$Stat_3"
-							+ "$txt_Fig*GEOM*TEXT SET " + CricketFunctions.getAverage(stat.getMatches(), stat.getNot_out(), stat.getRuns(), 2, slashOrDash) + "\0", 
+							+ "$txt_Fig*GEOM*TEXT SET " + CricketFunctions.getAverage(stat.getMatches(), stat.getNotOut(), stat.getRuns(), 2, slashOrDash) + "\0", 
 								print_writers);
 					
 					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Infobar$Right$Side_" + WhichSide + "$Analytics_2_Wide$4_Stats$Stat_4"
@@ -9112,7 +9112,7 @@ public class InfobarGfx
 					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Infobar$Right$Side_" + WhichSide + "$Analytics_2_Wide$3_Stats$Stat_3"
 							+ "$txt_Desig*GEOM*TEXT SET " + "ECONOMY" + "\0", print_writers);	
 					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Infobar$Right$Side_" + WhichSide + "$Analytics_2_Wide$3_Stats$Stat_3"
-							+ "$txt_Fig*GEOM*TEXT SET " + CricketFunctions.getEconomy(stat.getRuns_conceded(), stat.getBalls_bowled(), 2, slashOrDash) + "\0", 
+							+ "$txt_Fig*GEOM*TEXT SET " + CricketFunctions.getEconomy(stat.getRunsConceded(), stat.getBallsBowled(), 2, slashOrDash) + "\0", 
 								print_writers);
 					
 					break;
@@ -13032,7 +13032,7 @@ public class InfobarGfx
 					return "InfoBarPlayerProfile: Player Id NOT found [" + FirstPlayerId + "]";
 				}
 				
-				stat = statistics.stream().filter(st -> st.getPlayer_id() == FirstPlayerId).findAny().orElse(null);
+				stat = statistics.stream().filter(st -> st.getPlayerID() == FirstPlayerId).findAny().orElse(null);
 				if(stat == null) {
 					return "InfoBarPlayerProfile: Stats not found for Player Id [" + FirstPlayerId + "]";
 				}
@@ -13042,7 +13042,7 @@ public class InfobarGfx
 					return "InfoBarPlayerProfile: Stats Type not found for profile [" + WhichProfile + "]";
 				}
 				
-				player = CricketFunctions.getPlayerFromMatchData(stat.getPlayer_id(), matchAllData); 
+				player = CricketFunctions.getPlayerFromMatchData(stat.getPlayerID(), matchAllData); 
 				if(player == null) {
 					return "InfoBarPlayerProfile: Player Id not found [" + FirstPlayerId + "]";
 				}
@@ -13094,7 +13094,7 @@ public class InfobarGfx
 					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Infobar$Right$Side_" + WhichSide + "$Analytics_2_Wide$4_Stats$Stat_3"
 							+ "$txt_Desig*GEOM*TEXT SET " + "AVERAGE" + "\0", print_writers);
 					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Infobar$Right$Side_" + WhichSide + "$Analytics_2_Wide$4_Stats$Stat_3"
-							+ "$txt_Fig*GEOM*TEXT SET " + CricketFunctions.getAverage(stat.getMatches(), stat.getNot_out(), stat.getRuns(), 2, slashOrDash) + "\0", 
+							+ "$txt_Fig*GEOM*TEXT SET " + CricketFunctions.getAverage(stat.getMatches(), stat.getNotOut(), stat.getRuns(), 2, slashOrDash) + "\0", 
 								print_writers);
 					
 					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Infobar$Right$Side_" + WhichSide + "$Analytics_2_Wide$4_Stats$Stat_4"
@@ -13119,7 +13119,7 @@ public class InfobarGfx
 					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Infobar$Right$Side_" + WhichSide + "$Analytics_2_Wide$3_Stats$Stat_3"
 							+ "$txt_Desig*GEOM*TEXT SET " + "ECONOMY" + "\0", print_writers);	
 					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Infobar$Right$Side_" + WhichSide + "$Analytics_2_Wide$3_Stats$Stat_3"
-							+ "$txt_Fig*GEOM*TEXT SET " + CricketFunctions.getEconomy(stat.getRuns_conceded(), stat.getBalls_bowled(), 2, slashOrDash) + "\0", 
+							+ "$txt_Fig*GEOM*TEXT SET " + CricketFunctions.getEconomy(stat.getRunsConceded(), stat.getBallsBowled(), 2, slashOrDash) + "\0", 
 								print_writers);
 					
 					break;
@@ -14596,7 +14596,7 @@ public class InfobarGfx
 					if(statsType == null) {
 						return "populateFullSection: Stats Type not found for profile [" + WhichProfile + "]";
 					}
-					stat = statistics.stream().filter(st -> st.getPlayer_id() == FirstPlayerId && statsType.getStatsId() == st.getStats_type_id()).findAny().orElse(null);
+					stat = statistics.stream().filter(st -> st.getPlayerID() == FirstPlayerId && statsType.getStatsId() == st.getStatsTypeId()).findAny().orElse(null);
 					if(stat == null) {
 						return "populateFullSection: Stats not found for Player Id [" + FirstPlayerId + "]";
 					}
@@ -14615,7 +14615,7 @@ public class InfobarGfx
 					if(statsType == null) {
 						return "InfoBarPlayerProfile: Stats Type not found for profile [" + WhichProfile + "]";
 					}
-					stat = statistics.stream().filter(st -> st.getPlayer_id() == FirstPlayerId && statsType.getStatsId() == st.getStats_type_id()).findAny().orElse(null);
+					stat = statistics.stream().filter(st -> st.getPlayerID() == FirstPlayerId && statsType.getStatsId() == st.getStatsTypeId()).findAny().orElse(null);
 					if(stat == null) {
 						return "InfoBarPlayerProfile: Stats not found for Player Id [" + FirstPlayerId + "]";
 					}
@@ -14709,7 +14709,7 @@ public class InfobarGfx
 							CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_Infobar$All$Normal$Analytics$Side" + WhichSide + "$PlayerCareer$Stats$Stat_2$"
 									+ "txt_StatValue*GEOM*TEXT SET " + stat.getRuns() + "\0", print_writers);
 							CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_Infobar$All$Normal$Analytics$Side" + WhichSide + "$PlayerCareer$Stats$Stat_3$"
-									+ "txt_StatValue*GEOM*TEXT SET " + CricketFunctions.generateStrikeRate(stat.getRuns(), stat.getBalls_faced(), 0) + "\0", print_writers);
+									+ "txt_StatValue*GEOM*TEXT SET " + CricketFunctions.generateStrikeRate(stat.getRuns(), stat.getBallsFaced(), 0) + "\0", print_writers);
 						}
 						break;
 					}
@@ -14740,7 +14740,7 @@ public class InfobarGfx
 						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_Infobar$All$Normal$Analytics$Side" + WhichSide + "$PlayerCareer$Stats$Stat_2$"
 								+ "txt_StatValue*GEOM*TEXT SET " + stat.getWickets() + "\0", print_writers);
 						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_Infobar$All$Normal$Analytics$Side" + WhichSide + "$PlayerCareer$Stats$Stat_3$"
-								+ "txt_StatValue*GEOM*TEXT SET " + CricketFunctions.getEconomy(stat.getRuns_conceded(), stat.getBalls_bowled(), 2, "-") + "\0", print_writers);
+								+ "txt_StatValue*GEOM*TEXT SET " + CricketFunctions.getEconomy(stat.getRunsConceded(), stat.getBallsBowled(), 2, "-") + "\0", print_writers);
 					}
 					break;
 				}
@@ -14772,7 +14772,7 @@ public class InfobarGfx
 				if(statsType == null) {
 					return "populateFullSection: Stats Type not found for profile [" + WhichProfile + "]";
 				}
-				stat = statistics.stream().filter(st -> st.getPlayer_id() == FirstPlayerId && statsType.getStatsId() == st.getStats_type_id()).findAny().orElse(null);
+				stat = statistics.stream().filter(st -> st.getPlayerID() == FirstPlayerId && statsType.getStatsId() == st.getStatsTypeId()).findAny().orElse(null);
 				if(stat == null) {
 					return "populateFullSection: Stats not found for Player Id [" + FirstPlayerId + "]";
 				}
@@ -14868,21 +14868,21 @@ public class InfobarGfx
 					}
 					break;
 				case "3WI":
-					if(stat.getPlus_3() == 1) {
+					if(stat.getPlus3() == 1) {
 						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_Infobar$All$Normal$Analytics$Side" + WhichSide + "$Milestone$Info$txt_Text*GEOM*TEXT SET " 
 								+ "MAIDEN T20 MUMBAI 3 WICKET HAUL" + "\0", print_writers);
 					}else {
 						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_Infobar$All$Normal$Analytics$Side" + WhichSide + "$Milestone$Info$txt_Text*GEOM*TEXT SET " 
-								+ CricketFunctions.ordinal(stat.getPlus_3()) + " 3-WICKET HAUL IN " + stat.getMatches() + " T20 MUMBAI MATCHES" + "\0", print_writers);
+								+ CricketFunctions.ordinal(stat.getPlus3()) + " 3-WICKET HAUL IN " + stat.getMatches() + " T20 MUMBAI MATCHES" + "\0", print_writers);
 					}
 					break;
 				case "5WI":
-					if(stat.getPlus_5() == 1) {
+					if(stat.getPlus5() == 1) {
 						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_Infobar$All$Normal$Analytics$Side" + WhichSide + "$Milestone$Info$txt_Text*GEOM*TEXT SET " 
 								+ "MAIDEN T20 MUMBAI 5 WICKET HAUL" + "\0", print_writers);
 					}else {
 						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_Infobar$All$Normal$Analytics$Side" + WhichSide + "$Milestone$Info$txt_Text*GEOM*TEXT SET " 
-								+ CricketFunctions.ordinal(stat.getPlus_5()) + " 5-WICKET HAUL IN " + stat.getMatches() + " T20 MUMBAI MATCHES" + "\0", print_writers);
+								+ CricketFunctions.ordinal(stat.getPlus5()) + " 5-WICKET HAUL IN " + stat.getMatches() + " T20 MUMBAI MATCHES" + "\0", print_writers);
 					}
 					break;
 				}
@@ -15611,7 +15611,7 @@ public class InfobarGfx
 			if(statsTypes == null) {
 				return "InfoBarPlayerProfile: Stats Type not found for profile [" + WhichProfile + "]";
 			}
-			stat = statistics.stream().filter(st -> st.getPlayer_id() == player.getPlayerId() && statsType.getStatsId() == st.getStats_type_id()).findAny().orElse(null);
+			stat = statistics.stream().filter(st -> st.getPlayerID() == player.getPlayerId() && statsType.getStatsId() == st.getStatsTypeId()).findAny().orElse(null);
 			if(stat == null) {
 				return "InfoBarPlayerProfile: Stats not found for Player Id [" + FirstPlayerId + "]";
 			}
@@ -15631,7 +15631,7 @@ public class InfobarGfx
 					return "InfoBarPlayerProfile: Stats Type not found for profile [" + WhichProfile + "]";
 				}
 				
-				stat = statistics.stream().filter(st -> st.getPlayer_id() == FirstPlayerId && statsType.getStatsId() == st.getStats_type_id()).findAny().orElse(null);
+				stat = statistics.stream().filter(st -> st.getPlayerID() == FirstPlayerId && statsType.getStatsId() == st.getStatsTypeId()).findAny().orElse(null);
 				if(stat == null) {
 					return "InfoBarPlayerProfile: Stats not found for Player Id [" + FirstPlayerId + "]";
 				}
@@ -15648,7 +15648,7 @@ public class InfobarGfx
 					return "InfoBarPlayerProfile: Stats Type not found for profile [" + WhichProfile + "]";
 				}
 				
-				stat = statistics.stream().filter(st -> st.getPlayer_id() == FirstPlayerId && statsType.getStatsId() == st.getStats_type_id()).findAny().orElse(null);
+				stat = statistics.stream().filter(st -> st.getPlayerID() == FirstPlayerId && statsType.getStatsId() == st.getStatsTypeId()).findAny().orElse(null);
 				if(stat == null) {
 					return "InfoBarPlayerProfile: Stats not found for Player Id [" + FirstPlayerId + "]";
 				}
@@ -15668,7 +15668,7 @@ public class InfobarGfx
 					return "InfoBarPlayerProfile: Stats Type not found for profile [" + WhichProfile + "]";
 				}
 				
-				stat = statistics.stream().filter(st -> st.getPlayer_id() == FirstPlayerId && statsType.getStatsId() == st.getStats_type_id()).findAny().orElse(null);
+				stat = statistics.stream().filter(st -> st.getPlayerID() == FirstPlayerId && statsType.getStatsId() == st.getStatsTypeId()).findAny().orElse(null);
 				if(stat == null) {
 					return "InfoBarPlayerProfile: Stats not found for Player Id [" + FirstPlayerId + "]";
 				}
@@ -15693,7 +15693,7 @@ public class InfobarGfx
 					return "InfoBarPlayerProfile: Stats Type not found for profile [" + WhichProfile + "]";
 				}
 				
-				stat = statistics.stream().filter(st -> st.getPlayer_id() == FirstPlayerId && statsType.getStatsId() == st.getStats_type_id()).findAny().orElse(null);
+				stat = statistics.stream().filter(st -> st.getPlayerID() == FirstPlayerId && statsType.getStatsId() == st.getStatsTypeId()).findAny().orElse(null);
 				if(stat == null) {
 					return "InfoBarPlayerProfile: Stats not found for Player Id [" + FirstPlayerId + "]";
 				}
@@ -15979,7 +15979,7 @@ public class InfobarGfx
 					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Infobar$Right$Side_" + WhichSide + "$Analytics_2_Wide$4_Stats$Stat_3"
 							+ "$txt_Desig*GEOM*TEXT SET " + "S/R" + "\0", print_writers);
 					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Infobar$Right$Side_" + WhichSide + "$Analytics_2_Wide$4_Stats$Stat_3"
-							+ "$txt_Fig*GEOM*TEXT SET " + CricketFunctions.generateStrikeRate(stat.getRuns(), stat.getBalls_faced(), 0) + "\0", 
+							+ "$txt_Fig*GEOM*TEXT SET " + CricketFunctions.generateStrikeRate(stat.getRuns(), stat.getBallsFaced(), 0) + "\0", 
 								print_writers);
 					
 					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Infobar$Right$Side_" + WhichSide + "$Analytics_2_Wide$4_Stats$Stat_4"
@@ -16005,7 +16005,7 @@ public class InfobarGfx
 					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Infobar$Right$Side_" + WhichSide + "$Player_Stats_Wide$2_Stats$Stat_2"
 							+ "$txt_Desig*GEOM*TEXT SET " + "ECONOMY" + "\0", print_writers);	
 					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Infobar$Right$Side_" + WhichSide + "$Player_Stats_Wide$2_Stats$Stat_2"
-							+ "$txt_Fig*GEOM*TEXT SET " + CricketFunctions.getEconomy(stat.getRuns_conceded(), stat.getBalls_bowled(), 2, slashOrDash) + "\0", print_writers);
+							+ "$txt_Fig*GEOM*TEXT SET " + CricketFunctions.getEconomy(stat.getRunsConceded(), stat.getBallsBowled(), 2, slashOrDash) + "\0", print_writers);
 					break;
 				case "RECENT_FORM_BALL":
 					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Infobar$Right$Side_" + WhichSide + "$Player_Stats_Wide$Bottom$Select_Amount"
@@ -16086,7 +16086,7 @@ public class InfobarGfx
 					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Infobar$Right$Side_" + WhichSide + "$Analytics_2_Wide$4_Stats$Stat_3"
 							+ "$txt_Desig*GEOM*TEXT SET " + "ECONOMY" + "\0", print_writers);	
 					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Infobar$Right$Side_" + WhichSide + "$Analytics_2_Wide$4_Stats$Stat_3"
-							+ "$txt_Fig*GEOM*TEXT SET " + CricketFunctions.getEconomy(stat.getRuns_conceded(), stat.getBalls_bowled(), 2, slashOrDash) + "\0", 
+							+ "$txt_Fig*GEOM*TEXT SET " + CricketFunctions.getEconomy(stat.getRunsConceded(), stat.getBallsBowled(), 2, slashOrDash) + "\0", 
 								print_writers);
 					break;
 				}
@@ -16218,7 +16218,7 @@ public class InfobarGfx
 					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Infobar$Right$Side_" + WhichSide + "$Analytics_2_Wide$5_Stats$Stat_3"
 							+ "$txt_Desig*GEOM*TEXT SET " + "S/R" + "\0", print_writers);
 					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Infobar$Right$Side_" + WhichSide + "$Analytics_2_Wide$5_Stats$Stat_3"
-							+ "$txt_Fig*GEOM*TEXT SET " + CricketFunctions.generateStrikeRate(stat.getRuns(), stat.getBalls_faced(), 0) + "\0", 
+							+ "$txt_Fig*GEOM*TEXT SET " + CricketFunctions.generateStrikeRate(stat.getRuns(), stat.getBallsFaced(), 0) + "\0", 
 								print_writers);
 					
 					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Infobar$Right$Side_" + WhichSide + "$Analytics_2_Wide$5_Stats$Stat_4"
@@ -16244,7 +16244,7 @@ public class InfobarGfx
 					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Infobar$Right$Side_" + WhichSide + "$Player_Stats_Wide$2_Stats$Stat_2"
 							+ "$txt_Desig*GEOM*TEXT SET " + "ECONOMY" + "\0", print_writers);	
 					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Infobar$Right$Side_" + WhichSide + "$Player_Stats_Wide$2_Stats$Stat_2"
-							+ "$txt_Fig*GEOM*TEXT SET " + CricketFunctions.getEconomy(stat.getRuns_conceded(), stat.getBalls_bowled(), 2, slashOrDash) + "\0", print_writers);
+							+ "$txt_Fig*GEOM*TEXT SET " + CricketFunctions.getEconomy(stat.getRunsConceded(), stat.getBallsBowled(), 2, slashOrDash) + "\0", print_writers);
 					break;
 				case "RECENT_FORM_BALL":
 					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Infobar$Right$Side_" + WhichSide + "$Player_Stats_Wide$Bottom$Select_Amount"
@@ -16325,7 +16325,7 @@ public class InfobarGfx
 					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Infobar$Right$Side_" + WhichSide + "$Analytics_2_Wide$5_Stats$Stat_3"
 							+ "$txt_Desig*GEOM*TEXT SET " + "ECONOMY" + "\0", print_writers);	
 					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Infobar$Right$Side_" + WhichSide + "$Analytics_2_Wide$5_Stats$Stat_3"
-							+ "$txt_Fig*GEOM*TEXT SET " + CricketFunctions.getEconomy(stat.getRuns_conceded(), stat.getBalls_bowled(), 2, slashOrDash) + "\0", 
+							+ "$txt_Fig*GEOM*TEXT SET " + CricketFunctions.getEconomy(stat.getRunsConceded(), stat.getBallsBowled(), 2, slashOrDash) + "\0", 
 								print_writers);
 					break;
 				}
@@ -17435,7 +17435,7 @@ public class InfobarGfx
 					statsData.add("InfoBarPlayerProfile: Stats Type not found for profile [" + whatToProcess.split(",")[3] + "]");
 					return (List<T>) statsData;
 				}
-				stat = statistics.stream().filter(st -> st.getPlayer_id() == player.getPlayerId() && statsType.getStatsId() == st.getStats_type_id()).findAny().orElse(null);
+				stat = statistics.stream().filter(st -> st.getPlayerID() == player.getPlayerId() && statsType.getStatsId() == st.getStatsTypeId()).findAny().orElse(null);
 				if(stat == null) {
 					statsData.add("InfoBarPlayerProfile: Stats not found for Player Id [" + player.getPlayerId() + "]");
 					return (List<T>) statsData;
@@ -17461,7 +17461,7 @@ public class InfobarGfx
 					        statsData.add("InfoBarPlayerProfile: Stats Type not found for profile [" + profile + "]");
 					        return (List<T>) statsData;
 					    }
-					    stat = statistics.stream().filter(st -> st.getPlayer_id() == player.getPlayerId()&& statsType.getStatsId() == st.getStats_type_id()).findAny().orElse(null);
+					    stat = statistics.stream().filter(st -> st.getPlayerID() == player.getPlayerId()&& statsType.getStatsId() == st.getStatsTypeId()).findAny().orElse(null);
 					    if (stat == null) {
 					        statsData.add("InfoBarPlayerProfile: Stats not found for Player Id [" + player.getPlayerId() + "]");
 					        return (List<T>) statsData;
@@ -17483,7 +17483,7 @@ public class InfobarGfx
 							return (List<T>) statsData;
 						}
 						
-						stat = statistics.stream().filter(st -> st.getPlayer_id() == player.getPlayerId() && statsType.getStatsId() == st.getStats_type_id()).findAny().orElse(null);
+						stat = statistics.stream().filter(st -> st.getPlayerID() == player.getPlayerId() && statsType.getStatsId() == st.getStatsTypeId()).findAny().orElse(null);
 						if(stat == null) {
 							statsData.add("InfoBarPlayerProfile: Stats not found for Player Id [" + player.getPlayerId() + "]");
 							return (List<T>) statsData;
@@ -17510,7 +17510,7 @@ public class InfobarGfx
 							return (List<T>) statsData;
 						}
 						
-						stat = statistics.stream().filter(st -> st.getPlayer_id() == player.getPlayerId() && statsType.getStatsId() == st.getStats_type_id()).findAny().orElse(null);
+						stat = statistics.stream().filter(st -> st.getPlayerID() == player.getPlayerId() && statsType.getStatsId() == st.getStatsTypeId()).findAny().orElse(null);
 						if(stat == null) {
 							statsData.add("InfoBarPlayerProfile: Stats not found for Player Id [" + player.getPlayerId() + "]");
 							return (List<T>) statsData;
@@ -17552,7 +17552,7 @@ public class InfobarGfx
 				default:
 					statsData.add("MATCHES," + stat.getMatches());
 					statsData.add("RUNS," + stat.getRuns());
-					statsData.add("STRIKE RATE," + CricketFunctions.generateStrikeRate(stat.getRuns(), stat.getBalls_faced(), 0));
+					statsData.add("STRIKE RATE," + CricketFunctions.generateStrikeRate(stat.getRuns(), stat.getBallsFaced(), 0));
 					break;
 				}
 				break;
@@ -17560,7 +17560,7 @@ public class InfobarGfx
 				switch (whatToProcess.split(",")[3]) {
 				case "BPL_MILESTONE_BALL": case "APL_MILESTONE_BALL": case "MPL_MILESTONE_BALL":
 					statsData.add("WICKETS," + stat.getWickets());
-					statsData.add("ECONOMY," + CricketFunctions.getEconomy(stat.getRuns_conceded(), stat.getBalls_bowled(), 2, slashOrDash));
+					statsData.add("ECONOMY," + CricketFunctions.getEconomy(stat.getRunsConceded(), stat.getBallsBowled(), 2, slashOrDash));
 					break;
 				case "THIS_SERIES":
 					statsData.add("MATCHES," + tournament.getMatches());
@@ -17570,7 +17570,7 @@ public class InfobarGfx
 				default:
 					statsData.add("MATCHES," + stat.getMatches());
 					statsData.add("WICKETS," + stat.getWickets());
-					statsData.add("ECONOMY," + CricketFunctions.getEconomy(stat.getRuns_conceded(), stat.getBalls_bowled(), 2, slashOrDash));
+					statsData.add("ECONOMY," + CricketFunctions.getEconomy(stat.getRunsConceded(), stat.getBallsBowled(), 2, slashOrDash));
 					break;
 				}
 				break;

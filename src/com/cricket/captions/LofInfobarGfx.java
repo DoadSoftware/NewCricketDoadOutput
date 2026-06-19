@@ -3549,7 +3549,7 @@ public class LofInfobarGfx
 				return "InfoBarPlayerProfile: Stats Type not found for profile [" + WhichProfile + "]";
 			}
 			
-			stat = statistics.stream().filter(st -> st.getPlayer_id() == FirstPlayerId && statsType.getStatsId() == st.getStats_type_id()).findAny().orElse(null);
+			stat = statistics.stream().filter(st -> st.getPlayerID() == FirstPlayerId && statsType.getStatsId() == st.getStatsTypeId()).findAny().orElse(null);
 			if(stat == null) {
 				return "InfoBarPlayerProfile: Stats not found for Player Id [" + FirstPlayerId + "]";
 			}
@@ -3987,9 +3987,9 @@ public class LofInfobarGfx
 							"$Profile$Data$Style1$Line1$Dehighlight$txt_Value*GEOM*TEXT SET " + stat.getMatches() + "\0", print_writers);
 					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_L_BandInfo$Left_DataGrp$Main$AllSections$Section2$Side" + WhichSide + 
 							"$Profile$Data$Style1$Line2$Dehighlight$txt_Value*GEOM*TEXT SET " + stat.getRuns() + "\0", print_writers);
-					if(!CricketFunctions.generateStrikeRate(stat.getRuns(), stat.getBalls_faced(), 0).isEmpty()) {
+					if(!CricketFunctions.generateStrikeRate(stat.getRuns(), stat.getBallsFaced(), 0).isEmpty()) {
 						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_L_BandInfo$Left_DataGrp$Main$AllSections$Section2$Side" + WhichSide + 
-								"$Profile$Data$Style1$Line3$Dehighlight$txt_Value*GEOM*TEXT SET " + CricketFunctions.generateStrikeRate(stat.getRuns(), stat.getBalls_faced(), 0) 
+								"$Profile$Data$Style1$Line3$Dehighlight$txt_Value*GEOM*TEXT SET " + CricketFunctions.generateStrikeRate(stat.getRuns(), stat.getBallsFaced(), 0) 
 								+ "\0", print_writers);
 					}else {
 						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_L_BandInfo$Left_DataGrp$Main$AllSections$Section2$Side" + WhichSide + 
@@ -3997,7 +3997,7 @@ public class LofInfobarGfx
 					}
 					
 					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_L_BandInfo$Left_DataGrp$Main$AllSections$Section2$Side" + WhichSide + 
-							"$Profile$Data$Style1$Line4$Dehighlight$txt_Value*GEOM*TEXT SET " + stat.getBest_score() + "\0", print_writers);
+							"$Profile$Data$Style1$Line4$Dehighlight$txt_Value*GEOM*TEXT SET " + stat.getBestScore() + "\0", print_writers);
 				}
 				break;
 			case "BALL_PROFILE_CAREER":
@@ -4051,10 +4051,10 @@ public class LofInfobarGfx
 					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_L_BandInfo$Left_DataGrp$Main$AllSections$Section2$Side" + WhichSide + 
 							"$Profile$Data$Style1$Line2$Dehighlight$txt_Value*GEOM*TEXT SET " + stat.getWickets() + "\0", print_writers);
 					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_L_BandInfo$Left_DataGrp$Main$AllSections$Section2$Side" + WhichSide + 
-							"$Profile$Data$Style1$Line3$Dehighlight$txt_Value*GEOM*TEXT SET " + CricketFunctions.getEconomy(stat.getRuns_conceded(), stat.getBalls_bowled(), 
+							"$Profile$Data$Style1$Line3$Dehighlight$txt_Value*GEOM*TEXT SET " + CricketFunctions.getEconomy(stat.getRunsConceded(), stat.getBallsBowled(), 
 							2, "-") + "\0", print_writers);
 					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_L_BandInfo$Left_DataGrp$Main$AllSections$Section2$Side" + WhichSide + 
-							"$Profile$Data$Style1$Line4$Dehighlight$txt_Value*GEOM*TEXT SET " + stat.getBest_figures() + "\0", print_writers);
+							"$Profile$Data$Style1$Line4$Dehighlight$txt_Value*GEOM*TEXT SET " + stat.getBestFigures() + "\0", print_writers);
 				}
 				break;
 
@@ -7238,7 +7238,7 @@ public class LofInfobarGfx
 					return (List<T>) statsData;
 				}
 				
-				stat = statistics.stream().filter(st -> st.getPlayer_id() == player.getPlayerId() && statsType.getStatsId() == st.getStats_type_id()).findAny().orElse(null);
+				stat = statistics.stream().filter(st -> st.getPlayerID() == player.getPlayerId() && statsType.getStatsId() == st.getStatsTypeId()).findAny().orElse(null);
 				if(stat == null) {
 					statsData.add("InfoBarPlayerProfile: Stats not found for Player Id [" + whatToProcess.split(",")[2] + "]");
 					return (List<T>) statsData;
@@ -7468,13 +7468,13 @@ public class LofInfobarGfx
 				switch ((whatToProcess.contains(",") ? whatToProcess.split(",")[0] : whatToProcess)) {
 				case "Alt_3":
 					statsData.add("RUNS," + stat.getRuns());
-					statsData.add("STRIKE RATE," + CricketFunctions.generateStrikeRate(stat.getRuns(), stat.getBalls_faced(), 0));
-					statsData.add("BEST," + stat.getBest_score());
+					statsData.add("STRIKE RATE," + CricketFunctions.generateStrikeRate(stat.getRuns(), stat.getBallsFaced(), 0));
+					statsData.add("BEST," + stat.getBestScore());
 					break;
 				case "Alt_4":
 					statsData.add("WICKETS," + stat.getWickets());
-					statsData.add("ECONOMY," + CricketFunctions.getEconomy(stat.getRuns_conceded(), stat.getBalls_bowled(), 2, slashOrDash));
-					statsData.add("BEST," + stat.getBest_figures());
+					statsData.add("ECONOMY," + CricketFunctions.getEconomy(stat.getRunsConceded(), stat.getBallsBowled(), 2, slashOrDash));
+					statsData.add("BEST," + stat.getBestFigures());
 					break;
 				}
 				break;

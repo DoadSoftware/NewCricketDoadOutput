@@ -468,7 +468,7 @@ public class Caption
 			case "Alt_F2": // BallGriff
 				switch (config.getBroadcaster().toUpperCase()) {
 				case Constants.BENGAL_T20: case Constants.NPL: case Constants.MPL:case Constants.LEGENDS:
-				case Constants.T20_MUMBAI:
+				case Constants.T20_MUMBAI: case Constants.APL:
 					status = this_bugsAndMiniGfx.populateGriff(whatToProcess, whichSide, matchAllData);
 					break;
 				case Constants.ICC_U19_2023:  
