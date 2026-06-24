@@ -40145,7 +40145,7 @@ public class FullFramesGfx
 						topPlayerRun = phaseWiseScore.split("\\|")[2].split("\\.")[1].split(",")[0].split("_")[1] + "-" + phaseWiseScore.split("\\|")[2].split("\\.")[1].split(",")[0].split("_")[2]; 
 						topPlayerBall = CricketFunctions.OverBalls(0, Integer.valueOf(phaseWiseScore.split("\\|")[2].split("\\.")[1].split(",")[0].split("_")[3]));
 						bottomPlayerRun =  phaseWiseScore.split("\\|")[2].split("\\.")[1].split(",")[1].split("_")[1] + "-" + phaseWiseScore.split("\\|")[2].split("\\.")[1].split(",")[1].split("_")[2] ;
-						bottomPlayerBall = CricketFunctions.OverBalls(0, Integer.valueOf(phaseWiseScore.split("\\|")[2].split("\\.")[1].split(",")[1].split("_")[2]));
+						bottomPlayerBall = CricketFunctions.OverBalls(0, Integer.valueOf(phaseWiseScore.split("\\|")[2].split("\\.")[1].split(",")[1].split("_")[3]));
 						
 						setPlayer(whichSide, topPlayer, bottomPlayer, topPlayerRun, topPlayerBall, bottomPlayerRun, bottomPlayerBall, 2);
 
@@ -40157,7 +40157,7 @@ public class FullFramesGfx
 						topPlayerRun = phaseWiseScore.split("\\|")[1].split("\\.")[1].split(",")[0].split("_")[1]; 
 						topPlayerBall =  phaseWiseScore.split("\\|")[1].split("\\.")[1].split(",")[0].split("_")[2];
 						bottomPlayerRun = phaseWiseScore.split("\\|")[2].split("\\.")[1].split(",")[0].split("_")[1] + "-" + phaseWiseScore.split("\\|")[2].split("\\.")[1].split(",")[0].split("_")[2] ;
-						bottomPlayerBall = CricketFunctions.OverBalls(0, Integer.valueOf(phaseWiseScore.split("\\|")[2].split("\\.")[1].split(",")[0].split("_")[2]));
+						bottomPlayerBall = CricketFunctions.OverBalls(0, Integer.valueOf(phaseWiseScore.split("\\|")[2].split("\\.")[1].split(",")[0].split("_")[3]));
 						
 						setPlayer(whichSide, topPlayer, bottomPlayer, topPlayerRun, topPlayerBall, bottomPlayerRun, bottomPlayerBall, 2);
 
@@ -40170,7 +40170,7 @@ public class FullFramesGfx
 					topPlayerRun = phaseWiseScore.split("\\|")[1].split("\\.")[1].split(",")[0].split("_")[1]; 
 					topPlayerBall =  phaseWiseScore.split("\\|")[1].split("\\.")[1].split(",")[0].split("_")[2];
 					bottomPlayerRun = phaseWiseScore.split("\\|")[2].split("\\.")[1].split(",")[0].split("_")[1] + "-" + phaseWiseScore.split("\\|")[2].split("\\.")[1].split(",")[0].split("_")[2] ;
-					bottomPlayerBall = CricketFunctions.OverBalls(0, Integer.valueOf(phaseWiseScore.split("\\|")[2].split("\\.")[1].split(",")[0].split("_")[2]));
+					bottomPlayerBall = CricketFunctions.OverBalls(0, Integer.valueOf(phaseWiseScore.split("\\|")[2].split("\\.")[1].split(",")[0].split("_")[3]));
 					
 					setPlayer(whichSide, topPlayer, bottomPlayer, topPlayerRun, topPlayerBall, bottomPlayerRun, bottomPlayerBall, 2);
 
@@ -40205,7 +40205,7 @@ public class FullFramesGfx
 						topPlayerRun = phaseWiseScore.split("\\|")[2].split("\\.")[2].split(",")[0].split("_")[1] + "-" + phaseWiseScore.split("\\|")[2].split("\\.")[2].split(",")[0].split("_")[2]; 
 						topPlayerBall =  CricketFunctions.OverBalls(0, Integer.valueOf(phaseWiseScore.split("\\|")[2].split("\\.")[2].split(",")[0].split("_")[3]));
 						bottomPlayerRun = phaseWiseScore.split("\\|")[2].split("\\.")[2].split(",")[1].split("_")[1] + "-" + phaseWiseScore.split("\\|")[2].split("\\.")[2].split(",")[1].split("_")[2];
-						bottomPlayerBall = CricketFunctions.OverBalls(0, Integer.valueOf(phaseWiseScore.split("\\|")[2].split("\\.")[2].split(",")[1].split("_")[2]));
+						bottomPlayerBall = CricketFunctions.OverBalls(0, Integer.valueOf(phaseWiseScore.split("\\|")[2].split("\\.")[2].split(",")[1].split("_")[3]));
 						
 						setPlayer(whichSide, topPlayer, bottomPlayer, topPlayerRun, topPlayerBall, bottomPlayerRun, bottomPlayerBall, 3);
 
@@ -40217,7 +40217,7 @@ public class FullFramesGfx
 						topPlayerRun = phaseWiseScore.split("\\|")[1].split("\\.")[2].split(",")[0].split("_")[1]; 
 						topPlayerBall = phaseWiseScore.split("\\|")[1].split("\\.")[2].split(",")[0].split("_")[2];
 						bottomPlayerRun = phaseWiseScore.split("\\|")[2].split("\\.")[2].split(",")[0].split("_")[1] + "-" + phaseWiseScore.split("\\|")[2].split("\\.")[2].split(",")[0].split("_")[2];
-						bottomPlayerBall = CricketFunctions.OverBalls(0, Integer.valueOf(phaseWiseScore.split("\\|")[2].split("\\.")[2].split(",")[0].split("_")[2]));
+						bottomPlayerBall = CricketFunctions.OverBalls(0, Integer.valueOf(phaseWiseScore.split("\\|")[2].split("\\.")[2].split(",")[0].split("_")[3]));
 						
 						setPlayer(whichSide, topPlayer, bottomPlayer, topPlayerRun, topPlayerBall, bottomPlayerRun, bottomPlayerBall, 3);
 					}
