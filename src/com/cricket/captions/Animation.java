@@ -213,7 +213,7 @@ public class Animation
 				return Constants.MINIS;
 			}
 			break;
-		case Constants.BENGAL_T20:
+		case Constants.BENGAL_T20: case Constants.AFG_T20:
 			switch (whatToProcess.split(",")[0]) {
 			case "F1": case "Control_Shift_A": case "F2": case "F4": case "Shift_F10": case "Control_F11": case "Shift_F11": case "m": case "Control_m": 
 			case "Shift_T": case "Control_d": case "Control_e": case "Control_F7": case "Control_F10": case "9":
@@ -1952,7 +1952,7 @@ public class Animation
 				break;
 			}
 			break;
-		case Constants.BENGAL_T20:
+		case Constants.BENGAL_T20: case Constants.AFG_T20:
 
 			//Full framers
 			switch (whatToProcess.split(",")[0]) {
@@ -2714,7 +2714,7 @@ public class Animation
 			
 		case "Alt_p":
 			switch (config.getBroadcaster().toUpperCase()) {
-			case Constants.BENGAL_T20:
+			case Constants.BENGAL_T20: case Constants.AFG_T20:
 				processAnimation(Constants.FRONT, print_writers, "anim_Toss", "START");
 				break;
 			default:
@@ -3140,7 +3140,7 @@ public class Animation
 			case "Alt_p":
 				if(this.specialBugOnScreen.equalsIgnoreCase(CricketUtil.TOSS)) {
 					switch (config.getBroadcaster().toUpperCase()) {
-					case Constants.BENGAL_T20:
+					case Constants.BENGAL_T20: case Constants.AFG_T20:
 						processAnimation(Constants.FRONT, print_writers, "anim_Toss", "CONTINUE");
 						break;
 					default:
@@ -4466,7 +4466,7 @@ public class Animation
 				break;
 			}
 			break;
-		case Constants.BENGAL_T20:
+		case Constants.BENGAL_T20: case Constants.AFG_T20:
 			switch (whatToProcess.split(",")[0]) {
 			case "9":
 				processAnimation(Constants.MIDDLE, print_writers, "Plotter", "CONTINUE");
@@ -4811,7 +4811,7 @@ public class Animation
 			case "Alt_p":
 				if(this.specialBugOnScreen.equalsIgnoreCase(CricketUtil.TOSS)) {
 					switch (config.getBroadcaster().toUpperCase()) {
-					case Constants.BENGAL_T20:
+					case Constants.BENGAL_T20: case Constants.AFG_T20:
 						processAnimation(Constants.FRONT, print_writers, "anim_Toss", "CONTINUE");
 						break;
 					default:
@@ -6024,7 +6024,7 @@ public class Animation
 			}
 			break;
 		
-		case Constants.BENGAL_T20:
+		case Constants.BENGAL_T20: case Constants.AFG_T20:
 			
 			if(!whatToProcess.contains(",")) {
 				return CricketUtil.NO;
@@ -6346,7 +6346,7 @@ public class Animation
 				switch(whatToProcess.split(",")[0]) {
 				case "Alt_1":
 					switch (config.getBroadcaster().toUpperCase()) {
-					case Constants.BENGAL_T20:
+					case Constants.BENGAL_T20: case Constants.AFG_T20:
 						processAnimation(Constants.FRONT, print_writers, "anim_Infobar$Section3_Change", "START");
 						TimeUnit.MILLISECONDS.sleep(200);
 						infobar.setLeft_bottom(whatToProcess.split(",")[2]);
@@ -6356,7 +6356,7 @@ public class Animation
 					break;
 				case "Alt_2": case "Alt_3": case "Alt_4": case "Alt_6": case "Alt_9": case "Alt_0": case "Control_Shift_(":
 					switch (config.getBroadcaster().toUpperCase()) {
-					case Constants.BENGAL_T20:
+					case Constants.BENGAL_T20: case Constants.AFG_T20:
 						
 						if(whatToProcess.split(",")[2].equalsIgnoreCase(CricketUtil.BATSMAN)) {
 							processAnimation(Constants.FRONT, print_writers, "anim_Infobar$Fade_For_Analytics", "CONTINUE");
@@ -6389,7 +6389,7 @@ public class Animation
 					break;
 				case "Alt_7":
 					switch(config.getBroadcaster().toUpperCase()) {
-					case Constants.BENGAL_T20: 
+					case Constants.BENGAL_T20: case Constants.AFG_T20:
 						processAnimation(Constants.FRONT, print_writers, "anim_Infobar$Section1_Change", "START");
 						infobar.setRight_bottom(whatToProcess.split(",")[2]);
 						break;
@@ -7665,7 +7665,7 @@ public class Animation
 			}
 			break;
 			
-		case Constants.BENGAL_T20:
+		case Constants.BENGAL_T20: case Constants.AFG_T20:
 
 			if(!whatToProcess.contains(",")) {
 				return CricketUtil.NO;
@@ -12415,7 +12415,7 @@ public class Animation
 			}
 			this.whichGraphicOnScreen = "";
 			break;
-		case Constants.BENGAL_T20:
+		case Constants.BENGAL_T20: case Constants.AFG_T20:
 			processAnimation(Constants.BACK, print_writers, "Anim_FullFrames", "SHOW 0.0");
 			processAnimation(Constants.BACK, print_writers, "Anim_Ident", "SHOW 0.0");
 			processAnimation(Constants.BACK, print_writers, "Anim_DoubleIdent", "SHOW 0.0");
@@ -13635,7 +13635,7 @@ public class Animation
 		            CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER PREVIEW SCENE*/Default/FullFrames "
 		                    + "C:/Temp/Preview.tga " + previewCommand + " \0", print_writer);
 		            break;
-			case Constants.BENGAL_T20:
+			case Constants.BENGAL_T20: case Constants.AFG_T20:
 				if(whichside == 1) {
 					if(whatToProcess.contains(",")) {
 						switch(whatToProcess.split(",")[0]) {
@@ -14406,7 +14406,7 @@ public class Animation
 				}
 				
 				break;
-			case Constants.BENGAL_T20:
+			case Constants.BENGAL_T20: case Constants.AFG_T20:
 				if(whichside == 1) {
 					switch(whatToProcess.split(",")[0]) {
 					case "9": case "Alt_Shift_Q":
@@ -14775,7 +14775,7 @@ public class Animation
 				}
 				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER PREVIEW SCENE*" + which_gfx + " C:/Temp/Preview.tga " + previewCommand + "\0", print_writer);
 				break;
-			case Constants.BENGAL_T20: 
+			case Constants.BENGAL_T20: case Constants.AFG_T20:
 				switch(whatToProcess.split(",")[0]) {
 				case "Control_Shift_U": case "Control_Shift_V":
 					if(whichside == 1) {
@@ -15057,7 +15057,7 @@ public class Animation
 					}
 				}
 				break;
-			case Constants.BENGAL_T20:
+			case Constants.BENGAL_T20: case Constants.AFG_T20:
 				if(whatToProcess.contains(",")) {
 					switch(whatToProcess.split(",")[0]) {
 					case "Alt_F1": case "Alt_F2": case "Control_Shift_F": case "Control_Shift_E":

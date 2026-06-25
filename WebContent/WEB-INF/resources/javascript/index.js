@@ -378,7 +378,7 @@ function processUserSelectionData(whatToProcess,dataToProcess)
 				case 'ISPL': case 'VIDARBHA':
 					addItemsToList(dataToProcess,null);
 					break;
-				case 'ICC-U19-2023': case 'BENGAL-T20': case 'NPL': case 'LEGENDS-90': case 'MPL': case 'APL': case 'T20_MUMBAI':
+				default:
 					dataToProcess = dataToProcess + ',' + document.getElementById('which_inning').value;
 					processCricketProcedures("POPULATE-GRAPHICS", dataToProcess);
 					break;
@@ -389,7 +389,7 @@ function processUserSelectionData(whatToProcess,dataToProcess)
 				case 'ISPL':
 					addItemsToList(dataToProcess,null);
 					break;
-				case 'ICC-U19-2023': case 'BENGAL-T20': case 'NPL': case 'LEGENDS-90': case 'MPL': case 'T20_MUMBAI': case 'APL': case 'VIDARBHA':
+				default:
 					dataToProcess = dataToProcess + ',' + document.getElementById('which_inning').value;
 					processCricketProcedures("POPULATE-GRAPHICS", dataToProcess);
 					break;
@@ -397,12 +397,12 @@ function processUserSelectionData(whatToProcess,dataToProcess)
 				break;
 			case 'F4': case 'Shift_K': case "Alt_Shift_J":
 				switch($('#selected_broadcaster').val().toUpperCase()){
-				case 'ISPL': case 'BENGAL-T20': case 'NPL': case 'LEGENDS-90':  case 'MPL': case 'T20_MUMBAI': case 'APL': case 'VIDARBHA':
-					dataToProcess = dataToProcess + ',' + document.getElementById('which_inning').value;
-					processCricketProcedures("POPULATE-GRAPHICS", dataToProcess);
-					break;
 				case 'ICC-U19-2023':
 					addItemsToList(dataToProcess,null);
+					break;
+				default:
+					dataToProcess = dataToProcess + ',' + document.getElementById('which_inning').value;
+					processCricketProcedures("POPULATE-GRAPHICS", dataToProcess);
 					break;
 				}
 				break;
@@ -412,7 +412,7 @@ function processUserSelectionData(whatToProcess,dataToProcess)
 					dataToProcess = dataToProcess + ',' + document.getElementById('which_inning').value;
 					processCricketProcedures("POPULATE-GRAPHICS", dataToProcess);
 					break;
-				case 'BENGAL-T20': case 'NPL': case 'ISPL':  case 'MPL': case 'APL': case 'T20_MUMBAI':
+				case 'BENGAL-T20': case 'NPL': case 'ISPL':  case 'MPL': case 'APL': case 'T20_MUMBAI': case 'AFG-T20':
 					addItemsToList(dataToProcess,null);
 					break;
 				}
@@ -423,26 +423,25 @@ function processUserSelectionData(whatToProcess,dataToProcess)
 					dataToProcess = dataToProcess + ',' + document.getElementById('which_inning').value;
 					processCricketProcedures("POPULATE-GRAPHICS", dataToProcess);
 					break;
-				case 'ICC-U19-2023': case 'BENGAL-T20': case 'NPL': case 'MPL': case 'LEGENDS-90': case 'APL':
+				case 'ICC-U19-2023': case 'BENGAL-T20': case 'NPL': case 'MPL': case 'LEGENDS-90': case 'APL': case 'AFG-T20':
 					addItemsToList(dataToProcess,null);
 					break;
 				}
 				break;
 			case 'Control_p': case 'Alt_F7':
 				switch($('#selected_broadcaster').val().toUpperCase()){
-				case 'ISPL': case 'BENGAL-T20': case 'NPL': case 'LEGENDS-90':  case 'MPL': case 'T20_MUMBAI': 
-				case 'APL': case 'VIDARBHA':
-					dataToProcess = dataToProcess + ',' + document.getElementById('which_inning').value;
-					processCricketProcedures("POPULATE-GRAPHICS", dataToProcess);
-					break;
 				case 'ICC-U19-2023': 
 					addItemsToList(dataToProcess,null);
+					break;
+				default:
+					dataToProcess = dataToProcess + ',' + document.getElementById('which_inning').value;
+					processCricketProcedures("POPULATE-GRAPHICS", dataToProcess);
 					break;
 				}
 				break;
 			case 'Control_h':
 				switch($('#selected_broadcaster').val().toUpperCase()){
-				case 'NPL': case 'LEGENDS-90':  case 'MPL': case 'BENGAL-T20': case 'APL': case 'VIDARBHA':
+				case 'NPL': case 'LEGENDS-90':  case 'MPL': case 'BENGAL-T20': case 'APL': case 'VIDARBHA': case 'AFG-T20':
 					dataToProcess = dataToProcess + ',' + document.getElementById('which_inning').value
 					processCricketProcedures("POPULATE-GRAPHICS", dataToProcess);
 					break;
@@ -454,13 +453,15 @@ function processUserSelectionData(whatToProcess,dataToProcess)
 			case 'F7':
 				switch($('#selected_broadcaster').val().toUpperCase()){
 					case 'BENGAL-T20': case 'NPL': case 'ISPL': case 'LEGENDS-90':  case 'MPL': case 'T20_MUMBAI': case 'APL': case 'VIDARBHA':
+					case 'AFG-T20':
 					addItemsToList(dataToProcess,null); 
 					break;
 				}
 			break;		
 			case 'F11':
 				switch($('#selected_broadcaster').val().toUpperCase()){
-					case 'BENGAL-T20': case 'NPL': case 'ISPL': case 'LEGENDS-90':  case 'MPL': case 'T20_MUMBAI': case 'APL': case 'VIDARBHA':
+					case 'BENGAL-T20': case 'NPL': case 'ISPL': case 'LEGENDS-90':  case 'MPL': case 'T20_MUMBAI': case 'APL': case 'VIDARBHA': 
+					case 'AFG-T20':
 					addItemsToList(dataToProcess,null); 
 					break;
 				}
@@ -507,7 +508,7 @@ function processUserSelectionData(whatToProcess,dataToProcess)
 			case 'Alt_5':
 				switch($('#selected_broadcaster').val().toUpperCase()){
 				case 'ICC-U19-2023': case 'BENGAL-T20': case 'NPL': case 'MPL': case 'LEGENDS-90': case 'APL': case 'ISPL':
-				case 'T20_MUMBAI':
+				case 'T20_MUMBAI': case 'AFG-T20':
 					addItemsToList(dataToProcess,null); 
 					break;
 				 }
@@ -607,7 +608,7 @@ function processUserSelectionData(whatToProcess,dataToProcess)
 				break;	
 			case 'Control_4': 
 				switch($('#selected_broadcaster').val().toUpperCase()){
-				case 'NPL': case 'LEGENDS-90': case 'ISPL':  case 'MPL': case 'T20_MUMBAI': case 'BENGAL-T20': case 'APL': case 'VIDARBHA':
+				case 'NPL': case 'LEGENDS-90': case 'ISPL':  case 'MPL': case 'T20_MUMBAI': case 'BENGAL-T20': case 'APL': case 'VIDARBHA': case 'AFG-T20':
 					switch(dataToProcess) {
 						case 'Control_4':
 							dataToProcess = dataToProcess + ',' + document.getElementById('which_inning').value;
@@ -629,7 +630,7 @@ function processUserSelectionData(whatToProcess,dataToProcess)
 			//All key presses which doesn't require graphics population will come here
 			case '5': case '6': case '7': case '8': case '9': case 'Alt_Shift_Q': case 'Alt_Shift_P':
 				switch($('#selected_broadcaster').val().toUpperCase()){
-				case 'NPL': case 'LEGENDS-90': case 'ISPL':  case 'MPL': case 'T20_MUMBAI': case 'BENGAL-T20': case 'APL': case 'VIDARBHA':
+				case 'NPL': case 'LEGENDS-90': case 'ISPL':  case 'MPL': case 'T20_MUMBAI': case 'BENGAL-T20': case 'APL': case 'VIDARBHA': case 'AFG-T20':
 					switch(dataToProcess) {
 						case '6': case '9': 
 							dataToProcess = dataToProcess + ',' + document.getElementById('which_inning').value;
@@ -637,7 +638,7 @@ function processUserSelectionData(whatToProcess,dataToProcess)
 							break;
 						case 'Alt_Shift_Q': case 'Alt_Shift_P':
 							switch($('#selected_broadcaster').val().toUpperCase()){
-								case 'MPL': case 'LEGENDS-90': case 'BENGAL-T20': case 'NPL': case 'APL': case 'VIDARBHA':
+								case 'MPL': case 'LEGENDS-90': case 'BENGAL-T20': case 'NPL': case 'APL': case 'VIDARBHA': case 'AFG-T20':
 									addItemsToList(dataToProcess,null);
 									break;
 								case 'ISPL':
@@ -1863,7 +1864,7 @@ function addItemsToList(whatToProcess,dataToProcess)
 				});
 				
 				switch($('#selected_broadcaster').val().toUpperCase()){
-					case 'BENGAL-T20':
+					case 'BENGAL-T20': case 'AFG-T20':
 						$(select).on('change', function() {
 					        setDropdownOptionToSelectOptionArray(this, 2);
 					        processCricketProcedures("GRAPHICS-OPTIONS_DATA", whatToProcess + "," +$('#selectTeam').val() + "," + 
@@ -1905,7 +1906,7 @@ function addItemsToList(whatToProcess,dataToProcess)
 			    cellCount++;
 			    
 			    switch($('#selected_broadcaster').val().toUpperCase()){
-					case 'BENGAL-T20':
+					case 'BENGAL-T20': case 'AFG-T20':
 						select = document.createElement('select');
 						select.id = 'selectPic';
 						select.name = select.id;
@@ -2603,7 +2604,7 @@ function addItemsToList(whatToProcess,dataToProcess)
 			cellCount = cellCount + 1;
 			
 			switch($('#selected_broadcaster').val().toUpperCase()){
-				case 'BENGAL-T20': case 'NPL':  case 'MPL': case 'APL':
+				case 'BENGAL-T20': case 'NPL':  case 'MPL': case 'APL': case 'AFG-T20':
 				break;
 				default:
 				select = document.createElement('select');
@@ -2734,7 +2735,7 @@ function addItemsToList(whatToProcess,dataToProcess)
 	            select.appendChild(option);
 	            
 	            switch($('#selected_broadcaster').val().toUpperCase()){
-					case 'BENGAL-T20':
+					case 'BENGAL-T20': case 'AFG-T20':
 					option = document.createElement('option');
 		            option.value = 'trophy';
 		            option.text = 'trophy';
@@ -3305,7 +3306,7 @@ function addItemsToList(whatToProcess,dataToProcess)
 				setDropdownOptionToSelectOptionArray($(select),0);
 				cellCount = cellCount + 1;
 				break;
-			case 'BENGAL-T20': case 'DOAD-BILATERAL':
+			case 'BENGAL-T20': case 'DOAD-BILATERAL': case 'AFG-T20':
 				select = document.createElement('select');
 				select.id = 'selectMiddleStat';
 				select.name = select.id;
@@ -3881,7 +3882,7 @@ function addItemsToList(whatToProcess,dataToProcess)
 				}
 					break;
 				
-				case 'BENGAL-T20':
+				case 'BENGAL-T20': case 'AFG-T20':
 					header_text.innerHTML = 'LEFT BOTTON INFOBAR SECTION';
 					select = document.createElement('select');
 					select.id = 'selectLeftBottom';
@@ -4671,7 +4672,7 @@ function addItemsToList(whatToProcess,dataToProcess)
 		
 				}
 				break;
-			case 'BENGAL-T20':
+			case 'BENGAL-T20': case 'AFG-T20':
 				header_text.innerHTML = 'MIDDLE INFOBAR SECTION';
 			
 				select = document.createElement('select');
@@ -5857,7 +5858,7 @@ function addItemsToList(whatToProcess,dataToProcess)
 				option.text = 'Bowler Replace';
 				select.appendChild(option);
 				break;
-			case 'BENGAL-T20':
+			case 'BENGAL-T20': case 'AFG-T20':
 				
 				select = document.createElement('select');
 				select.id = 'selectRightBottom';
@@ -6193,7 +6194,7 @@ function addItemsToList(whatToProcess,dataToProcess)
 						}
 					});
 					break;
-				case 'BENGAL-T20':
+				case 'BENGAL-T20': case 'AFG-T20':
 					header_text.innerHTML = 'RIGHT INFOBAR SECTION';
 		
 					select = document.createElement('select');
@@ -6294,7 +6295,7 @@ function addItemsToList(whatToProcess,dataToProcess)
 		case 'Alt_9':
 			switch($('#selected_broadcaster').val().toUpperCase()){
 			case 'ICC-U19-2023': case 'BENGAL-T20': case 'NPL': case 'MPL': case 'LEGENDS-90': case 'APL': case 'ISPL': case 'VIDARBHA':
-			case 'T20_MUMBAI':
+			case 'T20_MUMBAI': case 'AFG-T20':
 				header_text.innerHTML = 'INFOBAR SECTION - FREE TEXT';
 						
 				select = document.createElement('select');
@@ -6433,7 +6434,8 @@ function addItemsToList(whatToProcess,dataToProcess)
 				});
 				select.dispatchEvent(new Event('change'));
 				break;
-			case 'ICC-U19-2023': case 'BENGAL-T20': case 'NPL': case 'MPL': case 'LEGENDS-90': case 'APL': case 'ISPL': case "VIDARBHA":
+			case 'ICC-U19-2023': case 'BENGAL-T20': case 'NPL': case 'MPL': case 'LEGENDS-90': case 'APL': case 'ISPL': 
+			case "VIDARBHA": case 'AFG-T20':
 				header_text.innerHTML = 'MIDDLE INFOBAR SECTION - COMMANTATORS';
 						
 				select = document.createElement('select');
@@ -6665,7 +6667,7 @@ function addItemsToList(whatToProcess,dataToProcess)
 					setDropdownOptionToSelectOptionArray($(select),0);
 					cellCount = cellCount + 1
 					break;
-				case 'NPL':  case 'MPL': case 'T20_MUMBAI': case 'BENGAL-T20': case 'APL': case 'VIDARBHA':
+				case 'NPL':  case 'MPL': case 'T20_MUMBAI': case 'BENGAL-T20': case 'APL': case 'VIDARBHA': case 'AFG-T20':
 					header_text.innerHTML = 'POWERPLAY';
 	
 					select = document.createElement('select');
@@ -6772,7 +6774,7 @@ function addItemsToList(whatToProcess,dataToProcess)
 			
 			switch($('#selected_broadcaster').val().toUpperCase()){
 				case 'ISPL': case 'BENGAL-T20': case 'NPL': case 'LEGENDS-90':  case 'MPL':case 'T20_MUMBAI':
-				case 'APL': case 'VIDARBHA':
+				case 'APL': case 'VIDARBHA': case 'AFG-T20':
 					header_text.innerHTML = '30-50 SPLIT';
 			
 					select = document.createElement('select');
@@ -6928,7 +6930,7 @@ function addItemsToList(whatToProcess,dataToProcess)
 				break;	
 			case 'Control_s':
 				switch($('#selected_broadcaster').val().toUpperCase()){
-					case 'BENGAL-T20': //case 'NPL': case 'APL':
+					case 'BENGAL-T20': case 'AFG-T20': //case 'NPL': case 'APL':
 					break;
 					default:
 						select = document.createElement('select');
@@ -7146,7 +7148,8 @@ function addItemsToList(whatToProcess,dataToProcess)
 					option.text = session_match.setup.awayTeam.teamName4 + '-' + 'FIELD';
 					select.appendChild(option);
 					break;
-				case 'NPL': case 'LEGENDS-90':  case 'MPL': case 'BENGAL-T20': case 'APL': case 'VIDARBHA': case 'T20_MUMBAI':
+				case 'NPL': case 'LEGENDS-90':  case 'MPL': case 'BENGAL-T20': case 'APL': case 'VIDARBHA': 
+				case 'T20_MUMBAI': case 'AFG-T20':
 				option = document.createElement('option');
 				option.value = session_match.setup.homeTeam.teamName1 + '-' + 'BAT';
 				option.text = session_match.setup.homeTeam.teamName1 + '-' + 'BAT';
@@ -7849,7 +7852,7 @@ function addItemsToList(whatToProcess,dataToProcess)
 			}
 			
 			switch($('#selected_broadcaster').val().toUpperCase()){
-				case 'BENGAL-T20':
+				case 'BENGAL-T20': case 'AFG-T20':
 					select = document.createElement('select');
 					select.id = 'selectPhoto';
 					select.name = select.id;
@@ -7987,7 +7990,7 @@ function addItemsToList(whatToProcess,dataToProcess)
 			cellCount = cellCount + 1;
 			
 			switch($('#selected_broadcaster').val().toUpperCase()){
-			case 'BENGAL-T20': //case 'NPL': case 'APL':
+			case 'BENGAL-T20': case 'AFG-T20': //case 'NPL': case 'APL':
 				break;
 			default:
 				select = document.createElement('select');
@@ -8341,7 +8344,7 @@ function addItemsToList(whatToProcess,dataToProcess)
 					cellCount = cellCount + 1;
 				    break;
 						
-				case 'ICC-U19-2023': case 'BENGAL-T20': case 'NPL':  case 'MPL': case 'APL': 
+				case 'ICC-U19-2023': case 'BENGAL-T20': case 'NPL':  case 'MPL': case 'APL': case 'AFG-T20':
 					select = document.createElement('select');
 					select.id = 'selectpreSummary';
 					select.name = select.id;
@@ -8577,7 +8580,7 @@ function addItemsToList(whatToProcess,dataToProcess)
 			cellCount = cellCount + 1;
 			
 			switch($('#selected_broadcaster').val().toUpperCase()){
-				case 'BENGAL-T20':
+				case 'BENGAL-T20': case 'AFG-T20':
 					select = document.createElement('select');
 					select.id = 'sponsorOrNot';
 					select.name = select.id;
@@ -8751,7 +8754,7 @@ function addItemsToList(whatToProcess,dataToProcess)
 			cellCount = cellCount + 1;
 			
 			switch($('#selected_broadcaster').val().toUpperCase()){
-				case 'BENGAL-T20':
+				case 'BENGAL-T20': case 'AFG-T20':
 					select = document.createElement('select');
 					select.id = 'sponsorOrNot';
 					select.name = select.id;
@@ -9471,7 +9474,7 @@ function addItemsToList(whatToProcess,dataToProcess)
 					option.text = 'ISPL CAREER';
 					select.appendChild(option);
 					break;
-				case 'BENGAL-T20':
+				case 'BENGAL-T20': case 'AFG-T20':
 									
 					option = document.createElement('option');
 					option.value = 'DT20';
@@ -10333,7 +10336,7 @@ function addItemsToList(whatToProcess,dataToProcess)
 					option.text = 'ISPL CAREER';
 					select.appendChild(option);
 					break;
-				case 'BENGAL-T20':
+				case 'BENGAL-T20': case 'AFG-T20':
 					
 					option = document.createElement('option');
 					option.value = 'DT20';

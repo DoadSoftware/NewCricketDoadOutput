@@ -162,7 +162,7 @@ public class Caption
 				break;
 			case "Control_Shift_(":
 				switch (config.getBroadcaster().toUpperCase()) {
-				case Constants.BENGAL_T20: case Constants.MPL:
+				case Constants.BENGAL_T20: case Constants.MPL: case Constants.AFG_T20:
 					this_infobarGfx.infobar.setMiddle_section("FREE_TEXT");
 					this_infobarGfx.freeText = whatToProcess.split(",")[2];
 					//status = this_infobarGfx.populateVizInfobarMiddleSection(print_writers, matchAllData, whichSide);
@@ -182,7 +182,7 @@ public class Caption
 			case "Control_4":
 				switch (config.getBroadcaster().toUpperCase()) {
 				case Constants.NPL: case Constants.LEGENDS: case Constants.MPL: case Constants.T20_MUMBAI: case Constants.BENGAL_T20:
-				case Constants.APL: case Constants.VIDARBHA:
+				case Constants.APL: case Constants.VIDARBHA: case Constants.AFG_T20:
 					status = this_bugsAndMiniGfx.populateFourCounter(whatToProcess, whichSide, matchAllData);
 					break;
 				case Constants.ISPL:
@@ -267,7 +267,7 @@ public class Caption
 					status = this_lowerThirdGfx.populateBatVsAllBowlers(whatToProcess, whichSide, matchAllData);
 					break;
 
-				case Constants.BENGAL_T20:
+				case Constants.BENGAL_T20: case Constants.AFG_T20:
 					status = this_bugsAndMiniGfx.populateBatStatsVsAllBowlers(whatToProcess, whichSide, matchAllData);
 					break;
 				}
@@ -450,7 +450,7 @@ public class Caption
 			case "Alt_F1": // BatGriff
 				switch (config.getBroadcaster().toUpperCase()) {
 				case Constants.BENGAL_T20: case Constants.NPL: case Constants.MPL:case Constants.LEGENDS:
-				case Constants.APL: case Constants.T20_MUMBAI:
+				case Constants.APL: case Constants.T20_MUMBAI: case Constants.AFG_T20:
 					status = this_bugsAndMiniGfx.populateGriff(whatToProcess, whichSide, matchAllData);
 					break;
 				case Constants.ICC_U19_2023:
@@ -468,7 +468,7 @@ public class Caption
 			case "Alt_F2": // BallGriff
 				switch (config.getBroadcaster().toUpperCase()) {
 				case Constants.BENGAL_T20: case Constants.NPL: case Constants.MPL:case Constants.LEGENDS:
-				case Constants.T20_MUMBAI: case Constants.APL:
+				case Constants.T20_MUMBAI: case Constants.APL: case Constants.AFG_T20:
 					status = this_bugsAndMiniGfx.populateGriff(whatToProcess, whichSide, matchAllData);
 					break;
 				case Constants.ICC_U19_2023:  
@@ -696,7 +696,7 @@ public class Caption
 			case "Control_F11": //MATCH SUMMARY
 				System.out.println("whatToProcess - " + whatToProcess);
 				switch(config.getBroadcaster()) {
-				case Constants.BENGAL_T20: case Constants.NPL: case Constants.ISPL: case Constants.MPL: case Constants.APL: case Constants.T20_MUMBAI:
+				case Constants.BENGAL_T20: case Constants.NPL: case Constants.ISPL: case Constants.MPL: case Constants.APL: case Constants.T20_MUMBAI: case Constants.AFG_T20:
 					this_fullFramesGfx.WhichType = whatToProcess.split(",")[2];
 					break;
 				}
@@ -855,7 +855,7 @@ public class Caption
 			case "Control_h"://powerplay Summary
 				switch (config.getBroadcaster().toUpperCase()) {
 				case Constants.NPL: case Constants.LEGENDS: case Constants.MPL: case Constants.T20_MUMBAI: case Constants.BENGAL_T20:
-				case Constants.APL: case Constants.VIDARBHA:
+				case Constants.APL: case Constants.VIDARBHA: case Constants.AFG_T20:
 					status = this_lowerThirdGfx.populateL3PhaseWise(whatToProcess,whichSide,matchAllData);
 					break;
 
@@ -1091,7 +1091,7 @@ public class Caption
 					this_infobarGfx.infobar.setLeft_bottom(whatToProcess.split(",")[2]);
 					status = this_infobarGfx.populateVizInfobarLeftBottom(print_writers, matchAllData, whichSide);
 					break;
-				case Constants.BENGAL_T20:
+				case Constants.BENGAL_T20: case Constants.AFG_T20:
 					this_infobarGfx.infobar.setLeft_bottom(whatToProcess.split(",")[2]);
 					status = this_infobarGfx.populateVizInfobarLeftBottom(print_writers, matchAllData, whichSide);
 					break;
@@ -1146,7 +1146,7 @@ public class Caption
 					status = this_infobarGfx.populateVizInfobarMiddleSection(false, print_writers,matchAllData, whichSide);
 					break;
 					
-				case Constants.BENGAL_T20:
+				case Constants.BENGAL_T20: case Constants.AFG_T20:
 					
 					if(this_infobarGfx.infobar.getMiddle_section().equalsIgnoreCase(CricketUtil.BATSMAN)) {
 						this_infobarGfx.infobar.setMiddle_section(whatToProcess.split(",")[2]);
@@ -1682,7 +1682,7 @@ public class Caption
 					this_infobarGfx.infobar.setRight_bottom(whatToProcess.split(",")[2]);
 					status = this_infobarGfx.populateVizInfobarRightBottom(print_writers, matchAllData, whichSide, 1);
 					break;
-				case Constants.BENGAL_T20:
+				case Constants.BENGAL_T20: case Constants.AFG_T20:
 					this_infobarGfx.infobar.setRight_bottom(whatToProcess.split(",")[2]);
 					status = this_infobarGfx.populateVizInfobarRightBottom(print_writers, matchAllData, whichSide, whichSide);
 					break;	
@@ -1819,7 +1819,7 @@ public class Caption
 						status = "IN Alt+2 Section BASTMAN/BOWLER NOT SELECTED";
 					}
 					break;
-				case Constants.BENGAL_T20:
+				case Constants.BENGAL_T20: case Constants.AFG_T20:
 					if(this_infobarGfx.infobar.getMiddle_section().equalsIgnoreCase(CricketUtil.BATSMAN)) {
 						if(this_infobarGfx.infobar.getRight_section().equalsIgnoreCase(CricketUtil.BOWLER) && 
 								whatToProcess.split(",")[2].equalsIgnoreCase(CricketUtil.BOWLER)) {
@@ -1931,7 +1931,7 @@ public class Caption
 					this_infobarGfx.infobarStatsId = Integer.valueOf(whatToProcess.split(",")[2]);
 					status = this_infobarGfx.populateFullSection(false,print_writers, matchAllData, whichSide);
 					break;
-				case Constants.BENGAL_T20:
+				case Constants.BENGAL_T20: case Constants.AFG_T20:
 					this_infobarGfx.infobar.setMiddle_section("FREE_TEXT");
 					this_infobarGfx.infobarStatsId = Integer.valueOf(whatToProcess.split(",")[2]);
 					status = this_infobarGfx.populateVizInfobarMiddleSection(false,print_writers, matchAllData, whichSide);
@@ -2021,7 +2021,7 @@ public class Caption
 						status = this_infobarGfx.populateVizInfobarMiddleSection(false,print_writers, matchAllData, whichSide);
 					}
 					break;
-				case Constants.BENGAL_T20:
+				case Constants.BENGAL_T20: case Constants.AFG_T20:
 					this_infobarGfx.infobar.setMiddle_section("COMMENTATORS");
 					this_infobarGfx.Comms_Name = whatToProcess;
 					status = this_infobarGfx.populateVizInfobarMiddleSection(false,print_writers, matchAllData, whichSide);

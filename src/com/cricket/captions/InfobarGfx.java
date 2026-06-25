@@ -416,7 +416,7 @@ public class InfobarGfx
 			}
 			break;	
 			
-		case Constants.BENGAL_T20:
+		case Constants.BENGAL_T20: case Constants.AFG_T20:
 			
 			inning = matchAllData.getMatch().getInning().stream().filter(
 				inn -> inn.getIsCurrentInning().equalsIgnoreCase(CricketUtil.YES)).findAny().orElse(null);
@@ -816,7 +816,7 @@ public class InfobarGfx
 				return status;
 			}
 			break;
-		case Constants.BENGAL_T20: 
+		case Constants.BENGAL_T20: case Constants.AFG_T20:
 			
 			infobar.setPowerplay_on_screen(false);
 			infobar.setPowerplay_end(false);
@@ -2314,7 +2314,7 @@ public class InfobarGfx
 			
 			break;
 			
-		case Constants.BENGAL_T20: 
+		case Constants.BENGAL_T20: case Constants.AFG_T20:
 
 			if(is_this_updating == false) {
 				
@@ -2888,7 +2888,7 @@ public class InfobarGfx
 					+ infobar.getBatsmanAndBowlOrSponsor() + "$Bat_" + WhichBatsman + "$Side" + WhichSubSide + "$obj_Indicator*ACTIVE SET 0 \0",print_writers);
 			}
 			break;
-		case Constants.BENGAL_T20: 
+		case Constants.BENGAL_T20: case Constants.AFG_T20:
 			
 			inning = matchAllData.getMatch().getInning().stream().filter(inn -> inn.getIsCurrentInning().equalsIgnoreCase(CricketUtil.YES)).findAny().orElse(null);
 			
@@ -3203,7 +3203,7 @@ public class InfobarGfx
 			}
 			infobar.setLast_batsmen(battingCardList);
 			break;
-		case Constants.BENGAL_T20:
+		case Constants.BENGAL_T20: case Constants.AFG_T20:
 			if(infobar.getLast_batsmen() != null && infobar.getLast_batsmen().size() >= 2) {
 				
 				if(infobar.getLast_batsmen().get(0).getPlayerId() != battingCardList.get(0).getPlayerId()) {
@@ -3647,7 +3647,7 @@ public class InfobarGfx
 			}
 	
 			break;
-		case Constants.BENGAL_T20:
+		case Constants.BENGAL_T20: case Constants.AFG_T20:
 			
 			inning = matchAllData.getMatch().getInning().stream().filter(inn -> inn.getIsCurrentInning().equalsIgnoreCase(CricketUtil.YES)).findAny().orElse(null);
 			
@@ -3817,7 +3817,7 @@ public class InfobarGfx
 			
 			infobar.setLast_bowler(bowlingCard);
 			break;
-		case Constants.BENGAL_T20: 
+		case Constants.BENGAL_T20: case Constants.AFG_T20:
 			if(infobar.getLast_bowler() != null) {
 				if(infobar.getLast_bowler().getPlayerId() != bowlingCard.getPlayerId()) {
 					populateRightTopBowler(print_writers, matchAllData, WhichSide, 2);
@@ -5061,7 +5061,7 @@ public class InfobarGfx
 			}
 			break;
 			
-		case Constants.BENGAL_T20: 
+		case Constants.BENGAL_T20: case Constants.AFG_T20:
 			if(infobar.getRight_bottom() != null && !infobar.getRight_bottom().isEmpty()) {
 				switch(infobar.getRight_bottom().toUpperCase()) {
 				case "BOWLER_REPLACE":
@@ -6312,7 +6312,7 @@ public class InfobarGfx
 					infobar.setLast_right_section(infobar.getRight_section());
 				}
 				break;
-			case Constants.BENGAL_T20: 
+			case Constants.BENGAL_T20: case Constants.AFG_T20:
 				if(infobar.getRight_section() != null && !infobar.getRight_section().isEmpty()) {
 					switch(infobar.getRight_section().toUpperCase()) {
 					case "LAST_X_BALLS":
@@ -10149,7 +10149,7 @@ public class InfobarGfx
 			infobar.setLast_left_bottom(infobar.getLeft_bottom());
 			break;
 			
-		case Constants.BENGAL_T20: 
+		case Constants.BENGAL_T20: case Constants.AFG_T20:
 			switch(infobar.getLeft_bottom().toUpperCase()) {
 			case "CURR_PARTNERSHIP":
 				
@@ -10360,7 +10360,7 @@ public class InfobarGfx
 			t20MumbaiMiddleSection(isThisOverLimitExceed, print_writers, matchAllData, WhichSide);
 			infobar.setLast_middle_section(infobar.getMiddle_section());
 			break;
-		case Constants.BENGAL_T20:
+		case Constants.BENGAL_T20: case Constants.AFG_T20:
 			bengalT20MiddleSection(isThisOverLimitExceed, print_writers, matchAllData, WhichSide);
 			infobar.setLast_middle_section(infobar.getMiddle_section());
 			break;
@@ -16601,7 +16601,7 @@ public class InfobarGfx
 //			
 //			return Constants.OK;
 			
-		case Constants.BENGAL_T20:
+		case Constants.BENGAL_T20: case Constants.AFG_T20:
 			
 			CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_Infobar$Ident$Left$In$Mask1$img_Base1*TEXTURE*IMAGE SET " + 
 					Constants.BENGAL_BASE_PATH + "1/" + matchAllData.getSetup().getHomeTeam().getTeamName4() + "\0", print_writers);
@@ -16920,7 +16920,7 @@ public class InfobarGfx
 //			}
 //			break;
 			
-		case Constants.BENGAL_T20:
+		case Constants.BENGAL_T20: case Constants.AFG_T20:
 			
 //			if(WhichSide==1) {
 //				this_animation.processAnimation(Constants.FRONT, print_writers, "Anim_InfoBar$IdentInfo$Change", "SHOW 0.0");
@@ -17366,7 +17366,7 @@ public class InfobarGfx
 				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*TREE*$Main$All$Geom_GroundAll$RotationGrp$dime_final$" + i + "$Texture$img_Base02" + 
 						"*TEXTURE*IMAGE SET " + Constants.LEGENDS_BASE2 + logoCategory + "\0", print_writers);
 				break;
-			case Constants.BENGAL_T20:
+			case Constants.BENGAL_T20: case Constants.AFG_T20:
 				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*TREE*$Main$All$Geom_GroundAll$RotationGrp$dime_final$" + i + "$Texture$img_Base01" + 
 						"*TEXTURE*IMAGE SET " + Constants.BENGAL_BASE_PATH + "1/EVENT" + "\0", print_writers);
 				break;

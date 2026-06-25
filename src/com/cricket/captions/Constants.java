@@ -43,6 +43,8 @@ public class Constants
 	public final static String SPONSERS_PATH = "IMAGE*/Default/Essentials/Sponsors/";
 	public final static String ISPL_PHOTO_PATH = "C:\\\\Images\\\\ISPL\\\\PHOTOS\\";
 	public final static String Local_ISPL_PHOTOS_PATH = "\\\\c\\\\Images\\\\ISPL\\\\PHOTOS\\\\";
+	
+	public final static String AFG_T20 = "AFG-T20";
 
 	public final static String BENGAL_T20 = "BENGAL-T20";
 	public final static String BENGAL_ICONS_PATH = "IMAGE*/Default/Essentials/Badge/";

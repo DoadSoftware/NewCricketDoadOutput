@@ -409,7 +409,8 @@ public class IndexController
 	    // SPECIAL CASES
 	    if (select_broadcaster.equalsIgnoreCase(Constants.MPL)) {
 	        this_caption.this_fullFramesGfx.setFullFrameBase(session_configuration);
-	    } else if (select_broadcaster.equalsIgnoreCase(Constants.BENGAL_T20)) {
+	    } else if (select_broadcaster.equalsIgnoreCase(Constants.BENGAL_T20) || 
+	    		select_broadcaster.equalsIgnoreCase(Constants.AFG_T20)) {
 	        this_caption.this_fullFramesGfx.PopulateFfFooter(0, "", session_match, 0);
 	    }
 
@@ -543,7 +544,7 @@ public class IndexController
 				processAnimations(process, session_configuration, valueToProcess, print_writers, headToHead, session_MasterCricketDirectory);
 			}else if(process.contains("ANIMATE-OUT-SECOND_PLAYING")) {
 				switch (session_configuration.getBroadcaster()) {
-				case Constants.BENGAL_T20:
+				case Constants.BENGAL_T20: case Constants.AFG_T20:
 					if(this_animation.whichGraphicOnScreen.contains("Control_Shift_F7")) {
 						this_animation.lineUpCount++;
 						if(this_animation.lineUpCount == 3) {
@@ -811,7 +812,7 @@ public class IndexController
 			break;
 		default:
 			if (Set.of(Constants.ICC_U19_2023,Constants.ISPL,Constants.BENGAL_T20,Constants.NPL,Constants.LEGENDS,
-					Constants.MPL,Constants.APL,Constants.VIDARBHA).contains(session_configuration.getBroadcaster())
+					Constants.MPL,Constants.APL,Constants.VIDARBHA,Constants.AFG_T20).contains(session_configuration.getBroadcaster())
 					&& !session_configuration.getPrimaryVariousOptions().contains(Constants.FULL_FRAMER)
 					&& graphicsType.contains(Constants.FULL_FRAMER)) {
 
@@ -1495,7 +1496,7 @@ public class IndexController
 	public void GetVariousDBData(String typeOfUpdate,Configuration config,HeadToHead headToHead, String session_MasterCricketDirectory)throws Exception {
 
 	    if (!Set.of(Constants.ICC_U19_2023,Constants.ISPL,Constants.BENGAL_T20,Constants.NPL,Constants.LEGENDS,Constants.T20_MUMBAI,
-	    		Constants.MPL,Constants.APL,Constants.VIDARBHA).contains(config.getBroadcaster())) {
+	    		Constants.MPL,Constants.APL,Constants.VIDARBHA,Constants.AFG_T20).contains(config.getBroadcaster())) {
 	        return;
 	    }
 
@@ -1694,7 +1695,7 @@ public class IndexController
 	            break;
 
 	        case Constants.ICC_U19_2023: case Constants.BENGAL_T20: case Constants.NPL: case Constants.LEGENDS:
-	        case Constants.MPL: case Constants.APL: case Constants.VIDARBHA:
+	        case Constants.MPL: case Constants.APL: case Constants.VIDARBHA: case Constants.AFG_T20:
 
 	            if (session_configuration.getPrimaryVariousOptions().contains(Constants.FULL_FRAMER)) {
 	                this_scene.LoadScene("FULL-FRAMERS", print_writers,session_configuration);

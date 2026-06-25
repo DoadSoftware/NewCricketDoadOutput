@@ -269,7 +269,8 @@
 			      		<option value="LEGENDS-90">LEGENDS 90</option>
 			      		<option value="T20_MUMBAI">T20 MUMBAI</option>
 			      		<option value="NPL">NPL 2024</option>
-			      		<option value="DOAD-BILATERAL">AFG v BAN</option>	
+			      		<option value="DOAD-BILATERAL">AFG v BAN</option>
+			      		<option value="AFG-T20">AFG T20</option>
 			      		<option value="BENGAL-T20">MAHARAJA T20</option>
 			      		<option value="ICC-U19-2023">ICC Under-19 WC 2023</option>
 			      </select>

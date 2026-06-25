@@ -808,7 +808,7 @@ public class FullFramesGfx
 				break;
 			}
 			break;
-		case Constants.BENGAL_T20: case Constants.MPL:
+		case Constants.BENGAL_T20: case Constants.MPL: case Constants.AFG_T20:
 			if(WhichProfile.equalsIgnoreCase("BPTL2024")) {
 				matchAllData.getSetup().setMatchType("BPTL2024");
 			}
@@ -2735,7 +2735,7 @@ public class FullFramesGfx
 				break;	
 			}
 			break;
-		case Constants.BENGAL_T20:
+		case Constants.BENGAL_T20: case Constants.AFG_T20:
 			offset = "";
 			switch(whatToProcess) {
 			case "F1":
@@ -4226,7 +4226,7 @@ public class FullFramesGfx
 				break;
 			}
 			break;
-		case Constants.BENGAL_T20:
+		case Constants.BENGAL_T20: case Constants.AFG_T20:
 			switch(whatToProcess) {
 			case "Shift_F10":
 				if(inning.getInningNumber() == 1) {
@@ -6848,7 +6848,7 @@ public class FullFramesGfx
 				break;
 			}
 			break;
-		case Constants.BENGAL_T20:
+		case Constants.BENGAL_T20: case Constants.AFG_T20:
 			switch (whatToProcess) {
 			case "Alt_Shift_W":
 				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$Logo$StartLogoAll$Select_LogoType"
@@ -8102,7 +8102,7 @@ public class FullFramesGfx
 			String powerPlay2 = "";
 			switch (config.getBroadcaster().toUpperCase()) {
 			case Constants.ICC_U19_2023: case Constants.ISPL: case Constants.BENGAL_T20: case Constants.NPL: case Constants.MPL:
-			case Constants.LEGENDS: case Constants.APL: case Constants.VIDARBHA: case Constants.T20_MUMBAI:
+			case Constants.LEGENDS: case Constants.APL: case Constants.VIDARBHA: case Constants.T20_MUMBAI: case Constants.AFG_T20:
 				switch (config.getBroadcaster().toUpperCase()) {
 				case Constants.ISPL:
 					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_FullFrame$All_Graphics$Side_" + WhichSide 
@@ -8117,7 +8117,7 @@ public class FullFramesGfx
 					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$All$Main$Side_" + WhichSide + 
 							"$Select_GraphcsType*FUNCTION*Omo*vis_con SET 13\0", print_writers);
 					break;
-				case Constants.BENGAL_T20:
+				case Constants.BENGAL_T20: case Constants.AFG_T20:
 					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$AllGraphics$Side" + WhichSide + 
 							"$Select_GraphicsType*FUNCTION*Omo*vis_con SET 9 \0", print_writers);
 					break;
@@ -8315,7 +8315,7 @@ public class FullFramesGfx
 						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$AllGraphics$Side" + WhichSide + "$Manhattan$Wickets_Axis"
 								+ "$Out$Wkt_" + (j) + "$Select_PowerPlay*FUNCTION*Omo*vis_con SET " + powerplay_omo + "\0", print_writers);	
 						break;	
-					case Constants.BENGAL_T20: case Constants.NPL: case Constants.APL:
+					case Constants.BENGAL_T20: case Constants.NPL: case Constants.APL: case Constants.AFG_T20:
 						if((j*6) <= powerPlayValue) {
 							powerplay_omo = 0;
 							powerPlay = "$PowerPlay";
@@ -8424,7 +8424,7 @@ public class FullFramesGfx
 						case Constants.NPL: case Constants.MPL: case Constants.APL:
 							lngth = ((382 * Integer.valueOf(manhattan.get(j).getOverTotalRuns())) / maxRuns);
 							break;
-						case Constants.BENGAL_T20: case Constants.ICC_U19_2023:
+						case Constants.BENGAL_T20: case Constants.ICC_U19_2023: case Constants.AFG_T20:
 							lngth = ((135 * Integer.valueOf(manhattan.get(j).getOverTotalRuns())) / maxRuns);
 							break;
 						case Constants.LEGENDS:
@@ -8476,7 +8476,7 @@ public class FullFramesGfx
 							CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$AllGraphics$Side" + WhichSide + "$Manhattan$Wickets_Axis"
 									+ "$Out$Wkt_" + j + "$Select_Wickets*FUNCTION*Omo*vis_con SET " + manhattan.get(j).getOverTotalWickets() + "\0", print_writers);
 							break;
-						case Constants.BENGAL_T20: case Constants.NPL: case Constants.MPL: case Constants.APL:
+						case Constants.BENGAL_T20: case Constants.NPL: case Constants.MPL: case Constants.APL: case Constants.AFG_T20:
 							CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$AllGraphics$Side" + WhichSide + "$Manhattan$Wickets_Axis"
 									+ "$Out$Wkt_" + (j) + powerPlay + "$Select_Wickets*FUNCTION*Omo*vis_con SET " + manhattan.get(j).getOverTotalWickets() + "\0", print_writers);
 							break;
@@ -8506,7 +8506,7 @@ public class FullFramesGfx
 							CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$" + gfx_name + WhichSide + "$Manhattan$Scale_Position$"
 									+ (j) + "$Wickets$WicketColour*FUNCTION*Omo*vis_con SET 0\0", print_writers);
 							break;
-						case Constants.BENGAL_T20:
+						case Constants.BENGAL_T20: case Constants.AFG_T20:
 							CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$AllGraphics$Side" + WhichSide + "$Manhattan$Wickets_Axis"
 									+ "$Out$Wkt_" + (j) + powerPlay + "$Select_Wickets*FUNCTION*Omo*vis_con SET 0\0", print_writers);
 							break;	
@@ -8527,7 +8527,7 @@ public class FullFramesGfx
 			case Constants.T20_MUMBAI:
 				return T20_Mumbai_PlayerProfileAndThisSeriesBody(WhichSide, whatToProcess);
 			case Constants.NPL: case Constants.MPL: case Constants.BENGAL_T20: case Constants.APL:
-			case Constants.ICC_U19_2023: case Constants.ISPL:
+			case Constants.ICC_U19_2023: case Constants.ISPL: case Constants.AFG_T20:
 				MplandNplBatThisSeriesBody(WhichSide, whatToProcess, matchAllData, WhichInning);
 				break;
 			}
@@ -8542,7 +8542,7 @@ public class FullFramesGfx
 			case Constants.T20_MUMBAI:
 				return T20_Mumbai_PlayerProfileAndThisSeriesBody(WhichSide, whatToProcess);
 			case Constants.NPL: case Constants.MPL: case Constants.BENGAL_T20: case Constants.APL:
-			case Constants.ICC_U19_2023: case Constants.ISPL:
+			case Constants.ICC_U19_2023: case Constants.ISPL: case Constants.AFG_T20:
 				batProfileBody(WhichSide, whatToProcess, matchAllData, WhichInning);
 				break;
 			}
@@ -8556,7 +8556,7 @@ public class FullFramesGfx
 				return T20_Mumbai_PlayerProfileAndThisSeriesBody(WhichSide, whatToProcess);
 			case Constants.NPL: case Constants.MPL: case Constants.APL:
 				return NPLandMPLPlayerProfileAndThisSeriesBody(WhichSide, whatToProcess);
-			case Constants.BENGAL_T20:
+			case Constants.BENGAL_T20: case Constants.AFG_T20:
 				return BengalT20PlayerProfileAndThisSeriesBody(WhichSide, whatToProcess);
 			case Constants.ICC_U19_2023: case Constants.ISPL:
 				return ICCandISPLPlayerProfileAndThisSeriesBody(WhichSide, whatToProcess);
@@ -8648,7 +8648,7 @@ public class FullFramesGfx
 				}
 				
 				break;
-			case Constants.BENGAL_T20:
+			case Constants.BENGAL_T20: case Constants.AFG_T20:
 				
 				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Profile$Side" + WhichSide + "$DataGrp$1"
 						+ "$txt_StatHead*GEOM*TEXT SET " + "MATCHES" + "\0", print_writers);		
@@ -8842,7 +8842,8 @@ public class FullFramesGfx
 			case Constants.ISPL:
 				Wormsdata(WhichSide, matchAllData,WhichInning);
 				break;
-			case Constants.ICC_U19_2023: case Constants.BENGAL_T20: case Constants.NPL: case Constants.MPL: case Constants.APL:
+			case Constants.ICC_U19_2023: case Constants.BENGAL_T20: case Constants.NPL: case Constants.MPL: case Constants.APL: 
+			case Constants.AFG_T20:
 				
 				int wkt_count=0;
 				maxRuns = runsIncr = 0;
@@ -9797,7 +9798,7 @@ public class FullFramesGfx
 					break;
 				}
 				break;
-			case Constants.BENGAL_T20:
+			case Constants.BENGAL_T20: case Constants.AFG_T20:
 				newDate = "";
 				date_data = "";
 				String[] dateSuffix = { "th", "st", "nd", "rd", "th", "th", "th", "th", "th", "th",
@@ -10658,7 +10659,7 @@ public class FullFramesGfx
 			}
 			
 			break;
-		case Constants.BENGAL_T20:
+		case Constants.BENGAL_T20: case Constants.AFG_T20:
 			
 			CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$Main$Website*GEOM*TEXT SET #MaharajaTrophy\0", print_writers);
 			CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Ident$DataAll$txt_WebInfo*GEOM*TEXT SET #MaharajaTrophy\0", print_writers);
@@ -10755,7 +10756,7 @@ public class FullFramesGfx
 						+ "txt_Overs_Value*GEOM*TEXT SET " + CricketFunctions.OverBalls(inning.getTotalOvers(), inning.getTotalBalls()) + "\0", print_writers);
 				
 				if(inning.getInningNumber() == 1) {
-					if(Integer.valueOf(matchAllData.getSetup().getReducedOvers()) > 0) {
+					if(matchAllData.getSetup().getReducedOvers() != null && !matchAllData.getSetup().getReducedOvers().isEmpty()) {
 						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$FooterAll$Text_In$Side" + WhichSide + "$Score$OversGroup$"
 								+ "txt_Overs_Value*GEOM*TEXT SET " + CricketFunctions.OverBalls(inning.getTotalOvers(), inning.getTotalBalls()) + 
 								" (" + matchAllData.getSetup().getReducedOvers() + ")" + "\0", print_writers);
@@ -11699,7 +11700,7 @@ public class FullFramesGfx
 				}
 			}
 			break;	
-		case Constants.BENGAL_T20:
+		case Constants.BENGAL_T20: case Constants.AFG_T20:
 			CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$AllGraphics$Side" + WhichSide + 
 					"$Select_GraphicsType*FUNCTION*Omo*vis_con SET 11 \0", print_writers);
 			CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$AllGraphics$Side" + WhichSide + "$Team_Fixtures$"
@@ -22100,7 +22101,7 @@ public class FullFramesGfx
 			this.numberOfRows = rowId;
 			break;
 		
-		case Constants.BENGAL_T20:
+		case Constants.BENGAL_T20: case Constants.AFG_T20:
 			CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$AllGraphics$Side" + WhichSide 
 					+ "$Select_GraphicsType*FUNCTION*Omo*vis_con SET 3 \0", print_writers);
 			
@@ -24532,7 +24533,7 @@ public class FullFramesGfx
 				}
 			}
 			break;
-		case Constants.BENGAL_T20:
+		case Constants.BENGAL_T20: case Constants.AFG_T20:
 			ImpactData[] impactArray = new ImpactData[2];
 			int count = 0, impactOmo = 0;
 			
@@ -26123,7 +26124,7 @@ public class FullFramesGfx
 			break;
 			
 			
-		case Constants.ICC_U19_2023: case Constants.BENGAL_T20: case Constants.NPL: case Constants.MPL: case Constants.APL:
+		case Constants.ICC_U19_2023: case Constants.BENGAL_T20: case Constants.NPL: case Constants.MPL: case Constants.APL: case Constants.AFG_T20:
 			switch (config.getBroadcaster().toUpperCase()) {
 			case Constants.ICC_U19_2023:
 				omo = 5;
@@ -26139,7 +26140,7 @@ public class FullFramesGfx
 				containerName_2 = "$Tittle";
 				containerName_3 = "$Select_GraphicsType";
 				break;	
-			case Constants.BENGAL_T20:
+			case Constants.BENGAL_T20: case Constants.AFG_T20:
 				omo = 5;
 				numberOfRows = 4;
 				containerName = "Team_";
@@ -27338,7 +27339,7 @@ public class FullFramesGfx
 				break;
 			}
 			break;
-		case Constants.ICC_U19_2023: case Constants.BENGAL_T20: case Constants.NPL: case Constants.MPL: case Constants.APL:
+		case Constants.ICC_U19_2023: case Constants.BENGAL_T20: case Constants.NPL: case Constants.MPL: case Constants.APL: case Constants.AFG_T20:
 			switch (config.getBroadcaster().toUpperCase()) {
 			case Constants.ISPL:
 				omo = 2;
@@ -27355,7 +27356,7 @@ public class FullFramesGfx
 				containerName_2 = "$Tittle$Data";
 				containerName_3 = "$Select_GraphicsType";
 				break;
-			case Constants.BENGAL_T20:
+			case Constants.BENGAL_T20: case Constants.AFG_T20:
 				omo = 5;
 				numberOfRows = 4;
 				containerName = "Team_";
@@ -27388,7 +27389,7 @@ public class FullFramesGfx
 					+ "*FUNCTION*Omo*vis_con SET " + omo + "\0", print_writers);
 			
 			switch (config.getBroadcaster().toUpperCase()) {
-			case Constants.ISPL: case Constants.BENGAL_T20:
+			case Constants.ISPL: case Constants.BENGAL_T20: case Constants.AFG_T20:
 				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$AllGraphics$Side" + WhichSide + "$Summary$" + containerName + 
 						"1$Select_Captain*FUNCTION*Omo*vis_con SET " + "0" + "\0", print_writers);
 				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$AllGraphics$Side" + WhichSide + "$Summary$" + containerName + 
@@ -28279,7 +28280,7 @@ public class FullFramesGfx
 					+ "$Team1$Runs2$txt_Balls*GEOM*TEXT SET " + inning.getPartnerships().get(inning.getPartnerships().size() - 1).getSecondBatterBalls() + "\0", print_writers);
 			
 			break;
-		case Constants.ICC_U19_2023: case Constants.BENGAL_T20:
+		case Constants.ICC_U19_2023: case Constants.BENGAL_T20: case Constants.AFG_T20:
 			if(config.getBroadcaster().equalsIgnoreCase(Constants.ICC_U19_2023)) {
 				if(config.getPrimaryIpAddress().equalsIgnoreCase(Constants.LOCALHOST)) {
 					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$AllGraphics$Side" + WhichSide + "$Partnership"
@@ -28665,8 +28666,8 @@ public class FullFramesGfx
 			
 			return VidharbhaDoubleTeamsBody(WhichSide, whatToProcess, matchAllData, WhichInning);
 		
-		case Constants.ICC_U19_2023: case Constants.ISPL: case Constants.BENGAL_T20: case Constants.NPL: case Constants.LEGENDS:
-		case Constants.MPL:	case Constants.APL:
+		case Constants.ICC_U19_2023: case Constants.ISPL: case Constants.BENGAL_T20: case Constants.NPL: case Constants.LEGENDS: 
+		case Constants.MPL:	case Constants.APL: case Constants.AFG_T20:
 			switch (config.getBroadcaster().toUpperCase()) {
 			case Constants.NPL: case Constants.MPL: case Constants.APL:
 				omo = 8;
@@ -28704,7 +28705,7 @@ public class FullFramesGfx
 				containerName_3 = "$Select_Graphics";
 				containerName_4 = "$Title$txt_Team";
 				break;
-			case Constants.BENGAL_T20:
+			case Constants.BENGAL_T20: case Constants.AFG_T20:
 				omo = 1;
 				containerName = "Team_";
 				containerName_3 = "$Select_GraphicsType";
@@ -29449,7 +29450,7 @@ public class FullFramesGfx
 										+ "Substitute$Team_" + i + "$" + s + "*ACTIVE SET 0 \0", print_writers);
 							}
 							break;
-						case Constants.BENGAL_T20:
+						case Constants.BENGAL_T20: case Constants.AFG_T20:
 							
 							CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$AllGraphics$Side" + WhichSide + "$Teams$" + 
 									"Substitute$Team_" + i + "$Title$txt_Tittle*GEOM*TEXT SET " + matchAllData.getSetup().getHomeTeam().getTeamName1() + "\0", print_writers);
@@ -29624,7 +29625,7 @@ public class FullFramesGfx
 								}
 								
 								break;
-							case Constants.BENGAL_T20:
+							case Constants.BENGAL_T20: case Constants.AFG_T20:
 								if(hs.getRole().equalsIgnoreCase("BATSMAN") || hs.getRole().equalsIgnoreCase("BATTER") || hs.getRole().equalsIgnoreCase("BAT/KEEPER")) {
 									CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$AllGraphics$Side" + WhichSide + "$Teams$Team_1$" + 
 											rowId + "$txt_Description*GEOM*TEXT SET " + "BATTER" + "\0", print_writers);
@@ -29768,7 +29769,7 @@ public class FullFramesGfx
 										+ "Substitute$Team_" + i + "$" + s + "*ACTIVE SET 0 \0", print_writers);
 							}
 							break;
-						case Constants.BENGAL_T20:
+						case Constants.BENGAL_T20: case Constants.AFG_T20:
 							
 							CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$AllGraphics$Side" + WhichSide + "$Teams$" + 
 									"Substitute$Team_" + i + "$Title$txt_Tittle*GEOM*TEXT SET " + matchAllData.getSetup().getAwayTeam().getTeamName1() + "\0", print_writers);
@@ -29937,7 +29938,7 @@ public class FullFramesGfx
 								}
 								
 								break;
-							case Constants.BENGAL_T20:
+							case Constants.BENGAL_T20: case Constants.AFG_T20:
 								if(as.getRole().equalsIgnoreCase("BATSMAN") || as.getRole().equalsIgnoreCase("BATTER") || as.getRole().equalsIgnoreCase("BAT/KEEPER")) {
 									CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$AllGraphics$Side" + WhichSide + "$Teams$Team_2$" + 
 											rowId + "$txt_Description*GEOM*TEXT SET " + "BATTER" + "\0", print_writers);
@@ -31010,7 +31011,7 @@ public class FullFramesGfx
 				}
 				
 				break;
-			case Constants.BENGAL_T20:
+			case Constants.BENGAL_T20: case Constants.AFG_T20:
 				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$Main$AllGraphics$Side" + WhichSide + 
 						"$Select_GraphicsType*FUNCTION*Omo*vis_con SET 2 \0", print_writers);
 				
@@ -32232,7 +32233,7 @@ public class FullFramesGfx
 							+ i + "$img_Role*TEXTURE*IMAGE SET " +  Constants.ICONS_PATH + role + "\0", print_writers);
 				}
 				break;
-			case Constants.BENGAL_T20:
+			case Constants.BENGAL_T20: case Constants.AFG_T20:
 				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$Main$AllGraphics$Side" + WhichSide + 
 						"$Select_GraphicsType*FUNCTION*Omo*vis_con SET 2 \0", print_writers);
 				
@@ -33526,7 +33527,7 @@ public class FullFramesGfx
 				}
 			}
 			break;
-		case Constants.BENGAL_T20:
+		case Constants.BENGAL_T20: case Constants.AFG_T20:
 			if(inning.getBattingTeamId() == matchAllData.getSetup().getHomeTeamId()) {
 				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Target$TeamLogos$TeamBadge1$TeamBadgeGrp1$img_TeamBadge"
 						+ "*TEXTURE*IMAGE SET " + Constants.BENGAL_ICONS_PATH + matchAllData.getSetup().getHomeTeam().getTeamName4() + "\0", print_writers);
@@ -36379,7 +36380,7 @@ public class FullFramesGfx
 				}
 			}
 			break;
-		case Constants.BENGAL_T20:
+		case Constants.BENGAL_T20: case Constants.AFG_T20:
 			
 //			CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$AllGraphics$Side" + WhichSide 
 //					+"$Leader_Board$Stats$SubTitle$Caps$Select*FUNCTION*Omo*vis_con SET 0\0", print_writers);
@@ -36406,7 +36407,7 @@ public class FullFramesGfx
 					if(rowId <= 7) {
 						
 						switch (config.getBroadcaster().toUpperCase()) {
-						case Constants.BENGAL_T20:
+						case Constants.BENGAL_T20: case Constants.AFG_T20:
 							
 							CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$AllGraphics$Side" + WhichSide 
 									+"$Leaderboard$Rows$" + rowId + "$Select_Rowtype*FUNCTION*Omo*vis_con SET 1\0", print_writers);
@@ -36495,7 +36496,7 @@ public class FullFramesGfx
 					if(rowId <= 7) {
 						
 						switch (config.getBroadcaster().toUpperCase()) {
-						case Constants.BENGAL_T20:
+						case Constants.BENGAL_T20: case Constants.AFG_T20:
 							CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$AllGraphics$Side" + WhichSide 
 									+"$Leaderboard$Rows$" + rowId + "$Select_Rowtype*FUNCTION*Omo*vis_con SET 1\0", print_writers);
 							
@@ -36587,7 +36588,7 @@ public class FullFramesGfx
 						if(rowId>=7) break;
 						
 						switch (config.getBroadcaster().toUpperCase()) {
-						case Constants.BENGAL_T20:
+						case Constants.BENGAL_T20: case Constants.AFG_T20:
 							
 							CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$AllGraphics$Side" + WhichSide 
 									+"$Leaderboard$Rows$" + rowId + "$Select_Rowtype*FUNCTION*Omo*vis_con SET 1\0", print_writers);
@@ -36668,7 +36669,7 @@ public class FullFramesGfx
 						if(rowId>=7) break;
 						
 						switch (config.getBroadcaster().toUpperCase()) {
-						case Constants.BENGAL_T20:
+						case Constants.BENGAL_T20: case Constants.AFG_T20:
 							CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$AllGraphics$Side" + WhichSide 
 									+"$Leaderboard$Rows$" + rowId + "$Select_Rowtype*FUNCTION*Omo*vis_con SET 1\0", print_writers);
 							
@@ -36778,7 +36779,7 @@ public class FullFramesGfx
 					if(rowId>=7) break;
 					
 					switch (config.getBroadcaster().toUpperCase()) {
-					case Constants.BENGAL_T20:
+					case Constants.BENGAL_T20: case Constants.AFG_T20:
 						
 						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$AllGraphics$Side" + WhichSide 
 								+"$Leaderboard$Rows$" + rowId + "$Select_Rowtype*FUNCTION*Omo*vis_con SET 1\0", print_writers);
@@ -36958,7 +36959,7 @@ public class FullFramesGfx
 					if(rowId>=7) break;
 					
 					switch (config.getBroadcaster().toUpperCase()) {
-					case Constants.BENGAL_T20:
+					case Constants.BENGAL_T20: case Constants.AFG_T20:
 						
 						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$AllGraphics$Side" + WhichSide 
 								+"$Leaderboard$Rows$" + rowId + "$Select_Rowtype*FUNCTION*Omo*vis_con SET 1\0", print_writers);
@@ -37450,7 +37451,7 @@ public class FullFramesGfx
 			String isConcussed = "";
 			
 			switch (config.getBroadcaster().toUpperCase()) {
-			case Constants.ICC_U19_2023: case Constants.ISPL: case Constants.BENGAL_T20: case Constants.LEGENDS:
+			case Constants.ICC_U19_2023: case Constants.ISPL: case Constants.BENGAL_T20: case Constants.LEGENDS: case Constants.AFG_T20:
 				switch (config.getBroadcaster().toUpperCase()) {
 				case Constants.LEGENDS:
 					omo = 4;
@@ -37470,7 +37471,7 @@ public class FullFramesGfx
 					containerName_2 = "BattingDataAll";
 					containerName_3 = "$Select_GraphicsStyle";
 					break;
-				case Constants.BENGAL_T20:
+				case Constants.BENGAL_T20: case Constants.AFG_T20:
 					omo = 6;
 					Mult = 40;
 					containerName_2 = "Select_Row_Offset";
@@ -38082,7 +38083,7 @@ public class FullFramesGfx
 							else if(ps.getPartnershipNumber() >= inning.getPartnerships().size()) {
 								omo_num = 3;
 								switch (config.getBroadcaster().toUpperCase()) {
-								case Constants.ICC_U19_2023: case Constants.BENGAL_T20:
+								case Constants.ICC_U19_2023: case Constants.BENGAL_T20: case Constants.AFG_T20:
 									containerName = "$Not_Out";
 									break;
 								}
@@ -38096,7 +38097,7 @@ public class FullFramesGfx
 							+ containerName_2 + "$" + rowId +  "$Select_Row_Type*FUNCTION*Omo*vis_con SET " + omo_num + "\0", print_writers);
 						
 						switch (config.getBroadcaster().toUpperCase()) {
-						case Constants.ICC_U19_2023: case Constants.BENGAL_T20:
+						case Constants.ICC_U19_2023: case Constants.BENGAL_T20: case Constants.AFG_T20:
 							
 //							// Read all lines and join into a single string
 //				            String content = String.join("", Files.readAllLines(Paths.get("C:\\Sports\\Cricket\\ExcludePlayer.txt"))).trim();
@@ -38809,7 +38810,7 @@ public class FullFramesGfx
 						+"\0", print_writers);
 			}
 			break;
-		case Constants.ICC_U19_2023: case Constants.ISPL: case Constants.BENGAL_T20:
+		case Constants.ICC_U19_2023: case Constants.ISPL: case Constants.BENGAL_T20: case Constants.AFG_T20:
 			String fourOrSix = "";
 			if(whatToProcess.equalsIgnoreCase("p")) {
 				if(config.getBroadcaster().toUpperCase().equalsIgnoreCase(Constants.ISPL)){	
@@ -38836,7 +38837,7 @@ public class FullFramesGfx
 					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$AllGraphics$Side" + WhichSide + 
 							"$Select_Graphics*FUNCTION*Omo*vis_con SET 8 \0", print_writers);
 					break;
-				case Constants.BENGAL_T20:
+				case Constants.BENGAL_T20: case Constants.AFG_T20:
 					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$AllGraphics$Side" + WhichSide + 
 							"$Select_GraphicsType*FUNCTION*Omo*vis_con SET 8 \0", print_writers);
 					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$AllGraphics$Side" + WhichSide + 
@@ -38938,7 +38939,7 @@ public class FullFramesGfx
 									print_writers);
 						}
 						break;
-					case Constants.BENGAL_T20:
+					case Constants.BENGAL_T20: case Constants.AFG_T20:
 						if(leagueTable.getLeagueTeams().get(i).getQualifiedStatus().trim().equalsIgnoreCase("")) {
 							CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$AllGraphics$Side" + WhichSide + 
 									fourOrSix +"$Rows$" + rowId + containerName + "$txt_Position*GEOM*TEXT SET " + "" +"\0", print_writers);
@@ -38993,7 +38994,7 @@ public class FullFramesGfx
 							}
 						}
 					break;
-				case Constants.BENGAL_T20:
+				case Constants.BENGAL_T20: case Constants.AFG_T20:
 					for(Team team : Teams) {
 						if(team.getTeamName4().equalsIgnoreCase(leagueTable.getLeagueTeams().get(i).getTeamName())) {
 							CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$AllGraphics$Side" + WhichSide + 
@@ -39524,7 +39525,7 @@ public class FullFramesGfx
 			}
 			
 			break;
-		case Constants.BENGAL_T20:
+		case Constants.BENGAL_T20: case Constants.AFG_T20:
 			CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Profile$Side" + WhichSide + "$DataGrp$1"
 					+ "$txt_StatHead*GEOM*TEXT SET " + "MATCHES" + "\0", print_writers);		
 			CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Profile$Side" + WhichSide + "$DataGrp$2"
@@ -39784,7 +39785,7 @@ public class FullFramesGfx
 			}
 			
 			break;
-		case Constants.BENGAL_T20:
+		case Constants.BENGAL_T20: case Constants.AFG_T20:
 			CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Profile$Side" + WhichSide + "$DataGrp$1"
 					+ "$txt_StatHead*GEOM*TEXT SET " + "MATCHES" + "\0", print_writers);		
 			CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Profile$Side" + WhichSide + "$DataGrp$2"
@@ -43947,7 +43948,7 @@ public class FullFramesGfx
 				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Ident$Main$Footer$TeamName2$txt_Name"
 						+ "*GEOM*TEXT SET " + matchAllData.getSetup().getAwayTeam().getTeamName1() + "\0", print_writers);
 				break;	
-			case Constants.BENGAL_T20:
+			case Constants.BENGAL_T20: case Constants.AFG_T20:
 				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Ident$Main$DataAll$TeamLogos$TeamBadge1$TeamBadgeGrp1$img_TeamBadge"
 						+ "*TEXTURE*IMAGE SET " + Constants.BENGAL_ICONS_PATH + matchAllData.getSetup().getHomeTeam().getTeamName4() + "\0", print_writers);
 				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Ident$Main$DataAll$TeamLogos$TeamBadge1$TeamBadgeGrp1$img_TeamBadge_R"
@@ -44269,7 +44270,7 @@ public class FullFramesGfx
 				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Ident$Main$Footer$TeamName2$txt_Name"
 						+ "*GEOM*TEXT SET " + fixture.getAway_Team().getTeamName1() + "\0", print_writers);
 				break;
-			case Constants.BENGAL_T20:
+			case Constants.BENGAL_T20: case Constants.AFG_T20:
 				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Ident$Main$DataAll$TeamLogos$TeamBadge1$TeamBadgeGrp1$img_TeamBadge"
 						+ "*TEXTURE*IMAGE SET " + Constants.BENGAL_ICONS_PATH + fixture.getHome_Team().getTeamBadge() + "\0", print_writers);
 				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Ident$Main$DataAll$TeamLogos$TeamBadge1$TeamBadgeGrp1$img_TeamBadge_R"

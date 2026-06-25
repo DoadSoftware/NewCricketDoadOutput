@@ -1,12 +1,9 @@
 package com.cricket.captions;
 
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.io.PrintWriter;
-import java.nio.charset.StandardCharsets;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -38,7 +35,6 @@ import com.cricket.model.OverByOverData;
 import com.cricket.model.Partnership;
 import com.cricket.model.PerformanceBug;
 import com.cricket.model.Player;
-import com.cricket.model.Setup;
 import com.cricket.model.Statistics;
 import com.cricket.model.StatsType;
 import com.cricket.model.Team;
@@ -338,7 +334,7 @@ public class BugsAndMiniGfx
 		}
 		
 		switch (whatToProcess.split(",")[0]) {
-		case Constants.NPL: case Constants.MPL:case Constants.BENGAL_T20: case Constants.APL: case Constants.LEGENDS:
+		case Constants.NPL: case Constants.MPL:case Constants.BENGAL_T20: case Constants.APL: case Constants.LEGENDS: case Constants.AFG_T20:
 			break;
 
 		default:
@@ -874,7 +870,8 @@ public class BugsAndMiniGfx
 		} else {
 			
 			switch (config.getBroadcaster().toUpperCase()) {
-			case Constants.NPL: case Constants.MPL: case Constants.T20_MUMBAI: case Constants.BENGAL_T20: case Constants.APL: case Constants.VIDARBHA:
+			case Constants.NPL: case Constants.MPL: case Constants.T20_MUMBAI: case Constants.BENGAL_T20: case Constants.APL: 
+			case Constants.VIDARBHA: case Constants.AFG_T20:
 				inning = matchAllData.getMatch().getInning().stream().filter(inn -> inn.getInningNumber() == 
 					Integer.valueOf(whatToProcess.split(",")[2])).findAny().orElse(null);
 				break;
@@ -5363,7 +5360,7 @@ public class BugsAndMiniGfx
 				break;
 			}
 			break;	
-		case Constants.BENGAL_T20:
+		case Constants.BENGAL_T20: case Constants.AFG_T20:
 			switch(whatToProcess.split(",")[0]) {
 				case "Control_y":
 				
@@ -8628,7 +8625,7 @@ public class BugsAndMiniGfx
 				break;
 			}
 			break;
-		case Constants.BENGAL_T20:
+		case Constants.BENGAL_T20: case Constants.AFG_T20:
 			switch(whatToProcess) {
 			case "Control_Shift_E":
 				rowId = 0;
