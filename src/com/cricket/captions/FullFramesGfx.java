@@ -26465,7 +26465,7 @@ public class FullFramesGfx
 							CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$AllGraphics$Side" + WhichSide + "$Summary$" + 
 									containerName + i + "$Row_" + rowId + "$Batsman*ACTIVE SET 1 \0", print_writers);
 							
-							if(config.getBroadcaster().equalsIgnoreCase(Constants.BENGAL_T20)) {
+							if(config.getBroadcaster().equalsIgnoreCase(Constants.BENGAL_T20) || config.getBroadcaster().equalsIgnoreCase(Constants.AFG_T20)) {
 								
 								if(!CricketFunctions.checkBatAndBallImpactInOutPlayer(matchAllData.getEventFile().getEvents(), bc.getPlayerId()).isEmpty()) {
 									switch(CricketFunctions.checkBatAndBallImpactInOutPlayer(matchAllData.getEventFile().getEvents(), bc.getPlayerId())) {
@@ -28410,7 +28410,7 @@ public class FullFramesGfx
 				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$AllGraphics$Side" + WhichSide + "$Partnership$5"
 						+ "$Data$txt_Ball*GEOM*TEXT SET " + inning.getPartnerships().get(inning.getPartnerships().size() - 1).getSecondBatterBalls() + "\0", print_writers);
 			}
-			else if(config.getBroadcaster().equalsIgnoreCase(Constants.BENGAL_T20)) {
+			else if(config.getBroadcaster().equalsIgnoreCase(Constants.BENGAL_T20) || config.getBroadcaster().equalsIgnoreCase(Constants.AFG_T20)) {
 				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$AllGraphics$Side" + WhichSide + "$Partnership$PlayerGrp1"
 						+ "$NameGrp$img_Text1$txt_Name*GEOM*TEXT SET " + battingCardList.get(0).getPlayer().getTicker_name() + "\0", print_writers);
 				
@@ -37485,7 +37485,7 @@ public class FullFramesGfx
 					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_FullFrame$Main$All_Graphics$Side_" + WhichSide + containerName_3 +
 							"*FUNCTION*Omo*vis_con SET " + omo + "\0", print_writers);
 					
-					if(!config.getBroadcaster().equalsIgnoreCase(Constants.BENGAL_T20)) {
+					if(!config.getBroadcaster().equalsIgnoreCase(Constants.BENGAL_T20) || !config.getBroadcaster().equalsIgnoreCase(Constants.AFG_T20)) {
 						if(inning.getPartnerships().size()>=10) {
 							CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_FullFrame$Main$All_Graphics$Side_" + WhichSide + "$Partnership_list$" +
 									containerName_2 + "*FUNCTION*Grid*num_row SET " + inning.getPartnerships().size() + " \0", print_writers);
