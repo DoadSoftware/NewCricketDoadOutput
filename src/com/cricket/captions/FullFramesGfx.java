@@ -5864,7 +5864,7 @@ public class FullFramesGfx
 							+ "*TEXTURE*IMAGE SET " + (config.getBroadcaster().equalsIgnoreCase(Constants.APL)?Constants.APL_LOGO_PATH:Constants.NPL_LOGO_PATH) + inning.getBatting_team().getTeamBadge() + "\0", print_writers);
 				}
 				
-				if(inning.getBatting_team().getTeamBadge().equalsIgnoreCase("VSS")) {
+				if(inning.getBowling_team().getTeamBadge().equalsIgnoreCase("VSS")) {
 					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$ExtraData$Side" + WhichSide + "$2_Logo$Team2$img_Badges"
 							+ "*TEXTURE*IMAGE SET " + (config.getBroadcaster().equalsIgnoreCase(Constants.APL)?Constants.APL_LOGO_PATH:Constants.NPL_LOGO_PATH) + "VSS_White" + "\0", print_writers);
 				}else {
