@@ -1150,11 +1150,11 @@ public class Caption
 					
 					if(this_infobarGfx.infobar.getMiddle_section().equalsIgnoreCase(CricketUtil.BATSMAN)) {
 						this_infobarGfx.infobar.setMiddle_section(whatToProcess.split(",")[2]);
-						//status = this_infobarGfx.populateVizInfobarMiddleSection(print_writers,matchAllData, whichSide);
+						status = this_infobarGfx.populateVizInfobarMiddleSection(false, print_writers,matchAllData, whichSide);
 					}else {
 						if(whatToProcess.split(",")[2].equalsIgnoreCase(CricketUtil.BATSMAN)) {
 							this_infobarGfx.infobar.setMiddle_section(whatToProcess.split(",")[2]);
-							//status = this_infobarGfx.populateVizInfobarMiddleSection(print_writers,matchAllData, 1);
+							status = this_infobarGfx.populateVizInfobarMiddleSection(false, print_writers,matchAllData, 1);
 						}else {
 							if(this_infobarGfx.infobar.getMiddle_section() != null && !this_infobarGfx.infobar.getMiddle_section().isEmpty()) {
 								if(!this_infobarGfx.infobar.getMiddle_section().equalsIgnoreCase(whatToProcess.split(",")[2])) {
@@ -1166,7 +1166,7 @@ public class Caption
 								whichSide = 1;
 							}
 							this_infobarGfx.infobar.setMiddle_section(whatToProcess.split(",")[2]);
-							//status = this_infobarGfx.populateVizInfobarMiddleSection(print_writers,matchAllData, whichSide);
+							status = this_infobarGfx.populateVizInfobarMiddleSection(false, print_writers,matchAllData, whichSide);
 						}
 					}
 					break;	
