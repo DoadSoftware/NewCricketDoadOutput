@@ -126,7 +126,15 @@ public class Scene
 		        CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*STAGE SHOW 0.0 \0", print_writers);
 				break;
 			case "PLOTTER":
-				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER SET_OBJECT SCENE*/Default/FieldPlotter_LLC \0", print_writers);
+				switch (config.getBroadcaster().toUpperCase()) {
+				case Constants.AFG_T20:
+					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER SET_OBJECT SCENE*/Default/FieldPlotter \0", print_writers);
+					break;
+				default:
+					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER SET_OBJECT SCENE*/Default/FieldPlotter_LLC \0", print_writers);
+					break;	
+				}
+				
 				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*SCENE_DATA INITIALIZE \0", print_writers);
 		        CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*STAGE SHOW 0.0 \0", print_writers);
 				break;

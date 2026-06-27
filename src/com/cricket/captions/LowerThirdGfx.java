@@ -2221,7 +2221,7 @@ public class LowerThirdGfx
 		}
 		
 		lowerThird = new LowerThird("", "CURRENT", "PARTNERSHIP","", String.valueOf(partnership.getTotalRuns()),String.valueOf(partnership.getTotalBalls()),2,"",
-				inning.getBatting_team().getTeamName4(),null,null,new String[]{partnership.getFirstPlayer().getTicker_name(),String.valueOf(partnership.getFirstBatterRuns()),
+				inning.getBatting_team().getTeamBadge(),null,null,new String[]{partnership.getFirstPlayer().getTicker_name(),String.valueOf(partnership.getFirstBatterRuns()),
 						String.valueOf(partnership.getFirstBatterBalls())},new String[]{partnership.getSecondPlayer().getTicker_name(),
 						String.valueOf(partnership.getSecondBatterRuns()),String.valueOf(partnership.getSecondBatterBalls())},null);
 		
@@ -2877,25 +2877,25 @@ public class LowerThirdGfx
 			String sponsorOrNot = whatToProcess.split(",")[3];
 			if(whatToProcess.split(",")[4].equalsIgnoreCase("THISSERIES")) {
 				lowerThird = new LowerThird("THISSERIES", battingCard.getPlayer().getFirstname(), surName,outOrNot, String.valueOf(battingCard.getRuns()),
-						"", 3, sponsorOrNot,inning.getBatting_team().getTeamName4(),new String[] {"BALLS","DOTS","FOURS","SIXES","STRIKE RATE"},new String[] {String.valueOf(battingCard.getBalls()),
+						"", 3, sponsorOrNot,inning.getBatting_team().getTeamBadge(),new String[] {"BALLS","DOTS","FOURS","SIXES","STRIKE RATE"},new String[] {String.valueOf(battingCard.getBalls()),
 						Count[0],String.valueOf(battingCard.getFours()),String.valueOf(battingCard.getSixes()),striktRate},
 						new String[] {"THIS SEASON",String.valueOf(tournament.getMatches()),String.valueOf(tournament.getRuns()),String.valueOf(CricketFunctions.generateStrikeRate(tournament.getRuns(), tournament.getBallsFaced(), 1))},null,
 						new String[] {"-12.0","54.0","120.0","186.0","252.0"});
 			}else {
 				if(whatToProcess.split(",")[4].equalsIgnoreCase("NOSTATS")) {
 					lowerThird = new LowerThird("NOSTATS", battingCard.getPlayer().getFirstname(), surName,outOrNot, String.valueOf(battingCard.getRuns()),
-							"", 2, sponsorOrNot,inning.getBatting_team().getTeamName4(),new String[] {"BALLS","DOTS","FOURS","SIXES","STRIKE RATE"},new String[] {String.valueOf(battingCard.getBalls()),
+							"", 2, sponsorOrNot,inning.getBatting_team().getTeamBadge(),new String[] {"BALLS","DOTS","FOURS","SIXES","STRIKE RATE"},new String[] {String.valueOf(battingCard.getBalls()),
 							Count[0],String.valueOf(battingCard.getFours()),String.valueOf(battingCard.getSixes()),striktRate},null,null,new String[] {"-12.0","54.0","120.0","186.0","252.0"});
 				}else {
 					if(stat!=null) {
 						lowerThird = new LowerThird("DT20", battingCard.getPlayer().getFirstname(), surName,outOrNot, String.valueOf(battingCard.getRuns()),
-								"", 3, sponsorOrNot,inning.getBatting_team().getTeamName4(),new String[] {"BALLS","DOTS","FOURS","SIXES","STRIKE RATE"},new String[] {String.valueOf(battingCard.getBalls()),
+								"", 3, sponsorOrNot,inning.getBatting_team().getTeamBadge(),new String[] {"BALLS","DOTS","FOURS","SIXES","STRIKE RATE"},new String[] {String.valueOf(battingCard.getBalls()),
 								Count[0],String.valueOf(battingCard.getFours()),String.valueOf(battingCard.getSixes()),striktRate},
 								new String[] {stat.getStats_type().getStatsShortName(),String.valueOf(stat.getMatches()),String.valueOf(stat.getRuns()),String.valueOf(CricketFunctions.generateStrikeRate(stat.getRuns(), stat.getBallsFaced(), 1))},null,
 								new String[] {"-12.0","54.0","120.0","186.0","252.0"});
 					}else {
 						lowerThird = new LowerThird("NOSTATS", battingCard.getPlayer().getFirstname(), surName,outOrNot, String.valueOf(battingCard.getRuns()),
-								"", 2, sponsorOrNot,inning.getBatting_team().getTeamName4(),new String[] {"BALLS","DOTS","FOURS","SIXES","STRIKE RATE"},new String[] {String.valueOf(battingCard.getBalls()),
+								"", 2, sponsorOrNot,inning.getBatting_team().getTeamBadge(),new String[] {"BALLS","DOTS","FOURS","SIXES","STRIKE RATE"},new String[] {String.valueOf(battingCard.getBalls()),
 								Count[0],String.valueOf(battingCard.getFours()),String.valueOf(battingCard.getSixes()),striktRate},null,null,new String[] {"-12.0","54.0","120.0","186.0","252.0"});
 					}
 				}
@@ -3093,26 +3093,26 @@ public class LowerThirdGfx
 			String sponsorOrNot = whatToProcess.split(",")[3];
 			if(whatToProcess.split(",")[4].equalsIgnoreCase("THISSERIES")) {
 				System.out.println("1");
-				lowerThird = new LowerThird("THIS SEASON", bowlingCard.getPlayer().getFirstname(), surName,"", "", "", 3, sponsorOrNot, inning.getBowling_team().getTeamName4(),
+				lowerThird = new LowerThird("THIS SEASON", bowlingCard.getPlayer().getFirstname(), surName,"", "", "", 3, sponsorOrNot, inning.getBowling_team().getTeamBadge(),
 						new String[] {"OVERS", "DOTS", "RUNS", "WICKETS", "ECONOMY"},new String[]{CricketFunctions.OverBalls(bowlingCard.getOvers(), bowlingCard.getBalls()), 
 						String.valueOf(bowlingCard.getDots()),String.valueOf(bowlingCard.getRuns()),String.valueOf(bowlingCard.getWickets()), economy}
 						,new String[] {"THIS SEASON", String.valueOf(tournament.getMatches()), String.valueOf(tournament.getWickets()), String.valueOf(CricketFunctions.getEconomy(tournament.getRunsConceded(), tournament.getBallsBowled(), 2, "-"))},null,new String[] {"-12.0","54.0","120.0","186.0","252.0"});
 			}else {
 				System.out.println("2");
 				if(whatToProcess.split(",")[4].equalsIgnoreCase("NOSTATS")) {
-					lowerThird = new LowerThird("NOSTATS", bowlingCard.getPlayer().getFirstname(), surName,"", "", "", 2, sponsorOrNot, inning.getBowling_team().getTeamName4(),
+					lowerThird = new LowerThird("NOSTATS", bowlingCard.getPlayer().getFirstname(), surName,"", "", "", 2, sponsorOrNot, inning.getBowling_team().getTeamBadge(),
 							new String[] {"OVERS", "DOTS", "RUNS", "WICKETS", "ECONOMY"},new String[]{CricketFunctions.OverBalls(bowlingCard.getOvers(), bowlingCard.getBalls()), 
 							String.valueOf(bowlingCard.getDots()),String.valueOf(bowlingCard.getRuns()),String.valueOf(bowlingCard.getWickets()), economy}
 							,null,null,new String[] {"-12.0","54.0","120.0","186.0","252.0"});
 				}else {
 					if(stat != null) {
-						lowerThird = new LowerThird("DT20", bowlingCard.getPlayer().getFirstname(), surName,"", "", "", 3, sponsorOrNot, inning.getBowling_team().getTeamName4(),
+						lowerThird = new LowerThird("DT20", bowlingCard.getPlayer().getFirstname(), surName,"", "", "", 3, sponsorOrNot, inning.getBowling_team().getTeamBadge(),
 								new String[] {"OVERS", "DOTS", "RUNS", "WICKETS", "ECONOMY"},new String[]{CricketFunctions.OverBalls(bowlingCard.getOvers(), bowlingCard.getBalls()), 
 								String.valueOf(bowlingCard.getDots()),String.valueOf(bowlingCard.getRuns()),String.valueOf(bowlingCard.getWickets()), economy}
 								,new String[] {stat.getStats_type().getStatsShortName(), String.valueOf(stat.getMatches()), String.valueOf(stat.getWickets()), String.valueOf(CricketFunctions.getEconomy(stat.getRunsConceded(),
 										stat.getBallsBowled(), 2, "-"))},null,new String[] {"-12.0","54.0","120.0","186.0","252.0"});
 					}else {
-						lowerThird = new LowerThird("NOSTATS", bowlingCard.getPlayer().getFirstname(), surName,"", "", "", 2, sponsorOrNot, inning.getBowling_team().getTeamName4(),
+						lowerThird = new LowerThird("NOSTATS", bowlingCard.getPlayer().getFirstname(), surName,"", "", "", 2, sponsorOrNot, inning.getBowling_team().getTeamBadge(),
 								new String[] {"OVERS", "DOTS", "RUNS", "WICKETS", "ECONOMY"},new String[]{CricketFunctions.OverBalls(bowlingCard.getOvers(), bowlingCard.getBalls()), 
 								String.valueOf(bowlingCard.getDots()),String.valueOf(bowlingCard.getRuns()),String.valueOf(bowlingCard.getWickets()), economy}
 								,null,null,new String[] {"-12.0","54.0","120.0","186.0","252.0"});
@@ -3458,7 +3458,7 @@ public class LowerThirdGfx
 					break;
 				case Constants.BENGAL_T20: case Constants.AFG_T20:
 					lowerThird = new LowerThird("", matchAllData.getSetup().getAwayTeam().getTeamName1(), "",whichSplit, String.valueOf(inning.getTotalRuns() + "-" + inning.getTotalWickets()), "",
-							2,"",matchAllData.getSetup().getAwayTeam().getTeamName4(),splitNumber,splitData,new String[]{"THIRTIES","BALLS"},null,
+							2,"",matchAllData.getSetup().getAwayTeam().getTeamBadge(),splitNumber,splitData,new String[]{"THIRTIES","BALLS"},null,
 							new String[] {"41.0","65.0","89.0","113.0","137.0","161.0","185.0","209.0","233.0","257.0"});
 					break;
 				case Constants.ICC_U19_2023:
@@ -3499,7 +3499,7 @@ public class LowerThirdGfx
 					break;
 				case Constants.BENGAL_T20: case Constants.AFG_T20:
 					lowerThird = new LowerThird("", matchAllData.getSetup().getAwayTeam().getTeamName1(), "",whichSplit, String.valueOf(inning.getTotalRuns() + "-" + inning.getTotalWickets()), "",
-							2,"",matchAllData.getSetup().getAwayTeam().getTeamName4(),splitNumber,splitData,new String[]{"FIFTIES","BALLS"},null,
+							2,"",matchAllData.getSetup().getAwayTeam().getTeamBadge(),splitNumber,splitData,new String[]{"FIFTIES","BALLS"},null,
 							new String[] {"41.0","65.0","89.0","113.0","137.0","161.0","185.0","209.0","233.0","257.0"});
 					break;
 				case Constants.ICC_U19_2023:
@@ -3550,7 +3550,7 @@ public class LowerThirdGfx
 					break;
 				case Constants.BENGAL_T20: case Constants.AFG_T20:
 					lowerThird = new LowerThird("", matchAllData.getSetup().getHomeTeam().getTeamName1(), "",whichSplit, String.valueOf(inning.getTotalRuns() + "-" + inning.getTotalWickets()), "",
-							2,"",matchAllData.getSetup().getHomeTeam().getTeamName4(),splitNumber,splitData,new String[]{"THIRTIES","BALLS"},null,
+							2,"",matchAllData.getSetup().getHomeTeam().getTeamBadge(),splitNumber,splitData,new String[]{"THIRTIES","BALLS"},null,
 							new String[] {"41.0","65.0","89.0","113.0","137.0","161.0","185.0","209.0","233.0","257.0"});
 					break;
 				case Constants.ICC_U19_2023:
@@ -3591,7 +3591,7 @@ public class LowerThirdGfx
 					break;
 				case Constants.BENGAL_T20: case Constants.AFG_T20:
 					lowerThird = new LowerThird("", matchAllData.getSetup().getHomeTeam().getTeamName1(), "",whichSplit, String.valueOf(inning.getTotalRuns() + "-" + inning.getTotalWickets()), "",
-							2,"",matchAllData.getSetup().getHomeTeam().getTeamName4(),splitNumber,splitData,new String[]{"FIFTIES","BALLS"},null,
+							2,"",matchAllData.getSetup().getHomeTeam().getTeamBadge(),splitNumber,splitData,new String[]{"FIFTIES","BALLS"},null,
 							new String[] {"41.0","65.0","89.0","113.0","137.0","161.0","185.0","209.0","233.0","257.0"});
 					break;
 				case Constants.ICC_U19_2023:
@@ -6302,7 +6302,7 @@ public class LowerThirdGfx
 			player = battingCard.getPlayer();
 			containerName =(config.getBroadcaster().toUpperCase().equalsIgnoreCase(Constants.T20_MUMBAI)?"THIS INNINGS":"");
 			lowerThird = new LowerThird(containerName, battingCard.getPlayer().getFirstname(), surName,outOrNot, String.valueOf(battingCard.getRuns()), 
-					String.valueOf(battingCard.getBalls()), 2, "", inning.getBatting_team().getTeamName4(),new String[] {"DOTS", "ONES", "TWOS", "THREES", "FOURS", "SIXES"},
+					String.valueOf(battingCard.getBalls()), 2, "", inning.getBatting_team().getTeamBadge(),new String[] {"DOTS", "ONES", "TWOS", "THREES", "FOURS", "SIXES"},
 					new String[]{Count[0],Count[1],Count[2],Count[3],Count[4],Count[6]},null,null,new String[] {"-12.0","42.0","94.0","146.0","198.0","250.0"});
 			break;
 		case Constants.T20_MUMBAI:
@@ -6444,7 +6444,7 @@ public class LowerThirdGfx
 			player = bowlingCard.getPlayer();
 			containerName =(config.getBroadcaster().toUpperCase().equalsIgnoreCase(Constants.T20_MUMBAI)?"THIS INNINGS":"");
 			lowerThird = new LowerThird(containerName, bowlingCard.getPlayer().getFirstname(), surName,over_text, String.valueOf(bowlingCard.getWickets()) + "-" + String.valueOf(bowlingCard.getRuns()), 
-					String.valueOf(CricketFunctions.OverBalls(bowlingCard.getOvers(), bowlingCard.getBalls())), 2, "", inning.getBowling_team().getTeamName4(),new String[] {"DOTS", "ONES", "TWOS", "THREES", "FOURS", "SIXES"},
+					String.valueOf(CricketFunctions.OverBalls(bowlingCard.getOvers(), bowlingCard.getBalls())), 2, "", inning.getBowling_team().getTeamBadge(),new String[] {"DOTS", "ONES", "TWOS", "THREES", "FOURS", "SIXES"},
 					new String[]{Count[0],Count[1],Count[2],Count[3],Count[4],Count[6]},null,null,new String[] {"-12.0","42.0","94.0","146.0","198.0","250.0"});
 			break;
 		case Constants.T20_MUMBAI:
@@ -6539,7 +6539,7 @@ public class LowerThirdGfx
 			break;
 		case Constants.BENGAL_T20: case Constants.AFG_T20:
 			lowerThird = new LowerThird(inning.getBatting_team().getTeamName1(), "", "","", String.valueOf(inning.getTotalRuns()) + "-" + String.valueOf(inning.getTotalWickets()), 
-					CricketFunctions.OverBalls(inning.getTotalOvers(), inning.getTotalBalls()), 2, "", inning.getBatting_team().getTeamName4(),
+					CricketFunctions.OverBalls(inning.getTotalOvers(), inning.getTotalBalls()), 2, "", inning.getBatting_team().getTeamBadge(),
 					new String[] {"DOTS", "ONES", "TWOS", "THREES", "FOURS", "SIXES"},new String[]{Count[0],Count[1],Count[2],Count[3],String.valueOf(inning.getTotalFours()),
 					String.valueOf(inning.getTotalSixes())},null,null,new String[] {"-12.0","42.0","94.0","146.0","198.0","250.0"});
 			break;
@@ -8090,8 +8090,8 @@ public class LowerThirdGfx
 						"ARE", String.valueOf(inning.getTotalRuns() + "-" + inning.getTotalWickets())},null,null);
 				break;
 			case Constants.BENGAL_T20: case Constants.AFG_T20:
-				lowerThird = new LowerThird("AFTER",  matchAllData.getSetup().getHomeTeam().getTeamName4(), 
-						matchAllData.getSetup().getAwayTeam().getTeamName4(),"", "",CricketFunctions.OverBalls(inning.getTotalOvers(), inning.getTotalBalls()), 
+				lowerThird = new LowerThird("AFTER",  matchAllData.getSetup().getHomeTeam().getTeamBadge(), 
+						matchAllData.getSetup().getAwayTeam().getTeamBadge(),"", "",CricketFunctions.OverBalls(inning.getTotalOvers(), inning.getTotalBalls()), 
 						2, "" ,"EVENT",new String[]{"FOURS" + "," + String.valueOf(in_data.split(",")[3]), String.valueOf(inning.getTotalFours()),
 						"SIXES" + "," + String.valueOf(in_data.split(",")[2]) , String.valueOf(inning.getTotalSixes())},null,new String[]{inning.getBowling_team().getTeamName1(), 
 						" WERE ",  String.valueOf(in_data.split(",")[0] + "-" + in_data.split(",")[1]),inning.getBatting_team().getTeamName1(), 
@@ -8578,7 +8578,7 @@ public class LowerThirdGfx
 					switch (config.getBroadcaster().toUpperCase()) {
 					case Constants.BENGAL_T20: case Constants.AFG_T20:
 						lowerThird = new LowerThird(CricketFunctions.getbattingstyle(player.getBattingStyle(),
-								CricketUtil.FULL, true, false).toUpperCase(), player.getFirstname(), surName,short_name, "", "", 2,"",team.getTeamName4(),
+								CricketUtil.FULL, true, false).toUpperCase(), player.getFirstname(), surName,short_name, "", "", 2,"",team.getTeamBadge(),
 								new String[]{"MATCHES", "RUNS", "50s", "100s", "BEST", "S/R"},
 								new String[]{String.valueOf(stat.getMatches()), runs ,fifty, hundred, best,strikeRate},null,null,
 								new String[] {"-3.0","51.0","103.0","155.0","207.0","259.0"});
@@ -8649,13 +8649,13 @@ public class LowerThirdGfx
 				case Constants.BENGAL_T20: case Constants.AFG_T20:
 					if(WhichProfile.equalsIgnoreCase("DT20")) {
 						short_name = "T20 CAREER";
-						lowerThird = new LowerThird("", player.getFirstname(), surName,short_name, "", "", 2,"",team.getTeamName4(),
+						lowerThird = new LowerThird("", player.getFirstname(), surName,short_name, "", "", 2,"",team.getTeamBadge(),
 								new String[]{"MTS", "WKTS", "AVG", "ECON", "5WI", "BEST"},new String[]{String.valueOf(stat.getMatches()), 
 								String.valueOf(stat.getWickets()),Data,economy, String.valueOf(stat.getPlus5()), stat.getBestFigures()},null,null,
 								new String[] {"-3.0","51.0","103.0","155.0","207.0","259.0"});
 					}else if(WhichProfile.equalsIgnoreCase("IPL")) {
 						short_name = "IPL CAREER";
-						lowerThird = new LowerThird("", player.getFirstname(), surName,short_name, "", "", 2,"",team.getTeamName4(),
+						lowerThird = new LowerThird("", player.getFirstname(), surName,short_name, "", "", 2,"",team.getTeamBadge(),
 								new String[]{"MTS", "WKTS", "AVG", "ECON", "5WI", "BEST"},new String[]{String.valueOf(stat.getMatches()), 
 								String.valueOf(stat.getWickets()),Data,economy, String.valueOf(stat.getPlus5()), stat.getBestFigures()},null,null,
 								new String[] {"-3.0","51.0","103.0","155.0","207.0","259.0"});
@@ -8667,7 +8667,7 @@ public class LowerThirdGfx
 						}else {
 							bestFig = "-";
 						}
-						lowerThird = new LowerThird("", player.getFirstname(), surName,short_name, "", "", 2,"",team.getTeamName4(),
+						lowerThird = new LowerThird("", player.getFirstname(), surName,short_name, "", "", 2,"",team.getTeamBadge(),
 								new String[]{"MTS", "WKTS", "AVG", "ECON", "BEST"},new String[]{String.valueOf(stat.getMatches()), 
 								String.valueOf(stat.getWickets()),Data,economy, bestFig},null,null,
 								new String[] {"-3.0","66.0","132.0","198.0","260.0"});
@@ -8679,7 +8679,7 @@ public class LowerThirdGfx
 						}else {
 							bestFig = "-";
 						}
-						lowerThird = new LowerThird("", player.getFirstname(), surName,short_name, "", "", 2,"",team.getTeamName4(),
+						lowerThird = new LowerThird("", player.getFirstname(), surName,short_name, "", "", 2,"",team.getTeamBadge(),
 								new String[]{"MTS", "WKTS", "AVG", "ECON", "BEST"},new String[]{String.valueOf(stat.getMatches()), 
 								String.valueOf(stat.getWickets()),Data,economy, bestFig},null,null,
 								new String[] {"-3.0","66.0","132.0","198.0","260.0"});
