@@ -2106,6 +2106,7 @@ public class Animation
 					break;
 				case "F4":
 					processAnimation(Constants.BACK, print_writers, "Anim_FullFrames$In_Out$Partnership_List", "START");
+					processAnimation(Constants.BACK, print_writers, "Anim_FullFrames$In_Out$Sponsor", "START");
 					break;
 				case "Control_F1":
 					processAnimation(Constants.BACK, print_writers, "Anim_FullFrames$In_Out$Batting_Card_Image", "START");
@@ -2117,6 +2118,7 @@ public class Animation
 					break;
 				case "Control_F11": case "Shift_F11":
 					processAnimation(Constants.BACK, print_writers, "Anim_FullFrames$In_Out$Summary", "START");
+					processAnimation(Constants.BACK, print_writers, "Anim_FullFrames$In_Out$Sponsor", "START");
 					processAnimation(Constants.BACK, print_writers, "Change$Footer$Dynamic", "START");
 					switch (whatToProcess.split(",")[0]) {
 					case "Control_F11":
@@ -2450,7 +2452,7 @@ public class Animation
 				}
 				break;
 			
-			case "w": case "i": case "f": case "s":
+			case "w": case "i": case "f": case "s": case "0": case "8":
 				if(whatToProcess.split(",")[0].equalsIgnoreCase("w")) {
 					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_Infobar$Main$Fade_For_Shrink$Animation$Select_Type*FUNCTION*Omo*vis_con SET 4 \0", print_writers);
 				}else if(whatToProcess.split(",")[0].equalsIgnoreCase("i")) {
@@ -2459,6 +2461,22 @@ public class Animation
 					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_Infobar$Main$Fade_For_Shrink$Animation$Select_Type*FUNCTION*Omo*vis_con SET 2 \0", print_writers);
 				}else if(whatToProcess.split(",")[0].equalsIgnoreCase("s")) {
 					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_Infobar$Main$Fade_For_Shrink$Animation$Select_Type*FUNCTION*Omo*vis_con SET 3 \0", print_writers);
+				}else if(whatToProcess.split(",")[0].equalsIgnoreCase("0") || whatToProcess.split(",")[0].equalsIgnoreCase("8")) {
+					switch(whatToProcess.split(",")[0]) {
+					case "0":
+						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_Infobar$Main$Fade_For_Shrink$Animation$Hat_Trick_Ball$txt_Title1"
+								+ "*GEOM*TEXT SET ON A HAT-TRICK\0", print_writers);
+						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_Infobar$Main$Fade_For_Shrink$Animation$Hat_Trick_Ball$txt_Title2"
+								+ "*GEOM*TEXT SET ON A HAT-TRICK\0", print_writers);
+						break;
+					case "8":
+						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_Infobar$Main$Fade_For_Shrink$Animation$Hat_Trick_Ball$txt_Title1"
+								+ "*GEOM*TEXT SET HAT-TRICK\0", print_writers);
+						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_Infobar$Main$Fade_For_Shrink$Animation$Hat_Trick_Ball$txt_Title2"
+								+ "*GEOM*TEXT SET HAT-TRICK\0", print_writers);
+						break;
+					}
+					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_Infobar$Main$Fade_For_Shrink$Animation$Select_Type*FUNCTION*Omo*vis_con SET 5 \0", print_writers);
 				}
 				
 				if(this.infobar.isInfobar_on_screen() == true && !this.infobar.isInfobar_pushed()) {
@@ -4624,6 +4642,7 @@ public class Animation
 					caption.this_fullFramesGfx.ballperformer_id = 0;
 					break;	
 				case "F4":
+					processAnimation(Constants.BACK, print_writers, "Anim_FullFrames$In_Out$Sponsor", "CONTINUE");
 					processAnimation(Constants.BACK, print_writers, "Anim_FullFrames$In_Out$Partnership_List", "CONTINUE");
 					break;
 				case "Control_F1":
@@ -4640,6 +4659,7 @@ public class Animation
 					processAnimation(Constants.BACK, print_writers, "Anim_FullFrames$In_Out$Summary", "CONTINUE");
 					switch (whatToProcess.split(",")[0]) {
 					case "Control_F11":
+						processAnimation(Constants.BACK, print_writers, "Anim_FullFrames$In_Out$Sponsor", "CONTINUE");
 						if(caption.this_fullFramesGfx.WhichType.equalsIgnoreCase("trophy")) {
 							processAnimation(Constants.BACK, print_writers, "Anin_Trophy$In_Out", "CONTINUE");
 						}
@@ -4902,7 +4922,6 @@ public class Animation
 		switch (config.getBroadcaster().toUpperCase()) {
 		case Constants.VIDARBHA:
 			T20_VidarbhaChangeom(whatToProcess,print_writers,config);
-			
 			break;	
 		case Constants.T20_MUMBAI:
 			T20_MumbaiChangeOn(whatToProcess, print_writers, config);
@@ -6074,7 +6093,7 @@ public class Animation
 							processAnimation(Constants.BACK, print_writers, "Change$Footer$Dynamic", "SHOW 0.0");
 						}
 						switch(whatToProcess.split(",")[0]) {
-						case "F1": case "Control_Shift_A": case "F2": case "Control_Shift_F1": case "Control_Shift_F2":
+						case "F1": case "Control_Shift_A": case "F2": case "Control_Shift_F1": case "Control_Shift_F2": case "F4":
 							break;
 						default:
 							processAnimation(Constants.BACK, print_writers, "Anim_FullFrames$In_Out$Sponsor", "CONTINUE REVERSE");
@@ -6089,7 +6108,7 @@ public class Animation
 							processAnimation(Constants.BACK, print_writers, "Change$Footer$Dynamic", "SHOW 0.0");
 						}
 						switch(whatToProcess.split(",")[0]) {
-						case "F2": case "F1": case "Control_Shift_A": case "Control_Shift_F1": case "Control_Shift_F2":
+						case "F2": case "F1": case "Control_Shift_A": case "Control_Shift_F1": case "Control_Shift_F2": case "F4":
 							break;
 						default:
 							processAnimation(Constants.BACK, print_writers, "Anim_FullFrames$In_Out$Sponsor", "CONTINUE REVERSE");
@@ -6107,7 +6126,7 @@ public class Animation
 						}
 						
 						switch(whatToProcess.split(",")[0]) {
-						case "F2": case "F1": case "Control_Shift_A": case "Control_Shift_F2":
+						case "F2": case "F1": case "Control_Shift_A": case "Control_Shift_F2": case "F4":
 							break;
 						case "Control_Shift_F1":
 							if(caption.this_fullFramesGfx.WhichType.equalsIgnoreCase("performer")) {
@@ -6136,7 +6155,7 @@ public class Animation
 						}
 						
 						switch(whatToProcess.split(",")[0]) {
-						case "F2": case "F1": case "Control_Shift_A": case "Control_Shift_F1":
+						case "F2": case "F1": case "Control_Shift_A": case "Control_Shift_F1": case "F4":
 							break;
 						case "Control_Shift_F2":
 							processAnimation(Constants.BACK, print_writers, "Anim_Highlights$Bowling_Card$Side1$" + 
@@ -6151,7 +6170,6 @@ public class Animation
 						break;
 						
 					case "F4":
-						
 						if(whatToProcess.split(",")[0].equalsIgnoreCase("Control_Shift_F4")) {
 							processAnimation(Constants.BACK, print_writers, "Change$Extra_Info", "START");
 						}else {
@@ -6160,10 +6178,10 @@ public class Animation
 						}
 						
 						switch(whatToProcess.split(",")[0]) {
-						case "F4":
+						case "F2": case "F1": case "Control_Shift_A": case "Control_Shift_F1": case "Control_Shift_F2": case "F4":
 							break;
 						default:
-							processAnimation(Constants.BACK, print_writers, "Anim_FullFrames$In_Out$Sponsor", "START");
+							processAnimation(Constants.BACK, print_writers, "Anim_FullFrames$In_Out$Sponsor", "CONTINUE REVERSE");
 							break;
 						}
 						break;
@@ -6272,6 +6290,7 @@ public class Animation
 						
 					case "F4":
 						processAnimation(Constants.BACK, print_writers, "Change$Partnership_List", "START");
+						processAnimation(Constants.BACK, print_writers, "Change$Sponsor", "START");
 //						if(caption.this_fullFramesGfx.whichSponsor != null || !caption.this_fullFramesGfx.whichSponsor.isEmpty()) {
 //							processAnimation(Constants.BACK, print_writers, "Sponsor", "START");
 //						}
@@ -6295,6 +6314,8 @@ public class Animation
 					case "Control_F11":
 						processAnimation(Constants.BACK, print_writers, "Change$Summary", "START");
 						processAnimation(Constants.BACK, print_writers, "Change$Footer$Dynamic", "START");
+						processAnimation(Constants.BACK, print_writers, "Change$Sponsor", "START");
+						
 						if(caption.this_fullFramesGfx.WhichType.equalsIgnoreCase("trophy")) {
 							processAnimation(Constants.BACK, print_writers, "Anin_Trophy$In_Out", "START");
 						}
@@ -7928,11 +7949,17 @@ public class Animation
 						processAnimation(Constants.BACK, print_writers, "Change$Footer$Dynamic", "SHOW 0.0");
 						processAnimation(Constants.BACK, print_writers, "Anim_FullFrames$In_Out$Partnership_List", "SHOW 2.500");
 						processAnimation(Constants.BACK, print_writers, "Change$Partnership_List", "SHOW 0.0");
+						
+						processAnimation(Constants.BACK, print_writers, "Anim_FullFrames$In_Out$Sponsor", "SHOW 2.500");
+						processAnimation(Constants.BACK, print_writers, "Change$Sponsor", "SHOW 0.0");
 						break;
 					case "Control_F11":
 						processAnimation(Constants.BACK, print_writers, "Anim_FullFrames$In_Out$Summary", "SHOW 2.500");
 						processAnimation(Constants.BACK, print_writers, "Change$Summary", "SHOW 0.0");
 						processAnimation(Constants.BACK, print_writers, "Change$Footer$Dynamic", "SHOW 0.500");
+						
+						processAnimation(Constants.BACK, print_writers, "Anim_FullFrames$In_Out$Sponsor", "SHOW 2.500");
+						processAnimation(Constants.BACK, print_writers, "Change$Sponsor", "SHOW 0.0");
 						break;
 					case "p":
 						processAnimation(Constants.BACK, print_writers, "Anim_FullFrames$In_Out$Group_Standings", "SHOW 2.500");

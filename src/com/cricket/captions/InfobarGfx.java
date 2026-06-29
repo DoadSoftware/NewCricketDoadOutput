@@ -571,8 +571,9 @@ public class InfobarGfx
 				if(infobar.getLeft_bottom() != null && !infobar.getLeft_bottom().isEmpty()) {
 					populateVizInfobarLeftBottom(print_writers, matchAllData, 1);
 				}
-				if(!infobar.getMiddle_section().equalsIgnoreCase(CricketUtil.BATSMAN)) {
-					//populateVizInfobarMiddleSection(print_writers, matchAllData, 1);
+				if(infobar.getMiddle_section() != null && !infobar.getMiddle_section().isEmpty() && 
+						!infobar.getMiddle_section().equalsIgnoreCase(CricketUtil.BATSMAN)) {
+					populateVizInfobarMiddleSection(false, print_writers, matchAllData, 1);
 				}else {
 					populateCurrentBatsmen(print_writers, matchAllData, 2);
 					populateCurrentBatsmen(print_writers, matchAllData, 1);

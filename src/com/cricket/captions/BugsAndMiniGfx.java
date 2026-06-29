@@ -5667,6 +5667,11 @@ public class BugsAndMiniGfx
 					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Counter$SelectText$Header"
 							+ "$txt_Text*GEOM*TEXT SET TOURNAMENT SIXES\0", print_writers);
 					
+					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Counter$SponsorAll"
+							+ "$select_Sponsor*FUNCTION*Omo*vis_con SET 1\0", print_writers);
+					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Counter$SponsorAll"
+							+ "$img_Sponsor*TEXTURE*IMAGE SET "+Constants.BENGAL_SPONSOR_PATH+"SUPER_COLA"+"\0", print_writers);
+					
 					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Counter$SelectText$Counter$Unit"
 							+ "$Side1$Reflection3$txt_Text*GEOM*TEXT SET "+this_data_str.get(0).split(",")[2] + "\0", print_writers);
 					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Counter$SelectText$Counter$Unit"
@@ -5703,6 +5708,11 @@ public class BugsAndMiniGfx
 				case "Control_4":
 					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Counter$SelectText$Header"
 							+ "$txt_Text*GEOM*TEXT SET TOURNAMENT FOURS\0", print_writers);
+					
+					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Counter$SponsorAll"
+							+ "$select_Sponsor*FUNCTION*Omo*vis_con SET 1\0", print_writers);
+					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Counter$SponsorAll"
+							+ "$img_Sponsor*TEXTURE*IMAGE SET "+Constants.BENGAL_SPONSOR_PATH+"ETISALAT"+"\0", print_writers);
 					
 					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Counter$SelectText$Counter$Unit"
 							+ "$Side1$Reflection3$txt_Text*GEOM*TEXT SET "+this_data_str.get(0).split(",")[2] + "\0", print_writers);
@@ -5767,6 +5777,8 @@ public class BugsAndMiniGfx
 					}
 					switch (whatToProcess.split(",")[3].toUpperCase()) {
 					case "SCORE":
+						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_All$gfx_Popup$SponsorAll$Side"+WhichSide
+								+ "$select_Sponsor*FUNCTION*Omo*vis_con SET 0\0", print_writers);
 						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_All$gfx_Popup$Side"+WhichSide+"$Select_TextType"
 								+ "*FUNCTION*Omo*vis_con SET " + "0" + "\0", print_writers);
 						if(battingCard.getStatus().equalsIgnoreCase(CricketUtil.NOT_OUT)) {
@@ -5787,6 +5799,11 @@ public class BugsAndMiniGfx
 						break;
 
 					case "STRIKERATE":
+						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_All$gfx_Popup$SponsorAll$Side"+WhichSide
+								+ "$select_Sponsor*FUNCTION*Omo*vis_con SET 1\0", print_writers);
+						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_All$gfx_Popup$SponsorAll$Side"+WhichSide
+								+ "$Sponsor$img_Sponsor*TEXTURE*IMAGE SET "+Constants.BENGAL_SPONSOR_PATH+"ETISALAT"+"\0", print_writers);
+						
 						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_All$gfx_Popup$Side"+WhichSide+"$Select_TextType"
 								+ "*FUNCTION*Omo*vis_con SET " + "1" + "\0", print_writers);
 						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_All$gfx_Popup$Side"+WhichSide+"$Stat_Title$Text1$txt_Figure_Outline"
@@ -5797,6 +5814,8 @@ public class BugsAndMiniGfx
 								+ "*GEOM*TEXT SET " + "STRIKE RATE" + "\0", print_writers);
 						break;
 					case "BOUNDARY":
+						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_All$gfx_Popup$SponsorAll$Side"+WhichSide
+								+ "$select_Sponsor*FUNCTION*Omo*vis_con SET 0\0", print_writers);
 						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_All$gfx_Popup$Side"+WhichSide+"$Select_TextType"
 								+ "*FUNCTION*Omo*vis_con SET " + "1" + "\0", print_writers);
 						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_All$gfx_Popup$Side"+WhichSide+"$Stat_Title$Text1$txt_Figure_Outline"
@@ -5829,6 +5848,9 @@ public class BugsAndMiniGfx
 						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_All$gfx_Popup$PlayerName$txt_LastName"
 								+ "*GEOM*TEXT SET " + bowlingCard.getPlayer().getFirstname()+ "\0", print_writers);
 					}
+					
+					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_All$gfx_Popup$SponsorAll$Side"+WhichSide
+							+ "$select_Sponsor*FUNCTION*Omo*vis_con SET 0\0", print_writers);
 					switch (whatToProcess.split(",")[3].toUpperCase()) {
 					case "FIGURE":
 						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_All$gfx_Popup$Side"+WhichSide+"$Select_TextType"

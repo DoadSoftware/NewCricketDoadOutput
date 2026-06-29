@@ -8600,7 +8600,7 @@ function addItemsToList(whatToProcess,dataToProcess)
 					setDropdownOptionToSelectOptionArray($(select),1);
 					cellCount = cellCount + 1
 					
-					select = document.createElement('select');
+					/*select = document.createElement('select');
 					select.id = 'statType';
 					select.name = select.id;
 					
@@ -8627,7 +8627,7 @@ function addItemsToList(whatToProcess,dataToProcess)
 					select.setAttribute('onchange',"setDropdownOptionToSelectOptionArray(this, 2)");
 					row.insertCell(cellCount).appendChild(select);
 					setDropdownOptionToSelectOptionArray($(select),2);
-					cellCount = cellCount + 1
+					cellCount = cellCount + 1*/
 				break;
 			}
 			break;
@@ -9411,8 +9411,6 @@ function addItemsToList(whatToProcess,dataToProcess)
 						  option.value = value;
 						  option.text = text;
 						  select.appendChild(option);
-						  
-						 
 					});
 					
 					break;
@@ -9474,8 +9472,13 @@ function addItemsToList(whatToProcess,dataToProcess)
 					option.text = 'ISPL CAREER';
 					select.appendChild(option);
 					break;
+				case 'AFG-T20':
+					option = document.createElement('option');
+					option.value = 'DT20';
+					option.text = 'DT20';
+					select.appendChild(option);
+					break;
 				case 'BENGAL-T20': case 'AFG-T20':
-									
 					option = document.createElement('option');
 					option.value = 'DT20';
 					option.text = 'DT20';
@@ -9490,7 +9493,7 @@ function addItemsToList(whatToProcess,dataToProcess)
 					option.value = 'IPL';
 					option.text = 'IPL';
 					select.appendChild(option);
-				break;
+					break;
 				default:
 					option = document.createElement('option');
 					option.value = 'U19ODI';
@@ -10336,8 +10339,13 @@ function addItemsToList(whatToProcess,dataToProcess)
 					option.text = 'ISPL CAREER';
 					select.appendChild(option);
 					break;
-				case 'BENGAL-T20': case 'AFG-T20':
-					
+				case 'AFG-T20':			
+					option = document.createElement('option');
+					option.value = 'DT20';
+					option.text = 'DT20';
+					select.appendChild(option);
+					break;
+				case 'BENGAL-T20': 
 					option = document.createElement('option');
 					option.value = 'DT20';
 					option.text = 'DT20';
@@ -10352,7 +10360,7 @@ function addItemsToList(whatToProcess,dataToProcess)
 					option.value = 'IPL';
 					option.text = 'IPL';
 					select.appendChild(option);
-				break;
+					break;
 				default:
 					option = document.createElement('option');
 					option.value = 'U19ODI';

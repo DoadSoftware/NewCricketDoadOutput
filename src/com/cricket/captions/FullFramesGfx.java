@@ -565,7 +565,7 @@ public class FullFramesGfx
 	public String populateFixturesAndResults(int WhichSide, String whatToProcess, MatchAllData matchAllData, int WhichInning) throws Exception 
 	{
 		FixturesList.clear();
-		for(Fixture fixture : CricketFunctions.processAllFixtures(cricketService)) {
+		for(Fixture fixture : CricketFunctions.processAllFixtures(fixTures, Teams)) {
 			if(fixture.getHometeamid() == Integer.valueOf(whatToProcess.split(",")[2]) || 
 					fixture.getAwayteamid() == Integer.valueOf(whatToProcess.split(",")[2])) {
 				FixturesList.add(fixture);
@@ -7079,7 +7079,10 @@ public class FullFramesGfx
 				switch (whatToProcess) {
 				case "Control_F11":
 					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$Sponsor$Side" + WhichSide + "$Slect_Sponsor"
-							+ "*FUNCTION*Omo*vis_con SET " + "0" + "\0", print_writers);
+							+ "*FUNCTION*Omo*vis_con SET " + "1" + "\0", print_writers);
+					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$Sponsor$Side" + WhichSide + "$Slect_Sponsor$img_Sponsor"
+							+ "*TEXTURE*IMAGE SET " + Constants.BENGAL_SPONSOR_PATH + "AMIR_HAJIZADA" + "\0", print_writers);
+					
 					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$Extra_Info$Side" + WhichSide + "$Select_Type"
 							+ "*FUNCTION*Omo*vis_con SET 0 \0", print_writers);
 					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$HeaderDataAll$Side" + WhichSide + 
@@ -7177,16 +7180,25 @@ public class FullFramesGfx
 				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$HeaderDataAll$Side" + WhichSide + 
 						"$TextGrp$Text_Out$Team_Name_Grp_In$txt_TeamName*GEOM*TEXT SET " + inning.getBatting_team().getTeamName1() + "\0", print_writers);
 				
-				if(whatToProcess.equalsIgnoreCase("F1")) {
+				switch(whatToProcess) {
+				case "F1":
 					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$Sponsor$Side" + WhichSide + "$Slect_Sponsor"
-							+ "*FUNCTION*Omo*vis_con SET " + "0" + "\0", print_writers);
+							+ "*FUNCTION*Omo*vis_con SET " + "1" + "\0", print_writers);
 					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$Sponsor$Side" + WhichSide + "$Slect_Sponsor$img_Sponsor"
-							+ "*TEXTURE*IMAGE SET " + Constants.BENGAL_SPONSOR_PATH + "SHRIRAM" + "\0", print_writers);
-				}else if(whatToProcess.equalsIgnoreCase("Control_F10")) {
+							+ "*TEXTURE*IMAGE SET " + Constants.BENGAL_SPONSOR_PATH + "KHPALWAK" + "\0", print_writers);
+					break;
+				case "F4":
+					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$Sponsor$Side" + WhichSide + "$Slect_Sponsor"
+							+ "*FUNCTION*Omo*vis_con SET " + "1" + "\0", print_writers);
+					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$Sponsor$Side" + WhichSide + "$Slect_Sponsor$img_Sponsor"
+							+ "*TEXTURE*IMAGE SET " + Constants.BENGAL_SPONSOR_PATH + "AFGHAN_TELECOM" + "\0", print_writers);
+					break;
+				case "Control_F10":
 					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$Sponsor$Side" + WhichSide + "$Slect_Sponsor"
 							+ "*FUNCTION*Omo*vis_con SET " + "0" + "\0", print_writers);
 					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$Sponsor$Side" + WhichSide + "$Slect_Sponsor$img_Sponsor"
 							+ "*TEXTURE*IMAGE SET " + Constants.BENGAL_SPONSOR_PATH + "Vimal" + "\0", print_writers);
+					break;
 				}
 				
 				switch (whatToProcess) {
@@ -7232,9 +7244,9 @@ public class FullFramesGfx
 						"$TextGrp$Text_Out$Team_Name_Grp_In$txt_TeamName*GEOM*TEXT SET " + inning.getBowling_team().getTeamName1() + "\0", print_writers);
 				
 				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$Sponsor$Side" + WhichSide + "$Slect_Sponsor"
-						+ "*FUNCTION*Omo*vis_con SET " + "0" + "\0", print_writers);
+						+ "*FUNCTION*Omo*vis_con SET " + "1" + "\0", print_writers);
 				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$Sponsor$Side" + WhichSide + "$Slect_Sponsor$img_Sponsor"
-						+ "*TEXTURE*IMAGE SET " + Constants.BENGAL_SPONSOR_PATH + "SHRIRAM" + "\0", print_writers);
+						+ "*TEXTURE*IMAGE SET " + Constants.BENGAL_SPONSOR_PATH + "ZIYAFAT" + "\0", print_writers);
 				break;
 			case "Control_Shift_F2":
 				rowId = 1;
