@@ -1377,7 +1377,7 @@ public class IndexController
 					}
 		        return tournamentStats.size() > 5 ? (List<T>) tournamentStats.subList(0, 5) : (List<T>) tournamentStats;
 			}else {
-				return (List<T>) cricketService.getTeams();
+				return (List<T>) session_team;
 			}
 		case "z": case "x": case "c": case "v": case "Control_Shift_Z": case "Control_Shift_Y": case "Shift_@": case "Shift_$": case "Control_Shift_@": case "Control_Alt_5":
 		case "Control_Alt_9": case "Control_Alt_0":	case "Alt_Shift_K": case "Alt_Shift_X": case "Alt_Shift_T": case "Alt_Shift_V":  case "Alt_Shift_U": case "Alt_Shift_I":
@@ -1385,14 +1385,11 @@ public class IndexController
 			List<Tournament> tournamentStats = new ArrayList<Tournament>();
 			switch (whatToProcess) {
 			case "Alt_Shift_I": 
-				tournamentStats = CricketFunctions.extractTournamentData(
-				        "CURRENT_MATCH_DATA",false, null,
-				        cricketService,session_match, null);
+				tournamentStats = CricketFunctions.extractTournamentData("CURRENT_MATCH_DATA",false, null,cricketService,session_match, null);
 				break;
 			default:
-				tournamentStats = CricketFunctions.extractTournamentData(
-				        "CURRENT_MATCH_DATA",false, headToHead.getH2hPlayer(),
-				        cricketService,session_match, past_tournament_stats);
+				tournamentStats = CricketFunctions.extractTournamentData("CURRENT_MATCH_DATA",false, headToHead.getH2hPlayer(),cricketService,
+						session_match, past_tournament_stats);
 				break;
 			}
 			

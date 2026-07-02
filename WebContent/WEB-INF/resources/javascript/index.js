@@ -1901,6 +1901,7 @@ function addItemsToList(whatToProcess,dataToProcess)
 			       });
 			    row.insertCell(cellCount).appendChild(select);
 			    cellCount++;
+				
 			    document.getElementById('selectStats').dispatchEvent(new Event('change'));
 			    row.insertCell(cellCount).id = 'Player';
 			    cellCount++;
@@ -2448,6 +2449,33 @@ function addItemsToList(whatToProcess,dataToProcess)
 			row.insertCell(cellCount).appendChild(select);
 			setDropdownOptionToSelectOptionArray($(select),1);
 			cellCount = cellCount + 1;
+			
+			switch(whatToProcess){
+			case 'Control_Shift_V':
+				switch($('#selected_broadcaster').val().toUpperCase()){
+				case 'AFG-T20':
+					select = document.createElement('select');
+					select.id = 'selectPhoto';
+					select.name = select.id;
+					
+					option = document.createElement('option');
+					option.value = 'withoutphoto';
+					option.text = 'WITHOUT PHOTO';
+					select.appendChild(option);
+					
+					option = document.createElement('option');
+					option.value = 'withphoto';
+					option.text = 'WITH PHOTO';
+					select.appendChild(option);
+					
+					select.setAttribute('onchange',"setDropdownOptionToSelectOptionArray(this, 2)");
+					row.insertCell(cellCount).appendChild(select);
+					setDropdownOptionToSelectOptionArray($(select),2);
+					cellCount = cellCount + 1;
+					break;
+				}
+				break;
+			}
 			break;
 		case 'Control_Shift_F1': case 'Control_Shift_U':
 			select = document.createElement('select');
@@ -2487,7 +2515,7 @@ function addItemsToList(whatToProcess,dataToProcess)
 			select.id = 'selectStatsType';
 			select.name = select.id;
 			switch(whatToProcess){
-				case 'Control_Shift_U':
+			case 'Control_Shift_U':
 				header_text.innerHTML = 'BAT POP UP';
 				option = document.createElement('option');
 				option.value = 'score';
@@ -2528,6 +2556,33 @@ function addItemsToList(whatToProcess,dataToProcess)
 			row.insertCell(cellCount).appendChild(select);
 			setDropdownOptionToSelectOptionArray($(select),1);
 			cellCount = cellCount + 1;
+			
+			switch(whatToProcess){
+			case 'Control_Shift_U':
+				switch($('#selected_broadcaster').val().toUpperCase()){
+				case 'AFG-T20':
+					select = document.createElement('select');
+					select.id = 'selectPhoto';
+					select.name = select.id;
+					
+					option = document.createElement('option');
+					option.value = 'withoutphoto';
+					option.text = 'WITHOUT PHOTO';
+					select.appendChild(option);
+					
+					option = document.createElement('option');
+					option.value = 'withphoto';
+					option.text = 'WITH PHOTO';
+					select.appendChild(option);
+					
+					select.setAttribute('onchange',"setDropdownOptionToSelectOptionArray(this, 2)");
+					row.insertCell(cellCount).appendChild(select);
+					setDropdownOptionToSelectOptionArray($(select),2);
+					cellCount = cellCount + 1;
+					break;
+				}
+				break;
+			}
 			break;
 		case 'Control_Shift_E':
 			header_text.innerHTML = 'BOWLER VS ALL BATSMAN';
@@ -9899,6 +9954,21 @@ function addItemsToList(whatToProcess,dataToProcess)
 			option = document.createElement('option');
 			option.value = 'Player Of The Match';
 			option.text = 'Player Of The Match';
+			select.appendChild(option);
+			
+			option = document.createElement('option');
+			option.value = 'MOST SIXES OF THE MATCH';
+			option.text = 'MOST SIXES OF THE MATCH';
+			select.appendChild(option);
+			
+			option = document.createElement('option');
+			option.value = 'STYLISH PLAYER OF THE MATCH';
+			option.text = 'STYLISH PLAYER OF THE MATCH';
+			select.appendChild(option);
+			
+			option = document.createElement('option');
+			option.value = 'GAME CHANGER OF THE MATCH';
+			option.text = 'GAME CHANGER OF THE MATCH';
 			select.appendChild(option);
 			
 			option = document.createElement('option');

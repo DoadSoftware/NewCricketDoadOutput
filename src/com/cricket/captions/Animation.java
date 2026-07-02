@@ -1960,15 +1960,15 @@ public class Animation
 				processAnimation(Constants.FRONT, print_writers, "anim_Infobar$Manhattan", "START");
 				this.whichGraphicOnScreen = whatToProcess;
 				break;
-			case "Alt_z":
-				AnimateIn("ArrowDown,", print_writers, config); // Push infobar
-				TimeUnit.MILLISECONDS.sleep(500);
-				processAnimation(Constants.BACK, print_writers, "Anim_Squad", "START");
-				if(!caption.this_fullFramesGfx.WhichType.equalsIgnoreCase("role")) {
-					processAnimation(Constants.BACK, print_writers, "Anim_SquadDataChange", "START");
-				}
-				this.whichGraphicOnScreen = whatToProcess;
-				break;
+//			case "Alt_z":
+//				AnimateIn("ArrowDown,", print_writers, config); // Push infobar
+//				TimeUnit.MILLISECONDS.sleep(500);
+//				processAnimation(Constants.BACK, print_writers, "Anim_Squad", "START");
+//				if(!caption.this_fullFramesGfx.WhichType.equalsIgnoreCase("role")) {
+//					processAnimation(Constants.BACK, print_writers, "Anim_SquadDataChange", "START");
+//				}
+//				this.whichGraphicOnScreen = whatToProcess;
+//				break;
 			case "Shift_D":
 				AnimateIn("ArrowDown,", print_writers, config); // Push infobar
 				TimeUnit.MILLISECONDS.sleep(500);
@@ -2044,6 +2044,7 @@ public class Animation
 			case "Shift_T": case "Control_F7": case "Control_F10": case "Shift_K": case "Alt_F9": case "Alt_F10": case "p": case "z": case "x": 
 			case "c": case "v": case "Control_z": case "Control_x": case "Control_Shift_Z": case "Control_Shift_Y": case "Control_Shift_F8": 
 			case "Control_p": case "Alt_F11": case "Shift_Z": case "Shift_X": case "Control_Shift_F1": case "Control_Shift_F2": case "Control_Shift_F4":
+			case "Alt_z":
 				
 				setVariousAnimationsKeys("ANIMATE-IN", print_writers, config);
 				AnimateIn("ArrowDown,", print_writers, config); // Push infobar
@@ -2133,7 +2134,7 @@ public class Animation
 					processAnimation(Constants.BACK, print_writers, "Change$Footer$Dynamic", "START");
 					processAnimation(Constants.BACK, print_writers, "Anim_FullFrames$In_Out$Sponsor", "START");
 					break;
-				case "Control_F7":
+				case "Control_F7": case "Alt_z":
 					processAnimation(Constants.BACK, print_writers, "Anim_FullFrames$In_Out$Teams", "START");
 					processAnimation(Constants.BACK, print_writers, "Anim_FullFrames$In_Out$Sponsor", "START");
 					processAnimation(Constants.BACK, print_writers, "Change$Footer$Dynamic", "START");
@@ -2449,6 +2450,20 @@ public class Animation
 					processAnimation(Constants.FRONT, print_writers, "anim_Infobar$Push", "START");
 					this.infobar.setInfobar_pushed(true);
 					TimeUnit.MILLISECONDS.sleep(800);
+				}
+				break;
+			case "ArrowLeft":
+				if(this.infobar.isInfobar_on_screen() == true) {
+					if(this.infobar.getInfobar_status().equalsIgnoreCase(Constants.TWO_LINER_INFOBAR)) {
+						processAnimation(Constants.FRONT, print_writers, "anim_Infobar$Shrink$InOut", "START");
+						this.infobar.setInfobar_status(Constants.FORCED + Constants.SHRUNK_INFOBAR);
+					}
+				}
+				break;
+			case "ArrowRight":
+				if(this.infobar.isInfobar_on_screen() == true) {
+					processAnimation(Constants.FRONT, print_writers, "anim_Infobar$Shrink$InOut", "CONTINUE");
+					this.infobar.setInfobar_status(Constants.TWO_LINER_INFOBAR);
 				}
 				break;
 			
@@ -4505,15 +4520,15 @@ public class Animation
 				processAnimation(Constants.FRONT, print_writers, "anim_Ident", "SHOW 0.0");
 				AnimateIn("ArrowUp,", print_writers, config); // Push infobar
 				break;	
-			case "Alt_z":
-				processAnimation(Constants.BACK, print_writers, "Anim_Squad", "CONTINUE");
-				if(!caption.this_fullFramesGfx.WhichType.equalsIgnoreCase("role")) {
-					processAnimation(Constants.BACK, print_writers, "Anim_SquadDataChange", "CONTINUE");
-				}
-				TimeUnit.MILLISECONDS.sleep(1000);
-				AnimateIn("ArrowUp,", print_writers, config); // Restore infobar
-				this.whichGraphicOnScreen = "";
-				break;
+//			case "Alt_z":
+//				processAnimation(Constants.BACK, print_writers, "Anim_Squad", "CONTINUE");
+//				if(!caption.this_fullFramesGfx.WhichType.equalsIgnoreCase("role")) {
+//					processAnimation(Constants.BACK, print_writers, "Anim_SquadDataChange", "CONTINUE");
+//				}
+//				TimeUnit.MILLISECONDS.sleep(1000);
+//				AnimateIn("ArrowUp,", print_writers, config); // Restore infobar
+//				this.whichGraphicOnScreen = "";
+//				break;
 			case "Shift_D":
 				processAnimation(Constants.BACK, print_writers, "Anim_Target", "CONTINUE");
 
@@ -4592,7 +4607,7 @@ public class Animation
 			case "F1": case "Control_Shift_A": case "F2": case "F4": case "Control_F1": case "Shift_F10": case "Control_F11": case "Shift_F11": case "p":
 			case "Shift_T": case "Control_F7": case "Control_F10": case "Shift_K": case "Alt_F9": case "Alt_F10": case "Control_p": case "z": case "x": 
 			case "c": case "v": case "Control_z": case "Control_x": case "Control_Shift_Z": case "Control_Shift_Y": case "Control_Shift_F8": case "Alt_F11": 
-			case "Shift_Z": case "Shift_X": case "Control_Shift_F1": case "Control_Shift_F2": case "Control_Shift_F4":
+			case "Shift_Z": case "Shift_X": case "Control_Shift_F1": case "Control_Shift_F2": case "Control_Shift_F4": case "Alt_z":
 				
 				processAnimation(Constants.BACK, print_writers, "Anim_FullFrames$In_Out$Essentials", "CONTINUE");
 				processAnimation(Constants.BACK, print_writers, "Anim_FullFrames$In_Out$Header", "CONTINUE");
@@ -4678,7 +4693,7 @@ public class Animation
 				case "Control_d": case "Shift_P": case "Control_e": case "Shift_Q":
 					processAnimation(Constants.BACK, print_writers, "Anim_FullFrames$In_Out$Profile", "CONTINUE");
 					break;
-				case "Control_F7":
+				case "Control_F7": case "Alt_z":
 					processAnimation(Constants.BACK, print_writers, "Anim_FullFrames$In_Out$Teams", "CONTINUE");
 					processAnimation(Constants.BACK, print_writers, "Anim_FullFrames$In_Out$Sponsor", "CONTINUE");
 					TimeUnit.MILLISECONDS.sleep(1000);
@@ -13690,12 +13705,9 @@ public class Animation
 							
 						case "F1": case "Control_Shift_A": case "F2": case "F4": case "Control_F1": case "Shift_F10": case "Control_F11": case "Shift_F11": case "p": case "Control_p":
 						case "Shift_T": case "Control_F7": case "Control_F10": case "Alt_F9": case "Shift_K":case "z": case "x": case "c": case "v": case "Alt_F10": case "Control_Shift_F8":
+						case "Alt_F11": case "Control_z": case "Control_x": case "Control_Shift_Z": case "Control_Shift_Y": case "Control_Shift_F1": case "Control_Shift_F2": case "Alt_z":
 
-						case "Alt_F11": case "Control_z": case "Control_x": case "Control_Shift_Z": case "Control_Shift_Y": case "Control_Shift_F1": case "Control_Shift_F2":
-
-							
-							if(whatToProcess.split(",")[0].equalsIgnoreCase("z") ||
-									whatToProcess.split(",")[0].equalsIgnoreCase("x") || whatToProcess.split(",")[0].equalsIgnoreCase("c") ||
+							if(whatToProcess.split(",")[0].equalsIgnoreCase("z") || whatToProcess.split(",")[0].equalsIgnoreCase("x") || whatToProcess.split(",")[0].equalsIgnoreCase("c") ||
 									whatToProcess.split(",")[0].equalsIgnoreCase("v") || whatToProcess.split(",")[0].equalsIgnoreCase("Control_z") ||
 									whatToProcess.split(",")[0].equalsIgnoreCase("Control_x") || whatToProcess.split(",")[0].equalsIgnoreCase("Control_Shift_Z") ||
 									whatToProcess.split(",")[0].equalsIgnoreCase("Control_Shift_Y") || whatToProcess.split(",")[0].equalsIgnoreCase("Control_Shift_F8")) {
@@ -13734,12 +13746,12 @@ public class Animation
 							break;
 							
 						case "F4": //All Partnership
-							previewCommand = previewCommand + " Anim_FullFrames$In_Out$Main$Partnership_List$In 2.180";
-							if(whichside == 1 && caption.this_fullFramesGfx.whichSponsor != null && !caption.this_fullFramesGfx.whichSponsor.isEmpty()) {
-								previewCommand = previewCommand + " Sponsor 0.900 Sponsor$In 0.900";
-							}
+							previewCommand = previewCommand + " Anim_FullFrames$In_Out$Main$Partnership_List$In 2.180 Anim_FullFrames$In_Out$Sponsor$In 2.420";
+//							if(whichside == 1 && caption.this_fullFramesGfx.whichSponsor != null && !caption.this_fullFramesGfx.whichSponsor.isEmpty()) {
+//								previewCommand = previewCommand + " Sponsor 0.900 Sponsor$In 0.900";
+//							}
 							break;
-						case "Control_F7":// Double Teams
+						case "Control_F7": case "Alt_z":// Double Teams
 							previewCommand = previewCommand + " Anim_FullFrames$In_Out$Sponsor$In 2.420 Anim_FullFrames$In_Out$Main$Teams$In 2.140 Change$Footer$Dynamic 0.500";
 							break;
 						case "Shift_T": //Playing XI
@@ -13799,12 +13811,12 @@ public class Animation
 						case "Alt_F11":
 							previewCommand = previewCommand + " Anim_FullFrames$In_Out$Main$Manhattan_Comparison$In 3.000";
 							break;
-						case "Alt_z":
-							previewCommand = previewCommand + " Anim_Squad$In_Out 2.200 Anim_Squad$In_Out$In 2.200";
-							if(!caption.this_fullFramesGfx.WhichType.equalsIgnoreCase("role")) {
-								previewCommand = previewCommand + " Anim_SquadDataChange 0.500";
-							}
-							break;
+//						case "Alt_z":
+//							previewCommand = previewCommand + " Anim_Squad$In_Out 2.200 Anim_Squad$In_Out$In 2.200";
+//							if(!caption.this_fullFramesGfx.WhichType.equalsIgnoreCase("role")) {
+//								previewCommand = previewCommand + " Anim_SquadDataChange 0.500";
+//							}
+//							break;
 						case "r":
 							previewCommand = previewCommand + " Anim_POTT$In_Out$In 2.140";
 							break;
@@ -13902,12 +13914,12 @@ public class Animation
 									break;
 									
 								case "F4":
-									previewCommand = previewCommand + "Change$Partnership_List 1.180 Change$Partnership_List$Change_Out 0.540 "
-										+ "Change$Partnership_List$Change_In 1.180 ";
+									previewCommand = previewCommand + "Change$Partnership_List 1.180 Change$Partnership_List$Change_Out 0.540 Change$Partnership_List$Change_In 1.180 "
+											+ "Change$Sponsor 0.500 Change$Sponsor$Change_Out 0.300 Change$Sponsor$Change_In 0.500 ";
 									break;
 								case "Control_F11":
 									previewCommand = previewCommand + "Change$Summary 1.200 Change$Summary$Change_Out 0.480 Change$Summary$Change_In 1.200 "
-											+ "Change$Footer$Dynamic 0.500 ";
+											+ "Change$Footer$Dynamic 0.500 Change$Sponsor 0.500 Change$Sponsor$Change_Out 0.300 Change$Sponsor$Change_In 0.500 ";
 									if(caption.this_fullFramesGfx.WhichType.equalsIgnoreCase("trophy")) {
 										previewCommand = previewCommand + "Anin_Trophy$In_Out$In 3.000 ";
 									}
