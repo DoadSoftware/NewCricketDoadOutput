@@ -44430,7 +44430,7 @@ public class FullFramesGfx
 				cal_bengal.add(Calendar.DATE, +1);
 				if(fixture.getDate().equalsIgnoreCase(new SimpleDateFormat("dd-MM-yyyy").format(cal_bengal.getTime()))) {
 					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Ident$Main$DataAll$VenueGrp$txt_Venue"
-							+ "*GEOM*TEXT SET " + "TOMORROW - " + fixture.getLocalTime() + " IST - " + fixture.getVenue() + "\0", print_writers);
+							+ "*GEOM*TEXT SET " + "TOMORROW - " + fixture.getLocalTime() + " - " + fixture.getVenue() + "\0", print_writers);
 				}else {
 					cal_bengal.add(Calendar.DATE, -1);
 					if(fixture.getDate().equalsIgnoreCase(new SimpleDateFormat("dd-MM-yyyy").format(cal_bengal.getTime()))) {
@@ -44445,7 +44445,7 @@ public class FullFramesGfx
 								Month.of(Integer.valueOf(fixture.getDate().split("-")[1])) + " " + fixture.getDate().split("-")[2];
 						
 						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Ident$Main$DataAll$VenueGrp$txt_Venue"
-								+ "*GEOM*TEXT SET " + date_data + " - " + fixture.getLocalTime() + " IST - " + fixture.getVenue() + "\0", print_writers);
+								+ "*GEOM*TEXT SET " + date_data + " - " + fixture.getLocalTime() + " - " + fixture.getVenue() + "\0", print_writers);
 					}
 				}
 				

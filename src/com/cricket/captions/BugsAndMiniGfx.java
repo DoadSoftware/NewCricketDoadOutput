@@ -5820,12 +5820,11 @@ public class BugsAndMiniGfx
 					}					
 					break;
 				case "Alt_p":
-					
-					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_All$All_TossBug$In_Out$Data"
-						+ "$txt_Info*GEOM*TEXT SET " + whatToProcess.split(",")[2].split("-")[0] + " WON THE TOSS & ELECTED TO " + 
-						whatToProcess.split(",")[2].split("-")[1]+ "\0", print_writers);
-					
-				 break;
+					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_All$All_TossBug$In_Out$Data$txt_Info*TEXTURE*IMAGE SET "
+							+ Constants.BENGAL_TEXT_PATH + "1/" +  "EVENT"+"\0", print_writers);
+					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_All$All_TossBug$In_Out$Data$txt_Info*GEOM*TEXT SET " 
+							+ whatToProcess.split(",")[2].split("-")[0] + " WON THE TOSS & ELECTED TO " + whatToProcess.split(",")[2].split("-")[1]+ "\0", print_writers);
+					break;
 				case "Control_Shift_U":
 					switch (whatToProcess.split(",")[4].toUpperCase()) {
 					case "WITHOUTPHOTO":

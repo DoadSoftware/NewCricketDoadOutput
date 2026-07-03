@@ -1626,6 +1626,7 @@ public class IndexController
 	    this_caption.this_lowerThirdGfx.VariousText = session_variousText;
 	    this_caption.this_lowerThirdGfx.Potts = session_pott;
 	    this_caption.this_lowerThirdGfx.fixTures = session_fixture;
+	    this_caption.this_lowerThirdGfx.Players = session_players;
 
 	    // =====================================================
 	    // FULL FRAME
