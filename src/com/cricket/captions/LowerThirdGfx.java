@@ -8318,8 +8318,8 @@ public class LowerThirdGfx
 				break;
 			case Constants.APL:
 				switch (WhichProfile.toUpperCase()) {
-				case "APL_CAREER":
-					statsType = statsTypes.stream().filter(st -> st.getStatsShortName().equalsIgnoreCase("APL_CAREER")).findAny().orElse(null);
+				case "PPL_CAREER":
+					statsType = statsTypes.stream().filter(st -> st.getStatsShortName().equalsIgnoreCase("PPL_CAREER")).findAny().orElse(null);
 					if(statsType == null) {
 						return "InfoBarPlayerProfile: Stats Type not found for profile [" + WhichProfile + "]";
 					}
@@ -8568,8 +8568,8 @@ public class LowerThirdGfx
 						short_name =  "KCL CAREER";
 					}else if(WhichProfile.equalsIgnoreCase("NPL_CAREER")) {
 						short_name =  "NPL CAREER";
-					}else if(WhichProfile.equalsIgnoreCase("APL_CAREER")) {
-						short_name =  "APL CAREER";
+					}else if(WhichProfile.equalsIgnoreCase("PPL_CAREER")) {
+						short_name =  "PPL CAREER";
 					}else if(WhichProfile.equalsIgnoreCase("VIDARBHA_CAREER")) {
 						short_name =  "VPL T20 CAREER";
 					}else if(WhichProfile.equalsIgnoreCase("BPL_CAREER")) {
@@ -8749,8 +8749,8 @@ public class LowerThirdGfx
 						short_name =  "IPL 2025";
 					}else if(WhichProfile.equalsIgnoreCase("NPL_CAREER")) {
 						short_name =  "NPL CAREER";
-					}else if(WhichProfile.equalsIgnoreCase("APL_CAREER")) {
-						short_name =  "APL CAREER";
+					}else if(WhichProfile.equalsIgnoreCase("PPL_CAREER")) {
+						short_name =  "PPL CAREER";
 					}else if(WhichProfile.equalsIgnoreCase("KCL")) {
 						short_name =  "KCL CAREER";
 					}else if(WhichProfile.equalsIgnoreCase("NPL S1")) {
@@ -8959,6 +8959,13 @@ public class LowerThirdGfx
 				
 				switch (config.getBroadcaster().toUpperCase()) {
 				case Constants.NPL: case Constants.APL:
+					
+					if(lowerThird.getWhichTeamFlag().equalsIgnoreCase("GYR")) {
+						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$LT_PlayingXI$Logo_Grp$Side" + WhichSide + "$Single$img_Logo_Shadow*ACTIVE SET 0\0", print_writers);
+					}else {
+						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$LT_PlayingXI$Logo_Grp$Side" + WhichSide + "$Single$img_Logo_Shadow*ACTIVE SET 1\0", print_writers);
+					}
+					
 					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$LT_PlayingXI$Logo_Grp$Side" + WhichSide + "$Single$img_Logo_Shadow*TEXTURE*IMAGE SET " 
 							+ (config.getBroadcaster().equalsIgnoreCase(Constants.APL)?Constants.APL_LOGO_PATH:Constants.NPL_LOGO_PATH) + lowerThird.getWhichTeamFlag() + "\0", print_writers);
 					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$LT_PlayingXI$Logo_Grp$Side" + WhichSide + "$Single$img_Logo*TEXTURE*IMAGE SET " 
@@ -14411,13 +14418,16 @@ public class LowerThirdGfx
 		case "Control_Shift_B":
 			switch (config.getBroadcaster().toUpperCase()) {
 			case Constants.NPL: case Constants.MPL: case Constants.APL:
-				if(inning.getTotalWickets() >=7 ) {
-					containerName = "$4Bats";
-					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$LT_NextToBat$Side"+WhichSide+"$Select*FUNCTION*Omo*vis_con SET 1\0", print_writers);
-				}else {
-					containerName = "$5Bats";
-					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$LT_NextToBat$Side"+WhichSide+"$Select*FUNCTION*Omo*vis_con SET 0\0", print_writers);
-				}
+//				if(inning.getTotalWickets() >=7 ) {
+//					containerName = "$4Bats";
+//					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$LT_NextToBat$Side"+WhichSide+"$Select*FUNCTION*Omo*vis_con SET 1\0", print_writers);
+//				}else {
+//					containerName = "$5Bats";
+//					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$LT_NextToBat$Side"+WhichSide+"$Select*FUNCTION*Omo*vis_con SET 0\0", print_writers);
+//				}
+				
+				containerName = "$3Bats";
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$LT_NextToBat$Side"+WhichSide+"$Select*FUNCTION*Omo*vis_con SET 2\0", print_writers);
 				
 				switch (config.getBroadcaster().toUpperCase()) {
 				case Constants.NPL: case Constants.APL:

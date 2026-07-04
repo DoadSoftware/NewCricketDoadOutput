@@ -1138,7 +1138,7 @@ public class IndexController
 							TimeUnit.MILLISECONDS.sleep(2300);
 							break;
 						default:
-							TimeUnit.MILLISECONDS.sleep(2000);
+							TimeUnit.MILLISECONDS.sleep(2300);
 							break;
 						}
 						this_caption.whichSide = 1;
