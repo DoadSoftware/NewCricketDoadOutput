@@ -578,7 +578,7 @@ public class IndexController
 						}
 					}
 					break;	
-				case Constants.LEGENDS:
+				case Constants.LEGENDS: case Constants.ASSAM:
 					if(this_animation.LineUpBigImage_On_Screen) {
 						this_animation.lineUpCount++;
 						this_animation.processAnimation(Constants.BACK, print_writers, "anim_Team_BigImage", "CONTINUE");
@@ -811,7 +811,7 @@ public class IndexController
 			}
 			break;
 		default:
-			if (Set.of(Constants.ICC_U19_2023,Constants.ISPL,Constants.BENGAL_T20,Constants.NPL,Constants.LEGENDS,
+			if (Set.of(Constants.ICC_U19_2023,Constants.ISPL,Constants.BENGAL_T20,Constants.NPL,Constants.LEGENDS, Constants.ASSAM,
 					Constants.MPL,Constants.APL,Constants.VIDARBHA,Constants.AFG_T20).contains(session_configuration.getBroadcaster())
 					&& !session_configuration.getPrimaryVariousOptions().contains(Constants.FULL_FRAMER)
 					&& graphicsType.contains(Constants.FULL_FRAMER)) {
@@ -931,7 +931,7 @@ public class IndexController
 				.equalsIgnoreCase(CricketUtil.YES)).findAny().orElse(null).getInningNumber();
 		
 		switch(session_configuration.getBroadcaster()) {
-		case Constants.NPL: case Constants.LEGENDS: case Constants.APL: case Constants.MPL: case Constants.VIDARBHA:
+		case Constants.NPL: case Constants.LEGENDS: case Constants.ASSAM: case Constants.APL: case Constants.MPL: case Constants.VIDARBHA:
 			this_caption.whichSide = 2;
 
 			if(!this_caption.this_infobarGfx.infobar.getMiddle_section().equalsIgnoreCase("BATSMAN") && 
@@ -1492,7 +1492,7 @@ public class IndexController
 	
 	public void GetVariousDBData(String typeOfUpdate,Configuration config,HeadToHead headToHead, String session_MasterCricketDirectory)throws Exception {
 
-	    if (!Set.of(Constants.ICC_U19_2023,Constants.ISPL,Constants.BENGAL_T20,Constants.NPL,Constants.LEGENDS,Constants.T20_MUMBAI,
+	    if (!Set.of(Constants.ICC_U19_2023,Constants.ISPL,Constants.BENGAL_T20,Constants.NPL,Constants.LEGENDS, Constants.ASSAM,Constants.T20_MUMBAI,
 	    		Constants.MPL,Constants.APL,Constants.VIDARBHA,Constants.AFG_T20).contains(config.getBroadcaster())) {
 	        return;
 	    }
@@ -1692,7 +1692,7 @@ public class IndexController
                 this_caption.this_lowerThirdGfx.TournamentColor(print_writers, session_configuration);
 	            break;
 
-	        case Constants.ICC_U19_2023: case Constants.BENGAL_T20: case Constants.NPL: case Constants.LEGENDS:
+	        case Constants.ICC_U19_2023: case Constants.BENGAL_T20: case Constants.NPL: case Constants.LEGENDS: case Constants.ASSAM:
 	        case Constants.MPL: case Constants.APL: case Constants.VIDARBHA: case Constants.AFG_T20:
 
 	            if (session_configuration.getPrimaryVariousOptions().contains(Constants.FULL_FRAMER)) {

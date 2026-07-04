@@ -161,5 +161,20 @@ public class Constants
 	public final static String LEGENDS_TEXT = "IMAGE*/Default/Essentials/Text/";
 	public final static String LEGENDS_TEXT1 = "IMAGE*/Default/Essentials/Text1/";
 	
+	public final static String ASSAM = "ASSAM-T20";
+	public final static String ASSAM_LOGO_PATH = "IMAGE*/Default/Essentials/TeamLogo/";
+	public final static String ASSAM_TEAMLOGO_PATH = "IMAGE*/Default/Essentials/TeamLogo/";
+	public final static String ASSAM_TEAMLOGO_GREY_PATH = "IMAGE*/Default/Essentials/TeamLogo_Grey/";
+	public final static String ASSAM_TEAMLOGO_BW_PATH = "IMAGE*/Default/Essentials/TeamLogoBW/";
+	public final static String ASSAM_LOCAL_PHOTO_PATH = "C:\\\\Images\\\\ASSAM\\\\Photos\\\\";
+	public final static String ASSAM_PHOTO_PATH = "\\c\\Images\\ASSAM\\Photos\\";
+	public final static String ASSAM_ICONS_PATH = "IMAGE*/Default/Essentials/Icons/";
+	
+	public final static String ASSAM_BASE = "IMAGE*/Default/Essentials/Base/";
+	public final static String ASSAM_BASE2 = "IMAGE*/Default/Essentials/Base2/";
+	
+	public final static String ASSAM_TEXT = "IMAGE*/Default/Essentials/Text/";
+	public final static String ASSAM_TEXT1 = "IMAGE*/Default/Essentials/Text1/";
+	
 	
 }

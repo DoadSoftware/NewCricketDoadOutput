@@ -104,7 +104,7 @@ public class Animation
 				return Constants.MINIS;	
 			}
 			break;
-		case Constants.LEGENDS:
+		case Constants.LEGENDS: case Constants.ASSAM:
 			switch (whatToProcess.split(",")[0]) {
 			case "Alt_1": case "Alt_2": case "Alt_3": case "Alt_4": case "Alt_5": case "Alt_6": case "Alt_7": case "Alt_8": 
 			case "Alt_9": case "Alt_0": case "Control_F12": case "Shift_F12":
@@ -513,7 +513,7 @@ public class Animation
 		case Constants.ISPL:
 			ISPL_AnimateIn(whatToProcess, print_writers, config);
 			break;
-		case Constants.LEGENDS:
+		case Constants.LEGENDS: case Constants.ASSAM:
 			switch (whatToProcess.split(",")[0]) {
 			//FF
 			case "Shift_D":
@@ -588,7 +588,7 @@ public class Animation
 				AnimateIn("ArrowDown,", print_writers, config); // Push infobar
 				TimeUnit.MILLISECONDS.sleep(500);
 				switch (config.getBroadcaster().toUpperCase()) {
-				case Constants.LEGENDS:
+				case Constants.LEGENDS: case Constants.ASSAM:
 					processAnimation(Constants.BACK, print_writers, "anim_FullFrame$In_Out$Essentials", "START");
 					processAnimation(Constants.BACK, print_writers, "anim_FullFrame$In_Out$Event_Logo", "START");
 					processAnimation(Constants.BACK, print_writers, "anim_FullFrame$In_Out$Logo_FF", "START");
@@ -3391,7 +3391,7 @@ public class Animation
 			}
 			break;	
 			
-		case Constants.LEGENDS:
+		case Constants.LEGENDS: case Constants.ASSAM:
 			switch (whatToProcess.split(",")[0]) {
 			//FF
 			case "Shift_D":
@@ -5129,7 +5129,7 @@ public class Animation
 				break;
 			}
 			break;
-		case Constants.LEGENDS:
+		case Constants.LEGENDS: case Constants.ASSAM:
 			if(!whatToProcess.contains(",")) {
 				return CricketUtil.NO;
 			}
@@ -7098,7 +7098,7 @@ public class Animation
 				break;
 			}
 			break;
-		case Constants.LEGENDS:
+		case Constants.LEGENDS: case Constants.ASSAM:
 			if(!whatToProcess.contains(",")) {
 				return CricketUtil.NO;
 			}
@@ -12621,7 +12621,7 @@ public class Animation
 				caption.this_lowerThirdGfx.chnageOn = false;
 			}
 			break;
-		case Constants.LEGENDS:
+		case Constants.LEGENDS: case Constants.ASSAM:
 			processAnimation(Constants.FRONT, print_writers, "Extra_PopUps", "SHOW 0.0");
 			processAnimation(Constants.MIDDLE, print_writers, "Plotter", "SHOW 0.0");
 			processAnimation(Constants.BACK, print_writers, "anim_FullFrame", "SHOW 0.0");
@@ -14130,7 +14130,7 @@ public class Animation
 			    CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER PREVIEW SCENE*/Default/FullFrames "
 				    	+ "C:/Temp/Preview.tga " + previewCommand + " \0", print_writer);
 				break;
-			case Constants.LEGENDS: case Constants.NPL: case Constants.APL: case Constants.MPL: case Constants.ISPL:
+			case Constants.LEGENDS: case Constants.ASSAM: case Constants.NPL: case Constants.APL: case Constants.MPL: case Constants.ISPL:
 				processLegendFullFramesPreview(whatToProcess,print_writer,whichside,config,whichGraphicOnScreen);
 				break;
 			}
@@ -14655,7 +14655,7 @@ public class Animation
 				}
 			    
 				break;
-			case Constants.LEGENDS:
+			case Constants.LEGENDS: case Constants.ASSAM:
 				if(whichside == 1) {
 					switch(whatToProcess.split(",")[0]) {
 					case "9": case "Alt_Shift_Q":
@@ -14844,7 +14844,7 @@ public class Animation
 				}
 				break;
 			
-			case Constants.NPL: case Constants.LEGENDS: case Constants.MPL: case Constants.APL:
+			case Constants.NPL: case Constants.LEGENDS: case Constants.ASSAM: case Constants.MPL: case Constants.APL:
 				
 				switch (config.getBroadcaster().toUpperCase()) {
 				case Constants.MPL:
@@ -15011,7 +15011,7 @@ public class Animation
 					}
 				}
 				break;
-			case Constants.ICC_U19_2023: case Constants.ISPL: case Constants.NPL: case Constants.LEGENDS:
+			case Constants.ICC_U19_2023: case Constants.ISPL: case Constants.NPL: case Constants.LEGENDS: case Constants.ASSAM:
 			case Constants.MPL:	 case Constants.APL:
 				
 				switch (config.getBroadcaster().toUpperCase()) {
@@ -15074,7 +15074,7 @@ public class Animation
 						break;
 					case "Alt_F7":
 						switch (config.getBroadcaster()) {
-						case Constants.NPL: case Constants.LEGENDS: case Constants.MPL: case Constants.APL:
+						case Constants.NPL: case Constants.LEGENDS: case Constants.ASSAM: case Constants.MPL: case Constants.APL:
 							CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER PREVIEW SCENE*" 
 									+ "/Default/" + bugs_pre + " C:/Temp/Preview.tga Anim_Mini$In_Out 1.260 Anim_Mini$In_Out$In 1.240\0", print_writer);
 							break;
@@ -15609,7 +15609,7 @@ public class Animation
 			String previewCommand = "";
 			switch (config.getBroadcaster().toUpperCase()) {
 			
-			case Constants.LEGENDS:
+			case Constants.LEGENDS: case Constants.ASSAM:
 				if(whichside == 1) {
 					switch(whatToProcess.split(",")[0]) {
 					case "Shift_D":

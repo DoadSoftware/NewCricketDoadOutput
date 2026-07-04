@@ -366,7 +366,7 @@ public class InfobarGfx
 				}
 			}
 			break;
-		case Constants.NPL: case Constants.ISPL:  case Constants.LEGENDS: case Constants.MPL:
+		case Constants.NPL: case Constants.ISPL:  case Constants.LEGENDS: case Constants.ASSAM: case Constants.MPL:
 		case Constants.APL:
 			inning = matchAllData.getMatch().getInning().stream().filter(
 				inn -> inn.getIsCurrentInning().equalsIgnoreCase(CricketUtil.YES)).findAny().orElse(null);
@@ -766,7 +766,7 @@ public class InfobarGfx
 				return status;
 			}
 			break;
-		case Constants.ISPL: case Constants.LEGENDS:
+		case Constants.ISPL: case Constants.LEGENDS: case Constants.ASSAM:
 			
 			this_animation.processAnimation(Constants.FRONT, print_writers, "Anim_Infobar", "SHOW 0.0");
 			infobar.setPowerplay_on_screen(false);
@@ -1954,7 +1954,7 @@ public class InfobarGfx
 			CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_Infobar$All$Normal$ScoreAll$Score$Overs$txt_DLS_Overs*GEOM*TEXT SET " 
 					+ dls_over + "\0", print_writers);
 			break;
-		case Constants.NPL: case Constants.ISPL: case Constants.LEGENDS: case Constants.MPL: case Constants.APL:
+		case Constants.NPL: case Constants.ISPL: case Constants.LEGENDS: case Constants.ASSAM: case Constants.MPL: case Constants.APL:
 			
 			String logoPath = "";
 
@@ -1980,23 +1980,24 @@ public class InfobarGfx
 					}else {
 						logoCategory = "";
 					}
-				}else if(config.getBroadcaster().equalsIgnoreCase(Constants.LEGENDS)) {
-					logoPath = Constants.LEGENDS_LOGO_PATH;
+				}else if(config.getBroadcaster().equalsIgnoreCase(Constants.LEGENDS) || config.getBroadcaster().equalsIgnoreCase(Constants.ASSAM)) {
+					logoPath = (config.getBroadcaster().equalsIgnoreCase(Constants.LEGENDS) ? Constants.LEGENDS_LOGO_PATH : Constants.ASSAM_LOGO_PATH);
 					
 					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Infobar$InfobarSmall$img_Base*TEXTURE*IMAGE SET " + 
-							Constants.LEGENDS_BASE + inning.getBatting_team().getTeamBadge() + "\0", print_writers);
+							(config.getBroadcaster().equalsIgnoreCase(Constants.LEGENDS) ? Constants.LEGENDS_BASE : Constants.ASSAM_BASE) + inning.getBatting_team().getTeamBadge() + "\0", print_writers);
 					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Infobar$InfobarSmall$im_Text*TEXTURE*IMAGE SET " + 
 							Constants.LEGENDS_TEXT + inning.getBatting_team().getTeamBadge() + "\0", print_writers);
 					
 					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Infobar$gfx_Infobar$LeftALL$Data_Left$img_Base"
-							+ "*TEXTURE*IMAGE SET " + Constants.LEGENDS_BASE + inning.getBatting_team().getTeamBadge() + "\0", print_writers);
+							+ "*TEXTURE*IMAGE SET " + (config.getBroadcaster().equalsIgnoreCase(Constants.LEGENDS) ? Constants.LEGENDS_BASE : Constants.ASSAM_BASE) + inning.getBatting_team().getTeamBadge() + "\0", print_writers);
 					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Infobar$gfx_Infobar$LeftALL$Data_Left$img_Text"
-							+ "*TEXTURE*IMAGE SET " + Constants.LEGENDS_TEXT + inning.getBatting_team().getTeamBadge() + "\0", print_writers);
+							+ "*TEXTURE*IMAGE SET " + (config.getBroadcaster().equalsIgnoreCase(Constants.LEGENDS) ? Constants.LEGENDS_TEXT : Constants.ASSAM_TEXT)
+							 + inning.getBatting_team().getTeamBadge() + "\0", print_writers);
 					
 					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Infobar$Right$Data_Right_Normal$Side_1$Style2$img_Base"
-							+ "*TEXTURE*IMAGE SET " + Constants.LEGENDS_BASE + inning.getBowling_team().getTeamBadge() + "\0", print_writers);
+							+ "*TEXTURE*IMAGE SET " + (config.getBroadcaster().equalsIgnoreCase(Constants.LEGENDS) ? Constants.LEGENDS_BASE : Constants.ASSAM_BASE) + inning.getBowling_team().getTeamBadge() + "\0", print_writers);
 					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Infobar$Right$Data_Right_Normal$Side_1$Style2$img_Text"
-							+ "*TEXTURE*IMAGE SET " + Constants.LEGENDS_TEXT + inning.getBowling_team().getTeamBadge() + "\0", print_writers);
+							+ "*TEXTURE*IMAGE SET " +(config.getBroadcaster().equalsIgnoreCase(Constants.LEGENDS) ? Constants.LEGENDS_TEXT : Constants.ASSAM_TEXT) + inning.getBowling_team().getTeamBadge() + "\0", print_writers);
 					
 				}else {
 					logoPath = Constants.ISPL_LOGOS_PATH;
@@ -2033,10 +2034,10 @@ public class InfobarGfx
 						logoPath + inning.getBowling_team().getTeamBadge() + logoCategory + "\0", print_writers);
 				
 				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Infobar$Top$txt_Team_1*GEOM*TEXT SET " + 
-						(config.getBroadcaster().equalsIgnoreCase(Constants.LEGENDS) ? inning.getBatting_team().getTeamName3() : 
+						(config.getBroadcaster().equalsIgnoreCase(Constants.LEGENDS) || config.getBroadcaster().equalsIgnoreCase(Constants.ASSAM) ? inning.getBatting_team().getTeamName3() : 
 							inning.getBatting_team().getTeamName1())  + "\0", print_writers);
 				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Infobar$InfobarSmall$txt_Team_1*GEOM*TEXT SET " + 
-						(config.getBroadcaster().equalsIgnoreCase(Constants.LEGENDS) ? inning.getBatting_team().getTeamName3() : 
+						(config.getBroadcaster().equalsIgnoreCase(Constants.LEGENDS) || config.getBroadcaster().equalsIgnoreCase(Constants.ASSAM) ? inning.getBatting_team().getTeamName3() : 
 							inning.getBatting_team().getTeamName4()) + "\0", print_writers);
 			}
 			
@@ -2047,7 +2048,7 @@ public class InfobarGfx
 					CricketFunctions.getTeamScore(inning, slashOrDash, false) + "\0", print_writers);
 			
 			switch(config.getBroadcaster()) {
-			case Constants.LEGENDS:
+			case Constants.LEGENDS: case Constants.ASSAM:
 				containerName = "Overs_Only";
 				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Infobar$Data_Left$Overs$Choose_Type*FUNCTION*Omo*vis_con SET 0\0", print_writers);
 				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Infobar$Data_Left$DLS$Choose_Type*FUNCTION*Omo*vis_con SET 1\0", print_writers);
@@ -2142,7 +2143,7 @@ public class InfobarGfx
 			}else {
 				
 				switch (config.getBroadcaster()) {
-				case Constants.LEGENDS:
+				case Constants.LEGENDS: case Constants.ASSAM:
 					if (!CricketFunctions.processPowerPlay(CricketUtil.MINI, matchAllData).isEmpty()) {
 						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Infobar$InfobarSmall$Powerplay$Select*FUNCTION*Omo*vis_con SET 0 \0",
 								print_writers);
@@ -2691,7 +2692,7 @@ public class InfobarGfx
 				this_animation.processAnimation(Constants.FRONT, print_writers, "BatterLowlight$" + WhichBatsman, "SHOW 0.500");
 			}
 			break;
-		case Constants.NPL: case Constants.ISPL: case Constants.LEGENDS: case Constants.MPL: case Constants.APL:
+		case Constants.NPL: case Constants.ISPL: case Constants.LEGENDS: case Constants.ASSAM: case Constants.MPL: case Constants.APL:
 			
 			switch(config.getBroadcaster()) {
 			case Constants.NPL: case Constants.APL:
@@ -2706,7 +2707,7 @@ public class InfobarGfx
 					}
 				}
 				break;
-			case Constants.LEGENDS:
+			case Constants.LEGENDS: case Constants.ASSAM:
 				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Infobar$Right$Side_" + WhichSide 
 						+ infobar.getBatsmanAndBowlOrSponsor() + "$Bat_" + WhichBatsman + "$Side" + WhichSubSide + "$Batsman$Select_Impact"
 						+ "*FUNCTION*Omo*vis_con SET 0\0", print_writers);
@@ -2739,7 +2740,7 @@ public class InfobarGfx
 					
 					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Infobar$Right$Side_" + WhichSide 
 							+ infobar.getBatsmanAndBowlOrSponsor() + "$Bat_" + WhichBatsman + "_Impact$Select"
-							+ "*FUNCTION*Omo*vis_con SET "+(config.getBroadcaster().equalsIgnoreCase(Constants.LEGENDS) ? 2 : 1)+"\0", print_writers);
+							+ "*FUNCTION*Omo*vis_con SET "+(config.getBroadcaster().equalsIgnoreCase(Constants.LEGENDS) || config.getBroadcaster().equalsIgnoreCase(Constants.ASSAM) ? 2 : 1)+"\0", print_writers);
 					
 					if(isimpactBatIn == false) {
 						this_animation.processAnimation(Constants.FRONT, print_writers, "Anim_Infobar$Impact_Bat", "START");
@@ -3264,7 +3265,7 @@ public class InfobarGfx
 			}
 			infobar.setLast_batsmen(battingCardList);
 			break;
-		case Constants.ICC_U19_2023: case Constants.NPL: case Constants.ISPL: case Constants.LEGENDS: case Constants.MPL:
+		case Constants.ICC_U19_2023: case Constants.NPL: case Constants.ISPL: case Constants.LEGENDS: case Constants.ASSAM: case Constants.MPL:
 		case Constants.APL:
 			if(infobar.getLast_batsmen() != null && infobar.getLast_batsmen().size() >= 2) {
 				if(infobar.getLast_batsmen().get(0).getPlayerId() != battingCardList.get(0).getPlayerId()) {
@@ -3461,7 +3462,7 @@ public class InfobarGfx
 //			}
 //			//this_animation.processAnimation(Constants.FRONT, print_writers, "Anim_InfoBar$Bowler_In", "START");
 //			break;
-		case Constants.NPL: case Constants.ISPL:  case Constants.LEGENDS:  case Constants.MPL: case Constants.APL:
+		case Constants.NPL: case Constants.ISPL:  case Constants.LEGENDS: case Constants.ASSAM:  case Constants.MPL: case Constants.APL:
 			if(config.getCategory().equalsIgnoreCase("MEN")) {
 				category = "MPL";
 				logoCategory = "M";
@@ -3474,7 +3475,7 @@ public class InfobarGfx
 			}
 			
 			switch(config.getBroadcaster()) {
-			case Constants.LEGENDS:
+			case Constants.LEGENDS: case Constants.ASSAM:
 				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Infobar$Right$Data_Right_Normal$Side_1" + infobar.getInfobar_photo() + "$txt_Team_2" + 
 						"*GEOM*TEXT SET " + inning.getBowling_team().getTeamName3() + "\0", print_writers);
 				break;
@@ -3509,7 +3510,7 @@ public class InfobarGfx
 				}
 				
 				break;
-			case Constants.LEGENDS:
+			case Constants.LEGENDS: case Constants.ASSAM:
 				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Infobar$Right$Data_Right_Normal$Side_1$Style2$Bowl_Impact$" 
 						+"Select*FUNCTION*Omo*vis_con SET 0\0", print_writers);
 				
@@ -3657,7 +3658,7 @@ public class InfobarGfx
 			}
 			
 			switch (config.getBroadcaster()) {
-			case Constants.LEGENDS:
+			case Constants.LEGENDS: case Constants.ASSAM:
 //				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Infobar$Right$Data_Right_Normal$Side_1$Style2$Bowl_Part$Side" + 
 //						WhichSide + "$txt_Balls*GEOM*TEXT SET " + ((6*bowlingCard.getOvers()) + bowlingCard.getBalls()) + "\0", print_writers);
 				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Infobar$Right$Data_Right_Normal$Side_1" + infobar.getInfobar_photo() + "$Bowl_Part$Side" 
@@ -3864,10 +3865,10 @@ public class InfobarGfx
 //			
 //			infobar.setLast_bowler(bowlingCard);
 //			break;
-		case Constants.ICC_U19_2023: case Constants.NPL: case Constants.ISPL:  case Constants.LEGENDS: case Constants.MPL:
+		case Constants.ICC_U19_2023: case Constants.NPL: case Constants.ISPL:  case Constants.LEGENDS: case Constants.ASSAM: case Constants.MPL:
 		case Constants.APL:
 			switch(config.getBroadcaster()) {
-			case Constants.ISPL:  case Constants.LEGENDS:
+			case Constants.ISPL:  case Constants.LEGENDS: case Constants.ASSAM:
 				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Infobar$Data_Right_Normal$Bat_and_Bowl$"
 						+ "Select_Type*FUNCTION*Omo*vis_con SET 1\0", print_writers);
 				break;
@@ -4729,7 +4730,7 @@ public class InfobarGfx
 				infobar.setLast_right_bottom(infobar.getRight_bottom());
 			}
 			break;	
-		case Constants.ISPL:  case Constants.LEGENDS: case Constants.MPL: case Constants.NPL: case Constants.APL:
+		case Constants.ISPL:  case Constants.LEGENDS: case Constants.ASSAM: case Constants.MPL: case Constants.NPL: case Constants.APL:
 			if(infobar.getRight_bottom() != null && !infobar.getRight_bottom().isEmpty()) {
 				switch(infobar.getRight_bottom().toUpperCase()) {
 				case "BOWLER_REPLACE":
@@ -5725,7 +5726,7 @@ public class InfobarGfx
 				default:
 					return t20MumbaiRightSection(is_this_updating, print_writers, matchAllData, WhichSide, WhichSubSide);
 				}
-			case Constants.NPL: case Constants.ISPL:  case Constants.LEGENDS: case Constants.MPL: case Constants.APL:
+			case Constants.NPL: case Constants.ISPL:  case Constants.LEGENDS: case Constants.ASSAM: case Constants.MPL: case Constants.APL:
 				System.out.println("hello");
 				if(infobar.getRight_section() != null && !infobar.getRight_section().isEmpty()) {
 					switch(infobar.getRight_section().toUpperCase()) {
@@ -5939,12 +5940,12 @@ public class InfobarGfx
 						
 						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Infobar$Right$Data_Right_Normal$Side_" + WhichSide +
 								infobar.getInfobar_photo() + "$Bowl_Part_All$Side" + WhichSubSide + "$Boundaries$Position$Boundaries$txt_FourHead*GEOM*TEXT SET " 
-									+ (config.getBroadcaster().equalsIgnoreCase(Constants.LEGENDS)?matchAllData.getSetup().getHomeTeam().getTeamName3():
+									+ (config.getBroadcaster().equalsIgnoreCase(Constants.LEGENDS) || config.getBroadcaster().equalsIgnoreCase(Constants.ASSAM)?matchAllData.getSetup().getHomeTeam().getTeamName3():
 										matchAllData.getSetup().getHomeTeam().getTeamName3()) + "\0", print_writers);
 
 						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Infobar$Right$Data_Right_Normal$Side_" + WhichSide + 
 								infobar.getInfobar_photo() + "$Bowl_Part_All$Side" + WhichSubSide + "$Boundaries$Position$Boundaries$txt_SixHead*GEOM*TEXT SET " 
-									+ (config.getBroadcaster().equalsIgnoreCase(Constants.LEGENDS) ? matchAllData.getSetup().getAwayTeam().getTeamName3():
+									+ (config.getBroadcaster().equalsIgnoreCase(Constants.LEGENDS) || config.getBroadcaster().equalsIgnoreCase(Constants.ASSAM) ? matchAllData.getSetup().getAwayTeam().getTeamName3():
 										matchAllData.getSetup().getAwayTeam().getTeamName3()) + "\0", print_writers);
 						break;
 						
@@ -5973,7 +5974,7 @@ public class InfobarGfx
 						
 						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Infobar$Right$Data_Right_Normal$Side_" + WhichSide +
 								infobar.getInfobar_photo() + "$Bowl_Part_All$Side" + WhichSubSide + "$Boundaries$Position$Boundaries$txt_FourHead*GEOM*TEXT SET " 
-									+ (config.getBroadcaster().equalsIgnoreCase(Constants.LEGENDS)?matchAllData.getSetup().getHomeTeam().getTeamName3():
+									+ (config.getBroadcaster().equalsIgnoreCase(Constants.LEGENDS) || config.getBroadcaster().equalsIgnoreCase(Constants.ASSAM)?matchAllData.getSetup().getHomeTeam().getTeamName3():
 										matchAllData.getSetup().getHomeTeam().getTeamName3()) + "\0", print_writers);
 
 						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Infobar$Right$Data_Right_Normal$Side_" + WhichSide + 
@@ -5982,7 +5983,7 @@ public class InfobarGfx
 						
 						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Infobar$Right$Data_Right_Normal$Side_" + WhichSide + 
 								infobar.getInfobar_photo() + "$Bowl_Part_All$Side" + WhichSubSide + "$Boundaries$Position$Boundaries$txt_SixHead*GEOM*TEXT SET " 
-									+ (config.getBroadcaster().equalsIgnoreCase(Constants.LEGENDS) ? matchAllData.getSetup().getAwayTeam().getTeamName3():
+									+ (config.getBroadcaster().equalsIgnoreCase(Constants.LEGENDS) || config.getBroadcaster().equalsIgnoreCase(Constants.ASSAM) ? matchAllData.getSetup().getAwayTeam().getTeamName3():
 										matchAllData.getSetup().getAwayTeam().getTeamName3()) + "\0", print_writers);
 						break;	
 					case CricketUtil.BOUNDARY:
@@ -6106,7 +6107,7 @@ public class InfobarGfx
 								WhichSubSide + "$FreeTex$Position$txt_Head*GEOM*TEXT SET AT THIS STAGE" + "\0", print_writers);
 
 						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Infobar$Right$Data_Right_Normal$Side_" + WhichSide + infobar.getInfobar_photo() + "$Bowl_Part_All$Side" + 
-								WhichSubSide + "$FreeTex$Position$Boundaries$txt_Head*GEOM*TEXT SET " +  (config.getBroadcaster().equalsIgnoreCase(Constants.LEGENDS) ? 
+								WhichSubSide + "$FreeTex$Position$Boundaries$txt_Head*GEOM*TEXT SET " +  (config.getBroadcaster().equalsIgnoreCase(Constants.LEGENDS) || config.getBroadcaster().equalsIgnoreCase(Constants.ASSAM) ? 
 										inning.getBowling_team().getTeamName3() : inning.getBowling_team().getTeamName4()) + " WERE" + "\0", print_writers);
 
 						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Infobar$Right$Data_Right_Normal$Side_" + WhichSide + infobar.getInfobar_photo() + "$Bowl_Part_All$Side" + 
@@ -6188,7 +6189,7 @@ public class InfobarGfx
 						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Infobar$Right$Data_Right_Normal$Side_" + WhichSide + 
 							infobar.getInfobar_photo() + "$Bowl_Part_All$Side" + WhichSubSide + "$Select*FUNCTION*Omo*vis_con SET 2\0", print_writers);
 						switch(config.getBroadcaster()) {
-						case Constants.LEGENDS:
+						case Constants.LEGENDS: case Constants.ASSAM:
 							CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Infobar$Right$Data_Right_Normal$Side_" + WhichSide + "$Style2$"
 									+ "Bowl_Part_All$Side" + WhichSubSide + "$FreeText02$txt_Head*GEOM*TEXT SET " + CricketFunctions.generateTossResult(matchAllData, 
 											CricketUtil.FULL, CricketUtil.FIELD, CricketUtil.MIDDLE, CricketUtil.CHOSE).toUpperCase() + "\0", print_writers); 
@@ -9413,9 +9414,9 @@ public class InfobarGfx
 						+ "REVIEWS REMAINING" + "\0", print_writers);
 				
 				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_Infobar$Main$Fade_For_Shrink$Analytics$Side" + WhichSide + "$Select_Type$2_Line_Text$Maxsize_Subtitle$txt_Subtitle*GEOM*TEXT SET " 
-						+ (config.getBroadcaster().equalsIgnoreCase(Constants.LEGENDS)?matchAllData.getSetup().getHomeTeam().getTeamName3():
+						+ (config.getBroadcaster().equalsIgnoreCase(Constants.LEGENDS) || config.getBroadcaster().equalsIgnoreCase(Constants.ASSAM)?matchAllData.getSetup().getHomeTeam().getTeamName3():
 							matchAllData.getSetup().getHomeTeam().getTeamName3()) + " - " + Integer.parseInt(parts[0]) + "    " + 
-							(config.getBroadcaster().equalsIgnoreCase(Constants.LEGENDS) ? matchAllData.getSetup().getAwayTeam().getTeamName3():
+							(config.getBroadcaster().equalsIgnoreCase(Constants.LEGENDS) || config.getBroadcaster().equalsIgnoreCase(Constants.ASSAM) ? matchAllData.getSetup().getAwayTeam().getTeamName3():
 								matchAllData.getSetup().getAwayTeam().getTeamName3()) + " - " + Integer.parseInt(parts[1]) + "\0", print_writers);
 				
 				TimeUnit.MILLISECONDS.sleep(1000);
@@ -10419,7 +10420,7 @@ public class InfobarGfx
 			infobar.setLast_middle_section(infobar.getMiddle_section());
 			break;
 		
-		case Constants.NPL: case Constants.ISPL:  case Constants.LEGENDS: case Constants.MPL: case Constants.APL:
+		case Constants.NPL: case Constants.ISPL:  case Constants.LEGENDS: case Constants.ASSAM: case Constants.MPL: case Constants.APL:
 			switch(infobar.getMiddle_section().toUpperCase()) {
 				case CricketUtil.BATSMAN:
 					switch(config.getBroadcaster()) {
@@ -11217,7 +11218,7 @@ public class InfobarGfx
 							+ "$Select_Type*FUNCTION*Omo*vis_con SET 3 \0",print_writers);
 					
 					switch (config.getBroadcaster()) {
-					case Constants.LEGENDS:
+					case Constants.LEGENDS: case Constants.ASSAM:
 						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Infobar$Right$Side_" + WhichSide + "$Analytics_1_Wide$txt_Top*GEOM*TEXT SET " + 
 								CricketFunctions.generateTossResult(matchAllData, CricketUtil.FULL, CricketUtil.FIELD, CricketUtil.MIDDLE, CricketUtil.CHOSE).toUpperCase().split("WON")[0] + "\0", print_writers);
 						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Infobar$Right$Side_" + WhichSide + "$Analytics_1_Wide$txt_Bottom*GEOM*TEXT SET WON" + 
@@ -11275,7 +11276,7 @@ public class InfobarGfx
 							+ "$Select_Type*FUNCTION*Omo*vis_con SET 3 \0",print_writers);
 					
 					switch (config.getBroadcaster()) {
-					case Constants.LEGENDS:
+					case Constants.LEGENDS: case Constants.ASSAM:
 						if(!CricketFunctions.GenerateMatchSummaryStatus(2, matchAllData, CricketUtil.MIDDLE, "|", config.getBroadcaster(), true).getTargetOrResult().toUpperCase().split("\\|")[0].contains(" TIED")) {
 							CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Infobar$Right$Side_" + WhichSide + "$Analytics_1_Wide$txt_Top*GEOM*TEXT SET " + 
 									CricketFunctions.GenerateMatchSummaryStatus(2, matchAllData, CricketUtil.MIDDLE, "|", config.getBroadcaster(), true).getTargetOrResult().toUpperCase().split(" WIN ")[0] + "\0", print_writers);
@@ -11357,7 +11358,7 @@ public class InfobarGfx
 					switch (infobar.getMiddle_section().toUpperCase()) {
 					case "IDENT_TEAM": 
 						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Infobar$Right$Side_" + WhichSide + "$Basic$txt_Top*GEOM*TEXT SET " +
-								(config.getBroadcaster().equalsIgnoreCase(Constants.LEGENDS) ? matchAllData.getSetup().getHomeTeam().getTeamName3() + " v " + 
+								(config.getBroadcaster().equalsIgnoreCase(Constants.LEGENDS) || config.getBroadcaster().equalsIgnoreCase(Constants.ASSAM) ? matchAllData.getSetup().getHomeTeam().getTeamName3() + " v " + 
 								matchAllData.getSetup().getAwayTeam().getTeamName3() : matchAllData.getSetup().getHomeTeam().getTeamName1() + " v " + 
 								matchAllData.getSetup().getAwayTeam().getTeamName1()) + "\0", print_writers);
 						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Infobar$Right$Side_" + WhichSide + "$Basic$txt_Bottom*GEOM*TEXT SET " + 
@@ -11367,7 +11368,7 @@ public class InfobarGfx
 						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Infobar$Right$Side_" + WhichSide + "$Basic$txt_Top*GEOM*TEXT SET " + 
 								matchAllData.getSetup().getTournament() + "\0", print_writers);
 						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Infobar$Right$Side_" + WhichSide + "$Basic$txt_Bottom*GEOM*TEXT SET " + 
-								matchAllData.getSetup().getMatchIdent() + " - " + (config.getBroadcaster().equalsIgnoreCase(Constants.LEGENDS) ? 
+								matchAllData.getSetup().getMatchIdent() + " - " + (config.getBroadcaster().equalsIgnoreCase(Constants.LEGENDS) || config.getBroadcaster().equalsIgnoreCase(Constants.ASSAM) ? 
 										matchAllData.getSetup().getHomeTeam().getTeamName3() + " v " + matchAllData.getSetup().getAwayTeam().getTeamName3() : 
 										matchAllData.getSetup().getHomeTeam().getTeamName1() + " v " + matchAllData.getSetup().getAwayTeam().getTeamName1()) + "\0", print_writers);
 						break;
@@ -11431,7 +11432,7 @@ public class InfobarGfx
 					}
 					
 					switch (config.getBroadcaster()) {
-					case Constants.LEGENDS:
+					case Constants.LEGENDS: case Constants.ASSAM:
 						this_data_str.add(CricketFunctions.populateDls(matchAllData, CricketUtil.MIDDLE, Integer.valueOf(this_data_str.get(0))));
 						break;
 					default:
@@ -11465,11 +11466,11 @@ public class InfobarGfx
 							CricketFunctions.GetTargetData(matchAllData).getTargetRuns() + "\0", print_writers);
 					
 					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Infobar$Right$Side_" + WhichSide + "$Target$txt_Team*GEOM*TEXT SET " + 
-							(config.getBroadcaster().equalsIgnoreCase(Constants.LEGENDS) ? inning.getBatting_team().getTeamName3() + " NEED" : 
+							(config.getBroadcaster().equalsIgnoreCase(Constants.LEGENDS) || config.getBroadcaster().equalsIgnoreCase(Constants.ASSAM) ? inning.getBatting_team().getTeamName3() + " NEED" : 
 								inning.getBatting_team().getTeamName1() + "\n NEED") + "\0", print_writers);
 					
 					switch(config.getBroadcaster()) {
-					case Constants.LEGENDS:
+					case Constants.LEGENDS: case Constants.ASSAM:
 						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Infobar$Right$Side_" + WhichSide + "$Target$txt_From*GEOM*TEXT SET " + 
 								"RUNS\nFROM" + "\0", print_writers);
 						break;
@@ -11513,11 +11514,11 @@ public class InfobarGfx
 							CricketFunctions.GetTargetData(matchAllData).getRemaningBall() + "\0", print_writers);
 					
 					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Infobar$Right$Side_" + WhichSide + "$Target$txt_Team*GEOM*TEXT SET " + 
-							(config.getBroadcaster().equalsIgnoreCase(Constants.LEGENDS) ? inning.getBatting_team().getTeamName3() + " NEED" : 
+							(config.getBroadcaster().equalsIgnoreCase(Constants.LEGENDS) || config.getBroadcaster().equalsIgnoreCase(Constants.ASSAM) ? inning.getBatting_team().getTeamName3() + " NEED" : 
 								inning.getBatting_team().getTeamName1() + "\n NEED") + "\0", print_writers);
 					
 					switch(config.getBroadcaster()) {
-					case Constants.LEGENDS:
+					case Constants.LEGENDS: case Constants.ASSAM:
 						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Infobar$Right$Side_" + WhichSide + "$Target$txt_From*GEOM*TEXT SET " + 
 								" RUN" + CricketFunctions.Plural(CricketFunctions.GetTargetData(matchAllData).getRemaningRuns()).toUpperCase() + "\nFROM" + "\0", print_writers);
 						break;
@@ -11549,7 +11550,7 @@ public class InfobarGfx
 					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Infobar$Right$Side_" + WhichSide 
 							+ "$Select_Type*FUNCTION*Omo*vis_con SET 7 \0", print_writers);
 					switch(config.getBroadcaster()) {
-					case Constants.LEGENDS:
+					case Constants.LEGENDS: case Constants.ASSAM:
 						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Infobar$Right$Side_" + WhichSide + "$Stats_Wide$Stat$txt_Title"
 								+ "*GEOM*TEXT SET " + "FALL OF WICKET" + CricketFunctions.Plural(inning.getFallsOfWickets().size()).toUpperCase() + "\0", print_writers);
 						break;
@@ -11998,7 +11999,7 @@ public class InfobarGfx
 							0, ",", matchAllData.getEventFile().getEvents()).split(",")[0]);
 					
 					switch (config.getBroadcaster()) {
-					case Constants.MPL: case Constants.NPL: case Constants.LEGENDS: case Constants.APL:
+					case Constants.MPL: case Constants.NPL: case Constants.LEGENDS: case Constants.ASSAM: case Constants.APL:
 						this_data_str.add(CricketFunctions.hundredsTensUnits(String.valueOf(total_dot)));
 						break;
 					default:
@@ -12007,7 +12008,7 @@ public class InfobarGfx
 					}
 					
 					switch(config.getBroadcaster()) {
-					case Constants.LEGENDS:
+					case Constants.LEGENDS: case Constants.ASSAM:
 						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Infobar$Right$Side_" + WhichSide + "$Tournament_Sixes$txt_Title"
 								+ "*GEOM*TEXT SET " + "THIS INNING DOTS" + "\0", print_writers);
 						break;
@@ -12104,7 +12105,7 @@ public class InfobarGfx
 					int thisMatchNewFours = thisMatchPrevFours+1;
 					
 					switch (config.getBroadcaster()) {
-					case Constants.MPL: case Constants.NPL: case Constants.LEGENDS: case Constants.APL:
+					case Constants.MPL: case Constants.NPL: case Constants.LEGENDS: case Constants.ASSAM: case Constants.APL:
 						this_data_str.add(CricketFunctions.hundredsTensUnits(String.valueOf(thisMatchPrevFours)));
 						this_data_str.add(CricketFunctions.hundredsTensUnits(String.valueOf(thisMatchNewFours)));
 						break;
@@ -12116,7 +12117,7 @@ public class InfobarGfx
 					}
 					
 					switch(config.getBroadcaster()) {
-					case Constants.LEGENDS:
+					case Constants.LEGENDS: case Constants.ASSAM:
 						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Infobar$Right$Side_" + WhichSide + "$Tournament_Sixes$txt_Title"
 								+ "*GEOM*TEXT SET " + "THIS MATCH FOURS" + "\0", print_writers);
 						break;
@@ -12231,7 +12232,7 @@ public class InfobarGfx
 					int thisMatchNewSixes = thisMatchPrevSixes+1;
 					
 					switch (config.getBroadcaster()) {
-					case Constants.MPL: case Constants.NPL: case Constants.LEGENDS: case Constants.APL:
+					case Constants.MPL: case Constants.NPL: case Constants.LEGENDS: case Constants.ASSAM: case Constants.APL:
 						this_data_str.add(CricketFunctions.hundredsTensUnits(String.valueOf(thisMatchPrevSixes)));
 						this_data_str.add(CricketFunctions.hundredsTensUnits(String.valueOf(thisMatchNewSixes)));
 						break;
@@ -12243,7 +12244,7 @@ public class InfobarGfx
 					}
 					
 					switch(config.getBroadcaster()) {
-					case Constants.LEGENDS:
+					case Constants.LEGENDS: case Constants.ASSAM:
 						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Infobar$Right$Side_" + WhichSide + "$Tournament_Sixes$txt_Title"
 								+ "*GEOM*TEXT SET " + "THIS MATCH SIXES" + "\0", print_writers);
 						break;
@@ -15677,7 +15678,7 @@ public class InfobarGfx
 		}
 		
 		switch (config.getBroadcaster()) {
-		case Constants.APL: case Constants.LEGENDS:
+		case Constants.APL: case Constants.LEGENDS: case Constants.ASSAM:
 			switch (WhichProfile.toUpperCase()) {
 			case "APL_BOUNDARY": case "BPL_BOUNDARY": case "PPL_BOUNDARY":
 				this_series =  CricketFunctions.extractTournamentData("CURRENT_MATCH_DATA", false, headToHead,cricketService, matchAllData, past_tournament_stats);
@@ -15780,7 +15781,7 @@ public class InfobarGfx
 				stat = CricketFunctions.updateStatisticsWithMatchData(stat, matchAllData, CricketUtil.TEAMNAME_3);
 				break;
 			default:
-				if(!config.getBroadcaster().equalsIgnoreCase(Constants.LEGENDS)) {
+				if(!config.getBroadcaster().equalsIgnoreCase(Constants.LEGENDS) || config.getBroadcaster().equalsIgnoreCase(Constants.ASSAM)) {
 					//stat = CricketFunctions.updateTournamentWithH2h(stat, headToHead, matchAllData, CricketUtil.FULL);
 					//matchAllData.getSetup().setMatchType("DT20");
 				}
@@ -15789,7 +15790,7 @@ public class InfobarGfx
 			break;
 
 		default:
-			if(!config.getBroadcaster().equalsIgnoreCase(Constants.LEGENDS)) {
+			if(!config.getBroadcaster().equalsIgnoreCase(Constants.LEGENDS) || config.getBroadcaster().equalsIgnoreCase(Constants.ASSAM)) {
 				stat = CricketFunctions.updateTournamentWithH2h(stat, headToHead, matchAllData, CricketUtil.FULL);
 				stat = CricketFunctions.updateStatisticsWithMatchData(stat, matchAllData, CricketUtil.FULL);
 				matchAllData.getSetup().setMatchType("DT20");
@@ -15937,7 +15938,7 @@ public class InfobarGfx
 		String MatchNam = null, matchName = null;
 		
 		switch (config.getBroadcaster()) {
-		case Constants.LEGENDS:
+		case Constants.LEGENDS: case Constants.ASSAM:
 			switch (infobar.getMiddle_section().toUpperCase()) {
 			case "BAT_PROFILE_CAREER":
 				switch (WhichProfile) {
@@ -16548,7 +16549,7 @@ public class InfobarGfx
 			
 			infoIdentSection(print_writers, whatToProcess, matchAllData, WhichSide);
 			break;
-		case Constants.NPL: case Constants.ISPL:  case Constants.LEGENDS: case Constants.MPL: case Constants.APL:
+		case Constants.NPL: case Constants.ISPL:  case Constants.LEGENDS: case Constants.ASSAM: case Constants.MPL: case Constants.APL:
 			String logoPath = "";
 			logoCategory = "";
 			if(config.getBroadcaster().equalsIgnoreCase(Constants.NPL)) {
@@ -16582,8 +16583,8 @@ public class InfobarGfx
 					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$SB_Ident$BaseALL$TLogo$img_Logo*TEXTURE*IMAGE SET " + 
 							logoPath + "TLogo" + "\0", print_writers);
 				}
-			}else if(config.getBroadcaster().equalsIgnoreCase(Constants.LEGENDS)) {
-				logoPath = Constants.LEGENDS_LOGO_PATH;
+			}else if(config.getBroadcaster().equalsIgnoreCase(Constants.LEGENDS) || config.getBroadcaster().equalsIgnoreCase(Constants.ASSAM)) {
+				logoPath = (config.getBroadcaster().equalsIgnoreCase(Constants.LEGENDS) ? Constants.LEGENDS_LOGO_PATH : Constants.ASSAM_LOGO_PATH);
 			}else {
 				logoPath = Constants.ISPL_LOGOS_PATH;
 				
@@ -16831,7 +16832,7 @@ public class InfobarGfx
 				break;
 			}
 			break;
-		case Constants.NPL: case Constants.ISPL:  case Constants.LEGENDS: case Constants.MPL: case Constants.APL:
+		case Constants.NPL: case Constants.ISPL:  case Constants.LEGENDS: case Constants.ASSAM: case Constants.MPL: case Constants.APL:
 //			if(WhichSide==1) {
 //				this_animation.processAnimation(Constants.FRONT, print_writers, "Anim_InfoBar$IdentInfo$Change", "SHOW 0.0");
 //			}
@@ -16839,7 +16840,7 @@ public class InfobarGfx
 			switch (whatToProcess.split(",")[2]) {
 			case CricketUtil.TOSS:
 				switch (config.getBroadcaster()) {
-				case Constants.LEGENDS:
+				case Constants.LEGENDS: case Constants.ASSAM:
 					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$SB_Ident$Data_Grp$Bottom_Grp$Stat_Head_GRP$Side" + WhichSide + "$txt1"
 							+ "*GEOM*TEXT SET " + CricketFunctions.generateTossResult(matchAllData, CricketUtil.FULL, CricketUtil.FIELD, CricketUtil.MIDDLE, 
 							CricketUtil.CHOSE).toUpperCase() + "\0", print_writers);
@@ -16870,7 +16871,7 @@ public class InfobarGfx
 					
 					if(matchAllData.getSetup().getTargetOvers() != null && matchAllData.getSetup().getTargetRuns() != 0) {
 						switch (config.getBroadcaster()) {
-						case Constants.LEGENDS:
+						case Constants.LEGENDS: case Constants.ASSAM:
 							if(matchAllData.getSetup().getTargetOvers() != null && !matchAllData.getSetup().getTargetOvers().isEmpty()) {
 								
 								CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$SB_Ident$Data_Grp$Bottom_Grp$Stat_Head_GRP$Side" + WhichSide + "$txt1*GEOM*TEXT SET " 
@@ -17427,7 +17428,7 @@ public class InfobarGfx
 			return "populateVizInfobarLeftBottom: Ground Name [" + matchAllData.getSetup().getVenueName() + "] from database is returning NULL";
 		}
 		switch (config.getBroadcaster()) {
-		case Constants.LEGENDS:
+		case Constants.LEGENDS: case Constants.ASSAM:
 			logoCategory = "TLogo";
 			break;
 		default:
@@ -17443,11 +17444,11 @@ public class InfobarGfx
 		
 		for(int i =1; i<= 8; i++) {
 			switch (config.getBroadcaster()) {
-			case Constants.LEGENDS:
+			case Constants.LEGENDS: case Constants.ASSAM:
 				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*TREE*$Main$All$Geom_GroundAll$RotationGrp$dime_final$" + i + "$Texture$img_Base01" + 
-						"*TEXTURE*IMAGE SET " + Constants.LEGENDS_BASE + logoCategory + "\0", print_writers);
+						"*TEXTURE*IMAGE SET " + (config.getBroadcaster().equalsIgnoreCase(Constants.LEGENDS) ? Constants.LEGENDS_BASE : Constants.ASSAM_BASE) + logoCategory + "\0", print_writers);
 				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*TREE*$Main$All$Geom_GroundAll$RotationGrp$dime_final$" + i + "$Texture$img_Base02" + 
-						"*TEXTURE*IMAGE SET " + Constants.LEGENDS_BASE2 + logoCategory + "\0", print_writers);
+						"*TEXTURE*IMAGE SET " + (config.getBroadcaster().equalsIgnoreCase(Constants.LEGENDS) ? Constants.LEGENDS_BASE2 : Constants.ASSAM_BASE2) + logoCategory + "\0", print_writers);
 				break;
 			case Constants.BENGAL_T20: case Constants.AFG_T20:
 				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*TREE*$Main$All$Geom_GroundAll$RotationGrp$dime_final$" + i + "$Texture$img_Base01" + 
@@ -17526,7 +17527,7 @@ public class InfobarGfx
 				stat.setStats_type(statsType);
 			}else {
 				switch (config.getBroadcaster()) {
-				case Constants.APL: case Constants.LEGENDS: case Constants.T20_MUMBAI:
+				case Constants.APL: case Constants.LEGENDS: case Constants.ASSAM: case Constants.T20_MUMBAI:
 					switch (whatToProcess.split(",")[3].toUpperCase()) {
 					case "APL_BOUNDARY": case "BPL_BOUNDARY": case "THIS_SERIES": case "T20_MUMBAI_BOUNDARY":
 						this_series =  CricketFunctions.extractTournamentData("CURRENT_MATCH_DATA", false, headToHead,cricketService, matchAllData, past_tournament_stats);

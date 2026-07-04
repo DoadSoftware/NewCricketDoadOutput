@@ -105,14 +105,14 @@ public class Scene
 				break;	
 			}
 			break;
-		case Constants.BENGAL_T20: case Constants.LEGENDS: case Constants.AFG_T20:
+		case Constants.BENGAL_T20: case Constants.LEGENDS: case Constants.ASSAM: case Constants.AFG_T20:
 			switch (whatToProcess) {
 			case "FULL-FRAMERS":
 				switch (config.getBroadcaster().toUpperCase()) {
 				case Constants.BENGAL_T20: case Constants.AFG_T20:
 					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER SET_OBJECT SCENE*/Default/FullFrames \0", print_writers);
 					break;
-				case Constants.LEGENDS:
+				case Constants.LEGENDS: case Constants.ASSAM:
 					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER SET_OBJECT SCENE*/Default/Fullframes \0", print_writers);
 					break;	
 				}

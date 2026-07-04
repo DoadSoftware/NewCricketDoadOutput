@@ -181,7 +181,7 @@ public class Caption
 				break;
 			case "Control_4":
 				switch (config.getBroadcaster().toUpperCase()) {
-				case Constants.NPL: case Constants.LEGENDS: case Constants.MPL: case Constants.T20_MUMBAI: case Constants.BENGAL_T20:
+				case Constants.NPL: case Constants.LEGENDS: case Constants.ASSAM: case Constants.MPL: case Constants.T20_MUMBAI: case Constants.BENGAL_T20:
 				case Constants.APL: case Constants.VIDARBHA: case Constants.AFG_T20:
 					status = this_bugsAndMiniGfx.populateFourCounter(whatToProcess, whichSide, matchAllData);
 					break;
@@ -449,7 +449,7 @@ public class Caption
 				break;
 			case "Alt_F1": // BatGriff
 				switch (config.getBroadcaster().toUpperCase()) {
-				case Constants.BENGAL_T20: case Constants.NPL: case Constants.MPL:case Constants.LEGENDS:
+				case Constants.BENGAL_T20: case Constants.NPL: case Constants.MPL:case Constants.LEGENDS: case Constants.ASSAM:
 				case Constants.APL: case Constants.T20_MUMBAI: case Constants.AFG_T20:
 					status = this_bugsAndMiniGfx.populateGriff(whatToProcess, whichSide, matchAllData);
 					break;
@@ -574,7 +574,7 @@ public class Caption
 					status = this_lofInfobarGfx.populateInfobar(print_writers,whatToProcess,matchAllData,whichSide);
 				}else {
 					switch(config.getBroadcaster()) {
-					case Constants.NPL: case Constants.LEGENDS: case Constants.ISPL:  case Constants.MPL: case Constants.APL:
+					case Constants.NPL: case Constants.LEGENDS: case Constants.ASSAM: case Constants.ISPL:  case Constants.MPL: case Constants.APL:
 						this_infobarGfx.infobar.setLeft_bottom(whatToProcess.split(",")[0]);
 						break;
 					}
@@ -853,7 +853,7 @@ public class Caption
 				break;
 			case "Control_h"://powerplay Summary
 				switch (config.getBroadcaster().toUpperCase()) {
-				case Constants.NPL: case Constants.LEGENDS: case Constants.MPL: case Constants.T20_MUMBAI: case Constants.BENGAL_T20:
+				case Constants.NPL: case Constants.LEGENDS: case Constants.ASSAM: case Constants.MPL: case Constants.T20_MUMBAI: case Constants.BENGAL_T20:
 				case Constants.APL: case Constants.VIDARBHA: case Constants.AFG_T20:
 					status = this_lowerThirdGfx.populateL3PhaseWise(whatToProcess,whichSide,matchAllData);
 					break;
@@ -1119,7 +1119,7 @@ public class Caption
 				
 			case "Alt_2": // Infobar Middle
 				switch (config.getBroadcaster().toUpperCase()) {
-				case Constants.ICC_U19_2023: case Constants.NPL: case Constants.LEGENDS: case Constants.T20_MUMBAI: case Constants.MPL:
+				case Constants.ICC_U19_2023: case Constants.NPL: case Constants.LEGENDS: case Constants.ASSAM: case Constants.T20_MUMBAI: case Constants.MPL:
 				case Constants.APL:
 					if(config.getBroadcaster().equalsIgnoreCase(Constants.NPL) || config.getBroadcaster().equalsIgnoreCase(Constants.MPL) ||
 							config.getBroadcaster().equalsIgnoreCase(Constants.APL)) {
@@ -1475,7 +1475,7 @@ public class Caption
 						}
 					}
 					break;
-				case Constants.NPL: case Constants.LEGENDS: case Constants.ISPL: case Constants.MPL: case Constants.APL:
+				case Constants.NPL: case Constants.LEGENDS: case Constants.ASSAM: case Constants.ISPL: case Constants.MPL: case Constants.APL:
 					if(config.getWhichInfobar().equalsIgnoreCase("LOF_INFOBAR")) {
 						if(whatToProcess.split(",")[3].equalsIgnoreCase("WITH")) {
 							this_lofInfobarGfx.infobar.setFull_section("LAST_X_BALLS");
@@ -1641,7 +1641,7 @@ public class Caption
 //					this_infobarGfx.infobar.setRight_bottom(whatToProcess.split(",")[2]);
 //					status = this_infobarGfx.populateVizInfobarRightBottom(print_writers, matchAllData, 1, whichSide);
 					break;
-				case Constants.NPL: case Constants.LEGENDS: case Constants.MPL: case Constants.APL:
+				case Constants.NPL: case Constants.LEGENDS: case Constants.ASSAM: case Constants.MPL: case Constants.APL:
 //					if(this_infobarGfx.infobar.getMiddle_section().equalsIgnoreCase(CricketUtil.BATSMAN)) {
 //						this_infobarGfx.infobar.setRight_bottom(whatToProcess.split(",")[2]);
 //						status = this_infobarGfx.populateVizInfobarRightBottom(print_writers, matchAllData, 1, whichSide);
@@ -1750,7 +1750,7 @@ public class Caption
 						}
 					}
 					break;
-				case Constants.NPL: case Constants.LEGENDS: case Constants.MPL: case Constants.APL:
+				case Constants.NPL: case Constants.LEGENDS: case Constants.ASSAM: case Constants.MPL: case Constants.APL:
 					if(this_infobarGfx.infobar.getRight_section().equalsIgnoreCase(CricketUtil.BOWLER) && 
 							whatToProcess.split(",")[2].equalsIgnoreCase(CricketUtil.BOWLER)) {
 						status = "IN Alt+8 Section BOWLER IS ALREADY SELECTED";
@@ -1765,7 +1765,7 @@ public class Caption
 								// When Goes Bowler to Boundary/Compare Section
 								this_infobarGfx.infobar.setRight_section(whatToProcess.split(",")[2]);
 								switch (config.getBroadcaster().toUpperCase()) {
-								case Constants.LEGENDS:
+								case Constants.LEGENDS: case Constants.ASSAM:
 									status = this_infobarGfx.populateVizInfobarRightSection(false,print_writers, matchAllData, 1, 1);
 									break;
 								default:
@@ -1904,7 +1904,7 @@ public class Caption
 					this_infobarGfx.infobarStatsId = Integer.valueOf(whatToProcess.split(",")[2]);
 					status = this_infobarGfx.populateFullSection(false,print_writers, matchAllData, whichSide);
 					break;
-				case Constants.ICC_U19_2023: case Constants.NPL: case Constants.ISPL: case Constants.LEGENDS: case Constants.MPL:
+				case Constants.ICC_U19_2023: case Constants.NPL: case Constants.ISPL: case Constants.LEGENDS: case Constants.ASSAM: case Constants.MPL:
 				case Constants.APL:
 					if(config.getWhichInfobar().equalsIgnoreCase("LOF_INFOBAR")) {
 						if(this_lofInfobarGfx.infobar.getFull_section() != null && !this_lofInfobarGfx.infobar.getFull_section().isEmpty()) {
@@ -1972,7 +1972,7 @@ public class Caption
 					this_infobarGfx.infobar.setFull_promo_section(whatToProcess.split(",")[2]);
 					status = this_infobarGfx.t20MumbaiFullPromoSection(false, print_writers, matchAllData, whichSide);
 					break;
-				case Constants.ICC_U19_2023: case Constants.NPL: case Constants.ISPL: case Constants.LEGENDS: case Constants.MPL:
+				case Constants.ICC_U19_2023: case Constants.NPL: case Constants.ISPL: case Constants.LEGENDS: case Constants.ASSAM: case Constants.MPL:
 				case Constants.APL: case Constants.VIDARBHA:
 					if(config.getWhichInfobar().equalsIgnoreCase("LOF_INFOBAR")) {
 						if(this_lofInfobarGfx.infobar.getFull_section() != null && !this_lofInfobarGfx.infobar.getFull_section().isEmpty()) {

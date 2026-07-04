@@ -229,7 +229,7 @@
 			</div>
 	      	<c:if test="${(session_configuration.broadcaster == 'ISPL' || session_configuration.broadcaster == 'T20_MUMBAI' || 
 	      					session_configuration.broadcaster == 'NPL' || session_configuration.broadcaster == 'APL' ||
-	      					session_configuration.broadcaster == 'MPL' || session_configuration.broadcaster == 'VIDARBHA' || 
+	      					session_configuration.broadcaster == 'MPL' || session_configuration.broadcaster == 'VIDARBHA' || session_configuration.broadcaster == 'ASSAM-T20' ||
 	      					session_configuration.broadcaster == 'LEGENDS-90' || session_configuration.broadcaster == 'AFG-T20')}">
 			    <br>
 			   <div class="custom-toggle-wrapper">
