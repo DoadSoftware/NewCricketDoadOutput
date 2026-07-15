@@ -857,7 +857,6 @@ public class Caption
 				case Constants.APL: case Constants.VIDARBHA: case Constants.AFG_T20:
 					status = this_lowerThirdGfx.populateL3PhaseWise(whatToProcess,whichSide,matchAllData);
 					break;
-
 				case Constants.ICC_U19_2023: case Constants.ISPL:
 					status = this_lowerThirdGfx.populateL3rdPowerPlay(whatToProcess,whichSide,matchAllData);
 					break;
@@ -1827,7 +1826,7 @@ public class Caption
 						}else {
 							if(whatToProcess.split(",")[2].equalsIgnoreCase(CricketUtil.BOWLER)) {
 								this_infobarGfx.infobar.setRight_section(CricketUtil.BOWLER);
-								this_infobarGfx.infobar.setRight_bottom("BOWLING_END");
+								this_infobarGfx.infobar.setRight_bottom("OVER");
 								
 								status = this_infobarGfx.populateVizInfobarBowler(print_writers, matchAllData, 1);
 								status = this_infobarGfx.populateVizInfobarRightBottom(print_writers, matchAllData, whichSide, whichSide);

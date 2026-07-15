@@ -5687,34 +5687,34 @@ public class BugsAndMiniGfx
 								+ "$txt_Text*GEOM*TEXT SET TOURNAMENT SIXES\0", print_writers);
 						
 						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Counter$SelectText$Counter$Unit"
-								+ "$Side1$Reflection3$txt_Text*GEOM*TEXT SET "+this_data_str.get(0).split(",")[2] + "\0", print_writers);
+								+ "$Side1$Reflection3$txt_Text*GEOM*TEXT SET "+this_data_str.get(0).split(",")[3] + "\0", print_writers);
 						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Counter$SelectText$Counter$Unit"
+								+ "$Side1$Reflection1A$txt_Text*GEOM*TEXT SET "+this_data_str.get(0).split(",")[3] + "\0", print_writers);
+						
+						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Counter$SelectText$Counter$Tenths"
+								+ "$Side1$Reflection3$txt_Text*GEOM*TEXT SET "+this_data_str.get(0).split(",")[2] + "\0", print_writers);
+						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Counter$SelectText$Counter$Tenths"
 								+ "$Side1$Reflection1A$txt_Text*GEOM*TEXT SET "+this_data_str.get(0).split(",")[2] + "\0", print_writers);
 						
-						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Counter$SelectText$Counter$Tenths"
+						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Counter$SelectText$Counter$Hundredths"
 								+ "$Side1$Reflection3$txt_Text*GEOM*TEXT SET "+this_data_str.get(0).split(",")[1] + "\0", print_writers);
-						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Counter$SelectText$Counter$Tenths"
+						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Counter$SelectText$Counter$Hundredths"
 								+ "$Side1$Reflection1A$txt_Text*GEOM*TEXT SET "+this_data_str.get(0).split(",")[1] + "\0", print_writers);
 						
-						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Counter$SelectText$Counter$Hundredths"
-								+ "$Side1$Reflection3$txt_Text*GEOM*TEXT SET "+this_data_str.get(0).split(",")[0] + "\0", print_writers);
-						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Counter$SelectText$Counter$Hundredths"
-								+ "$Side1$Reflection1A$txt_Text*GEOM*TEXT SET "+this_data_str.get(0).split(",")[0] + "\0", print_writers);
+						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Counter$SelectText$Counter$Unit"
+								+ "$Side2$Reflection3$txt_Text*GEOM*TEXT SET "+this_data_str.get(1).split(",")[3] + "\0", print_writers);
+						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Counter$SelectText$Counter$Unit"
+								+ "$Side2$Reflection1A$txt_Text*GEOM*TEXT SET "+this_data_str.get(1).split(",")[3] + "\0", print_writers);
 						
-						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Counter$SelectText$Counter$Unit"
+						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Counter$SelectText$Counter$Tenths"
 								+ "$Side2$Reflection3$txt_Text*GEOM*TEXT SET "+this_data_str.get(1).split(",")[2] + "\0", print_writers);
-						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Counter$SelectText$Counter$Unit"
+						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Counter$SelectText$Counter$Tenths"
 								+ "$Side2$Reflection1A$txt_Text*GEOM*TEXT SET "+this_data_str.get(1).split(",")[2] + "\0", print_writers);
 						
-						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Counter$SelectText$Counter$Tenths"
+						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Counter$SelectText$Counter$Hundredths"
 								+ "$Side2$Reflection3$txt_Text*GEOM*TEXT SET "+this_data_str.get(1).split(",")[1] + "\0", print_writers);
-						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Counter$SelectText$Counter$Tenths"
+						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Counter$SelectText$Counter$Hundredths"
 								+ "$Side2$Reflection1A$txt_Text*GEOM*TEXT SET "+this_data_str.get(1).split(",")[1] + "\0", print_writers);
-						
-						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Counter$SelectText$Counter$Hundredths"
-								+ "$Side2$Reflection3$txt_Text*GEOM*TEXT SET "+this_data_str.get(1).split(",")[0] + "\0", print_writers);
-						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Counter$SelectText$Counter$Hundredths"
-								+ "$Side2$Reflection1A$txt_Text*GEOM*TEXT SET "+this_data_str.get(1).split(",")[0] + "\0", print_writers);
 						break;
 					case Constants.AFG_T20:
 						
@@ -5722,34 +5722,34 @@ public class BugsAndMiniGfx
 								+ "$txt_Text*GEOM*TEXT SET TOURNAMENT SIXES\0", print_writers);
 						
 						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Counter$DataAll$Counter$Unit"
+								+ "$Side1$txt_Text*GEOM*TEXT SET "+this_data_str.get(0).split(",")[3] + "\0", print_writers);
+						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Counter$DataAll$Counter$Unit"
+								+ "$Side1$txt_Text*GEOM*TEXT SET "+this_data_str.get(0).split(",")[3] + "\0", print_writers);
+						
+						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Counter$DataAll$Counter$Tenths"
 								+ "$Side1$txt_Text*GEOM*TEXT SET "+this_data_str.get(0).split(",")[2] + "\0", print_writers);
-						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Counter$DataAll$Counter$Unit"
+						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Counter$DataAll$Counter$Tenths"
 								+ "$Side1$txt_Text*GEOM*TEXT SET "+this_data_str.get(0).split(",")[2] + "\0", print_writers);
 						
-						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Counter$DataAll$Counter$Tenths"
-								+ "$Side1$txt_Text*GEOM*TEXT SET "+this_data_str.get(0).split(",")[1] + "\0", print_writers);
-						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Counter$DataAll$Counter$Tenths"
-								+ "$Side1$txt_Text*GEOM*TEXT SET "+this_data_str.get(0).split(",")[1] + "\0", print_writers);
-						
 						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Counter$DataAll$Counter$Hundredths"
-								+ "$Side1$txt_Text*GEOM*TEXT SET "+this_data_str.get(0).split(",")[0] + "\0", print_writers);
+								+ "$Side1$txt_Text*GEOM*TEXT SET "+this_data_str.get(0).split(",")[1] + "\0", print_writers);
 						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Counter$DataAll$Counter$Hundredths"
-								+ "$Side1$txt_Text*GEOM*TEXT SET "+this_data_str.get(0).split(",")[0] + "\0", print_writers);
+								+ "$Side1$txt_Text*GEOM*TEXT SET "+this_data_str.get(0).split(",")[1] + "\0", print_writers);
 						
 						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Counter$DataAll$Counter$Unit"
-								+ "$Side2$txt_Text*GEOM*TEXT SET "+this_data_str.get(1).split(",")[2] + "\0", print_writers);
+								+ "$Side2$txt_Text*GEOM*TEXT SET "+this_data_str.get(1).split(",")[3] + "\0", print_writers);
 						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Counter$DataAll$Counter$Unit"
+								+ "$Side2$txt_Text*GEOM*TEXT SET "+this_data_str.get(1).split(",")[3] + "\0", print_writers);
+						
+						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Counter$DataAll$Counter$Tenths"
+								+ "$Side2$txt_Text*GEOM*TEXT SET "+this_data_str.get(1).split(",")[2] + "\0", print_writers);
+						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Counter$DataAll$Counter$Tenths"
 								+ "$Side2$txt_Text*GEOM*TEXT SET "+this_data_str.get(1).split(",")[2] + "\0", print_writers);
 						
-						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Counter$DataAll$Counter$Tenths"
-								+ "$Side2$txt_Text*GEOM*TEXT SET "+this_data_str.get(1).split(",")[1] + "\0", print_writers);
-						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Counter$DataAll$Counter$Tenths"
-								+ "$Side2$txt_Text*GEOM*TEXT SET "+this_data_str.get(1).split(",")[1] + "\0", print_writers);
-						
 						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Counter$DataAll$Counter$Hundredths"
-								+ "$Side2$txt_Text*GEOM*TEXT SET "+this_data_str.get(1).split(",")[0] + "\0", print_writers);
+								+ "$Side2$txt_Text*GEOM*TEXT SET "+this_data_str.get(1).split(",")[1] + "\0", print_writers);
 						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Counter$DataAll$Counter$Hundredths"
-								+ "$Side2$txt_Text*GEOM*TEXT SET "+this_data_str.get(1).split(",")[0] + "\0", print_writers);
+								+ "$Side2$txt_Text*GEOM*TEXT SET "+this_data_str.get(1).split(",")[1] + "\0", print_writers);
 						break;
 					}
 					break;
@@ -5765,34 +5765,34 @@ public class BugsAndMiniGfx
 								+ "$txt_Text*GEOM*TEXT SET TOURNAMENT FOURS\0", print_writers);
 						
 						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Counter$SelectText$Counter$Unit"
-								+ "$Side1$Reflection3$txt_Text*GEOM*TEXT SET "+this_data_str.get(0).split(",")[2] + "\0", print_writers);
+								+ "$Side1$Reflection3$txt_Text*GEOM*TEXT SET "+this_data_str.get(0).split(",")[3] + "\0", print_writers);
 						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Counter$SelectText$Counter$Unit"
+								+ "$Side1$Reflection1A$txt_Text*GEOM*TEXT SET "+this_data_str.get(0).split(",")[3] + "\0", print_writers);
+						
+						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Counter$SelectText$Counter$Tenths"
+								+ "$Side1$Reflection3$txt_Text*GEOM*TEXT SET "+this_data_str.get(0).split(",")[2] + "\0", print_writers);
+						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Counter$SelectText$Counter$Tenths"
 								+ "$Side1$Reflection1A$txt_Text*GEOM*TEXT SET "+this_data_str.get(0).split(",")[2] + "\0", print_writers);
 						
-						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Counter$SelectText$Counter$Tenths"
+						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Counter$SelectText$Counter$Hundredths"
 								+ "$Side1$Reflection3$txt_Text*GEOM*TEXT SET "+this_data_str.get(0).split(",")[1] + "\0", print_writers);
-						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Counter$SelectText$Counter$Tenths"
+						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Counter$SelectText$Counter$Hundredths"
 								+ "$Side1$Reflection1A$txt_Text*GEOM*TEXT SET "+this_data_str.get(0).split(",")[1] + "\0", print_writers);
 						
-						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Counter$SelectText$Counter$Hundredths"
-								+ "$Side1$Reflection3$txt_Text*GEOM*TEXT SET "+this_data_str.get(0).split(",")[0] + "\0", print_writers);
-						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Counter$SelectText$Counter$Hundredths"
-								+ "$Side1$Reflection1A$txt_Text*GEOM*TEXT SET "+this_data_str.get(0).split(",")[0] + "\0", print_writers);
+						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Counter$SelectText$Counter$Unit"
+								+ "$Side2$Reflection3$txt_Text*GEOM*TEXT SET "+this_data_str.get(1).split(",")[3] + "\0", print_writers);
+						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Counter$SelectText$Counter$Unit"
+								+ "$Side2$Reflection1A$txt_Text*GEOM*TEXT SET "+this_data_str.get(1).split(",")[3] + "\0", print_writers);
 						
-						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Counter$SelectText$Counter$Unit"
+						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Counter$SelectText$Counter$Tenths"
 								+ "$Side2$Reflection3$txt_Text*GEOM*TEXT SET "+this_data_str.get(1).split(",")[2] + "\0", print_writers);
-						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Counter$SelectText$Counter$Unit"
+						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Counter$SelectText$Counter$Tenths"
 								+ "$Side2$Reflection1A$txt_Text*GEOM*TEXT SET "+this_data_str.get(1).split(",")[2] + "\0", print_writers);
 						
-						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Counter$SelectText$Counter$Tenths"
+						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Counter$SelectText$Counter$Hundredths"
 								+ "$Side2$Reflection3$txt_Text*GEOM*TEXT SET "+this_data_str.get(1).split(",")[1] + "\0", print_writers);
-						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Counter$SelectText$Counter$Tenths"
+						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Counter$SelectText$Counter$Hundredths"
 								+ "$Side2$Reflection1A$txt_Text*GEOM*TEXT SET "+this_data_str.get(1).split(",")[1] + "\0", print_writers);
-						
-						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Counter$SelectText$Counter$Hundredths"
-								+ "$Side2$Reflection3$txt_Text*GEOM*TEXT SET "+this_data_str.get(1).split(",")[0] + "\0", print_writers);
-						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Counter$SelectText$Counter$Hundredths"
-								+ "$Side2$Reflection1A$txt_Text*GEOM*TEXT SET "+this_data_str.get(1).split(",")[0] + "\0", print_writers);
 						break;
 					case Constants.AFG_T20:
 						
@@ -5800,34 +5800,34 @@ public class BugsAndMiniGfx
 								+ "$txt_Text*GEOM*TEXT SET TOURNAMENT FOURS\0", print_writers);
 						
 						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Counter$DataAll$Counter$Unit"
+								+ "$Side1$txt_Text*GEOM*TEXT SET "+this_data_str.get(0).split(",")[3] + "\0", print_writers);
+						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Counter$DataAll$Counter$Unit"
+								+ "$Side1$txt_Text*GEOM*TEXT SET "+this_data_str.get(0).split(",")[3] + "\0", print_writers);
+						
+						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Counter$DataAll$Counter$Tenths"
 								+ "$Side1$txt_Text*GEOM*TEXT SET "+this_data_str.get(0).split(",")[2] + "\0", print_writers);
-						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Counter$DataAll$Counter$Unit"
+						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Counter$DataAll$Counter$Tenths"
 								+ "$Side1$txt_Text*GEOM*TEXT SET "+this_data_str.get(0).split(",")[2] + "\0", print_writers);
 						
-						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Counter$DataAll$Counter$Tenths"
-								+ "$Side1$txt_Text*GEOM*TEXT SET "+this_data_str.get(0).split(",")[1] + "\0", print_writers);
-						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Counter$DataAll$Counter$Tenths"
-								+ "$Side1$txt_Text*GEOM*TEXT SET "+this_data_str.get(0).split(",")[1] + "\0", print_writers);
-						
 						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Counter$DataAll$Counter$Hundredths"
-								+ "$Side1$txt_Text*GEOM*TEXT SET "+this_data_str.get(0).split(",")[0] + "\0", print_writers);
+								+ "$Side1$txt_Text*GEOM*TEXT SET "+this_data_str.get(0).split(",")[1] + "\0", print_writers);
 						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Counter$DataAll$Counter$Hundredths"
-								+ "$Side1$txt_Text*GEOM*TEXT SET "+this_data_str.get(0).split(",")[0] + "\0", print_writers);
+								+ "$Side1$txt_Text*GEOM*TEXT SET "+this_data_str.get(0).split(",")[1] + "\0", print_writers);
 						
 						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Counter$DataAll$Counter$Unit"
-								+ "$Side2$txt_Text*GEOM*TEXT SET "+this_data_str.get(1).split(",")[2] + "\0", print_writers);
+								+ "$Side2$txt_Text*GEOM*TEXT SET "+this_data_str.get(1).split(",")[3] + "\0", print_writers);
 						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Counter$DataAll$Counter$Unit"
+								+ "$Side2$txt_Text*GEOM*TEXT SET "+this_data_str.get(1).split(",")[3] + "\0", print_writers);
+						
+						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Counter$DataAll$Counter$Tenths"
+								+ "$Side2$txt_Text*GEOM*TEXT SET "+this_data_str.get(1).split(",")[2] + "\0", print_writers);
+						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Counter$DataAll$Counter$Tenths"
 								+ "$Side2$txt_Text*GEOM*TEXT SET "+this_data_str.get(1).split(",")[2] + "\0", print_writers);
 						
-						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Counter$DataAll$Counter$Tenths"
-								+ "$Side2$txt_Text*GEOM*TEXT SET "+this_data_str.get(1).split(",")[1] + "\0", print_writers);
-						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Counter$DataAll$Counter$Tenths"
-								+ "$Side2$txt_Text*GEOM*TEXT SET "+this_data_str.get(1).split(",")[1] + "\0", print_writers);
-						
 						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Counter$DataAll$Counter$Hundredths"
-								+ "$Side2$txt_Text*GEOM*TEXT SET "+this_data_str.get(1).split(",")[0] + "\0", print_writers);
+								+ "$Side2$txt_Text*GEOM*TEXT SET "+this_data_str.get(1).split(",")[1] + "\0", print_writers);
 						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Counter$DataAll$Counter$Hundredths"
-								+ "$Side2$txt_Text*GEOM*TEXT SET "+this_data_str.get(1).split(",")[0] + "\0", print_writers);
+								+ "$Side2$txt_Text*GEOM*TEXT SET "+this_data_str.get(1).split(",")[1] + "\0", print_writers);
 						break;
 					}					
 					break;
