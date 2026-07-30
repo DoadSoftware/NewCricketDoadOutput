@@ -4392,13 +4392,13 @@ function addItemsToList(whatToProcess,dataToProcess)
 					select.appendChild(option);
 					
 					switch($('#selected_broadcaster').val().toUpperCase()){
-						 case 'MPL': case 'NPL': //case 'APL':
+						 /*case 'MPL': case 'NPL': case 'APL':
 							option = document.createElement('option');
 							option.value = 'PHOTO BATSMAN';
 							option.text = 'Photo Batsman/Bowler';
 							select.appendChild(option);
 						 break;
-						/* case 'LEGENDS-90': case 'ASSAM-T20':
+						 case 'LEGENDS-90': case 'ASSAM-T20':
 							option = document.createElement('option');
 							option.value = 'BowlerVsBatsman';
 							option.text = 'BowlerVsBatsman';
@@ -4516,7 +4516,7 @@ function addItemsToList(whatToProcess,dataToProcess)
 					select.appendChild(option);
 					
 					switch($('#selected_broadcaster').val().toUpperCase()){
-					case 'MPL': case 'NPL': //case 'APL':
+					case 'NPL': //case 'APL': case 'MPL': 
 						
 						option = document.createElement('option');
 						option.value = 'NEXT_TO_BAT';
@@ -4525,10 +4525,10 @@ function addItemsToList(whatToProcess,dataToProcess)
 						break;
 					}
 					
-					option = document.createElement('option');
+					/*option = document.createElement('option');
 					option.value = 'SPEED_THIS_OVER';
 					option.text = 'Speed This Over';
-					select.appendChild(option);
+					select.appendChild(option);*/
 					
 					option = document.createElement('option');
 					option.value = 'INNING_DOTS';
@@ -6191,32 +6191,6 @@ function addItemsToList(whatToProcess,dataToProcess)
 					option.text = 'Innings Boundaries';
 					select.appendChild(option);
 					
-					option = document.createElement('option');
-					option.value = 'TEAMS_STANDINGS';
-					option.text = 'Standings';
-					select.appendChild(option);
-					
-					option = document.createElement('option');
-					option.value = 'REVIEWS_REMAINING';
-					option.text = 'Review';
-					select.appendChild(option);
-					
-					option = document.createElement('option');
-					option.value = 'VENUE';
-					option.text = 'Venue';
-					select.appendChild(option);
-					
-					option = document.createElement('option');
-					option.value = 'FreeText';
-					option.text = 'Free Text';
-					select.appendChild(option);
-					
-					if($('#selected_broadcaster').val() == 'ISPL'){
-						option = document.createElement('option');
-						option.value = 'over';
-						option.text = 'This Over';
-						select.appendChild(option);
-					}
 					session_match.match.inning.forEach(function(inn){
 						if(inn.isCurrentInning == 'YES'){
 							if(inn.inningNumber == 1){
@@ -6267,6 +6241,34 @@ function addItemsToList(whatToProcess,dataToProcess)
 							}
 						}
 					});
+										
+					option = document.createElement('option');
+					option.value = 'TEAMS_STANDINGS';
+					option.text = 'Standings';
+					select.appendChild(option);
+					
+					option = document.createElement('option');
+					option.value = 'REVIEWS_REMAINING';
+					option.text = 'Review';
+					select.appendChild(option);
+					
+					option = document.createElement('option');
+					option.value = 'VENUE';
+					option.text = 'Venue';
+					select.appendChild(option);
+					
+					/*option = document.createElement('option');
+					option.value = 'FreeText';
+					option.text = 'Free Text';
+					select.appendChild(option);*/
+					
+					if($('#selected_broadcaster').val() == 'ISPL'){
+						option = document.createElement('option');
+						option.value = 'over';
+						option.text = 'This Over';
+						select.appendChild(option);
+					}
+					
 					break;
 				case 'BENGAL-T20': case 'AFG-T20':
 					header_text.innerHTML = 'RIGHT INFOBAR SECTION';
@@ -9511,8 +9513,8 @@ function addItemsToList(whatToProcess,dataToProcess)
 				case 'NPL': case 'MPL': case 'APL':	case 'VIDARBHA':		
 					if($('#selected_broadcaster').val().toUpperCase()=='MPL'){
 						option = document.createElement('option');
-						option.value = 'MPL';
-						option.text = 'MPL';
+						option.value = 'KCL_CAREER';
+						option.text = 'KCL CAREER';
 						select.appendChild(option);	
 					}else if($('#selected_broadcaster').val().toUpperCase()=='NPL'){
 						option = document.createElement('option');
@@ -9817,11 +9819,11 @@ function addItemsToList(whatToProcess,dataToProcess)
 						break;
 
 					case 'MPL':
-						addOption('MPL', 'MPL CAREER');
 						addOption('DT20');
-						addOption('IT20');
-						addOption('MPL_BOUNDARY_CAREER', 'MPL BOUNDARY CAREER');
-						addOption('MPL_BOUNDARY', 'THIS SEASON BOUNDARY');
+						addOption('KCL_CAREER', 'KCL CAREER');
+						addOption('KCL_MILESTONE_BAT', 'KCL MILESTONE');
+						addOption('KCL_BOUNDARY_CAREER', 'KCL BOUNDARY CAREER');
+						addOption('KCL_BOUNDARY', 'THIS SEASON BOUNDARY');
 						addOption('RECENT_FORM_BAT', 'RECENT FORM');
 						break;
 
@@ -10184,9 +10186,10 @@ function addItemsToList(whatToProcess,dataToProcess)
 							break;
 
 						case 'MPL':
-							addOption('KCL', 'KCL CAREER');
 							addOption('DT20');
-							addOption('IT20');
+							addOption('KCL_CAREER', 'KCL CAREER');
+							addOption('KCL_MILESTONE_BALL', 'KCL MILESTONE');
+							addOption('RECENT_FORM_BALL', 'RECENT FORM');
 							break;
 						case 'APL':
 							addOption('DT20');
@@ -10395,8 +10398,8 @@ function addItemsToList(whatToProcess,dataToProcess)
 				case 'NPL': case 'MPL': case 'APL': case 'VIDARBHA':
 					if($('#selected_broadcaster').val().toUpperCase()=='MPL'){
 						option = document.createElement('option');
-						option.value = 'KCL';
-						option.text = 'KCL';
+						option.value = 'KCL_CAREER';
+						option.text = 'KCL CAREER';
 						select.appendChild(option);	
 					}else if($('#selected_broadcaster').val().toUpperCase()=='NPL'){
 						option = document.createElement('option');

@@ -698,7 +698,7 @@ public class IndexController
 	    speed_match_time_stamp = currentTimestamp;
 
 	    switch (session_configuration.getBroadcaster()) {
-	        case Constants.T20_MUMBAI: case Constants.NPL: case Constants.APL: case Constants.VIDARBHA:
+	        case Constants.T20_MUMBAI: case Constants.NPL: case Constants.APL: case Constants.VIDARBHA: case Constants.MPL:
 	            this_caption.this_infobarGfx.speed(CricketFunctions.processPrintWriter(session_configuration).get(0),session_match,session_configuration, 
 	            		session_MasterCricketDirectory);
 	            break;

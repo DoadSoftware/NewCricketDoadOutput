@@ -980,8 +980,8 @@ public class InfobarGfx
 		while ((text_to_return = br.readLine()) != null) {
 			if (lineIndex1 == 1) {
 				
-				switch (config.getBroadcaster()) {
-				case Constants.NPL: case Constants.APL:
+				switch (config.getBroadcaster()) { 
+				case Constants.NPL: case Constants.APL: case Constants.MPL:
 					//-------------------------------------TOP SECTION SPEED--------------------------------------------
 				
 					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Infobar$Right$Data_Right_Normal$Side_1$Style1$Bowl_Part$Speed_Top$Without_Image$"
@@ -15664,6 +15664,7 @@ public class InfobarGfx
 		
 		case "APL_MILESTONE_BAT": case "APL_MILESTONE_BALL": case "RECENT_FORM_BAT": case "RECENT_FORM_BALL":
 		case "BPL_MILESTONE_BAT": case "BPL_MILESTONE_BALL": case "PPL_MILESTONE_BAT": case "PPL_MILESTONE_BALL":
+		case "KCL_MILESTONE_BAT": case "KCL_MILESTONE_BALL":	
 			CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Infobar$Right$Side_" + WhichSide 
 					+ "$Select_Type*FUNCTION*Omo*vis_con SET 10\0",print_writers);
 			break;
@@ -15678,10 +15679,12 @@ public class InfobarGfx
 			return "InfoBarPlayerProfile: Player Id not found [" + FirstPlayerId + "]";
 		}
 		
-		if(!WhichProfile.equalsIgnoreCase("NPL_CAREER") && !WhichProfile.equalsIgnoreCase("KCL") && !WhichProfile.equalsIgnoreCase("APL_CAREER") && 
-				!WhichProfile.equalsIgnoreCase("APL_BOUNDARY_CAREER") && !WhichProfile.equalsIgnoreCase("APL_BOUNDARY") && 
+		if(!WhichProfile.equalsIgnoreCase("NPL_CAREER") && !WhichProfile.equalsIgnoreCase("KCL_CAREER") && !WhichProfile.equalsIgnoreCase("APL_CAREER") && 
+				!WhichProfile.equalsIgnoreCase("APL_BOUNDARY_CAREER") && !WhichProfile.equalsIgnoreCase("APL_BOUNDARY") &&
+				!WhichProfile.equalsIgnoreCase("KCL_BOUNDARY_CAREER") && !WhichProfile.equalsIgnoreCase("KCL_BOUNDARY") &&
 				!WhichProfile.equalsIgnoreCase("MPL_BOUNDARY_CAREER") && !WhichProfile.equalsIgnoreCase("MPL_BOUNDARY") &&
 				!WhichProfile.equalsIgnoreCase("APL_MILESTONE_BAT") && !WhichProfile.equalsIgnoreCase("APL_MILESTONE_BALL") &&
+				!WhichProfile.equalsIgnoreCase("KCL_MILESTONE_BAT") && !WhichProfile.equalsIgnoreCase("KCL_MILESTONE_BALL") &&
 				!WhichProfile.equalsIgnoreCase("RECENT_FORM_BAT") && !WhichProfile.equalsIgnoreCase("RECENT_FORM_BALL") &&
 				!WhichProfile.equalsIgnoreCase("BPL_CAREER") && !WhichProfile.equalsIgnoreCase("BPL_BOUNDARY_CAREER") && 
 				!WhichProfile.equalsIgnoreCase("BPL_BOUNDARY") && !WhichProfile.equalsIgnoreCase("BPL_MILESTONE_BAT") && 
@@ -15780,12 +15783,12 @@ public class InfobarGfx
 			break;
 		case Constants.MPL:
 			switch (WhichProfile.toUpperCase()) {
-			case "MPL_BOUNDARY":
+			case "MPL_BOUNDARY": case "KCL_BOUNDARY":
 				this_series =  CricketFunctions.extractTournamentData("CURRENT_MATCH_DATA", false, headToHead,cricketService, matchAllData, past_tournament_stats);
 				tournament = this_series.stream().filter(tourn -> tourn.getPlayerId() == FirstPlayerId).findAny().orElse(null);
 				break;	
 			case "MPL": case "MPL_BOUNDARY_CAREER":
-				statsType = statsTypes.stream().filter(st -> st.getStatsShortName().equalsIgnoreCase("MPL")).findAny().orElse(null);
+				statsType = statsTypes.stream().filter(st -> st.getStatsShortName().equalsIgnoreCase("KCL_CAREER")).findAny().orElse(null);
 				if(statsType == null) {
 					return "InfoBarPlayerProfile: Stats Type not found for profile [" + WhichProfile + "]";
 				}
@@ -15801,6 +15804,23 @@ public class InfobarGfx
 				stat = CricketFunctions.updateTournamentWithH2h(stat, headToHead, matchAllData, CricketUtil.TEAMNAME_3);
 				stat = CricketFunctions.updateStatisticsWithMatchData(stat, matchAllData, CricketUtil.TEAMNAME_3);
 				break;
+			case "KCL_CAREER": case "KCL_BOUNDARY_CAREER": case "KCL_MILESTONE_BAT": case "KCL_MILESTONE_BALL":
+				statsType = statsTypes.stream().filter(st -> st.getStatsShortName().equalsIgnoreCase("KCL_CAREER")).findAny().orElse(null);
+				if(statsType == null) {
+					return "InfoBarPlayerProfile: Stats Type not found for profile [" + WhichProfile + "]";
+				}
+				
+				stat = statistics.stream().filter(st -> st.getPlayerID() == FirstPlayerId && statsType.getStatsId() == st.getStatsTypeId()).findAny().orElse(null);
+				if(stat == null) {
+					return "InfoBarPlayerProfile: Stats not found for Player Id [" + FirstPlayerId + "]";
+				}
+				
+				statsType = statsTypes.stream().filter(st -> st.getStatsShortName().equalsIgnoreCase("DT20")).findAny().orElse(null);
+				stat.setStats_type(statsType);
+				
+				stat = CricketFunctions.updateTournamentWithH2h(stat, headToHead, matchAllData, CricketUtil.TEAMNAME_3);
+				stat = CricketFunctions.updateStatisticsWithMatchData(stat, matchAllData, CricketUtil.TEAMNAME_3);
+				break;	
 			default:
 				if(!config.getBroadcaster().equalsIgnoreCase(Constants.LEGENDS) || config.getBroadcaster().equalsIgnoreCase(Constants.ASSAM)) {
 					//stat = CricketFunctions.updateTournamentWithH2h(stat, headToHead, matchAllData, CricketUtil.FULL);
@@ -15822,7 +15842,7 @@ public class InfobarGfx
 		
 		switch (WhichProfile.toUpperCase()) {
 		case "APL_MILESTONE_BAT": case "APL_MILESTONE_BALL": case "RECENT_FORM_BAT": case "RECENT_FORM_BALL": case "BPL_MILESTONE_BAT": case "BPL_MILESTONE_BALL":
-		case "PPL_MILESTONE_BAT": case "PPL_MILESTONE_BALL":	
+		case "PPL_MILESTONE_BAT": case "PPL_MILESTONE_BALL":	case "KCL_MILESTONE_BAT": case "KCL_MILESTONE_BALL":
 			
 			CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Infobar$Right$Side_" + WhichSide + "$Player_Stats_Wide$Top$txt_Firstname"
 					+ "*GEOM*TEXT SET\0", print_writers);
@@ -15835,7 +15855,7 @@ public class InfobarGfx
 			
 			inning = matchAllData.getMatch().getInning().stream().filter(inn -> inn.getIsCurrentInning().equalsIgnoreCase(CricketUtil.YES)).findAny().orElse(null);
 			switch (WhichProfile.toUpperCase()) {
-			case "APL_MILESTONE_BAT": case "RECENT_FORM_BAT": case "BPL_MILESTONE_BAT": case "PPL_MILESTONE_BAT":
+			case "APL_MILESTONE_BAT": case "RECENT_FORM_BAT": case "BPL_MILESTONE_BAT": case "PPL_MILESTONE_BAT": case "KCL_MILESTONE_BAT":
 				for(BattingCard bc : inning.getBattingCard()) {
 					if(bc.getPlayerId() == FirstPlayerId) {
 						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Infobar$Right$Side_" + WhichSide + "$Player_Stats_Wide$Top$txt_Score"
@@ -15845,7 +15865,7 @@ public class InfobarGfx
 					}
 				}
 				break;
-			case "APL_MILESTONE_BALL": case "RECENT_FORM_BALL": case "BPL_MILESTONE_BALL": case "PPL_MILESTONE_BALL":
+			case "APL_MILESTONE_BALL": case "RECENT_FORM_BALL": case "BPL_MILESTONE_BALL": case "PPL_MILESTONE_BALL": case "KCL_MILESTONE_BALL":
 				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Infobar$Right$Side_" + WhichSide + "$Player_Stats_Wide$Top$txt_Score"
 						+ "*GEOM*TEXT SET \0", print_writers);
 				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Infobar$Right$Side_" + WhichSide + "$Player_Stats_Wide$Top$txt_Balls"
@@ -15870,6 +15890,9 @@ public class InfobarGfx
 			}else if(WhichProfile.contains("PPL")) {
 				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Infobar$Right$Side_" + WhichSide + "$Player_Stats_Wide$Top$txt_Subtitle"
 						+ "*GEOM*TEXT SET " + "PPL CAREER" + "\0", print_writers);
+			}else if(WhichProfile.contains("KCL")) {
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Infobar$Right$Side_" + WhichSide + "$Player_Stats_Wide$Top$txt_Subtitle"
+						+ "*GEOM*TEXT SET " + "KCL CAREER" + "\0", print_writers);
 			}else {
 				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Infobar$Right$Side_" + WhichSide + "$Player_Stats_Wide$Top$txt_Subtitle"
 						+ "*GEOM*TEXT SET " + "RECENT FORM" + "\0", print_writers);
@@ -15924,6 +15947,10 @@ public class InfobarGfx
 			CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Infobar$Right$Side_" + WhichSide + "$Analytics_2_Wide$Top$txt_Subtitle"
 					+ "*GEOM*TEXT SET " + "NPL CAREER" + "\0", print_writers);
 			break;
+		case "KCL_CAREER": case "KCL_BOUNDARY_CAREER":
+			CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Infobar$Right$Side_" + WhichSide + "$Analytics_2_Wide$Top$txt_Subtitle"
+					+ "*GEOM*TEXT SET " + "KCL CAREER" + "\0", print_writers);
+			break;	
 		case "APL_CAREER": case "APL_BOUNDARY_CAREER":
 			CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Infobar$Right$Side_" + WhichSide + "$Analytics_2_Wide$Top$txt_Subtitle"
 					+ "*GEOM*TEXT SET " + "APL CAREER" + "\0", print_writers);
@@ -15940,6 +15967,10 @@ public class InfobarGfx
 			CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Infobar$Right$Side_" + WhichSide + "$Analytics_2_Wide$Top$txt_Subtitle"
 					+ "*GEOM*TEXT SET " + "THIS SEASON" + "\0", print_writers);
 			break;
+		case "KCL_BOUNDARY":
+			CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Infobar$Right$Side_" + WhichSide + "$Analytics_2_Wide$Top$txt_Subtitle"
+					+ "*GEOM*TEXT SET " + "THIS SEASON" + "\0", print_writers);
+			break;	
 		case "MPL_BOUNDARY_CAREER":
 			CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Infobar$Right$Side_" + WhichSide + "$Analytics_2_Wide$Top$txt_Subtitle"
 					+ "*GEOM*TEXT SET " + "MPL CAREER" + "\0", print_writers);
@@ -16202,7 +16233,7 @@ public class InfobarGfx
 			switch (infobar.getMiddle_section().toUpperCase()) {
 			case "BAT_PROFILE_CAREER":
 				switch (WhichProfile) {
-				case "APL_BOUNDARY_CAREER": case "MPL_BOUNDARY_CAREER": case "PPL_BOUNDARY_CAREER":
+				case "APL_BOUNDARY_CAREER": case "MPL_BOUNDARY_CAREER": case "PPL_BOUNDARY_CAREER": case "KCL_BOUNDARY_CAREER":
 					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Infobar$Right$Side_" + WhichSide 
 							+ "$5_Stats*FUNCTION*Omo*vis_con SET 1\0",print_writers);
 					
@@ -16216,7 +16247,7 @@ public class InfobarGfx
 					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Infobar$Right$Side_" + WhichSide + "$Analytics_2_Wide$5_Stats$Stat_2"
 							+ "$txt_Fig*GEOM*TEXT SET " + stat.getSixes() + "\0", print_writers);
 					break;
-				case "APL_BOUNDARY": case  "MPL_BOUNDARY": case "PPL_BOUNDARY":
+				case "APL_BOUNDARY": case  "MPL_BOUNDARY": case "PPL_BOUNDARY": case "KCL_BOUNDARY":
 					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Infobar$Right$Side_" + WhichSide 
 							+ "$5_Stats*FUNCTION*Omo*vis_con SET 1\0",print_writers);
 					
@@ -16291,7 +16322,7 @@ public class InfobarGfx
 						}
 					}
 					break;
-				case "APL_MILESTONE_BAT": case "PPL_MILESTONE_BAT":
+				case "APL_MILESTONE_BAT": case "PPL_MILESTONE_BAT": case "KCL_MILESTONE_BAT":
 					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Infobar$Right$Side_" + WhichSide + "$Player_Stats_Wide$Bottom$Select_Amount"
 							+ "*FUNCTION*Omo*vis_con SET 0\0",print_writers);
 
@@ -16336,7 +16367,7 @@ public class InfobarGfx
 				break;
 			case "BALL_PROFILE_CAREER":
 				switch (WhichProfile) {
-				case "APL_MILESTONE_BALL": case "PPL_MILESTONE_BALL":
+				case "APL_MILESTONE_BALL": case "PPL_MILESTONE_BALL": case "KCL_MILESTONE_BALL":
 					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Infobar$Right$Side_" + WhichSide + "$Player_Stats_Wide$Bottom$Select_Amount"
 							+ "*FUNCTION*Omo*vis_con SET 0\0",print_writers);
 
@@ -17527,16 +17558,18 @@ public class InfobarGfx
 			}
 			
 			if(!whatToProcess.split(",")[3].equalsIgnoreCase("NPL_CAREER") && !whatToProcess.split(",")[3].equalsIgnoreCase("MPL") && 
-					!whatToProcess.split(",")[3].equalsIgnoreCase("APL_CAREER") && !whatToProcess.split(",")[3].equalsIgnoreCase("APL_BOUNDARY_CAREER") && 
+					!whatToProcess.split(",")[3].equalsIgnoreCase("APL_CAREER") && !whatToProcess.split(",")[3].equalsIgnoreCase("APL_BOUNDARY_CAREER") &&
+					!whatToProcess.split(",")[3].equalsIgnoreCase("KCL_CAREER") && !whatToProcess.split(",")[3].equalsIgnoreCase("KCL_BOUNDARY_CAREER") &&
 					!whatToProcess.split(",")[3].equalsIgnoreCase("PPL_CAREER") && !whatToProcess.split(",")[3].equalsIgnoreCase("PPL_BOUNDARY_CAREER") && 
 					!whatToProcess.split(",")[3].equalsIgnoreCase("APL_BOUNDARY") && !whatToProcess.split(",")[3].equalsIgnoreCase("MPL_BOUNDARY") &&
 					!whatToProcess.split(",")[3].equalsIgnoreCase("PPL_BOUNDARY") && !whatToProcess.split(",")[3].equalsIgnoreCase("PPL_MILESTONE_BAT") &&
 					!whatToProcess.split(",")[3].equalsIgnoreCase("APL_MILESTONE_BAT") && !whatToProcess.split(",")[3].equalsIgnoreCase("MPL_BOUNDARY_CAREER") && 
 					!whatToProcess.split(",")[3].equalsIgnoreCase("APL_MILESTONE_BALL") && !whatToProcess.split(",")[3].equalsIgnoreCase("BPL_CAREER") && 
-					!whatToProcess.split(",")[3].equalsIgnoreCase("PPL_MILESTONE_BALL") &&
+					!whatToProcess.split(",")[3].equalsIgnoreCase("PPL_MILESTONE_BALL") && !whatToProcess.split(",")[3].equalsIgnoreCase("KCL_BOUNDARY") &&
 					!whatToProcess.split(",")[3].equalsIgnoreCase("BPL_BOUNDARY_CAREER") && !whatToProcess.split(",")[3].equalsIgnoreCase("BPL_BOUNDARY") && 
 					!whatToProcess.split(",")[3].equalsIgnoreCase("BPL_MILESTONE_BAT") && !whatToProcess.split(",")[3].equalsIgnoreCase("BPL_MILESTONE_BALL") &&
 					!whatToProcess.split(",")[3].equalsIgnoreCase("T20 MUMBAI") && !whatToProcess.split(",")[3].equalsIgnoreCase("THIS_SERIES") &&
+					!whatToProcess.split(",")[3].equalsIgnoreCase("KCL_MILESTONE_BAT") && !whatToProcess.split(",")[3].equalsIgnoreCase("KCL_MILESTONE_BALL") &&
 					!whatToProcess.split(",")[3].equalsIgnoreCase("T20_MUMBAI_BOUNDARY") && !whatToProcess.split(",")[3].equalsIgnoreCase("T20_MUMBAI_BOUNDARY_CAREER")) {
 				statsType = statsTypes.stream().filter(stype -> stype.getStatsShortName().equalsIgnoreCase(whatToProcess.split(",")[3])).findAny().orElse(null);
 				if(statsTypes == null) {
@@ -17553,17 +17586,18 @@ public class InfobarGfx
 				switch (config.getBroadcaster()) {
 				case Constants.APL: case Constants.LEGENDS: case Constants.ASSAM: case Constants.T20_MUMBAI:
 					switch (whatToProcess.split(",")[3].toUpperCase()) {
-					case "APL_BOUNDARY": case "PPL_BOUNDARY": case "BPL_BOUNDARY": case "THIS_SERIES": case "T20_MUMBAI_BOUNDARY":
+					case "APL_BOUNDARY": case "PPL_BOUNDARY": case "BPL_BOUNDARY": case "THIS_SERIES": case "T20_MUMBAI_BOUNDARY": case "KCL_BOUNDARY":
 						this_series =  CricketFunctions.extractTournamentData("CURRENT_MATCH_DATA", false, headToHead,cricketService, matchAllData, past_tournament_stats);
 						tournament = this_series.stream().filter(tourn -> tourn.getPlayerId() == player.getPlayerId()).findAny().orElse(null);
 						break;
 					case "BPL_CAREER": case "BPL_BOUNDARY_CAREER": case "BPL_MILESTONE_BAT": case "BPL_MILESTONE_BALL":
 					case "APL_CAREER": case "APL_BOUNDARY_CAREER": case "APL_MILESTONE_BAT": case "APL_MILESTONE_BALL":
-					case "PPL_CAREER": case "PPL_BOUNDARY_CAREER": case "PPL_MILESTONE_BAT": case "PPL_MILESTONE_BALL":	
+					case "PPL_CAREER": case "PPL_BOUNDARY_CAREER": case "PPL_MILESTONE_BAT": case "PPL_MILESTONE_BALL":
+					case "KCL_CAREER": case "KCL_BOUNDARY_CAREER": case "KCL_MILESTONE_BAT": case "KCL_MILESTONE_BALL":	
 					case "T20 MUMBAI": case "T20_MUMBAI_BOUNDARY_CAREER":
 					    final String profile = whatToProcess.split(",")[3].toUpperCase();
 					    final String whichCareer = profile.startsWith("BPL") ? "BPL_CAREER" : 
-					    		profile.startsWith("APL") ? "APL_CAREER" : profile.startsWith("PPL") ? "PPL_CAREER" : "T20 MUMBAI";
+					    		profile.startsWith("APL") ? "APL_CAREER" : profile.startsWith("PPL") ? "PPL_CAREER" : profile.startsWith("KCL") ? "KCL_CAREER" : "T20 MUMBAI";
 
 					    statsType = statsTypes.stream().filter(st -> st.getStatsShortName().equalsIgnoreCase(whichCareer)).findAny().orElse(null);
 					    if (statsType == null) {
@@ -17608,12 +17642,13 @@ public class InfobarGfx
 					break;
 				case Constants.MPL:
 					switch (whatToProcess.split(",")[3].toUpperCase()) {
-					case "MPL_BOUNDARY":
+					case "MPL_BOUNDARY": case "KCL_BOUNDARY":
 						this_series =  CricketFunctions.extractTournamentData("CURRENT_MATCH_DATA", false, headToHead,cricketService, matchAllData, past_tournament_stats);
 						tournament = this_series.stream().filter(tourn -> tourn.getPlayerId() == player.getPlayerId()).findAny().orElse(null);
 						break;
 					case "MPL":  case "MPL_BOUNDARY_CAREER": case "MPL_MILESTONE_BAT": case "MPL_MILESTONE_BALL":
-						statsType = statsTypes.stream().filter(st -> st.getStatsShortName().equalsIgnoreCase("MPL")).findAny().orElse(null);
+					case "KCL_CAREER":  case "KCL_BOUNDARY_CAREER": case "KCL_MILESTONE_BAT": case "KCL_MILESTONE_BALL":	
+						statsType = statsTypes.stream().filter(st -> st.getStatsShortName().equalsIgnoreCase("KCL_CAREER")).findAny().orElse(null);
 						if(statsTypes == null) {
 							statsData.add("InfoBarPlayerProfile: Stats Type not found for profile [" + whatToProcess.split(",")[3] + "]");
 							return (List<T>) statsData;
@@ -17642,14 +17677,15 @@ public class InfobarGfx
 			case "Alt_3":
 				switch (whatToProcess.split(",")[3]) {
 				case "BPL_BOUNDARY_CAREER": case "APL_BOUNDARY_CAREER": case "PPL_BOUNDARY_CAREER": case "MPL_BOUNDARY_CAREER": case "T20_MUMBAI_BOUNDARY_CAREER":
+				case "KCL_BOUNDARY_CAREER":	
 					statsData.add("FOURS," + stat.getFours());
 					statsData.add("SIXES," + stat.getSixes());
 					break;
-				case "BPL_BOUNDARY": case "APL_BOUNDARY": case "PPL_BOUNDARY": case "MPL_BOUNDARY": case "T20_MUMBAI_BOUNDARY":
+				case "BPL_BOUNDARY": case "APL_BOUNDARY": case "PPL_BOUNDARY": case "MPL_BOUNDARY": case "T20_MUMBAI_BOUNDARY": case "KCL_BOUNDARY":
 					statsData.add("FOUR" + CricketFunctions.Plural(tournament.getFours()).toUpperCase()+"," +tournament.getFours());
 					statsData.add((tournament.getSixes() == 1 ? "SIX" : "SIXES")+"," + tournament.getSixes());
 					break;
-				case "BPL_MILESTONE_BAT": case "APL_MILESTONE_BAT": case "PPL_MILESTONE_BAT":
+				case "BPL_MILESTONE_BAT": case "APL_MILESTONE_BAT": case "PPL_MILESTONE_BAT": case "KCL_MILESTONE_BAT":
 					statsData.add("RUNS," + stat.getRuns());
 					statsData.add("50s/100s," + stat.getFifties() + "/" + stat.getHundreds());
 					break;
@@ -17667,7 +17703,7 @@ public class InfobarGfx
 				break;
 			case "Alt_4":
 				switch (whatToProcess.split(",")[3]) {
-				case "BPL_MILESTONE_BALL": case "APL_MILESTONE_BALL": case "PPL_MILESTONE_BALL": case "MPL_MILESTONE_BALL":
+				case "BPL_MILESTONE_BALL": case "APL_MILESTONE_BALL": case "PPL_MILESTONE_BALL": case "MPL_MILESTONE_BALL": case "KCL_MILESTONE_BALL":
 					statsData.add("WICKETS," + stat.getWickets());
 					statsData.add("ECONOMY," + CricketFunctions.getEconomy(stat.getRunsConceded(), stat.getBallsBowled(), 2, slashOrDash));
 					break;

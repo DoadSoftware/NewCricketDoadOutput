@@ -3905,10 +3905,10 @@ public class FullFramesGfx
 								inning.getBatting_team().getTeamBadge() + logoCategory + "\0", print_writers);
 					}else {
 						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$AllGraphics$Side" + WhichSide 
-								+"$BattingCard$"+ rowId +"$BattingData$Not_Out$Runs$img_TeamBase01*TEXTURE*IMAGE SET " + Constants.MPL_BASE1 +  
+								+"$BattingCard$"+ rowId +"$BattingData$Not_Out$Runs$img_TeamBase01*TEXTURE*IMAGE SET " + Constants.MPL_BASE2 +  
 								inning.getBatting_team().getTeamBadge() + logoCategory + "\0", print_writers);
 						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$AllGraphics$Side" + WhichSide 
-								+"$BattingCard$"+ rowId +"$BattingData$Not_Out$Balls$img_TeamBase01*TEXTURE*IMAGE SET " + Constants.MPL_BASE1 +  
+								+"$BattingCard$"+ rowId +"$BattingData$Not_Out$Balls$img_TeamBase01*TEXTURE*IMAGE SET " + Constants.MPL_BASE2 +  
 								inning.getBatting_team().getTeamBadge() + logoCategory + "\0", print_writers);
 					}
 					
@@ -12160,11 +12160,11 @@ public class FullFramesGfx
 						} 	
 					}	
 				break;
-			case Constants.APL:
+			case Constants.APL: case Constants.MPL:
 				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$Sponsor$Side" + WhichSide 
 						+ "$Select_Sponsor*FUNCTION*Omo*vis_con SET 3\0", print_writers);
 				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$AllGraphics$Side" + WhichSide 
-						+ "$Select_GraphicsType*FUNCTION*Omo*vis_con SET 22\0", print_writers);
+						+ "$Select_GraphicsType*FUNCTION*Omo*vis_con SET 19\0", print_writers);
 				Collections.sort(inning.getBattingCard());
 				
 				for(int i=1; i<=13; i++) {
@@ -20896,7 +20896,7 @@ public class FullFramesGfx
 					break;
 				default:
 					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$AllGraphics$Side" + WhichSide 
-							+ "$Select_GraphicsType*FUNCTION*Omo*vis_con SET 19\0", print_writers);
+							+ "$Select_GraphicsType*FUNCTION*Omo*vis_con SET 20\0", print_writers);
 					break;
 			}
 			
@@ -36483,8 +36483,7 @@ public class FullFramesGfx
 									+ containerName+"$txt_Team*GEOM*TEXT SET " + Teams.get(tournament_stats.get(i).getPlayer().getTeamId() - 1).getTeamName1() + "\0", print_writers);
 							
 							CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$AllGraphics$Side" + WhichSide + "$Leader_Board$Stats$Stats$" + rowId 
-									+ containerName+"$txt_ExtraDetails*GEOM*TEXT SET " + "S/R: " 
-									+ CricketFunctions.generateStrikeRate(tournament_stats.get(i).getRuns(), tournament_stats.get(i).getBallsFaced(), 1) + "\0", print_writers);
+									+ containerName+"$txt_ExtraDetails*GEOM*TEXT SET " + "MATCHES: " + tournament_stats.get(i).getMatches() + "\0", print_writers);
 							break;
 						case "x":
 							

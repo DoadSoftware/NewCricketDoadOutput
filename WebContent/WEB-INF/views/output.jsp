@@ -252,18 +252,6 @@
 		  			name="headToHead_file" id="headToHead_file" onclick="processUserSelection(this)"> Head To Head </button> 
 				  </div>
 			</c:if>
-			<c:if test="${(session_configuration.broadcaster == 'MPL')}">
-			    <br>
-			   <div class="custom-toggle-wrapper">
-				    <div class="custom-toggle">
-				        <label for="audioOnOrOff">
-				            <i class="fas fa-volume-up"></i> Audio
-				            <input type="checkbox" id="audioOnOrOff" name="audioOnOrOff" onclick="processUserSelection(this)">
-				            <span class="slider"></span>
-				        </label>
-				    </div>
-			  </div>
-			</c:if>
 		  </div>
 	  </div>
      </div>
