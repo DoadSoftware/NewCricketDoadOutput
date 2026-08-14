@@ -124,6 +124,8 @@
 			   console.log('whichKey = ' + whichKey);
 			   processUserSelectionData('LOGGER_FORM_KEYPRESS',whichKey);
 		   }
+		   console.log('whichKey = ' + whichKey);
+		   break;
 	      }
 	  }); 
    	  setInterval(() => {processCricketProcedures('READ-MATCH-AND-POPULATE');}, 1000);
@@ -155,7 +157,7 @@
 			    <i class="fas fa-file-video"  style="font-size: 30px;"></i> <b>Match:</b> ${session_match.match.matchFileName.replace(".json"," ")}</label>
 			
 			<label class="col-sm-4 col-form-label text-left">
-			    <i class="fas fa-broadcast-tower"  style="font-size: 30px;"></i> <b>Broadcaster:</b> ${session_configuration.broadcaster.replace("_"," ").replace("LEGENDS-90","BPL")}
+			    <i class="fas fa-broadcast-tower"  style="font-size: 30px;"></i> <b>Broadcaster:</b> ${session_configuration.broadcaster.replace("_"," ").replace("LEGENDS-90","KCL")}
 			</label>
 			
 			<c:if test="${not empty session_configuration.secondaryBroadcaster}">

@@ -113,7 +113,7 @@ public class Scene
 					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER SET_OBJECT SCENE*/Default/FullFrames \0", print_writers);
 					break;
 				case Constants.LEGENDS: case Constants.ASSAM:
-					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER SET_OBJECT SCENE*/Default/Fullframes \0", print_writers);
+					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER SET_OBJECT SCENE*/Default/Fullframes\0", print_writers);
 					break;	
 				}
 				

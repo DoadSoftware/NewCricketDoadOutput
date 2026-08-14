@@ -57,6 +57,7 @@ public class Caption
 	public List<InfobarStats> infobarStats;
 	public List<VariousText> VariousText;
 	public List<DuckWorthLewis> dls;
+	public List<DuckWorthLewis> vjd;
 	public List<Commentator> Commentators;
 	public List<Staff> Staff;
 	public List<Player> Players;
@@ -92,7 +93,7 @@ public class Caption
 		List<Staff> staff, List<Player> players, List<POTT> pott,List<Playoff> Playoffs, List<String> teamChanges, List<PerformanceBug> performanceBugs, 
 		FullFramesGfx this_fullFramesGfx,LowerThirdGfx this_lowerThirdGfx, InfobarGfx this_infobarGfx,LofInfobarGfx this_lofInfobarGfx , BugsAndMiniGfx this_bugsAndMiniGfx, 
 		int whichSide, String whichGraphhicsOnScreen, String slashOrDash, List<Tournament> tournament, List<BestStats> tapeball,List<DuckWorthLewis> dls, 
-		List<HeadToHeadPlayer> headToHead, List<Tournament> past_tournament_stats, CricketService cricketService, String masterCricketDirectory) {
+		List<HeadToHeadPlayer> headToHead, List<Tournament> past_tournament_stats, CricketService cricketService, String masterCricketDirectory,List<DuckWorthLewis> vjd) {
 	
 		super();
 		this.print_writers = print_writers;
@@ -121,13 +122,14 @@ public class Caption
 		
 		
 		this.dls = dls;
+		this.vjd = vjd;
 		this.this_fullFramesGfx = new FullFramesGfx(print_writers, config, statistics, statsTypes, fixTures, Teams, Grounds,tournament, VariousText, 
 				players, pott,Playoffs, teamChanges,headToHead, past_tournament_stats, cricketService, masterCricketDirectory);
 		this.this_lowerThirdGfx = new LowerThirdGfx(print_writers, config, statistics, statsTypes, nameSupers, Teams, Grounds, tournament, tapeball, dls, 
-				staff, players, pott, varioustText, headToHead, past_tournament_stats, cricketService,fixTures, masterCricketDirectory);
+				staff, players, pott, varioustText, headToHead, past_tournament_stats, cricketService,fixTures, masterCricketDirectory,vjd);
 		this.whichSide = whichSide;
 		this.this_infobarGfx = new InfobarGfx(config, slashOrDash, print_writers, statistics, statsTypes, infobarStats, Grounds, Commentators, dls, 
-				players, headToHead, past_tournament_stats, cricketService, fixTures, Teams, masterCricketDirectory);
+				players, headToHead, past_tournament_stats, cricketService, fixTures, Teams, masterCricketDirectory,vjd);
 		this.this_lofInfobarGfx = new LofInfobarGfx(config, slashOrDash, print_writers, statistics, statsTypes, infobarStats, Grounds, Commentators, dls, 
 				players, headToHead,past_tournament_stats, cricketService, masterCricketDirectory);
 		this.this_bugsAndMiniGfx = new BugsAndMiniGfx(print_writers, config, bugs, performanceBugs, Teams, VariousText, cricketService, headToHead,
@@ -846,8 +848,17 @@ public class Caption
 				status = this_lowerThirdGfx.populateTeamSummary(whatToProcess,whichSide,matchAllData);
 				break;
 			case "Alt_d":// DLS Target
-				status = this_lowerThirdGfx.populateDlsTarget(whatToProcess,whichSide,matchAllData);
-				break;	
+				System.out.println("config.getBroadcaster() = " + config.getBroadcaster());
+				switch (config.getBroadcaster().toUpperCase()) {
+				case Constants.NPL: case Constants.LEGENDS: case Constants.ASSAM: case Constants.MPL: case Constants.T20_MUMBAI: case Constants.BENGAL_T20:
+				case Constants.APL: case Constants.VIDARBHA: case Constants.AFG_T20:
+					status = this_lowerThirdGfx.populateVjd(whatToProcess,whichSide,matchAllData);
+					break;
+				default:
+					status = this_lowerThirdGfx.populateDlsTarget(whatToProcess,whichSide,matchAllData);
+					break;
+				}
+				break;
 			case "Control_g"://powerplay Description
 				status = this_lowerThirdGfx.populatePowerplay(whatToProcess,whichSide,matchAllData);
 				break;
@@ -1136,6 +1147,10 @@ public class Caption
 				    case "BATSMANBOUNDARY": case "BOWLERDOTS":
 				    	this_infobarGfx.FirstPlayerId = Integer.valueOf(whatToProcess.split(",")[3]);
 				        break;
+				    case "SPLIT":
+				    	System.out.println("whatToProcess = " + whatToProcess);
+				    	this_infobarGfx.whichSplt = Integer.valueOf(whatToProcess.split(",")[3]);
+				    		break;
 				    
 					}
 					

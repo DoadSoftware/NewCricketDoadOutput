@@ -1605,6 +1605,7 @@ public class FullFramesGfx
 		if(inning == null) {
 			return "populateMatchSummary: current inning is NULL";
 		}
+		System.out.println("teamId = " + teamId + "    matchAllData.getSetup().getHomeTeamId() = " + matchAllData.getSetup().getHomeTeamId());
 		if(teamId == matchAllData.getSetup().getHomeTeamId()) {
 			PlayingXI = matchAllData.getSetup().getHomeSquad();
 			otherSquad = matchAllData.getSetup().getHomeSubstitutes();
@@ -11289,13 +11290,18 @@ public class FullFramesGfx
 			
 			player = PlayingXI.stream().filter(plyr -> plyr.getPlayerId() == inning.getBattingCard().get(plyr_count-1).getPlayerId()).findAny().orElse(null);
 			
-			if(player.getCaptainWicketKeeper().equalsIgnoreCase(CricketUtil.CAPTAIN) || 
-					player.getCaptainWicketKeeper().equalsIgnoreCase("CAPTAIN_WICKET_KEEPER")){
-				
-				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$AllGraphics$Side" + WhichSide + "$Batting_Card_Image" + 
-						containerName + "$Photo_" + rowId + "$Select_Captain*FUNCTION*Omo*vis_con SET 1 \0", print_writers);
-			}
-			else {
+			if(player.getCaptainWicketKeeper() != null) {
+				if(player.getCaptainWicketKeeper().equalsIgnoreCase(CricketUtil.CAPTAIN) || 
+						player.getCaptainWicketKeeper().equalsIgnoreCase("CAPTAIN_WICKET_KEEPER")){
+					
+					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$AllGraphics$Side" + WhichSide + "$Batting_Card_Image" + 
+							containerName + "$Photo_" + rowId + "$Select_Captain*FUNCTION*Omo*vis_con SET 1 \0", print_writers);
+				}
+				else {
+					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$AllGraphics$Side" + WhichSide + "$Batting_Card_Image" + 
+							containerName + "$Photo_" + rowId + "$Select_Captain*FUNCTION*Omo*vis_con SET 0 \0", print_writers);
+				}
+			}else {
 				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$AllGraphics$Side" + WhichSide + "$Batting_Card_Image" + 
 						containerName + "$Photo_" + rowId + "$Select_Captain*FUNCTION*Omo*vis_con SET 0 \0", print_writers);
 			}

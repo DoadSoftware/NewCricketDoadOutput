@@ -122,6 +122,7 @@ public class IndexController
 	public static FieldersData fielderFormation = new FieldersData();
 	public static BugsAndMiniGfx this_bugs_mini = new BugsAndMiniGfx();
 	public static List<DuckWorthLewis> session_dls = new ArrayList<>();
+	public static List<DuckWorthLewis> session_vjd = new ArrayList<>();
 
 	private static final Map<String, Comparator<Tournament>> SORT_MAP;
 
@@ -698,7 +699,7 @@ public class IndexController
 	    speed_match_time_stamp = currentTimestamp;
 
 	    switch (session_configuration.getBroadcaster()) {
-	        case Constants.T20_MUMBAI: case Constants.NPL: case Constants.APL: case Constants.VIDARBHA: case Constants.MPL:
+	        case Constants.T20_MUMBAI: case Constants.NPL: case Constants.APL: case Constants.VIDARBHA: case Constants.MPL: case Constants.LEGENDS:
 	            this_caption.this_infobarGfx.speed(CricketFunctions.processPrintWriter(session_configuration).get(0),session_match,session_configuration, 
 	            		session_MasterCricketDirectory);
 	            break;
@@ -1501,6 +1502,10 @@ public class IndexController
 	    if (new File(session_MasterCricketDirectory + "ParScores BB.html").exists() && session_match != null) {
 	        session_dls = CricketFunctions.populateDuckWorthLewis(session_match, session_MasterCricketDirectory);
 	    }
+	    
+	    if (new File(session_MasterCricketDirectory + "PARBALL").exists() && session_match != null) {
+	        session_vjd = CricketFunctions.populateVJD(session_match, session_MasterCricketDirectory);
+	    }
 	    switch (typeOfUpdate) {
 	    case "ONLY_DB":
 	        updateGraphicsData(config);
@@ -1510,7 +1515,7 @@ public class IndexController
 	        this_caption = new Caption(print_writers,config,session_statistics,cricketService.getAllStatsType(),session_name_super,  session_bugs,session_infoBarStats,
 	        		session_fixture,session_team,session_ground,session_variousText,session_commentator, session_staff,session_players,session_pott,session_playoff,
 	        		session_teamChanges,session_performance_bug,new FullFramesGfx(),new LowerThirdGfx(),new InfobarGfx(),new LofInfobarGfx(),new BugsAndMiniGfx(),
-	        		1,"","-",past_tournament_stats,past_tape,session_dls,headToHead.getH2hPlayer(),past_tournament_stats,cricketService,session_MasterCricketDirectory);
+	        		1,"","-",past_tournament_stats,past_tape,session_dls,headToHead.getH2hPlayer(),past_tournament_stats,cricketService,session_MasterCricketDirectory,session_vjd);
 
 	        updateBoundaryData();
 	        updateGraphicsData(config);
@@ -1604,6 +1609,7 @@ public class IndexController
 	        this_caption.this_infobarGfx.infobarStats = session_infoBarStats;
 	        this_caption.this_infobarGfx.Grounds = session_ground;
 	        this_caption.this_infobarGfx.dls = session_dls;
+	        this_caption.this_infobarGfx.vjd = session_vjd;
 	        this_caption.this_infobarGfx.Commentators = session_commentator;
 	        this_caption.this_infobarGfx.Players = session_players;
 	        this_caption.this_infobarGfx.fixtures = session_fixture;
@@ -1622,6 +1628,7 @@ public class IndexController
 	    this_caption.this_lowerThirdGfx.tournaments = past_tournament_stats;
 	    this_caption.this_lowerThirdGfx.tapeballs = past_tape;
 	    this_caption.this_lowerThirdGfx.dls = session_dls;
+	    this_caption.this_lowerThirdGfx.vjd = session_vjd;
 	    this_caption.this_lowerThirdGfx.Staff = session_staff;
 	    this_caption.this_lowerThirdGfx.VariousText = session_variousText;
 	    this_caption.this_lowerThirdGfx.Potts = session_pott;
