@@ -417,7 +417,10 @@ public class Caption
 				break;
 			case "Control_F2": // Bowling FF
 				status = this_lowerThirdGfx.PopulateLTBowlingCard(whatToProcess,whichSide, matchAllData);
-				break;	
+				break;
+			case "Alt_Shift_!":
+				status = this_lowerThirdGfx.populateL3rdBowlingLineUp(whatToProcess,whichSide,matchAllData);
+				break;
 			case "F4": //All Partnership
 				if(config.getBroadcaster().toUpperCase().equalsIgnoreCase(Constants.ICC_U19_2023)) {
 					this_fullFramesGfx.whichSponsor = whatToProcess.split(",")[2];
