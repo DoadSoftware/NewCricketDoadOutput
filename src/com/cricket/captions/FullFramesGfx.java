@@ -14741,13 +14741,21 @@ public class FullFramesGfx
 		
 		//Player Photo
 		if(config.getPrimaryIpAddress().equalsIgnoreCase(Constants.LOCALHOST)) {
-			CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$Main$Side_" + WhichSide + "$PlayerProfile$Image"
-					+ "$img_Player*TEXTURE*IMAGE SET "+ (config.getBroadcaster().equalsIgnoreCase(Constants.LEGENDS) ? Constants.LEGENDS_LOCAL_PHOTO_PATH : Constants.ASSAM_LOCAL_PHOTO_PATH) + "\\\\" + team.getTeamName4().replace("BIG BOYS", "BIG_BOYS")+"\\\\"
-					+ player.getPhoto()+ CricketUtil.PNG_EXTENSION + "\0", print_writers);
+			CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$Main$Side_" + WhichSide + "$PlayerProfile$Image$img_Player*TEXTURE*IMAGE SET "
+					+ (config.getBroadcaster().equalsIgnoreCase(Constants.LEGENDS) ? Constants.LEGENDS_LOCAL_PHOTO_PATH : Constants.ASSAM_LOCAL_PHOTO_PATH) + "\\\\" 
+					+ "BLANK" + CricketUtil.PNG_EXTENSION + "\0", print_writers);
+			
+			CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$Main$Side_" + WhichSide + "$PlayerProfile$Image$img_Player*TEXTURE*IMAGE SET "
+					+ (config.getBroadcaster().equalsIgnoreCase(Constants.LEGENDS) ? Constants.LEGENDS_LOCAL_PHOTO_PATH : Constants.ASSAM_LOCAL_PHOTO_PATH) + "\\\\" 
+					+ team.getTeamName4().replace("BIG BOYS", "BIG_BOYS")+"\\\\" + player.getPhoto()+ CricketUtil.PNG_EXTENSION + "\0", print_writers);
 		}else {
-			CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$Main$Side_" + WhichSide + "$PlayerProfile$Image"
-					+ "$img_Player*TEXTURE*IMAGE SET "+"\\\\"+config.getPrimaryIpAddress()+"\\\\"+ (config.getBroadcaster().equalsIgnoreCase(Constants.LEGENDS) ? Constants.LEGENDS_PHOTO_PATH : Constants.ASSAM_PHOTO_PATH) + 
-					team.getTeamName4().replace("BIG BOYS", "BIG_BOYS")+ "\\\\" + player.getPhoto()+ CricketUtil.PNG_EXTENSION + "\0", print_writers);
+			CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$Main$Side_" + WhichSide + "$PlayerProfile$Image$img_Player*TEXTURE*IMAGE SET "
+					+ "\\\\" + config.getPrimaryIpAddress() + "\\\\" + (config.getBroadcaster().equalsIgnoreCase(Constants.LEGENDS) ? Constants.LEGENDS_PHOTO_PATH : Constants.ASSAM_PHOTO_PATH) 
+					+ "BLANK" + CricketUtil.PNG_EXTENSION + "\0", print_writers);
+			
+			CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$Main$Side_" + WhichSide + "$PlayerProfile$Image$img_Player*TEXTURE*IMAGE SET "
+					+ "\\\\" + config.getPrimaryIpAddress() + "\\\\" + (config.getBroadcaster().equalsIgnoreCase(Constants.LEGENDS) ? Constants.LEGENDS_PHOTO_PATH : Constants.ASSAM_PHOTO_PATH) 
+					+ team.getTeamName4().replace("BIG BOYS", "BIG_BOYS")+ "\\\\" + player.getPhoto()+ CricketUtil.PNG_EXTENSION + "\0", print_writers);
 		}
 		
 		CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$Main$Side_" + WhichSide + "$PlayerProfile$Playing11$Age$"
@@ -18632,9 +18640,15 @@ public class FullFramesGfx
 						if(tournament_stats.get(i).getPlayerId() == FirstPlayerId) {
 							containerName ="$Highlight";
 							omo =1;
-							CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$All$Main$Side_" + WhichSide + "$LeaderBoard$ImageAll"
-									+ "$img_Player*TEXTURE*IMAGE SET " + (config.getPrimaryIpAddress().equalsIgnoreCase("LOCALHOST") ? 
-									   (config.getBroadcaster().equalsIgnoreCase(Constants.LEGENDS) ? Constants.LEGENDS_LOCAL_PHOTO_PATH : Constants.ASSAM_LOCAL_PHOTO_PATH) : "\\\\" + config.getPrimaryIpAddress() + (config.getBroadcaster().equalsIgnoreCase(Constants.LEGENDS) ? Constants.LEGENDS_PHOTO_PATH : Constants.ASSAM_PHOTO_PATH)) 
+							
+							CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$All$Main$Side_" + WhichSide + "$LeaderBoard$ImageAll$img_Player*TEXTURE*IMAGE SET " 
+									+ (config.getPrimaryIpAddress().equalsIgnoreCase("LOCALHOST") ? (config.getBroadcaster().equalsIgnoreCase(Constants.LEGENDS) ? Constants.LEGENDS_LOCAL_PHOTO_PATH : 
+									Constants.ASSAM_LOCAL_PHOTO_PATH) : "\\\\" + config.getPrimaryIpAddress() + (config.getBroadcaster().equalsIgnoreCase(Constants.LEGENDS) ? Constants.LEGENDS_PHOTO_PATH : Constants.ASSAM_PHOTO_PATH)) 
+									+ "BLANK" + CricketUtil.PNG_EXTENSION + "\0", print_writers);
+							
+							CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$All$Main$Side_" + WhichSide + "$LeaderBoard$ImageAll$img_Player*TEXTURE*IMAGE SET " 
+									+ (config.getPrimaryIpAddress().equalsIgnoreCase("LOCALHOST") ? (config.getBroadcaster().equalsIgnoreCase(Constants.LEGENDS) ? Constants.LEGENDS_LOCAL_PHOTO_PATH : 
+									Constants.ASSAM_LOCAL_PHOTO_PATH) : "\\\\" + config.getPrimaryIpAddress() + (config.getBroadcaster().equalsIgnoreCase(Constants.LEGENDS) ? Constants.LEGENDS_PHOTO_PATH : Constants.ASSAM_PHOTO_PATH)) 
 									+ Teams.get(whichTeam - 1).getTeamName4() + "\\\\" + tournament_stats.get(i).getPlayer().getPhoto() + CricketUtil.PNG_EXTENSION + "\0", print_writers);
 						}
 						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$All$Main$Side_" + WhichSide + "$LeaderBoard$"+ 
@@ -18731,9 +18745,17 @@ public class FullFramesGfx
 							if(tournament_stats.get(i).getPlayerId() == FirstPlayerId) {
 								containerName ="$Highlight";
 								omo =1;
+								
 								CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$All$Main$Side_" + WhichSide + "$LeaderBoard$ImageAll"
 										+ "$img_Player*TEXTURE*IMAGE SET " + (config.getPrimaryIpAddress().equalsIgnoreCase("LOCALHOST") ? 
-										   (config.getBroadcaster().equalsIgnoreCase(Constants.LEGENDS) ? Constants.LEGENDS_LOCAL_PHOTO_PATH : Constants.ASSAM_LOCAL_PHOTO_PATH) : "\\\\" + config.getPrimaryIpAddress() + (config.getBroadcaster().equalsIgnoreCase(Constants.LEGENDS) ? Constants.LEGENDS_PHOTO_PATH : Constants.ASSAM_PHOTO_PATH)) 
+										   (config.getBroadcaster().equalsIgnoreCase(Constants.LEGENDS) ? Constants.LEGENDS_LOCAL_PHOTO_PATH : Constants.ASSAM_LOCAL_PHOTO_PATH) : "\\\\" 
+										+ config.getPrimaryIpAddress() + (config.getBroadcaster().equalsIgnoreCase(Constants.LEGENDS) ? Constants.LEGENDS_PHOTO_PATH : Constants.ASSAM_PHOTO_PATH)) 
+										+ "BLANK" + CricketUtil.PNG_EXTENSION + "\0", print_writers);
+								
+								CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$All$Main$Side_" + WhichSide + "$LeaderBoard$ImageAll"
+										+ "$img_Player*TEXTURE*IMAGE SET " + (config.getPrimaryIpAddress().equalsIgnoreCase("LOCALHOST") ? 
+										   (config.getBroadcaster().equalsIgnoreCase(Constants.LEGENDS) ? Constants.LEGENDS_LOCAL_PHOTO_PATH : Constants.ASSAM_LOCAL_PHOTO_PATH) : "\\\\" 
+										+ config.getPrimaryIpAddress() + (config.getBroadcaster().equalsIgnoreCase(Constants.LEGENDS) ? Constants.LEGENDS_PHOTO_PATH : Constants.ASSAM_PHOTO_PATH)) 
 										+ Teams.get(tournament_stats.get(i).getPlayer().getTeamId() - 1).getTeamName4() + "\\\\" 
 										+ tournament_stats.get(i).getPlayer().getPhoto() + CricketUtil.PNG_EXTENSION + "\0", print_writers);
 							}
@@ -18772,6 +18794,13 @@ public class FullFramesGfx
 							if(tournament_stats.get(i).getPlayerId() == FirstPlayerId) {
 								containerName ="$Highlight";
 								omo =1;
+								
+								CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$All$Main$Side_" + WhichSide + "$LeaderBoard$ImageAll"
+										+ "$img_Player*TEXTURE*IMAGE SET " + (config.getPrimaryIpAddress().equalsIgnoreCase("LOCALHOST") ? 
+										   (config.getBroadcaster().equalsIgnoreCase(Constants.LEGENDS) ? Constants.LEGENDS_LOCAL_PHOTO_PATH : Constants.ASSAM_LOCAL_PHOTO_PATH) : "\\\\" + config.getPrimaryIpAddress() 
+										+ (config.getBroadcaster().equalsIgnoreCase(Constants.LEGENDS) ? Constants.LEGENDS_PHOTO_PATH : Constants.ASSAM_PHOTO_PATH)) 
+										+ "BLANK" + CricketUtil.PNG_EXTENSION + "\0", print_writers);
+								
 								CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$All$Main$Side_" + WhichSide + "$LeaderBoard$ImageAll"
 										+ "$img_Player*TEXTURE*IMAGE SET " + (config.getPrimaryIpAddress().equalsIgnoreCase("LOCALHOST") ? 
 										   (config.getBroadcaster().equalsIgnoreCase(Constants.LEGENDS) ? Constants.LEGENDS_LOCAL_PHOTO_PATH : Constants.ASSAM_LOCAL_PHOTO_PATH) : "\\\\" + config.getPrimaryIpAddress() + (config.getBroadcaster().equalsIgnoreCase(Constants.LEGENDS) ? Constants.LEGENDS_PHOTO_PATH : Constants.ASSAM_PHOTO_PATH)) 
@@ -18813,9 +18842,17 @@ public class FullFramesGfx
 							if(tournament_stats.get(i).getPlayerId() == FirstPlayerId) {
 								containerName ="$Highlight";
 								omo =1;
+								
 								CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$All$Main$Side_" + WhichSide + "$LeaderBoard$ImageAll"
 										+ "$img_Player*TEXTURE*IMAGE SET " + (config.getPrimaryIpAddress().equalsIgnoreCase("LOCALHOST") ? 
-										   (config.getBroadcaster().equalsIgnoreCase(Constants.LEGENDS) ? Constants.LEGENDS_LOCAL_PHOTO_PATH : Constants.ASSAM_LOCAL_PHOTO_PATH) : "\\\\" + config.getPrimaryIpAddress() + (config.getBroadcaster().equalsIgnoreCase(Constants.LEGENDS) ? Constants.LEGENDS_PHOTO_PATH : Constants.ASSAM_PHOTO_PATH)) 
+										   (config.getBroadcaster().equalsIgnoreCase(Constants.LEGENDS) ? Constants.LEGENDS_LOCAL_PHOTO_PATH : Constants.ASSAM_LOCAL_PHOTO_PATH) : "\\\\" + config.getPrimaryIpAddress() 
+										   + (config.getBroadcaster().equalsIgnoreCase(Constants.LEGENDS) ? Constants.LEGENDS_PHOTO_PATH : Constants.ASSAM_PHOTO_PATH)) 
+										+ "BLANK" + CricketUtil.PNG_EXTENSION + "\0", print_writers);
+								
+								CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$All$Main$Side_" + WhichSide + "$LeaderBoard$ImageAll"
+										+ "$img_Player*TEXTURE*IMAGE SET " + (config.getPrimaryIpAddress().equalsIgnoreCase("LOCALHOST") ? 
+										   (config.getBroadcaster().equalsIgnoreCase(Constants.LEGENDS) ? Constants.LEGENDS_LOCAL_PHOTO_PATH : Constants.ASSAM_LOCAL_PHOTO_PATH) : "\\\\" + config.getPrimaryIpAddress() 
+										   + (config.getBroadcaster().equalsIgnoreCase(Constants.LEGENDS) ? Constants.LEGENDS_PHOTO_PATH : Constants.ASSAM_PHOTO_PATH)) 
 										+ Teams.get(tournament_stats.get(i).getPlayer().getTeamId() - 1).getTeamName4() + "\\\\" 
 										+ tournament_stats.get(i).getPlayer().getPhoto() + CricketUtil.PNG_EXTENSION + "\0", print_writers);
 							}
@@ -18855,6 +18892,13 @@ public class FullFramesGfx
 					if(top_batsman_beststats.get(i).getPlayerId() == FirstPlayerId) {
 						containerName ="$Highlight";
 						omo =1;
+						
+						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$All$Main$Side_" + WhichSide + "$LeaderBoard$ImageAll"
+								+ "$img_Player*TEXTURE*IMAGE SET " + (config.getPrimaryIpAddress().equalsIgnoreCase("LOCALHOST") ? 
+								   (config.getBroadcaster().equalsIgnoreCase(Constants.LEGENDS) ? Constants.LEGENDS_LOCAL_PHOTO_PATH : Constants.ASSAM_LOCAL_PHOTO_PATH) : 
+									   "\\\\" + config.getPrimaryIpAddress() + (config.getBroadcaster().equalsIgnoreCase(Constants.LEGENDS) ? Constants.LEGENDS_PHOTO_PATH : Constants.ASSAM_PHOTO_PATH)) 
+								+ "BLANK" + CricketUtil.PNG_EXTENSION + "\0", print_writers);
+						
 						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$All$Main$Side_" + WhichSide + "$LeaderBoard$ImageAll"
 								+ "$img_Player*TEXTURE*IMAGE SET " + (config.getPrimaryIpAddress().equalsIgnoreCase("LOCALHOST") ? 
 								   (config.getBroadcaster().equalsIgnoreCase(Constants.LEGENDS) ? Constants.LEGENDS_LOCAL_PHOTO_PATH : Constants.ASSAM_LOCAL_PHOTO_PATH) : 
@@ -18907,9 +18951,17 @@ public class FullFramesGfx
 				  if(top_bowler_beststats.get(i).getPlayerId() == FirstPlayerId) {
 						containerName ="$Highlight";
 						omo =1;
+						
+					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$All$Main$Side_" + WhichSide + "$LeaderBoard$ImageAll"
+							+ "$img_Player*TEXTURE*IMAGE SET " + (config.getPrimaryIpAddress().equalsIgnoreCase("LOCALHOST") ? 
+							   (config.getBroadcaster().equalsIgnoreCase(Constants.LEGENDS) ? Constants.LEGENDS_LOCAL_PHOTO_PATH : Constants.ASSAM_LOCAL_PHOTO_PATH) : "\\\\" 
+							+ config.getPrimaryIpAddress() + (config.getBroadcaster().equalsIgnoreCase(Constants.LEGENDS) ? Constants.LEGENDS_PHOTO_PATH : Constants.ASSAM_PHOTO_PATH)) 
+							+ "BLANK" + CricketUtil.PNG_EXTENSION + "\0", print_writers);
+						
 					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$All$Main$Side_" + WhichSide + "$LeaderBoard$ImageAll"
 						+ "$img_Player*TEXTURE*IMAGE SET " + (config.getPrimaryIpAddress().equalsIgnoreCase("LOCALHOST") ? 
-						   (config.getBroadcaster().equalsIgnoreCase(Constants.LEGENDS) ? Constants.LEGENDS_LOCAL_PHOTO_PATH : Constants.ASSAM_LOCAL_PHOTO_PATH) : "\\\\" + config.getPrimaryIpAddress() + (config.getBroadcaster().equalsIgnoreCase(Constants.LEGENDS) ? Constants.LEGENDS_PHOTO_PATH : Constants.ASSAM_PHOTO_PATH)) 
+						   (config.getBroadcaster().equalsIgnoreCase(Constants.LEGENDS) ? Constants.LEGENDS_LOCAL_PHOTO_PATH : Constants.ASSAM_LOCAL_PHOTO_PATH) : "\\\\" 
+						+ config.getPrimaryIpAddress() + (config.getBroadcaster().equalsIgnoreCase(Constants.LEGENDS) ? Constants.LEGENDS_PHOTO_PATH : Constants.ASSAM_PHOTO_PATH)) 
 						+ Teams.get(top_bowler_beststats.get(i).getPlayer().getTeamId() - 1).getTeamName4() + "\\\\" 
 						+ top_bowler_beststats.get(i).getPlayer().getPhoto() + CricketUtil.PNG_EXTENSION + "\0", print_writers);
 					}
@@ -18973,6 +19025,13 @@ public class FullFramesGfx
 					if(tournament_stats.get(i).getPlayerId() == FirstPlayerId) {
 						containerName ="$Highlight";
 						omo =1;
+						
+						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$All$Main$Side_" + WhichSide + "$LeaderBoard$ImageAll"
+								+ "$img_Player*TEXTURE*IMAGE SET " + (config.getPrimaryIpAddress().equalsIgnoreCase("LOCALHOST") ? 
+								   (config.getBroadcaster().equalsIgnoreCase(Constants.LEGENDS) ? Constants.LEGENDS_LOCAL_PHOTO_PATH : Constants.ASSAM_LOCAL_PHOTO_PATH) : "\\\\" + 
+										config.getPrimaryIpAddress() + (config.getBroadcaster().equalsIgnoreCase(Constants.LEGENDS) ? Constants.LEGENDS_PHOTO_PATH : Constants.ASSAM_PHOTO_PATH)) 
+								+ "BLANK" + CricketUtil.PNG_EXTENSION + "\0", print_writers);
+						
 						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$All$Main$Side_" + WhichSide + "$LeaderBoard$ImageAll"
 								+ "$img_Player*TEXTURE*IMAGE SET " + (config.getPrimaryIpAddress().equalsIgnoreCase("LOCALHOST") ? 
 								   (config.getBroadcaster().equalsIgnoreCase(Constants.LEGENDS) ? Constants.LEGENDS_LOCAL_PHOTO_PATH : Constants.ASSAM_LOCAL_PHOTO_PATH) : "\\\\" + 
@@ -28334,25 +28393,35 @@ public class FullFramesGfx
 					+ "$Team1$img_Text*TEXTURE*IMAGE SET " + (config.getBroadcaster().equalsIgnoreCase(Constants.LEGENDS) ? Constants.LEGENDS_TEXT : Constants.ASSAM_TEXT) + inning.getBatting_team().getTeamBadge() + "\0", print_writers);
 			
 			if(config.getPrimaryIpAddress().equalsIgnoreCase(Constants.LOCALHOST)) {
-				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$Main$Side_" + WhichSide + "$Partnership"
-						+ "$Photo$img_PlayerPhoto1*TEXTURE*IMAGE SET " + (config.getBroadcaster().equalsIgnoreCase(Constants.LEGENDS) ? Constants.LEGENDS_LOCAL_PHOTO_PATH : Constants.ASSAM_LOCAL_PHOTO_PATH) + inning.getBatting_team().getTeamName4().
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$Main$Side_" + WhichSide + "$Partnership$Photo$img_PlayerPhoto1*TEXTURE*IMAGE SET " 
+						+ (config.getBroadcaster().equalsIgnoreCase(Constants.LEGENDS) ? Constants.LEGENDS_LOCAL_PHOTO_PATH : Constants.ASSAM_LOCAL_PHOTO_PATH) + "BLANK" + CricketUtil.PNG_EXTENSION + "\0", print_writers);
+				
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$Main$Side_" + WhichSide + "$Partnership$Photo$img_PlayerPhoto2*TEXTURE*IMAGE SET " 
+						+ (config.getBroadcaster().equalsIgnoreCase(Constants.LEGENDS) ? Constants.LEGENDS_LOCAL_PHOTO_PATH : Constants.ASSAM_LOCAL_PHOTO_PATH) + "BLANK" + CricketUtil.PNG_EXTENSION + "\0", print_writers);
+				
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$Main$Side_" + WhichSide + "$Partnership$Photo$img_PlayerPhoto1*TEXTURE*IMAGE SET " 
+						+ (config.getBroadcaster().equalsIgnoreCase(Constants.LEGENDS) ? Constants.LEGENDS_LOCAL_PHOTO_PATH : Constants.ASSAM_LOCAL_PHOTO_PATH) + inning.getBatting_team().getTeamName4().
 						replace("BIG BOYS", "BIG_BOYS") + "\\\\"+ battingCardList.get(0).getPlayer().getPhoto() + CricketUtil.PNG_EXTENSION + "\0", print_writers);
 				
-				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$Main$Side_" + WhichSide + "$Partnership"
-						+ "$Photo$img_PlayerPhoto2*TEXTURE*IMAGE SET " + (config.getBroadcaster().equalsIgnoreCase(Constants.LEGENDS) ? Constants.LEGENDS_LOCAL_PHOTO_PATH : Constants.ASSAM_LOCAL_PHOTO_PATH) + inning.getBatting_team().getTeamName4().
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$Main$Side_" + WhichSide + "$Partnership$Photo$img_PlayerPhoto2*TEXTURE*IMAGE SET " 
+						+ (config.getBroadcaster().equalsIgnoreCase(Constants.LEGENDS) ? Constants.LEGENDS_LOCAL_PHOTO_PATH : Constants.ASSAM_LOCAL_PHOTO_PATH) + inning.getBatting_team().getTeamName4().
 						replace("BIG BOYS", "BIG_BOYS") + "\\\\"+ battingCardList.get(1).getPlayer().getPhoto()+ CricketUtil.PNG_EXTENSION + "\0", print_writers);
 				
 			}else {
 				
-				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$Main$Side_" + WhichSide + "$Partnership"
-						+ "$Photo$img_PlayerPhoto1*TEXTURE*IMAGE SET " + "\\\\" + config.getPrimaryIpAddress() + "\\" + (config.getBroadcaster().equalsIgnoreCase(Constants.LEGENDS) ? Constants.LEGENDS_PHOTO_PATH : Constants.ASSAM_PHOTO_PATH) + 
-						inning.getBatting_team().getTeamName4().replace("BIG BOYS", "BIG_BOYS") + "\\\\" + battingCardList.get(0).getPlayer().getPhoto()+ 
-						CricketUtil.PNG_EXTENSION + "\0", print_writers);
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$Main$Side_" + WhichSide + "$Partnership$Photo$img_PlayerPhoto1*TEXTURE*IMAGE SET " + "\\\\" + config.getPrimaryIpAddress() 
+						+ "\\" + (config.getBroadcaster().equalsIgnoreCase(Constants.LEGENDS) ? Constants.LEGENDS_PHOTO_PATH : Constants.ASSAM_PHOTO_PATH) + "BLANK" + CricketUtil.PNG_EXTENSION + "\0", print_writers);
 		
-				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$Main$Side_" + WhichSide + "$Partnership"
-						+ "$Photo$img_PlayerPhoto2*TEXTURE*IMAGE SET " + "\\\\" + config.getPrimaryIpAddress() + "\\" + (config.getBroadcaster().equalsIgnoreCase(Constants.LEGENDS) ? Constants.LEGENDS_PHOTO_PATH : Constants.ASSAM_PHOTO_PATH) + 
-						inning.getBatting_team().getTeamName4().replace("BIG BOYS", "BIG_BOYS") + "\\\\" + battingCardList.get(1).getPlayer().getPhoto()+ 
-						CricketUtil.PNG_EXTENSION + "\0", print_writers);
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$Main$Side_" + WhichSide + "$Partnership$Photo$img_PlayerPhoto2*TEXTURE*IMAGE SET " + "\\\\" + config.getPrimaryIpAddress() 
+						+ "\\" + (config.getBroadcaster().equalsIgnoreCase(Constants.LEGENDS) ? Constants.LEGENDS_PHOTO_PATH : Constants.ASSAM_PHOTO_PATH) + "BLANK" + CricketUtil.PNG_EXTENSION + "\0", print_writers);
+				
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$Main$Side_" + WhichSide + "$Partnership$Photo$img_PlayerPhoto1*TEXTURE*IMAGE SET " + "\\\\" + config.getPrimaryIpAddress() 
+						+ "\\" + (config.getBroadcaster().equalsIgnoreCase(Constants.LEGENDS) ? Constants.LEGENDS_PHOTO_PATH : Constants.ASSAM_PHOTO_PATH) + inning.getBatting_team().getTeamName4().replace("BIG BOYS", "BIG_BOYS") 
+						+ "\\\\" + battingCardList.get(0).getPlayer().getPhoto() + CricketUtil.PNG_EXTENSION + "\0", print_writers);
+		
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$Main$Side_" + WhichSide + "$Partnership$Photo$img_PlayerPhoto2*TEXTURE*IMAGE SET " + "\\\\" + config.getPrimaryIpAddress() 
+						+ "\\" + (config.getBroadcaster().equalsIgnoreCase(Constants.LEGENDS) ? Constants.LEGENDS_PHOTO_PATH : Constants.ASSAM_PHOTO_PATH) + inning.getBatting_team().getTeamName4().replace("BIG BOYS", "BIG_BOYS") 
+						+ "\\\\" + battingCardList.get(1).getPlayer().getPhoto()+ CricketUtil.PNG_EXTENSION + "\0", print_writers);
 			}
 			
 			CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$Main$Side_" + WhichSide + "$Partnership"
@@ -31533,13 +31602,20 @@ public class FullFramesGfx
 							+ rowId + "$txt_Name*GEOM*TEXT SET " + PlayingXI.get(i-1).getTicker_name() + "\0", print_writers);
 					
 					if(config.getPrimaryIpAddress().equalsIgnoreCase(Constants.LOCALHOST)) {
-						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$Main$Side_" + WhichSide + "$TeamImage$Playing11$" 
-								+ rowId + "$TeamImageData$img_Player*TEXTURE*IMAGE SET " + (config.getBroadcaster().equalsIgnoreCase(Constants.LEGENDS) ? Constants.LEGENDS_LOCAL_PHOTO_PATH : Constants.ASSAM_LOCAL_PHOTO_PATH) + team.getTeamName4().
-								replace("BIG BOYS", "BIG_BOYS") + "\\\\" + PlayingXI.get(i-1).getPhoto()+CricketUtil.PNG_EXTENSION + "\0", print_writers);
+						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$Main$Side_" + WhichSide + "$TeamImage$Playing11$" + rowId + "$TeamImageData$img_Player*TEXTURE*IMAGE SET " 
+								+ (config.getBroadcaster().equalsIgnoreCase(Constants.LEGENDS) ? Constants.LEGENDS_LOCAL_PHOTO_PATH : Constants.ASSAM_LOCAL_PHOTO_PATH) + "BLANK" + CricketUtil.PNG_EXTENSION + "\0", print_writers);
+						
+						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$Main$Side_" + WhichSide + "$TeamImage$Playing11$" + rowId + "$TeamImageData$img_Player*TEXTURE*IMAGE SET " 
+								+ (config.getBroadcaster().equalsIgnoreCase(Constants.LEGENDS) ? Constants.LEGENDS_LOCAL_PHOTO_PATH : Constants.ASSAM_LOCAL_PHOTO_PATH) + team.getTeamName4().replace("BIG BOYS", "BIG_BOYS") 
+								+ "\\\\" + PlayingXI.get(i-1).getPhoto()+CricketUtil.PNG_EXTENSION + "\0", print_writers);
 					}else {
-						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$Main$Side_" + WhichSide + "$TeamImage$Playing11$" 
-								+ rowId + "$TeamImageData$img_Player*TEXTURE*IMAGE SET " + "\\\\" + config.getPrimaryIpAddress() + (config.getBroadcaster().equalsIgnoreCase(Constants.LEGENDS) ? Constants.LEGENDS_PHOTO_PATH : Constants.ASSAM_PHOTO_PATH) + 
-								team.getTeamName4().replace("BIG BOYS", "BIG_BOYS") + "\\\\" + PlayingXI.get(i-1).getPhoto() + CricketUtil.PNG_EXTENSION + "\0", print_writers);
+						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$Main$Side_" + WhichSide + "$TeamImage$Playing11$" + rowId + "$TeamImageData$img_Player*TEXTURE*IMAGE SET " 
+								+ "\\\\" + config.getPrimaryIpAddress() + (config.getBroadcaster().equalsIgnoreCase(Constants.LEGENDS) ? Constants.LEGENDS_PHOTO_PATH : Constants.ASSAM_PHOTO_PATH) 
+								+ "BLANK" + CricketUtil.PNG_EXTENSION + "\0", print_writers);
+						
+						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$Main$Side_" + WhichSide + "$TeamImage$Playing11$" + rowId + "$TeamImageData$img_Player*TEXTURE*IMAGE SET " 
+								+ "\\\\" + config.getPrimaryIpAddress() + (config.getBroadcaster().equalsIgnoreCase(Constants.LEGENDS) ? Constants.LEGENDS_PHOTO_PATH : Constants.ASSAM_PHOTO_PATH) 
+								+ team.getTeamName4().replace("BIG BOYS", "BIG_BOYS") + "\\\\" + PlayingXI.get(i-1).getPhoto() + CricketUtil.PNG_EXTENSION + "\0", print_writers);
 					}
 					
 					String role = "",role_word="";
@@ -32311,13 +32387,23 @@ public class FullFramesGfx
 							+ "$Photo_" + rowId + "$Role$img_Text*TEXTURE*IMAGE SET " + (config.getBroadcaster().equalsIgnoreCase(Constants.LEGENDS) ? Constants.LEGENDS_TEXT : Constants.ASSAM_TEXT) + team.getTeamBadge() + "\0", print_writers);
 					
 					if(config.getPrimaryIpAddress().equalsIgnoreCase(Constants.LOCALHOST)) {
+						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_LineUpBigImage$Team_BigImage$Side" + WhichSide + containerName + "$Photo_" + rowId + "$img_Photo*TEXTURE*IMAGE SET " 
+								+ (config.getBroadcaster().equalsIgnoreCase(Constants.LEGENDS) ? Constants.LEGENDS_LOCAL_PHOTO_PATH : Constants.ASSAM_LOCAL_PHOTO_PATH) + "BLANK" + CricketUtil.PNG_EXTENSION + "\0", print_writers);
+						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_LineUpBigImage$Team_BigImage$Side" + WhichSide + containerName + "$Photo_" + rowId + "$img_PhotoShadow*TEXTURE*IMAGE SET " 
+								+ (config.getBroadcaster().equalsIgnoreCase(Constants.LEGENDS) ? Constants.LEGENDS_LOCAL_PHOTO_PATH : Constants.ASSAM_LOCAL_PHOTO_PATH) + "BLANK" + CricketUtil.PNG_EXTENSION + "\0", print_writers);
+						
 						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_LineUpBigImage$Team_BigImage$Side" + WhichSide + containerName 
-								+ "$Photo_" + rowId + "$img_Photo*TEXTURE*IMAGE SET " + (config.getBroadcaster().equalsIgnoreCase(Constants.LEGENDS) ? Constants.LEGENDS_LOCAL_PHOTO_PATH : Constants.ASSAM_LOCAL_PHOTO_PATH) + team.getTeamName4().replace("BIG BOYS", 
-										"BIG_BOYS") + "\\\\" + PlayingXI.get(i-1).getPhoto() + CricketUtil.PNG_EXTENSION + "\0", print_writers);
+								+ "$Photo_" + rowId + "$img_Photo*TEXTURE*IMAGE SET " + (config.getBroadcaster().equalsIgnoreCase(Constants.LEGENDS) ? Constants.LEGENDS_LOCAL_PHOTO_PATH : Constants.ASSAM_LOCAL_PHOTO_PATH) 
+								+ team.getTeamName4().replace("BIG BOYS", "BIG_BOYS") + "\\\\" + PlayingXI.get(i-1).getPhoto() + CricketUtil.PNG_EXTENSION + "\0", print_writers);
 						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_LineUpBigImage$Team_BigImage$Side" + WhichSide + containerName 
-								+ "$Photo_" + rowId + "$img_PhotoShadow*TEXTURE*IMAGE SET " + (config.getBroadcaster().equalsIgnoreCase(Constants.LEGENDS) ? Constants.LEGENDS_LOCAL_PHOTO_PATH : Constants.ASSAM_LOCAL_PHOTO_PATH) + team.getTeamName4().
-								replace("BIG BOYS", "BIG_BOYS") + "\\\\" + PlayingXI.get(i-1).getPhoto() + CricketUtil.PNG_EXTENSION + "\0", print_writers);
+								+ "$Photo_" + rowId + "$img_PhotoShadow*TEXTURE*IMAGE SET " + (config.getBroadcaster().equalsIgnoreCase(Constants.LEGENDS) ? Constants.LEGENDS_LOCAL_PHOTO_PATH : Constants.ASSAM_LOCAL_PHOTO_PATH) 
+								+ team.getTeamName4().replace("BIG BOYS", "BIG_BOYS") + "\\\\" + PlayingXI.get(i-1).getPhoto() + CricketUtil.PNG_EXTENSION + "\0", print_writers);
 					}else {
+						
+						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_LineUpBigImage$Team_BigImage$Side" + WhichSide + containerName + "$Photo_" + rowId + "$img_Photo*TEXTURE*IMAGE SET " + "\\\\" 
+								+ config.getPrimaryIpAddress() + (config.getBroadcaster().equalsIgnoreCase(Constants.LEGENDS) ? Constants.LEGENDS_PHOTO_PATH : Constants.ASSAM_PHOTO_PATH) + "BLANK" + CricketUtil.PNG_EXTENSION + "\0", print_writers);
+						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_LineUpBigImage$Team_BigImage$Side" + WhichSide + containerName + "$Photo_" + rowId + "$img_PhotoShadow*TEXTURE*IMAGE SET " + "\\\\" 
+								+ config.getPrimaryIpAddress() + (config.getBroadcaster().equalsIgnoreCase(Constants.LEGENDS) ? Constants.LEGENDS_PHOTO_PATH : Constants.ASSAM_PHOTO_PATH) + "BLANK" + CricketUtil.PNG_EXTENSION + "\0", print_writers);
 						
 						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_LineUpBigImage$Team_BigImage$Side" + WhichSide + containerName 
 								+ "$Photo_" + rowId + "$img_Photo*TEXTURE*IMAGE SET " + "\\\\" + config.getPrimaryIpAddress() + (config.getBroadcaster().equalsIgnoreCase(Constants.LEGENDS) ? Constants.LEGENDS_PHOTO_PATH : Constants.ASSAM_PHOTO_PATH) 
@@ -33439,26 +33525,46 @@ public class FullFramesGfx
 				if(plyr.getCaptainWicketKeeper() != null && !plyr.getCaptainWicketKeeper().isEmpty()) {
 					if(plyr.getCaptainWicketKeeper().equalsIgnoreCase(CricketUtil.CAPTAIN) || plyr.getCaptainWicketKeeper().equalsIgnoreCase("CAPTAIN_WICKET_KEEPER")) {
 						if(config.getPrimaryIpAddress().equalsIgnoreCase(Constants.LOCALHOST)) {
-							CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$Main$Side_" + WhichSide + "$Target$Team1$img_Player"
-									+ "*TEXTURE*IMAGE SET " + (config.getBroadcaster().equalsIgnoreCase(Constants.LEGENDS) ? Constants.LEGENDS_LOCAL_PHOTO_PATH : Constants.ASSAM_LOCAL_PHOTO_PATH) + matchAllData.getSetup().getHomeTeam().getTeamName4().replace("BIG BOYS", 
-											"BIG_BOYS") + "\\\\" +plyr.getPhoto()+CricketUtil.PNG_EXTENSION + "\0", print_writers);
-							CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$Main$Side_" + WhichSide + "$Target$Team1$img_PlayerShadow"
-									+ "*TEXTURE*IMAGE SET " + (config.getBroadcaster().equalsIgnoreCase(Constants.LEGENDS) ? Constants.LEGENDS_LOCAL_PHOTO_PATH : Constants.ASSAM_LOCAL_PHOTO_PATH) + matchAllData.getSetup().getHomeTeam().getTeamName4().replace("BIG BOYS", 
-											"BIG_BOYS") + "\\\\" +plyr.getPhoto()+CricketUtil.PNG_EXTENSION + "\0", print_writers);
-							CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$Main$Side_" + WhichSide + "$Target$Team1$img_PlayerGrey"
-									+ "*TEXTURE*IMAGE SET " + (config.getBroadcaster().equalsIgnoreCase(Constants.LEGENDS) ? Constants.LEGENDS_LOCAL_PHOTO_PATH : Constants.ASSAM_LOCAL_PHOTO_PATH) + matchAllData.getSetup().getHomeTeam().getTeamName4().replace("BIG BOYS", 
-											"BIG_BOYS") + "\\\\" +plyr.getPhoto()+CricketUtil.PNG_EXTENSION + "\0", print_writers);
+							CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$Main$Side_" + WhichSide + "$Target$Team1$img_Player*TEXTURE*IMAGE SET " 
+									+ (config.getBroadcaster().equalsIgnoreCase(Constants.LEGENDS) ? Constants.LEGENDS_LOCAL_PHOTO_PATH : Constants.ASSAM_LOCAL_PHOTO_PATH) 
+									+ "BLANK" + CricketUtil.PNG_EXTENSION + "\0", print_writers);
+							CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$Main$Side_" + WhichSide + "$Target$Team1$img_PlayerShadow*TEXTURE*IMAGE SET " 
+									+ (config.getBroadcaster().equalsIgnoreCase(Constants.LEGENDS) ? Constants.LEGENDS_LOCAL_PHOTO_PATH : Constants.ASSAM_LOCAL_PHOTO_PATH) 
+									+ "BLANK" + CricketUtil.PNG_EXTENSION + "\0", print_writers);
+							CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$Main$Side_" + WhichSide + "$Target$Team1$img_PlayerGrey*TEXTURE*IMAGE SET " 
+									+ (config.getBroadcaster().equalsIgnoreCase(Constants.LEGENDS) ? Constants.LEGENDS_LOCAL_PHOTO_PATH : Constants.ASSAM_LOCAL_PHOTO_PATH) 
+									+ "BLANK" + CricketUtil.PNG_EXTENSION + "\0", print_writers);
+							
+							CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$Main$Side_" + WhichSide + "$Target$Team1$img_Player*TEXTURE*IMAGE SET " 
+									+ (config.getBroadcaster().equalsIgnoreCase(Constants.LEGENDS) ? Constants.LEGENDS_LOCAL_PHOTO_PATH : Constants.ASSAM_LOCAL_PHOTO_PATH) 
+									+ matchAllData.getSetup().getHomeTeam().getTeamName4().replace("BIG BOYS", "BIG_BOYS") + "\\\\" +plyr.getPhoto()+CricketUtil.PNG_EXTENSION + "\0", print_writers);
+							CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$Main$Side_" + WhichSide + "$Target$Team1$img_PlayerShadow*TEXTURE*IMAGE SET " 
+									+ (config.getBroadcaster().equalsIgnoreCase(Constants.LEGENDS) ? Constants.LEGENDS_LOCAL_PHOTO_PATH : Constants.ASSAM_LOCAL_PHOTO_PATH) 
+									+ matchAllData.getSetup().getHomeTeam().getTeamName4().replace("BIG BOYS", "BIG_BOYS") + "\\\\" +plyr.getPhoto()+CricketUtil.PNG_EXTENSION + "\0", print_writers);
+							CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$Main$Side_" + WhichSide + "$Target$Team1$img_PlayerGrey*TEXTURE*IMAGE SET " 
+									+ (config.getBroadcaster().equalsIgnoreCase(Constants.LEGENDS) ? Constants.LEGENDS_LOCAL_PHOTO_PATH : Constants.ASSAM_LOCAL_PHOTO_PATH) 
+									+ matchAllData.getSetup().getHomeTeam().getTeamName4().replace("BIG BOYS", "BIG_BOYS") + "\\\\" +plyr.getPhoto()+CricketUtil.PNG_EXTENSION + "\0", print_writers);
 							break;
 						}else {
-							CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$Main$Side_" + WhichSide + "$Target$Team1$img_Player"
-									+ "*TEXTURE*IMAGE SET " + "\\\\" + config.getPrimaryIpAddress() + (config.getBroadcaster().equalsIgnoreCase(Constants.LEGENDS) ? Constants.LEGENDS_PHOTO_PATH : Constants.ASSAM_PHOTO_PATH) + matchAllData.getSetup().getHomeTeam()
-									.getTeamName4().replace("BIG BOYS", "BIG_BOYS") + "\\\\" + plyr.getPhoto() + CricketUtil.PNG_EXTENSION + "\0", print_writers);
-							CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$Main$Side_" + WhichSide + "$Target$Team1$img_PlayerShadow"
-									+ "*TEXTURE*IMAGE SET " + "\\\\" + config.getPrimaryIpAddress() + (config.getBroadcaster().equalsIgnoreCase(Constants.LEGENDS) ? Constants.LEGENDS_PHOTO_PATH : Constants.ASSAM_PHOTO_PATH) + matchAllData.getSetup().getHomeTeam()
-									.getTeamName4().replace("BIG BOYS", "BIG_BOYS") + "\\\\" + plyr.getPhoto() + CricketUtil.PNG_EXTENSION + "\0", print_writers);
-							CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$Main$Side_" + WhichSide + "$Target$Team1$img_PlayerGrey"
-									+ "*TEXTURE*IMAGE SET " + "\\\\" + config.getPrimaryIpAddress() + (config.getBroadcaster().equalsIgnoreCase(Constants.LEGENDS) ? Constants.LEGENDS_PHOTO_PATH : Constants.ASSAM_PHOTO_PATH) + matchAllData.getSetup().getHomeTeam()
-									.getTeamName4().replace("BIG BOYS", "BIG_BOYS") + "\\\\" + plyr.getPhoto() + CricketUtil.PNG_EXTENSION + "\0", print_writers);
+							CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$Main$Side_" + WhichSide + "$Target$Team1$img_Player*TEXTURE*IMAGE SET " + "\\\\" 
+									+ config.getPrimaryIpAddress() + (config.getBroadcaster().equalsIgnoreCase(Constants.LEGENDS) ? Constants.LEGENDS_PHOTO_PATH : Constants.ASSAM_PHOTO_PATH) 
+									+ "BLANK" + CricketUtil.PNG_EXTENSION + "\0", print_writers);
+							CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$Main$Side_" + WhichSide + "$Target$Team1$img_PlayerShadow*TEXTURE*IMAGE SET " + "\\\\" 
+									+ config.getPrimaryIpAddress() + (config.getBroadcaster().equalsIgnoreCase(Constants.LEGENDS) ? Constants.LEGENDS_PHOTO_PATH : Constants.ASSAM_PHOTO_PATH) 
+									+ "BLANK" + CricketUtil.PNG_EXTENSION + "\0", print_writers);
+							CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$Main$Side_" + WhichSide + "$Target$Team1$img_PlayerGrey*TEXTURE*IMAGE SET " + "\\\\" 
+									+ config.getPrimaryIpAddress() + (config.getBroadcaster().equalsIgnoreCase(Constants.LEGENDS) ? Constants.LEGENDS_PHOTO_PATH : Constants.ASSAM_PHOTO_PATH) 
+									+ "BLANK" + CricketUtil.PNG_EXTENSION + "\0", print_writers);
+							
+							CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$Main$Side_" + WhichSide + "$Target$Team1$img_Player*TEXTURE*IMAGE SET " + "\\\\" 
+									+ config.getPrimaryIpAddress() + (config.getBroadcaster().equalsIgnoreCase(Constants.LEGENDS) ? Constants.LEGENDS_PHOTO_PATH : Constants.ASSAM_PHOTO_PATH) 
+									+ matchAllData.getSetup().getHomeTeam().getTeamName4().replace("BIG BOYS", "BIG_BOYS") + "\\\\" + plyr.getPhoto() + CricketUtil.PNG_EXTENSION + "\0", print_writers);
+							CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$Main$Side_" + WhichSide + "$Target$Team1$img_PlayerShadow*TEXTURE*IMAGE SET " + "\\\\" 
+									+ config.getPrimaryIpAddress() + (config.getBroadcaster().equalsIgnoreCase(Constants.LEGENDS) ? Constants.LEGENDS_PHOTO_PATH : Constants.ASSAM_PHOTO_PATH) 
+									+ matchAllData.getSetup().getHomeTeam().getTeamName4().replace("BIG BOYS", "BIG_BOYS") + "\\\\" + plyr.getPhoto() + CricketUtil.PNG_EXTENSION + "\0", print_writers);
+							CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$Main$Side_" + WhichSide + "$Target$Team1$img_PlayerGrey*TEXTURE*IMAGE SET " + "\\\\" 
+									+ config.getPrimaryIpAddress() + (config.getBroadcaster().equalsIgnoreCase(Constants.LEGENDS) ? Constants.LEGENDS_PHOTO_PATH : Constants.ASSAM_PHOTO_PATH) 
+									+ matchAllData.getSetup().getHomeTeam().getTeamName4().replace("BIG BOYS", "BIG_BOYS") + "\\\\" + plyr.getPhoto() + CricketUtil.PNG_EXTENSION + "\0", print_writers);
 							break;
 						}
 					}
@@ -33468,17 +33574,34 @@ public class FullFramesGfx
 				if(plyr.getCaptainWicketKeeper() != null && !plyr.getCaptainWicketKeeper().isEmpty()) {
 					if(plyr.getCaptainWicketKeeper().equalsIgnoreCase(CricketUtil.CAPTAIN) || plyr.getCaptainWicketKeeper().equalsIgnoreCase("CAPTAIN_WICKET_KEEPER")) {
 						if(config.getPrimaryIpAddress().equalsIgnoreCase(Constants.LOCALHOST)) {
-							CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$Main$Side_" + WhichSide + "$Target$Team2$img_Player"
-									+ "*TEXTURE*IMAGE SET " + (config.getBroadcaster().equalsIgnoreCase(Constants.LEGENDS) ? Constants.LEGENDS_LOCAL_PHOTO_PATH : Constants.ASSAM_LOCAL_PHOTO_PATH) + matchAllData.getSetup().getAwayTeam().getTeamName4().replace("BIG BOYS", 
-											"BIG_BOYS") + "\\\\" +plyr.getPhoto()+CricketUtil.PNG_EXTENSION + "\0", print_writers);
-							CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$Main$Side_" + WhichSide + "$Target$Team2$img_PlayerShadow"
-									+ "*TEXTURE*IMAGE SET " + (config.getBroadcaster().equalsIgnoreCase(Constants.LEGENDS) ? Constants.LEGENDS_LOCAL_PHOTO_PATH : Constants.ASSAM_LOCAL_PHOTO_PATH) + matchAllData.getSetup().getAwayTeam().getTeamName4().replace("BIG BOYS", 
-											"BIG_BOYS") + "\\\\" +plyr.getPhoto()+CricketUtil.PNG_EXTENSION + "\0", print_writers);
-							CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$Main$Side_" + WhichSide + "$Target$Team2$img_PlayerGrey"
-									+ "*TEXTURE*IMAGE SET " + (config.getBroadcaster().equalsIgnoreCase(Constants.LEGENDS) ? Constants.LEGENDS_LOCAL_PHOTO_PATH : Constants.ASSAM_LOCAL_PHOTO_PATH) + matchAllData.getSetup().getAwayTeam().getTeamName4().replace("BIG BOYS", 
-											"BIG_BOYS") + "\\\\" +plyr.getPhoto()+CricketUtil.PNG_EXTENSION + "\0", print_writers);
+							CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$Main$Side_" + WhichSide + "$Target$Team2$img_Player*TEXTURE*IMAGE SET " 
+									+ (config.getBroadcaster().equalsIgnoreCase(Constants.LEGENDS) ? Constants.LEGENDS_LOCAL_PHOTO_PATH : Constants.ASSAM_LOCAL_PHOTO_PATH) 
+									+ "BLANK" + CricketUtil.PNG_EXTENSION + "\0", print_writers);
+							CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$Main$Side_" + WhichSide + "$Target$Team2$img_PlayerShadow*TEXTURE*IMAGE SET " 
+									+ (config.getBroadcaster().equalsIgnoreCase(Constants.LEGENDS) ? Constants.LEGENDS_LOCAL_PHOTO_PATH : Constants.ASSAM_LOCAL_PHOTO_PATH) 
+									+ "BLANK"+CricketUtil.PNG_EXTENSION + "\0", print_writers);
+							CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$Main$Side_" + WhichSide + "$Target$Team2$img_PlayerGrey*TEXTURE*IMAGE SET " 
+									+ (config.getBroadcaster().equalsIgnoreCase(Constants.LEGENDS) ? Constants.LEGENDS_LOCAL_PHOTO_PATH : Constants.ASSAM_LOCAL_PHOTO_PATH) 
+									+ "BLANK"+CricketUtil.PNG_EXTENSION + "\0", print_writers);
+							
+							CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$Main$Side_" + WhichSide + "$Target$Team2$img_Player*TEXTURE*IMAGE SET " 
+									+ (config.getBroadcaster().equalsIgnoreCase(Constants.LEGENDS) ? Constants.LEGENDS_LOCAL_PHOTO_PATH : Constants.ASSAM_LOCAL_PHOTO_PATH) 
+									+ matchAllData.getSetup().getAwayTeam().getTeamName4().replace("BIG BOYS", "BIG_BOYS") + "\\\\" +plyr.getPhoto()+CricketUtil.PNG_EXTENSION + "\0", print_writers);
+							CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$Main$Side_" + WhichSide + "$Target$Team2$img_PlayerShadow*TEXTURE*IMAGE SET " 
+									+ (config.getBroadcaster().equalsIgnoreCase(Constants.LEGENDS) ? Constants.LEGENDS_LOCAL_PHOTO_PATH : Constants.ASSAM_LOCAL_PHOTO_PATH) 
+									+ matchAllData.getSetup().getAwayTeam().getTeamName4().replace("BIG BOYS", "BIG_BOYS") + "\\\\" +plyr.getPhoto()+CricketUtil.PNG_EXTENSION + "\0", print_writers);
+							CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$Main$Side_" + WhichSide + "$Target$Team2$img_PlayerGrey*TEXTURE*IMAGE SET " 
+									+ (config.getBroadcaster().equalsIgnoreCase(Constants.LEGENDS) ? Constants.LEGENDS_LOCAL_PHOTO_PATH : Constants.ASSAM_LOCAL_PHOTO_PATH) 
+									+ matchAllData.getSetup().getAwayTeam().getTeamName4().replace("BIG BOYS", "BIG_BOYS") + "\\\\" +plyr.getPhoto()+CricketUtil.PNG_EXTENSION + "\0", print_writers);
 							break;
 						}else {
+							CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$Main$Side_" + WhichSide + "$Target$Team2$img_Player*TEXTURE*IMAGE SET " + "\\\\" + config.getPrimaryIpAddress() 
+								+ (config.getBroadcaster().equalsIgnoreCase(Constants.LEGENDS) ? Constants.LEGENDS_PHOTO_PATH : Constants.ASSAM_PHOTO_PATH) + "BLANK" + CricketUtil.PNG_EXTENSION + "\0", print_writers);
+							CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$Main$Side_" + WhichSide + "$Target$Team2$img_PlayerShadow*TEXTURE*IMAGE SET " + "\\\\" + config.getPrimaryIpAddress() 
+								+ (config.getBroadcaster().equalsIgnoreCase(Constants.LEGENDS) ? Constants.LEGENDS_PHOTO_PATH : Constants.ASSAM_PHOTO_PATH) + "BLANK" + CricketUtil.PNG_EXTENSION + "\0", print_writers);
+							CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$Main$Side_" + WhichSide + "$Target$Team2$img_PlayerGrey*TEXTURE*IMAGE SET " + "\\\\" + config.getPrimaryIpAddress() 
+								+ (config.getBroadcaster().equalsIgnoreCase(Constants.LEGENDS) ? Constants.LEGENDS_PHOTO_PATH : Constants.ASSAM_PHOTO_PATH) + "BLANK" + CricketUtil.PNG_EXTENSION + "\0", print_writers);
+							
 							CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$Main$Side_" + WhichSide + "$Target$Team2$img_Player"
 									+ "*TEXTURE*IMAGE SET " + "\\\\" + config.getPrimaryIpAddress() + (config.getBroadcaster().equalsIgnoreCase(Constants.LEGENDS) ? Constants.LEGENDS_PHOTO_PATH : Constants.ASSAM_PHOTO_PATH) + matchAllData.getSetup().getAwayTeam()
 									.getTeamName4().replace("BIG BOYS", "BIG_BOYS") + "\\\\" + plyr.getPhoto() + CricketUtil.PNG_EXTENSION + "\0", print_writers);
@@ -42826,15 +42949,20 @@ public class FullFramesGfx
 						rowId+ "$Style2$txt_Name*GEOM*TEXT SET " + player.getFull_name() + "\0", print_writers);
 				//Player Photo 
 				if(config.getPrimaryIpAddress().equalsIgnoreCase(Constants.LOCALHOST)) {
-					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$All$Main$Side_"+ WhichSide +"$TeamsAll$Team"+
-							rowId+ "$Style2$img_Player*TEXTURE*IMAGE SET "+ (config.getBroadcaster().equalsIgnoreCase(Constants.LEGENDS) ? Constants.LEGENDS_LOCAL_PHOTO_PATH : Constants.ASSAM_LOCAL_PHOTO_PATH)
-							 + "\\\\" + tm.getTeamBadge()+"\\\\"
+					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$All$Main$Side_"+ WhichSide +"$TeamsAll$Team" + rowId+ "$Style2$img_Player*TEXTURE*IMAGE SET "
+							+ (config.getBroadcaster().equalsIgnoreCase(Constants.LEGENDS) ? Constants.LEGENDS_LOCAL_PHOTO_PATH : Constants.ASSAM_LOCAL_PHOTO_PATH) + "BLANK" + CricketUtil.PNG_EXTENSION + "\0", print_writers);
+					
+					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$All$Main$Side_"+ WhichSide +"$TeamsAll$Team" + rowId+ "$Style2$img_Player*TEXTURE*IMAGE SET "
+							+ (config.getBroadcaster().equalsIgnoreCase(Constants.LEGENDS) ? Constants.LEGENDS_LOCAL_PHOTO_PATH : Constants.ASSAM_LOCAL_PHOTO_PATH) + "\\\\" + tm.getTeamBadge()+"\\\\"
 							+ tm.getCaptains()+ CricketUtil.PNG_EXTENSION + "\0", print_writers);
 				}else {
-					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$All$Main$Side_"+ WhichSide +"$TeamsAll$Team"+
-							rowId+ "$Style2$img_Player*TEXTURE*IMAGE SET "+"\\\\"+config.getPrimaryIpAddress()+"\\\\"+
-							(config.getBroadcaster().equalsIgnoreCase(Constants.LEGENDS) ? (config.getBroadcaster().equalsIgnoreCase(Constants.LEGENDS) ? Constants.LEGENDS_PHOTO_PATH : Constants.ASSAM_PHOTO_PATH) : Constants.ASSAM_PHOTO_PATH) +
-							team.getTeamBadge()+ "\\\\" + tm.getCaptains()+ CricketUtil.PNG_EXTENSION + "\0", print_writers);
+					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$All$Main$Side_"+ WhichSide +"$TeamsAll$Team" + rowId + "$Style2$img_Player*TEXTURE*IMAGE SET "
+							+ "\\\\" + config.getPrimaryIpAddress() + "\\\\" + (config.getBroadcaster().equalsIgnoreCase(Constants.LEGENDS) ? (config.getBroadcaster().equalsIgnoreCase(Constants.LEGENDS) ? 
+							Constants.LEGENDS_PHOTO_PATH : Constants.ASSAM_PHOTO_PATH) : Constants.ASSAM_PHOTO_PATH) + "BLANK" + CricketUtil.PNG_EXTENSION + "\0", print_writers);
+					
+					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$All$Main$Side_"+ WhichSide +"$TeamsAll$Team" + rowId + "$Style2$img_Player*TEXTURE*IMAGE SET "
+							+ "\\\\" + config.getPrimaryIpAddress() + "\\\\" + (config.getBroadcaster().equalsIgnoreCase(Constants.LEGENDS) ? (config.getBroadcaster().equalsIgnoreCase(Constants.LEGENDS) ? 
+							Constants.LEGENDS_PHOTO_PATH : Constants.ASSAM_PHOTO_PATH) : Constants.ASSAM_PHOTO_PATH) + team.getTeamBadge()+ "\\\\" + tm.getCaptains()+ CricketUtil.PNG_EXTENSION + "\0", print_writers);
 				}
 			}else {
 				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$All$Main$Side_"+ WhichSide +"$TeamsAll$Team"+

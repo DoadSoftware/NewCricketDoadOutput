@@ -505,6 +505,10 @@ public class Animation
 				AnimateIn("ArrowDown,", print_writers, config); // Push infobar
 				TimeUnit.MILLISECONDS.sleep(500);
 				
+				if(audioenabled.equalsIgnoreCase("TRUE")) {
+					processAnimation(Constants.BACK, print_writers, "Audio", "START");
+				}
+				
 				processAnimation(Constants.BACK, print_writers, "anim_FullFrame$In_Out$Essentials", "START");
 				processAnimation(Constants.BACK, print_writers, "anim_FullFrame$In_Out$Event_Logo", "START");
 				processAnimation(Constants.BACK, print_writers, "anim_FullFrame$In_Out$Target", "START");
@@ -516,6 +520,10 @@ public class Animation
 				processAnimation(Constants.BACK, print_writers, "Loop", "START");
 				AnimateIn("ArrowDown,", print_writers, config); // Push infobar
 				TimeUnit.MILLISECONDS.sleep(500);
+				
+				if(audioenabled.equalsIgnoreCase("TRUE")) {
+					processAnimation(Constants.BACK, print_writers, "Audio", "START");
+				}
 				
 				processAnimation(Constants.BACK, print_writers, "anim_Team_BigImage", "START");
 				this.whichGraphicOnScreen = whatToProcess;
@@ -537,6 +545,10 @@ public class Animation
 			case "Control_d": case "Control_e": case "Shift_P": case "Shift_Q":
 				AnimateIn("ArrowDown,", print_writers, config); // Push infobar
 				TimeUnit.MILLISECONDS.sleep(500);
+				
+				if(audioenabled.equalsIgnoreCase("TRUE")) {
+					processAnimation(Constants.BACK, print_writers, "Audio", "START");
+				}
 				
 				processAnimation(Constants.BACK, print_writers, "anim_FullFrame$In_Out$Essentials", "START");
 				processAnimation(Constants.BACK, print_writers, "anim_FullFrame$In_Out$Event_Logo", "START");
@@ -571,6 +583,11 @@ public class Animation
 				processAnimation(Constants.BACK, print_writers, "Loop", "START");
 				AnimateIn("ArrowDown,", print_writers, config); // Push infobar
 				TimeUnit.MILLISECONDS.sleep(500);
+				
+				if(audioenabled.equalsIgnoreCase("TRUE")) {
+					processAnimation(Constants.BACK, print_writers, "Audio", "START");
+				}
+				
 				switch (config.getBroadcaster().toUpperCase()) {
 				case Constants.LEGENDS: case Constants.ASSAM:
 					processAnimation(Constants.BACK, print_writers, "anim_FullFrame$In_Out$Essentials", "START");
@@ -699,7 +716,8 @@ public class Animation
 				}
 				break;
 			case "ArrowDown":
-				if(this.infobar.isInfobar_on_screen() == true && !this.infobar.isInfobar_pushed()) {
+				if(this.infobar.isInfobar_on_screen() == true && !this.infobar.isInfobar_pushed() && 
+					this.infobar.getInfobar_status().equalsIgnoreCase(Constants.TWO_LINER_INFOBAR)) {
 					processAnimation(Constants.FRONT, print_writers, "Anim_Infobar$Push", "START");
 					this.infobar.setInfobar_pushed(true);
 					TimeUnit.MILLISECONDS.sleep(800);
