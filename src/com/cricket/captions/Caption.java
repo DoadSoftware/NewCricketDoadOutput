@@ -635,6 +635,9 @@ public class Caption
 			case "Alt_Shift_L":
 				status = this_lowerThirdGfx.populateL3rdOversPerHour(whatToProcess,whichSide,matchAllData);
 				break;
+			case "Control_Shift_!":
+				status = this_fullFramesGfx.populateFairPlayPointsTable(whatToProcess, whichSide, matchAllData);
+				break;
 			case "Control_Shift_P":
 				switch (config.getBroadcaster()) {
 				case Constants.NPL: case Constants.APL:
@@ -799,19 +802,22 @@ public class Caption
 				break;
 			case "z": case "x": case "c": case "v": case "Control_z": case "Control_x": case "Control_c": case "Control_v": case "Shift_V":
 			case "Shift_Z": case "Shift_X": case "Control_Shift_Z": case "Control_Shift_Y": case "Alt_Shift_W": case "Control_Shift_F8":
-			case "Alt_Shift_U":	case "Alt_Shift_I":	
+			case "Alt_Shift_U":	case "Alt_Shift_I": case "Alt_Shift_<":
 				
 				System.out.println("wtp = " + whatToProcess);
 				if(whatToProcess.split(",")[0].equalsIgnoreCase("Shift_Z") || whatToProcess.split(",")[0].equalsIgnoreCase("Shift_X")) {
 					this_fullFramesGfx.FirstPlayerId = Integer.valueOf((whatToProcess.split(",")[2]));
 				}
 				else if(!whatToProcess.split(",")[0].equalsIgnoreCase("Shift_V") && !whatToProcess.split(",")[0].equalsIgnoreCase("Alt_Shift_W")
-						&& !whatToProcess.split(",")[0].equalsIgnoreCase("Control_Shift_F8")) {
+						&& !whatToProcess.split(",")[0].equalsIgnoreCase("Control_Shift_F8") && !whatToProcess.split(",")[0].equalsIgnoreCase("Alt_Shift_<")) {
 					this_fullFramesGfx.FirstPlayerId = Integer.valueOf((whatToProcess.split(",")[2]).split("_")[1]);
 				}else if(whatToProcess.split(",")[0].equalsIgnoreCase("Control_Shift_F8")) {
 					this_fullFramesGfx.FirstPlayerId = Integer.valueOf((whatToProcess.split(",")[2]).split("_")[1]);
 					this_fullFramesGfx.whichtype = whatToProcess.split(",")[3];
 					this_fullFramesGfx.whichTeam = Integer.valueOf(whatToProcess.split(",")[4]);
+				}else if(whatToProcess.split(",")[0].equalsIgnoreCase("Alt_Shift_<")) {
+					this_fullFramesGfx.FirstPlayerId = Integer.valueOf((whatToProcess.split(",")[2]).split("_")[1]);
+					this_fullFramesGfx.highlight_count = Integer.valueOf((whatToProcess.split(",")[2]).split("_")[0]);
 				}
 				
 				if(!config.getBroadcaster().equalsIgnoreCase(Constants.ISPL) && !config.getBroadcaster().equalsIgnoreCase(Constants.LEGENDS) &&

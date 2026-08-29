@@ -57,6 +57,7 @@ import com.cricket.model.FieldersData;
 import com.cricket.model.Fixture;
 import com.cricket.model.Ground;
 import com.cricket.model.HeadToHead;
+import com.cricket.model.HeadToHeadPlayer;
 import com.cricket.model.InfobarStats;
 import com.cricket.model.Match;
 import com.cricket.model.MatchAllData;
@@ -73,6 +74,7 @@ import com.cricket.model.StatsType;
 import com.cricket.model.Team;
 import com.cricket.model.Tournament;
 import com.cricket.model.VariousText;
+import com.cricket.model.WagonWheel;
 import com.cricket.service.CricketService;
 import com.cricket.util.CricketFunctions;
 import com.cricket.util.CricketUtil;
@@ -1239,6 +1241,7 @@ public class IndexController
 	@SuppressWarnings("unchecked")
 	public <T> List<T> GetGraphicOption(String whatToProcess,Configuration session_configuration, HeadToHead headToHead, 
 			String session_MasterCricketDirectory) throws Exception {
+		
 	  switch ((whatToProcess.contains(",")?whatToProcess.split(",")[0]:whatToProcess)) {
 	  	case "Alt_3":
 		    StatsType stat = (whatToProcess.split(",").length > 2) ? 
@@ -1380,9 +1383,10 @@ public class IndexController
 			}else {
 				return (List<T>) session_team;
 			}
+			
 		case "z": case "x": case "c": case "v": case "Control_Shift_Z": case "Control_Shift_Y": case "Shift_@": case "Shift_$": case "Control_Shift_@": case "Control_Alt_5":
 		case "Control_Alt_9": case "Control_Alt_0":	case "Alt_Shift_K": case "Alt_Shift_X": case "Alt_Shift_T": case "Alt_Shift_V":  case "Alt_Shift_U": case "Alt_Shift_I":
-			
+		
 			List<Tournament> tournamentStats = new ArrayList<Tournament>();
 			switch (whatToProcess) {
 			case "Alt_Shift_I": 
@@ -1440,7 +1444,22 @@ public class IndexController
 					headToHead.getH2hPlayer());
 			Collections.sort(log_fifty,new CricketFunctions.LogFiftyWicketsComparator());
 			return (List<T>) log_fifty;
-	
+		case "Alt_Shift_<":
+			List<WagonWheel> sortedStats = new ArrayList<>();
+			List<Tournament> tournamentsData = new ArrayList<Tournament>();
+			
+			tournamentsData = CricketFunctions.extractTournamentData("CURRENT_MATCH_DATA", false, headToHead.getH2hPlayer(), cricketService, 
+	                session_match, past_tournament_stats);
+			
+			for (Tournament tourn : tournamentsData) {
+				if(tourn.getSixDistance() != null) {
+					for(WagonWheel bs : tourn.getSixDistance()) {
+						sortedStats.add(bs);
+					}
+				}
+			}
+			sortedStats.sort(Comparator.comparingDouble(WagonWheel::getSixDistance).reversed());
+			return (List<T>) sortedStats;
 		case "Control_z": case "Control_x": case "Alt_Shift_@": case "Control_Alt_6":
 
 			List<Tournament> gender_Specific_tournaments_stats = new ArrayList<Tournament>();
@@ -1554,6 +1573,7 @@ public class IndexController
 	    }
 	    past_tournament_stats = CricketFunctions.extractTournamentData("PAST_MATCHES_DATA",false,headToHead.getH2hPlayer(),cricketService,session_match,null);
 	    past_tournament_boundaries = CricketFunctions.extracttournamentFoursAndSixesData("PAST_MATCHES_DATA",headToHead.getH2hPlayer(),session_match,null);
+	    
 	}
 
 	private void updateBoundaryData() {
