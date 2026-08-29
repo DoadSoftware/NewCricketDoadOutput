@@ -5525,6 +5525,10 @@ public class FullFramesGfx
 				
 				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$All$Sponsor$Side" + WhichSide
 						+ "$Select*FUNCTION*Omo*vis_con SET 0\0", print_writers);
+				
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$All$Header$Side" + WhichSide
+						+ "$Select_HeaderType$Style2$img_Base*TEXTURE*IMAGE SET " + Constants.LEGENDS_BASE + "TLogo" + "\0", print_writers);
+				
 				boolean vtext= false;
 				for(VariousText vt : VariousText) {
 					if(vt.getVariousType().equalsIgnoreCase("LEADERBOARDHEADER") && vt.getUseThis().toUpperCase().equalsIgnoreCase(CricketUtil.YES)) {

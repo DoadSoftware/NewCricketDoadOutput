@@ -543,7 +543,7 @@ function processUserSelectionData(whatToProcess,dataToProcess)
 				break;
 			case 'Alt_F9':
 				switch($('#selected_broadcaster').val().toUpperCase()){
-				case 'ICC-U19-2023': case 'T20_MUMBAI':
+				case 'ICC-U19-2023': case 'T20_MUMBAI': case 'ACC':
 					addItemsToList(dataToProcess,null); 
 					break;
 				 }
