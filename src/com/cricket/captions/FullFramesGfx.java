@@ -29477,7 +29477,7 @@ public class FullFramesGfx
 									containerName + i + "$" + rowId + "$Select_Row_Type*FUNCTION*Omo*vis_con SET " + "0" + "\0", print_writers);
 							
 							CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$Main$Side_" + WhichSide + "$Teams$Playing11$" + 
-									containerName + i + "$" + rowId + "$txt_Name*GEOM*TEXT SET " + hs.getFull_name() + "\0", print_writers);
+									containerName + i + "$" + rowId + "$txt_Name*GEOM*TEXT SET " + CricketFunctions.fbPlayerName(hs,18) + "\0", print_writers);
 							
 							switch (config.getBroadcaster().toUpperCase()) {
 							case Constants.LEGENDS: case Constants.ASSAM:
@@ -29666,7 +29666,7 @@ public class FullFramesGfx
 									containerName + i + "$" + rowId + "$Select_Row_Type*FUNCTION*Omo*vis_con SET " + "0" + "\0", print_writers);
 							
 							CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$Main$Side_" + WhichSide + "$Teams$Playing11$" + 
-									containerName + i + "$" + rowId + "$txt_Name*GEOM*TEXT SET " + as.getFull_name() + "\0", print_writers);
+									containerName + i + "$" + rowId + "$txt_Name*GEOM*TEXT SET " + CricketFunctions.fbPlayerName(as,18) + "\0", print_writers);
 							
 							switch (config.getBroadcaster().toUpperCase()) {
 							case Constants.LEGENDS: case Constants.ASSAM:
