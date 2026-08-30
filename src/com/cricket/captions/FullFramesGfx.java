@@ -377,12 +377,17 @@ public class FullFramesGfx
 			CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$All$SubHeader$Side" + WhichSide + "$txt_SubHeader"
 					+ "*GEOM*TEXT SET " + matchAllData.getSetup().getTournament() + "\0", print_writers);
 			
+			CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$All$Header$Side" + WhichSide
+					+ "$Select_HeaderType$Style2$img_Base*TEXTURE*IMAGE SET " + Constants.LEGENDS_BASE + "TLogo" + "\0", print_writers);
+			CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$All$Header$Side" + WhichSide
+					+ "$Select_HeaderType$Style2$img_Text*TEXTURE*IMAGE SET " + Constants.LEGENDS_TEXT + "TLogo" + "\0", print_writers);
+			
 			CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$All$LogoForFF$Side" + WhichSide + "$Select_LogoStyle"
 					+ "*FUNCTION*Omo*vis_con SET 1\0", print_writers);
 			CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$All$LogoForFF$Side" + WhichSide + "$SingleLogo$2$img_TeamLogoBW"
-					+ "*TEXTURE*IMAGE SET " + Constants.LEGENDS_TEAMLOGO_BW_PATH + "TLogo" + "\0", print_writers);
+					+ "*TEXTURE*IMAGE SET " + Constants.LEGENDS_TEAMLOGO_GREY_PATH + "TLogo" + "\0", print_writers);
 			CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$All$LogoForFF$Side" + WhichSide + "$SingleLogo$2$img_TeamLogo"
-					+ "*TEXTURE*IMAGE SET " + Constants.LEGENDS_TEAMLOGO_PATH + "TLogo" + "\0", print_writers);
+					+ "*TEXTURE*IMAGE SET " + Constants.LEGENDS_TEAMLOGO_GREY_PATH + "TLogo" + "\0", print_writers);
 			
 			CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$All$Sponsor$Side" + WhichSide + "$Select"
 					+ "*FUNCTION*Omo*vis_con SET 0 \0", print_writers);
@@ -5476,11 +5481,11 @@ public class FullFramesGfx
 				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$All$LogoForFF$Side" + WhichSide
 						+ "$SingleLogo$SelectLogo*FUNCTION*Omo*vis_con SET 1\0", print_writers);
 				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$All$LogoForFF$Side" + WhichSide + "$SingleLogo$SelectLogo$2$"
-						+ "img_TeamLogoBW*TEXTURE*IMAGE SET " + (config.getBroadcaster().equalsIgnoreCase(Constants.LEGENDS) ? Constants.LEGENDS_TEAMLOGO_BW_PATH : 
+						+ "img_TeamLogoBW*TEXTURE*IMAGE SET " + (config.getBroadcaster().equalsIgnoreCase(Constants.LEGENDS) ? Constants.LEGENDS_TEAMLOGO_GREY_PATH : 
 							Constants.ASSAM_TEAMLOGO_BW_PATH) + "TLogo"+ "\0", print_writers);
 				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$All$LogoForFF$Side" + WhichSide + "$SingleLogo$SelectLogo$2$"
-						+ "img_TeamLogo*TEXTURE*IMAGE SET " + (config.getBroadcaster().equalsIgnoreCase(Constants.LEGENDS) ? Constants.LEGENDS_TEAMLOGO_PATH : Constants.ASSAM_TEAMLOGO_PATH)
-						+ "TLogo" + "\0", print_writers);
+						+ "img_TeamLogo*TEXTURE*IMAGE SET " + (config.getBroadcaster().equalsIgnoreCase(Constants.LEGENDS) ? Constants.LEGENDS_TEAMLOGO_GREY_PATH : 
+							Constants.ASSAM_TEAMLOGO_PATH) + "TLogo" + "\0", print_writers);
 				
 				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$All$Sponsor$Side" + WhichSide
 						+ "$Select*FUNCTION*Omo*vis_con SET 0\0", print_writers);
@@ -5530,6 +5535,8 @@ public class FullFramesGfx
 				
 				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$All$Header$Side" + WhichSide
 						+ "$Select_HeaderType$Style2$img_Base*TEXTURE*IMAGE SET " + Constants.LEGENDS_BASE + "TLogo" + "\0", print_writers);
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$All$Header$Side" + WhichSide
+						+ "$Select_HeaderType$Style2$img_Text*TEXTURE*IMAGE SET " + Constants.LEGENDS_TEXT + "TLogo" + "\0", print_writers);
 				
 				boolean vtext= false;
 				for(VariousText vt : VariousText) {
@@ -5639,16 +5646,18 @@ public class FullFramesGfx
 						+ "$Select_SubHeader*FUNCTION*Omo*vis_con SET 1\0", print_writers);
 				
 				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_LineUpBigImage$All$Header$Side" + WhichSide 
-						+ "$Style2$img_Base*TEXTURE*IMAGE SET " + (config.getBroadcaster().equalsIgnoreCase(Constants.LEGENDS) ? Constants.LEGENDS_BASE : Constants.ASSAM_BASE)
-						 + color_name + "\0", print_writers);
+						+ "$Style2$img_Base*TEXTURE*IMAGE SET " + (config.getBroadcaster().equalsIgnoreCase(Constants.LEGENDS) ? 
+								Constants.LEGENDS_BASE : Constants.ASSAM_BASE) + color_name + "\0", print_writers);
 				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_LineUpBigImage$All$Header$Side" + WhichSide 
-						+ "$Style2$img_Text*TEXTURE*IMAGE SET " + (config.getBroadcaster().equalsIgnoreCase(Constants.LEGENDS) ? (config.getBroadcaster().equalsIgnoreCase(Constants.LEGENDS) ? Constants.LEGENDS_TEXT : Constants.ASSAM_TEXT) : Constants.ASSAM_TEXT)
-						 + color_name + "\0", print_writers);
+						+ "$Style2$img_Text*TEXTURE*IMAGE SET " + (config.getBroadcaster().equalsIgnoreCase(Constants.LEGENDS) ? 
+								Constants.LEGENDS_TEXT : Constants.ASSAM_TEXT) + color_name + "\0", print_writers);
 				
 				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_LineUpBigImage$All$LogoForFF$Side" + WhichSide + "$SingleLogo$Team1$"
-						+ "img_TeamLogoBW*TEXTURE*IMAGE SET " + (config.getBroadcaster().equalsIgnoreCase(Constants.LEGENDS) ? Constants.LEGENDS_TEAMLOGO_BW_PATH : Constants.ASSAM_TEAMLOGO_BW_PATH) + logo_name + "\0", print_writers);
+						+ "img_TeamLogoBW*TEXTURE*IMAGE SET " + (config.getBroadcaster().equalsIgnoreCase(Constants.LEGENDS) ? Constants.LEGENDS_TEAMLOGO_PATH : 
+							Constants.ASSAM_TEAMLOGO_BW_PATH) + logo_name + "\0", print_writers);
 				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_LineUpBigImage$All$LogoForFF$Side" + WhichSide + "$SingleLogo$Team1$"
-						+ "img_TeamLogo*TEXTURE*IMAGE SET " + (config.getBroadcaster().equalsIgnoreCase(Constants.LEGENDS) ? Constants.LEGENDS_TEAMLOGO_PATH : Constants.ASSAM_TEAMLOGO_PATH) + logo_name + "\0", print_writers);
+						+ "img_TeamLogo*TEXTURE*IMAGE SET " + (config.getBroadcaster().equalsIgnoreCase(Constants.LEGENDS) ? Constants.LEGENDS_TEAMLOGO_PATH : 
+							Constants.ASSAM_TEAMLOGO_PATH) + logo_name + "\0", print_writers);
 				
 				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_LineUpBigImage$All$Header$Side" + WhichSide 
 						+ "$Style2$txt_Header*GEOM*TEXT SET " + team.getTeamName1() + "\0", print_writers);
@@ -5676,18 +5685,24 @@ public class FullFramesGfx
 						+ "$Select*FUNCTION*Omo*vis_con SET 0\0", print_writers);
 				
 				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$All$Header$Side" + WhichSide 
-						+ "$Style2$img_Base*TEXTURE*IMAGE SET " + (config.getBroadcaster().equalsIgnoreCase(Constants.LEGENDS) ? Constants.LEGENDS_BASE : Constants.ASSAM_BASE) + "TLogo" + "\0", print_writers);
+						+ "$Style2$img_Base*TEXTURE*IMAGE SET " + (config.getBroadcaster().equalsIgnoreCase(Constants.LEGENDS) ? 
+								Constants.LEGENDS_BASE : Constants.ASSAM_BASE) + "TLogo" + "\0", print_writers);
 				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$All$Header$Side" + WhichSide 
-						+ "$Style2$img_Text*TEXTURE*IMAGE SET " + (config.getBroadcaster().equalsIgnoreCase(Constants.LEGENDS) ? Constants.LEGENDS_TEXT : Constants.ASSAM_TEXT) + "TLogo" + "\0", print_writers);
+						+ "$Style2$img_Text*TEXTURE*IMAGE SET " + (config.getBroadcaster().equalsIgnoreCase(Constants.LEGENDS) ? 
+								Constants.LEGENDS_TEXT : Constants.ASSAM_TEXT) + "TLogo" + "\0", print_writers);
 				
 				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$All$LogoForFF$Side" + WhichSide + "$DoubleLogo$Team1$"
-						+ "img_TeamLogoBW*TEXTURE*IMAGE SET " + (config.getBroadcaster().equalsIgnoreCase(Constants.LEGENDS) ? Constants.LEGENDS_TEAMLOGO_BW_PATH : Constants.ASSAM_TEAMLOGO_BW_PATH) + previous_match.getMatch().getInning().get(0).getBatting_team().getTeamBadge() + "\0", print_writers);
+						+ "img_TeamLogoBW*TEXTURE*IMAGE SET " + (config.getBroadcaster().equalsIgnoreCase(Constants.LEGENDS) ? Constants.LEGENDS_TEAMLOGO_PATH : 
+							Constants.ASSAM_TEAMLOGO_BW_PATH) + previous_match.getMatch().getInning().get(0).getBatting_team().getTeamBadge() + "\0", print_writers);
 				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$All$LogoForFF$Side" + WhichSide + "$DoubleLogo$Team1$"
-						+ "img_TeamLogo*TEXTURE*IMAGE SET " + (config.getBroadcaster().equalsIgnoreCase(Constants.LEGENDS) ? Constants.LEGENDS_TEAMLOGO_PATH : Constants.ASSAM_TEAMLOGO_PATH) + previous_match.getMatch().getInning().get(0).getBatting_team().getTeamBadge() + "\0", print_writers);
+						+ "img_TeamLogo*TEXTURE*IMAGE SET " + (config.getBroadcaster().equalsIgnoreCase(Constants.LEGENDS) ? Constants.LEGENDS_TEAMLOGO_PATH : 
+							Constants.ASSAM_TEAMLOGO_PATH) + previous_match.getMatch().getInning().get(0).getBatting_team().getTeamBadge() + "\0", print_writers);
 				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$All$LogoForFF$Side" + WhichSide + "$DoubleLogo$Team2$"
-						+ "img_TeamLogoBW*TEXTURE*IMAGE SET " + (config.getBroadcaster().equalsIgnoreCase(Constants.LEGENDS) ? Constants.LEGENDS_TEAMLOGO_BW_PATH : Constants.ASSAM_TEAMLOGO_BW_PATH) + previous_match.getMatch().getInning().get(1).getBatting_team().getTeamBadge() + "\0", print_writers);
+						+ "img_TeamLogoBW*TEXTURE*IMAGE SET " + (config.getBroadcaster().equalsIgnoreCase(Constants.LEGENDS) ? Constants.LEGENDS_TEAMLOGO_PATH : 
+							Constants.ASSAM_TEAMLOGO_BW_PATH) + previous_match.getMatch().getInning().get(1).getBatting_team().getTeamBadge() + "\0", print_writers);
 				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$All$LogoForFF$Side" + WhichSide + "$DoubleLogo$Team2$"
-						+ "img_TeamLogo*TEXTURE*IMAGE SET " + (config.getBroadcaster().equalsIgnoreCase(Constants.LEGENDS) ? Constants.LEGENDS_TEAMLOGO_PATH : Constants.ASSAM_TEAMLOGO_PATH) + previous_match.getMatch().getInning().get(1).getBatting_team().getTeamBadge() + "\0", print_writers);
+						+ "img_TeamLogo*TEXTURE*IMAGE SET " + (config.getBroadcaster().equalsIgnoreCase(Constants.LEGENDS) ? Constants.LEGENDS_TEAMLOGO_PATH : 
+							Constants.ASSAM_TEAMLOGO_PATH) + previous_match.getMatch().getInning().get(1).getBatting_team().getTeamBadge() + "\0", print_writers);
 				break;
 			case "Control_F10":
 				omo = 1;
@@ -5708,13 +5723,22 @@ public class FullFramesGfx
 				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$All$Sponsor$Side" + WhichSide
 						+ "$Select*FUNCTION*Omo*vis_con SET 0\0", print_writers);
 				
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$All$Header$Side" + WhichSide 
+						+ "$Style2$img_Base*TEXTURE*IMAGE SET " + (config.getBroadcaster().equalsIgnoreCase(Constants.LEGENDS) ? 
+								Constants.LEGENDS_BASE : Constants.ASSAM_BASE) + inning.getBatting_team().getTeamBadge() + "\0", print_writers);
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$All$Header$Side" + WhichSide 
+						+ "$Style2$img_Text*TEXTURE*IMAGE SET " + (config.getBroadcaster().equalsIgnoreCase(Constants.LEGENDS) ? 
+								Constants.LEGENDS_TEXT : Constants.ASSAM_TEXT) + inning.getBatting_team().getTeamBadge() + "\0", print_writers);
+				
 				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$All$LogoForFF$Side" + WhichSide
 						+ "$Select_LogoStyle$SingleLogo$SelectLogo*FUNCTION*Omo*vis_con SET 1\0", print_writers);
 				
 				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$All$LogoForFF$Side" + WhichSide 
-						+ "$SingleLogo$2$img_TeamLogoBW*TEXTURE*IMAGE SET " + (config.getBroadcaster().equalsIgnoreCase(Constants.LEGENDS) ? Constants.LEGENDS_TEAMLOGO_BW_PATH : Constants.ASSAM_TEAMLOGO_BW_PATH) + inning.getBatting_team().getTeamBadge() + "\0", print_writers);
+						+ "$SingleLogo$2$img_TeamLogoBW*TEXTURE*IMAGE SET " + (config.getBroadcaster().equalsIgnoreCase(Constants.LEGENDS) ? 
+								Constants.LEGENDS_TEAMLOGO_PATH : Constants.ASSAM_TEAMLOGO_BW_PATH) + inning.getBatting_team().getTeamBadge() + "\0", print_writers);
 				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$All$LogoForFF$Side" + WhichSide 
-						+ "$SingleLogo$2$img_TeamLogo*TEXTURE*IMAGE SET " + (config.getBroadcaster().equalsIgnoreCase(Constants.LEGENDS) ? Constants.LEGENDS_TEAMLOGO_PATH : Constants.ASSAM_TEAMLOGO_PATH) + inning.getBatting_team().getTeamBadge() + "\0", print_writers);
+						+ "$SingleLogo$2$img_TeamLogo*TEXTURE*IMAGE SET " + (config.getBroadcaster().equalsIgnoreCase(Constants.LEGENDS) ? 
+								Constants.LEGENDS_TEAMLOGO_PATH : Constants.ASSAM_TEAMLOGO_PATH) + inning.getBatting_team().getTeamBadge() + "\0", print_writers);
 				
 				break;
 			
@@ -5758,18 +5782,24 @@ public class FullFramesGfx
 						+ "$Select*FUNCTION*Omo*vis_con SET 0\0", print_writers);
 				
 				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$All$Header$Side" + WhichSide 
-						+ "$Style2$img_Base*TEXTURE*IMAGE SET " + (config.getBroadcaster().equalsIgnoreCase(Constants.LEGENDS) ? Constants.LEGENDS_BASE : Constants.ASSAM_BASE) + "TLogo" + "\0", print_writers);
+						+ "$Style2$img_Base*TEXTURE*IMAGE SET " + (config.getBroadcaster().equalsIgnoreCase(Constants.LEGENDS) ? 
+								Constants.LEGENDS_BASE : Constants.ASSAM_BASE) + "TLogo" + "\0", print_writers);
 				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$All$Header$Side" + WhichSide 
-						+ "$Style2$img_Text*TEXTURE*IMAGE SET " + (config.getBroadcaster().equalsIgnoreCase(Constants.LEGENDS) ? Constants.LEGENDS_TEXT : Constants.ASSAM_TEXT) + "TLogo" + "\0", print_writers);
+						+ "$Style2$img_Text*TEXTURE*IMAGE SET " + (config.getBroadcaster().equalsIgnoreCase(Constants.LEGENDS) ? 
+								Constants.LEGENDS_TEXT : Constants.ASSAM_TEXT) + "TLogo" + "\0", print_writers);
 				
 				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$All$LogoForFF$Side" + WhichSide + "$DoubleLogo$Team1$"
-						+ "img_TeamLogoBW*TEXTURE*IMAGE SET " + (config.getBroadcaster().equalsIgnoreCase(Constants.LEGENDS) ? Constants.LEGENDS_TEAMLOGO_BW_PATH : Constants.ASSAM_TEAMLOGO_BW_PATH) + matchAllData.getMatch().getInning().get(0).getBatting_team().getTeamBadge() + "\0", print_writers);
+						+ "img_TeamLogoBW*TEXTURE*IMAGE SET " + (config.getBroadcaster().equalsIgnoreCase(Constants.LEGENDS) ? Constants.LEGENDS_TEAMLOGO_PATH : 
+							Constants.ASSAM_TEAMLOGO_BW_PATH) + matchAllData.getMatch().getInning().get(0).getBatting_team().getTeamBadge() + "\0", print_writers);
 				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$All$LogoForFF$Side" + WhichSide + "$DoubleLogo$Team1$"
-						+ "img_TeamLogo*TEXTURE*IMAGE SET " + (config.getBroadcaster().equalsIgnoreCase(Constants.LEGENDS) ? Constants.LEGENDS_TEAMLOGO_PATH : Constants.ASSAM_TEAMLOGO_PATH) + matchAllData.getMatch().getInning().get(0).getBatting_team().getTeamBadge() + "\0", print_writers);
+						+ "img_TeamLogo*TEXTURE*IMAGE SET " + (config.getBroadcaster().equalsIgnoreCase(Constants.LEGENDS) ? Constants.LEGENDS_TEAMLOGO_PATH : 
+							Constants.ASSAM_TEAMLOGO_PATH) + matchAllData.getMatch().getInning().get(0).getBatting_team().getTeamBadge() + "\0", print_writers);
 				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$All$LogoForFF$Side" + WhichSide + "$DoubleLogo$Team2$"
-						+ "img_TeamLogoBW*TEXTURE*IMAGE SET " + (config.getBroadcaster().equalsIgnoreCase(Constants.LEGENDS) ? Constants.LEGENDS_TEAMLOGO_BW_PATH : Constants.ASSAM_TEAMLOGO_BW_PATH) + matchAllData.getMatch().getInning().get(1).getBatting_team().getTeamBadge() + "\0", print_writers);
+						+ "img_TeamLogoBW*TEXTURE*IMAGE SET " + (config.getBroadcaster().equalsIgnoreCase(Constants.LEGENDS) ? Constants.LEGENDS_TEAMLOGO_PATH : 
+							Constants.ASSAM_TEAMLOGO_BW_PATH) + matchAllData.getMatch().getInning().get(1).getBatting_team().getTeamBadge() + "\0", print_writers);
 				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$All$LogoForFF$Side" + WhichSide + "$DoubleLogo$Team2$"
-						+ "img_TeamLogo*TEXTURE*IMAGE SET " + (config.getBroadcaster().equalsIgnoreCase(Constants.LEGENDS) ? Constants.LEGENDS_TEAMLOGO_PATH : Constants.ASSAM_TEAMLOGO_PATH) + matchAllData.getMatch().getInning().get(1).getBatting_team().getTeamBadge() + "\0", print_writers);
+						+ "img_TeamLogo*TEXTURE*IMAGE SET " + (config.getBroadcaster().equalsIgnoreCase(Constants.LEGENDS) ? Constants.LEGENDS_TEAMLOGO_PATH : 
+							Constants.ASSAM_TEAMLOGO_PATH) + matchAllData.getMatch().getInning().get(1).getBatting_team().getTeamBadge() + "\0", print_writers);
 				
 				break;
 			case "F4": case "F1": case "F2": case "Shift_T": case "Shift_K": case "Control_F7": case "Control_d": case "Control_e": 
@@ -5861,6 +5891,20 @@ public class FullFramesGfx
 //							matchAllData.getSetup().getAwayTeam().getTeamBadge() + "\0", print_writers);
 					
 					break;
+				case "Control_p":
+					rowId = 2;
+					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$All$LogoForFF$Side" + WhichSide
+							+ "$SingleLogo$SelectLogo*FUNCTION*Omo*vis_con SET 1\0", print_writers);
+					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$All$LogoForFF$Side" + WhichSide
+							+ "$Select_LogoStyle*FUNCTION*Omo*vis_con SET 1\0", print_writers);
+					
+					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$All$LogoForFF$Side" + WhichSide 
+							+ "$SingleLogo$" + rowId + "$img_TeamLogoBW*TEXTURE*IMAGE SET " + (config.getBroadcaster().equalsIgnoreCase(Constants.LEGENDS) ? 
+									Constants.LEGENDS_TEAMLOGO_GREY_PATH : Constants.ASSAM_TEAMLOGO_BW_PATH) + logo_name + "\0", print_writers);
+					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$All$LogoForFF$Side" + WhichSide 
+							+ "$SingleLogo$" + rowId + "$img_TeamLogo*TEXTURE*IMAGE SET " + (config.getBroadcaster().equalsIgnoreCase(Constants.LEGENDS) ? 
+									Constants.LEGENDS_TEAMLOGO_GREY_PATH : Constants.ASSAM_TEAMLOGO_BW_PATH) + logo_name + "\0", print_writers);
+					break;
 				default:
 					System.out.println(whatToProcess);
 					switch (whatToProcess) { 
@@ -5880,9 +5924,11 @@ public class FullFramesGfx
 							+ "$Select_LogoStyle*FUNCTION*Omo*vis_con SET 1\0", print_writers);
 					
 					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$All$LogoForFF$Side" + WhichSide 
-							+ "$SingleLogo$" + rowId + "$img_TeamLogoBW*TEXTURE*IMAGE SET " + (config.getBroadcaster().equalsIgnoreCase(Constants.LEGENDS) ? Constants.LEGENDS_TEAMLOGO_BW_PATH : Constants.ASSAM_TEAMLOGO_BW_PATH) + logo_name + "\0", print_writers);
+							+ "$SingleLogo$" + rowId + "$img_TeamLogoBW*TEXTURE*IMAGE SET " + (config.getBroadcaster().equalsIgnoreCase(Constants.LEGENDS) ? 
+									Constants.LEGENDS_TEAMLOGO_PATH : Constants.ASSAM_TEAMLOGO_BW_PATH) + logo_name + "\0", print_writers);
 					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$All$LogoForFF$Side" + WhichSide 
-							+ "$SingleLogo$" + rowId + "$img_TeamLogo*TEXTURE*IMAGE SET " + (config.getBroadcaster().equalsIgnoreCase(Constants.LEGENDS) ? Constants.LEGENDS_TEAMLOGO_PATH : Constants.ASSAM_TEAMLOGO_PATH) + logo_name + "\0", print_writers);
+							+ "$SingleLogo$" + rowId + "$img_TeamLogo*TEXTURE*IMAGE SET " + (config.getBroadcaster().equalsIgnoreCase(Constants.LEGENDS) ? 
+									Constants.LEGENDS_TEAMLOGO_PATH : Constants.ASSAM_TEAMLOGO_PATH) + logo_name + "\0", print_writers);
 					break;
 				}
 				
