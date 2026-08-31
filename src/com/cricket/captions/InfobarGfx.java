@@ -2076,6 +2076,25 @@ public class InfobarGfx
 				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Infobar$InfobarSmall$txt_Team_1*GEOM*TEXT SET " + 
 						(config.getBroadcaster().equalsIgnoreCase(Constants.LEGENDS) || config.getBroadcaster().equalsIgnoreCase(Constants.ASSAM) ? inning.getBatting_team().getTeamName4() : 
 							inning.getBatting_team().getTeamName4()) + "\0", print_writers);
+				
+				switch(config.getBroadcaster()) {
+				case Constants.LEGENDS:
+					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Infobar$InfobarSmall$Powerplay*ACTIVE SET 0 \0",print_writers);
+					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Infobar$Top$Powerplay$Select*FUNCTION*Omo*vis_con SET 0 \0",print_writers);
+					
+					if(inning.getInningNumber() == 2) {
+						this.infobar.setTarget_on_screen(true);
+						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Infobar$Top$Powerplay$Select_target*FUNCTION*Omo*vis_con SET 1 \0",print_writers);
+						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Infobar$Top$Powerplay$Target$txt_Target*GEOM*TEXT SET " 
+								+ CricketFunctions.GetTargetData(matchAllData).getTargetRuns() + "\0", print_writers);
+					}else {
+						this.infobar.setTarget_on_screen(false);
+						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Infobar$Top$Powerplay$Select_target*FUNCTION*Omo*vis_con SET 0 \0",print_writers);
+					}
+					
+					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*STAGE*DIRECTOR*Powerplay START \0", print_writers);
+					break;
+				}
 			}
 			
 			CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Infobar$Scorebox$txt_Score*GEOM*TEXT SET " + 
@@ -2093,8 +2112,8 @@ public class InfobarGfx
 				}else if(inning.getInningNumber() == 2) {
 					reduce_Over = (matchAllData.getSetup().getTargetOvers() != null && !matchAllData.getSetup().getTargetOvers().trim().isEmpty() ? 
 									"(" + matchAllData.getSetup().getTargetOvers() + ") ":"");
-					reduceType = (matchAllData.getSetup().getTargetType() != null && !matchAllData.getSetup().getTargetType().trim().isEmpty() ? 
-									"(" + matchAllData.getSetup().getTargetType().toUpperCase() + ")" :"");
+//					reduceType = (matchAllData.getSetup().getTargetType() != null && !matchAllData.getSetup().getTargetType().trim().isEmpty() ? 
+//									"(" + matchAllData.getSetup().getTargetType().toUpperCase() + ")" :"");
 				}
 				
 				if(!reduce_Over.isEmpty()) {
@@ -2112,17 +2131,6 @@ public class InfobarGfx
 					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Infobar$Data_Left$Overs$Choose_Type*FUNCTION*Omo*vis_con SET 0\0", print_writers);
 					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Infobar$Data_Left$DLS$Choose_Type*FUNCTION*Omo*vis_con SET 0\0", print_writers);
 				}
-				
-//				if (matchAllData.getSetup().getTargetType() != null && !matchAllData.getSetup().getTargetType().isEmpty()) {
-//					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Infobar$DLS$Overs_with_Reduced$txt_DLS*GEOM*TEXT SET " 
-//							+"(" + matchAllData.getSetup().getTargetOvers() + " - " + matchAllData.getSetup().getTargetType().toUpperCase()  + ")" 
-//							+ "\0", print_writers);
-//				} else if (matchAllData.getSetup().getTargetOvers() != null && !matchAllData.getSetup().getTargetOvers().isEmpty()) {
-//					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Infobar$DLS$Overs_with_Reduced$txt_DLS*GEOM*TEXT SET " 
-//							+ "(" + matchAllData.getSetup().getTargetOvers() + ")"+ "\0", print_writers);
-//				}else {
-//					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Infobar$DLS$Overs_with_Reduced$txt_DLS*GEOM*TEXT SET \0", print_writers);
-//				}
 				
 				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Infobar$" + containerName + "$txt_Overs*GEOM*TEXT SET " + 
 						CricketFunctions.OverBalls(inning.getTotalOvers(),inning.getTotalBalls()) + "\0", print_writers);
@@ -2179,16 +2187,37 @@ public class InfobarGfx
 			}else {
 				
 				switch (config.getBroadcaster()) {
-				case Constants.LEGENDS: case Constants.ASSAM:
+				case Constants.LEGENDS:
 					if (!CricketFunctions.processPowerPlay(CricketUtil.MINI, matchAllData).isEmpty()) {
-						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Infobar$InfobarSmall$Powerplay$Select*FUNCTION*Omo*vis_con SET 0 \0",
-								print_writers);
-						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Infobar$InfobarSmall$Powerplay$PP$txt_Powerplay*GEOM*TEXT SET " + 
-								"P" + "\0", print_writers);
-						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Infobar$Top$Powerplay$Select*FUNCTION*Omo*vis_con SET 0 \0",
-								print_writers);
-						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Infobar$Top$Powerplay$PP$txt_Powerplay*GEOM*TEXT SET " + 
-								"P" + "\0", print_writers);
+						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Infobar$InfobarSmall$Powerplay*ACTIVE SET 1 \0",print_writers);
+						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Infobar$InfobarSmall$Powerplay$Select*FUNCTION*Omo*vis_con SET 0 \0",print_writers);
+						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Infobar$InfobarSmall$Powerplay$PP$txt_Powerplay*GEOM*TEXT SET " + "P" + "\0", print_writers);
+						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Infobar$Top$Powerplay$Select*FUNCTION*Omo*vis_con SET 1 \0",print_writers);
+						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Infobar$Top$Powerplay$PP$txt_Powerplay*GEOM*TEXT SET " + "P" + "\0", print_writers);
+						
+						if (infobar.isPowerplay_on_screen() == false) {
+//							CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*STAGE*DIRECTOR*Powerplay START \0", print_writers);
+							infobar.setPowerplay_on_screen(true);
+						}
+						
+					} else {
+						if (infobar.isPowerplay_on_screen() == true) {
+							CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Infobar$InfobarSmall$Powerplay*ACTIVE SET 0 \0",print_writers);
+							CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Infobar$Top$Powerplay$Select*FUNCTION*Omo*vis_con SET 0 \0",print_writers);
+							
+//							CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*STAGE*DIRECTOR*Powerplay CONTINUE REVERSE \0", print_writers);
+//							TimeUnit.MILLISECONDS.sleep(300);
+//							CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*STAGE*DIRECTOR*Powerplay SHOW 0.0 \0", print_writers);
+							infobar.setPowerplay_on_screen(false);
+						}
+					}
+					break;
+				case Constants.ASSAM:
+					if (!CricketFunctions.processPowerPlay(CricketUtil.MINI, matchAllData).isEmpty()) {
+						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Infobar$InfobarSmall$Powerplay$Select*FUNCTION*Omo*vis_con SET 0 \0",print_writers);
+						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Infobar$InfobarSmall$Powerplay$PP$txt_Powerplay*GEOM*TEXT SET " + "P" + "\0", print_writers);
+						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Infobar$Top$Powerplay$Select*FUNCTION*Omo*vis_con SET 0 \0",print_writers);
+						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Infobar$Top$Powerplay$PP$txt_Powerplay*GEOM*TEXT SET " + "P" + "\0", print_writers);
 						
 						if (infobar.isPowerplay_on_screen() == false) {
 							CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*STAGE*DIRECTOR*Powerplay START \0", print_writers);
@@ -3309,6 +3338,8 @@ public class InfobarGfx
 					
 					TimeUnit.MILLISECONDS.sleep(800);
 					populateTwoBatsmenSingleBatsman(print_writers, matchAllData, WhichSide, 1, 1, battingCardList);
+					
+					TimeUnit.MILLISECONDS.sleep(500);
 					this_animation.processAnimation(Constants.FRONT, print_writers, "Bat_1_Change", "SHOW 0.0");
 					
 					isimpactBatIn = false;
@@ -3321,6 +3352,8 @@ public class InfobarGfx
 					
 					TimeUnit.MILLISECONDS.sleep(800);
 					populateTwoBatsmenSingleBatsman(print_writers, matchAllData, WhichSide, 1, 2, battingCardList);
+					
+					TimeUnit.MILLISECONDS.sleep(500);
 					this_animation.processAnimation(Constants.FRONT, print_writers, "Bat_2_Change", "SHOW 0.0");
 					
 					isimpactBatIn = false;
@@ -17548,6 +17581,9 @@ public class InfobarGfx
 		switch(config.getBroadcaster().toUpperCase()) {
 		case Constants.T20_MUMBAI:
 			
+			break;
+		case Constants.LEGENDS:
+			System.out.println("HELLO");
 			break;
 		default:
 			if(infobar.isPowerplay_on_screen() == false) {

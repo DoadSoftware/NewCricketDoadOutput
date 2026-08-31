@@ -129,9 +129,9 @@ public class Animation
 			case "Alt_k": case "Control_Shift_F10": case "Shift_F3": case "u":  case "q": case "Shift_F5": case "Shift_F9": case "Alt_F12": case "Control_g": case "j": 
 			case "Control_F6": case "Shift_F6": case "Alt_Shift_F3": case "Control_s": case "Alt_d": case "Alt_l": case "Control_f": case "Control_q": case "l": case "n": 
 			case "a": case "Control_F2": case "Alt_a": case "Alt_s":case "Shift_E": case "Alt_q": case "Alt_F6": case "Shift_A": case "Shift_R": case "Shift_U": case "Alt_w": 
-			case "Control_j": case "Alt_i": case "Alt_j": case "b": case "Control_i": case "Alt_Shift_L": case "Shift_B": case "Control_Shift_P": case "Control_Shift_M": 
+			case "Control_j": case "Alt_i": case "Alt_j": case "Control_i": case "Alt_Shift_L": case "Shift_B": case "Control_Shift_P": case "Control_Shift_M": 
 			case "Control_Shift_L":	case "Alt_Shift_F5": case "Alt_Shift_D":case "Alt_Shift_E":case "Alt_Shift_F":case "Alt_Shift_G":case "Alt_Shift_H": case "Control_u": 
-			case "Shift_G": case "Shift_W":case "Control_Shift_X": case "Shift_I":case "Alt_Shift_F7":case "Alt_Shift_F6": case "Alt_Shift_!":
+			case "Shift_G": case "Shift_W":case "Control_Shift_X": case "Shift_I":case "Alt_Shift_F7":case "Alt_Shift_F6": case "Alt_Shift_!": //case "b":
 				return Constants.LOWER_THIRD;	
 			}
 			break;
@@ -746,12 +746,29 @@ public class Animation
 					}
 				}
 				break;
+			case "b":
+				if(caption.this_infobarGfx.infobar.isTarget_on_screen() == false) {
+					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Infobar$Top$Powerplay$Select_target*FUNCTION*Omo*vis_con SET 1 \0",print_writers);
+					caption.this_infobarGfx.infobar.setTarget_on_screen(true);
+				}else {
+					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Infobar$Top$Powerplay$Select_target*FUNCTION*Omo*vis_con SET 0 \0",print_writers);
+					caption.this_infobarGfx.infobar.setTarget_on_screen(false);
+				}
+				break;
 			case "Alt_e":
 				if(caption.this_infobarGfx.infobar.isPowerplay_on_screen() == false) {
-					processAnimation(Constants.FRONT, print_writers, "Anim_Infobar$Powerplay", "START");
+					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Infobar$InfobarSmall$Powerplay*ACTIVE SET 1 \0",print_writers);
+					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Infobar$InfobarSmall$Powerplay$Select*FUNCTION*Omo*vis_con SET 0 \0",print_writers);
+					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Infobar$InfobarSmall$Powerplay$PP$txt_Powerplay*GEOM*TEXT SET " + "P" + "\0", print_writers);
+					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Infobar$Top$Powerplay$Select*FUNCTION*Omo*vis_con SET 1 \0",print_writers);
+					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Infobar$Top$Powerplay$PP$txt_Powerplay*GEOM*TEXT SET " + "P" + "\0", print_writers);
+					
+//					processAnimation(Constants.FRONT, print_writers, "Anim_Infobar$Powerplay", "START");
 					caption.this_infobarGfx.infobar.setPowerplay_on_screen(true);
 				}else {
-					processAnimation(Constants.FRONT, print_writers, "Anim_Infobar$Powerplay", "CONTINUE REVERSE");
+					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Infobar$InfobarSmall$Powerplay*ACTIVE SET 0 \0",print_writers);
+					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Infobar$Top$Powerplay$Select*FUNCTION*Omo*vis_con SET 0 \0",print_writers);
+//					processAnimation(Constants.FRONT, print_writers, "Anim_Infobar$Powerplay", "CONTINUE REVERSE");
 					caption.this_infobarGfx.infobar.setPowerplay_on_screen(false);
 				}
 				break;

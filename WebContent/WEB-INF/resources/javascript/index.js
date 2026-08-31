@@ -559,6 +559,18 @@ function processUserSelectionData(whatToProcess,dataToProcess)
 					break;
 			 	}
 				break;
+			case 'b':
+				switch($('#selected_broadcaster').val().toUpperCase()){
+				case 'LEGENDS-90':
+					dataToProcess = dataToProcess + ',' + document.getElementById('which_inning').value;
+					processCricketProcedures("ANIMATE-IN-GRAPHICS", dataToProcess);
+					break;
+				default :
+					dataToProcess = dataToProcess + ',' + document.getElementById('which_inning').value;
+					processCricketProcedures("POPULATE-GRAPHICS", dataToProcess);
+					break;
+			 	}
+				break;
 					
 			case 'Shift_C': case 'Control_Shift_Q': case 'h':
 			case 'F12': case 'Alt_1': case 'Alt_2': case 'Alt_7': // case 'Alt_8': case 'Alt_3': case 'Alt_4': case 'F7': case 'F11':
@@ -579,7 +591,7 @@ function processUserSelectionData(whatToProcess,dataToProcess)
 			//changed shift_f11 to control_f11
 			case 'Shift_F10': case 'Control_F1': case 'Control_a': case "Control_Shift_F10": case 'Alt_o':  case 'Shift_F3': case 'd': case 'e': case 'Control_F6': 
 			case 'Control_k': case 'Control_F10': case 'Control_F3':  case 'a': case 't': case 'n': case 'Shift_F1': case 'Shift_F2': case 'Shift_D': 
-			case 'Control_q': case 'Control_b': case 'o': case 'Control_F2': case 'b': case 'Alt_F11': case 'Shift_U': case 'Alt_j': case 'Alt_h': case 'Alt_Shift_L':	 
+			case 'Control_q': case 'Control_b': case 'o': case 'Control_F2': case 'Alt_F11': case 'Shift_U': case 'Alt_j': case 'Alt_h': case 'Alt_Shift_L':	 
 			//case 'Shift_F':
 			case '.': case '/': case 'Shift_V': case 'Alt_i': case 'b': case 'Shift_B': case 'Control_Shift_B': case 'Alt_Shift_F3': case 'Control_Shift_R': 
 			case 'Control_Shift_F3': case 'Control_Shift_H': case "Control_Shift_I": case "Alt_Shift_D":case "Alt_Shift_E":case "Alt_Shift_F":case "Alt_Shift_G":
@@ -4555,10 +4567,10 @@ function addItemsToList(whatToProcess,dataToProcess)
 						break;
 					}
 					
-					/*option = document.createElement('option');
+					option = document.createElement('option');
 					option.value = 'SPEED_THIS_OVER';
 					option.text = 'Speed This Over';
-					select.appendChild(option);*/
+					select.appendChild(option);
 					
 					option = document.createElement('option');
 					option.value = 'INNING_DOTS';

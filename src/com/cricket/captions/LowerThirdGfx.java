@@ -4943,12 +4943,6 @@ public class LowerThirdGfx
 					new String[] {"WITH_TITLE"},new String[] {"-19","33","86","142","194","246","295","345","396","446"});
 			break;
 		case Constants.ISPL:
-//			numbers = CricketFunctions.ThisOverSpeed(bowlingCard);
-//			lowerThird = new LowerThird("", "THIS OVER SPEED", "","", "", 
-//					"", 2, "", inning.getBowling_team().getTeamName4(),null,
-//					null,null,null,
-//					new String[] {"-527.0","-398.0","-259.0","-130.0","9.0","132.0","239.0","358.0","479.0","592.0"});
-			
 			if(speed.length == 1) {
 				lowerThird = new LowerThird("", "SPEEDS", "","THIS OVER", "", "", 2, "", inning.getBowling_team().getTeamName4(),null,
 						speed,null,null,new String[] {"-544"});
@@ -18397,22 +18391,28 @@ public class LowerThirdGfx
             	}
             	if(omoSize >=5) {
             		CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$LT_Bowling$All$Select_Data"
-        					+ "*FUNCTION*Omo*vis_con SET " + (8-omoSize) + "\0", print_writers);
+        					+ "*FUNCTION*Omo*vis_con SET " + (omoSize == 10 ? 4 : omoSize == 9 ? 5 : (8-omoSize)) + "\0", print_writers);
             		CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$LT_Bowling$All$Select_Header"
-        					+ "*FUNCTION*Omo*vis_con SET " + (8-omoSize) + "\0", print_writers);
+        					+ "*FUNCTION*Omo*vis_con SET " + (omoSize == 10 ? 4 : omoSize == 9 ? 5 : (8-omoSize)) + "\0", print_writers);
             		switch (omoSize) {
             		case 5:
             			selectOption= "$Five";
-            		break;
+            			break;
             		case 6:
             			selectOption= "$Six";
-            		break;
+            			break;
             		case 7:
             			selectOption= "$Seven";
-            		break;
+            			break;
             		case 8:
             			selectOption= "$Eight";
-            		break;
+            			break;
+            		case 9:
+            			selectOption= "$Nine";
+            			break;
+            		case 10:
+            			selectOption= "$Ten";
+            			break;
             		
             		}
             	}else {
@@ -18422,6 +18422,9 @@ public class LowerThirdGfx
         					+ "*FUNCTION*Omo*vis_con SET 3\0", print_writers);
             		selectOption= "$Five";
             	}
+            	
+            	CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$LT_Bowling$All$Select_Data" + selectOption
+    					+ "$DataAll$Data_Grp$Select_Player*FUNCTION*Grid*num_col SET " + omoSize + "\0", print_writers);
             	
             	CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$LT_Bowling$All$Select_Header" + selectOption 
             			+ "$txt_Header*GEOM*TEXT SET " + "BOWLING OPTIONS" + "\0", print_writers);

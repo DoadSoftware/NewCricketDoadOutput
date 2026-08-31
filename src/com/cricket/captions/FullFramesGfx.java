@@ -11606,7 +11606,7 @@ public class FullFramesGfx
 						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$Main$Side_" + WhichSide + "$TeamImage$Playing11$"
 								+ rowId + "$StatGrp$Select_Data*FUNCTION*Omo*vis_con SET 0\0", print_writers);
 						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$Main$Side_" + WhichSide + "$TeamImage$Playing11$"
-								+ rowId + "$StatGrp$txt_Head*GEOM*TEXT SET " + "IN AT " + iRow + "\0", print_writers);
+								+ rowId + "$StatGrp$txt_Head*GEOM*TEXT SET " + player.getBattingStyle().toUpperCase() + "\0", print_writers);
 					} else {
 						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$Main$Side_" + WhichSide + "$TeamImage$Playing11$"
 								+ rowId + "$StatGrp$Select_Data*FUNCTION*Omo*vis_con SET 0\0", print_writers);
