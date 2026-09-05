@@ -1413,7 +1413,22 @@ public class IndexController
 			if (comparator != null) {
 			    tournamentStats.sort(comparator);
 			}
-
+			
+			
+//			List<BestStats> sortedspeedData = new ArrayList<>();
+//			for (Tournament tourn : tournamentStats) {
+//				if(tourn.getBallSpeed() != null) {
+//					for (BestStats bs : tourn.getBallSpeed()) {
+//						sortedspeedData.add(bs);
+//					}
+//				}
+//			}
+//			sortedspeedData.sort(Comparator.comparingDouble(BestStats::getBallSpeed).reversed());
+//			
+//			for (BestStats bs : sortedspeedData) {
+//	            System.out.println(bs.getPlayer().getFull_name() + " - " + bs.getBallSpeed());
+//	        }
+			
 			return (List<T>) tournamentStats;
 			
 		case "Control_Alt_8":

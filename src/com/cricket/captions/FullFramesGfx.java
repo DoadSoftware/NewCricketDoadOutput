@@ -394,7 +394,7 @@ public class FullFramesGfx
 			CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$Footer$Side" + WhichSide + "$Select_FooterStyle"
 					+ "*FUNCTION*Omo*vis_con SET 2\0", print_writers);
 			CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$Footer$Side"+WhichSide+"$Style3$txt_Info"
-					+ "*GEOM*TEXT SET \0", print_writers);
+					+ "*GEOM*TEXT SET " + "WINNER TO BE PICKED BY MATCH OFFICIALS" + "\0", print_writers);
 			
 			CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$Main$Side_" + WhichSide 
 					+ "$Select_GraphcsType*FUNCTION*Omo*vis_con SET 11\0", print_writers);

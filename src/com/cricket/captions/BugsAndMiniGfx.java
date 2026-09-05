@@ -7741,6 +7741,16 @@ public class BugsAndMiniGfx
 					        		+ "$Players_Dehighlight$txt_Name*GEOM*TEXT SET v " + (config.getBroadcaster().equalsIgnoreCase(Constants.LEGENDS)
 							        		?match.getOpponentTeam().getTeamName2():match.getOpponentTeam().getTeamName3()) + ", QF 2 \0",print_writers);
 
+					    }else if (matchName.contains("SEMI FINAL 1")) {
+					        CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$minis$Side" + WhichSide + "$Batting$Row" + row_id 
+					        		+ "$Players_Dehighlight$txt_Name*GEOM*TEXT SET v " + (config.getBroadcaster().equalsIgnoreCase(Constants.LEGENDS)
+							        		?match.getOpponentTeam().getTeamName2():match.getOpponentTeam().getTeamName3()) + ", SF 1 \0",print_writers);
+
+					    } else if (matchName.contains("SEMI FINAL 2")) {
+					        CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$minis$Side" + WhichSide + "$Batting$Row" + row_id 
+					        		+ "$Players_Dehighlight$txt_Name*GEOM*TEXT SET v " + (config.getBroadcaster().equalsIgnoreCase(Constants.LEGENDS)
+							        		?match.getOpponentTeam().getTeamName2():match.getOpponentTeam().getTeamName3()) + ", SF 2 \0",print_writers);
+
 					    } else if (matchName.contains("FINAL")) {
 					        CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$minis$Side" + WhichSide + "$Batting$Row" + row_id 
 					        		+ "$Players_Dehighlight$txt_Name*GEOM*TEXT SET v " + (config.getBroadcaster().equalsIgnoreCase(Constants.LEGENDS)
@@ -7835,6 +7845,14 @@ public class BugsAndMiniGfx
 									CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$minis$Side" + WhichSide+ "$Batting$Row" + row_id
 											+ "$Players_Highlight$txt_Name*GEOM*TEXT SET v " + (config.getBroadcaster().equalsIgnoreCase(Constants.LEGENDS)
 							        				?inning.getBowling_team().getTeamName2():inning.getBowling_team().getTeamName3()) + ", QF 2" + " \0",print_writers);
+								}else if(matchAllData.getSetup().getMatchIdent().contains("SEMI FINAL 1")) {
+									CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$minis$Side" + WhichSide+ "$Batting$Row" + row_id
+											+ "$Players_Highlight$txt_Name*GEOM*TEXT SET v " + (config.getBroadcaster().equalsIgnoreCase(Constants.LEGENDS)
+							        				?inning.getBowling_team().getTeamName2():inning.getBowling_team().getTeamName3()) + ", SF 1" + " \0",print_writers);
+								}else if(matchAllData.getSetup().getMatchIdent().contains("SEMI FINAL 2")) {
+									CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$minis$Side" + WhichSide+ "$Batting$Row" + row_id
+											+ "$Players_Highlight$txt_Name*GEOM*TEXT SET v " + (config.getBroadcaster().equalsIgnoreCase(Constants.LEGENDS)
+							        				?inning.getBowling_team().getTeamName2():inning.getBowling_team().getTeamName3()) + ", SF 2" + " \0",print_writers);
 								}else if(matchAllData.getSetup().getMatchIdent().contains("FINAL")) {
 									CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$minis$Side" + WhichSide+ "$Batting$Row" + row_id
 											+ "$Players_Highlight$txt_Name*GEOM*TEXT SET v " + (config.getBroadcaster().equalsIgnoreCase(Constants.LEGENDS)
@@ -7914,6 +7932,14 @@ public class BugsAndMiniGfx
 									CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$minis$Side" + WhichSide+ "$Batting$Row" + row_id
 											+ "$Players_Highlight$txt_Name*GEOM*TEXT SET v " + (config.getBroadcaster().equalsIgnoreCase(Constants.LEGENDS)
 							        				?inning.getBowling_team().getTeamName2():inning.getBowling_team().getTeamName3()) + ", QF 2" + " \0",print_writers);
+								}else if(matchAllData.getSetup().getMatchIdent().contains("SEMI FINAL 1")) {
+									CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$minis$Side" + WhichSide+ "$Batting$Row" + row_id
+											+ "$Players_Highlight$txt_Name*GEOM*TEXT SET v " + (config.getBroadcaster().equalsIgnoreCase(Constants.LEGENDS)
+							        				?inning.getBowling_team().getTeamName2():inning.getBowling_team().getTeamName3()) + ", SF 1" + " \0",print_writers);
+								}else if(matchAllData.getSetup().getMatchIdent().contains("SEMI FINAL 2")) {
+									CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$minis$Side" + WhichSide+ "$Batting$Row" + row_id
+											+ "$Players_Highlight$txt_Name*GEOM*TEXT SET v " + (config.getBroadcaster().equalsIgnoreCase(Constants.LEGENDS)
+							        				?inning.getBowling_team().getTeamName2():inning.getBowling_team().getTeamName3()) + ", SF 2" + " \0",print_writers);
 								}else if(matchAllData.getSetup().getMatchIdent().contains("FINAL")) {
 									CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$minis$Side" + WhichSide+ "$Batting$Row" + row_id
 											+ "$Players_Highlight$txt_Name*GEOM*TEXT SET v " + (config.getBroadcaster().equalsIgnoreCase(Constants.LEGENDS)
@@ -8003,6 +8029,14 @@ public class BugsAndMiniGfx
 							CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$minis$Side" + WhichSide+ "$Batting$Row" + row_id
 									+ "$Players_Highlight$txt_Name*GEOM*TEXT SET v " + (config.getBroadcaster().equalsIgnoreCase(Constants.LEGENDS)
 					        				?inning.getBowling_team().getTeamName2():inning.getBowling_team().getTeamName3()) + ", QF 2" + " \0",print_writers);
+						}else if(matchAllData.getSetup().getMatchIdent().contains("SEMI FINAL 1")) {
+							CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$minis$Side" + WhichSide+ "$Batting$Row" + row_id
+									+ "$Players_Highlight$txt_Name*GEOM*TEXT SET v " + (config.getBroadcaster().equalsIgnoreCase(Constants.LEGENDS)
+					        				?inning.getBowling_team().getTeamName2():inning.getBowling_team().getTeamName3()) + ", SF 1" + " \0",print_writers);
+						}else if(matchAllData.getSetup().getMatchIdent().contains("SEMI FINAL 2")) {
+							CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$minis$Side" + WhichSide+ "$Batting$Row" + row_id
+									+ "$Players_Highlight$txt_Name*GEOM*TEXT SET v " + (config.getBroadcaster().equalsIgnoreCase(Constants.LEGENDS)
+					        				?inning.getBowling_team().getTeamName2():inning.getBowling_team().getTeamName3()) + ", SF 2" + " \0",print_writers);
 						}else if(matchAllData.getSetup().getMatchIdent().contains("FINAL")) {
 							CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$minis$Side" + WhichSide+ "$Batting$Row" + row_id
 									+ "$Players_Highlight$txt_Name*GEOM*TEXT SET v " + (config.getBroadcaster().equalsIgnoreCase(Constants.LEGENDS)
@@ -8227,8 +8261,6 @@ public class BugsAndMiniGfx
 						break;
 					}
 					
-					
-
 					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$minis$Side" + WhichSide 
 							+ "$Bowling$Row"+rowId+"$Select_Row_Type*FUNCTION*Omo*vis_con SET " + String.valueOf(omo_num) + " \0", print_writers);
 					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$minis$Side" + WhichSide 
@@ -8679,6 +8711,14 @@ public class BugsAndMiniGfx
 					    		CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$minis$Side" + WhichSide+ "$Bowling$Row" + row_no1
 									+ "$Players_Dehighlight$txt_Name*GEOM*TEXT SET v " + (config.getBroadcaster().equalsIgnoreCase(Constants.LEGENDS)
 					        				?match.getOpponentTeam().getTeamName2():match.getOpponentTeam().getTeamName3()) + ", QF 2" + " \0", print_writers);
+					    }else if (matchName.contains("SEMI FINAL 1")) {
+					    		CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$minis$Side" + WhichSide+ "$Bowling$Row" + row_no1
+									+ "$Players_Dehighlight$txt_Name*GEOM*TEXT SET v " + (config.getBroadcaster().equalsIgnoreCase(Constants.LEGENDS)
+					        				?match.getOpponentTeam().getTeamName2():match.getOpponentTeam().getTeamName3()) + ", SF 1" + " \0", print_writers);
+					    } else if (matchName.contains("SEMI FINAL 2")) {
+					    		CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$minis$Side" + WhichSide+ "$Bowling$Row" + row_no1
+									+ "$Players_Dehighlight$txt_Name*GEOM*TEXT SET v " + (config.getBroadcaster().equalsIgnoreCase(Constants.LEGENDS)
+					        				?match.getOpponentTeam().getTeamName2():match.getOpponentTeam().getTeamName3()) + ", SF 2" + " \0", print_writers);
 					    } else if (matchName.contains("FINAL")) {
 					    		CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$minis$Side" + WhichSide+ "$Bowling$Row" + row_no1
 									+ "$Players_Dehighlight$txt_Name*GEOM*TEXT SET v " + (config.getBroadcaster().equalsIgnoreCase(Constants.LEGENDS)
@@ -8759,6 +8799,14 @@ public class BugsAndMiniGfx
 									CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$minis$Side" + WhichSide+ "$Bowling$Row" + row_no1
 											+ "$Players_Highlight$txt_Name*GEOM*TEXT SET v " + (config.getBroadcaster().equalsIgnoreCase(Constants.LEGENDS)
 							        				?inning.getBatting_team().getTeamName2():inning.getBatting_team().getTeamName3()) + ", QF 2" + " \0", print_writers);
+								}else if(matchAllData.getSetup().getMatchIdent().contains("SEMI FINAL 1")) {
+									CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$minis$Side" + WhichSide+ "$Bowling$Row" + row_no1
+											+ "$Players_Highlight$txt_Name*GEOM*TEXT SET v " + (config.getBroadcaster().equalsIgnoreCase(Constants.LEGENDS)
+							        				?inning.getBatting_team().getTeamName2():inning.getBatting_team().getTeamName3()) + ", SF 1" + " \0", print_writers);
+								}else if(matchAllData.getSetup().getMatchIdent().contains("SEMI FINAL 2")) {
+									CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$minis$Side" + WhichSide+ "$Bowling$Row" + row_no1
+											+ "$Players_Highlight$txt_Name*GEOM*TEXT SET v " + (config.getBroadcaster().equalsIgnoreCase(Constants.LEGENDS)
+							        				?inning.getBatting_team().getTeamName2():inning.getBatting_team().getTeamName3()) + ", SF 2" + " \0", print_writers);
 								}else if(matchAllData.getSetup().getMatchIdent().contains("FINAL")) {
 									CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$minis$Side" + WhichSide+ "$Bowling$Row" + row_no1
 											+ "$Players_Highlight$txt_Name*GEOM*TEXT SET v " + (config.getBroadcaster().equalsIgnoreCase(Constants.LEGENDS)
@@ -8843,6 +8891,14 @@ public class BugsAndMiniGfx
 							CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$minis$Side" + WhichSide+ "$Bowling$Row" + row_no1
 									+ "$Players_Highlight$txt_Name*GEOM*TEXT SET v " + (config.getBroadcaster().equalsIgnoreCase(Constants.LEGENDS)
 					        				?inning.getBatting_team().getTeamName2():inning.getBatting_team().getTeamName3()) + ", QF 2" + " \0", print_writers);
+						}else if(matchAllData.getSetup().getMatchIdent().contains("SEMI FINAL 1")) {
+							CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$minis$Side" + WhichSide+ "$Bowling$Row" + row_no1
+									+ "$Players_Highlight$txt_Name*GEOM*TEXT SET v " + (config.getBroadcaster().equalsIgnoreCase(Constants.LEGENDS)
+					        				?inning.getBatting_team().getTeamName2():inning.getBatting_team().getTeamName3()) + ", SF 1" + " \0", print_writers);
+						}else if(matchAllData.getSetup().getMatchIdent().contains("SEMI FINAL 2")) {
+							CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$minis$Side" + WhichSide+ "$Bowling$Row" + row_no1
+									+ "$Players_Highlight$txt_Name*GEOM*TEXT SET v " + (config.getBroadcaster().equalsIgnoreCase(Constants.LEGENDS)
+					        				?inning.getBatting_team().getTeamName2():inning.getBatting_team().getTeamName3()) + ", SF 2" + " \0", print_writers);
 						}else if(matchAllData.getSetup().getMatchIdent().contains("FINAL")) {
 							CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$minis$Side" + WhichSide+ "$Bowling$Row" + row_no1
 									+ "$Players_Highlight$txt_Name*GEOM*TEXT SET v " + (config.getBroadcaster().equalsIgnoreCase(Constants.LEGENDS)

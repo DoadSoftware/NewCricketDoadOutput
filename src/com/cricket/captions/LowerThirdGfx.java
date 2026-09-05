@@ -7779,7 +7779,7 @@ public class LowerThirdGfx
 		if(fixture.getDate().equalsIgnoreCase(new SimpleDateFormat("dd-MM-yyyy").format(cal_bengal.getTime()))) {
 			
 			if(config.getBroadcaster().toUpperCase().equalsIgnoreCase(Constants.MPL)) {
-				text = "TOMORROW - " + fixture.getLocalTime() + " - " + matchAllData.getSetup().getGround().getFullname();
+				text = "TOMORROW - " + fixture.getLocalTime() + " - " + matchAllData.getSetup().getGround().getShortname();
 			}else if(config.getBroadcaster().toUpperCase().equalsIgnoreCase(Constants.NPL)) {
 				text = "TOMORROW - " + fixture.getLocalTime() + " NST - " + fixture.getVenue();
 			}else {
@@ -7789,7 +7789,7 @@ public class LowerThirdGfx
 		}else {
 			cal_bengal.add(Calendar.DATE, -1);
 			if(fixture.getDate().equalsIgnoreCase(new SimpleDateFormat("dd-MM-yyyy").format(cal_bengal.getTime()))) {
-				text = "UP NEXT - " + match_name + " - LIVE FROM " + matchAllData.getSetup().getGround().getFullname();
+				text = "UP NEXT - " + match_name + " - " + matchAllData.getSetup().getGround().getShortname();
 			}else {
 				newDate = fixture.getDate().split("-")[0];
 				if(Integer.valueOf(newDate) < 10) {
@@ -7799,7 +7799,7 @@ public class LowerThirdGfx
 						Month.of(Integer.valueOf(fixture.getDate().split("-")[1]));
 				
 				if(config.getBroadcaster().toUpperCase().equalsIgnoreCase(Constants.MPL)) {
-					text = date_data + " - " + fixture.getLocalTime() + " - " + matchAllData.getSetup().getGround().getFullname();
+					text = date_data + " - " + fixture.getLocalTime() + " - " + matchAllData.getSetup().getGround().getShortname();
 				}else if(config.getBroadcaster().toUpperCase().equalsIgnoreCase(Constants.NPL)) {
 					text = date_data + " - " + fixture.getLocalTime() + " NST - " + fixture.getVenue();
 				}else {
@@ -23683,6 +23683,10 @@ public class LowerThirdGfx
 						+ LT_Position_4 + "\0",print_writers);
 			}
 			
+			for(int i=0; i<10; i++) {
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_Lower_Third$Sublines$Rows_Side_1$Select_SubLine$2$Data$Stat$txt_" 
+						+ (i+1) + "*FUNCTION*Maxsize*WIDTH_X SET 1155.0\0", print_writers);
+			}
 			break;
 		case Constants.ISPL:
 			switch (subline) {
