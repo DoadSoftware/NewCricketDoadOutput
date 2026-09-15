@@ -83,6 +83,21 @@ public class Constants
 	public final static String NPL_WEATHER_PATH = "IMAGE*/Default/Essentials/WeatherIcons/";
 	public final static String NPL_CAPS_PATH = "IMAGE*/Default/Essentials/Caps/";
 	
+	public final static String ODISHA = "ODISHA";
+	public final static String ODISHA_LOGO_PATH = "IMAGE*/Default/Essentials/TeamLogo/";
+	public final static String ODISHA_BASE1 = "IMAGE*/Default/Essentials/Base1/";
+	public final static String ODISHA_BASE2 = "IMAGE*/Default/Essentials/Base2/";
+	public final static String ODISHA_LOGOS_BW_PATH = "IMAGE*/Default/Essentials/TeamLogoBW/";
+	public final static String ODISHA_PHOTO_PATH = "C:\\\\Images\\\\VIDARBHA\\\\Photos\\\\";
+	public final static String  Local_ODISHA_PHOTOS_PATH = "\\c\\Images\\VIDARBHA\\Photos\\";
+//	public final static String VIDARBHA_SPONSOR_PATH = "IMAGE*/Default/Essentials/Sponsor/";
+//	public final static String VIDARBHA_WEATHER_PATH = "IMAGE*/Default/Essentials/WeatherIcons/";
+//	public final static String VIDARBHA_CAPS_PATH = "IMAGE*/Default/Essentials/Caps/";
+	public final static String ODISHA_TEXT1 = "IMAGE*/Default/Essentials/Text1/";
+	public final static String ODISHA_TEXT2 = "IMAGE*/Default/Essentials/Text2/";
+	public final static String ODISHA_TEXT3 = "IMAGE*/Default/Essentials/Text3/";
+	public final static String ODISHA_TEXT4 = "IMAGE*/Default/Essentials/Text4/";
+	
 	public final static String VIDARBHA = "VIDARBHA";
 	public final static String VIDARBHA_LOGO_PATH = "IMAGE*/Default/Essentials/TeamLogo/";
 	public final static String VIDARBHA_BASE1 = "IMAGE*/Default/Essentials/Base1/";

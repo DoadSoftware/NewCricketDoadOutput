@@ -184,7 +184,7 @@ public class Caption
 			case "Control_4":
 				switch (config.getBroadcaster().toUpperCase()) {
 				case Constants.NPL: case Constants.LEGENDS: case Constants.ASSAM: case Constants.MPL: case Constants.T20_MUMBAI: case Constants.BENGAL_T20:
-				case Constants.APL: case Constants.VIDARBHA: case Constants.AFG_T20:
+				case Constants.APL: case Constants.VIDARBHA: case Constants.ODISHA: case Constants.AFG_T20:
 					status = this_bugsAndMiniGfx.populateFourCounter(whatToProcess, whichSide, matchAllData);
 					break;
 				case Constants.ISPL:
@@ -397,7 +397,7 @@ public class Caption
 						this_fullFramesGfx.WhichProfile = whatToProcess;
 					}
 					break;
-				case Constants.VIDARBHA:
+				case Constants.VIDARBHA: case Constants.ODISHA:
 					this_fullFramesGfx.WhichScoreCard = whatToProcess.split(",")[2];
 					break;
 				}
@@ -821,8 +821,8 @@ public class Caption
 				}
 				
 				if(!config.getBroadcaster().equalsIgnoreCase(Constants.ISPL) && !config.getBroadcaster().equalsIgnoreCase(Constants.LEGENDS) &&
-						!config.getBroadcaster().equalsIgnoreCase(Constants.MPL) && !config.getBroadcaster().equalsIgnoreCase(Constants.VIDARBHA) && 
-						!config.getBroadcaster().equalsIgnoreCase(Constants.T20_MUMBAI)) {
+						!config.getBroadcaster().equalsIgnoreCase(Constants.MPL) && !config.getBroadcaster().equalsIgnoreCase(Constants.ODISHA)
+						&& !config.getBroadcaster().equalsIgnoreCase(Constants.VIDARBHA) && !config.getBroadcaster().equalsIgnoreCase(Constants.T20_MUMBAI)) {
 					if(whatToProcess.split(",")[0].equalsIgnoreCase("Control_Shift_Z")){
 						this_fullFramesGfx.whichSponsor = whatToProcess.split(",")[3];
 					}else if(whatToProcess.split(",")[0].equalsIgnoreCase("Alt_Shift_W")){
@@ -860,7 +860,7 @@ public class Caption
 				System.out.println("config.getBroadcaster() = " + config.getBroadcaster());
 				switch (config.getBroadcaster().toUpperCase()) {
 				case Constants.NPL: case Constants.LEGENDS: case Constants.ASSAM: case Constants.MPL: case Constants.T20_MUMBAI: case Constants.BENGAL_T20:
-				case Constants.APL: case Constants.VIDARBHA: case Constants.AFG_T20:
+				case Constants.APL: case Constants.VIDARBHA: case Constants.ODISHA: case Constants.AFG_T20:
 					status = this_lowerThirdGfx.populateVjd(whatToProcess,whichSide,matchAllData);
 					break;
 				default:
@@ -874,7 +874,7 @@ public class Caption
 			case "Control_h"://powerplay Summary
 				switch (config.getBroadcaster().toUpperCase()) {
 				case Constants.NPL: case Constants.LEGENDS: case Constants.ASSAM: case Constants.MPL: case Constants.T20_MUMBAI: case Constants.BENGAL_T20:
-				case Constants.APL: case Constants.VIDARBHA: case Constants.AFG_T20:
+				case Constants.APL: case Constants.VIDARBHA: case Constants.ODISHA: case Constants.AFG_T20:
 					status = this_lowerThirdGfx.populateL3PhaseWise(whatToProcess,whichSide,matchAllData);
 					break;
 				case Constants.ICC_U19_2023: case Constants.ISPL:
@@ -1053,7 +1053,7 @@ public class Caption
 				break;	
 			case "Alt_1": // Infobar Left 
 				switch (config.getBroadcaster().toUpperCase()) {
-				case Constants.VIDARBHA:
+				case Constants.VIDARBHA: case Constants.ODISHA:
 					if(this_infobarGfx.infobar.getFull_section() != null && !this_infobarGfx.infobar.getFull_section().isEmpty()) {
 						if(!this_infobarGfx.infobar.getFull_section().equalsIgnoreCase(whatToProcess.split(",")[2])) {
 							whichSide = 2;
@@ -1192,7 +1192,7 @@ public class Caption
 						}
 					}
 					break;	
-				case Constants.VIDARBHA:
+				case Constants.VIDARBHA: case Constants.ODISHA:
 					
 					if(this_infobarGfx.infobar.getMiddle_section().equalsIgnoreCase(CricketUtil.BATSMAN)) {
 						this_infobarGfx.infobar.setMiddle_section(whatToProcess.split(",")[2]);
@@ -1630,7 +1630,7 @@ public class Caption
 				break;
 			case "Alt_7":
 				switch (config.getBroadcaster().toUpperCase()) {
-				case Constants.VIDARBHA:
+				case Constants.VIDARBHA: case Constants.ODISHA:
 					if(this_infobarGfx.infobar.getRight_bottom().equalsIgnoreCase(CricketUtil.BOWLER)) {
 						this_infobarGfx.infobar.setRight_bottom(whatToProcess.split(",")[2]);
 						status = this_infobarGfx.populateVizInfobarRightBottom(print_writers, matchAllData, 1, 1);
@@ -1747,7 +1747,7 @@ public class Caption
 				break;
 			case "Alt_8":
 				switch (config.getBroadcaster().toUpperCase()) {
-				case Constants.VIDARBHA:
+				case Constants.VIDARBHA: case Constants.ODISHA:
 					whichSide = 1;
 					this_infobarGfx.infobar.setRight_section(whatToProcess.split(",")[2]);
 					status = this_infobarGfx.populateVizInfobarRightSection(false,print_writers, matchAllData, whichSide, 0);
@@ -1910,7 +1910,7 @@ public class Caption
 				break;
 			case "Alt_9":
 				switch (config.getBroadcaster().toUpperCase()) {
-				case Constants.VIDARBHA:
+				case Constants.VIDARBHA: case Constants.ODISHA:
 					if(this_infobarGfx.infobar.getFull_section() != null && !this_infobarGfx.infobar.getFull_section().isEmpty()) {
 						if(this_infobarGfx.infobarStatsId != Integer.valueOf(whatToProcess.split(",")[2])) {
 							whichSide = 2;
@@ -1996,7 +1996,7 @@ public class Caption
 					status = this_infobarGfx.t20MumbaiFullPromoSection(false, print_writers, matchAllData, whichSide);
 					break;
 				case Constants.ICC_U19_2023: case Constants.NPL: case Constants.ISPL: case Constants.LEGENDS: case Constants.ASSAM: case Constants.MPL:
-				case Constants.APL: case Constants.VIDARBHA:
+				case Constants.APL: case Constants.VIDARBHA: case Constants.ODISHA:
 					if(config.getWhichInfobar().equalsIgnoreCase("LOF_INFOBAR")) {
 						if(this_lofInfobarGfx.infobar.getFull_section() != null && !this_lofInfobarGfx.infobar.getFull_section().isEmpty()) {
 							if(!this_lofInfobarGfx.infobar.getFull_section().equalsIgnoreCase("COMMENTATORS")) {
@@ -2014,7 +2014,7 @@ public class Caption
 						
 					}else {
 						switch (config.getBroadcaster().toUpperCase()) {
-						case Constants.VIDARBHA:
+						case Constants.VIDARBHA: case Constants.ODISHA:
 							if(this_infobarGfx.infobar.getMiddle_section() != null && !this_infobarGfx.infobar.getMiddle_section().isEmpty()) {
 								if(!this_infobarGfx.infobar.getMiddle_section().equalsIgnoreCase("COMMENTATORS")) {
 									whichSide = 1;

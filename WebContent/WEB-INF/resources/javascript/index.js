@@ -378,7 +378,7 @@ function processUserSelectionData(whatToProcess,dataToProcess)
 			switch(dataToProcess) {
 			case 'F1':
 				switch($('#selected_broadcaster').val().toUpperCase()){
-				case 'ISPL': case 'VIDARBHA':
+				case 'ISPL': case 'VIDARBHA': case 'ODISHA':
 					addItemsToList(dataToProcess,null);
 					break;
 				default:
@@ -411,7 +411,7 @@ function processUserSelectionData(whatToProcess,dataToProcess)
 				break;
 			case 'Control_F11':
 				switch($('#selected_broadcaster').val().toUpperCase()){
-				case 'ICC-U19-2023': case 'LEGENDS-90': case 'ASSAM-T20': case 'VIDARBHA':
+				case 'ICC-U19-2023': case 'LEGENDS-90': case 'ASSAM-T20': case 'VIDARBHA': case 'ODISHA':
 					dataToProcess = dataToProcess + ',' + document.getElementById('which_inning').value;
 					processCricketProcedures("POPULATE-GRAPHICS", dataToProcess);
 					break;
@@ -444,7 +444,8 @@ function processUserSelectionData(whatToProcess,dataToProcess)
 				break;
 			case 'Control_h':
 				switch($('#selected_broadcaster').val().toUpperCase()){
-				case 'NPL': case 'LEGENDS-90': case 'ASSAM-T20':  case 'MPL': case 'BENGAL-T20': case 'APL': case 'VIDARBHA': case 'AFG-T20':
+				case 'NPL': case 'LEGENDS-90': case 'ASSAM-T20':  case 'MPL': case 'BENGAL-T20': case 'APL': case 'VIDARBHA': 
+				case 'AFG-T20': case 'ODISHA':
 					dataToProcess = dataToProcess + ',' + document.getElementById('which_inning').value
 					processCricketProcedures("POPULATE-GRAPHICS", dataToProcess);
 					break;
@@ -455,16 +456,16 @@ function processUserSelectionData(whatToProcess,dataToProcess)
 				break;
 			case 'F7':
 				switch($('#selected_broadcaster').val().toUpperCase()){
-					case 'BENGAL-T20': case 'NPL': case 'ISPL': case 'LEGENDS-90': case 'ASSAM-T20':  case 'MPL': case 'T20_MUMBAI': case 'APL': case 'VIDARBHA':
-					case 'AFG-T20':
+					case 'BENGAL-T20': case 'NPL': case 'ISPL': case 'LEGENDS-90': case 'ASSAM-T20':  case 'MPL': case 'T20_MUMBAI': case 'APL': 
+					case 'VIDARBHA': case 'AFG-T20': case 'ODISHA':
 					addItemsToList(dataToProcess,null); 
 					break;
 				}
 			break;		
 			case 'F11':
 				switch($('#selected_broadcaster').val().toUpperCase()){
-					case 'BENGAL-T20': case 'NPL': case 'ISPL': case 'LEGENDS-90': case 'ASSAM-T20':  case 'MPL': case 'T20_MUMBAI': case 'APL': case 'VIDARBHA': 
-					case 'AFG-T20':
+					case 'BENGAL-T20': case 'NPL': case 'ISPL': case 'LEGENDS-90': case 'ASSAM-T20':  case 'MPL': case 'T20_MUMBAI': case 'APL': 
+					case 'VIDARBHA': case 'AFG-T20': case 'ODISHA':
 					addItemsToList(dataToProcess,null); 
 					break;
 				}
@@ -623,7 +624,8 @@ function processUserSelectionData(whatToProcess,dataToProcess)
 				break;	
 			case 'Control_4': 
 				switch($('#selected_broadcaster').val().toUpperCase()){
-				case 'NPL': case 'LEGENDS-90': case 'ASSAM-T20': case 'ISPL':  case 'MPL': case 'T20_MUMBAI': case 'BENGAL-T20': case 'APL': case 'VIDARBHA': case 'AFG-T20':
+				case 'NPL': case 'LEGENDS-90': case 'ASSAM-T20': case 'ISPL':  case 'MPL': case 'T20_MUMBAI': case 'BENGAL-T20': case 'APL': 
+				case 'VIDARBHA': case 'AFG-T20': case 'ODISHA':
 					switch(dataToProcess) {
 						case 'Control_4':
 							dataToProcess = dataToProcess + ',' + document.getElementById('which_inning').value;
@@ -645,7 +647,8 @@ function processUserSelectionData(whatToProcess,dataToProcess)
 			//All key presses which doesn't require graphics population will come here
 			case '5': case '6': case '7': case '8': case '9': case 'Alt_Shift_Q': case 'Alt_Shift_P':
 				switch($('#selected_broadcaster').val().toUpperCase()){
-				case 'NPL': case 'LEGENDS-90': case 'ASSAM-T20': case 'ISPL':  case 'MPL': case 'T20_MUMBAI': case 'BENGAL-T20': case 'APL': case 'VIDARBHA': case 'AFG-T20':
+				case 'NPL': case 'LEGENDS-90': case 'ASSAM-T20': case 'ISPL':  case 'MPL': case 'T20_MUMBAI': case 'BENGAL-T20': case 'APL': 
+				case 'VIDARBHA': case 'AFG-T20': case 'ODISHA':
 					switch(dataToProcess) {
 						case '6': case '9': 
 							dataToProcess = dataToProcess + ',' + document.getElementById('which_inning').value;
@@ -653,7 +656,8 @@ function processUserSelectionData(whatToProcess,dataToProcess)
 							break;
 						case 'Alt_Shift_Q': case 'Alt_Shift_P':
 							switch($('#selected_broadcaster').val().toUpperCase()){
-								case 'MPL': case 'LEGENDS-90': case 'ASSAM-T20': case 'BENGAL-T20': case 'NPL': case 'APL': case 'VIDARBHA': case 'AFG-T20':
+								case 'MPL': case 'LEGENDS-90': case 'ASSAM-T20': case 'BENGAL-T20': case 'NPL': case 'APL':
+								 case 'VIDARBHA': case 'AFG-T20': case 'ODISHA':
 									addItemsToList(dataToProcess,null);
 									break;
 								case 'ISPL':
@@ -2944,7 +2948,7 @@ function addItemsToList(whatToProcess,dataToProcess)
 						cellCount = cellCount + 1;
 					}
 					break;
-				case 'VIDARBHA':
+				case 'VIDARBHA': case 'ODISHA':
 					header_text.innerHTML = 'SCORECARD';
 					select = document.createElement('select');
 					select.id = 'selectScoreCard';
@@ -3251,7 +3255,7 @@ function addItemsToList(whatToProcess,dataToProcess)
 		break;
 		case 'F12':
 			switch($('#selected_broadcaster').val().toUpperCase()){
-				case 'VIDARBHA':
+				case 'VIDARBHA': case 'ODISHA':
 								
 				select = document.createElement('select');
 				select.id = 'selectMiddleStat';
@@ -3624,7 +3628,7 @@ function addItemsToList(whatToProcess,dataToProcess)
 					select.appendChild(option);
 												
 					break;
-				case 'VIDARBHA':
+				case 'VIDARBHA': case 'ODISHA':
 					header_text.innerHTML = 'INFOBAR MIDDLE';
 					select = document.createElement('select');
 					select.id = 'selectMiddleStat';
@@ -3999,8 +4003,8 @@ function addItemsToList(whatToProcess,dataToProcess)
 					break;	
 				}
 				
-				if($('#selected_broadcaster').val() != 'ISPL' && $('#selected_broadcaster').val() != 'VIDARBHA' 
-					&& $('#selected_broadcaster').val() != 'T20_MUMBAI'){
+				if($('#selected_broadcaster').val() != 'ISPL' && $('#selected_broadcaster').val() != 'VIDARBHA' && 
+					$('#selected_broadcaster').val() != 'ODISHA' && $('#selected_broadcaster').val() != 'T20_MUMBAI'){
 					option = document.createElement('option');
 					option.value = 'CRR';
 					option.text = 'Run Rate';
@@ -4079,7 +4083,7 @@ function addItemsToList(whatToProcess,dataToProcess)
 			break;	
 		case 'Alt_2':
 			switch($('#selected_broadcaster').val().toUpperCase()){
-				case 'VIDARBHA':
+				case 'VIDARBHA': case 'ODISHA':
 				header_text.innerHTML = 'MIDDLE INFOBAR SECTION';
 			
 				select = document.createElement('select');
@@ -5816,7 +5820,7 @@ function addItemsToList(whatToProcess,dataToProcess)
 			
 		case 'Alt_7':
 			switch($('#selected_broadcaster').val().toUpperCase()){
-				case 'VIDARBHA':			
+				case 'VIDARBHA': case 'ODISHA':		 
 				select = document.createElement('select');
 				select.id = 'selectRightBottom';
 				select.name = select.id;
@@ -6061,7 +6065,7 @@ function addItemsToList(whatToProcess,dataToProcess)
 			
 		case 'Alt_8':
 			switch($('#selected_broadcaster').val().toUpperCase()){
-				case 'VIDARBHA':
+				case 'VIDARBHA': case 'ODISHA':
 					header_text.innerHTML = 'RIGHT TOP INFOBAR SECTION';
 		
 					select = document.createElement('select');
@@ -6439,8 +6443,8 @@ function addItemsToList(whatToProcess,dataToProcess)
 			
 		case 'Alt_9':
 			switch($('#selected_broadcaster').val().toUpperCase()){
-			case 'ICC-U19-2023': case 'BENGAL-T20': case 'NPL': case 'MPL': case 'LEGENDS-90': case 'ASSAM-T20': case 'APL': case 'ISPL': case 'VIDARBHA':
-			case 'T20_MUMBAI': case 'AFG-T20':
+			case 'ICC-U19-2023': case 'BENGAL-T20': case 'NPL': case 'MPL': case 'LEGENDS-90': case 'ASSAM-T20': case 'APL': case 'ISPL': 
+			case 'VIDARBHA': case 'T20_MUMBAI': case 'AFG-T20': case 'ODISHA':
 				header_text.innerHTML = 'INFOBAR SECTION - FREE TEXT';
 						
 				select = document.createElement('select');
@@ -6582,7 +6586,7 @@ function addItemsToList(whatToProcess,dataToProcess)
 				select.dispatchEvent(new Event('change'));
 				break;
 			case 'ICC-U19-2023': case 'BENGAL-T20': case 'NPL': case 'MPL': case 'LEGENDS-90': case 'ASSAM-T20': case 'APL': case 'ISPL': 
-			case "VIDARBHA": case 'AFG-T20':
+			case "VIDARBHA": case 'AFG-T20': case 'ODISHA':
 				header_text.innerHTML = 'MIDDLE INFOBAR SECTION - COMMANTATORS';
 						
 				select = document.createElement('select');
@@ -6817,6 +6821,7 @@ function addItemsToList(whatToProcess,dataToProcess)
 					cellCount = cellCount + 1
 					break;
 				case 'NPL':  case 'MPL': case 'T20_MUMBAI': case 'BENGAL-T20': case 'APL': case 'VIDARBHA': case 'AFG-T20':
+				case 'ODISHA':
 					header_text.innerHTML = 'POWERPLAY';
 	
 					select = document.createElement('select');
@@ -6923,7 +6928,7 @@ function addItemsToList(whatToProcess,dataToProcess)
 			
 			switch($('#selected_broadcaster').val().toUpperCase()){
 				case 'ISPL': case 'BENGAL-T20': case 'NPL': case 'LEGENDS-90': case 'ASSAM-T20':  case 'MPL':case 'T20_MUMBAI':
-				case 'APL': case 'VIDARBHA': case 'AFG-T20':
+				case 'APL': case 'VIDARBHA': case 'AFG-T20': case 'ODISHA':
 					header_text.innerHTML = '30-50 SPLIT';
 			
 					select = document.createElement('select');
@@ -7298,7 +7303,7 @@ function addItemsToList(whatToProcess,dataToProcess)
 					select.appendChild(option);
 					break;
 				case 'NPL': case 'LEGENDS-90': case 'ASSAM-T20':  case 'MPL': case 'BENGAL-T20': case 'APL': case 'VIDARBHA': 
-				case 'T20_MUMBAI': case 'AFG-T20':
+				case 'T20_MUMBAI': case 'AFG-T20': case 'ODISHA':
 				option = document.createElement('option');
 				option.value = session_match.setup.homeTeam.teamName1 + '-' + 'BAT';
 				option.text = session_match.setup.homeTeam.teamName1 + '-' + 'BAT';
@@ -9609,7 +9614,7 @@ function addItemsToList(whatToProcess,dataToProcess)
 					});
 					
 					break;
-				case 'NPL': case 'MPL': case 'APL':	case 'VIDARBHA':		
+				case 'NPL': case 'MPL': case 'APL':	case 'VIDARBHA': case 'ODISHA':		
 					if($('#selected_broadcaster').val().toUpperCase()=='MPL'){
 						option = document.createElement('option');
 						option.value = 'KCL_CAREER';
@@ -9820,7 +9825,7 @@ function addItemsToList(whatToProcess,dataToProcess)
 		case 'Alt_3':
 			switch($('#selected_broadcaster').val().toUpperCase()){
 			case 'ICC-U19-2023': case 'NPL': case "ISPL": case 'LEGENDS-90': case 'ASSAM-T20':  case 'MPL': case 'T20_MUMBAI':
-			case 'APL': case "VIDARBHA":
+			case 'APL': case "VIDARBHA": case 'ODISHA':
 				switch($('#selected_broadcaster').val().toUpperCase()){
 				case 'T20_MUMBAI':
 					header_text.innerHTML = 'FULL INFOBAR SECTION - BAT PLAYER PROFILE';
@@ -9910,7 +9915,7 @@ function addItemsToList(whatToProcess,dataToProcess)
 							['SA TRI-NATION 2023-24', 'SA TRI-NATION']
 						].forEach(([value, text]) => addOption(value, text));
 						break;
-					case "VIDARBHA":
+					case "VIDARBHA": case 'ODISHA':
 						addOption('DT20');
 						addOption('IT20', 'T20I');
 						break;
@@ -10512,7 +10517,7 @@ function addItemsToList(whatToProcess,dataToProcess)
 					});
 					
 					break;
-				case 'NPL': case 'MPL': case 'APL': case 'VIDARBHA':
+				case 'NPL': case 'MPL': case 'APL': case 'VIDARBHA': case 'ODISHA':
 					if($('#selected_broadcaster').val().toUpperCase()=='MPL'){
 						option = document.createElement('option');
 						option.value = 'KCL_CAREER';

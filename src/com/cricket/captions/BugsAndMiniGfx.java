@@ -872,7 +872,7 @@ public class BugsAndMiniGfx
 			
 			switch (config.getBroadcaster().toUpperCase()) {
 			case Constants.NPL: case Constants.MPL: case Constants.T20_MUMBAI: case Constants.BENGAL_T20: case Constants.APL: 
-			case Constants.VIDARBHA: case Constants.AFG_T20:
+			case Constants.VIDARBHA: case Constants.ODISHA: case Constants.AFG_T20:
 				inning = matchAllData.getMatch().getInning().stream().filter(inn -> inn.getInningNumber() == 
 					Integer.valueOf(whatToProcess.split(",")[2])).findAny().orElse(null);
 				break;

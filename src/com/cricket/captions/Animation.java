@@ -135,7 +135,7 @@ public class Animation
 				return Constants.LOWER_THIRD;	
 			}
 			break;
-		case Constants.NPL: case Constants.MPL: case Constants.APL: case Constants.VIDARBHA:
+		case Constants.NPL: case Constants.MPL: case Constants.APL: case Constants.VIDARBHA:  case Constants.ODISHA:
 			switch (whatToProcess.split(",")[0]) {
 			case "Alt_1": case "Alt_2": case "Alt_3": case "Alt_4": case "Alt_5": case "Alt_6": case "Alt_7": case "Alt_8": 
 			case "Alt_9": case "Alt_0": case "Control_F12": case "Shift_F12": case "Control_Shift_(":
@@ -944,7 +944,7 @@ public class Animation
 	public String AnimateIn(String whatToProcess, List<PrintWriter> print_writers, Configuration config) throws InterruptedException, IOException 
 	{
 		switch (config.getBroadcaster().toUpperCase()) {
-		case Constants.VIDARBHA:
+		case Constants.VIDARBHA: case Constants.ODISHA:
 			T20_VidarbhaAnimateIn(whatToProcess, print_writers, config);
 			break;	
 		case Constants.T20_MUMBAI:
@@ -2944,7 +2944,7 @@ public class Animation
 		case "F12": //Infobar
 			if(this.infobar.isInfobar_on_screen()) {
 				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$InfoBar$Logos_All$Main$Select*FUNCTION*Omo*vis_con SET 1 \0", print_writers);
-//				processAnimation(Constants.FRONT, print_writers, "Anim_InfoBar$Small$In", "SHOW 0.0");
+				processAnimation(Constants.FRONT, print_writers, "Anim_InfoBar$Small$In", "SHOW 0.0");
 				processAnimation(Constants.FRONT, print_writers, "Anim_InfoBar$Ident_Out", "START");
 				processAnimation(Constants.FRONT, print_writers, "Anim_InfoBar$IdentInfo$In_Out", "CONTINUE");
 				processAnimation(Constants.FRONT, print_writers, "Anim_InfoBar$Main$Main_In", "START");
@@ -2960,14 +2960,17 @@ public class Animation
 			}else {
 				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$InfoBar$Logos_All$Main$Select*FUNCTION*Omo*vis_con SET 1 \0", print_writers);
 
-//				processAnimation(Constants.FRONT, print_writers, "Anim_InfoBar$Small$In", "SHOW 0.0");
+				processAnimation(Constants.FRONT, print_writers, "Anim_InfoBar$Small$In", "SHOW 0.0");
 				processAnimation(Constants.FRONT, print_writers, "Anim_InfoBar$In", "START");
 				processAnimation(Constants.FRONT, print_writers, "Anim_InfoBar$Main$Main_In", "START");
 				if(whatToProcess.split(",")[2].equalsIgnoreCase(CricketUtil.BATSMAN)) {
 					processAnimation(Constants.FRONT, print_writers, "Anim_InfoBar$Batsman1_In", "START");
 					processAnimation(Constants.FRONT, print_writers, "Anim_InfoBar$Batsman2_In", "START");
+					processAnimation(Constants.FRONT, print_writers, "Anim_InfoBar$Stage1$Stage1_In", "START");
 					processAnimation(Constants.FRONT, print_writers, "Anim_InfoBar$StrikeIn", "START");
 					processAnimation(Constants.FRONT, print_writers, "Anim_InfoBar$Bowler_In", "START");
+					processAnimation(Constants.FRONT, print_writers, "Anim_InfoBar$Stage2$Stage2_In", "START");
+					
 				}
 				this.infobar.setInfobar_on_screen(true);
 				this.infobar.setInfobar_pushed(false);
@@ -3091,7 +3094,7 @@ public class Animation
 	public String AnimateOut(String whatToProcess, List<PrintWriter> print_writers, Configuration config) throws InterruptedException, IOException
 	{
 		switch (config.getBroadcaster().toUpperCase()) {
-		case Constants.VIDARBHA:
+		case Constants.VIDARBHA: case Constants.ODISHA:
 			VidharbaAnimateOut(whatToProcess, print_writers, config);
 			break;
 		case Constants.T20_MUMBAI:
@@ -4736,7 +4739,7 @@ public class Animation
 		System.out.println("config.getBroadcaster().toUpperCase() = " + config.getBroadcaster().toUpperCase());
 		System.out.println("whatToProcess = " + whatToProcess);
 		switch (config.getBroadcaster().toUpperCase()) {
-		case Constants.VIDARBHA:
+		case Constants.VIDARBHA: case Constants.ODISHA:
 			T20_VidarbhaChangeom(whatToProcess,print_writers,config);
 			break;	
 		case Constants.T20_MUMBAI:
@@ -6422,7 +6425,7 @@ public class Animation
 			break;	
 		 case "Alt_F8": case "F8": case "F10": case "j": case "Alt_a": case "Alt_s":
 			 switch (config.getBroadcaster().toUpperCase()) {
-				case Constants.VIDARBHA:
+				case Constants.VIDARBHA: case Constants.ODISHA:
 					processAnimation(Constants.FRONT, print_writers, "Anim_LtChange", "START");
 					processAnimation(Constants.FRONT, print_writers, "Anim_LtChange$Lt_X_Position", "CONTINUE REVERSE");
 					processAnimation(Constants.FRONT, print_writers, "anim_Lower_Third$Top_Header", "SHOW 0.0");
@@ -6553,7 +6556,7 @@ public class Animation
 	public String CutBack(String whatToProcess,List<PrintWriter> print_writers, Configuration config) throws InterruptedException, IOException
 	{
 		switch (config.getBroadcaster().toUpperCase()) {
-		case Constants.VIDARBHA:
+		case Constants.VIDARBHA: case Constants.ODISHA:
 
 			if(!whatToProcess.contains(",")) {
 				return CricketUtil.NO;
@@ -12452,7 +12455,7 @@ public class Animation
 	public String ResetAnimation(String whatToProcess, List<PrintWriter> print_writers, Configuration config) throws InterruptedException
 	{
 		switch (config.getBroadcaster().toUpperCase()) {
-		case Constants.VIDARBHA:
+		case Constants.VIDARBHA: case Constants.ODISHA:
 
 			processAnimation(Constants.BACK, print_writers, "Anim_MatchId", "SHOW 0.0");
 			processAnimation(Constants.BACK, print_writers, "Anim_FullFrames", "SHOW 0.0");
@@ -13681,7 +13684,7 @@ public class Animation
 			case Constants.T20_MUMBAI:
 				processT20_MumbaiFullFramesPreview(whatToProcess, print_writer, whichside, config, whichGraphicOnScreen);
 				break;
-			 case Constants.VIDARBHA:
+			 case Constants.VIDARBHA: case Constants.ODISHA:
 	            if(whichside == 1) {
 	                if(whatToProcess.contains(",")) {
 	                    switch(whatToProcess.split(",")[0]) {
@@ -14295,7 +14298,7 @@ public class Animation
 		if(config.getPreview().equalsIgnoreCase("WITH_PREVIEW")) {
 			String previewCommands = "";
 			switch (config.getBroadcaster().toUpperCase()) {
-			case Constants.VIDARBHA:
+			case Constants.VIDARBHA: case Constants.ODISHA:
 				if(whichside == 1) {
 					switch(whatToProcess.split(",")[0]) {
 					case "Shift_I":
@@ -14880,7 +14883,7 @@ public class Animation
 		if(config.getPreview().equalsIgnoreCase("WITH_PREVIEW")) {
 			String previewCommand = "",which_gfx="/Default/gfx_Overlays";
 			switch (config.getBroadcaster().toUpperCase()) {
-			case Constants.VIDARBHA:
+			case Constants.VIDARBHA: case Constants.ODISHA:
 	            if(whatToProcess.contains(",")) {
 	                if(whichside == 1) {
 	                    switch(whatToProcess.split(",")[0]) {
@@ -15122,7 +15125,7 @@ public class Animation
 	public void processMiniPreview(String whatToProcess, List<PrintWriter> print_writer, int whichside, Configuration config, String whichGraphicOnScreen) throws InterruptedException {
 		if(config.getPreview().equalsIgnoreCase("WITH_PREVIEW")) {
 			switch (config.getBroadcaster().toUpperCase()) {
-			case Constants.VIDARBHA:
+			case Constants.VIDARBHA: case Constants.ODISHA:
 	            if(whatToProcess.contains(",")) {
 	                switch(whatToProcess.split(",")[0]) {
 	                case "Shift_F1": case "Shift_F2": case "Alt_F1": case "Alt_F2":

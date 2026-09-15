@@ -480,7 +480,7 @@ public class IndexController
             
 		default:
 			switch(session_configuration.getBroadcaster()) {
-			case Constants.NPL: case Constants.MPL: case Constants.APL: case Constants.VIDARBHA:
+			case Constants.NPL: case Constants.MPL: case Constants.APL: case Constants.VIDARBHA:  case Constants.ODISHA:
 				if(process.split(",")[0].toUpperCase().equalsIgnoreCase("highlightProfile") || 
 						process.split(",")[0].toUpperCase().equalsIgnoreCase("highlightLeader")) {
 					this_animation.ChangeOn(process, print_writers, session_configuration);
@@ -499,6 +499,12 @@ public class IndexController
 					this_caption.this_lowerThirdGfx.chnageOn = false;
 					break;
 				case Constants.VIDARBHA:
+					this_animation.ChangeOn(this_caption.this_lowerThirdGfx.impactPlayerData, print_writers, session_configuration);
+					this_caption.this_lowerThirdGfx.chnageOn = true;
+					TimeUnit.MILLISECONDS.sleep(3000);
+					this_caption.this_lowerThirdGfx.chnageOn = false;
+					break;
+				case Constants.ODISHA:
 					this_animation.ChangeOn(this_caption.this_lowerThirdGfx.impactPlayerData, print_writers, session_configuration);
 					this_caption.this_lowerThirdGfx.chnageOn = true;
 					TimeUnit.MILLISECONDS.sleep(3000);
@@ -701,7 +707,8 @@ public class IndexController
 	    speed_match_time_stamp = currentTimestamp;
 
 	    switch (session_configuration.getBroadcaster()) {
-	        case Constants.T20_MUMBAI: case Constants.NPL: case Constants.APL: case Constants.VIDARBHA: case Constants.MPL: case Constants.LEGENDS:
+	        case Constants.T20_MUMBAI: case Constants.NPL: case Constants.APL: case Constants.VIDARBHA: case Constants.ODISHA:
+	        case Constants.MPL: case Constants.LEGENDS:
 	            this_caption.this_infobarGfx.speed(CricketFunctions.processPrintWriter(session_configuration).get(0),session_match,session_configuration, 
 	            		session_MasterCricketDirectory);
 	            break;
@@ -815,7 +822,7 @@ public class IndexController
 			break;
 		default:
 			if (Set.of(Constants.ICC_U19_2023,Constants.ISPL,Constants.BENGAL_T20,Constants.NPL,Constants.LEGENDS, Constants.ASSAM,
-					Constants.MPL,Constants.APL,Constants.VIDARBHA,Constants.AFG_T20).contains(session_configuration.getBroadcaster())
+					Constants.MPL,Constants.APL,Constants.VIDARBHA,Constants.ODISHA,Constants.AFG_T20).contains(session_configuration.getBroadcaster())
 					&& !session_configuration.getPrimaryVariousOptions().contains(Constants.FULL_FRAMER)
 					&& graphicsType.contains(Constants.FULL_FRAMER)) {
 
@@ -934,7 +941,8 @@ public class IndexController
 				.equalsIgnoreCase(CricketUtil.YES)).findAny().orElse(null).getInningNumber();
 		
 		switch(session_configuration.getBroadcaster()) {
-		case Constants.NPL: case Constants.LEGENDS: case Constants.ASSAM: case Constants.APL: case Constants.MPL: case Constants.VIDARBHA:
+		case Constants.NPL: case Constants.LEGENDS: case Constants.ASSAM: case Constants.APL: case Constants.MPL: 
+		case Constants.VIDARBHA: case Constants.ODISHA:
 			this_caption.whichSide = 2;
 
 			if(!this_caption.this_infobarGfx.infobar.getMiddle_section().equalsIgnoreCase("BATSMAN") && 
@@ -1528,7 +1536,7 @@ public class IndexController
 	public void GetVariousDBData(String typeOfUpdate,Configuration config,HeadToHead headToHead, String session_MasterCricketDirectory)throws Exception {
 
 	    if (!Set.of(Constants.ICC_U19_2023,Constants.ISPL,Constants.BENGAL_T20,Constants.NPL,Constants.LEGENDS, Constants.ASSAM,Constants.T20_MUMBAI,
-	    		Constants.MPL,Constants.APL,Constants.VIDARBHA,Constants.AFG_T20).contains(config.getBroadcaster())) {
+	    		Constants.MPL,Constants.APL,Constants.VIDARBHA, Constants.ODISHA,Constants.AFG_T20).contains(config.getBroadcaster())) {
 	        return;
 	    }
 
@@ -1735,7 +1743,7 @@ public class IndexController
 	            break;
 
 	        case Constants.ICC_U19_2023: case Constants.BENGAL_T20: case Constants.NPL: case Constants.LEGENDS: case Constants.ASSAM:
-	        case Constants.MPL: case Constants.APL: case Constants.VIDARBHA: case Constants.AFG_T20:
+	        case Constants.MPL: case Constants.APL: case Constants.VIDARBHA: case Constants.ODISHA: case Constants.AFG_T20:
 
 	            if (session_configuration.getPrimaryVariousOptions().contains(Constants.FULL_FRAMER)) {
 	                this_scene.LoadScene("FULL-FRAMERS", print_writers,session_configuration);

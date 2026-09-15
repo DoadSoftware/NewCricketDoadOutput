@@ -269,6 +269,7 @@
 			      		<option value="APL">PPL</option>
 			      		<option value="APL">APL</option>
 			      		<option value="VIDARBHA">VIDARBHA</option>
+			      		<option value="ODISHA">ODISHA</option>
 			      		<option value="ISPL">ISPL</option>
 			      		<option value="LEGENDS-90">LEGENDS 90</option>
 			      		<option value="T20_MUMBAI">T20 MUMBAI</option>
