@@ -944,7 +944,29 @@ public class IndexController
 		case Constants.NPL: case Constants.LEGENDS: case Constants.ASSAM: case Constants.APL: case Constants.MPL: 
 		case Constants.VIDARBHA: case Constants.ODISHA:
 			this_caption.whichSide = 2;
-
+			if(this_caption.this_infobarGfx.infobar.getFull_section()!= null && 
+					!this_caption.this_infobarGfx.infobar.getFull_section().isEmpty()) {
+				
+				this_caption.this_infobarGfx.infobar.setMiddle_section(CricketUtil.BATSMAN);
+				this_caption.this_infobarGfx.infobar.setRight_section(CricketUtil.BOWLER);
+				this_caption.this_infobarGfx.infobar.setRight_bottom("BOWLING_END");
+				this_caption.this_infobarGfx.infobar.setLeft_bottom(this_caption.this_infobarGfx.infobar.getLast_left_bottom());
+				
+				this_caption.this_infobarGfx.populateCurrentBatsmen(print_writers, session_match, 1);
+				this_caption.this_infobarGfx.populateVizInfobarBowler(print_writers, session_match, 1);
+				this_caption.this_infobarGfx.odishaT20MiddleBottomSection(false,print_writers, session_match, 1);
+				this_caption.this_infobarGfx.populateVizInfobarRightBottom(print_writers, session_match, 1,1);
+				
+				this_animation.ChangeOn("Alt_1," + Inn_Number + ",BLANK", print_writers, session_configuration);
+			}
+			
+			if(this_caption.this_infobarGfx.infobar.getRight_section()!= null && 
+					!this_caption.this_infobarGfx.infobar.getRight_section().isEmpty()) {
+				this_animation.VidharbaAnimateOut("Control_F8," + Inn_Number + ",BLANK", print_writers, session_configuration);
+			}
+			
+			
+			
 			if(!this_caption.this_infobarGfx.infobar.getMiddle_section().equalsIgnoreCase("BATSMAN") && 
 					!this_caption.this_infobarGfx.infobar.getMiddle_section().equalsIgnoreCase("PHOTO BATSMAN")) {
 				

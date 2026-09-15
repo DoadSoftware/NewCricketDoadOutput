@@ -3646,6 +3646,11 @@ function addItemsToList(whatToProcess,dataToProcess)
 					}
 					
 					option = document.createElement('option');
+					option.value = 'BATTERBOWLER';
+					option.text = 'Batter Bowler';
+					select.appendChild(option);
+					
+					option = document.createElement('option');
 					option.value = 'BOUNDARY';
 					option.text = 'Inning Boundaries';
 					select.appendChild(option);

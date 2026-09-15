@@ -6466,8 +6466,24 @@ public class Animation
 					infobar.setFull_section(whatToProcess.split(",")[2]);
 					break;
 				default:
+					
 					if(infobar.getFull_section() != null && !infobar.getFull_section().trim().isEmpty()) {
-						processAnimation(Constants.FRONT, print_writers, "Anim_InfoBar$Stage3_Change", "START");
+						
+						if(caption.this_infobarGfx.infobar.getMiddle_section() != null && !caption.this_infobarGfx.infobar.getMiddle_section().trim().isEmpty()) {
+							if(caption.this_infobarGfx.infobar.getMiddle_section().equalsIgnoreCase(CricketUtil.BATSMAN)) {
+								processAnimation(Constants.FRONT, print_writers, "Anim_InfoBar$Stage3_Out", "START");
+								processAnimation(Constants.FRONT, print_writers, "Anim_InfoBar$Stage1$Stage1_In", "START");
+								processAnimation(Constants.FRONT, print_writers, "Anim_InfoBar$Sateg2$Stage2_In", "START");
+								infobar.setFull_section("");
+								
+								infobar.setMiddle_section(CricketUtil.BATSMAN);
+								infobar.setLeft_bottom(caption.this_infobarGfx.infobar.getLeft_bottom());
+								infobar.setRight_bottom("BOWLING_END");
+							}
+						}else {
+							processAnimation(Constants.FRONT, print_writers, "Anim_InfoBar$Stage3_Change", "START");
+							infobar.setFull_section(whatToProcess.split(",")[2]);
+						}
 					}else {
 						processAnimation(Constants.FRONT, print_writers, "Anim_InfoBar$Stage3_In", "START");
 						processAnimation(Constants.FRONT, print_writers, "Anim_InfoBar$Stage1$Stage1_Out", "START");
@@ -6482,8 +6498,9 @@ public class Animation
 						infobar.setMiddle_section("");
 						infobar.setLeft_bottom("");
 						infobar.setRight_bottom("");
+						infobar.setFull_section(whatToProcess.split(",")[2]);
 					}
-					infobar.setFull_section(whatToProcess.split(",")[2]);
+					
 					break;
 					
 				}
@@ -6525,7 +6542,7 @@ public class Animation
 						infobar.setFull_section("");
 					}
 					
-					if(infobar.getLeft_bottom() != null && !infobar.getLeft_bottom().isEmpty()) {
+					if(caption.this_infobarGfx.infobar.getLeft_bottom() != null && !caption.this_infobarGfx.infobar.getLeft_bottom().isEmpty()) {
 						processAnimation(Constants.FRONT, print_writers, "Anim_InfoBar$Stage1_Change", "START");
 					}else {
 						processAnimation(Constants.FRONT, print_writers, "Anim_InfoBar$Stage1_In", "START");
@@ -6570,7 +6587,7 @@ public class Animation
 						infobar.setFull_section("");
 					}
 					
-					if(infobar.getRight_bottom() != null && !infobar.getRight_bottom().trim().isEmpty()) {
+					if(caption.this_infobarGfx.infobar.getRight_bottom() != null && !caption.this_infobarGfx.infobar.getRight_bottom().trim().isEmpty()) {
 						processAnimation(Constants.FRONT, print_writers, "Anim_InfoBar$Stage2_Change", "START");
 					}else {
 						processAnimation(Constants.FRONT, print_writers, "Anim_InfoBar$Stage2_In", "START");
@@ -6635,7 +6652,9 @@ public class Animation
 				break;
 			case "Alt_1": case "Alt_9": case "Alt_0":
 				TimeUnit.MILLISECONDS.sleep(500);
-				processAnimation(Constants.FRONT, print_writers, "Anim_InfoBar$Stage3_Change", "SHOW 0.0");
+				if(!whatToProcess.split(",")[2].equalsIgnoreCase("BATTERBOWLER")) {
+					processAnimation(Constants.FRONT, print_writers, "Anim_InfoBar$Stage3_Change", "SHOW 0.0");
+				}
 				break;
 			case "Alt_2": case "Alt_3": case "Alt_4": case "Alt_5": case "Alt_6": 
 				TimeUnit.MILLISECONDS.sleep(1000);
@@ -12600,8 +12619,10 @@ public class Animation
 			processAnimation(Constants.FRONT, print_writers, "Sponsor_Pop", "SHOW 0.0");
 			processAnimation(Constants.FRONT, print_writers, "Sponsor_Bug", "SHOW 0.0");
 			processAnimation(Constants.BACK, print_writers, "Sponsor", "SHOW 0.0");
+			processAnimation(Constants.FRONT, print_writers, "Anim_InfoBar$Main$Target_In", "SHOW 0.0");
+			processAnimation(Constants.FRONT, print_writers, "Anim_InfoBar$TimeLine", "SHOW 0.0");
 			
-			
+			processAnimation(Constants.FRONT, print_writers, "Anim_InfoBar$Main$ToWin", "SHOW 0.0");
 			if(whatToProcess.contains("CLEAR-ALL")) {
 //				processAnimation(Constants.FRONT, print_writers, "Anim_InfoBar$Small$In", "SHOW 0.0");
 				processAnimation(Constants.FRONT, print_writers, "Anim_InfoBar$Reset", "START");

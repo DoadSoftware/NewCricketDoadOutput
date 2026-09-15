@@ -1069,7 +1069,20 @@ public class Caption
 					if(whatToProcess.split(",")[2].equalsIgnoreCase("LAST_X_BALLS")) {
 						this_infobarGfx.lastXballs = Integer.valueOf(whatToProcess.split(",")[3]);
 					}
-					status = this_infobarGfx.populateFullSection(false,print_writers, matchAllData, whichSide);
+					if(whatToProcess.split(",")[2].equalsIgnoreCase("BATTERBOWLER")) {
+						this_infobarGfx.infobar.setMiddle_section(CricketUtil.BATSMAN);
+						this_infobarGfx.infobar.setRight_section(CricketUtil.BOWLER);
+						this_infobarGfx.infobar.setRight_bottom("BOWLING_END");
+						this_infobarGfx.infobar.setLeft_bottom(this_infobarGfx.infobar.getLast_left_bottom());
+						
+						this_infobarGfx.populateCurrentBatsmen(print_writers, matchAllData, 1);
+						this_infobarGfx.populateVizInfobarBowler(print_writers, matchAllData, 1);
+						this_infobarGfx.odishaT20MiddleBottomSection(false,print_writers, matchAllData, 1);
+						status = this_infobarGfx.populateVizInfobarRightBottom(print_writers, matchAllData, 1,1);
+						
+					}else {
+						status = this_infobarGfx.populateFullSection(false,print_writers, matchAllData, whichSide);
+					}
 					break;
 				case Constants.ISPL:
 					if(config.getWhichInfobar().equalsIgnoreCase("LOF_INFOBAR")) {

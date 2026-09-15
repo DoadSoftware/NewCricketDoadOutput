@@ -12422,6 +12422,7 @@ public class InfobarGfx
 //					CricketFunctions.generateMatchSummaryStatus(2, matchAllData, CricketUtil.FULL, "|", config.getBroadcaster()).toUpperCase().split("\\|")[1] + "\0", print_writers);
 			break;
 		}
+		infobar.setLast_left_bottom(infobar.getLeft_bottom());
 		return Constants.OK;
 	}
 	
