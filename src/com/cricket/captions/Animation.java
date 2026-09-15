@@ -2668,7 +2668,7 @@ public class Animation
 			TimeUnit.MILLISECONDS.sleep(500);
 			switch (whatToProcess.split(",")[0]) {
 			case "F1": case "F2": case "F4":
-				processAnimation(Constants.BACK, print_writers, "Sponsor$In_Out", "START");
+				//processAnimation(Constants.BACK, print_writers, "Sponsor$In_Out", "START");
 				break;
 			default:
 				processAnimation(Constants.BACK, print_writers, "Sponsor", "SHOW 0.0");
@@ -6310,7 +6310,7 @@ public class Animation
 //			setVariousAnimationsKeys("CHANGE-ON", print_writers, config);
 			switch (whatToProcess.split(",")[0]) {
 			case "F1": case "F2": case "F4":
-				processAnimation(Constants.BACK, print_writers, "Sponsor$Change", "START");
+				//processAnimation(Constants.BACK, print_writers, "Sponsor$Change", "START");
 				break;
 			default:
 				processAnimation(Constants.BACK, print_writers, "Sponsor", "SHOW 0.0");
@@ -8579,7 +8579,7 @@ public class Animation
 		case "Shift_V": case "Control_F10": case "Control_z": case "Control_x": case "Shift_F10": case "Control_d": case "Control_e":
 			switch (whatToProcess.split(",")[0]) {
 			case "F1": case "F2": case "F4":
-				processAnimation(Constants.BACK, print_writers, "Sponsor$In_Out", "CONTINUE");
+				//processAnimation(Constants.BACK, print_writers, "Sponsor$In_Out", "CONTINUE");
 				break;
 			default:
 				processAnimation(Constants.BACK, print_writers, "Sponsor", "SHOW 0.0");
