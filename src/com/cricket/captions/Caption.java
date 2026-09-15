@@ -1192,7 +1192,23 @@ public class Caption
 						}
 					}
 					break;	
-				case Constants.VIDARBHA: case Constants.ODISHA:
+				case Constants.ODISHA:
+					
+					if(this_infobarGfx.infobar.getLeft_bottom() != null && !this_infobarGfx.infobar.getLeft_bottom().isEmpty()) {
+						if(!this_infobarGfx.infobar.getLeft_bottom().equalsIgnoreCase(whatToProcess.split(",")[2])) {
+							whichSide = 2;
+						}else {
+							whichSide = 1;
+						}
+					}else {
+						whichSide = 1;
+					}
+					this_infobarGfx.infobar.setLeft_bottom(whatToProcess.split(",")[2]);
+					status = this_infobarGfx.odishaT20MiddleBottomSection(false,print_writers,matchAllData, whichSide);
+					
+					this_infobarGfx.infobar.setFull_section("");
+					break;	
+				case Constants.VIDARBHA: 
 					
 					if(this_infobarGfx.infobar.getMiddle_section().equalsIgnoreCase(CricketUtil.BATSMAN)) {
 						this_infobarGfx.infobar.setMiddle_section(whatToProcess.split(",")[2]);

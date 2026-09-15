@@ -4090,11 +4090,11 @@ function addItemsToList(whatToProcess,dataToProcess)
 				select.id = 'selectMiddleStat';
 				select.name = select.id;
 	
-				option = document.createElement('option');
+				/*option = document.createElement('option');
 				option.value = 'BATSMAN';
 				option.text = 'Batsman/Bowler';
 				select.appendChild(option);
-				
+				*/
 				option = document.createElement('option');
 				option.value = 'CURR_PARTNERSHIP';
 				option.text = 'Current Partnership';
@@ -5825,11 +5825,14 @@ function addItemsToList(whatToProcess,dataToProcess)
 				select.id = 'selectRightBottom';
 				select.name = select.id;
 				
-				option = document.createElement('option');
-				option.value = 'BOWLER';
-				option.text = 'Bowler';
-				select.appendChild(option);
-				
+				switch($('#selected_broadcaster').val().toUpperCase()){
+					case 'VIDARBHA': 
+						option = document.createElement('option');
+						option.value = 'BOWLER';
+						option.text = 'Bowler';
+						select.appendChild(option);
+						break;
+				}
 				option = document.createElement('option');
 				option.value = 'OVER';
 				option.text = 'This Over';

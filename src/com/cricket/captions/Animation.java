@@ -2953,6 +2953,8 @@ public class Animation
 					processAnimation(Constants.FRONT, print_writers, "Anim_InfoBar$Batsman2_In", "START");
 					processAnimation(Constants.FRONT, print_writers, "Anim_InfoBar$StrikeIn", "START");
 					processAnimation(Constants.FRONT, print_writers, "Anim_InfoBar$Bowler_In", "START");
+					processAnimation(Constants.FRONT, print_writers, "Anim_InfoBar$Stage1$Stage1_In", "START");
+					processAnimation(Constants.FRONT, print_writers, "Anim_InfoBar$Sateg2$Stage2_In", "START");
 				}
 				this.infobar.setInfobar_on_screen(true);
 				this.infobar.setInfobar_pushed(false);
@@ -2969,7 +2971,7 @@ public class Animation
 					processAnimation(Constants.FRONT, print_writers, "Anim_InfoBar$Stage1$Stage1_In", "START");
 					processAnimation(Constants.FRONT, print_writers, "Anim_InfoBar$StrikeIn", "START");
 					processAnimation(Constants.FRONT, print_writers, "Anim_InfoBar$Bowler_In", "START");
-					processAnimation(Constants.FRONT, print_writers, "Anim_InfoBar$Stage2$Stage2_In", "START");
+					processAnimation(Constants.FRONT, print_writers, "Anim_InfoBar$Sateg2$Stage2_In", "START");
 					
 				}
 				this.infobar.setInfobar_on_screen(true);
@@ -6447,64 +6449,124 @@ public class Animation
 		case "Alt_1": case "Alt_2": case "Alt_3": case "Alt_4": case "Alt_5": case "Alt_6": case "Alt_7": case "Alt_8": case "Alt_9": case "Alt_0":
 			switch(whatToProcess.split(",")[0]) {
 			case "Alt_1": case "Alt_9": case "Alt_0":
-				if(infobar.getFull_section() != null && !infobar.getFull_section().trim().isEmpty()) {
-					processAnimation(Constants.FRONT, print_writers, "Anim_InfoBar$Stage3_Change", "START");
-				}else {
-					processAnimation(Constants.FRONT, print_writers, "Anim_InfoBar$Stage3_In", "START");
-					if(infobar.getMiddle_section() != null && !infobar.getMiddle_section().isEmpty()) {
-						processAnimation(Constants.FRONT, print_writers, "Anim_InfoBar$Stage1_In", "SHOW 0.0");
+				
+				switch (config.getBroadcaster().toUpperCase()) {
+				case Constants.VIDARBHA: 
+					if(infobar.getFull_section() != null && !infobar.getFull_section().trim().isEmpty()) {
+						processAnimation(Constants.FRONT, print_writers, "Anim_InfoBar$Stage3_Change", "START");
+					}else {
+						processAnimation(Constants.FRONT, print_writers, "Anim_InfoBar$Stage3_In", "START");
+						if(infobar.getMiddle_section() != null && !infobar.getMiddle_section().isEmpty()) {
+							processAnimation(Constants.FRONT, print_writers, "Anim_InfoBar$Stage1_In", "SHOW 0.0");
+						}
+						if(infobar.getRight_bottom() != null && !infobar.getRight_bottom().isEmpty()) {
+							processAnimation(Constants.FRONT, print_writers, "Anim_InfoBar$Stage2_In", "SHOW 0.0");
+						}
+						infobar.setMiddle_section("");
+						infobar.setRight_bottom("");
 					}
-					if(infobar.getRight_bottom() != null && !infobar.getRight_bottom().isEmpty()) {
-						processAnimation(Constants.FRONT, print_writers, "Anim_InfoBar$Stage2_In", "SHOW 0.0");
+					infobar.setFull_section(whatToProcess.split(",")[2]);
+					break;
+				default:
+					if(infobar.getFull_section() != null && !infobar.getFull_section().trim().isEmpty()) {
+						processAnimation(Constants.FRONT, print_writers, "Anim_InfoBar$Stage3_Change", "START");
+					}else {
+						processAnimation(Constants.FRONT, print_writers, "Anim_InfoBar$Stage3_In", "START");
+						processAnimation(Constants.FRONT, print_writers, "Anim_InfoBar$Stage1$Stage1_Out", "START");
+						processAnimation(Constants.FRONT, print_writers, "Anim_InfoBar$Sateg2$Stage2_Out", "START");
+						
+						if(infobar.getLeft_bottom() != null && !infobar.getLeft_bottom().isEmpty()) {
+							processAnimation(Constants.FRONT, print_writers, "Anim_InfoBar$Stage1_In", "SHOW 0.0");
+						}
+						if(infobar.getRight_bottom() != null && !infobar.getRight_bottom().isEmpty()) {
+							processAnimation(Constants.FRONT, print_writers, "Anim_InfoBar$Stage2_In", "SHOW 0.0");
+						}
+						infobar.setMiddle_section("");
+						infobar.setLeft_bottom("");
+						infobar.setRight_bottom("");
 					}
-					infobar.setMiddle_section("");
-					infobar.setRight_bottom("");
+					infobar.setFull_section(whatToProcess.split(",")[2]);
+					break;
+					
 				}
-				infobar.setFull_section(whatToProcess.split(",")[2]);
 				break;
 			case "Alt_2": case "Alt_3": case "Alt_4": case "Alt_5": case "Alt_6":
-				if(whatToProcess.split(",")[2].equalsIgnoreCase(CricketUtil.BATSMAN)) {
-					
-					if(infobar.getFull_section() != null && !infobar.getFull_section().isEmpty()) {
-						processAnimation(Constants.FRONT, print_writers, "Anim_InfoBar$Stage3_Out", "START");
-						TimeUnit.MILLISECONDS.sleep(500);
-						infobar.setFull_section("");
-						infobar.setMiddle_section("");
+				switch (config.getBroadcaster().toUpperCase()) {
+				case Constants.VIDARBHA: 
+					if(whatToProcess.split(",")[2].equalsIgnoreCase(CricketUtil.BATSMAN)) {
+						
+						if(infobar.getFull_section() != null && !infobar.getFull_section().isEmpty()) {
+							processAnimation(Constants.FRONT, print_writers, "Anim_InfoBar$Stage3_Out", "START");
+							TimeUnit.MILLISECONDS.sleep(500);
+							infobar.setFull_section("");
+							infobar.setMiddle_section("");
+						}else {
+							processAnimation(Constants.FRONT, print_writers, "Anim_InfoBar$Stage1_Out", "START");
+							infobar.setMiddle_section("");
+							infobar.setFull_section("");
+						}
 					}else {
-						processAnimation(Constants.FRONT, print_writers, "Anim_InfoBar$Stage1_Out", "START");
-						infobar.setMiddle_section("");
-						infobar.setFull_section("");
+						if(infobar.getFull_section()!= null && !infobar.getFull_section().isEmpty()) {
+							processAnimation(Constants.FRONT, print_writers, "Anim_InfoBar$Stage3_Out", "START");
+							TimeUnit.MILLISECONDS.sleep(500);
+							infobar.setFull_section("");
+						}
+						
+						if(infobar.getMiddle_section() != null && !infobar.getMiddle_section().isEmpty()) {
+							processAnimation(Constants.FRONT, print_writers, "Anim_InfoBar$Stage1_Change", "START");
+						}else {
+							processAnimation(Constants.FRONT, print_writers, "Anim_InfoBar$Stage1_In", "START");
+						}
+						infobar.setMiddle_section(whatToProcess.split(",")[2]);
 					}
-				}else {
+					break;
+				default:
 					if(infobar.getFull_section()!= null && !infobar.getFull_section().isEmpty()) {
 						processAnimation(Constants.FRONT, print_writers, "Anim_InfoBar$Stage3_Out", "START");
 						TimeUnit.MILLISECONDS.sleep(500);
 						infobar.setFull_section("");
 					}
 					
-					if(infobar.getMiddle_section() != null && !infobar.getMiddle_section().isEmpty()) {
+					if(infobar.getLeft_bottom() != null && !infobar.getLeft_bottom().isEmpty()) {
 						processAnimation(Constants.FRONT, print_writers, "Anim_InfoBar$Stage1_Change", "START");
 					}else {
 						processAnimation(Constants.FRONT, print_writers, "Anim_InfoBar$Stage1_In", "START");
 					}
-					infobar.setMiddle_section(whatToProcess.split(",")[2]);
+					infobar.setLeft_bottom(whatToProcess.split(",")[2]);
+					break;
+					
 				}
-				
 				break;
 			case "Alt_7":
-				if(whatToProcess.split(",")[2].equalsIgnoreCase(CricketUtil.BOWLER)) {
-					if(infobar.getFull_section() != null && !infobar.getFull_section().isEmpty()) {
-						processAnimation(Constants.FRONT, print_writers, "Anim_InfoBar$Stage3_Out", "START");
-						TimeUnit.MILLISECONDS.sleep(500);
-						infobar.setFull_section("");
-						infobar.setRight_bottom("");
+				switch (config.getBroadcaster().toUpperCase()) {
+				case Constants.VIDARBHA: 
+					if(whatToProcess.split(",")[2].equalsIgnoreCase(CricketUtil.BOWLER)) {
+						if(infobar.getFull_section() != null && !infobar.getFull_section().isEmpty()) {
+							processAnimation(Constants.FRONT, print_writers, "Anim_InfoBar$Stage3_Out", "START");
+							TimeUnit.MILLISECONDS.sleep(500);
+							infobar.setFull_section("");
+							infobar.setRight_bottom("");
+						}else {
+							processAnimation(Constants.FRONT, print_writers, "Anim_InfoBar$Stage2_Out", "START");
+							TimeUnit.MILLISECONDS.sleep(500);
+							infobar.setFull_section("");
+							infobar.setRight_bottom("");
+						}
 					}else {
-						processAnimation(Constants.FRONT, print_writers, "Anim_InfoBar$Stage2_Out", "START");
-						TimeUnit.MILLISECONDS.sleep(500);
-						infobar.setFull_section("");
-						infobar.setRight_bottom("");
+						if(infobar.getFull_section()!= null && !infobar.getFull_section().isEmpty()) {
+							processAnimation(Constants.FRONT, print_writers, "Anim_InfoBar$Stage3_Out", "START");
+							infobar.setFull_section("");
+						}
+						
+						if(infobar.getRight_bottom() != null && !infobar.getRight_bottom().trim().isEmpty()) {
+							processAnimation(Constants.FRONT, print_writers, "Anim_InfoBar$Stage2_Change", "START");
+						}else {
+							processAnimation(Constants.FRONT, print_writers, "Anim_InfoBar$Stage2_In", "START");
+						}
+						infobar.setRight_bottom(whatToProcess.split(",")[2]);
 					}
-				}else {
+					break;
+				default:
 					if(infobar.getFull_section()!= null && !infobar.getFull_section().isEmpty()) {
 						processAnimation(Constants.FRONT, print_writers, "Anim_InfoBar$Stage3_Out", "START");
 						infobar.setFull_section("");
@@ -6516,8 +6578,8 @@ public class Animation
 						processAnimation(Constants.FRONT, print_writers, "Anim_InfoBar$Stage2_In", "START");
 					}
 					infobar.setRight_bottom(whatToProcess.split(",")[2]);
+					break;	
 				}
-				
 				break;
 			case "Alt_8":
 				if(whatToProcess.split(",")[2].equalsIgnoreCase("TARGET")) {
@@ -6579,16 +6641,35 @@ public class Animation
 				break;
 			case "Alt_2": case "Alt_3": case "Alt_4": case "Alt_5": case "Alt_6": 
 				TimeUnit.MILLISECONDS.sleep(1000);
-				if(!whatToProcess.split(",")[2].equalsIgnoreCase(CricketUtil.BATSMAN) && 
-						infobar.getMiddle_section() != null && !infobar.getMiddle_section().isEmpty()) {
-					processAnimation(Constants.FRONT, print_writers, "Anim_InfoBar$Stage1_Change", "SHOW 0.0");
+				switch (config.getBroadcaster().toUpperCase()){
+				case Constants.ODISHA: 
+					
+					if(infobar.getLeft_bottom() != null && !infobar.getLeft_bottom().isEmpty()) {
+						processAnimation(Constants.FRONT, print_writers, "Anim_InfoBar$Stage1_Change", "SHOW 0.0");
+					}
+				break;
+				default:
+					if(!whatToProcess.split(",")[2].equalsIgnoreCase(CricketUtil.BATSMAN) && 
+							infobar.getMiddle_section() != null && !infobar.getMiddle_section().isEmpty()) {
+						processAnimation(Constants.FRONT, print_writers, "Anim_InfoBar$Stage1_Change", "SHOW 0.0");
+					}
+				break;
 				}
 				break;
 			case "Alt_7":
-				if(!whatToProcess.split(",")[2].equalsIgnoreCase(CricketUtil.BOWLER) && 
-						infobar.getRight_bottom() != null && !infobar.getRight_bottom().isEmpty()) {
-					processAnimation(Constants.FRONT, print_writers, "Anim_InfoBar$Stage2_Change", "SHOW 0.0");
-				}
+			switch (config.getBroadcaster().toUpperCase()){
+				case Constants.ODISHA: 
+					if(infobar.getRight_bottom() != null && !infobar.getRight_bottom().isEmpty()) {
+						processAnimation(Constants.FRONT, print_writers, "Anim_InfoBar$Stage2_Change", "SHOW 0.0");
+					}
+					break;
+				default:
+					if(!whatToProcess.split(",")[2].equalsIgnoreCase(CricketUtil.BOWLER) && 
+							infobar.getRight_bottom() != null && !infobar.getRight_bottom().isEmpty()) {
+						processAnimation(Constants.FRONT, print_writers, "Anim_InfoBar$Stage2_Change", "SHOW 0.0");
+					}
+					break;
+			}
 				break;
 			case "Alt_8":
 //				if(!whatToProcess.split(",")[2].equalsIgnoreCase(CricketUtil.BOWLER)) {
