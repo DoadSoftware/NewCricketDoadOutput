@@ -2761,22 +2761,20 @@ public class Animation
 			 processAnimation(Constants.FRONT, print_writers, "PopUps", "START");
 			 this.whichGraphicOnScreen = whatToProcess;
 			 break; 
-		case "F5": case "F6": case "F9": case "Control_F2":
-		case "Control_F5": case "Control_F9": case "Control_a":  case "Control_F3": case "Alt_o":
-		case "Shift_F3": case "u": case "d": case "e": case "Shift_F5": case "Shift_F9": case "Alt_F12":
-		case "Control_g": case "Control_h": case "Control_F6": case "Shift_F6": case "Shift_E": case "Alt_Shift_L":
-		case "Alt_d": case "l": case "a":  case "Alt_F1": case "Alt_F2": case "Alt_F6": case "Shift_A":  
-		case "Shift_R": case "Shift_U": case "Alt_w": case "Control_j": case "Alt_i": case "Alt_j": case "b": case "Control_i":
-		case "Alt_Shift_D":case "Alt_Shift_E":case "Alt_Shift_F":case "Alt_Shift_G":case "Alt_Shift_H":
-		case "Control_u": case "Shift_G": case "Shift_W":case "Control_Shift_X": case "Alt_l":
+		case "F5": case "F6": case "F9": case "Control_F2": case "Control_F5": case "Control_F9": case "Control_a":  case "Control_F3": case "Alt_o":
+		case "Shift_F3": case "u": case "d": case "e": case "Shift_F5": case "Shift_F9": case "Alt_F12": case "Control_g": case "Control_h": 
+		case "Control_F6": case "Shift_F6": case "Shift_E": case "Alt_Shift_L": case "Alt_d": case "l": case "a":  case "Alt_F1": case "Alt_F2": 
+		case "Alt_F6": case "Shift_A": case "Shift_R": case "Shift_U": case "Alt_w": case "Control_j": case "Alt_i": case "Alt_j": case "b": case "Control_i":
+		case "Alt_Shift_D":case "Alt_Shift_E":case "Alt_Shift_F":case "Alt_Shift_G":case "Alt_Shift_H": case "Control_u": case "Shift_G": case "Shift_W":
+		case "Control_Shift_X": case "Alt_l":
 			AnimateIn(Constants.SHRUNK_INFOBAR + ",", print_writers, config); // Shrink infobar
 			TimeUnit.MILLISECONDS.sleep(1000);
 			
 			switch (whatToProcess.split(",")[0]) {
 			case "Shift_F3":
-				processAnimation(Constants.FRONT, print_writers, "Sponsor_LT$In_Out", "START");
+				//processAnimation(Constants.FRONT, print_writers, "Sponsor_LT$In_Out", "START");
 				break;
-				default:
+			default:
 				processAnimation(Constants.FRONT, print_writers, "Sponsor_LT", "SHOW 0.0");
 				break;
 					
@@ -8673,23 +8671,22 @@ public class Animation
 			 processAnimation(Constants.FRONT, print_writers, "Sponsor_Pop", "SHOW 0.0");
 			 break;  
 			 
-		case "F5": case "F6": case "F9": case "Control_F2": case "Alt_Shift_F3":
-		case "Control_F5": case "Control_F9": case "Control_a":  case "Control_F3": case "Alt_o":
-		case "Shift_F3": case "u": case "d": case "e": case "Shift_F5": case "Shift_F9": case "Alt_F12":
-		case "Control_g": case "Control_h": case "Control_F6": case "Shift_F6": case "Shift_E": case "Alt_Shift_L":
-		case "Alt_d": case "Alt_l": case "l": case "a":  case "Alt_F1": case "Alt_F2": case "Alt_F6": case "Shift_A":  
+		case "F5": case "F6": case "F9": case "Control_F2": case "Alt_Shift_F3": case "Control_F5": case "Control_F9": 
+		case "Control_a":  case "Control_F3": case "Alt_o": case "Shift_F3": case "u": case "d": case "e": case "Shift_F5": 
+		case "Shift_F9": case "Alt_F12": case "Control_g": case "Control_h": case "Control_F6": case "Shift_F6": case "Shift_E": 
+		case "Alt_Shift_L": case "Alt_d": case "Alt_l": case "l": case "a":  case "Alt_F1": case "Alt_F2": case "Alt_F6": case "Shift_A":  
 		case "Shift_R": case "Shift_U": case "Alt_w": case "Control_j": case "Alt_i": case "Alt_j": case "b": case "Control_i": 
-		case "Alt_Shift_D":case "Alt_Shift_E":case "Alt_Shift_F":case "Alt_Shift_G":case "Alt_Shift_H":
-		case "Control_u": case "Shift_G": case "Shift_W":case "Control_Shift_X": 
+		case "Alt_Shift_D":case "Alt_Shift_E":case "Alt_Shift_F":case "Alt_Shift_G":case "Alt_Shift_H": case "Control_u": case "Shift_G": 
+		case "Shift_W":case "Control_Shift_X": 
 			 switch (whatToProcess.split(",")[0]) {
-				case "Shift_F3":
-					processAnimation(Constants.FRONT, print_writers, "Sponsor_LT$In_Out", "CONTINUE");
-					break;
-					default:
-					processAnimation(Constants.FRONT, print_writers, "Sponsor_LT$In_Out", "SHOW 0.0");
-					break;
-						
-				}	
+			case "Shift_F3":
+				//processAnimation(Constants.FRONT, print_writers, "Sponsor_LT$In_Out", "CONTINUE");
+				break;
+			default:
+				processAnimation(Constants.FRONT, print_writers, "Sponsor_LT$In_Out", "SHOW 0.0");
+				break;
+					
+			}	
 			
 			processAnimation(Constants.FRONT, print_writers, "anim_Lower_Third", "CONTINUE");
 			processAnimation(Constants.FRONT, print_writers, "Anim_LtChange$Lt_X_Position", "CONTINUE REVERSE");

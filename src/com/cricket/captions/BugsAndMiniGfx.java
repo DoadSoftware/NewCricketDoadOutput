@@ -3011,7 +3011,7 @@ public class BugsAndMiniGfx
 	public String PopulateBugBody(int WhichSide, String whatToProcess,MatchAllData matchAllData) throws IOException, InterruptedException {
 		
 		switch (config.getBroadcaster().toUpperCase()) {
-		case Constants.VIDARBHA:
+		case Constants.VIDARBHA: case Constants.ODISHA:
 			return T20VidarbhaBugBody(WhichSide, whatToProcess, matchAllData);
 		case Constants.T20_MUMBAI:
 			return T20MumbaiBugBody(WhichSide, whatToProcess, matchAllData);
@@ -7053,7 +7053,7 @@ public class BugsAndMiniGfx
 	}
 	public String populateMiniBody(int WhichSide, String whatToProcess, MatchAllData matchAllData, int WhichInning) throws StreamReadException, DatabindException, FileNotFoundException, IOException {
 		switch (config.getBroadcaster().toUpperCase()) {
-		case Constants.VIDARBHA:
+		case Constants.VIDARBHA: case Constants.ODISHA:
 			return populateT20_Vidarbha_MiniBody(WhichSide, whatToProcess, matchAllData, WhichInning);
 		case Constants.T20_MUMBAI:
 			return populateT20_MUMBAI_MiniBody(WhichSide, whatToProcess, matchAllData, WhichInning);

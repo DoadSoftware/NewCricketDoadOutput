@@ -20686,24 +20686,21 @@ public class LowerThirdGfx
 
 	            CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$All_LowerThirds$MoveForShrink$Out$SubLines$Side" + WhichSide +
 	                    "$Select_Subline$1$Data$Left$txt_1*GEOM*TEXT SET " + lowerThird.getLeftText()[0] + "\0", print_writers);
-
-	            if (config.getBroadcaster().toUpperCase().equals(Constants.VIDARBHA)) {
-	                // [0]=howOut  [1]=fours  [2]=sixes  [3]=dots(Count[0])  [4]=striktRate
+	            
+	            switch(config.getBroadcaster()) {
+	            case Constants.VIDARBHA: case Constants.ODISHA:
+	            	// [0]=howOut  [1]=fours  [2]=sixes  [3]=dots(Count[0])  [4]=striktRate
 	                CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$All_LowerThirds$MoveForShrink$Out$SubLines$Side" + WhichSide +
-	                        "$Select_Subline$2$Data$Left$txt_1*GEOM*TEXT SET " +
-	                        "FOURS  " + lowerThird.getLeftText()[1] +
-	                        "   SIXES  " + lowerThird.getLeftText()[2] +
-	                        "   DOTS  " + lowerThird.getLeftText()[3] +
-	                        "   S/R  " + lowerThird.getLeftText()[4].replace(".0", "") + "\0", print_writers);
-	            } else {
-	                // [0]=howOut  [1]=fours  [2]=sixes  [3]=nines  [4]=dots(Count[0])  [5]=striktRate
+	                        "$Select_Subline$2$Data$Left$txt_1*GEOM*TEXT SET FOURS  " + lowerThird.getLeftText()[1] + "   SIXES  " + lowerThird.getLeftText()[2] +
+	                        "   DOTS  " + lowerThird.getLeftText()[3] + "   S/R  " + lowerThird.getLeftText()[4].replace(".0", "") + "\0", print_writers);
+	            	break;
+	            default:
+	            	 // [0]=howOut  [1]=fours  [2]=sixes  [3]=nines  [4]=dots(Count[0])  [5]=striktRate
 	                CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$All_LowerThirds$MoveForShrink$Out$SubLines$Side" + WhichSide +
-	                        "$Select_Subline$2$Data$Left$txt_1*GEOM*TEXT SET " +
-	                        "FOURS  " + lowerThird.getLeftText()[1] +
-	                        "   SIXES  " + lowerThird.getLeftText()[2] +
-	                        "   NINES  " + lowerThird.getLeftText()[3] +
-	                        "   DOTS  " + lowerThird.getLeftText()[4] +
-	                        "   S/R  " + lowerThird.getLeftText()[5].replace(".0", "") + "\0", print_writers);
+	                        "$Select_Subline$2$Data$Left$txt_1*GEOM*TEXT SET FOURS  " + lowerThird.getLeftText()[1] + "   SIXES  " + lowerThird.getLeftText()[2] +
+	                        "   NINES  " + lowerThird.getLeftText()[3] + "   DOTS  " + lowerThird.getLeftText()[4] + "   S/R  " 
+	                        + lowerThird.getLeftText()[5].replace(".0", "") + "\0", print_writers);
+	            	break;
 	            }
 	            break;
 	        case "Shift_F6":
@@ -22471,7 +22468,7 @@ public class LowerThirdGfx
 	public void HideAndShowL3rdSubStrapContainers(int WhichSide)
 	{
 		switch (config.getBroadcaster().toUpperCase()) {
-		case Constants.VIDARBHA:
+		case Constants.VIDARBHA: case Constants.ODISHA:
 			
 			CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$All_LowerThirds$MoveForShrink$TopLine$TopData_Position_Y$Side" + WhichSide +
 					"$BottomTextGrp$geom_MaxSize*FUNCTION*Maxsize*WIDTH_X SET 500.0\0", print_writers);
@@ -23482,7 +23479,7 @@ public class LowerThirdGfx
 		String LT_Position_1 = "",LT_Position_2 = "",LT_Position_3 = "",LT_Position_4 = "",LT_Position_5 = "",LT_Position_6 = "",LT_Position_7 = "",LT_Position_8 = "",
 				LT_Flag_Keys="",LT_Flag_Object="",LT_Flag_ObjectX="",LT_Flag_ObjectY="",LT_Flag_ObjectZ="",slave_Flag_Keys = "",slave_Flag_Object="";
 		switch (config.getBroadcaster().toUpperCase()) {
-		case Constants.VIDARBHA:
+		case Constants.VIDARBHA: case Constants.ODISHA:
 			switch (subline) {
 			case 0:
 				LT_Position_1 = "156.0";
