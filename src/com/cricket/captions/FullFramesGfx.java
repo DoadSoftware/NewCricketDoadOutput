@@ -808,7 +808,7 @@ public class FullFramesGfx
 		        break;
 		    }
 		    break;
-		case Constants.VIDARBHA:
+		case Constants.VIDARBHA: case Constants.ODISHA:
 		    switch (WhichProfile.toUpperCase()) {
 		    case "VIDARBHA_CAREER":
 		         statsType = statsTypes.stream()
@@ -1597,7 +1597,7 @@ public class FullFramesGfx
 	public String populatePreviousMatchSummary(int WhichSide, String whatToProcess, MatchAllData matchAllData, int WhichInning) throws Exception
 	{
 		switch (config.getBroadcaster().toUpperCase()) {
-		case Constants.LEGENDS: case Constants.ASSAM: case Constants.VIDARBHA:
+		case Constants.LEGENDS: case Constants.ASSAM: case Constants.VIDARBHA: case Constants.ODISHA:
 			break;
 		default:
 			System.out.println(whatToProcess);
@@ -1744,7 +1744,7 @@ public class FullFramesGfx
 		
 		switch (config.getBroadcaster()) {
 		case Constants.T20_MUMBAI: case Constants.NPL: case Constants.ISPL: case Constants.APL: case Constants.MPL: case Constants.VIDARBHA:
-		case Constants.LEGENDS:
+		case Constants.LEGENDS: case Constants.ODISHA:
 			if(config.getBroadcaster().equalsIgnoreCase(Constants.T20_MUMBAI)) {
 				inning = matchAllData.getMatch().getInning().stream().filter(inn -> inn.getIsCurrentInning().equalsIgnoreCase(CricketUtil.YES))
 						.findAny().orElse(null);
@@ -8840,7 +8840,7 @@ public class FullFramesGfx
 			
 		case "Control_d":  
 			switch (config.getBroadcaster().toUpperCase()) {
-			case Constants.VIDARBHA:
+			case Constants.VIDARBHA: case Constants.ODISHA:
 				return VidarbhaPlayerProfileAndThisSeriesBody(WhichSide, whatToProcess);
 			case Constants.LEGENDS: case Constants.ASSAM:
 				return LegendPlayerProfileAndThisSeriesBody(WhichSide, whatToProcess);
@@ -8872,7 +8872,7 @@ public class FullFramesGfx
 			double average = 0;
 			DecimalFormat df = null;
 			switch (config.getBroadcaster().toUpperCase()) {
-			case Constants.VIDARBHA:
+			case Constants.VIDARBHA: case Constants.ODISHA:
 				return VidarbhaPlayerProfileAndThisSeriesBody(WhichSide, whatToProcess);
 			case Constants.LEGENDS: case Constants.ASSAM:
 				return LegendPlayerProfileAndThisSeriesBody(WhichSide, whatToProcess);
@@ -10641,14 +10641,14 @@ public class FullFramesGfx
 				}
 				
 				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$AllGraphics$Side" + WhichSide + "$Teams$InfoGrp$"
-					+ "txt_Info*GEOM*TEXT SET " + CricketFunctions.generateTossResult(matchAllData, "", CricketUtil.FIELD, CricketUtil.SHORT,
+					+ "txt_Info*GEOM*TEXT SET " + CricketFunctions.generateTossResult(matchAllData, "", CricketUtil.FIELD, CricketUtil.FULL,
 					CricketUtil.ELECTED).replace(" won the toss &", "").toUpperCase() + "\0", print_writers);
 				
 				
 				break;
 			case "Shift_F8":
 				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$AllGraphics$Side" + WhichSide + "$LineUp_Image$InfoGrp$"
-						+ "txt_Info*GEOM*TEXT SET " + CricketFunctions.generateTossResult(matchAllData, "", CricketUtil.FIELD, CricketUtil.SHORT,
+						+ "txt_Info*GEOM*TEXT SET " + CricketFunctions.generateTossResult(matchAllData, "", CricketUtil.FIELD, CricketUtil.FULL,
 						CricketUtil.ELECTED).replace(" won the toss &", "").toUpperCase() + "\0", print_writers);
 					
 					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$AllGraphics$Side" + WhichSide + "$LineUp_Image$LegendGrp$"
@@ -10670,7 +10670,7 @@ public class FullFramesGfx
 					//c-f8 - s-t
 			case "Shift_T":
 				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$AllGraphics$Side" + WhichSide + "$Team_Single$InfoGrp$"
-					+ "txt_Info*GEOM*TEXT SET " + CricketFunctions.generateTossResult(matchAllData, CricketUtil.SHORT, CricketUtil.FIELD, CricketUtil.SHORT,
+					+ "txt_Info*GEOM*TEXT SET " + CricketFunctions.generateTossResult(matchAllData, CricketUtil.SHORT, CricketUtil.FIELD, CricketUtil.FULL,
 					CricketUtil.ELECTED).toUpperCase() + "\0", print_writers);
 				
 				break;
@@ -15642,7 +15642,7 @@ public class FullFramesGfx
 				if(plyr.getRole().equalsIgnoreCase("BATSMAN") || 
 						plyr.getRole().equalsIgnoreCase("BATTER") || plyr.getRole().equalsIgnoreCase("BAT/KEEPER")) {
 					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$AllGraphics$Side" + WhichSide + "$LineUp_Image$" + 
-							"LineUp_ImageDataAll$" + rowId + "$txt_Role*GEOM*TEXT SET " + "BATSMAN" + "\0", print_writers);
+							"LineUp_ImageDataAll$" + rowId + "$txt_Role*GEOM*TEXT SET " + "BATTER" + "\0", print_writers);
 				}
 				else if(plyr.getRole().equalsIgnoreCase("BOWLER")) {
 					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$AllGraphics$Side" + WhichSide + "$LineUp_Image$" + 
@@ -15687,7 +15687,8 @@ public class FullFramesGfx
                     	 CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$AllGraphics$Side" + WhichSide + "$LineUp_Image$"
 		                            + "Teams_SubDataAll$Team1$" + rowId1 + "*ACTIVE SET 1 \0", print_writers);
                     	 
-                    	 
+                    	 CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$AllGraphics$Side" + WhichSide + "$LineUp_Image$" +
+                                 "Teams_SubDataAll$Title$txt_Title*GEOM*TEXT SET IMPACT SUB OPTIONS\0", print_writers);
                     	 
                     	 CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$AllGraphics$Side" + WhichSide + "$LineUp_Image$" +
                                 "Teams_SubDataAll$Team1$" + rowId1 + "$txt_Name*GEOM*TEXT SET " + hsub.getFull_name() + "\0", print_writers);
@@ -27387,7 +27388,7 @@ public class FullFramesGfx
 	}
 	public String PreviousSummaryBody(int WhichSide, String whatToProcess, MatchAllData matchAllData, int WhichInning) throws IOException {
 		switch (config.getBroadcaster().toUpperCase()) {
-		case Constants.VIDARBHA:
+		case Constants.VIDARBHA: case Constants.ODISHA:
 			return T20VidarbhaSummAndPrevSummBody(WhichSide, whatToProcess, previous_match, 2);
 		case Constants.T20_MUMBAI:
 			return T20MumbaiSummAndPrevSummBody(WhichSide, whatToProcess, previous_match, 2);
@@ -29411,7 +29412,7 @@ public class FullFramesGfx
 									 "$Row" + rowId + "$txt_Name*GEOM*TEXT SET " + hs.getFull_name() + "\0", print_writers);
 							
 							switch (config.getBroadcaster().toUpperCase()) {
-							case Constants.VIDARBHA:
+							case Constants.VIDARBHA: case Constants.ODISHA:
 								
 								if(hs.getZone() == null) {
 									CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_FullFrame$All_Graphics$Side_" + WhichSide + "$Both_Teams$HomeTeam" + 
@@ -30981,7 +30982,7 @@ public class FullFramesGfx
 				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$Main" + 
 						"$WipeGrp$LeftWipe$Base1*TEXTURE*IMAGE SET " + Constants.VIDARBHA_LOGO_PATH + "TLogo" + "\0", print_writers);
 	        CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$AllGraphics$Side" + WhichSide + "$Teams$" +
-                    "Teams_SubDataAll$Title$Team_SubTitle$txt_Title*GEOM*TEXT SET " + "SUBSTITUTES" + "\0", print_writers);
+                    "Teams_SubDataAll$Title$Team_SubTitle$txt_Title*GEOM*TEXT SET " + "IMPACT SUB OPTIONS" + "\0", print_writers);
 	        
 	        rowId = 0; rowId1 = 0;
 	        for (int i = 1; i <= 2; i++) {
@@ -35236,7 +35237,7 @@ public class FullFramesGfx
 	
 	public String LeaderBoardBody(int WhichSide, String whatToProcess, MatchAllData matchAllData, int WhichInning) {
 		switch (config.getBroadcaster().toUpperCase()) {
-		case Constants.VIDARBHA:
+		case Constants.VIDARBHA: case Constants.ODISHA:
 			return T20VidarbhaLeaderBoardBody(WhichSide, whatToProcess, matchAllData, WhichInning);
 		case Constants.T20_MUMBAI:
 			return T20MumbaiLeaderBoardBody(WhichSide, whatToProcess, matchAllData, WhichInning);
@@ -39352,7 +39353,7 @@ public class FullFramesGfx
 	
 	public String populatePointsTableBody(int WhichSide, String whatToProcess, MatchAllData matchAllData, int WhichInning){
 		switch (config.getBroadcaster().toUpperCase()) {
-		case Constants.VIDARBHA:
+		case Constants.VIDARBHA: case Constants.ODISHA:
 			return T20VidarbhaPointsTableBody(WhichSide, matchAllData, WhichInning);
 		case Constants.T20_MUMBAI:
 			return T20MumbaiPointsTableBody(WhichSide, matchAllData, WhichInning);
@@ -44656,9 +44657,9 @@ public class FullFramesGfx
 						+ "*GEOM*TEXT SET " + matchAllData.getSetup().getMatchIdent() + "\0", print_writers);
 				
 				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_MatchId$InfoGrp$InfoTextGrp2$txt_Info2A"
-						+ "*GEOM*TEXT SET " + "LIVE FROM " + matchAllData.getSetup().getVenueName() + "\0", print_writers);
+						+ "*GEOM*TEXT SET " + "FROM " + matchAllData.getSetup().getVenueName() + "\0", print_writers);
 				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_MatchId$InfoGrp$InfoTextGrp2$txt_Info2B"
-						+ "*GEOM*TEXT SET " + "LIVE FROM " + matchAllData.getSetup().getVenueName() + "\0", print_writers);
+						+ "*GEOM*TEXT SET " + "FROM " + matchAllData.getSetup().getVenueName() + "\0", print_writers);
 				
 				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_MatchId$EventLogo_In$TLogo*TEXTURE*IMAGE SET " 
 						+ Constants.VIDARBHA_LOGO_PATH +  "TLogo" + "\0", print_writers);
@@ -45101,9 +45102,9 @@ public class FullFramesGfx
 					cal.add(Calendar.DATE, -1);
 					if(fixture.getDate().equalsIgnoreCase(new SimpleDateFormat("dd-MM-yyyy").format(cal.getTime()))) {
 						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_MatchId$InfoGrp$InfoTextGrp2$txt_Info2A"
-								+ "*GEOM*TEXT SET " + "UP NEXT - " + fixture.getVenue() + "\0", print_writers);
+								+ "*GEOM*TEXT SET " + "UP NEXT" + "\0", print_writers);
 						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_MatchId$InfoGrp$InfoTextGrp2$txt_Info2B"
-								+ "*GEOM*TEXT SET " + "UP NEXT - " + fixture.getVenue() + "\0", print_writers);
+								+ "*GEOM*TEXT SET " + "UP NEXT" + "\0", print_writers);
 					}else {
 						newDate = fixture.getDate().split("-")[0];
 						if(Integer.valueOf(newDate) < 10) {

@@ -958,6 +958,8 @@ public class IndexController
 				this_caption.this_infobarGfx.populateVizInfobarRightBottom(print_writers, session_match, 1,1);
 				
 				this_animation.ChangeOn("Alt_1," + Inn_Number + ",BLANK", print_writers, session_configuration);
+				
+				this_caption.this_infobarGfx.infobar.setFull_section("");
 			}
 			
 			if(this_caption.this_infobarGfx.infobar.getRight_section()!= null && 

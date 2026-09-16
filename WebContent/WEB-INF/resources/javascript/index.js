@@ -2954,15 +2954,17 @@ function addItemsToList(whatToProcess,dataToProcess)
 					select.id = 'selectScoreCard';
 					select.name = select.id;
 					
+					
+					option = document.createElement('option');
+		            option.value = 'NORMAL';
+		            option.text = 'NORMAL';
+		            select.appendChild(option);
+										
 					option = document.createElement('option');
 		            option.value = 'SPLIT';
 		            option.text = 'SPLIT';
 		            select.appendChild(option);
 		            
-					option = document.createElement('option');
-		            option.value = 'NORMAL';
-		            option.text = 'NORMAL';
-		            select.appendChild(option);
 					
 					select.setAttribute('onchange',"setDropdownOptionToSelectOptionArray(this, 0)");
 					row.insertCell(cellCount).appendChild(select);
@@ -3671,11 +3673,6 @@ function addItemsToList(whatToProcess,dataToProcess)
 					select.appendChild(option);
 					
 					option = document.createElement('option');
-					option.value = 'AT_THIS_STAGE';
-					option.text = 'At This Stage';
-					select.appendChild(option);
-					
-					option = document.createElement('option');
 					option.value = 'EXTRAS';
 					option.text = 'Extras';
 					select.appendChild(option);
@@ -3683,6 +3680,16 @@ function addItemsToList(whatToProcess,dataToProcess)
 					option = document.createElement('option');
 					option.value = 'LAST_WICKET';
 					option.text = 'Last Wicket';
+					select.appendChild(option);
+					
+					option = document.createElement('option');
+					option.value = 'RECENT_FORM';
+					option.text = 'RECENT FORM';
+					select.appendChild(option);
+					
+					option = document.createElement('option');
+					option.value = 'PHASE_WISE';
+					option.text = 'Phase Wise';
 					select.appendChild(option);
 					
 					session_match.match.inning.forEach(function(inn,index,arr){
@@ -3710,6 +3717,12 @@ function addItemsToList(whatToProcess,dataToProcess)
 								option.value = 'RESULT';
 								option.text = 'Result';
 								select.appendChild(option);
+								
+								option = document.createElement('option');
+								option.value = 'AT_THIS_STAGE';
+								option.text = 'At This Stage';
+								select.appendChild(option);
+													
 							}
 						}
 					});
@@ -4032,6 +4045,14 @@ function addItemsToList(whatToProcess,dataToProcess)
 				cellCount = cellCount + 1;
 				
 				select.addEventListener('change', function () {
+					const selectedValue = this.value;
+					// 🔁 Clean up any previously added special dropdowns
+					['selectScope', 'selectTeams', 'selectTeamids_in', 'Promo', 'selectFreeText'].forEach(id => {
+						let existing = document.getElementById(id);
+						if (existing) {
+						    existing.remove();
+						}
+					});
 			    if (document.getElementById('selectFreeText')) {
 			        document.getElementById('selectFreeText').parentElement.remove();
 			    }
@@ -4058,7 +4079,29 @@ function addItemsToList(whatToProcess,dataToProcess)
 			        setTextBoxOptionToSelectOptionArray(1);
 
 			        cellCount++;
-			    }
+				}else if(selectedValue === 'RECENT_FORM'){
+					// === 2. Team Dropdown ===
+					let teamSelect = document.createElement('select');
+					teamSelect.id = 'selectTeams';
+					teamSelect.name = teamSelect.id;
+			
+					let homeOption = document.createElement('option');
+					homeOption.value = session_match.setup.homeTeam.teamId;
+					homeOption.text = session_match.setup.homeTeam.teamName3;
+					teamSelect.appendChild(homeOption);
+			
+					let awayOption = document.createElement('option');
+					awayOption.value = session_match.setup.awayTeam.teamId;
+					awayOption.text = session_match.setup.awayTeam.teamName3;
+					teamSelect.appendChild(awayOption);
+			
+					row.insertCell(1).appendChild(teamSelect);
+					cellCount++;
+					// === Set onchange logic for each dropdown if needed ===1
+					teamSelect.setAttribute('onchange', "setDropdownOptionToSelectOptionArray(this, 1)");1
+			
+					setDropdownOptionToSelectOptionArray($(teamSelect), 1);
+				}
 			});
 
 			// Trigger once initially
@@ -4110,20 +4153,66 @@ function addItemsToList(whatToProcess,dataToProcess)
 				option.text = 'Run Rate';
 				select.appendChild(option);
 				
+				option = document.createElement('option');
+				option.value = 'TOSS';
+				option.text = 'TOSS';
+				select.appendChild(option);
+				
+				option = document.createElement('option');
+				option.value = 'BOUNDARY';
+				option.text = 'BOUNDARY';
+				select.appendChild(option);
+				
+				option = document.createElement('option');
+				option.value = 'VENUE';
+				option.text = 'VENUE';
+				select.appendChild(option);
+				
+				option = document.createElement('option');
+				option.value = 'TOURNAMENT_NAME';
+				option.text = 'TOURNAMENT NAME';
+				select.appendChild(option);
+												
+				option = document.createElement('option');
+				option.value = 'BALLS_SINCE_LAST_BOUNDARY';
+				option.text = 'BALLS_SINCE_LAST_BOUNDARY';
+				select.appendChild(option);
+				
+				option = document.createElement('option');
+				option.value = 'EXTRAS';
+				option.text = 'EXTRAS';
+				select.appendChild(option);
+				
+												
 				session_match.match.inning.forEach(function(inn,index,arr){
 					if(inn.isCurrentInning == 'YES'){
 						if(inn.inningNumber == 1){
 							
-							/*option = document.createElement('option');
+							option = document.createElement('option');
 							option.value = 'PROJECTED';
 							option.text = 'Projected Score';
-							select.appendChild(option);*/
+							select.appendChild(option);
 							
 						}
 						else{
 							option = document.createElement('option');
+							option.value = 'TARGET';
+							option.text = 'Target';
+							select.appendChild(option);
+							
+							option = document.createElement('option');
 							option.value = 'RRR';
 							option.text = 'Required Rate';
+							select.appendChild(option);
+							
+							option = document.createElement('option');
+							option.value = 'EQUATION';
+							option.text = 'EQUATION';
+							select.appendChild(option);
+							
+							option = document.createElement('option');
+							option.value = 'AT_THIS_STAGE';
+							option.text = 'AT_THIS_STAGE';
 							select.appendChild(option);
 							
 						}
