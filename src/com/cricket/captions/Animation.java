@@ -2827,7 +2827,6 @@ public class Animation
 			processAnimation(Constants.FRONT, print_writers, "anim_Boundary_LT", "START");
 			this.whichGraphicOnScreen = whatToProcess;
 			break;
-			
 		case "Alt_p":
 			switch (config.getBroadcaster().toUpperCase()) {
 			case Constants.BENGAL_T20: case Constants.AFG_T20:
@@ -2847,7 +2846,7 @@ public class Animation
 		case "Shift_F4": case "Shift_F":case "Alt_b": case ".": case "/":	
 			switch (whatToProcess.split(",")[0]) {
 			case "Control_y": 
-				processAnimation(Constants.FRONT, print_writers, "Sponsor_Bug$In_Out", "START");
+//				processAnimation(Constants.FRONT, print_writers, "Sponsor_Bug$In_Out", "START");
 				break;
 			default:
 				processAnimation(Constants.FRONT, print_writers, "Sponsor_Bug", "SHOW 0.0");
@@ -2857,8 +2856,8 @@ public class Animation
 			this.whichGraphicOnScreen = whatToProcess;
 			break;
 		case "Shift_F1": case "Shift_F2":
-			AnimateIn(Constants.SHRUNK_INFOBAR + ",", print_writers, config); // Shrink infobar
-			TimeUnit.MILLISECONDS.sleep(1000);
+			//AnimateIn(Constants.SHRUNK_INFOBAR + ",", print_writers, config); // Shrink infobar
+			//TimeUnit.MILLISECONDS.sleep(1000);
 			processAnimation(Constants.FRONT, print_writers, "Anim_Mini$In_Out", "START");
 			this.whichGraphicOnScreen = whatToProcess;
 			break;
@@ -6856,19 +6855,19 @@ public class Animation
 //					processAnimation(Constants.BACK, print_writers, "Change$Footer", "SHOW 0.0");
 					switch(whichGraphicOnScreen.split(",")[0]) {
 					case "F1": case "Control_Shift_A": 
-						processAnimation(Constants.BACK, print_writers, "Sponsor$In_Out", "SHOW 1.940");
+//						processAnimation(Constants.BACK, print_writers, "Sponsor$In_Out", "SHOW 1.940");
 						processAnimation(Constants.BACK, print_writers, "Anim_FullFrames$In_Out$Main$Batting_Card", "SHOW 2.240");
 						processAnimation(Constants.BACK, print_writers, "Change$Batting_Card", "SHOW 0.0");
 						processAnimation(Constants.BACK, print_writers, "Sponsor$Change", "SHOW 0.0");
 						break;
 					case "F2":  
-						processAnimation(Constants.BACK, print_writers, "Sponsor$In_Out", "SHOW 1.940");
+//						processAnimation(Constants.BACK, print_writers, "Sponsor$In_Out", "SHOW 1.940");
 						processAnimation(Constants.BACK, print_writers, "Anim_FullFrames$In_Out$Main$Bowling_Card", "SHOW 2.240");
 						processAnimation(Constants.BACK, print_writers, "Change$Bowling_Card", "SHOW 0.0");
 						processAnimation(Constants.BACK, print_writers, "Sponsor$Change", "SHOW 0.0");
 						break;
 					case "F4":
-						processAnimation(Constants.BACK, print_writers, "Sponsor$In_Out", "SHOW 1.940");
+//						processAnimation(Constants.BACK, print_writers, "Sponsor$In_Out", "SHOW 1.940");
 						processAnimation(Constants.BACK, print_writers, "Anim_FullFrames$In_Out$Partnership_List", "SHOW 2.240");
 						processAnimation(Constants.BACK, print_writers, "Change$Partnership_List", "SHOW 0.0");
 						processAnimation(Constants.BACK, print_writers, "Sponsor$Change", "SHOW 0.0");
@@ -8851,7 +8850,7 @@ public class Animation
 		case ".": case "/": case "Control_Shift_R": case "Control_Shift_F3":
 			switch (whatToProcess.split(",")[0]) {
 			case "Control_y": 
-				processAnimation(Constants.FRONT, print_writers, "Sponsor_Bug$In_Out", "CONTINUE");
+//				processAnimation(Constants.FRONT, print_writers, "Sponsor_Bug$In_Out", "CONTINUE");
 				break;
 			default:
 				processAnimation(Constants.FRONT, print_writers, "Sponsor_Bug", "SHOW 0.0");
@@ -8864,7 +8863,7 @@ public class Animation
 			processAnimation(Constants.FRONT, print_writers, "Anim_Mini$In_Out", "CONTINUE");
 			TimeUnit.MILLISECONDS.sleep(1000);
 			processAnimation(Constants.FRONT, print_writers, "Anim_Mini$In_Out", "SHOW 0.0");
-			AnimateIn(Constants.SHRUNK_INFOBAR + ",", print_writers, config); // Restore infobar
+			//AnimateIn(Constants.SHRUNK_INFOBAR + ",", print_writers, config); // Restore infobar
 			this.whichGraphicOnScreen = "";
 			break;
 		case "Alt_F7":
