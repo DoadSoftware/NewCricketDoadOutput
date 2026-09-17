@@ -3692,6 +3692,11 @@ function addItemsToList(whatToProcess,dataToProcess)
 					option.text = 'Phase Wise';
 					select.appendChild(option);
 					
+					option = document.createElement('option');
+					option.value = 'PHASE_WISE_RUNRATE';
+					option.text = 'Phase Wise run rate';
+					select.appendChild(option);
+					
 					session_match.match.inning.forEach(function(inn,index,arr){
 						if(inn.isCurrentInning == 'YES'){
 							if(inn.inningNumber == 1){
@@ -10013,6 +10018,7 @@ function addItemsToList(whatToProcess,dataToProcess)
 						].forEach(([value, text]) => addOption(value, text));
 						break;
 					case "VIDARBHA": case 'ODISHA':
+						addOption('THIS_SERIES', 'This Series');
 						addOption('DT20');
 						addOption('IT20', 'T20I');
 						break;
@@ -10302,7 +10308,7 @@ function addItemsToList(whatToProcess,dataToProcess)
 			break;
 		case 'Alt_4': 
 			switch($('#selected_broadcaster').val().toUpperCase()){
-				case 'ICC-U19-2023': case 'NPL':case "ISPL": case 'LEGENDS-90': case 'ASSAM-T20':  case 'MPL': case 'T20_MUMBAI': case 'APL':
+				case 'ICC-U19-2023': case 'NPL':case "ISPL": case 'LEGENDS-90': case 'ASSAM-T20':  case 'MPL': case 'T20_MUMBAI': case 'APL': case 'ODISHA':
 					switch($('#selected_broadcaster').val().toUpperCase()){
 					case 'T20_MUMBAI':
 						header_text.innerHTML = 'FULL INFOBAR SECTION - BALL PLAYER PROFILE';
@@ -10388,6 +10394,12 @@ function addItemsToList(whatToProcess,dataToProcess)
 								['SA TRI-NATION 2023-24', 'SA TRI-NATION']
 							].forEach(([value, text]) => addOption(value, text));
 							break;
+						
+						case 'ODISHA':
+							addOption('THIS_SERIES', 'This Series');
+							addOption('DT20');
+							addOption('IT20', 'T20I');
+							break;		
 
 						case 'NPL':
 							addOption('NPL S1');

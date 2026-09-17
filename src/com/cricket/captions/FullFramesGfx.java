@@ -10648,14 +10648,14 @@ public class FullFramesGfx
 				
 				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$AllGraphics$Side" + WhichSide + "$Teams$InfoGrp$"
 					+ "txt_Info*GEOM*TEXT SET " + CricketFunctions.generateTossResult(matchAllData, "", CricketUtil.FIELD, CricketUtil.FULL,
-					CricketUtil.ELECTED).replace(" won the toss &", "").toUpperCase() + "\0", print_writers);
+					CricketUtil.CHOSE).replace(" won the toss &", "").toUpperCase() + "\0", print_writers);
 				
 				
 				break;
 			case "Shift_F8":
 				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$AllGraphics$Side" + WhichSide + "$LineUp_Image$InfoGrp$"
 						+ "txt_Info*GEOM*TEXT SET " + CricketFunctions.generateTossResult(matchAllData, "", CricketUtil.FIELD, CricketUtil.FULL,
-						CricketUtil.ELECTED).replace(" won the toss &", "").toUpperCase() + "\0", print_writers);
+						CricketUtil.CHOSE).replace(" won the toss &", "").toUpperCase() + "\0", print_writers);
 					
 					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$AllGraphics$Side" + WhichSide + "$LineUp_Image$LegendGrp$"
 							+ "$ZoneLegend_1$txt_Legend*GEOM*TEXT SET " + "NZ: NORTH ZONE" + "\0", print_writers);
@@ -10677,7 +10677,7 @@ public class FullFramesGfx
 			case "Shift_T":
 				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$AllGraphics$Side" + WhichSide + "$Team_Single$InfoGrp$"
 					+ "txt_Info*GEOM*TEXT SET " + CricketFunctions.generateTossResult(matchAllData, CricketUtil.SHORT, CricketUtil.FIELD, CricketUtil.FULL,
-					CricketUtil.ELECTED).toUpperCase() + "\0", print_writers);
+					CricketUtil.CHOSE).toUpperCase() + "\0", print_writers);
 				
 				break;
 			case "Control_F10":
@@ -11446,7 +11446,7 @@ public class FullFramesGfx
 				
 				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$Footer$Top_Align$Side"+WhichSide+"$Select_FooterType$Info_Text$Data"
 						+ "$txt_Info_1*GEOM*TEXT SET " + CricketFunctions.generateTossResult(matchAllData, CricketUtil.FULL, CricketUtil.FIELD, CricketUtil.FULL, 
-					CricketUtil.ELECTED).toUpperCase() + "\0", print_writers);
+					CricketUtil.CHOSE).toUpperCase() + "\0", print_writers);
 				break;
 				
 			case "p": case "Control_p":

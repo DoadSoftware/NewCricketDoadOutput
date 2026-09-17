@@ -1395,6 +1395,12 @@ public class Caption
 						this_infobarGfx.infobar.setFull_section("BALL_PROFILE_CAREER");
 						status = this_infobarGfx.populateFullSection(false,print_writers, matchAllData, whichSide);
 						break;
+					case Constants.ODISHA:
+						this_infobarGfx.infobar.setFull_section("BALL_PROFILE_CAREER");
+						this_infobarGfx.FirstPlayerId = Integer.valueOf(whatToProcess.split(",")[2]);
+						this_infobarGfx.WhichProfile = whatToProcess.split(",")[3];
+						status = this_infobarGfx.populateFullSection(false,print_writers, matchAllData, whichSide);
+						break;	
 					default:
 						this_infobarGfx.infobar.setMiddle_section("BALL_PROFILE_CAREER");
 						this_infobarGfx.FirstPlayerId = Integer.valueOf(whatToProcess.split(",")[2]);

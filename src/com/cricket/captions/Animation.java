@@ -138,7 +138,7 @@ public class Animation
 		case Constants.NPL: case Constants.MPL: case Constants.APL: case Constants.VIDARBHA:  case Constants.ODISHA:
 			switch (whatToProcess.split(",")[0]) {
 			case "Alt_1": case "Alt_2": case "Alt_3": case "Alt_4": case "Alt_5": case "Alt_6": case "Alt_7": case "Alt_8": 
-			case "Alt_9": case "Alt_0": case "Control_F12": case "Shift_F12": case "Control_Shift_(":
+			case "Alt_9": case "Alt_0": case "Control_Shift_(": case "Shift_F12": //case "Control_F12":
 				return Constants.INFO_BAR;
 			case "F1": case "Control_Shift_A": case "Control_Shift_F1": case "F2": case "Control_Shift_F2": case "Control_F11": case "m": case "Control_m":
 			case "Shift_F11": case "F4": case "Control_Shift_F4": case "Shift_K": case "Control_d": case "Control_e": case "Shift_T": case "Shift_P": case "Shift_Q":
@@ -2893,14 +2893,22 @@ public class Animation
 					this.tapeballOnScreen = "";
 				}
 				
-				processAnimation(Constants.FRONT, print_writers, "Anim_InfoBar$Stage3_Out", "START");
-				processAnimation(Constants.FRONT, print_writers, "Anim_InfoBar$Stage1_Out", "START");
-				processAnimation(Constants.FRONT, print_writers, "Anim_InfoBar$Batsman1_Out", "START");
-				processAnimation(Constants.FRONT, print_writers, "Anim_InfoBar$Batsman2_Out", "START");
-				processAnimation(Constants.FRONT, print_writers, "Anim_InfoBar$StrikeOut", "START");
-				TimeUnit.MILLISECONDS.sleep(100);
 				processAnimation(Constants.FRONT, print_writers, "Anim_InfoBar$Main$Main_Out", "START");
+				
+				processAnimation(Constants.FRONT, print_writers, "Anim_InfoBar$Stage1_Out", "START");
+				processAnimation(Constants.FRONT, print_writers, "Anim_InfoBar$Stage2_Out", "START");
+				
+				processAnimation(Constants.FRONT, print_writers, "Anim_InfoBar$Stage3_Out", "START");
+				
+//				processAnimation(Constants.FRONT, print_writers, "Anim_InfoBar$Batsman1_Out", "START");
+//				processAnimation(Constants.FRONT, print_writers, "Anim_InfoBar$Batsman2_Out", "START");
+//				processAnimation(Constants.FRONT, print_writers, "Anim_InfoBar$StrikeOut", "START");
+				processAnimation(Constants.FRONT, print_writers, "Anim_InfoBar$Out", "START");
+				
+				TimeUnit.MILLISECONDS.sleep(1000);
+				processAnimation(Constants.FRONT, print_writers, "Anim_InfoBar$In", "START");
 				processAnimation(Constants.FRONT, print_writers, "Anim_InfoBar$Ident_In", "START");
+				TimeUnit.MILLISECONDS.sleep(1500);
 				processAnimation(Constants.FRONT, print_writers, "Anim_InfoBar$IdentInfo$In_Out", "START");
 				
 				infobar.setMiddle_section("");
@@ -4750,8 +4758,6 @@ public class Animation
 	}	
 	public String ChangeOn(String whatToProcess,List<PrintWriter> print_writers,Configuration config) throws InterruptedException, IOException
 	{
-		System.out.println("config.getBroadcaster().toUpperCase() = " + config.getBroadcaster().toUpperCase());
-		System.out.println("whatToProcess = " + whatToProcess);
 		switch (config.getBroadcaster().toUpperCase()) {
 		case Constants.VIDARBHA: case Constants.ODISHA:
 			T20_VidarbhaChangeom(whatToProcess,print_writers,config);
