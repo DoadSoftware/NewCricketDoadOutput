@@ -19043,8 +19043,9 @@ public class FullFramesGfx
 								rowId + "$Select-Highlight*FUNCTION*Omo*vis_con SET "+ omo +"\0", print_writers);
 						
 						for(int j=0; j<2; j++) {
+							
 							CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$All$Main$Side_" + WhichSide + "$LeaderBoard$" + rowId + 
-									containerName + "$txt_Name*GEOM*TEXT SET " + CricketFunctions.fbPlayerName(tournament_stats.get(i).getPlayer(), 15) + "\0", print_writers);
+									containerName + "$txt_Name*GEOM*TEXT SET " + CricketFunctions.fbPlayerName(tournament_stats.get(i).getPlayer(), 18) + "\0", print_writers);
 							
 							CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$All$Main$Side_" + WhichSide + "$LeaderBoard$" + rowId + 
 									containerName + "$txt_TeamName*GEOM*TEXT SET \0", print_writers);
@@ -19155,7 +19156,7 @@ public class FullFramesGfx
 							for(int j=0; j<2; j++) {
 								
 								CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$All$Main$Side_" + WhichSide + "$LeaderBoard$" + rowId + 
-										containerName + "$txt_Name*GEOM*TEXT SET " + CricketFunctions.fbPlayerName(tournament_stats.get(i).getPlayer(),15) + "\0", print_writers);
+										containerName + "$txt_Name*GEOM*TEXT SET " + CricketFunctions.fbPlayerName(tournament_stats.get(i).getPlayer(), 18) + "\0", print_writers);
 								CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$All$Main$Side_" + WhichSide + "$LeaderBoard$" + rowId + 
 										containerName + "$txt_TeamName*GEOM*TEXT SET " + Teams.get(tournament_stats.get(i).getPlayer().getTeamId() - 1).getTeamName1() + "\0", print_writers);						
 								CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$All$Main$Side_" + WhichSide + "$LeaderBoard$" + rowId + 
@@ -19202,7 +19203,7 @@ public class FullFramesGfx
 							for(int j=0; j<2; j++) {
 								
 								CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$All$Main$Side_" + WhichSide + "$LeaderBoard$" + rowId + 
-										containerName + "$txt_Name*GEOM*TEXT SET " + CricketFunctions.fbPlayerName(tournament_stats.get(i).getPlayer(),15) + "\0", print_writers);
+										containerName + "$txt_Name*GEOM*TEXT SET " + CricketFunctions.fbPlayerName(tournament_stats.get(i).getPlayer(), 18) + "\0", print_writers);
 								CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$All$Main$Side_" + WhichSide + "$LeaderBoard$" + rowId + 
 										containerName + "$txt_TeamName*GEOM*TEXT SET " + Teams.get(tournament_stats.get(i).getPlayer().getTeamId() - 1).getTeamName1() + "\0", print_writers);						
 								CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$All$Main$Side_" + WhichSide + "$LeaderBoard$" + rowId + 
@@ -19250,7 +19251,7 @@ public class FullFramesGfx
 							for(int j=0; j<2; j++) {
 								
 								CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$All$Main$Side_" + WhichSide + "$LeaderBoard$" + rowId + 
-										containerName + "$txt_Name*GEOM*TEXT SET " + CricketFunctions.fbPlayerName(tournament_stats.get(i).getPlayer(),15) + "\0", print_writers);
+										containerName + "$txt_Name*GEOM*TEXT SET " + CricketFunctions.fbPlayerName(tournament_stats.get(i).getPlayer(), 18) + "\0", print_writers);
 								CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$All$Main$Side_" + WhichSide + "$LeaderBoard$" + rowId + 
 										containerName + "$txt_TeamName*GEOM*TEXT SET " + Teams.get(tournament_stats.get(i).getPlayer().getTeamId() - 1).getTeamName1() + "\0", print_writers);						
 								CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$All$Main$Side_" + WhichSide + "$LeaderBoard$" + rowId + 
@@ -19304,7 +19305,7 @@ public class FullFramesGfx
 						}
 						
 						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$All$Main$Side_" + WhichSide + "$LeaderBoard$" + rowId + 
-								containerName + "$txt_Name*GEOM*TEXT SET " + CricketFunctions.fbPlayerName(sixDistanceData.get(i).getPlayer(),15) + "\0", print_writers);
+								containerName + "$txt_Name*GEOM*TEXT SET " + CricketFunctions.fbPlayerName(sixDistanceData.get(i).getPlayer(), 18) + "\0", print_writers);
 						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$All$Main$Side_" + WhichSide + "$LeaderBoard$" + rowId + 
 								containerName + "$txt_TeamName*GEOM*TEXT SET " + Teams.get(sixDistanceData.get(i).getPlayer().getTeamId() - 1).getTeamName2() + " vs " 
 								+ sixDistanceData.get(i).getOpponentTeam().getTeamName2() +", " + matchNumber + "\0", print_writers);						
@@ -19360,7 +19361,7 @@ public class FullFramesGfx
 						
 						
 						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$All$Main$Side_" + WhichSide + "$LeaderBoard$" + rowId + 
-								containerName + "$txt_Name*GEOM*TEXT SET " + CricketFunctions.fbPlayerName(top_batsman_beststats.get(i).getPlayer(),15) + "\0", print_writers);
+								containerName + "$txt_Name*GEOM*TEXT SET " + CricketFunctions.fbPlayerName(top_batsman_beststats.get(i).getPlayer(), 18) + "\0", print_writers);
 						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$All$Main$Side_" + WhichSide + "$LeaderBoard$" + rowId + 
 								containerName + "$txt_TeamName*GEOM*TEXT SET " + Teams.get(top_batsman_beststats.get(i).getPlayer().getTeamId() - 1).getTeamName2() + " vs " 
 								+ top_batsman_beststats.get(i).getOpponentTeam().getTeamName2() +", " + matchNumber + "\0", print_writers);						
@@ -19420,7 +19421,7 @@ public class FullFramesGfx
 					
 					
 					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$All$Main$Side_" + WhichSide + "$LeaderBoard$" + rowId + 
-							containerName + "$txt_Name*GEOM*TEXT SET " + CricketFunctions.fbPlayerName(top_bowler_beststats.get(i).getPlayer(),15) + "\0", print_writers);
+							containerName + "$txt_Name*GEOM*TEXT SET " + CricketFunctions.fbPlayerName(top_bowler_beststats.get(i).getPlayer(), 18) + "\0", print_writers);
 					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$All$Main$Side_" + WhichSide + "$LeaderBoard$" + rowId + 
 							containerName + "$txt_TeamName*GEOM*TEXT SET " + Teams.get(top_bowler_beststats.get(i).getPlayer().getTeamId() - 1).getTeamName2() + " vs " 
 							+ top_bowler_beststats.get(i).getOpponentTeam().getTeamName2() +", "+matchNumber + "\0", print_writers);
@@ -19483,8 +19484,7 @@ public class FullFramesGfx
 					
 					for(int j=0; j<2; j++) {
 						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$All$Main$Side_" + WhichSide + "$LeaderBoard$" + rowId + 
-								containerName + "$txt_Name*GEOM*TEXT SET " + CricketFunctions.fbPlayerName(tournament_stats.get(i).getPlayer(),15) + "\0", print_writers);
-						
+								containerName + "$txt_Name*GEOM*TEXT SET " + CricketFunctions.fbPlayerName(tournament_stats.get(i).getPlayer(), 18) + "\0", print_writers);
 						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$All$Main$Side_" + WhichSide + "$LeaderBoard$" + rowId + 
 								containerName + "$txt_TeamName*GEOM*TEXT SET " + Teams.get(tournament_stats.get(i).getPlayer().getTeamId() - 1).getTeamName1() 
 								+ "\0", print_writers);
