@@ -23479,7 +23479,167 @@ public class LowerThirdGfx
 		String LT_Position_1 = "",LT_Position_2 = "",LT_Position_3 = "",LT_Position_4 = "",LT_Position_5 = "",LT_Position_6 = "",LT_Position_7 = "",LT_Position_8 = "",
 				LT_Flag_Keys="",LT_Flag_Object="",LT_Flag_ObjectX="",LT_Flag_ObjectY="",LT_Flag_ObjectZ="",slave_Flag_Keys = "",slave_Flag_Object="";
 		switch (config.getBroadcaster().toUpperCase()) {
-		case Constants.VIDARBHA: case Constants.ODISHA:
+		case Constants.ODISHA:
+			switch (subline) {
+			case 0:
+				LT_Position_1 = "156.0";
+				LT_Position_2 = "-36.0 -52.5 0";
+				LT_Position_3 = "33.25 -52.5 0.0";
+				LT_Position_4 = "159.0";
+				LT_Position_5 = "1.0 1.0 1.0";
+				LT_Position_6 = "-52.5";
+				LT_Position_7 = "156.0";
+				break;
+			case 1:
+				LT_Position_1 = "208.5";
+				LT_Position_2 = "0.0 0.0 0.0";
+				LT_Position_3 = "33.25 0.0 0.0";
+				LT_Position_4 = "211.5";
+				LT_Position_5 = "1.0 1.0 1.0";
+				LT_Position_6 = "0.0";
+				LT_Position_7 = "208.5";
+				break;
+			case 2:
+				LT_Position_1 = "261.0";
+				LT_Position_2 = "33.25 52.5 0.0";
+				LT_Position_3 = "33.25 52.5 0.0";
+				LT_Position_4 = "264.0";
+				LT_Position_5 = "1.35 1.35 1.35";
+				LT_Position_6 = "52.5";
+				LT_Position_7 = "261.0";
+				break;
+			case 3:
+				LT_Position_1 = "313.0";
+				LT_Position_2 = "67.65 105.0 0.0";
+				LT_Position_3 = "33.25 105.0 0.0";
+				LT_Position_4 = "316.5";
+				LT_Position_5 = "1.35 1.35 1.35";
+				LT_Position_6 = "105.0";
+				LT_Position_7 = "313.5";
+				break;
+			case 4:
+				LT_Position_1 = "366.0";
+				LT_Position_2 = "104.0 157.5 0.0";
+				LT_Position_3 = "33.25 157.5 0.0";
+				LT_Position_4 = "369.0";
+				LT_Position_5 = "1.35 1.35 1.35";
+				LT_Position_6 = "152.5";
+				LT_Position_7 = "366.0";
+				break;	
+			}
+			
+			if(WhichSide == 1) {
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$All_LowerThirds$MoveForShrink$Out$TopLine$WhiteBigBase*ANIMATION*KEY*$White_Base_Y1*VALUE SET "
+						+ LT_Position_1 + "\0",print_writers);
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$All_LowerThirds$MoveForShrink$Out$TopLine$WhiteBigBase*ANIMATION*KEY*$White_Base_Y1*VALUE SET "
+						+ LT_Position_1 + "\0",print_writers);
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$All_LowerThirds$MoveForShrink$TopHeaderGrp$TopPositionForSublines*ANIMATION*KEY*$TopHeader_Y1*VALUE SET "
+						+ LT_Position_2 + "\0",print_writers);
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$All_LowerThirds$MoveForShrink$Out$TopLine$TopData_Position_Y*ANIMATION*KEY*$TopData_Y1*VALUE SET "
+						+ LT_Position_3 + "\0",print_writers);
+				
+				
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$All_LowerThirds$TeamLogoGrp$LogoGrpOut$Side1$BaseGrp$img_Base2$GrungeBase*ANIMATION*KEY*$GrungeBase_Side1_Y1*VALUE SET "
+						+ LT_Position_4 + "\0",print_writers);
+//				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$All_LowerThirds$TeamLogoGrp$Mask_2_3*ANIMATION*KEY*$Mask_2_3_Y1*VALUE SET "
+//						+ LT_Position_4 + "\0",print_writers);
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$All_LowerThirds$TeamLogoGrp$LogoGrpOut$Side1$BaseGrp$img_Base2$img_TeamLogoBW*ANIMATION*KEY*$Logo_BW_Side1_Y1*VALUE SET "
+						+ LT_Position_4 + "\0",print_writers);
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$All_LowerThirds$TeamLogoGrp$LogoGrpOut$Side1$BaseGrp$x*ANIMATION*KEY*$X_Side1_Y1*VALUE SET "
+						+ LT_Position_4 + "\0",print_writers);
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$All_LowerThirds$TeamLogoGrp$LogoGrpOut$Side1$LogoScale*ANIMATION*KEY*$LogoScale_Side1_1*VALUE SET "
+						+ LT_Position_5 + "\0",print_writers);
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$All_LowerThirds$TeamLogoGrp$LogoGrpOut$Side1$LogoScale*ANIMATION*KEY*$LogoScale_Side1_2*VALUE SET "
+						+ LT_Position_5 + "\0",print_writers);
+				
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$All_LowerThirds$TeamLogoGrp$LogoGrpOut$Side1$BaseGrp$img_Base2$GrungeBase*ANIMATION*KEY*$GrungeBase_Side1_Y2*VALUE SET "
+						+ LT_Position_4 + "\0",print_writers);
+//				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$All_LowerThirds$TeamLogoGrp$Mask_2_3*ANIMATION*KEY*$Mask_2_3_Y1*VALUE SET "
+//						+ LT_Position_4 + "\0",print_writers);
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$All_LowerThirds$TeamLogoGrp$LogoGrpOut$Side1$BaseGrp$img_Base2$img_TeamLogoBW*ANIMATION*KEY*$Logo_BW_Side1_Y2*VALUE SET "
+						+ LT_Position_4 + "\0",print_writers);
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$All_LowerThirds$TeamLogoGrp$LogoGrpOut$Side1$BaseGrp$x*ANIMATION*KEY*$X_Side1_Y2*VALUE SET "
+						+ LT_Position_4 + "\0",print_writers);
+				
+				
+			}else if(WhichSide == 2) {
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$All_LowerThirds$MoveForShrink$Out$TopLine$WhiteBigBase*ANIMATION*KEY*$White_Base_Y2*VALUE SET "
+						+ LT_Position_1 + "\0",print_writers);
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$All_LowerThirds$MoveForShrink$Out$TopLine$WhiteBigBase*ANIMATION*KEY*$White_Base_Y2*VALUE SET "
+						+ LT_Position_1 + "\0",print_writers);
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$All_LowerThirds$MoveForShrink$TopHeaderGrp$TopPositionForSublines*ANIMATION*KEY*$TopHeader_Y2*VALUE SET "
+						+ LT_Position_2 + "\0",print_writers);
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$All_LowerThirds$MoveForShrink$Out$TopLine$TopData_Position_Y*ANIMATION*KEY*$TopData_Y2*VALUE SET "
+						+ LT_Position_3 + "\0",print_writers);
+				
+				
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$All_LowerThirds$TeamLogoGrp$LogoGrpOut$Side2$BaseGrp$img_Base2$GrungeBase*ANIMATION*KEY*$GrungeBase_Side2_Y1*VALUE SET "
+						+ LT_Position_4 + "\0",print_writers);
+//				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$All_LowerThirds$TeamLogoGrp$Mask_2_3*ANIMATION*KEY*$Mask_2_3_Y1*VALUE SET "
+//						+ LT_Position_4 + "\0",print_writers);
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$All_LowerThirds$TeamLogoGrp$LogoGrpOut$Side2$BaseGrp$img_Base2$img_TeamLogoBW*ANIMATION*KEY*$Logo_BW_Side2_Y1*VALUE SET "
+						+ LT_Position_4 + "\0",print_writers);
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$All_LowerThirds$TeamLogoGrp$LogoGrpOut$Side2$BaseGrp$x*ANIMATION*KEY*$X_Side2_Y1*VALUE SET "
+						+ LT_Position_4 + "\0",print_writers);
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$All_LowerThirds$TeamLogoGrp$LogoGrpOut$Side2$LogoScale*ANIMATION*KEY*$LogoScale_Side2_1*VALUE SET "
+						+ LT_Position_5 + "\0",print_writers);
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$All_LowerThirds$TeamLogoGrp$LogoGrpOut$Side2$LogoScale*ANIMATION*KEY*$LogoScale_Side2_2*VALUE SET "
+						+ LT_Position_5 + "\0",print_writers);
+				
+				
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$All_LowerThirds$TeamLogoGrp$LogoGrpOut$Side2$BaseGrp$img_Base2$GrungeBase*ANIMATION*KEY*$GrungeBase_Side2_Y2*VALUE SET "
+						+ LT_Position_4 + "\0",print_writers);
+//				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$All_LowerThirds$TeamLogoGrp$Mask_2_3*ANIMATION*KEY*$Mask_2_3_Y2*VALUE SET "
+//						+ LT_Position_4 + "\0",print_writers);
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$All_LowerThirds$TeamLogoGrp$LogoGrpOut$Side2$BaseGrp$img_Base2$img_TeamLogoBW*ANIMATION*KEY*$Logo_BW_Side2_Y2*VALUE SET "
+						+ LT_Position_4 + "\0",print_writers);
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$All_LowerThirds$TeamLogoGrp$LogoGrpOut$Side2$BaseGrp$x*ANIMATION*KEY*$X_Side2_Y2*VALUE SET "
+						+ LT_Position_4 + "\0",print_writers);
+				
+				
+				
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$All_LowerThirds$TeamLogoGrp$LogoGrpOut$Side2$BaseGrp$img_Base2$GrungeBase*ANIMATION*KEY*$GrungeBase_Y_Side2_IN1*VALUE SET "
+						+ LT_Position_4 + "\0",print_writers);
+//				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$All_LowerThirds$TeamLogoGrp$Mask_2_3*ANIMATION*KEY*$Mask_2_3_Y_IN1*VALUE SET "
+//						+ LT_Position_4 + "\0",print_writers);
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$All_LowerThirds$TeamLogoGrp$LogoGrpOut$Side2$BaseGrp$img_Base2$img_TeamLogoBW*ANIMATION*KEY*$Logo_BW_Y_Side2_IN1*VALUE SET "
+						+ LT_Position_4 + "\0",print_writers);
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$All_LowerThirds$TeamLogoGrp$LogoGrpOut$Side2$BaseGrp$x*ANIMATION*KEY*$X_Y_Side2_IN1*VALUE SET "
+						+ LT_Position_4 + "\0",print_writers);
+				
+			}
+			
+			if(WhichSide == 1) {
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$All_LowerThirds$MoveForShrink$Out$TopLine$WhiteBigBase*ANIMATION*KEY*$White_Base_In*VALUE SET "
+						+ LT_Position_1 + "\0",print_writers);
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$All_LowerThirds$MoveForShrink$Out$TopLine$WhiteBigBase*ANIMATION*KEY*$White_Base_In*VALUE SET "
+						+ LT_Position_1 + "\0",print_writers);
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$All_LowerThirds$MoveForShrink$TopHeaderGrp$TopPositionForSublines*ANIMATION*KEY*$TopHeader_Y_IN1*VALUE SET "
+						+ LT_Position_2 + "\0",print_writers);
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$All_LowerThirds$MoveForShrink$Out$TopLine$TopData_Position_Y*ANIMATION*KEY*$TopData_Y_IN1*VALUE SET "
+						+ LT_Position_3 + "\0",print_writers);
+				
+				
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$All_LowerThirds$TeamLogoGrp$LogoGrpOut$Side1$BaseGrp$img_Base2$GrungeBase*ANIMATION*KEY*$GrungeBase_Y_Side1_IN1*VALUE SET "
+						+ LT_Position_4 + "\0",print_writers);
+//				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$All_LowerThirds$TeamLogoGrp$Mask_2_3*ANIMATION*KEY*$Mask_2_3_Y_IN1*VALUE SET "
+//						+ LT_Position_4 + "\0",print_writers);
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$All_LowerThirds$TeamLogoGrp$LogoGrpOut$Side1$BaseGrp$img_Base2$img_TeamLogoBW*ANIMATION*KEY*$Logo_BW_Y_Side1_IN1*VALUE SET "
+						+ LT_Position_4 + "\0",print_writers);
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$All_LowerThirds$TeamLogoGrp$LogoGrpOut$Side1$BaseGrp$x*ANIMATION*KEY*$X_Y_Side1_IN1*VALUE SET "
+						+ LT_Position_4 + "\0",print_writers);
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$All_LowerThirds$TeamLogoGrp$LogoGrpOut$Side1$LogoScale*ANIMATION*KEY*$LogoScale_Side1_1*VALUE SET "
+						+ LT_Position_5 + "\0",print_writers);
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$All_LowerThirds$TeamLogoGrp$LogoGrpOut$Side1$LogoScale*ANIMATION*KEY*$LogoScale_Side1_2*VALUE SET "
+						+ LT_Position_5 + "\0",print_writers);
+			}
+			
+			CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$All_LowerThirds$MoveForShrink$Out$SubLines$Side" + WhichSide + 
+					"$Set_Rows_Side_"+ WhichSide  +"_Position_Y*TRANSFORMATION*POSITION*Y SET " + LT_Position_6 + "\0",print_writers);
+//			CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$All_LowerThirds$MoveForShrink$Out$TopLine$geom_MaskTopLine_8"
+//					+ "*GEOM*height SET " + LT_Position_7 + "\0",print_writers);
+			break;
+		case Constants.VIDARBHA:
 			switch (subline) {
 			case 0:
 				LT_Position_1 = "156.0";
