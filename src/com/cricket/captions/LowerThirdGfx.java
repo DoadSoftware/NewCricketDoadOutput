@@ -4186,7 +4186,7 @@ public class LowerThirdGfx
 			
 		}else if(whatToProcess.split(",")[2].equalsIgnoreCase("TOSS")) {
 			lowerThird = new LowerThird(matchAllData.getSetup().getHomeTeam().getTeamBadge(), matchAllData.getSetup().getAwayTeam().getTeamBadge(), 
-					CricketFunctions.generateTossResult(matchAllData, CricketUtil.FULL, CricketUtil.FIELD, CricketUtil.MIDDLE, CricketUtil.CHOSE).toUpperCase(),
+					CricketFunctions.generateTossResult(matchAllData, CricketUtil.FULL, CricketUtil.FIELD, CricketUtil.FULL, CricketUtil.CHOSE).toUpperCase(),
 					(matchAllData.getSetup().getHomeTeam().getTeamName2() != null ?matchAllData.getSetup().getHomeTeam().getTeamName2():""), matchAllData.getSetup().getHomeTeam().getTeamName3(),
 					(matchAllData.getSetup().getAwayTeam().getTeamName2() != null ?matchAllData.getSetup().getAwayTeam().getTeamName2():""),1,matchAllData.getSetup().getAwayTeam().getTeamName3(),
 					"",null,null,null,null,null);
