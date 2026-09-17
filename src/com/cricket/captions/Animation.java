@@ -8760,7 +8760,7 @@ public class Animation
 			break;
 		case "Control_Shift_O":
 			processAnimation(Constants.FRONT, print_writers, "LT_PlayingXI", "CONTINUE");
-			TimeUnit.MILLISECONDS.sleep(500);
+			TimeUnit.MILLISECONDS.sleep(1000);
 			AnimateIn("ArrowUp,", print_writers, config); // Restore infobar
 			this.whichGraphicOnScreen = "";
 			break;
