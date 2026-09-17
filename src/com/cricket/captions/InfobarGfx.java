@@ -192,36 +192,40 @@ public class InfobarGfx
 					System.out.println("inside = " + infobar.getFull_section());
 					if(infobar.isResult_on_screen() == false) {
 						if(infobar.getFull_section() != null && !infobar.getFull_section().isEmpty()) {
-							System.out.println("1");
-							this.infobar.setFull_section(CricketUtil.RESULT);
-							populateFullSection(true,print_writers, matchAllData, 2);
-							this_animation.ChangeOn("Alt_1", print_writers, config);
-							TimeUnit.MILLISECONDS.sleep(2000);
-							populateFullSection(true,print_writers, matchAllData, 1);
-							this_animation.CutBack("Alt_1", print_writers, config);
-							
-							infobar.setFull_section(CricketUtil.RESULT);
-//							this_animation.infobar.setFull_section(CricketUtil.RESULT);
-							infobar.setResult_on_screen(true);
+							if(!matchAllData.getSetup().getMatchType().equalsIgnoreCase(CricketUtil.SUPER_OVER)) {
+								System.out.println("1");
+								this.infobar.setFull_section(CricketUtil.RESULT);
+								populateFullSection(true,print_writers, matchAllData, 2);
+								this_animation.ChangeOn("Alt_1", print_writers, config);
+								TimeUnit.MILLISECONDS.sleep(2000);
+								populateFullSection(true,print_writers, matchAllData, 1);
+								this_animation.CutBack("Alt_1", print_writers, config);
+								
+								infobar.setFull_section(CricketUtil.RESULT);
+//								this_animation.infobar.setFull_section(CricketUtil.RESULT);
+								infobar.setResult_on_screen(true);
+							}
 						}else{
-							System.out.println("2");
-							infobar.setResult_on_screen(true);
-							
-							this.infobar.setFull_section(CricketUtil.RESULT);
-							populateFullSection(true,print_writers, matchAllData, 1);
-							this_animation.processAnimation(Constants.FRONT, print_writers, "Anim_InfoBar$Stage3_In", "START");
-							if(infobar.getMiddle_section() != null && !infobar.getMiddle_section().isEmpty()) {
-								this_animation.processAnimation(Constants.FRONT, print_writers, "Anim_InfoBar$Stage1_In", "SHOW 0.0");
+							if(!matchAllData.getSetup().getMatchType().equalsIgnoreCase(CricketUtil.SUPER_OVER)) {
+								System.out.println("2");
+								infobar.setResult_on_screen(true);
+								
+								this.infobar.setFull_section(CricketUtil.RESULT);
+								populateFullSection(true,print_writers, matchAllData, 1);
+								this_animation.processAnimation(Constants.FRONT, print_writers, "Anim_InfoBar$Stage3_In", "START");
+								if(infobar.getMiddle_section() != null && !infobar.getMiddle_section().isEmpty()) {
+									this_animation.processAnimation(Constants.FRONT, print_writers, "Anim_InfoBar$Stage1_In", "SHOW 0.0");
+								}
+								if(infobar.getRight_bottom() != null && !infobar.getRight_bottom().isEmpty()) {
+									this_animation.processAnimation(Constants.FRONT, print_writers, "Anim_InfoBar$Stage2_In", "SHOW 0.0");
+								}
+								infobar.setMiddle_section("");
+								infobar.setRight_bottom("");
+								
+								infobar.setFull_section(CricketUtil.RESULT);
+								
+								System.out.println("infobar.getFull_section() = " + infobar.getFull_section());
 							}
-							if(infobar.getRight_bottom() != null && !infobar.getRight_bottom().isEmpty()) {
-								this_animation.processAnimation(Constants.FRONT, print_writers, "Anim_InfoBar$Stage2_In", "SHOW 0.0");
-							}
-							infobar.setMiddle_section("");
-							infobar.setRight_bottom("");
-							
-							infobar.setFull_section(CricketUtil.RESULT);
-							
-							System.out.println("infobar.getFull_section() = " + infobar.getFull_section());
 						}
 					}
 				}else {
@@ -1783,6 +1787,384 @@ public class InfobarGfx
 			}
 			if(is_this_updating == false) {
 				
+				//stage1
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$InfoBar$CenterGRp$Main$Stage1$Side1$CurrentPartnership$txt_Header*TEXTURE*IMAGE SET " + 
+						Constants.VIDARBHA_TEXT1 + "TLogo" + "\0", print_writers);
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$InfoBar$CenterGRp$Main$Stage1$Side1$CurrentPartnership$First$txt_StatHead*TEXTURE*IMAGE SET " + 
+						Constants.VIDARBHA_TEXT1 + "TLogo" + "\0", print_writers);
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$InfoBar$CenterGRp$Main$Stage1$Side1$CurrentPartnership$First$ValueGrp$txt_Value*TEXTURE*IMAGE SET " + 
+						Constants.VIDARBHA_TEXT1 + "TLogo" + "\0", print_writers);
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$InfoBar$CenterGRp$Main$Stage1$Side1$CurrentRunRate$txt_Header*TEXTURE*IMAGE SET " + 
+						Constants.VIDARBHA_TEXT1 + "TLogo" + "\0", print_writers);
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$InfoBar$CenterGRp$Main$Stage1$Side1$CurrentRunRate$First$txt_StatValue*TEXTURE*IMAGE SET " + 
+						Constants.VIDARBHA_TEXT1 + "TLogo" + "\0", print_writers);
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$InfoBar$CenterGRp$Main$Stage1$Side1$Current_ReqRunRate$txt_Header*TEXTURE*IMAGE SET " + 
+						Constants.VIDARBHA_TEXT1 + "TLogo" + "\0", print_writers);
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$InfoBar$CenterGRp$Main$Stage1$Side1$Current_ReqRunRate$First$txt_Header02*TEXTURE*IMAGE SET " + 
+						Constants.VIDARBHA_TEXT1 + "TLogo" + "\0", print_writers);
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$InfoBar$CenterGRp$Main$Stage1$Side1$Current_ReqRunRate$txt_Header02*TEXTURE*IMAGE SET " + 
+						Constants.VIDARBHA_TEXT1 + "TLogo" + "\0", print_writers);
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$InfoBar$CenterGRp$Main$Stage1$Side1$Current_ReqRunRate$Second$txt_StatValue*TEXTURE*IMAGE SET " + 
+						Constants.VIDARBHA_TEXT1 + "TLogo" + "\0", print_writers);
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$InfoBar$CenterGRp$Main$Stage1$Side1$Equation$txt_Header*TEXTURE*IMAGE SET " + 
+						Constants.VIDARBHA_TEXT1 + "TLogo" + "\0", print_writers);
+				
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$InfoBar$CenterGRp$Main$Stage1$Side1$Equation$First$txt_StatHead*TEXTURE*IMAGE SET " + 
+						Constants.VIDARBHA_TEXT1 + "TLogo" + "\0", print_writers);
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$InfoBar$CenterGRp$Main$Stage1$Side1$Equation$First$ValueGrp$Base*TEXTURE*IMAGE SET " + 
+						Constants.VIDARBHA_TEXT1 + "TLogo" + "\0", print_writers);
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$InfoBar$CenterGRp$Main$Stage1$Side1$Equation$Second$txt_StatHead*TEXTURE*IMAGE SET " + 
+						Constants.VIDARBHA_TEXT1 + "TLogo" + "\0", print_writers);
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$InfoBar$CenterGRp$Main$Stage1$Side1$Equation$Second$ValueGrp$Base*TEXTURE*IMAGE SET " + 
+						Constants.VIDARBHA_TEXT1 + "TLogo" + "\0", print_writers);
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$InfoBar$CenterGRp$Main$Stage1$Side1$Equation$Third$txt_StatHead*TEXTURE*IMAGE SET " + 
+						Constants.VIDARBHA_TEXT1 + "TLogo" + "\0", print_writers);
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$InfoBar$CenterGRp$Main$Stage1$Side1$Equation$Third$ValueGrp$Base*TEXTURE*IMAGE SET " + 
+						Constants.VIDARBHA_TEXT1 + "TLogo" + "\0", print_writers);
+				
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$InfoBar$CenterGRp$Main$Stage1$Side1$Free_Text$txt_Header*TEXTURE*IMAGE SET " + 
+						Constants.VIDARBHA_TEXT1 + "TLogo" + "\0", print_writers);
+				
+				
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$InfoBar$CenterGRp$Main$Stage1$Side2$CurrentPartnership$txt_Header*TEXTURE*IMAGE SET " + 
+						Constants.VIDARBHA_TEXT1 + "TLogo" + "\0", print_writers);
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$InfoBar$CenterGRp$Main$Stage1$Side2$CurrentPartnership$First$txt_StatHead*TEXTURE*IMAGE SET " + 
+						Constants.VIDARBHA_TEXT1 + "TLogo" + "\0", print_writers);
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$InfoBar$CenterGRp$Main$Stage1$Side2$CurrentPartnership$First$ValueGrp$txt_Value*TEXTURE*IMAGE SET " + 
+						Constants.VIDARBHA_TEXT1 + "TLogo" + "\0", print_writers);
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$InfoBar$CenterGRp$Main$Stage1$Side2$CurrentRunRate$txt_Header*TEXTURE*IMAGE SET " + 
+						Constants.VIDARBHA_TEXT1 + "TLogo" + "\0", print_writers);
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$InfoBar$CenterGRp$Main$Stage1$Side2$CurrentRunRate$First$txt_StatValue*TEXTURE*IMAGE SET " + 
+						Constants.VIDARBHA_TEXT1 + "TLogo" + "\0", print_writers);
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$InfoBar$CenterGRp$Main$Stage1$Side2$Current_ReqRunRate$txt_Header*TEXTURE*IMAGE SET " + 
+						Constants.VIDARBHA_TEXT1 + "TLogo" + "\0", print_writers);
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$InfoBar$CenterGRp$Main$Stage1$Side2$Current_ReqRunRate$First$txt_Header02*TEXTURE*IMAGE SET " + 
+						Constants.VIDARBHA_TEXT1 + "TLogo" + "\0", print_writers);
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$InfoBar$CenterGRp$Main$Stage1$Side2$Current_ReqRunRate$txt_Header02*TEXTURE*IMAGE SET " + 
+						Constants.VIDARBHA_TEXT1 + "TLogo" + "\0", print_writers);
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$InfoBar$CenterGRp$Main$Stage1$Side2$Current_ReqRunRate$Second$txt_StatValue*TEXTURE*IMAGE SET " + 
+						Constants.VIDARBHA_TEXT1 + "TLogo" + "\0", print_writers);
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$InfoBar$CenterGRp$Main$Stage1$Side2$Equation$txt_Header*TEXTURE*IMAGE SET " + 
+						Constants.VIDARBHA_TEXT1 + "TLogo" + "\0", print_writers);
+				
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$InfoBar$CenterGRp$Main$Stage1$Side2$Equation$First$txt_StatHead*TEXTURE*IMAGE SET " + 
+						Constants.VIDARBHA_TEXT1 + "TLogo" + "\0", print_writers);
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$InfoBar$CenterGRp$Main$Stage1$Side2$Equation$First$ValueGrp$Base*TEXTURE*IMAGE SET " + 
+						Constants.VIDARBHA_TEXT1 + "TLogo" + "\0", print_writers);
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$InfoBar$CenterGRp$Main$Stage1$Side2$Equation$Second$txt_StatHead*TEXTURE*IMAGE SET " + 
+						Constants.VIDARBHA_TEXT1 + "TLogo" + "\0", print_writers);
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$InfoBar$CenterGRp$Main$Stage1$Side2$Equation$Second$ValueGrp$Base*TEXTURE*IMAGE SET " + 
+						Constants.VIDARBHA_TEXT1 + "TLogo" + "\0", print_writers);
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$InfoBar$CenterGRp$Main$Stage1$Side2$Equation$Third$txt_StatHead*TEXTURE*IMAGE SET " + 
+						Constants.VIDARBHA_TEXT1 + "TLogo" + "\0", print_writers);
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$InfoBar$CenterGRp$Main$Stage1$Side2$Equation$Third$ValueGrp$Base*TEXTURE*IMAGE SET " + 
+						Constants.VIDARBHA_TEXT1 + "TLogo" + "\0", print_writers);
+				
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$InfoBar$CenterGRp$Main$Stage1$Side2$Free_Text$txt_Header*TEXTURE*IMAGE SET " + 
+						Constants.VIDARBHA_TEXT1 + "TLogo" + "\0", print_writers);
+				
+				
+				//stage3
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$InfoBar$CenterGRp$Main$Stage3$Side1$InningBoudaries$txt_Header*TEXTURE*IMAGE SET " + 
+						Constants.VIDARBHA_TEXT1 + "TLogo" + "\0", print_writers);
+				
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$InfoBar$CenterGRp$Main$Stage3$Side1$InningBoudaries$First$txt_StatHead*TEXTURE*IMAGE SET " + 
+						Constants.VIDARBHA_TEXT1 + "TLogo" + "\0", print_writers);
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$InfoBar$CenterGRp$Main$Stage3$Side1$InningBoudaries$First$ValueGrp$Base*TEXTURE*IMAGE SET " + 
+						Constants.VIDARBHA_TEXT1 + "TLogo" + "\0", print_writers);
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$InfoBar$CenterGRp$Main$Stage3$Side1$InningBoudaries$Second$txt_StatHead*TEXTURE*IMAGE SET " + 
+						Constants.VIDARBHA_TEXT1 + "TLogo" + "\0", print_writers);
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$InfoBar$CenterGRp$Main$Stage3$Side1$InningBoudaries$Second$ValueGrp$Base*TEXTURE*IMAGE SET " + 
+						Constants.VIDARBHA_TEXT1 + "TLogo" + "\0", print_writers);
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$InfoBar$CenterGRp$Main$Stage3$Side1$InningBoudaries$ValueGrp$txt_StatHead*TEXTURE*IMAGE SET " + 
+						Constants.VIDARBHA_TEXT1 + "TLogo" + "\0", print_writers);
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$InfoBar$CenterGRp$Main$Stage3$Side1$InningBoudaries$ValueGrp$ValueGrp$Base*TEXTURE*IMAGE SET " + 
+						Constants.VIDARBHA_TEXT1 + "TLogo" + "\0", print_writers);
+				
+				
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$InfoBar$CenterGRp$Main$Stage3$Side1$Extras$txt_Header*TEXTURE*IMAGE SET " + 
+						Constants.VIDARBHA_TEXT1 + "TLogo" + "\0", print_writers);
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$InfoBar$CenterGRp$Main$Stage3$Side1$Extras$First$txt_StatHead*TEXTURE*IMAGE SET " + 
+						Constants.VIDARBHA_TEXT1 + "TLogo" + "\0", print_writers);
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$InfoBar$CenterGRp$Main$Stage3$Side1$Extras$First$ValueGrp$Base*TEXTURE*IMAGE SET " + 
+						Constants.VIDARBHA_TEXT1 + "TLogo" + "\0", print_writers);
+				
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$InfoBar$CenterGRp$Main$Stage3$Side1$Extras$Second$txt_StatHead*TEXTURE*IMAGE SET " + 
+						Constants.VIDARBHA_TEXT1 + "TLogo" + "\0", print_writers);
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$InfoBar$CenterGRp$Main$Stage3$Side1$Extras$Second$ValueGrp$Base*TEXTURE*IMAGE SET " + 
+						Constants.VIDARBHA_TEXT1 + "TLogo" + "\0", print_writers);
+				
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$InfoBar$CenterGRp$Main$Stage3$Side1$Extras$Third$txt_StatHead*TEXTURE*IMAGE SET " + 
+						Constants.VIDARBHA_TEXT1 + "TLogo" + "\0", print_writers);
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$InfoBar$CenterGRp$Main$Stage3$Side1$Extras$Third$ValueGrp$Base*TEXTURE*IMAGE SET " + 
+						Constants.VIDARBHA_TEXT1 + "TLogo" + "\0", print_writers);
+				
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$InfoBar$CenterGRp$Main$Stage3$Side1$Extras$Fourth$txt_StatHead*TEXTURE*IMAGE SET " + 
+						Constants.VIDARBHA_TEXT1 + "TLogo" + "\0", print_writers);
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$InfoBar$CenterGRp$Main$Stage3$Side1$Extras$Fourth$ValueGrp$Base*TEXTURE*IMAGE SET " + 
+						Constants.VIDARBHA_TEXT1 + "TLogo" + "\0", print_writers);
+				
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$InfoBar$CenterGRp$Main$Stage3$Side1$Extras$Fifth$txt_StatHead*TEXTURE*IMAGE SET " + 
+						Constants.VIDARBHA_TEXT1 + "TLogo" + "\0", print_writers);
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$InfoBar$CenterGRp$Main$Stage3$Side1$Extras$Fifth$ValueGrp$Base*TEXTURE*IMAGE SET " + 
+						Constants.VIDARBHA_TEXT1 + "TLogo" + "\0", print_writers);
+				
+				
+				//lastwicket
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$InfoBar$CenterGRp$Main$Stage3$Side1$LastWicket$txt_Header*TEXTURE*IMAGE SET " + 
+						Constants.VIDARBHA_TEXT1 + "TLogo" + "\0", print_writers);
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$InfoBar$CenterGRp$Main$Stage3$Side1$LastWicket$First$txt_StatHead*TEXTURE*IMAGE SET " + 
+						Constants.VIDARBHA_TEXT1 + "TLogo" + "\0", print_writers);
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$InfoBar$CenterGRp$Main$Stage3$Side1$LastWicket$First$txt_StatHead02*TEXTURE*IMAGE SET " + 
+						Constants.VIDARBHA_TEXT1 + "TLogo" + "\0", print_writers);
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$InfoBar$CenterGRp$Main$Stage3$Side1$LastWicket$First$ValueGrp$Base*TEXTURE*IMAGE SET " + 
+						Constants.VIDARBHA_TEXT1 + "TLogo" + "\0", print_writers);
+				
+				//projected
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$InfoBar$CenterGRp$Main$Stage3$Side1$Projected$txt_Header*TEXTURE*IMAGE SET " + 
+						Constants.VIDARBHA_TEXT1 + "TLogo" + "\0", print_writers);
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$InfoBar$CenterGRp$Main$Stage3$Side1$Projected$First$txt_StatHead*TEXTURE*IMAGE SET " + 
+						Constants.VIDARBHA_TEXT1 + "TLogo" + "\0", print_writers);
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$InfoBar$CenterGRp$Main$Stage3$Side1$Projected$First$ValueGrp$Base*TEXTURE*IMAGE SET " + 
+						Constants.VIDARBHA_TEXT1 + "TLogo" + "\0", print_writers);
+				
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$InfoBar$CenterGRp$Main$Stage3$Side1$Projected$Second$txt_StatHead*TEXTURE*IMAGE SET " + 
+						Constants.VIDARBHA_TEXT1 + "TLogo" + "\0", print_writers);
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$InfoBar$CenterGRp$Main$Stage3$Side1$Projected$Second$ValueGrp$Base*TEXTURE*IMAGE SET " + 
+						Constants.VIDARBHA_TEXT1 + "TLogo" + "\0", print_writers);
+				
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$InfoBar$CenterGRp$Main$Stage3$Side1$Projected$Third$txt_StatHead*TEXTURE*IMAGE SET " + 
+						Constants.VIDARBHA_TEXT1 + "TLogo" + "\0", print_writers);
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$InfoBar$CenterGRp$Main$Stage3$Side1$Projected$Third$ValueGrp$Base*TEXTURE*IMAGE SET " + 
+						Constants.VIDARBHA_TEXT1 + "TLogo" + "\0", print_writers);
+				
+				//equation
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$InfoBar$CenterGRp$Main$Stage3$Side1$Equation$txt_Header*TEXTURE*IMAGE SET " + 
+						Constants.VIDARBHA_TEXT1 + "TLogo" + "\0", print_writers);
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$InfoBar$CenterGRp$Main$Stage3$Side1$Equation$First$txt_StatHead*TEXTURE*IMAGE SET " + 
+						Constants.VIDARBHA_TEXT1 + "TLogo" + "\0", print_writers);
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$InfoBar$CenterGRp$Main$Stage3$Side1$Equation$First$ValueGrp$Base*TEXTURE*IMAGE SET " + 
+						Constants.VIDARBHA_TEXT1 + "TLogo" + "\0", print_writers);
+				
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$InfoBar$CenterGRp$Main$Stage3$Side1$Equation$Second$txt_StatHead*TEXTURE*IMAGE SET " + 
+						Constants.VIDARBHA_TEXT1 + "TLogo" + "\0", print_writers);
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$InfoBar$CenterGRp$Main$Stage3$Side1$Equation$Second$ValueGrp$Base*TEXTURE*IMAGE SET " + 
+						Constants.VIDARBHA_TEXT1 + "TLogo" + "\0", print_writers);
+				
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$InfoBar$CenterGRp$Main$Stage3$Side1$Equation$Third$txt_StatHead*TEXTURE*IMAGE SET " + 
+						Constants.VIDARBHA_TEXT1 + "TLogo" + "\0", print_writers);
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$InfoBar$CenterGRp$Main$Stage3$Side1$Equation$Third$ValueGrp$Base*TEXTURE*IMAGE SET " + 
+						Constants.VIDARBHA_TEXT1 + "TLogo" + "\0", print_writers);
+				
+				//at this stage
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$InfoBar$CenterGRp$Main$Stage3$Side1$AT_THIS_STAGE$txt_Header*TEXTURE*IMAGE SET " + 
+						Constants.VIDARBHA_TEXT1 + "TLogo" + "\0", print_writers);
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$InfoBar$CenterGRp$Main$Stage3$Side1$AT_THIS_STAGE$First$txt_StatHead*TEXTURE*IMAGE SET " + 
+						Constants.VIDARBHA_TEXT1 + "TLogo" + "\0", print_writers);
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$InfoBar$CenterGRp$Main$Stage3$Side1$AT_THIS_STAGE$First$ValueGrp$Base*TEXTURE*IMAGE SET " + 
+						Constants.VIDARBHA_TEXT1 + "TLogo" + "\0", print_writers);
+				//freetext
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$InfoBar$CenterGRp$Main$Stage3$Side1$Free_Text$txt_Header*TEXTURE*IMAGE SET " + 
+						Constants.VIDARBHA_TEXT1 + "TLogo" + "\0", print_writers);
+				//com
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$InfoBar$CenterGRp$Main$Stage3$Side1$Commentators$txt_Header*TEXTURE*IMAGE SET " + 
+						Constants.VIDARBHA_TEXT1 + "TLogo" + "\0", print_writers);
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$InfoBar$CenterGRp$Main$Stage3$Side1$Commentators$First$txt_StatHead*TEXTURE*IMAGE SET " + 
+						Constants.VIDARBHA_TEXT1 + "TLogo" + "\0", print_writers);
+				
+				
+				//last x overs
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$InfoBar$CenterGRp$Main$Stage3$Side1$Last_X_Overs$txt_Header*TEXTURE*IMAGE SET " + 
+						Constants.VIDARBHA_TEXT1 + "TLogo" + "\0", print_writers);
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$InfoBar$CenterGRp$Main$Stage3$Side1$Last_X_Overs$First$txt_StatHead*TEXTURE*IMAGE SET " + 
+						Constants.VIDARBHA_TEXT1 + "TLogo" + "\0", print_writers);
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$InfoBar$CenterGRp$Main$Stage3$Side1$Last_X_Overs$First$ValueGrp$Base*TEXTURE*IMAGE SET " + 
+						Constants.VIDARBHA_TEXT1 + "TLogo" + "\0", print_writers);
+				
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$InfoBar$CenterGRp$Main$Stage3$Side1$Last_X_Overs$Second$txt_StatHead*TEXTURE*IMAGE SET " + 
+						Constants.VIDARBHA_TEXT1 + "TLogo" + "\0", print_writers);
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$InfoBar$CenterGRp$Main$Stage3$Side1$Last_X_Overs$Second$ValueGrp$Base*TEXTURE*IMAGE SET " + 
+						Constants.VIDARBHA_TEXT1 + "TLogo" + "\0", print_writers);
+				
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$InfoBar$CenterGRp$Main$Stage3$Side1$Last_X_Overs$Third$txt_StatHead*TEXTURE*IMAGE SET " + 
+						Constants.VIDARBHA_TEXT1 + "TLogo" + "\0", print_writers);
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$InfoBar$CenterGRp$Main$Stage3$Side1$Last_X_Overs$Third$ValueGrp$Base*TEXTURE*IMAGE SET " + 
+						Constants.VIDARBHA_TEXT1 + "TLogo" + "\0", print_writers);
+				
+				//runsscored
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$InfoBar$CenterGRp$Main$Stage3$Side1$RunsScored$txt_Header*TEXTURE*IMAGE SET " + 
+						Constants.VIDARBHA_TEXT1 + "TLogo" + "\0", print_writers);
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$InfoBar$CenterGRp$Main$Stage3$Side1$RunsScored$First$txt_StatHead*TEXTURE*IMAGE SET " + 
+						Constants.VIDARBHA_TEXT1 + "TLogo" + "\0", print_writers);
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$InfoBar$CenterGRp$Main$Stage3$Side1$RunsScored$First$ValueGrp$Base*TEXTURE*IMAGE SET " + 
+						Constants.VIDARBHA_TEXT1 + "TLogo" + "\0", print_writers);
+				
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$InfoBar$CenterGRp$Main$Stage3$Side1$RunsScored$Second$txt_StatHead*TEXTURE*IMAGE SET " + 
+						Constants.VIDARBHA_TEXT1 + "TLogo" + "\0", print_writers);
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$InfoBar$CenterGRp$Main$Stage3$Side1$RunsScored$Second$ValueGrp$Base*TEXTURE*IMAGE SET " + 
+						Constants.VIDARBHA_TEXT1 + "TLogo" + "\0", print_writers);
+				
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$InfoBar$CenterGRp$Main$Stage3$Side1$RunsScored$Third$txt_StatHead*TEXTURE*IMAGE SET " + 
+						Constants.VIDARBHA_TEXT1 + "TLogo" + "\0", print_writers);
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$InfoBar$CenterGRp$Main$Stage3$Side1$RunsScored$Third$ValueGrp$Base*TEXTURE*IMAGE SET " + 
+						Constants.VIDARBHA_TEXT1 + "TLogo" + "\0", print_writers);
+				
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$InfoBar$CenterGRp$Main$Stage3$Side1$RunsScored$Fourth$txt_StatHead*TEXTURE*IMAGE SET " + 
+						Constants.VIDARBHA_TEXT1 + "TLogo" + "\0", print_writers);
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$InfoBar$CenterGRp$Main$Stage3$Side1$RunsScored$Fourth$ValueGrp$Base*TEXTURE*IMAGE SET " + 
+						Constants.VIDARBHA_TEXT1 + "TLogo" + "\0", print_writers);
+				
+				
+				//side2stage3
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$InfoBar$CenterGRp$Main$Stage3$Side2$InningBoudaries$txt_Header*TEXTURE*IMAGE SET " + 
+						Constants.VIDARBHA_TEXT1 + "TLogo" + "\0", print_writers);
+				
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$InfoBar$CenterGRp$Main$Stage3$Side2$InningBoudaries$First$txt_StatHead*TEXTURE*IMAGE SET " + 
+						Constants.VIDARBHA_TEXT1 + "TLogo" + "\0", print_writers);
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$InfoBar$CenterGRp$Main$Stage3$Side2$InningBoudaries$First$ValueGrp$Base*TEXTURE*IMAGE SET " + 
+						Constants.VIDARBHA_TEXT1 + "TLogo" + "\0", print_writers);
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$InfoBar$CenterGRp$Main$Stage3$Side2$InningBoudaries$Second$txt_StatHead*TEXTURE*IMAGE SET " + 
+						Constants.VIDARBHA_TEXT1 + "TLogo" + "\0", print_writers);
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$InfoBar$CenterGRp$Main$Stage3$Side2$InningBoudaries$Second$ValueGrp$Base*TEXTURE*IMAGE SET " + 
+						Constants.VIDARBHA_TEXT1 + "TLogo" + "\0", print_writers);
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$InfoBar$CenterGRp$Main$Stage3$Side2$InningBoudaries$ValueGrp$txt_StatHead*TEXTURE*IMAGE SET " + 
+						Constants.VIDARBHA_TEXT1 + "TLogo" + "\0", print_writers);
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$InfoBar$CenterGRp$Main$Stage3$Side2$InningBoudaries$ValueGrp$ValueGrp$Base*TEXTURE*IMAGE SET " + 
+						Constants.VIDARBHA_TEXT1 + "TLogo" + "\0", print_writers);
+				
+				
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$InfoBar$CenterGRp$Main$Stage3$Side2$Extras$txt_Header*TEXTURE*IMAGE SET " + 
+						Constants.VIDARBHA_TEXT1 + "TLogo" + "\0", print_writers);
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$InfoBar$CenterGRp$Main$Stage3$Side2$Extras$First$txt_StatHead*TEXTURE*IMAGE SET " + 
+						Constants.VIDARBHA_TEXT1 + "TLogo" + "\0", print_writers);
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$InfoBar$CenterGRp$Main$Stage3$Side2$Extras$First$ValueGrp$Base*TEXTURE*IMAGE SET " + 
+						Constants.VIDARBHA_TEXT1 + "TLogo" + "\0", print_writers);
+				
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$InfoBar$CenterGRp$Main$Stage3$Side2$Extras$Second$txt_StatHead*TEXTURE*IMAGE SET " + 
+						Constants.VIDARBHA_TEXT1 + "TLogo" + "\0", print_writers);
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$InfoBar$CenterGRp$Main$Stage3$Side2$Extras$Second$ValueGrp$Base*TEXTURE*IMAGE SET " + 
+						Constants.VIDARBHA_TEXT1 + "TLogo" + "\0", print_writers);
+				
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$InfoBar$CenterGRp$Main$Stage3$Side2$Extras$Third$txt_StatHead*TEXTURE*IMAGE SET " + 
+						Constants.VIDARBHA_TEXT1 + "TLogo" + "\0", print_writers);
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$InfoBar$CenterGRp$Main$Stage3$Side2$Extras$Third$ValueGrp$Base*TEXTURE*IMAGE SET " + 
+						Constants.VIDARBHA_TEXT1 + "TLogo" + "\0", print_writers);
+				
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$InfoBar$CenterGRp$Main$Stage3$Side2$Extras$Fourth$txt_StatHead*TEXTURE*IMAGE SET " + 
+						Constants.VIDARBHA_TEXT1 + "TLogo" + "\0", print_writers);
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$InfoBar$CenterGRp$Main$Stage3$Side2$Extras$Fourth$ValueGrp$Base*TEXTURE*IMAGE SET " + 
+						Constants.VIDARBHA_TEXT1 + "TLogo" + "\0", print_writers);
+				
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$InfoBar$CenterGRp$Main$Stage3$Side2$Extras$Fifth$txt_StatHead*TEXTURE*IMAGE SET " + 
+						Constants.VIDARBHA_TEXT1 + "TLogo" + "\0", print_writers);
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$InfoBar$CenterGRp$Main$Stage3$Side2$Extras$Fifth$ValueGrp$Base*TEXTURE*IMAGE SET " + 
+						Constants.VIDARBHA_TEXT1 + "TLogo" + "\0", print_writers);
+				
+				
+				//lastwicket
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$InfoBar$CenterGRp$Main$Stage3$Side2$LastWicket$txt_Header*TEXTURE*IMAGE SET " + 
+						Constants.VIDARBHA_TEXT1 + "TLogo" + "\0", print_writers);
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$InfoBar$CenterGRp$Main$Stage3$Side2$LastWicket$First$txt_StatHead*TEXTURE*IMAGE SET " + 
+						Constants.VIDARBHA_TEXT1 + "TLogo" + "\0", print_writers);
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$InfoBar$CenterGRp$Main$Stage3$Side2$LastWicket$First$txt_StatHead02*TEXTURE*IMAGE SET " + 
+						Constants.VIDARBHA_TEXT1 + "TLogo" + "\0", print_writers);
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$InfoBar$CenterGRp$Main$Stage3$Side2$LastWicket$First$ValueGrp$Base*TEXTURE*IMAGE SET " + 
+						Constants.VIDARBHA_TEXT1 + "TLogo" + "\0", print_writers);
+				
+				//projected
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$InfoBar$CenterGRp$Main$Stage3$Side2$Projected$txt_Header*TEXTURE*IMAGE SET " + 
+						Constants.VIDARBHA_TEXT1 + "TLogo" + "\0", print_writers);
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$InfoBar$CenterGRp$Main$Stage3$Side2$Projected$First$txt_StatHead*TEXTURE*IMAGE SET " + 
+						Constants.VIDARBHA_TEXT1 + "TLogo" + "\0", print_writers);
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$InfoBar$CenterGRp$Main$Stage3$Side2$Projected$First$ValueGrp$Base*TEXTURE*IMAGE SET " + 
+						Constants.VIDARBHA_TEXT1 + "TLogo" + "\0", print_writers);
+				
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$InfoBar$CenterGRp$Main$Stage3$Side2$Projected$Second$txt_StatHead*TEXTURE*IMAGE SET " + 
+						Constants.VIDARBHA_TEXT1 + "TLogo" + "\0", print_writers);
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$InfoBar$CenterGRp$Main$Stage3$Side2$Projected$Second$ValueGrp$Base*TEXTURE*IMAGE SET " + 
+						Constants.VIDARBHA_TEXT1 + "TLogo" + "\0", print_writers);
+				
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$InfoBar$CenterGRp$Main$Stage3$Side2$Projected$Third$txt_StatHead*TEXTURE*IMAGE SET " + 
+						Constants.VIDARBHA_TEXT1 + "TLogo" + "\0", print_writers);
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$InfoBar$CenterGRp$Main$Stage3$Side2$Projected$Third$ValueGrp$Base*TEXTURE*IMAGE SET " + 
+						Constants.VIDARBHA_TEXT1 + "TLogo" + "\0", print_writers);
+				
+				//equation
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$InfoBar$CenterGRp$Main$Stage3$Side2$Equation$txt_Header*TEXTURE*IMAGE SET " + 
+						Constants.VIDARBHA_TEXT1 + "TLogo" + "\0", print_writers);
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$InfoBar$CenterGRp$Main$Stage3$Side2$Equation$First$txt_StatHead*TEXTURE*IMAGE SET " + 
+						Constants.VIDARBHA_TEXT1 + "TLogo" + "\0", print_writers);
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$InfoBar$CenterGRp$Main$Stage3$Side2$Equation$First$ValueGrp$Base*TEXTURE*IMAGE SET " + 
+						Constants.VIDARBHA_TEXT1 + "TLogo" + "\0", print_writers);
+				
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$InfoBar$CenterGRp$Main$Stage3$Side2$Equation$Second$txt_StatHead*TEXTURE*IMAGE SET " + 
+						Constants.VIDARBHA_TEXT1 + "TLogo" + "\0", print_writers);
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$InfoBar$CenterGRp$Main$Stage3$Side2$Equation$Second$ValueGrp$Base*TEXTURE*IMAGE SET " + 
+						Constants.VIDARBHA_TEXT1 + "TLogo" + "\0", print_writers);
+				
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$InfoBar$CenterGRp$Main$Stage3$Side2$Equation$Third$txt_StatHead*TEXTURE*IMAGE SET " + 
+						Constants.VIDARBHA_TEXT1 + "TLogo" + "\0", print_writers);
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$InfoBar$CenterGRp$Main$Stage3$Side2$Equation$Third$ValueGrp$Base*TEXTURE*IMAGE SET " + 
+						Constants.VIDARBHA_TEXT1 + "TLogo" + "\0", print_writers);
+				
+				//at this stage
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$InfoBar$CenterGRp$Main$Stage3$Side2$AT_THIS_STAGE$txt_Header*TEXTURE*IMAGE SET " + 
+						Constants.VIDARBHA_TEXT1 + "TLogo" + "\0", print_writers);
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$InfoBar$CenterGRp$Main$Stage3$Side2$AT_THIS_STAGE$First$txt_StatHead*TEXTURE*IMAGE SET " + 
+						Constants.VIDARBHA_TEXT1 + "TLogo" + "\0", print_writers);
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$InfoBar$CenterGRp$Main$Stage3$Side2$AT_THIS_STAGE$First$ValueGrp$Base*TEXTURE*IMAGE SET " + 
+						Constants.VIDARBHA_TEXT1 + "TLogo" + "\0", print_writers);
+				//freetext
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$InfoBar$CenterGRp$Main$Stage3$Side2$Free_Text$txt_Header*TEXTURE*IMAGE SET " + 
+						Constants.VIDARBHA_TEXT1 + "TLogo" + "\0", print_writers);
+				//com
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$InfoBar$CenterGRp$Main$Stage3$Side2$Commentators$txt_Header*TEXTURE*IMAGE SET " + 
+						Constants.VIDARBHA_TEXT1 + "TLogo" + "\0", print_writers);
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$InfoBar$CenterGRp$Main$Stage3$Side2$Commentators$First$txt_StatHead*TEXTURE*IMAGE SET " + 
+						Constants.VIDARBHA_TEXT1 + "TLogo" + "\0", print_writers);
+				
+				
+				//last x overs
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$InfoBar$CenterGRp$Main$Stage3$Side2$Last_X_Overs$txt_Header*TEXTURE*IMAGE SET " + 
+						Constants.VIDARBHA_TEXT1 + "TLogo" + "\0", print_writers);
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$InfoBar$CenterGRp$Main$Stage3$Side2$Last_X_Overs$First$txt_StatHead*TEXTURE*IMAGE SET " + 
+						Constants.VIDARBHA_TEXT1 + "TLogo" + "\0", print_writers);
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$InfoBar$CenterGRp$Main$Stage3$Side2$Last_X_Overs$First$ValueGrp$Base*TEXTURE*IMAGE SET " + 
+						Constants.VIDARBHA_TEXT1 + "TLogo" + "\0", print_writers);
+				
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$InfoBar$CenterGRp$Main$Stage3$Side2$Last_X_Overs$Second$txt_StatHead*TEXTURE*IMAGE SET " + 
+						Constants.VIDARBHA_TEXT1 + "TLogo" + "\0", print_writers);
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$InfoBar$CenterGRp$Main$Stage3$Side2$Last_X_Overs$Second$ValueGrp$Base*TEXTURE*IMAGE SET " + 
+						Constants.VIDARBHA_TEXT1 + "TLogo" + "\0", print_writers);
+				
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$InfoBar$CenterGRp$Main$Stage3$Side2$Last_X_Overs$Third$txt_StatHead*TEXTURE*IMAGE SET " + 
+						Constants.VIDARBHA_TEXT1 + "TLogo" + "\0", print_writers);
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$InfoBar$CenterGRp$Main$Stage3$Side2$Last_X_Overs$Third$ValueGrp$Base*TEXTURE*IMAGE SET " + 
+						Constants.VIDARBHA_TEXT1 + "TLogo" + "\0", print_writers);
+				
+				//runsscored
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$InfoBar$CenterGRp$Main$Stage3$Side2$RunsScored$txt_Header*TEXTURE*IMAGE SET " + 
+						Constants.VIDARBHA_TEXT1 + "TLogo" + "\0", print_writers);
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$InfoBar$CenterGRp$Main$Stage3$Side2$RunsScored$First$txt_StatHead*TEXTURE*IMAGE SET " + 
+						Constants.VIDARBHA_TEXT1 + "TLogo" + "\0", print_writers);
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$InfoBar$CenterGRp$Main$Stage3$Side2$RunsScored$First$ValueGrp$Base*TEXTURE*IMAGE SET " + 
+						Constants.VIDARBHA_TEXT1 + "TLogo" + "\0", print_writers);
+				
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$InfoBar$CenterGRp$Main$Stage3$Side2$RunsScored$Second$txt_StatHead*TEXTURE*IMAGE SET " + 
+						Constants.VIDARBHA_TEXT1 + "TLogo" + "\0", print_writers);
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$InfoBar$CenterGRp$Main$Stage3$Side2$RunsScored$Second$ValueGrp$Base*TEXTURE*IMAGE SET " + 
+						Constants.VIDARBHA_TEXT1 + "TLogo" + "\0", print_writers);
+				
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$InfoBar$CenterGRp$Main$Stage3$Side2$RunsScored$Third$txt_StatHead*TEXTURE*IMAGE SET " + 
+						Constants.VIDARBHA_TEXT1 + "TLogo" + "\0", print_writers);
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$InfoBar$CenterGRp$Main$Stage3$Side2$RunsScored$Third$ValueGrp$Base*TEXTURE*IMAGE SET " + 
+						Constants.VIDARBHA_TEXT1 + "TLogo" + "\0", print_writers);
+				
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$InfoBar$CenterGRp$Main$Stage3$Side2$RunsScored$Fourth$txt_StatHead*TEXTURE*IMAGE SET " + 
+						Constants.VIDARBHA_TEXT1 + "TLogo" + "\0", print_writers);
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$InfoBar$CenterGRp$Main$Stage3$Side2$RunsScored$Fourth$ValueGrp$Base*TEXTURE*IMAGE SET " + 
+						Constants.VIDARBHA_TEXT1 + "TLogo" + "\0", print_writers);
+				
 				if(inning.getBatting_team().getTeamName4().contains("KHILADI XI") || inning.getBatting_team().getTeamName4().contains("MASTER 11")) {
 					if(inning.getBatting_team().getTeamName4().equalsIgnoreCase("KHILADI XI")) {
 						color = "KHILADI_XI";
@@ -1807,18 +2189,18 @@ public class InfobarGfx
 				
 				if(matchAllData.getSetup().getMatchType().equalsIgnoreCase(CricketUtil.SUPER_OVER)) {
 				
-					}else {
-					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$InfoBar$CenterGRp$Main$BattingTeamGrp$Score_More$BattingTeamBaseGrp$img1*TEXTURE*IMAGE SET " + 
-							Constants.VIDARBHA_BASE1 + color + "\0", print_writers);
-					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$InfoBar$CenterGRp$Main$BattingTeamGrp$Score_More$Score_Grp$img_txt1*TEXTURE*IMAGE SET " + 
-							Constants.VIDARBHA_TEXT1 + color + "\0", print_writers);
-					
-					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$InfoBar$BolwerBaseGrp$img1*TEXTURE*IMAGE SET " + 
-							Constants.VIDARBHA_BASE1  + color2 + "\0", print_writers);
-					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$InfoBar$BowlerGrp_All$Side1$img_txt1*TEXTURE*IMAGE SET " + 
-							Constants.VIDARBHA_TEXT1 + color2 + "\0", print_writers);
-					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$InfoBar$BowlerGrp_All$Side2$img_txt1*TEXTURE*IMAGE SET " + 
-							Constants.VIDARBHA_TEXT1+ color2 + "\0", print_writers);
+				}else {
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$InfoBar$CenterGRp$Main$BattingTeamGrp$Score_More$BattingTeamBaseGrp$img1*TEXTURE*IMAGE SET " + 
+						Constants.VIDARBHA_BASE1 + color + "\0", print_writers);
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$InfoBar$CenterGRp$Main$BattingTeamGrp$Score_More$Score_Grp$img_txt1*TEXTURE*IMAGE SET " + 
+						Constants.VIDARBHA_TEXT1 + color + "\0", print_writers);
+				
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$InfoBar$BolwerBaseGrp$img1*TEXTURE*IMAGE SET " + 
+						Constants.VIDARBHA_BASE1  + color2 + "\0", print_writers);
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$InfoBar$BowlerGrp_All$Side1$img_txt1*TEXTURE*IMAGE SET " + 
+						Constants.VIDARBHA_TEXT1 + color2 + "\0", print_writers);
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$InfoBar$BowlerGrp_All$Side2$img_txt1*TEXTURE*IMAGE SET " + 
+						Constants.VIDARBHA_TEXT1+ color2 + "\0", print_writers);
 				}
 				
 				//--------------------------------------------------------------//
@@ -1874,34 +2256,58 @@ public class InfobarGfx
 					}
 				}
 			}else {
-				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$InfoBar$CenterGRp$Main$BattingTeamGrp$PowerPlay$txt_PP*GEOM*TEXT SET " + 
-						"P" + "\0", print_writers);
+//				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$InfoBar$CenterGRp$Main$BattingTeamGrp$PowerPlay$txt_PP*GEOM*TEXT SET " + 
+//						"P" + "\0", print_writers);
 				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$InfoBar$CenterGRp$Main$BattingTeamGrp$Score_More$Score_Grp$PowerPlay$BattingTeamBase*TEXTURE*IMAGE SET " + 
 						Constants.VIDARBHA_BASE1 +  "RED" + "\0", print_writers);
 				
-				if (!CricketFunctions.processPowerPlay(CricketUtil.MINI, matchAllData).isEmpty()) {
-					if (infobar.isPowerplay_on_screen() == true) {
-					} else {
-						if (infobar.isPowerplay_on_screen() == false) {
-							if(infobar.isForced_powerplay_out() == false) {
-								if (infobar.isPowerplay_on_screen() == true) {
-								} else {
-									if (infobar.isPowerplay_on_screen() == false) {
-										infobar.setPowerplay_on_screen(true);
-										CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*STAGE*DIRECTOR*Anim_InfoBar$Main$PowerPlay_In START \0", print_writers);
-							        }
-								}
-							}
-						}
-					}
-				}else {
-					if (infobar.isPowerplay_on_screen() == true) {
-						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*STAGE*DIRECTOR*Anim_InfoBar$Main$PowerPlay_In CONTINUE REVERSE \0", print_writers);
+				boolean hasPowerPlay = !CricketFunctions.processPowerPlay(CricketUtil.MINI, matchAllData).isEmpty();
+				boolean isPowerPlayVisible = infobar.isPowerplay_on_screen();
+				boolean isForcedOut = infobar.isForced_powerplay_out();
+
+				if (hasPowerPlay) {
+				    // Clear existing text if powerplay is not already visible
+				    if (!isPowerPlayVisible) {
+				    	CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$InfoBar$CenterGRp$Main$BattingTeamGrp$PowerPlay$txt_PP*GEOM*TEXT SET " + 
+								"P" + "\0", print_writers);
+				    	// Show animation only if not forced out
+				        if (!isForcedOut) {
+				            infobar.setPowerplay_on_screen(true);
+				            CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*STAGE*DIRECTOR*Anim_InfoBar$Main$PowerPlay_In START \0", print_writers);
+				        }
+				    }
+				} else {
+				    // Hide powerplay if currently visible
+				    if (isPowerPlayVisible) {
+				    	CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*STAGE*DIRECTOR*Anim_InfoBar$Main$PowerPlay_In CONTINUE REVERSE \0", print_writers);
 						TimeUnit.MILLISECONDS.sleep(300);
 						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*STAGE*DIRECTOR*Anim_InfoBar$Main$PowerPlay_In SHOW 0.0 \0", print_writers);
-						infobar.setPowerplay_on_screen(false);
-					}
+				        infobar.setPowerplay_on_screen(false);
+				    }
 				}
+//				if (!CricketFunctions.processPowerPlay(CricketUtil.MINI, matchAllData).isEmpty()) {
+//					if (infobar.isPowerplay_on_screen() == true) {
+//					} else {
+//						if (infobar.isPowerplay_on_screen() == false) {
+//							if(infobar.isForced_powerplay_out() == false) {
+//								if (infobar.isPowerplay_on_screen() == true) {
+//								} else {
+//									if (infobar.isPowerplay_on_screen() == false) {
+//										infobar.setPowerplay_on_screen(true);
+//										CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*STAGE*DIRECTOR*Anim_InfoBar$Main$PowerPlay_In START \0", print_writers);
+//							        }
+//								}
+//							}
+//						}
+//					}
+//				}else {
+//					if (infobar.isPowerplay_on_screen() == true) {
+//						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*STAGE*DIRECTOR*Anim_InfoBar$Main$PowerPlay_In CONTINUE REVERSE \0", print_writers);
+//						TimeUnit.MILLISECONDS.sleep(300);
+//						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*STAGE*DIRECTOR*Anim_InfoBar$Main$PowerPlay_In SHOW 0.0 \0", print_writers);
+//						infobar.setPowerplay_on_screen(false);
+//					}
+//				}
 				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$InfoBar$CenterGRp$Main$BattingTeamGrp$txt_Overs*GEOM*TEXT SET " + 
 						CricketFunctions.OverBalls(inning.getTotalOvers(),inning.getTotalBalls()) + "\0", print_writers);
 			}
@@ -16072,6 +16478,25 @@ public class InfobarGfx
 				break;
 				
 			case CricketUtil.BOUNDARY:
+				
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$InfoBar$CenterGRp$Main$Stage3$Side" + WhichSide + "$InningBoudaries$txt_Header*TEXTURE*IMAGE SET " + 
+						Constants.VIDARBHA_TEXT1 + "TLogo" + "\0", print_writers);
+				
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$InfoBar$CenterGRp$Main$Stage3$Side" + WhichSide + "$InningBoudaries$First$txt_StatHead*TEXTURE*IMAGE SET " + 
+						Constants.VIDARBHA_TEXT1 + "TLogo" + "\0", print_writers);
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$InfoBar$CenterGRp$Main$Stage3$Side" + WhichSide + "$InningBoudaries$First$ValueGrp$Base*TEXTURE*IMAGE SET " + 
+						Constants.VIDARBHA_TEXT1 + "TLogo" + "\0", print_writers);
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$InfoBar$CenterGRp$Main$Stage3$Side" + WhichSide + "$InningBoudaries$Second$txt_StatHead*TEXTURE*IMAGE SET " + 
+						Constants.VIDARBHA_TEXT1 + "TLogo" + "\0", print_writers);
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$InfoBar$CenterGRp$Main$Stage3$Side" + WhichSide + "$InningBoudaries$Second$ValueGrp$Base*TEXTURE*IMAGE SET " + 
+						Constants.VIDARBHA_TEXT1 + "TLogo" + "\0", print_writers);
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$InfoBar$CenterGRp$Main$Stage3$Side" + WhichSide + "$InningBoudaries$ValueGrp$txt_StatHead*TEXTURE*IMAGE SET " + 
+						Constants.VIDARBHA_TEXT1 + "TLogo" + "\0", print_writers);
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$InfoBar$CenterGRp$Main$Stage3$Side" + WhichSide + "$InningBoudaries$ValueGrp$ValueGrp$Base*TEXTURE*IMAGE SET " + 
+						Constants.VIDARBHA_TEXT1 + "TLogo" + "\0", print_writers);
+				
+				
+				
 				inning = matchAllData.getMatch().getInning().stream().filter(inn -> inn.getIsCurrentInning().equalsIgnoreCase(CricketUtil.YES)).findAny().orElse(null);
 				if(inning == null) {
 					return "populateFullSection: Inning returned is NULL";
@@ -16585,7 +17010,14 @@ public class InfobarGfx
 				}
 				
 			break;
-				
+			case "SUPER_OVER":
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$InfoBar$Stage3$Side" + WhichSide + "$Free_Text$txt_Header*GEOM*TEXT SET " + 
+						"SUPER OVER TIED - WINNER WILL BE DECIDED BY ANOTHER SUPER OVER" + "\0", print_writers);
+				break;
+			case "MATCH_TIED":
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$InfoBar$Stage3$Side" + WhichSide + "$Free_Text$txt_Header*GEOM*TEXT SET " + 
+						"MATCH TIED - POINTS WILL BE DISTRIBUTED" + "\0", print_writers);
+				break;	
 			case CricketUtil.RESULT:
 				inning = matchAllData.getMatch().getInning().stream().filter(inn -> inn.getIsCurrentInning().equalsIgnoreCase(CricketUtil.YES)).findAny().orElse(null);
 				if(inning == null) {
@@ -16621,7 +17053,7 @@ public class InfobarGfx
 							config.getBroadcaster(), true).getTargetOrResult().contains("tied")) {
 						
 						switch (config.getBroadcaster()) {
-						case Constants.VIDARBHA: case Constants.ODISHA:
+						case Constants.VIDARBHA: 
 							CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$InfoBar$Stage3$Side" + WhichSide + "$Free_Text$txt_Header*GEOM*TEXT SET " + 
 									"MATCH TIED" + "\0", print_writers);
 							break;

@@ -254,6 +254,13 @@
 		  			name="headToHead_file" id="headToHead_file" onclick="processUserSelection(this)"> Head To Head </button> 
 				  </div>
 			</c:if>
+			<c:if test="${(session_configuration.broadcaster == 'ODISHA')}">
+			  
+				    <br>
+				   	<button style="background-color:#f44336;color:#FEFEFE;" class="btn btn-sm" type="button"
+		  			name="headToHead_file" id="headToHead_file" onclick="processUserSelection(this)"> Head To Head </button> 
+				  </div>
+			</c:if>
 		  </div>
 	  </div>
      </div>

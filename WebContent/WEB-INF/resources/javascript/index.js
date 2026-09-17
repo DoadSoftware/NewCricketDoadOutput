@@ -3727,6 +3727,16 @@ function addItemsToList(whatToProcess,dataToProcess)
 								option.value = 'AT_THIS_STAGE';
 								option.text = 'At This Stage';
 								select.appendChild(option);
+								
+								option = document.createElement('option');
+								option.value = 'SUPER_OVER';
+								option.text = 'Super Over Tied';
+								select.appendChild(option);
+								
+								option = document.createElement('option');
+								option.value = 'MATCH_TIED';
+								option.text = 'Match Tied';
+								select.appendChild(option);
 													
 							}
 						}
