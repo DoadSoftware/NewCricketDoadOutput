@@ -2238,23 +2238,25 @@ public class InfobarGfx
 					infobar.setPowerplay_on_screen(true);
 		         }
 				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$InfoBar$CenterGRp$Main$BattingTeamGrp$PowerPlay$txt_PP*GEOM*TEXT SET " + 
-						"SUPER OVER" + "\0", print_writers);
+						"S" + "\0", print_writers);
 				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*STAGE*DIRECTOR*Anim_InfoBar$Main$PowerPlay_In SHOW 0.700 \0", print_writers);
 				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$InfoBar$CenterGRp$Main$BattingTeamGrp$txt_Overs*GEOM*TEXT SET " + 
-						((inning.getTotalOvers()* 6) +  inning.getTotalBalls()) + "\0", print_writers);
+						CricketFunctions.OverBalls(inning.getTotalOvers(),inning.getTotalBalls()) + "\0", print_writers);
 				
-				if(inning.getTotalOvers() > 0) {
-					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$InfoBar$CenterGRp$Main$BattingTeamGrp$txt_DLS*GEOM*TEXT SET " + 
-							"BALLS" + "\0", print_writers);
-				}else if(inning.getTotalOvers() == 0) {
-					if(inning.getTotalBalls() == 0 || inning.getTotalBalls() == 1) {
-						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$InfoBar$CenterGRp$Main$BattingTeamGrp$txt_DLS*GEOM*TEXT SET " + 
-								"BALL" + "\0", print_writers);
-					}else {
-						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$InfoBar$CenterGRp$Main$BattingTeamGrp$txt_DLS*GEOM*TEXT SET " + 
-								"BALLS" + "\0", print_writers);
-					}
-				}
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$InfoBar$CenterGRp$Main$BattingTeamGrp$txt_DLS*GEOM*TEXT SET " + 
+						"" + "\0", print_writers);
+//				if(inning.getTotalOvers() > 0) {
+//					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$InfoBar$CenterGRp$Main$BattingTeamGrp$txt_DLS*GEOM*TEXT SET " + 
+//							"BALLS" + "\0", print_writers);
+//				}else if(inning.getTotalOvers() == 0) {
+//					if(inning.getTotalBalls() == 0 || inning.getTotalBalls() == 1) {
+//						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$InfoBar$CenterGRp$Main$BattingTeamGrp$txt_DLS*GEOM*TEXT SET " + 
+//								"BALL" + "\0", print_writers);
+//					}else {
+//						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$InfoBar$CenterGRp$Main$BattingTeamGrp$txt_DLS*GEOM*TEXT SET " + 
+//								"BALLS" + "\0", print_writers);
+//					}
+//				}
 			}else {
 //				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$InfoBar$CenterGRp$Main$BattingTeamGrp$PowerPlay$txt_PP*GEOM*TEXT SET " + 
 //						"P" + "\0", print_writers);
@@ -17011,10 +17013,14 @@ public class InfobarGfx
 				
 			break;
 			case "SUPER_OVER":
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$InfoBar$Stage3$Side" + WhichSide 
+						+ "$Select*FUNCTION*Omo*vis_con SET 6 \0", print_writers);
 				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$InfoBar$Stage3$Side" + WhichSide + "$Free_Text$txt_Header*GEOM*TEXT SET " + 
 						"SUPER OVER TIED - WINNER WILL BE DECIDED BY ANOTHER SUPER OVER" + "\0", print_writers);
 				break;
 			case "MATCH_TIED":
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$InfoBar$Stage3$Side" + WhichSide 
+						+ "$Select*FUNCTION*Omo*vis_con SET 6 \0", print_writers);
 				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$InfoBar$Stage3$Side" + WhichSide + "$Free_Text$txt_Header*GEOM*TEXT SET " + 
 						"MATCH TIED - POINTS WILL BE DISTRIBUTED" + "\0", print_writers);
 				break;	
