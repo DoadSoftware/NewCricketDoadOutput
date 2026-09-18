@@ -8920,9 +8920,11 @@ public class FullFramesGfx
 					
 					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$Main$AllGraphics$Side" + WhichSide + "$Select_GraphicsType$Profile$Stats$5_Stats"
 							+ "$3$Data$Stat_1" + containerName + "$Justify$txt_Fig*GEOM*TEXT SET "+(stat.getBestFigures() != null ? stat.getBestFigures() : "-")+"\0", print_writers);
+//					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$AllGraphics$Side" + WhichSide + "$Profile$Stats$5_Stats"
+//							+ "$3$Data$Stat_1" + containerName + "$Justify$txt_VersusTeam*GEOM*TEXT SET "+(stat.getBestFiguresAgainst() != null && !stat.getBestFiguresAgainst().isEmpty()
+//							? "v "+ stat.getBestFiguresAgainst().toUpperCase() : "")+"\0", print_writers);
 					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$AllGraphics$Side" + WhichSide + "$Profile$Stats$5_Stats"
-							+ "$3$Data$Stat_1" + containerName + "$Justify$txt_VersusTeam*GEOM*TEXT SET "+(stat.getBestFiguresAgainst() != null && !stat.getBestFiguresAgainst().isEmpty()
-							? "v "+ stat.getBestFiguresAgainst().toUpperCase() : "")+"\0", print_writers);
+							+ "$3$Data$Stat_1" + containerName + "$Justify$txt_VersusTeam*GEOM*TEXT SET \0", print_writers);
 				}
 				
 				switch (config.getBroadcaster().toUpperCase()) {
@@ -12576,7 +12578,7 @@ public class FullFramesGfx
 				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$Sponsor$Side" + WhichSide 
 						+ "$Select_Sponsor*FUNCTION*Omo*vis_con SET 3\0", print_writers);
 				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$AllGraphics$Side" + WhichSide 
-						+ "$Select_GraphicsType*FUNCTION*Omo*vis_con SET 19\0", print_writers);
+						+ "$Select_GraphicsType*FUNCTION*Omo*vis_con SET 22\0", print_writers);
 				Collections.sort(inning.getBattingCard());
 				
 				for(int i=1; i<=13; i++) {
@@ -40471,14 +40473,17 @@ public class FullFramesGfx
 				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$AllGraphics$Side" + WhichSide + "$Profile$Stats$5_Stats"
 						+ "$2$Data$Stat_1" + containerName + "$txt_Fig*GEOM*TEXT SET " + CricketFunctions.generateStrikeRate(stat.getRuns(), stat.getBallsFaced(), 0) + "\0", print_writers);
 				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$AllGraphics$Side" + WhichSide + "$Profile$Stats$5_Stats"
-						+ "$2$Data$Stat_2" + containerName + "$txt_Fig*GEOM*TEXT SET " +(stat.getFifties() == 0 && stat.getHundreds() == 0 ? "-" 
-								: (stat.getFifties() != 0 ? stat.getFifties() : "-") + "/" + (stat.getHundreds() != 0 ? stat.getHundreds() : "-"))+ "\0", print_writers);
+						+ "$2$Data$Stat_2" + containerName + "$txt_Fig*GEOM*TEXT SET " +((stat.getFifties() == 0 && stat.getHundreds() == 0) ? "-" 
+								: (stat.getFifties() != 0 ? stat.getFifties() : "0") + "/" + (stat.getHundreds() != 0 ? stat.getHundreds() : "0"))+ "\0", print_writers);
 				
 				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$Main$AllGraphics$Side" + WhichSide + "$Select_GraphicsType$Profile$Stats$5_Stats"
 						+ "$3$Data$Stat_1" + containerName + "$Justify$txt_Fig*GEOM*TEXT SET "+(stat.getBestScore() != null ? stat.getBestScore() : "-")+"\0", print_writers);
+				
+//				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$AllGraphics$Side" + WhichSide + "$Profile$Stats$5_Stats"
+//						+ "$3$Data$Stat_1" + containerName + "$Justify$txt_VersusTeam*GEOM*TEXT SET "+(stat.getBestScoreAgainst().trim() != null && !stat.getBestScoreAgainst().isEmpty()
+//						? "v "+ stat.getBestScoreAgainst().toUpperCase() : "")+"\0", print_writers);
 				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$AllGraphics$Side" + WhichSide + "$Profile$Stats$5_Stats"
-						+ "$3$Data$Stat_1" + containerName + "$Justify$txt_VersusTeam*GEOM*TEXT SET "+(stat.getBestScoreAgainst().trim() != null && !stat.getBestScoreAgainst().isEmpty()
-						? "v "+ stat.getBestScoreAgainst().toUpperCase() : "")+"\0", print_writers);
+						+ "$3$Data$Stat_1" + containerName + "$Justify$txt_VersusTeam*GEOM*TEXT SET \0", print_writers);
 			}
 			
 			switch (config.getBroadcaster().toUpperCase()) {

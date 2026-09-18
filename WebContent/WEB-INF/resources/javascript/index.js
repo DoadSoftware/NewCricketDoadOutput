@@ -4735,7 +4735,7 @@ function addItemsToList(whatToProcess,dataToProcess)
 					option.text = 'Tournament Fours';
 					select.appendChild(option);
 					
-					/*option = document.createElement('option');
+					option = document.createElement('option');
 					option.value = 'PHASE_WISE';
 					option.text = 'Phase Wise';
 					select.appendChild(option);
@@ -4743,7 +4743,7 @@ function addItemsToList(whatToProcess,dataToProcess)
 					option = document.createElement('option');
 					option.value = 'PHASE_WISE_RUNRATE';
 					option.text = 'PhaseWise RunRate';
-					select.appendChild(option);*/
+					select.appendChild(option);
 					
 					/*option = document.createElement('option');
 					option.value = 'REVIEWS_REMAINING';
@@ -9743,10 +9743,16 @@ function addItemsToList(whatToProcess,dataToProcess)
 						option.text = 'NPL CAREER';
 						select.appendChild(option);
 					}else if($('#selected_broadcaster').val().toUpperCase()=='APL'){
-						option = document.createElement('option');
+						/*option = document.createElement('option');
 						option.value = 'PPL_CAREER';
 						option.text = 'PPL CAREER';
+						select.appendChild(option);*/
+						
+						option = document.createElement('option');
+						option.value = 'WPL';
+						option.text = 'WPL';
 						select.appendChild(option);
+												
 	                }else if($('#selected_broadcaster').val().toUpperCase()=='VIDARBHA'){
 							option = document.createElement('option');
 							option.value = 'VIDARBHA_CAREER';
@@ -10051,10 +10057,13 @@ function addItemsToList(whatToProcess,dataToProcess)
 
 					case 'APL':
 						addOption('DT20');
-						addOption('PPL_CAREER', 'PPL CAREER');
+						addOption('IT20');
+						addOption('WPL');
+						addOption('PPL_BOUNDARY', 'THIS SEASON BOUNDARY');
+						/*addOption('PPL_CAREER', 'PPL CAREER');
 						addOption('PPL_MILESTONE_BAT', 'PPL MILESTONE');
 						addOption('PPL_BOUNDARY_CAREER', 'PPL BOUNDARY CAREER');
-						addOption('PPL_BOUNDARY', 'THIS SEASON BOUNDARY');
+						addOption('PPL_BOUNDARY', 'THIS SEASON BOUNDARY');*/
 						addOption('RECENT_FORM_BAT', 'RECENT FORM');
 						break;
 
@@ -10426,8 +10435,10 @@ function addItemsToList(whatToProcess,dataToProcess)
 							break;
 						case 'APL':
 							addOption('DT20');
-							addOption('PPL_CAREER', 'PPL CAREER');
-							addOption('PPL_MILESTONE_BALL', 'PPL MILESTONE');
+							addOption('IT20');
+							addOption('WPL');
+							/*addOption('PPL_CAREER', 'PPL CAREER');
+							addOption('PPL_MILESTONE_BALL', 'PPL MILESTONE');*/
 							addOption('RECENT_FORM_BALL', 'RECENT FORM');
 							break;		
 
@@ -10654,10 +10665,16 @@ function addItemsToList(whatToProcess,dataToProcess)
 						select.appendChild(option);
 					}
 					else if($('#selected_broadcaster').val().toUpperCase()=='APL'){
-						option = document.createElement('option');
+						/*option = document.createElement('option');
 						option.value = 'PPL_CAREER';
 						option.text = 'PPL CAREER';
+						select.appendChild(option);*/
+						
+						option = document.createElement('option');
+						option.value = 'WPL';
+						option.text = 'WPL';
 						select.appendChild(option);
+						
 					}else if($('#selected_broadcaster').val().toUpperCase()=='VIDARBHA'){
 						option = document.createElement('option');
 						option.value = 'VIDARBHA_CAREER';

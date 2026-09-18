@@ -8868,6 +8868,8 @@ public class LowerThirdGfx
 						short_name =  "KCL CAREER";
 					}else if(WhichProfile.equalsIgnoreCase("NPL S1")) {
 						short_name =  "NPL SEASON 1";
+					}else if(WhichProfile.equalsIgnoreCase("WPL")) {
+						short_name =  "WPL CAREER";
 					}else {
 						short_name = "T20I CAREER";
 					}
