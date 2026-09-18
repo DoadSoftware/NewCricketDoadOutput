@@ -2757,7 +2757,7 @@ public class Animation
 			 this.whichGraphicOnScreen = whatToProcess;
 			 break;
 		 case "Control_4": case "6":	
-			 processAnimation(Constants.FRONT, print_writers, "Sponsor_Pop$In_Out", "START");
+		//	 processAnimation(Constants.FRONT, print_writers, "Sponsor_Pop$In_Out", "START");
 			 processAnimation(Constants.FRONT, print_writers, "PopUps", "START");
 			 this.whichGraphicOnScreen = whatToProcess;
 			 break; 
@@ -2775,7 +2775,7 @@ public class Animation
 				//processAnimation(Constants.FRONT, print_writers, "Sponsor_LT$In_Out", "START");
 				break;
 			default:
-				processAnimation(Constants.FRONT, print_writers, "Sponsor_LT", "SHOW 0.0");
+			//	processAnimation(Constants.FRONT, print_writers, "Sponsor_LT", "SHOW 0.0");
 				break;
 					
 			}
@@ -3003,7 +3003,7 @@ public class Animation
 			}else if(whatToProcess.split(",")[0].equalsIgnoreCase("i")) {
 				
 				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$InfoBar$All$CenterGRp$Main$WIPES$FreeHit"
-						+ "$WipeBase" + "*TEXTURE*IMAGE SET " + Constants.VIDARBHA_BASE2 + "TLogo" + "\0", print_writers);
+						+ "$WipeBase" + "*TEXTURE*IMAGE SET " + Constants.VIDARBHA_BASE1 + "TLogo" + "\0", print_writers);
 				TimeUnit.MILLISECONDS.sleep(500);
 				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$InfoBar$WIPES$Select*FUNCTION*Omo*vis_con SET 1 \0", print_writers);
 			}else if(whatToProcess.split(",")[0].equalsIgnoreCase("f")) {
@@ -8770,7 +8770,7 @@ public class Animation
 			 this.whichGraphicOnScreen = "";
 			 break;	
 		 case "Control_4": case "6":	
-			 processAnimation(Constants.FRONT, print_writers, "Sponsor_Pop$In_Out", "CONTINUE");
+			// processAnimation(Constants.FRONT, print_writers, "Sponsor_Pop$In_Out", "CONTINUE");
 			 processAnimation(Constants.FRONT, print_writers, "PopUps", "CONTINUE");
 			 this.whichGraphicOnScreen = "";
 			 TimeUnit.MILLISECONDS.sleep(1000);
@@ -8789,7 +8789,7 @@ public class Animation
 				//processAnimation(Constants.FRONT, print_writers, "Sponsor_LT$In_Out", "CONTINUE");
 				break;
 			default:
-				processAnimation(Constants.FRONT, print_writers, "Sponsor_LT$In_Out", "SHOW 0.0");
+			//	processAnimation(Constants.FRONT, print_writers, "Sponsor_LT$In_Out", "SHOW 0.0");
 				break;
 			}	
 			
