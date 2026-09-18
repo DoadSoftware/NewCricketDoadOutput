@@ -8143,7 +8143,7 @@ function addItemsToList(whatToProcess,dataToProcess)
 			}
 			
 			switch($('#selected_broadcaster').val().toUpperCase()){
-				case 'BENGAL-T20': case 'AFG-T20':
+				case 'BENGAL-T20': case 'AFG-T20': case 'ODISHA':
 					select = document.createElement('select');
 					select.id = 'selectPhoto';
 					select.name = select.id;

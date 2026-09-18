@@ -455,7 +455,7 @@ public class Caption
 			case "Alt_F1": // BatGriff
 				switch (config.getBroadcaster().toUpperCase()) {
 				case Constants.BENGAL_T20: case Constants.NPL: case Constants.MPL:case Constants.LEGENDS: case Constants.ASSAM:
-				case Constants.APL: case Constants.T20_MUMBAI: case Constants.AFG_T20:
+				case Constants.APL: case Constants.T20_MUMBAI: case Constants.AFG_T20: case Constants.ODISHA:
 					status = this_bugsAndMiniGfx.populateGriff(whatToProcess, whichSide, matchAllData);
 					break;
 				case Constants.ICC_U19_2023:

@@ -2381,7 +2381,7 @@ public class LowerThirdGfx
 		}
 		
 		System.out.println("battingCard.getPlayer().getAge() = " + battingCard.getPlayer().getAge());
-		if(battingCard.getPlayer().getAge() == 0) {
+		if(null == battingCard.getPlayer().getAge() || battingCard.getPlayer().getAge() == 0) {
 			age = "-";
 		}else {
 			age = String.valueOf(battingCard.getPlayer().getAge());
@@ -2428,7 +2428,7 @@ public class LowerThirdGfx
 			surName = player.getSurname();
 		}
 		
-		if(player.getAge() == 0) {
+		if(null == player.getAge() || player.getAge() == 0) {
 			age = "-";
 		}else {
 			age = String.valueOf(player.getAge());
