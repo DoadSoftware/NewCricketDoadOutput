@@ -3684,7 +3684,7 @@ function addItemsToList(whatToProcess,dataToProcess)
 					
 					option = document.createElement('option');
 					option.value = 'RECENT_FORM';
-					option.text = 'RECENT FORM';
+					option.text = 'Recent Form';
 					select.appendChild(option);
 					
 					option = document.createElement('option');
@@ -3726,6 +3726,16 @@ function addItemsToList(whatToProcess,dataToProcess)
 								option = document.createElement('option');
 								option.value = 'AT_THIS_STAGE';
 								option.text = 'At This Stage';
+								select.appendChild(option);
+								
+								option = document.createElement('option');
+								option.value = 'DLS_PAR_SCORE';
+								option.text = 'D/L Par Score';
+								select.appendChild(option);
+								
+								option = document.createElement('option');
+								option.value = 'VJD_PAR_SCORE';
+								option.text = 'VJD Par Score';
 								select.appendChild(option);
 								
 								option = document.createElement('option');
@@ -4228,6 +4238,16 @@ function addItemsToList(whatToProcess,dataToProcess)
 							option = document.createElement('option');
 							option.value = 'AT_THIS_STAGE';
 							option.text = 'AT_THIS_STAGE';
+							select.appendChild(option);
+							
+							option = document.createElement('option');
+							option.value = 'DLS_PAR_SCORE';
+							option.text = 'D/L Par Score';
+							select.appendChild(option);
+							
+							option = document.createElement('option');
+							option.value = 'VJD_PAR_SCORE';
+							option.text = 'VJD Par Score';
 							select.appendChild(option);
 							
 						}

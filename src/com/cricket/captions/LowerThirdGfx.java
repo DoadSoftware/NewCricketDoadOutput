@@ -20837,7 +20837,7 @@ public class LowerThirdGfx
 	                        "$Select_Subline$1$Data$Left$txt_1*GEOM*TEXT SET " + lowerThird.getSubTitle() + ", " + lowerThird.getLeftText()[0].toUpperCase() + "\0", print_writers);
 	            } else if (lowerThird.getLeftText()[0].equalsIgnoreCase("Captain Wicket-Keeper")) {
 	                CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$All_LowerThirds$MoveForShrink$Out$SubLines$Side" + WhichSide +
-	                        "$Select_Subline$1$Data$Left$txt_1*GEOM*TEXT SET " + lowerThird.getScoreText() + ", " + "CAPTAIN & WICKET KEEPER" + "\0", print_writers);
+	                        "$Select_Subline$1$Data$Left$txt_1*GEOM*TEXT SET " + lowerThird.getSubTitle() + ", " + "CAPTAIN & WICKET KEEPER" + "\0", print_writers);
 	            } else if (lowerThird.getLeftText()[0].equalsIgnoreCase("Team")) {
 	                CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$All_LowerThirds$MoveForShrink$Out$SubLines$Side" + WhichSide +
 	                        "$Select_Subline$1$Data$Left$txt_1*GEOM*TEXT SET " + lowerThird.getSubTitle() + "\0", print_writers);
