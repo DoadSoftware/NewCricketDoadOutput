@@ -2852,6 +2852,7 @@ public class Animation
 				processAnimation(Constants.FRONT, print_writers, "Sponsor_Bug", "SHOW 0.0");
 				break;
 			}
+			AnimateIn("ArrowDown,", print_writers, config); // Push infobar
 			processAnimation(Constants.FRONT, print_writers, "Anim_Bugs$Essentials$In", "START");
 			this.whichGraphicOnScreen = whatToProcess;
 			break;
@@ -8856,6 +8857,8 @@ public class Animation
 				break;
 			}
 			processAnimation(Constants.FRONT, print_writers, "Anim_Bugs$Essentials$Out", "START");
+			TimeUnit.MILLISECONDS.sleep(1000);
+			AnimateIn("ArrowUp,", print_writers, config); // Restore infobar
 			this.whichGraphicOnScreen = "";
 			break;
 		case "Shift_F1": case "Shift_F2": case "Alt_F1": case "Alt_F2":
@@ -14571,8 +14574,16 @@ public class Animation
 						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER PREVIEW SCENE*/Default/Overlays_SuperOver "
 						    	+ "C:/Temp/Preview.tga " + previewCommands + " \0", print_writer);
 					}else {
-						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER PREVIEW SCENE*/Default/FieldPlotter_LLC "
-						    	+ "C:/Temp/Preview.tga " + previewCommands + " \0", print_writer);
+						switch (config.getBroadcaster().toUpperCase()) {
+						case Constants.VIDARBHA: case Constants.ODISHA:
+							CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER PREVIEW SCENE*/Default/FieldPlotter "
+							    	+ "C:/Temp/Preview.tga " + previewCommands + " \0", print_writer);
+							break;
+						default:
+							CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER PREVIEW SCENE*/Default/FieldPlotter_LLC "
+							    	+ "C:/Temp/Preview.tga " + previewCommands + " \0", print_writer);
+							break;
+						}
 					}	
 					break;
 				default:
@@ -15074,8 +15085,8 @@ public class Animation
 	                    switch(whatToProcess.split(",")[0]) {
 	                     case "Shift_O": case "Control_k": case "k": case "g": case "y": case "Control_y": case "h": case "Shift_F4": case "Shift_F": case "Alt_b":
 	                    case ".": case "/": case "Shift_C": case "Control_Shift_R": case "Control_Shift_F3": case "Control_Shift_J":
-	                        CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER PREVIEW SCENE*" + "/Default/Overlays" + " C:/Temp/Preview.tga Anim_Bugs 2.940 "
-	                                + "Anim_Bugs$Essentials 2.940 Anim_Bugs$Essentials$In 0.960 Anim_Bugs$Essentials$In$Anim_Bugs 2.940 "
+	                        CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER PREVIEW SCENE*" + "/Default/Overlays" + " C:/Temp/Preview.tga Anim_Infobar$Push 0.500 "
+	                        		+ "Anim_Bugs 2.940 Anim_Bugs$Essentials 2.940 Anim_Bugs$Essentials$In 0.960 Anim_Bugs$Essentials$In$Anim_Bugs 2.940 "
 	                                + "Anim_Bugs$Essentials$In$Anim_Bugs$Essentials 2.940 Anim_Bugs$Essentials$In$Anim_Bugs$Essentials$Out 2.940 \0", print_writer);
 	                        break;
 	                    case "Alt_p": case "o": case "t":
