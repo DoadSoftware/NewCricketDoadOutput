@@ -32664,6 +32664,26 @@ public class FullFramesGfx
 					+ "$Worms$Team_1$1$img_Base2*TEXTURE*IMAGE SET " + Constants.VIDARBHA_BASE2 + matchAllData.getMatch().getInning().get(0).getBatting_team().getTeamBadge() + "\0", print_writers);
 			CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$AllGraphics$Side" + WhichSide + "$Worm$SummarryAllData$"
 					+ "$Worms$Team_2$2$img_Base2*TEXTURE*IMAGE SET " + Constants.VIDARBHA_BASE2 + matchAllData.getMatch().getInning().get(1).getBatting_team().getTeamBadge() + "\0", print_writers);
+			
+			if(inning.getInningNumber() == 1) {
+				
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$AllGraphics$Side" + WhichSide + "$Worm$"
+						+ "InfoGrp$txt_Info*GEOM*TEXT SET CURRENT RUN RATE: " + inning.getRunRate() + "\0", print_writers);
+			}else {
+				
+				if(matchAllData.getMatch().getMatchResult() != null) {
+					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$AllGraphics$Side" + WhichSide + "$Worm$"
+							+ "InfoGrp$txt_Info*GEOM*TEXT SET " +  matchAllData.getMatch().getMatchStatus().toUpperCase() + "\0", print_writers);
+				
+				}else {
+					
+					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$AllGraphics$Side" + WhichSide + "$Worm$"
+							+ "InfoGrp$txt_Info*GEOM*TEXT SET " + inning.getBowling_team().getTeamName1() + " WERE " + IndexController.MatchStats.getInningCompare().getTotalRuns() +
+							"-"+ IndexController.MatchStats.getInningCompare().getTotalWickets() + "\0", print_writers);
+					
+				}
+			}
+			
 			break;
 		default:
 			CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$AllGraphics$Side" + WhichSide + "$Worm$SummarryAllData$"
@@ -44644,10 +44664,10 @@ public class FullFramesGfx
 				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_MatchId$InfoGrp$InfoTextGrp1$txt_Info1B"
 						+ "*GEOM*TEXT SET " + matchAllData.getSetup().getMatchIdent() + "\0", print_writers);
 				
-				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_MatchId$InfoGrp$InfoTextGrp2$txt_Info2A"
-						+ "*GEOM*TEXT SET " + "FROM " + matchAllData.getSetup().getVenueName() + "\0", print_writers);
 				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_MatchId$InfoGrp$InfoTextGrp2$txt_Info2B"
 						+ "*GEOM*TEXT SET " + "FROM " + matchAllData.getSetup().getVenueName() + "\0", print_writers);
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_MatchId$InfoGrp$InfoTextGrp2$txt_Info2A"
+						+ "*GEOM*TEXT SET " + "" + "\0", print_writers);
 				
 				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_MatchId$EventLogo_In$TLogo*TEXTURE*IMAGE SET " 
 						+ Constants.VIDARBHA_LOGO_PATH +  "TLogo" + "\0", print_writers);
@@ -45083,14 +45103,14 @@ public class FullFramesGfx
 				cal.add(Calendar.DATE, +1);
 				if(fixture.getDate().equalsIgnoreCase(new SimpleDateFormat("dd-MM-yyyy").format(cal.getTime()))) {
 					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_MatchId$InfoGrp$InfoTextGrp2$txt_Info2A"
-							+ "*GEOM*TEXT SET " + "TOMORROW - " + fixture.getLocalTime() + " IST - " + fixture.getVenue() + "\0", print_writers);
+							+ "*GEOM*TEXT SET " + "TOMORROW - " + fixture.getLocalTime() + "\0", print_writers);
 					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_MatchId$InfoGrp$InfoTextGrp2$txt_Info2B"
-							+ "*GEOM*TEXT SET " + "TOMORROW - " + fixture.getLocalTime() + " IST - " + fixture.getVenue() + "\0", print_writers);
+							+ "*GEOM*TEXT SET " + fixture.getVenue() + "\0", print_writers);
 				}else {
 					cal.add(Calendar.DATE, -1);
 					if(fixture.getDate().equalsIgnoreCase(new SimpleDateFormat("dd-MM-yyyy").format(cal.getTime()))) {
 						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_MatchId$InfoGrp$InfoTextGrp2$txt_Info2A"
-								+ "*GEOM*TEXT SET " + "UP NEXT" + "\0", print_writers);
+								+ "*GEOM*TEXT SET " + "" + "\0", print_writers);
 						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_MatchId$InfoGrp$InfoTextGrp2$txt_Info2B"
 								+ "*GEOM*TEXT SET " + "UP NEXT" + "\0", print_writers);
 					}else {
@@ -45102,9 +45122,9 @@ public class FullFramesGfx
 								Month.of(Integer.valueOf(fixture.getDate().split("-")[1])) + " " + fixture.getDate().split("-")[2];
 						
 						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_MatchId$InfoGrp$InfoTextGrp2$txt_Info2A"
-								+ "*GEOM*TEXT SET " + date_data + " - " + fixture.getLocalTime() + " IST - " + fixture.getVenue() + "\0", print_writers);
+								+ "*GEOM*TEXT SET " + date_data + " - " + fixture.getLocalTime() + "\0", print_writers);
 						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_MatchId$InfoGrp$InfoTextGrp2$txt_Info2B"
-								+ "*GEOM*TEXT SET " + date_data + " - " + fixture.getLocalTime() + " IST - " + fixture.getVenue() + "\0", print_writers);
+								+ "*GEOM*TEXT SET " + fixture.getVenue() + "\0", print_writers);
 					}
 				}
 				
