@@ -2115,6 +2115,8 @@ public class Caption
 						case Constants.ODISHA:
 							System.out.println("What A0================" + whatToProcess);
 							this_infobarGfx.infobar.setFull_section("COMMENTATORS");
+							this_infobarGfx.infobar.setMiddle_section("");
+							this_infobarGfx.infobar.setRight_bottom("");
 							this_infobarGfx.Comms_Name = whatToProcess;
 							status = this_infobarGfx.populateFullSection(false,print_writers, matchAllData, whichSide);
 							
