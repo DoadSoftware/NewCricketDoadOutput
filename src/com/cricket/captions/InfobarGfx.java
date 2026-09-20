@@ -5237,8 +5237,8 @@ public class InfobarGfx
 						
 						if(matchAllData.getSetup().getMatchType().equalsIgnoreCase(CricketUtil.SUPER_OVER)) {
 						}else {
-							CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$InfoBar$Stage2$Side" + WhichSide + "$This_Over$Balls$"+(iBall + 1)+"$img_Text1*TEXTURE*IMAGE SET " 
-									+ Constants.VIDARBHA_TEXT1 + color2 + "\0", print_writers);
+							CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$InfoBar$Stage2$Side" + WhichSide + "$This_Over$Balls$"
+									+(iBall + 1)+"$img_Text1*TEXTURE*IMAGE SET " + Constants.VIDARBHA_TEXT1 + color2 + "\0", print_writers);
 						}
 							switch (this_data_str.get(this_data_str.size()-1).split(",")[iBall].toUpperCase()) {
 						case CricketUtil.DOT:
@@ -5280,12 +5280,19 @@ public class InfobarGfx
 						default:
 							
 							if(this_data_str.get(this_data_str.size()-1).split(",")[iBall].toUpperCase().contains("BOUNDARY")) {
-								CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$InfoBar$Stage2$Side"+ WhichSide + "$This_Over"
-										+ "$Balls$" + (iBall + 1) + "$Four$txt_4*GEOM*TEXT SET " + 
-										this_data_str.get(this_data_str.size()-1).
-										split(",")[iBall].toUpperCase().replace("BOUNDARY", "") + "\0", print_writers);
-								CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$InfoBar$Stage2$Side"+ WhichSide + "$This_Over"
-										+ "$Balls$" + (iBall + 1) + "$Choose_Type*FUNCTION*Omo*vis_con SET 2 \0", print_writers);
+								if(this_data_str.get(this_data_str.size()-1).split(",")[iBall].toUpperCase().contains("4")) {
+									CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$InfoBar$Stage2$Side"+ WhichSide + "$This_Over"
+											+ "$Balls$" + (iBall + 1) + "$Four$txt_4*GEOM*TEXT SET " + this_data_str.get(this_data_str.size()-1).
+											split(",")[iBall].toUpperCase().replace("BOUNDARY", "") + "\0", print_writers);
+									CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$InfoBar$Stage2$Side"+ WhichSide + "$This_Over"
+											+ "$Balls$" + (iBall + 1) + "$Choose_Type*FUNCTION*Omo*vis_con SET 2 \0", print_writers);
+								}else {
+									CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$InfoBar$Stage2$Side"+ WhichSide + "$This_Over"
+											+ "$Balls$" + (iBall + 1) + "$Six$txt_6*GEOM*TEXT SET " + this_data_str.get(this_data_str.size()-1).
+											split(",")[iBall].toUpperCase().replace("BOUNDARY", "") + "\0", print_writers);
+									CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$InfoBar$Stage2$Side"+ WhichSide + "$This_Over"
+											+ "$Balls$" + (iBall + 1) + "$Choose_Type*FUNCTION*Omo*vis_con SET 3 \0", print_writers);
+								}
 							}else if(!this_data_str.get(this_data_str.size()-1).isEmpty()) {
 								CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$InfoBar$Stage2$Side"+ WhichSide + "$This_Over"
 										+ "$Balls$" + (iBall + 1) + "$Choose_Type*FUNCTION*Omo*vis_con SET 5 \0", print_writers);

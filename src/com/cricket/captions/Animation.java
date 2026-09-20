@@ -2648,6 +2648,12 @@ public class Animation
 		case "Control_1":
 			processAnimation(Constants.FRONT, print_writers, "Anim_InfoBar$Bonus_In", "START");
 			break;
+		case "Control_Shift_D":
+			AnimateIn("ArrowDown,", print_writers, config); // Push infobar
+			TimeUnit.MILLISECONDS.sleep(500);
+			processAnimation(Constants.BACK, print_writers, "AnimMatchId_Double$In_Out", "START");
+			this.whichGraphicOnScreen = whatToProcess;
+			break;
 		case "m": case "Control_m":
 			AnimateIn("ArrowDown,", print_writers, config); // Push infobar
 			TimeUnit.MILLISECONDS.sleep(500);
@@ -2676,6 +2682,10 @@ public class Animation
 			}
 			processAnimation(Constants.BACK, print_writers, "Anim_FullFrames$In_Out$Essentials", "START");
 			processAnimation(Constants.BACK, print_writers, "Anim_FullFrames$In_Out$Header", "START");
+			
+			processAnimation(Constants.BACK, print_writers, "Anim_FullFrames$In_Out$Legend", "START");
+			processAnimation(Constants.BACK, print_writers, "Anim_FullFrames$In_Out$Header_ILU", "START");
+			
 			switch (whatToProcess.split(",")[0]) {
 			case "Control_d": case "Control_e":
 				processAnimation(Constants.BACK, print_writers, "Anim_FullFrames$In_Out$Main$Profile", "START");
@@ -2758,8 +2768,24 @@ public class Animation
 			 break;
 		 case "Control_4": case "6":	
 		//	 processAnimation(Constants.FRONT, print_writers, "Sponsor_Pop$In_Out", "START");
-			 processAnimation(Constants.FRONT, print_writers, "PopUps", "START");
+			 processAnimation(Constants.FRONT, print_writers, "PopUps$InOut", "START");
+			 TimeUnit.MILLISECONDS.sleep(1500);
 			 this.whichGraphicOnScreen = whatToProcess;
+			 if(!caption.this_bugsAndMiniGfx.this_data_str.get(caption.this_bugsAndMiniGfx.this_data_str.size()-2).split(",")[1].
+					equalsIgnoreCase(caption.this_bugsAndMiniGfx.this_data_str.get(caption.this_bugsAndMiniGfx.this_data_str.size()-1).split(",")[1])) {
+				processAnimation(Constants.FRONT, print_writers, "PopUps$Change_Sixes$Hundreds", "START");
+				processAnimation(Constants.FRONT, print_writers, "PopUps$Change_Sixes$Tens", "START");
+				processAnimation(Constants.FRONT, print_writers, "PopUps$Change_Sixes$Units", "START");
+			}
+			else if(!caption.this_bugsAndMiniGfx.this_data_str.get(caption.this_bugsAndMiniGfx.this_data_str.size()-2).split(",")[2].
+					equalsIgnoreCase(caption.this_bugsAndMiniGfx.this_data_str.get(caption.this_bugsAndMiniGfx.this_data_str.size()-1).split(",")[2])) {
+				processAnimation(Constants.FRONT, print_writers, "PopUps$Change_Sixes$Tens", "START");
+				processAnimation(Constants.FRONT, print_writers, "PopUps$Change_Sixes$Units", "START");
+			}
+			else if(!caption.this_bugsAndMiniGfx.this_data_str.get(caption.this_bugsAndMiniGfx.this_data_str.size()-2).split(",")[3].
+					equalsIgnoreCase(caption.this_bugsAndMiniGfx.this_data_str.get(caption.this_bugsAndMiniGfx.this_data_str.size()-1).split(",")[3])) {
+				processAnimation(Constants.FRONT, print_writers, "PopUps$Change_Sixes$Units", "START");
+			}
 			 break; 
 		case "F5": case "F6": case "F9": case "Control_F2": case "Control_F5": case "Control_F9": case "Control_a":  case "Control_F3": case "Alt_o":
 		case "Shift_F3": case "u": case "d": case "e": case "Shift_F5": case "Shift_F9": case "Alt_F12": case "Control_g": case "Control_h": 
@@ -6337,6 +6363,10 @@ public class Animation
 				break;
 			}
 			processAnimation(Constants.BACK, print_writers, "Change$Header", "START");
+			
+			processAnimation(Constants.BACK, print_writers, "Change$Legend", "START");
+			processAnimation(Constants.BACK, print_writers, "Change$Header_ILU", "START");
+			
 //			processAnimation(Constants.BACK, print_writers, "Change$Footer", "START");
 			if(whichGraphicOnScreen.contains(",")) {
 				switch(whichGraphicOnScreen.split(",")[0]) {
@@ -6853,6 +6883,10 @@ public class Animation
 			 case "Shift_F8": case "Control_F11": case "Shift_K":
 				 TimeUnit.MILLISECONDS.sleep(500);
 					processAnimation(Constants.BACK, print_writers, "Change$Header", "SHOW 0.0");
+					
+					processAnimation(Constants.BACK, print_writers, "Change$Legend", "SHOW 0.0");
+					processAnimation(Constants.BACK, print_writers, "Change$Header_ILU", "SHOW 0.0");
+					
 //					processAnimation(Constants.BACK, print_writers, "Change$Footer", "SHOW 0.0");
 					switch(whichGraphicOnScreen.split(",")[0]) {
 					case "F1": case "Control_Shift_A": 
@@ -8666,6 +8700,13 @@ public class Animation
 			this.whichGraphicOnScreen = "";
 			caption.this_infobarGfx.infobar.setFieldPlotter_on_screen(false);
 			break;
+		case "Control_Shift_D":
+			processAnimation(Constants.BACK, print_writers, "AnimMatchId_Double$In_Out", "CONTINUE");
+			TimeUnit.MILLISECONDS.sleep(1000);
+			processAnimation(Constants.BACK, print_writers, "AnimMatchId_Double$In_Out", "SHOW 0.0");
+			AnimateIn("ArrowUp,", print_writers, config); // Restore infobar
+			this.whichGraphicOnScreen = "";
+			break;
 		case "m": case "Control_m":
 			processAnimation(Constants.BACK, print_writers, "Anim_MatchId$In_Out", "CONTINUE");
 			TimeUnit.MILLISECONDS.sleep(1000);
@@ -8695,6 +8736,9 @@ public class Animation
 			
 			processAnimation(Constants.BACK, print_writers, "Anim_FullFrames$In_Out$Essentials$Out", "CONTINUE");
 			processAnimation(Constants.BACK, print_writers, "Anim_FullFrames$In_Out$Header$Out", "CONTINUE");
+			
+			processAnimation(Constants.BACK, print_writers, "Anim_FullFrames$In_Out$Legend", "CONTINUE");
+			processAnimation(Constants.BACK, print_writers, "Anim_FullFrames$In_Out$Header_ILU", "CONTINUE");
 			
 			switch (whatToProcess.split(",")[0]) {
 			case "Control_d": case "Control_e":
@@ -8772,10 +8816,11 @@ public class Animation
 			 break;	
 		 case "Control_4": case "6":	
 			// processAnimation(Constants.FRONT, print_writers, "Sponsor_Pop$In_Out", "CONTINUE");
-			 processAnimation(Constants.FRONT, print_writers, "PopUps", "CONTINUE");
+			 processAnimation(Constants.FRONT, print_writers, "PopUps$InOut", "CONTINUE");
 			 this.whichGraphicOnScreen = "";
 			 TimeUnit.MILLISECONDS.sleep(1000);
 			 processAnimation(Constants.FRONT, print_writers, "Sponsor_Pop", "SHOW 0.0");
+			 processAnimation(Constants.FRONT, print_writers, "PopUps$InOut", "SHOW 0.0");
 			 break;  
 			 
 		case "F5": case "F6": case "F9": case "Control_F2": case "Alt_Shift_F3": case "Control_F5": case "Control_F9": 
@@ -12648,7 +12693,7 @@ public class Animation
 			processAnimation(Constants.BACK, print_writers, "Change", "SHOW 0.0");
 			processAnimation(Constants.BACK, print_writers, "LeaderBoardHighlight", "SHOW 0.0");
 			processAnimation(Constants.BACK, print_writers, "Leader3_Highlight", "SHOW 0.0");
-
+			processAnimation(Constants.BACK, print_writers, "AnimMatchId_Double", "SHOW 0.0");
 			processAnimation(Constants.BACK, print_writers, "Anim_Target", "SHOW 0.0");
 			
 			processAnimation("", print_writers, "Plotter", "SHOW 0.0");
@@ -13879,10 +13924,15 @@ public class Animation
 	                    case "F1": case "Control_Shift_A": case "F2": case "F4": case "Control_F11": case "Control_F7": case "Shift_F8":
 	                    case "Shift_K": case "Control_p": case "Shift_F11": case "z": case "x": case "c": case "v": case "Control_z": case "Control_x":
 	                    case "Control_c": case "Control_v": case "Shift_V": case "Control_F10":  case "Shift_T": case "Control_d": case "Control_e":
-	                        previewCommand = "Anim_Infobar$Push 0.500 Anim_FullFrames$In_Out$Essentials$In 2.140 Anim_FullFrames$In_Out$Header$In 2.100";
+	                    case "Shift_F10":
+	                        previewCommand = "Anim_Infobar$Push 0.500 Anim_FullFrames$In_Out$Essentials$In 2.140 Anim_FullFrames$In_Out$Header$In 2.100 "
+	                        		+ "Anim_FullFrames$In_Out$Legend$In_Out$In 1.300 Anim_FullFrames$In_Out$Header_ILU$In 1.800";
 	                        break;
 	                    case "m": case "Control_m":
 	                        previewCommand = "Anim_MatchId$In_Out$In 1.700";
+	                        break;
+	                    case "Control_Shift_D":
+	                        previewCommand = "AnimMatchId_Double$In_Out$In 1.700";
 	                        break;
 	                    case "Shift_D":
 	                        previewCommand = "Anim_Target$In_Out$In 1.500";
@@ -13919,6 +13969,9 @@ public class Animation
 	                    case "Control_F10":
 	                        previewCommand = previewCommand + " Anim_FullFrames$In_Out$Main$Manhattan$In 2.220";
 	                        break;
+	                    case "Shift_F10":
+	                        previewCommand = previewCommand + " Anim_FullFrames$In_Out$Main$Worm$In 2.000 Anim_FullFrames$In_Out$Main$Worm$In$In 2.000";
+	                        break;
 	                    case "Control_p":
 	                        previewCommand = previewCommand + " Anim_FullFrames$In_Out$Main$Standings$In 1.843";
 	                        break;
@@ -13936,7 +13989,9 @@ public class Animation
 	                    switch(whatToProcess.split(",")[0]) {
 	                    case "F1": case "Control_Shift_A": case "F2": case "F4": case "Control_F11": case "Shift_T": case "Shift_F8": case "Shift_K":
 	                    case "Control_p": case "z": case "x": case "c": case "v": case "Control_z": case "Control_x":
-	                        previewCommand = previewCommand + "Change$Header 1.600 Change$Header$Change_In 1.600 Change$Header$Change_Out 0.420";
+	                        previewCommand = previewCommand + "Change$Header 1.600 Change$Header$Change_In 1.600 Change$Header$Change_Out 0.420 "
+	                        		+ "Change$Legend 1.300 Change$Legend$Change_In 1.300 Change$Legend$Change_Out 0.320 "
+	                        		+ "Change$Header_ILU 1.320 Change$Header_ILU$Change_In 1.320 Change$Header_ILU$Change_Out 0.420";
 	                        if(whichGraphicOnScreen.contains(",")) {
 	                            switch(whichGraphicOnScreen.split(",")[0]) {
 	                            case "F1": case "Control_Shift_A":
