@@ -4688,7 +4688,8 @@ public class LowerThirdGfx
 						null,null,new String[]{namesuper.getSubLine()},null,null);
 			}else if(namesuper.getSponsor()== null && namesuper.getFlag()== null && namesuper.getSubLine() != null) {
 				lowerThird = new LowerThird("", namesuper.getFirstname(), surName,"", "", "", 1, "" ,config.getBroadcaster().equalsIgnoreCase(Constants.ISPL)?
-						"ISPL":"TLogo",null,null,new String[]{namesuper.getSubLine()},null,null);
+						"ISPL" : config.getBroadcaster().equalsIgnoreCase(Constants.ODISHA) ? "TLogo_White" : "TLogo", null,null,
+								new String[]{namesuper.getSubLine()},null,null);
 			}else if(namesuper.getSponsor()!= null && namesuper.getFlag()!= null && namesuper.getSubLine() == null) {
 				lowerThird = new LowerThird("", namesuper.getFirstname(), surName,"", "", "", 0, namesuper.getSponsor() ,namesuper.getFlag(),
 						null,null,new String[]{""},null,null);
