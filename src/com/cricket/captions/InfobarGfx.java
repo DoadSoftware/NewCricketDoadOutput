@@ -13168,11 +13168,11 @@ public class InfobarGfx
 			
 			if(inning.getTotalPenalties() >0) {
 				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$InfoBar$Stage1$Side" + WhichSide + "$Free_Text$txt_Header*GEOM*TEXT SET " + 
-						"EXTRAS: " + "WD " +  inning.getTotalWides() + " NB " + inning.getTotalNoBalls() + " B " + inning.getTotalByes() + " LB " +  inning.getTotalLegByes()
-						 + " PEN " +  inning.getTotalPenalties() + "\0",print_writers);
+						"EXTRAS: " + "WD " +  inning.getTotalWides() + " , NB " + inning.getTotalNoBalls() + " , B " + inning.getTotalByes() + " , LB " +  inning.getTotalLegByes()
+						 + " , PEN " +  inning.getTotalPenalties() + "\0",print_writers);
 			}else {
 				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$InfoBar$Stage1$Side" + WhichSide + "$Free_Text$txt_Header*GEOM*TEXT SET " + 
-						"EXTRAS: " + "WD " +  inning.getTotalWides() + " NB " + inning.getTotalNoBalls() + " B " + inning.getTotalByes() + " LB " +  inning.getTotalLegByes()
+						"EXTRAS: " + "WD " +  inning.getTotalWides() + " , NB " + inning.getTotalNoBalls() + " , B " + inning.getTotalByes() + " , LB " +  inning.getTotalLegByes()
 						+ "\0",print_writers);
 			}
 			break;
