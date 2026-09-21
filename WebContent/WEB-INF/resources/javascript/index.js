@@ -5971,6 +5971,22 @@ function addItemsToList(whatToProcess,dataToProcess)
 				option.value = 'BOWLING_END';
 				option.text = 'Bowling End';
 				select.appendChild(option);
+				
+				option = document.createElement('option');
+				option.value = 'BOWLER_REPLACE';
+				option.text = 'Bowler Replaces';
+				select.appendChild(option);
+				
+				option = document.createElement('option');
+				option.value = 'RUNRATE';
+				option.text = 'Run Rate';
+				select.appendChild(option);
+				
+				option = document.createElement('option');
+				option.value = 'TARGET';
+				option.text = 'Target';
+				select.appendChild(option);
+				
 				header_text.innerHTML = 'RIGHT BOTTOM INFOBAR SECTION';
 				
 				

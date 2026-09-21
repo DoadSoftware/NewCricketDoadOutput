@@ -5178,8 +5178,80 @@ public class InfobarGfx
 					this.infobar.setRight_bottom(CricketUtil.BOWLER);
 					populateVizInfobarBowler(print_writers, matchAllData, WhichSide);
 					break;
-				case "BOWLING_END":
+				case "BOWLER_REPLACE":
+					if(inning.getBowling_team().getTeamName4().contains("KHILADI XI") || inning.getBowling_team().getTeamName4().contains("MASTER 11")) {
+						if(inning.getBowling_team().getTeamName4().equalsIgnoreCase("KHILADI XI")) {
+							color2 = "KHILADI_XI";
+						}else if(inning.getBowling_team().getTeamName4().equalsIgnoreCase("MASTER 11")) {
+							color2 = "MASTER_XI";
+						}
+					}else {
+						color2 = inning.getBowling_team().getTeamBadge();
+					}
 					
+					if(matchAllData.getSetup().getMatchType().equalsIgnoreCase(CricketUtil.SUPER_OVER)) {
+					}else {
+						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$InfoBar$Stage2$Side" + WhichSide + "$Free_Text$img_Text1*TEXTURE*IMAGE SET " 
+								+ Constants.VIDARBHA_TEXT1 + color2 + "\0", print_writers);
+					}
+					
+					isThisOverLimitExceed = true;
+					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$InfoBar$Stage2$Side" + WhichSide + "$Select*FUNCTION*Omo*vis_con SET 0 \0", print_writers);
+					
+					int Replaced_Player_id = CricketFunctions.SecondLastBowlerId(matchAllData,bowlingCard.getPlayerId());
+					
+					if(Replaced_Player_id > 0) {
+						player = Players.stream().filter(plyr -> plyr.getPlayerId() == Replaced_Player_id).findAny().orElse(null);
+						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$InfoBar$Stage2$Side" + WhichSide + "$Free_Text$txt_Header*GEOM*TEXT SET " 
+								+ "REPLACES " + player.getTicker_name() + "\0", print_writers);
+					}
+					break;
+				case "RUNRATE":
+					if(inning.getBowling_team().getTeamName4().contains("KHILADI XI") || inning.getBowling_team().getTeamName4().contains("MASTER 11")) {
+						if(inning.getBowling_team().getTeamName4().equalsIgnoreCase("KHILADI XI")) {
+							color2 = "KHILADI_XI";
+						}else if(inning.getBowling_team().getTeamName4().equalsIgnoreCase("MASTER 11")) {
+							color2 = "MASTER_XI";
+						}
+					}else {
+						color2 = inning.getBowling_team().getTeamBadge();
+					}
+					
+					if(matchAllData.getSetup().getMatchType().equalsIgnoreCase(CricketUtil.SUPER_OVER)) {
+					}else {
+						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$InfoBar$Stage2$Side" + WhichSide + "$Free_Text$img_Text1*TEXTURE*IMAGE SET " 
+								+ Constants.VIDARBHA_TEXT1 + color2 + "\0", print_writers);
+					}
+					
+					isThisOverLimitExceed = true;
+					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$InfoBar$Stage2$Side" + WhichSide + "$Select*FUNCTION*Omo*vis_con SET 0 \0", print_writers);
+					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$InfoBar$Stage2$Side" + WhichSide + "$Free_Text$txt_Header*GEOM*TEXT SET " 
+							+ "RUN RATE " + CricketFunctions.generateRunRate(inning.getTotalRuns(),inning.getTotalOvers(), inning.getTotalBalls(), 2, matchAllData) + "\0", print_writers);
+
+					break;
+				case "TARGET":
+					if(inning.getBowling_team().getTeamName4().contains("KHILADI XI") || inning.getBowling_team().getTeamName4().contains("MASTER 11")) {
+						if(inning.getBowling_team().getTeamName4().equalsIgnoreCase("KHILADI XI")) {
+							color2 = "KHILADI_XI";
+						}else if(inning.getBowling_team().getTeamName4().equalsIgnoreCase("MASTER 11")) {
+							color2 = "MASTER_XI";
+						}
+					}else {
+						color2 = inning.getBowling_team().getTeamBadge();
+					}
+					
+					if(matchAllData.getSetup().getMatchType().equalsIgnoreCase(CricketUtil.SUPER_OVER)) {
+					}else {
+						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$InfoBar$Stage2$Side" + WhichSide + "$Free_Text$img_Text1*TEXTURE*IMAGE SET " 
+								+ Constants.VIDARBHA_TEXT1 + color2 + "\0", print_writers);
+					}
+					
+					isThisOverLimitExceed = true;
+					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$InfoBar$Stage2$Side" + WhichSide + "$Select*FUNCTION*Omo*vis_con SET 0 \0", print_writers);
+					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$InfoBar$Stage2$Side" + WhichSide + "$Free_Text$txt_Header*GEOM*TEXT SET " 
+							+ "TARGET " + CricketFunctions.GetTargetData(matchAllData).getTargetRuns() + "\0", print_writers);
+					break;
+				case "BOWLING_END":
 					if(inning.getBowling_team().getTeamName4().contains("KHILADI XI") || inning.getBowling_team().getTeamName4().contains("MASTER 11")) {
 						if(inning.getBowling_team().getTeamName4().equalsIgnoreCase("KHILADI XI")) {
 							color2 = "KHILADI_XI";
@@ -5272,27 +5344,24 @@ public class InfobarGfx
 							break;
 						case "W":
 							CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$InfoBar$Stage2$Side"+ WhichSide + "$This_Over"
-									+ "$Balls$" + (iBall + 1) + "$Wicket$txt_W*GEOM*TEXT SET " + "W" + "\0", print_writers);
+									+ "$Balls$" + (iBall + 1) + "$Six$txt_6*GEOM*TEXT SET " + "W" + "\0", print_writers);
 							CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$InfoBar$Stage2$Side"+ WhichSide + "$This_Over"
-									+ "$Balls$" + (iBall + 1) + "$Choose_Type*FUNCTION*Omo*vis_con SET 4 \0", print_writers);
+									+ "$Balls$" + (iBall + 1) + "$Choose_Type*FUNCTION*Omo*vis_con SET 3 \0", print_writers);
+							
+//							CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$InfoBar$Stage2$Side"+ WhichSide + "$This_Over"
+//									+ "$Balls$" + (iBall + 1) + "$Wicket$txt_W*GEOM*TEXT SET " + "W" + "\0", print_writers);
+//							CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$InfoBar$Stage2$Side"+ WhichSide + "$This_Over"
+//									+ "$Balls$" + (iBall + 1) + "$Choose_Type*FUNCTION*Omo*vis_con SET 4 \0", print_writers);
 							break;
 
 						default:
 							
 							if(this_data_str.get(this_data_str.size()-1).split(",")[iBall].toUpperCase().contains("BOUNDARY")) {
-								if(this_data_str.get(this_data_str.size()-1).split(",")[iBall].toUpperCase().contains("4")) {
-									CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$InfoBar$Stage2$Side"+ WhichSide + "$This_Over"
-											+ "$Balls$" + (iBall + 1) + "$Four$txt_4*GEOM*TEXT SET " + this_data_str.get(this_data_str.size()-1).
-											split(",")[iBall].toUpperCase().replace("BOUNDARY", "") + "\0", print_writers);
-									CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$InfoBar$Stage2$Side"+ WhichSide + "$This_Over"
-											+ "$Balls$" + (iBall + 1) + "$Choose_Type*FUNCTION*Omo*vis_con SET 2 \0", print_writers);
-								}else {
-									CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$InfoBar$Stage2$Side"+ WhichSide + "$This_Over"
-											+ "$Balls$" + (iBall + 1) + "$Six$txt_6*GEOM*TEXT SET " + this_data_str.get(this_data_str.size()-1).
-											split(",")[iBall].toUpperCase().replace("BOUNDARY", "") + "\0", print_writers);
-									CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$InfoBar$Stage2$Side"+ WhichSide + "$This_Over"
-											+ "$Balls$" + (iBall + 1) + "$Choose_Type*FUNCTION*Omo*vis_con SET 3 \0", print_writers);
-								}
+								CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$InfoBar$Stage2$Side"+ WhichSide + "$This_Over"
+										+ "$Balls$" + (iBall + 1) + "$Six$txt_6*GEOM*TEXT SET " + this_data_str.get(this_data_str.size()-1).
+										split(",")[iBall].toUpperCase().replace("BOUNDARY", "") + "\0", print_writers);
+								CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$InfoBar$Stage2$Side"+ WhichSide + "$This_Over"
+										+ "$Balls$" + (iBall + 1) + "$Choose_Type*FUNCTION*Omo*vis_con SET 3 \0", print_writers);
 							}else if(!this_data_str.get(this_data_str.size()-1).isEmpty()) {
 								CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$InfoBar$Stage2$Side"+ WhichSide + "$This_Over"
 										+ "$Balls$" + (iBall + 1) + "$Choose_Type*FUNCTION*Omo*vis_con SET 5 \0", print_writers);

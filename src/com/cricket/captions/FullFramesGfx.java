@@ -40643,9 +40643,6 @@ public class FullFramesGfx
 			
 			CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$Legend$Side"+ WhichSide + 
 					"$Select_Legend*FUNCTION*Omo*vis_con SET 0\0", print_writers);
-			CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$Header_ILU$Side"+ WhichSide + 
-					"$Select_ILU*FUNCTION*Omo*vis_con SET 0\0", print_writers);
-			
 			CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$HeaderGrp$Side" + WhichSide + "$Change$"
 					+ "txt_SubheaderLong*GEOM*TEXT SET " + matchAllData.getSetup().getTournament() + "\0", print_writers);
 			
@@ -40663,6 +40660,8 @@ public class FullFramesGfx
 						+ "$txt_Title2*GEOM*TEXT SET " + "RUNS" + "\0", print_writers);
 				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$HeaderGrp$Side" + WhichSide + 
 						"$In_Out$Select_Header$Title$txt_Title*GEOM*TEXT SET " + "MOST RUNS" + "\0", print_writers);
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$Header_ILU$Side"+ WhichSide + 
+						"$Select_ILU*FUNCTION*Omo*vis_con SET 0\0", print_writers);
 				break;
 			case "x":
 				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$AllGraphics$Side" + WhichSide + "$LeaderBoard$LeaderBoardData$TitleGrp$" 
@@ -40671,6 +40670,8 @@ public class FullFramesGfx
 						+ "$txt_Title2*GEOM*TEXT SET " + "WICKETS" + "\0", print_writers);
 				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$HeaderGrp$Side" + WhichSide + 
 						"$In_Out$Select_Header$Title$txt_Title*GEOM*TEXT SET " + "MOST WICKETS" + "\0", print_writers);
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$Header_ILU$Side"+ WhichSide + 
+						"$Select_ILU*FUNCTION*Omo*vis_con SET 0\0", print_writers);
 				break;
 			case "c":
 				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$AllGraphics$Side" + WhichSide + "$LeaderBoard$LeaderBoardData$TitleGrp$" 
@@ -40679,6 +40680,10 @@ public class FullFramesGfx
 						+ "$txt_Title2*GEOM*TEXT SET " + "FOURS" + "\0", print_writers);
 				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$HeaderGrp$Side" + WhichSide + 
 						"$In_Out$Select_Header$Title$txt_Title*GEOM*TEXT SET " + "MOST FOURS" + "\0", print_writers);
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$Header_ILU$Side"+ WhichSide + 
+						"$Select_ILU*FUNCTION*Omo*vis_con SET 1\0", print_writers);
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$Header_ILU$Side" + WhichSide +
+						"$Select_ILU$TLogo*TEXTURE*IMAGE SET " + Constants.SPONSERS_PATH + "VimalElaichi" + "\0", print_writers);
 				break;
 			case "v":
 				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$AllGraphics$Side" + WhichSide + "$LeaderBoard$LeaderBoardData$TitleGrp$" 
@@ -40687,6 +40692,10 @@ public class FullFramesGfx
 						+ "$txt_Title2*GEOM*TEXT SET " + "SIXES" + "\0", print_writers);
 				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$HeaderGrp$Side" + WhichSide + 
 						"$In_Out$Select_Header$Title$txt_Title*GEOM*TEXT SET " + "MOST SIXES" + "\0", print_writers);
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$Header_ILU$Side"+ WhichSide + 
+						"$Select_ILU*FUNCTION*Omo*vis_con SET 1\0", print_writers);
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$Header_ILU$Side" + WhichSide +
+						"$Select_ILU$TLogo*TEXTURE*IMAGE SET " + Constants.SPONSERS_PATH + "BharatMasala" + "\0", print_writers);
 				break;
 			case "Control_z":
 				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$AllGraphics$Side" + WhichSide + "$LeaderBoard$LeaderBoardData$TitleGrp$" 
@@ -40782,6 +40791,8 @@ public class FullFramesGfx
 						"$Select_Legend*FUNCTION*Omo*vis_con SET 0\0", print_writers);
 				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$Header_ILU$Side"+ WhichSide + 
 						"$Select_ILU*FUNCTION*Omo*vis_con SET 1\0", print_writers);
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$Header_ILU$Side" + WhichSide +
+						"$Select_ILU$TLogo*TEXTURE*IMAGE SET " + Constants.VIDARBHA_LOGO_PATH + "TLogo" + "\0", print_writers);
 				break;
 			}
 			break;
@@ -40818,6 +40829,8 @@ public class FullFramesGfx
 					"$Select_Legend*FUNCTION*Omo*vis_con SET 0\0", print_writers);
 			CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$Header_ILU$Side"+ WhichSide + 
 					"$Select_ILU*FUNCTION*Omo*vis_con SET 1\0", print_writers);
+			CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$Header_ILU$Side" + WhichSide +
+					"$Select_ILU$TLogo*TEXTURE*IMAGE SET " + Constants.VIDARBHA_LOGO_PATH + "TLogo" + "\0", print_writers);
 			
 			CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$AllGraphics$Side" + WhichSide + "$Standings"
 					+ "$TeamLogoGrp$LogoBaseGrp$img_Base2*TEXTURE*IMAGE SET " + Constants.VIDARBHA_BASE2 + "TLogo"	+ "\0", print_writers);
@@ -40946,6 +40959,8 @@ public class FullFramesGfx
 					"$Select_Legend*FUNCTION*Omo*vis_con SET 0\0", print_writers);
 			CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$Header_ILU$Side"+ WhichSide + 
 					"$Select_ILU*FUNCTION*Omo*vis_con SET 1\0", print_writers);
+			CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$Header_ILU$Side" + WhichSide +
+					"$Select_ILU$TLogo*TEXTURE*IMAGE SET " + Constants.VIDARBHA_LOGO_PATH + "TLogo" + "\0", print_writers);
 			
 			CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$Main" + 
 					"$WipeGrp$LeftWipe$Base1*TEXTURE*IMAGE SET " + Constants.VIDARBHA_LOGO_PATH + color_name + "\0", print_writers);

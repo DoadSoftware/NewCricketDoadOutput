@@ -14020,35 +14020,37 @@ public class Animation
 	                        if(whichGraphicOnScreen.contains(",")) {
 	                            switch(whichGraphicOnScreen.split(",")[0]) {
 	                            case "F1": case "Control_Shift_A":
-	                                previewCommand = previewCommand + " Change$Batting_Card 1.900 Change$Batting_Card$Change_Out 0.860 Change$Batting_Card$Change_In 1.900";
+	                                previewCommand = previewCommand + " Change$Batting_Card 2.200 Change$Batting_Card$Change_Out 0.860 Change$Batting_Card$Change_In 2.200";
 	                                break;
 	                            case "F2":
-	                                previewCommand = previewCommand + " Change$Bowling_Card 1.820 Change$Bowling_Card$Change_Out 0.760 Change$Bowling_Card$Change_In 1.820";
+	                                previewCommand = previewCommand + " Change$Bowling_Card 2.120 Change$Bowling_Card$Change_Out 0.760 Change$Bowling_Card$Change_In 2.120 "
+	                                		+ "Change$Bowling_Card$Change_In$In 2.120";
 	                                break;
 	                            case "F4":
-	                                previewCommand = previewCommand + " Change$Partnership_List 1.900 Change$Partnership_List$Change_Out 0.860 "
-	                                        + "Change$Partnership_List$Change_In 1.900";
+	                                previewCommand = previewCommand + " Change$Partnership_List 2.200 Change$Partnership_List$Change_Out 0.860 "
+	                                        + "Change$Partnership_List$Change_In 2.200";
 	                                break;
 	                            case "Control_F11":
-	                                previewCommand = previewCommand + " Change$Summary 1.580 Change$Summary$Change_Out 0.760 Change$Summary$Change_In 1.580";
+	                                previewCommand = previewCommand + " Change$Summary 1.880 Change$Summary$Change_Out 0.760 Change$Summary$Change_In 1.880";
 	                                break;
 	                            case "Shift_T":
-	                                previewCommand = previewCommand + " Change$Team_Single 1.940 Change$Team_Single$Change_Out 0.820 Change$Team_Single$Change_In 1.940";
+	                                previewCommand = previewCommand + " Change$Team_Single 2.240 Change$Team_Single$Change_Out 0.820 Change$Team_Single$Change_In 2.240";
 	                                break;
 	                            case "Shift_F8":
-	                                previewCommand = previewCommand + " Change$LineUp_Image 1.940 Change$LineUp_Image$Change_Out 0.820 Change$LineUp_Image$Change_In 1.940";
+	                                previewCommand = previewCommand + " Change$LineUp_Image 1.940 Change$LineUp_Image$Change_Out 0.820 Change$LineUp_Image$Change_In 1.940 "
+	                                		+ "Change$LineUp_Image$Change_In$In 1.940";
 	                                break;
 	                            case "Shift_K":
-	                                previewCommand = previewCommand + " Change$Partnership 1.900 Change$Partnership$Change_Out 0.860 "
-	                                        + "Change$Partnership$Change_In 1.900";
+	                                previewCommand = previewCommand + " Change$Partnership 1.860 Change$Partnership$Change_Out 0.760 "
+	                                        + "Change$Partnership$Change_In 1.860";
 	                                break;
 	                            case "Control_p":
-	                                previewCommand = previewCommand + " Change$Standings 1.543 Change$Standings$Change_Out 0.760 "
-	                                        + "Change$Standings$Change_In 1.543";
+	                                previewCommand = previewCommand + " Change$Standings 1.843 Change$Standings$Change_Out 0.760 "
+	                                        + "Change$Standings$Change_In 1.843";
 	                                break;
 	                            case "z": case "x": case "c": case "v": case "Control_z": case "Control_x":
-	                                previewCommand = previewCommand + " Change$LeaderBoard 2.200 Change$LeaderBoard$Change_Out 0.760 "
-	                                        + "Change$LeaderBoard$Change_In 2.200";
+	                                previewCommand = previewCommand + " Change$LeaderBoard 1.843 Change$LeaderBoard$Change_Out 0.760 "
+	                                        + "Change$LeaderBoard$Change_In 1.843";
 	                                previewCommand = previewCommand + " LeaderBoardHighlight$Side2$Player" + whatToProcess.split(",")[2].split("_")[0] + " 1.574";
 	                                break;
 	                            }
@@ -14062,31 +14064,33 @@ public class Animation
 	                            }
 	                            switch(whatToProcess.split(",")[0]) {
 	                            case "F1": case "Control_Shift_A":
-	                                previewCommand = previewCommand + " Change$Batting_Card 1.900 Change$Batting_Card$Change_Out 0.860 Change$Batting_Card$Change_In 1.900";
+	                                previewCommand = previewCommand + " Change$Batting_Card 2.200 Change$Batting_Card$Change_Out 0.860 Change$Batting_Card$Change_In 2.200";
 	                                break;
 	                            case "F2":
-	                                previewCommand = previewCommand + " Change$Bowling_Card 1.820 Change$Bowling_Card$Change_Out 0.760 Change$Bowling_Card$Change_In 1.820";
+	                            	previewCommand = previewCommand + " Change$Bowling_Card 2.120 Change$Bowling_Card$Change_Out 0.760 Change$Bowling_Card$Change_In 2.120 "
+	                                		+ "Change$Bowling_Card$Change_In$In 2.120";
 	                                break;
 	                            case "F4":
-	                                previewCommand = previewCommand + " Change$Partnership_List 1.900 Change$Partnership_List$Change_Out 0.860 "
-	                                        + "Change$Partnership_List$Change_In 1.900";
+	                                previewCommand = previewCommand + " Change$Partnership_List 2.200 Change$Partnership_List$Change_Out 0.860 "
+	                                        + "Change$Partnership_List$Change_In 2.200";
 	                                break;
 	                            case "Control_F11":
-	                                previewCommand = previewCommand + " Change$Summary 1.580 Change$Summary$Change_Out 0.760 Change$Summary$Change_In 1.580";
+	                                previewCommand = previewCommand + " Change$Summary 1.880 Change$Summary$Change_Out 0.760 Change$Summary$Change_In 1.880";
 	                                break;
 	                            case "Shift_T":
-	                                previewCommand = previewCommand + " Change$Team_Single 1.940 Change$Team_Single$Change_Out 0.820 Change$Team_Single$Change_In 1.940";
+	                                previewCommand = previewCommand + " Change$Team_Single 2.240 Change$Team_Single$Change_Out 0.820 Change$Team_Single$Change_In 2.240";
 	                                break;
 	                            case "Shift_F8":
-	                                previewCommand = previewCommand + " Change$LineUp_Image 1.940 Change$LineUp_Image$Change_Out 0.820 Change$LineUp_Image$Change_In 1.940";
+	                                previewCommand = previewCommand + " Change$LineUp_Image 1.940 Change$LineUp_Image$Change_Out 0.820 Change$LineUp_Image$Change_In 1.940 "
+	                                		+ "Change$LineUp_Image$Change_In$In 1.940";
 	                                break;
 	                            case "Shift_K":
-	                                previewCommand = previewCommand + " Change$Partnership 1.900 Change$Partnership$Change_Out 0.860 "
-	                                        + "Change$Partnership$Change_In 1.900";
+	                                previewCommand = previewCommand + " Change$Partnership 1.860 Change$Partnership$Change_Out 0.760 "
+	                                        + "Change$Partnership$Change_In 1.860";
 	                                break;
 	                            case "Control_p":
-	                                previewCommand = previewCommand + " Change$Standings 1.543 Change$Standings$Change_Out 0.760 "
-	                                        + "Change$Standings$Change_In 1.543";
+	                                previewCommand = previewCommand + " Change$Standings 1.843 Change$Standings$Change_Out 0.760 "
+	                                        + "Change$Standings$Change_In 1.843";
 	                                break;
 	                            }
 	                        }
@@ -14580,17 +14584,13 @@ public class Animation
 						previewCommands = "LT_PlayingXI 2.200 LT_PlayingXI$Essentials 2.200 LT_PlayingXI$Essentials$In 2.100 LT_PlayingXI$Row 2.200"
 								+ " LT_PlayingXI$Row$In 1.400";
 						break;
-					case "F5": case "F6": case "F7": case "F9": case "F11": case "Control_F2":
-					case "Control_F5": case "Control_F9": case "Control_a":  case "Control_F3": case "Alt_o":
-					case "Shift_F3": case "u": case "d": case "e": case "Shift_F5": case "Shift_F9": case "Alt_F12":
-					case "Control_g": case "Control_h": case "Control_p": case "Control_F6": case "Shift_F6": case "Control_s":
-					case "Alt_d": case "Alt_l": case "Control_f": case "l": case "a": case "Alt_F1": case "Alt_F2":case "Shift_E": case "Alt_Shift_L":
-					case "Alt_F6": case "Shift_A":  case "Shift_R": case "Shift_U": case "Alt_F8": case "F8": case "F10": case "j": 
-					case "Alt_a": case "Alt_s":  case "Alt_w": case "Control_j": case "Alt_i": case "Alt_j": case "b": case "Control_i":
-					case "Alt_Shift_F3":
-					case "Alt_Shift_D":case "Alt_Shift_E":case "Alt_Shift_F":case "Alt_Shift_G":case "Alt_Shift_H":
+					case "F5": case "F6": case "F7": case "F9": case "F11": case "Control_F2": case "Control_F5": case "Control_F9": case "Control_a":  case "Control_F3": case "Alt_o":
+					case "Shift_F3": case "u": case "d": case "e": case "Shift_F5": case "Shift_F9": case "Alt_F12": case "Control_g": case "Control_h": case "Control_p": case "Control_F6": 
+					case "Shift_F6": case "Control_s": case "Alt_d": case "Alt_l": case "Control_f": case "l": case "a": case "Alt_F1": case "Alt_F2":case "Shift_E": case "Alt_Shift_L":
+					case "Alt_F6": case "Shift_A":  case "Shift_R": case "Shift_U": case "Alt_F8": case "F8": case "F10": case "j": case "Alt_a": case "Alt_s":  case "Alt_w": case "Control_j": 
+					case "Alt_i": case "Alt_j": case "b": case "Control_i": case "Alt_Shift_F3": case "Alt_Shift_D":case "Alt_Shift_E":case "Alt_Shift_F":case "Alt_Shift_G":case "Alt_Shift_H":
 					case "Control_u": case "Shift_G": case "Shift_W":case "Control_Shift_X":
-						previewCommands = "Anim_Infobar$Push 0.560 "
+						previewCommands = "Anim_InfoBar$Small$In 0.660 "
 								+ "Anim_LtChange$Top_Header 2.680  Anim_LtChange$Top_Header$In 1.920 "
 								+ "anim_Lower_Third$Essentials 3.200 anim_Lower_Third$Essentials$In 1.900 "
 								+ "anim_Lower_Third$Row 3.000 anim_Lower_Third$Row$In 1.900 "
@@ -15170,8 +15170,7 @@ public class Animation
 	                                + "Anim_Bugs$Essentials$In$Anim_Bugs$Essentials 2.940 Anim_Bugs$Essentials$In$Anim_Bugs$Essentials$Out 2.940 \0", print_writer);
 	                        break;
 	                    case "Alt_p": case "o": case "t":
-	                        CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER PREVIEW SCENE*" 
-	                                + "/Default/Overlays" + " C:/Temp/Preview.png Anim_Center_Bug$In 0.700 \0", print_writer);
+	                        CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER PREVIEW SCENE*/Default/Overlays" + " C:/Temp/Preview.tga Anim_Center_Bug$In 0.700 \0", print_writer);
 	                        break;
 	                    case "Control_Shift_U": case "Control_Shift_V": case "6": case "Control_4":
 	                        CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*STAGE*DIRECTOR*PopUps$Out SHOW 1.100 \0", print_writer);
