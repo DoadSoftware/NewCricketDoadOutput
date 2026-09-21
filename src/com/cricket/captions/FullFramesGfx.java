@@ -9504,7 +9504,7 @@ public class FullFramesGfx
 							+ matchName + "\0", print_writers);
 					if (WhichStyle.equalsIgnoreCase("TODAY")) {
 						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_MatchId_Double$InfoGrp$InfoSubTextGrp" + i + "$txt_Info1B*GEOM*TEXT SET " 
-								+ (i==2?(FixturesList.get(i-1).getLocalTime() != null ? (" - "+FixturesList.get(i-1).getLocalTime()) : ""):"") + "\0", print_writers);
+								+ (i==2 ? "UP-NEXT" : "LIVE") + "\0", print_writers);
 						
 					} else if (WhichStyle.equalsIgnoreCase("TOMORROW")) {
 						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_MatchId_Double$InfoGrp$InfoSubTextGrp" + i + "$txt_Info1B*GEOM*TEXT SET " 
