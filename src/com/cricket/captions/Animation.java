@@ -2786,7 +2786,11 @@ public class Animation
 					equalsIgnoreCase(caption.this_bugsAndMiniGfx.this_data_str.get(caption.this_bugsAndMiniGfx.this_data_str.size()-1).split(",")[3])) {
 				processAnimation(Constants.FRONT, print_writers, "PopUps$Change_Sixes$Units", "START");
 			}
-			 break; 
+			break;
+		case "Control_Shift_U": case "Control_Shift_V":
+			processAnimation(Constants.FRONT, print_writers, "PopUps$InOut", "START");
+			this.whichGraphicOnScreen = whatToProcess;
+			break;
 		case "F5": case "F6": case "F9": case "Control_F2": case "Control_F5": case "Control_F9": case "Control_a":  case "Control_F3": case "Alt_o":
 		case "Shift_F3": case "u": case "d": case "e": case "Shift_F5": case "Shift_F9": case "Alt_F12": case "Control_g": case "Control_h": 
 		case "Control_F6": case "Shift_F6": case "Shift_E": case "Alt_Shift_L": case "Alt_d": case "l": case "a": case "Alt_F6": case "Shift_A": 
@@ -6455,6 +6459,12 @@ public class Animation
 //				lastNumberOfRows = caption.this_fullFramesGfx.numberOfRows;
 //			}
 			break;
+		case "Control_Shift_U": case "Control_Shift_V":
+			if(Integer.valueOf(whichGraphicOnScreen.split(",")[2]) != Integer.valueOf(whatToProcess.split(",")[2])) {
+				processAnimation(Constants.FRONT, print_writers, "PopUps$Change$HeadAll_Change", "START");
+			}
+			processAnimation(Constants.FRONT, print_writers, "PopUps$Change$DataAll_Change", "START");
+			break;
 		case "Shift_I":
 			processAnimation(Constants.FRONT, print_writers, "Change", "START");
 			break;	
@@ -6760,6 +6770,14 @@ public class Animation
 			switch(whatToProcess.split(",")[0]) {
 			case "Shift_F12":
 				processAnimation(Constants.FRONT, print_writers, "Anim_InfoBar$IdentInfo$Change", "SHOW 0.0");
+				break;
+			case "Control_Shift_U": case "Control_Shift_V":
+				TimeUnit.MILLISECONDS.sleep(1000);
+				if(Integer.valueOf(whichGraphicOnScreen.split(",")[2]) != Integer.valueOf(whatToProcess.split(",")[2])) {
+					processAnimation(Constants.FRONT, print_writers, "PopUps$Change$HeadAll_Change", "SHOW 0.0");
+				}
+				processAnimation(Constants.FRONT, print_writers, "PopUps$Change$DataAll_Change", "SHOW 0.0");
+				this.whichGraphicOnScreen = whatToProcess;
 				break;
 			case "Shift_F1": case "Shift_F2":
 				processAnimation(Constants.FRONT, print_writers, "Anim_MiniChange", "SHOW 0.0");
@@ -8821,7 +8839,14 @@ public class Animation
 			 TimeUnit.MILLISECONDS.sleep(1000);
 			 processAnimation(Constants.FRONT, print_writers, "Sponsor_Pop", "SHOW 0.0");
 			 processAnimation(Constants.FRONT, print_writers, "PopUps$InOut", "SHOW 0.0");
-			 break;  
+			 break; 
+		 case "Control_Shift_U": case "Control_Shift_V":
+			processAnimation(Constants.FRONT, print_writers, "PopUps$InOut", "CONTINUE");
+			TimeUnit.MILLISECONDS.sleep(1000);
+			processAnimation(Constants.FRONT, print_writers, "PopUps", "SHOW 0.0");
+			processAnimation(Constants.FRONT, print_writers, "PopUps$Out", "SHOW 2.800");
+			this.whichGraphicOnScreen = "";
+			break;
 			 
 		case "F5": case "F6": case "F9": case "Control_F2": case "Alt_Shift_F3": case "Control_F5": case "Control_F9": 
 		case "Control_a":  case "Control_F3": case "Alt_o": case "Shift_F3": case "u": case "d": case "e": case "Shift_F5": 
@@ -15162,8 +15187,9 @@ public class Animation
 	                                + "/Default/Overlays C:/Temp/Preview.png Anim_BugsChange 1.260 \0", print_writer);
 	                        break;
 	                    case "Control_Shift_U": case "Control_Shift_V":
-	                        CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER PREVIEW SCENE*" + "/Default/Overlays" + " C:/Temp/Preview.tga "
-	                                + "PopUps$Change 1.000\0", print_writer);
+	                        CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER PREVIEW SCENE*" + "/Default/Overlays" + " C:/Temp/Preview.tga PopUps$Change 1.000 "
+	                        		+ "PopUps$Change$HeadAll_Change 1.000 PopUps$Change$HeadAll_Change$Head_Change 1.000 PopUps$Change$HeadAll_Change$Logo_Change 1.000 "
+	                                + "PopUps$Change$DataAll_Change 1.000 PopUps$Change$DataAll_Change$SubHead_Change 1.000 PopUps$Change$DataAll_Change$Data_Change 1.000\0", print_writer);
 	                        break;
 	                    }
 	                }
