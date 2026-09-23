@@ -7980,7 +7980,7 @@ public class BugsAndMiniGfx
 				}
 				
 				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$minis$Side" + WhichSide + "$Batting$txt_FirstName*GEOM*TEXT SET " + 
-						(config.getBroadcaster().equalsIgnoreCase(Constants.LEGENDS)?inning.getBatting_team().getTeamName2():inning.getBatting_team().getTeamName3()) 
+						(config.getBroadcaster().equalsIgnoreCase(Constants.LEGENDS)?inning.getBatting_team().getTeamName2():inning.getBatting_team().getTeamName1()) 
 						+ " \0", print_writers);
 				
 				
@@ -8469,38 +8469,38 @@ public class BugsAndMiniGfx
 					    if (matchName.contains("ELIMINATOR")) {
 					        CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$minis$Side" + WhichSide + "$Batting$Row" + row_id 
 					        		+ "$Players_Dehighlight$txt_Name*GEOM*TEXT SET v " + (config.getBroadcaster().equalsIgnoreCase(Constants.LEGENDS)
-					        				?match.getOpponentTeam().getTeamName2():match.getOpponentTeam().getTeamName3())+ ", ELM \0",print_writers);
+					        				?match.getOpponentTeam().getTeamName2():match.getOpponentTeam().getTeamName2())+ ", ELM \0",print_writers);
 
 					    } else if (matchName.contains("QUALIFIER 1")) {
 					        CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$minis$Side" + WhichSide + "$Batting$Row" + row_id 
 					        		+ "$Players_Dehighlight$txt_Name*GEOM*TEXT SET v " + (config.getBroadcaster().equalsIgnoreCase(Constants.LEGENDS)
-							        		?match.getOpponentTeam().getTeamName2():match.getOpponentTeam().getTeamName3()) + ", QF 1 \0",print_writers);
+							        		?match.getOpponentTeam().getTeamName2():match.getOpponentTeam().getTeamName2()) + ", QF 1 \0",print_writers);
 
 					    } else if (matchName.contains("QUALIFIER 2")) {
 					        CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$minis$Side" + WhichSide + "$Batting$Row" + row_id 
 					        		+ "$Players_Dehighlight$txt_Name*GEOM*TEXT SET v " + (config.getBroadcaster().equalsIgnoreCase(Constants.LEGENDS)
-							        		?match.getOpponentTeam().getTeamName2():match.getOpponentTeam().getTeamName3()) + ", QF 2 \0",print_writers);
+							        		?match.getOpponentTeam().getTeamName2():match.getOpponentTeam().getTeamName2()) + ", QF 2 \0",print_writers);
 
 					    }else if (matchName.contains("SEMI FINAL 1")) {
 					        CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$minis$Side" + WhichSide + "$Batting$Row" + row_id 
 					        		+ "$Players_Dehighlight$txt_Name*GEOM*TEXT SET v " + (config.getBroadcaster().equalsIgnoreCase(Constants.LEGENDS)
-							        		?match.getOpponentTeam().getTeamName2():match.getOpponentTeam().getTeamName3()) + ", SF 1 \0",print_writers);
+							        		?match.getOpponentTeam().getTeamName2():match.getOpponentTeam().getTeamName2()) + ", SF 1 \0",print_writers);
 
 					    } else if (matchName.contains("SEMI FINAL 2")) {
 					        CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$minis$Side" + WhichSide + "$Batting$Row" + row_id 
 					        		+ "$Players_Dehighlight$txt_Name*GEOM*TEXT SET v " + (config.getBroadcaster().equalsIgnoreCase(Constants.LEGENDS)
-							        		?match.getOpponentTeam().getTeamName2():match.getOpponentTeam().getTeamName3()) + ", SF 2 \0",print_writers);
+							        		?match.getOpponentTeam().getTeamName2():match.getOpponentTeam().getTeamName2()) + ", SF 2 \0",print_writers);
 
 					    } else if (matchName.contains("FINAL")) {
 					        CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$minis$Side" + WhichSide + "$Batting$Row" + row_id 
 					        		+ "$Players_Dehighlight$txt_Name*GEOM*TEXT SET v " + (config.getBroadcaster().equalsIgnoreCase(Constants.LEGENDS)
-							        		?match.getOpponentTeam().getTeamName2():match.getOpponentTeam().getTeamName3()) + ", FINAL \0", print_writers);
+							        		?match.getOpponentTeam().getTeamName2():match.getOpponentTeam().getTeamName2()) + ", FINAL \0", print_writers);
 
 					    } else {
 					        CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$minis$Side" + WhichSide + "$Batting$Row" + row_id 
 					        		+ "$Players_Dehighlight$txt_Name*GEOM*TEXT SET v " + (config.getBroadcaster().equalsIgnoreCase(Constants.LEGENDS)
-							        		?match.getOpponentTeam().getTeamName2():match.getOpponentTeam().getTeamName3()) + ", " 
-							        		+ getMatchCode(matchName.replace(".json", ""),"") + " \0",print_writers);
+							        		?match.getOpponentTeam().getTeamName2():match.getOpponentTeam().getTeamName2()) + ", " 
+							        		+ getMatchCode(matchName.replace(".json", "")) + " \0",print_writers);
 					    }
 
 					    //------------------------------------------------
@@ -8576,32 +8576,32 @@ public class BugsAndMiniGfx
 								if(matchAllData.getSetup().getMatchIdent().contains("ELIMINATOR")) {
 									CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$minis$Side" + WhichSide+ "$Batting$Row" + row_id
 											+ "$Players_Highlight$txt_Name*GEOM*TEXT SET v " + (config.getBroadcaster().equalsIgnoreCase(Constants.LEGENDS)
-							        				?inning.getBowling_team().getTeamName2():inning.getBowling_team().getTeamName3()) + ", ELM" + " \0",print_writers);
+							        				?inning.getBowling_team().getTeamName2():inning.getBowling_team().getTeamName2()) + ", ELM" + " \0",print_writers);
 								}else if(matchAllData.getSetup().getMatchIdent().contains("QUALIFIER 1")) {
 									CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$minis$Side" + WhichSide+ "$Batting$Row" + row_id
 											+ "$Players_Highlight$txt_Name*GEOM*TEXT SET v " + (config.getBroadcaster().equalsIgnoreCase(Constants.LEGENDS)
-							        				?inning.getBowling_team().getTeamName2():inning.getBowling_team().getTeamName3()) + ", QF 1" + " \0",print_writers);
+							        				?inning.getBowling_team().getTeamName2():inning.getBowling_team().getTeamName2()) + ", QF 1" + " \0",print_writers);
 								}else if(matchAllData.getSetup().getMatchIdent().contains("QUALIFIER 2")) {
 									CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$minis$Side" + WhichSide+ "$Batting$Row" + row_id
 											+ "$Players_Highlight$txt_Name*GEOM*TEXT SET v " + (config.getBroadcaster().equalsIgnoreCase(Constants.LEGENDS)
-							        				?inning.getBowling_team().getTeamName2():inning.getBowling_team().getTeamName3()) + ", QF 2" + " \0",print_writers);
+							        				?inning.getBowling_team().getTeamName2():inning.getBowling_team().getTeamName2()) + ", QF 2" + " \0",print_writers);
 								}else if(matchAllData.getSetup().getMatchIdent().contains("SEMI FINAL 1")) {
 									CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$minis$Side" + WhichSide+ "$Batting$Row" + row_id
 											+ "$Players_Highlight$txt_Name*GEOM*TEXT SET v " + (config.getBroadcaster().equalsIgnoreCase(Constants.LEGENDS)
-							        				?inning.getBowling_team().getTeamName2():inning.getBowling_team().getTeamName3()) + ", SF 1" + " \0",print_writers);
+							        				?inning.getBowling_team().getTeamName2():inning.getBowling_team().getTeamName2()) + ", SF 1" + " \0",print_writers);
 								}else if(matchAllData.getSetup().getMatchIdent().contains("SEMI FINAL 2")) {
 									CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$minis$Side" + WhichSide+ "$Batting$Row" + row_id
 											+ "$Players_Highlight$txt_Name*GEOM*TEXT SET v " + (config.getBroadcaster().equalsIgnoreCase(Constants.LEGENDS)
-							        				?inning.getBowling_team().getTeamName2():inning.getBowling_team().getTeamName3()) + ", SF 2" + " \0",print_writers);
+							        				?inning.getBowling_team().getTeamName2():inning.getBowling_team().getTeamName2()) + ", SF 2" + " \0",print_writers);
 								}else if(matchAllData.getSetup().getMatchIdent().contains("FINAL")) {
 									CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$minis$Side" + WhichSide+ "$Batting$Row" + row_id
 											+ "$Players_Highlight$txt_Name*GEOM*TEXT SET v " + (config.getBroadcaster().equalsIgnoreCase(Constants.LEGENDS)
-							        				?inning.getBowling_team().getTeamName2():inning.getBowling_team().getTeamName3()) + ", FINAL" + " \0",print_writers);
+							        				?inning.getBowling_team().getTeamName2():inning.getBowling_team().getTeamName2()) + ", FINAL" + " \0",print_writers);
 								}else {
 									CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$minis$Side" + WhichSide + "$Batting$Row" + row_id 
 											+ "$Players_Highlight$txt_Name*GEOM*TEXT SET v " + (config.getBroadcaster().equalsIgnoreCase(Constants.LEGENDS)
-							        				?inning.getBowling_team().getTeamName2():inning.getBowling_team().getTeamName3()) + ", " 
-							        					+ getMatchCode(matchAllData.getSetup().getMatchIdent(),"") + " \0", print_writers);
+							        				?inning.getBowling_team().getTeamName2():inning.getBowling_team().getTeamName2()) + ", " 
+							        					+ getMatchCode(matchAllData.getSetup().getMatchIdent()) + " \0", print_writers);
 								}
 								
 								switch (config.getBroadcaster().toUpperCase()) {
@@ -8663,32 +8663,32 @@ public class BugsAndMiniGfx
 								if(matchAllData.getSetup().getMatchIdent().contains("ELIMINATOR")) {
 									CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$minis$Side" + WhichSide+ "$Batting$Row" + row_id
 											+ "$Players_Highlight$txt_Name*GEOM*TEXT SET v " + (config.getBroadcaster().equalsIgnoreCase(Constants.LEGENDS)
-							        				?inning.getBowling_team().getTeamName2():inning.getBowling_team().getTeamName3()) + ", ELM" + " \0",print_writers);
+							        				?inning.getBowling_team().getTeamName2():inning.getBowling_team().getTeamName2()) + ", ELM" + " \0",print_writers);
 								}else if(matchAllData.getSetup().getMatchIdent().contains("QUALIFIER 1")) {
 									CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$minis$Side" + WhichSide+ "$Batting$Row" + row_id
 											+ "$Players_Highlight$txt_Name*GEOM*TEXT SET v " + (config.getBroadcaster().equalsIgnoreCase(Constants.LEGENDS)
-							        				?inning.getBowling_team().getTeamName2():inning.getBowling_team().getTeamName3()) + ", QF 1" + " \0",print_writers);
+							        				?inning.getBowling_team().getTeamName2():inning.getBowling_team().getTeamName2()) + ", QF 1" + " \0",print_writers);
 								}else if(matchAllData.getSetup().getMatchIdent().contains("QUALIFIER 2")) {
 									CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$minis$Side" + WhichSide+ "$Batting$Row" + row_id
 											+ "$Players_Highlight$txt_Name*GEOM*TEXT SET v " + (config.getBroadcaster().equalsIgnoreCase(Constants.LEGENDS)
-							        				?inning.getBowling_team().getTeamName2():inning.getBowling_team().getTeamName3()) + ", QF 2" + " \0",print_writers);
+							        				?inning.getBowling_team().getTeamName2():inning.getBowling_team().getTeamName2()) + ", QF 2" + " \0",print_writers);
 								}else if(matchAllData.getSetup().getMatchIdent().contains("SEMI FINAL 1")) {
 									CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$minis$Side" + WhichSide+ "$Batting$Row" + row_id
 											+ "$Players_Highlight$txt_Name*GEOM*TEXT SET v " + (config.getBroadcaster().equalsIgnoreCase(Constants.LEGENDS)
-							        				?inning.getBowling_team().getTeamName2():inning.getBowling_team().getTeamName3()) + ", SF 1" + " \0",print_writers);
+							        				?inning.getBowling_team().getTeamName2():inning.getBowling_team().getTeamName2()) + ", SF 1" + " \0",print_writers);
 								}else if(matchAllData.getSetup().getMatchIdent().contains("SEMI FINAL 2")) {
 									CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$minis$Side" + WhichSide+ "$Batting$Row" + row_id
 											+ "$Players_Highlight$txt_Name*GEOM*TEXT SET v " + (config.getBroadcaster().equalsIgnoreCase(Constants.LEGENDS)
-							        				?inning.getBowling_team().getTeamName2():inning.getBowling_team().getTeamName3()) + ", SF 2" + " \0",print_writers);
+							        				?inning.getBowling_team().getTeamName2():inning.getBowling_team().getTeamName2()) + ", SF 2" + " \0",print_writers);
 								}else if(matchAllData.getSetup().getMatchIdent().contains("FINAL")) {
 									CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$minis$Side" + WhichSide+ "$Batting$Row" + row_id
 											+ "$Players_Highlight$txt_Name*GEOM*TEXT SET v " + (config.getBroadcaster().equalsIgnoreCase(Constants.LEGENDS)
-							        				?inning.getBowling_team().getTeamName2():inning.getBowling_team().getTeamName3()) + ", FINAL" + " \0",print_writers);
+							        				?inning.getBowling_team().getTeamName2():inning.getBowling_team().getTeamName2()) + ", FINAL" + " \0",print_writers);
 								}else {
 									CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$minis$Side" + WhichSide + "$Batting$Row" + row_id 
 											+ "$Players_Highlight$txt_Name*GEOM*TEXT SET v " + (config.getBroadcaster().equalsIgnoreCase(Constants.LEGENDS)
-							        				?inning.getBowling_team().getTeamName2():inning.getBowling_team().getTeamName3()) + ", " 
-							        				+ getMatchCode(matchAllData.getSetup().getMatchIdent(),"") + " \0", print_writers);
+							        				?inning.getBowling_team().getTeamName2():inning.getBowling_team().getTeamName2()) + ", " 
+							        				+ getMatchCode(matchAllData.getSetup().getMatchIdent()) + " \0", print_writers);
 								}
 								
 								switch (config.getBroadcaster().toUpperCase()) {
@@ -8760,32 +8760,32 @@ public class BugsAndMiniGfx
 						if(matchAllData.getSetup().getMatchIdent().contains("ELIMINATOR")) {
 							CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$minis$Side" + WhichSide+ "$Batting$Row" + row_id
 									+ "$Players_Highlight$txt_Name*GEOM*TEXT SET v " + (config.getBroadcaster().equalsIgnoreCase(Constants.LEGENDS)
-					        				?inning.getBowling_team().getTeamName2():inning.getBowling_team().getTeamName3()) + ", ELM" + " \0",print_writers);
+					        				?inning.getBowling_team().getTeamName2():inning.getBowling_team().getTeamName2()) + ", ELM" + " \0",print_writers);
 						}else if(matchAllData.getSetup().getMatchIdent().contains("QUALIFIER 1")) {
 							CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$minis$Side" + WhichSide+ "$Batting$Row" + row_id
 									+ "$Players_Highlight$txt_Name*GEOM*TEXT SET v " + (config.getBroadcaster().equalsIgnoreCase(Constants.LEGENDS)
-					        				?inning.getBowling_team().getTeamName2():inning.getBowling_team().getTeamName3()) + ", QF 1" + " \0",print_writers);
+					        				?inning.getBowling_team().getTeamName2():inning.getBowling_team().getTeamName2()) + ", QF 1" + " \0",print_writers);
 						}else if(matchAllData.getSetup().getMatchIdent().contains("QUALIFIER 2")) {
 							CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$minis$Side" + WhichSide+ "$Batting$Row" + row_id
 									+ "$Players_Highlight$txt_Name*GEOM*TEXT SET v " + (config.getBroadcaster().equalsIgnoreCase(Constants.LEGENDS)
-					        				?inning.getBowling_team().getTeamName2():inning.getBowling_team().getTeamName3()) + ", QF 2" + " \0",print_writers);
+					        				?inning.getBowling_team().getTeamName2():inning.getBowling_team().getTeamName2()) + ", QF 2" + " \0",print_writers);
 						}else if(matchAllData.getSetup().getMatchIdent().contains("SEMI FINAL 1")) {
 							CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$minis$Side" + WhichSide+ "$Batting$Row" + row_id
 									+ "$Players_Highlight$txt_Name*GEOM*TEXT SET v " + (config.getBroadcaster().equalsIgnoreCase(Constants.LEGENDS)
-					        				?inning.getBowling_team().getTeamName2():inning.getBowling_team().getTeamName3()) + ", SF 1" + " \0",print_writers);
+					        				?inning.getBowling_team().getTeamName2():inning.getBowling_team().getTeamName2()) + ", SF 1" + " \0",print_writers);
 						}else if(matchAllData.getSetup().getMatchIdent().contains("SEMI FINAL 2")) {
 							CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$minis$Side" + WhichSide+ "$Batting$Row" + row_id
 									+ "$Players_Highlight$txt_Name*GEOM*TEXT SET v " + (config.getBroadcaster().equalsIgnoreCase(Constants.LEGENDS)
-					        				?inning.getBowling_team().getTeamName2():inning.getBowling_team().getTeamName3()) + ", SF 2" + " \0",print_writers);
+					        				?inning.getBowling_team().getTeamName2():inning.getBowling_team().getTeamName2()) + ", SF 2" + " \0",print_writers);
 						}else if(matchAllData.getSetup().getMatchIdent().contains("FINAL")) {
 							CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$minis$Side" + WhichSide+ "$Batting$Row" + row_id
 									+ "$Players_Highlight$txt_Name*GEOM*TEXT SET v " + (config.getBroadcaster().equalsIgnoreCase(Constants.LEGENDS)
-					        				?inning.getBowling_team().getTeamName2():inning.getBowling_team().getTeamName3()) + ", FINAL" + " \0",print_writers);
+					        				?inning.getBowling_team().getTeamName2():inning.getBowling_team().getTeamName2()) + ", FINAL" + " \0",print_writers);
 						}else {
 							CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$minis$Side" + WhichSide + "$Batting$Row" + row_id 
 									+ "$Players_Highlight$txt_Name*GEOM*TEXT SET v " + (config.getBroadcaster().equalsIgnoreCase(Constants.LEGENDS)
-					        				?inning.getBowling_team().getTeamName2():inning.getBowling_team().getTeamName3()) + ", " 
-					        				+ getMatchCode(matchAllData.getSetup().getMatchIdent(),"") + " \0", print_writers);
+					        				?inning.getBowling_team().getTeamName2():inning.getBowling_team().getTeamName2()) + ", " 
+					        				+ getMatchCode(matchAllData.getSetup().getMatchIdent()) + " \0", print_writers);
 						}
 						
 						switch (config.getBroadcaster().toUpperCase()) {
@@ -8878,7 +8878,7 @@ public class BugsAndMiniGfx
 				}
 				
 				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$minis$Side" + WhichSide + "$Bowling$txt_FirstName*GEOM*TEXT SET " + 
-						(config.getBroadcaster().equalsIgnoreCase(Constants.LEGENDS)?inning.getBowling_team().getTeamName2():inning.getBowling_team().getTeamName3())  
+						(config.getBroadcaster().equalsIgnoreCase(Constants.LEGENDS)?inning.getBowling_team().getTeamName2():inning.getBowling_team().getTeamName1())  
 						+ " \0", print_writers);
 				
 				for(int i=1; i<=inning.getBowlingCard().size(); i++) {
@@ -9442,31 +9442,31 @@ public class BugsAndMiniGfx
 					    if (matchName.contains("ELIMINATOR")) {
 					    		CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$minis$Side" + WhichSide+ "$Bowling$Row" + row_no1
 									+ "$Players_Dehighlight$txt_Name*GEOM*TEXT SET v " + (config.getBroadcaster().equalsIgnoreCase(Constants.LEGENDS)
-					        				?match.getOpponentTeam().getTeamName2():match.getOpponentTeam().getTeamName3()) + ", ELM" + " \0", print_writers);
+					        				?match.getOpponentTeam().getTeamName2():match.getOpponentTeam().getTeamName2()) + ", ELM" + " \0", print_writers);
 					    } else if (matchName.contains("QUALIFIER 1")) {
 					    		CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$minis$Side" + WhichSide+ "$Bowling$Row" + row_no1
 									+ "$Players_Dehighlight$txt_Name*GEOM*TEXT SET v " + (config.getBroadcaster().equalsIgnoreCase(Constants.LEGENDS)
-					        				?match.getOpponentTeam().getTeamName2():match.getOpponentTeam().getTeamName3()) + ", QF 1" + " \0", print_writers);
+					        				?match.getOpponentTeam().getTeamName2():match.getOpponentTeam().getTeamName2()) + ", QF 1" + " \0", print_writers);
 					    } else if (matchName.contains("QUALIFIER 2")) {
 					    		CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$minis$Side" + WhichSide+ "$Bowling$Row" + row_no1
 									+ "$Players_Dehighlight$txt_Name*GEOM*TEXT SET v " + (config.getBroadcaster().equalsIgnoreCase(Constants.LEGENDS)
-					        				?match.getOpponentTeam().getTeamName2():match.getOpponentTeam().getTeamName3()) + ", QF 2" + " \0", print_writers);
+					        				?match.getOpponentTeam().getTeamName2():match.getOpponentTeam().getTeamName2()) + ", QF 2" + " \0", print_writers);
 					    }else if (matchName.contains("SEMI FINAL 1")) {
 					    		CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$minis$Side" + WhichSide+ "$Bowling$Row" + row_no1
 									+ "$Players_Dehighlight$txt_Name*GEOM*TEXT SET v " + (config.getBroadcaster().equalsIgnoreCase(Constants.LEGENDS)
-					        				?match.getOpponentTeam().getTeamName2():match.getOpponentTeam().getTeamName3()) + ", SF 1" + " \0", print_writers);
+					        				?match.getOpponentTeam().getTeamName2():match.getOpponentTeam().getTeamName2()) + ", SF 1" + " \0", print_writers);
 					    } else if (matchName.contains("SEMI FINAL 2")) {
 					    		CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$minis$Side" + WhichSide+ "$Bowling$Row" + row_no1
 									+ "$Players_Dehighlight$txt_Name*GEOM*TEXT SET v " + (config.getBroadcaster().equalsIgnoreCase(Constants.LEGENDS)
-					        				?match.getOpponentTeam().getTeamName2():match.getOpponentTeam().getTeamName3()) + ", SF 2" + " \0", print_writers);
+					        				?match.getOpponentTeam().getTeamName2():match.getOpponentTeam().getTeamName2()) + ", SF 2" + " \0", print_writers);
 					    } else if (matchName.contains("FINAL")) {
 					    		CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$minis$Side" + WhichSide+ "$Bowling$Row" + row_no1
 									+ "$Players_Dehighlight$txt_Name*GEOM*TEXT SET v " + (config.getBroadcaster().equalsIgnoreCase(Constants.LEGENDS)
-					        				?match.getOpponentTeam().getTeamName2():match.getOpponentTeam().getTeamName3()) + ", FINAL" + " \0", print_writers);
+					        				?match.getOpponentTeam().getTeamName2():match.getOpponentTeam().getTeamName2()) + ", FINAL" + " \0", print_writers);
 					    } else {
 					    		CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$minis$Side" + WhichSide+ "$Bowling$Row" + row_no1
 									+ "$Players_Dehighlight$txt_Name*GEOM*TEXT SET v " + (config.getBroadcaster().equalsIgnoreCase(Constants.LEGENDS)
-					        				?match.getOpponentTeam().getTeamName2():match.getOpponentTeam().getTeamName3()) + ", " + getMatchCode(matchName.replace(".json", ""),"") + " \0", print_writers);
+					        				?match.getOpponentTeam().getTeamName2():match.getOpponentTeam().getTeamName2()) + ", " + getMatchCode(matchName.replace(".json", "")) + " \0", print_writers);
 					    }
 
 					    //------------------------------------------------
@@ -9530,32 +9530,32 @@ public class BugsAndMiniGfx
 								if(matchAllData.getSetup().getMatchIdent().contains("ELIMINATOR")) {
 									CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$minis$Side" + WhichSide+ "$Bowling$Row" + row_no1
 											+ "$Players_Highlight$txt_Name*GEOM*TEXT SET v " + (config.getBroadcaster().equalsIgnoreCase(Constants.LEGENDS)
-							        				?inning.getBatting_team().getTeamName2():inning.getBatting_team().getTeamName3()) + ", ELM" + " \0", print_writers);
+							        				?inning.getBatting_team().getTeamName2():inning.getBatting_team().getTeamName2()) + ", ELM" + " \0", print_writers);
 								}else if(matchAllData.getSetup().getMatchIdent().contains("QUALIFIER 1")) {
 									CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$minis$Side" + WhichSide+ "$Bowling$Row" + row_no1
 											+ "$Players_Highlight$txt_Name*GEOM*TEXT SET v " + (config.getBroadcaster().equalsIgnoreCase(Constants.LEGENDS)
-							        				?inning.getBatting_team().getTeamName2():inning.getBatting_team().getTeamName3()) + ", QF 1" + " \0", print_writers);
+							        				?inning.getBatting_team().getTeamName2():inning.getBatting_team().getTeamName2()) + ", QF 1" + " \0", print_writers);
 								}else if(matchAllData.getSetup().getMatchIdent().contains("QUALIFIER 2")) {
 									CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$minis$Side" + WhichSide+ "$Bowling$Row" + row_no1
 											+ "$Players_Highlight$txt_Name*GEOM*TEXT SET v " + (config.getBroadcaster().equalsIgnoreCase(Constants.LEGENDS)
-							        				?inning.getBatting_team().getTeamName2():inning.getBatting_team().getTeamName3()) + ", QF 2" + " \0", print_writers);
+							        				?inning.getBatting_team().getTeamName2():inning.getBatting_team().getTeamName2()) + ", QF 2" + " \0", print_writers);
 								}else if(matchAllData.getSetup().getMatchIdent().contains("SEMI FINAL 1")) {
 									CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$minis$Side" + WhichSide+ "$Bowling$Row" + row_no1
 											+ "$Players_Highlight$txt_Name*GEOM*TEXT SET v " + (config.getBroadcaster().equalsIgnoreCase(Constants.LEGENDS)
-							        				?inning.getBatting_team().getTeamName2():inning.getBatting_team().getTeamName3()) + ", SF 1" + " \0", print_writers);
+							        				?inning.getBatting_team().getTeamName2():inning.getBatting_team().getTeamName2()) + ", SF 1" + " \0", print_writers);
 								}else if(matchAllData.getSetup().getMatchIdent().contains("SEMI FINAL 2")) {
 									CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$minis$Side" + WhichSide+ "$Bowling$Row" + row_no1
 											+ "$Players_Highlight$txt_Name*GEOM*TEXT SET v " + (config.getBroadcaster().equalsIgnoreCase(Constants.LEGENDS)
-							        				?inning.getBatting_team().getTeamName2():inning.getBatting_team().getTeamName3()) + ", SF 2" + " \0", print_writers);
+							        				?inning.getBatting_team().getTeamName2():inning.getBatting_team().getTeamName2()) + ", SF 2" + " \0", print_writers);
 								}else if(matchAllData.getSetup().getMatchIdent().contains("FINAL")) {
 									CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$minis$Side" + WhichSide+ "$Bowling$Row" + row_no1
 											+ "$Players_Highlight$txt_Name*GEOM*TEXT SET v " + (config.getBroadcaster().equalsIgnoreCase(Constants.LEGENDS)
-							        				?inning.getBatting_team().getTeamName2():inning.getBatting_team().getTeamName3()) + ", FINAL" + " \0", print_writers);
+							        				?inning.getBatting_team().getTeamName2():inning.getBatting_team().getTeamName2()) + ", FINAL" + " \0", print_writers);
 								}else {
 									CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$minis$Side" + WhichSide+ "$Bowling$Row" + row_no1
 											+ "$Players_Highlight$txt_Name*GEOM*TEXT SET v " + (config.getBroadcaster().equalsIgnoreCase(Constants.LEGENDS)
-							        				?inning.getBatting_team().getTeamName2():inning.getBatting_team().getTeamName3()) + ", " 
-											+ getMatchCode(matchAllData.getSetup().getMatchIdent(),"") + " \0", print_writers);
+							        				?inning.getBatting_team().getTeamName2():inning.getBatting_team().getTeamName2()) + ", " 
+											+ getMatchCode(matchAllData.getSetup().getMatchIdent()) + " \0", print_writers);
 								}
 								
 								switch (config.getBroadcaster().toUpperCase()) {
@@ -9622,32 +9622,32 @@ public class BugsAndMiniGfx
 						if(matchAllData.getSetup().getMatchIdent().contains("ELIMINATOR")) {
 							CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$minis$Side" + WhichSide+ "$Bowling$Row" + row_no1
 									+ "$Players_Highlight$txt_Name*GEOM*TEXT SET v " + (config.getBroadcaster().equalsIgnoreCase(Constants.LEGENDS)
-					        				?inning.getBatting_team().getTeamName2():inning.getBatting_team().getTeamName3()) + ", ELM" + " \0", print_writers);
+					        				?inning.getBatting_team().getTeamName2():inning.getBatting_team().getTeamName2()) + ", ELM" + " \0", print_writers);
 						}else if(matchAllData.getSetup().getMatchIdent().contains("QUALIFIER 1")) {
 							CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$minis$Side" + WhichSide+ "$Bowling$Row" + row_no1
 									+ "$Players_Highlight$txt_Name*GEOM*TEXT SET v " + (config.getBroadcaster().equalsIgnoreCase(Constants.LEGENDS)
-					        				?inning.getBatting_team().getTeamName2():inning.getBatting_team().getTeamName3()) + ", QF 1" + " \0", print_writers);
+					        				?inning.getBatting_team().getTeamName2():inning.getBatting_team().getTeamName2()) + ", QF 1" + " \0", print_writers);
 						}else if(matchAllData.getSetup().getMatchIdent().contains("QUALIFIER 2")) {
 							CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$minis$Side" + WhichSide+ "$Bowling$Row" + row_no1
 									+ "$Players_Highlight$txt_Name*GEOM*TEXT SET v " + (config.getBroadcaster().equalsIgnoreCase(Constants.LEGENDS)
-					        				?inning.getBatting_team().getTeamName2():inning.getBatting_team().getTeamName3()) + ", QF 2" + " \0", print_writers);
+					        				?inning.getBatting_team().getTeamName2():inning.getBatting_team().getTeamName2()) + ", QF 2" + " \0", print_writers);
 						}else if(matchAllData.getSetup().getMatchIdent().contains("SEMI FINAL 1")) {
 							CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$minis$Side" + WhichSide+ "$Bowling$Row" + row_no1
 									+ "$Players_Highlight$txt_Name*GEOM*TEXT SET v " + (config.getBroadcaster().equalsIgnoreCase(Constants.LEGENDS)
-					        				?inning.getBatting_team().getTeamName2():inning.getBatting_team().getTeamName3()) + ", SF 1" + " \0", print_writers);
+					        				?inning.getBatting_team().getTeamName2():inning.getBatting_team().getTeamName2()) + ", SF 1" + " \0", print_writers);
 						}else if(matchAllData.getSetup().getMatchIdent().contains("SEMI FINAL 2")) {
 							CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$minis$Side" + WhichSide+ "$Bowling$Row" + row_no1
 									+ "$Players_Highlight$txt_Name*GEOM*TEXT SET v " + (config.getBroadcaster().equalsIgnoreCase(Constants.LEGENDS)
-					        				?inning.getBatting_team().getTeamName2():inning.getBatting_team().getTeamName3()) + ", SF 2" + " \0", print_writers);
+					        				?inning.getBatting_team().getTeamName2():inning.getBatting_team().getTeamName2()) + ", SF 2" + " \0", print_writers);
 						}else if(matchAllData.getSetup().getMatchIdent().contains("FINAL")) {
 							CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$minis$Side" + WhichSide+ "$Bowling$Row" + row_no1
 									+ "$Players_Highlight$txt_Name*GEOM*TEXT SET v " + (config.getBroadcaster().equalsIgnoreCase(Constants.LEGENDS)
-					        				?inning.getBatting_team().getTeamName2():inning.getBatting_team().getTeamName3()) + ", FINAL" + " \0", print_writers);
+					        				?inning.getBatting_team().getTeamName2():inning.getBatting_team().getTeamName2()) + ", FINAL" + " \0", print_writers);
 						}else {
 							CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$minis$Side" + WhichSide+ "$Bowling$Row" + row_no1
 									+ "$Players_Highlight$txt_Name*GEOM*TEXT SET v " + (config.getBroadcaster().equalsIgnoreCase(Constants.LEGENDS)
-					        				?inning.getBatting_team().getTeamName2():inning.getBatting_team().getTeamName3()) + ", " 
-					        				+ getMatchCode(matchAllData.getSetup().getMatchIdent(),"") + " \0", print_writers);
+					        				?inning.getBatting_team().getTeamName2():inning.getBatting_team().getTeamName2()) + ", " 
+					        				+ getMatchCode(matchAllData.getSetup().getMatchIdent()) + " \0", print_writers);
 						}
 						
 						switch (config.getBroadcaster().toUpperCase()) {
@@ -9780,9 +9780,9 @@ public class BugsAndMiniGfx
 						break;
 					default:
 						for(Team team : Teams) {
-							if(team.getTeamName4().equalsIgnoreCase(leagueTable.getLeagueTeams().get(i).getTeamName())) {
+							if(team.getTeamBadge().equalsIgnoreCase(leagueTable.getLeagueTeams().get(i).getTeamName())) {
 								CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$PointsTale$DataGrp$Row"+rowId+containerName+
-										"$txt_Name*GEOM*TEXT SET "+team.getTeamName3()+"\0", print_writers);
+										"$txt_Name*GEOM*TEXT SET "+team.getTeamName2()+"\0", print_writers);
 							}
 						}
 						break;

@@ -4670,10 +4670,10 @@ function addItemsToList(whatToProcess,dataToProcess)
 					option.text = 'RECENT FORM';
 					select.appendChild(option);
 					
-					/*option = document.createElement('option');
+					option = document.createElement('option');
 					option.value = 'TIMELINE';
 					option.text = 'TIMELINE';
-					select.appendChild(option);*/
+					select.appendChild(option);
 					
 					switch($('#selected_broadcaster').val().toUpperCase()){
 					case 'NPL': case 'MPL': case 'LEGENDS-90'://case 'APL': 
@@ -4686,7 +4686,7 @@ function addItemsToList(whatToProcess,dataToProcess)
 					}
 					
 					switch($('#selected_broadcaster').val().toUpperCase()){
-					case 'MPL': case 'LEGENDS-90':
+					case 'MPL': case 'LEGENDS-90': case 'APL': 
 						
 						option = document.createElement('option');
 						option.value = 'SPLIT';

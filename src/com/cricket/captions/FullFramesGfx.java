@@ -330,7 +330,7 @@ public class FullFramesGfx
 					"$Select_GraphicsType*FUNCTION*Omo*vis_con SET 16\0", print_writers);
 			
 			CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$AllGraphics$Side" + WhichSide 
-					+"$Row_Col$Select_Row*FUNCTION*Grid*num_row SET 8\0", print_writers);
+					+"$Row_Col$Select_Row*FUNCTION*Grid*num_row SET 5\0", print_writers);
 			
 			for(FairPlayTeam team : fairPlayTable.getFairPlayTeams()) {
 				rowId++;
@@ -713,6 +713,7 @@ public class FullFramesGfx
 	}
 	public String populateTeamLogoAndCaptain(int WhichSide, String whatToProcess, MatchAllData matchAllData) throws ParseException, JsonMappingException, JsonProcessingException, InterruptedException 
 	{
+		int row = 0;
 		switch (config.getBroadcaster()) {
 		case Constants.NPL: case Constants.APL:
 			CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$HeaderGrp$Side" + WhichSide + 
@@ -730,6 +731,12 @@ public class FullFramesGfx
 						"$Select_GraphicsType*FUNCTION*Omo*vis_con SET 19\0", print_writers);
 				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$ExtraData$Side" + WhichSide +
 						"$TLogo$TLogo*TEXTURE*IMAGE SET " + Constants.APL_LOGO_PATH + "TLogo_White" + "\0", print_writers);
+				
+				for(Team tm : Teams) {
+					row = row + 1;
+					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$AllGraphics$Side" + WhichSide +
+							"$Tournaments_Teams$Team" + row + "$img_Badges*TEXTURE*IMAGE SET " + Constants.APL_LOGO_PATH + tm.getTeamBadge() + "\0", print_writers);
+				}
 				break;
 			}
 			
@@ -5695,6 +5702,8 @@ public class FullFramesGfx
 					
 					if(WhichProfile.equalsIgnoreCase("DT20")) {
 						short_name =  "T20 CAREER";
+					}else if(WhichProfile.equalsIgnoreCase("IT20")) {
+						short_name =  "T20I CAREER";
 					}else if(WhichProfile.equalsIgnoreCase("IPL")) {
 						short_name =  "IPL CAREER";
 					}else if(WhichProfile.equalsIgnoreCase("NPL_CAREER")) {
@@ -5708,7 +5717,7 @@ public class FullFramesGfx
 					}else if(WhichProfile.equalsIgnoreCase("NPL S1")) {
 						short_name =  "NPL SEASON 1";
 					}else {
-						short_name = "T20I CAREER";
+						short_name = "WPL CAREER";
 					}
 					
 					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$SudheaderGrp$Side" + WhichSide + "$txt_SubHeadText2"
@@ -11724,13 +11733,15 @@ public class FullFramesGfx
 					}
 				}else {
 					if(FixturesList.get(i).getDate().equalsIgnoreCase(new SimpleDateFormat("dd-MM-yyyy").format(cal_npl.getTime()))) {
+//						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$AllGraphics$Side" + WhichSide +"$TeamSchedule$Row" + rowId +
+//								"$txt_03*GEOM*TEXT SET " + "TODAY" + " | " + FixturesList.get(i).getLocalTime() + "\0", print_writers);
 						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$AllGraphics$Side" + WhichSide +"$TeamSchedule$Row" + rowId +
-								"$txt_03*GEOM*TEXT SET " + "TODAY" + " | " + FixturesList.get(i).getVenue().split(",")[1] + "\0", print_writers);
+								"$txt_03*GEOM*TEXT SET TODAY\0", print_writers);
 					}else {
 						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$AllGraphics$Side" + WhichSide +"$TeamSchedule$Row" + rowId +
 								"$txt_03*GEOM*TEXT SET " + CricketFunctions.ordinal(Integer.valueOf(FixturesList.get(i).getDate().split("-")[0]))
 								+ " " + Month.of(Integer.valueOf(FixturesList.get(i).getDate().split("-")[1])) 
-								+ " | " + FixturesList.get(i).getVenue().split(",")[1] + "\0", print_writers);
+								+ " | " + FixturesList.get(i).getLocalTime() + "\0", print_writers);
 					}
 				}
 			}
@@ -15847,7 +15858,7 @@ public class FullFramesGfx
 								+ "$3$Data$Stat_1" + containerName + "$Justify$txt_Fig*GEOM*TEXT SET "+(top_bowler_beststats.get(j).getBestEquation() / 1000) + "-" + Math.abs(top_bowler_beststats.get(j).getBestEquation())+"\0", print_writers);
 					}
 					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$AllGraphics$Side" + WhichSide + "$Profile$Stats$5_Stats"
-							+ "$3$Data$Stat_1" + containerName + "$Justify$txt_VersusTeam*GEOM*TEXT SET v "+top_bowler_beststats.get(j).getOpponentTeam().getTeamName3().toUpperCase()  + 
+							+ "$3$Data$Stat_1" + containerName + "$Justify$txt_VersusTeam*GEOM*TEXT SET v "+top_bowler_beststats.get(j).getOpponentTeam().getTeamName2().toUpperCase()  + 
 							"\0", print_writers);
 					break;
 				}else if(top_bowler_beststats.get(j).getPlayerId() != player.getPlayerId()) {
@@ -26540,7 +26551,7 @@ public class FullFramesGfx
 						logo_name = "MASTER_XI";
 					}
 				}else {
-					logo_name = matchAllData.getMatch().getInning().get(i-1).getBatting_team().getTeamBadge();
+					logo_name = matchAllData.getMatch().getInning().get(i-1).getBatting_team().getTeamName4();
 					
 					if(matchAllData.getMatch().getInning().get(i-1).getBattingTeamId() == matchAllData.getSetup().getHomeTeamId()) {
 						for(Player hs : matchAllData.getSetup().getHomeSquad()) {
@@ -27716,7 +27727,7 @@ public class FullFramesGfx
 						logo_name = "MASTER_XI";
 					}
 				}else {
-					logo_name = previous_match.getMatch().getInning().get(i-1).getBatting_team().getTeamBadge();
+					logo_name = previous_match.getMatch().getInning().get(i-1).getBatting_team().getTeamName4();
 					
 					
 					if(previous_match.getMatch().getInning().get(i-1).getBattingTeamId() == previous_match.getSetup().getHomeTeamId()) {
@@ -35934,7 +35945,7 @@ public class FullFramesGfx
 									+"$Leader_Board$Stats$Stats$" + rowId + containerName + "$txt_Name*GEOM*TEXT SET " + top_batsman_beststat.get(i).getPlayer().getFull_name() + "\0", print_writers);
 							
 							CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$AllGraphics$Side" + WhichSide +"$Leader_Board$Stats$Stats$"+rowId+containerName+"$txt_Team*GEOM*TEXT SET v " + 
-									top_batsman_beststat.get(i).getOpponentTeam().getTeamName3() + "\0", print_writers);
+									top_batsman_beststat.get(i).getOpponentTeam().getTeamName2() + "\0", print_writers);
 							
 							if(config.getBroadcaster().equalsIgnoreCase(Constants.MPL)) {
 								CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$AllGraphics$Side" + WhichSide 
@@ -35942,7 +35953,7 @@ public class FullFramesGfx
 								
 							}else {
 								CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$AllGraphics$Side" + WhichSide 
-										+"$Leader_Board$Stats$Stats$" + rowId + containerName + "$txt_ExtraDetails*GEOM*TEXT SET v " + top_batsman_beststat.get(i).getOpponentTeam().getTeamName4().toUpperCase() + "\0", print_writers);
+										+"$Leader_Board$Stats$Stats$" + rowId + containerName + "$txt_ExtraDetails*GEOM*TEXT SET v " + top_batsman_beststat.get(i).getOpponentTeam().getTeamName2().toUpperCase() + "\0", print_writers);
 								
 							}
 							
@@ -36029,7 +36040,7 @@ public class FullFramesGfx
 							
 							CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$AllGraphics$Side" + WhichSide 
 									+"$Leader_Board$Stats$Stats$"+rowId+containerName+"$txt_Team*GEOM*TEXT SET v " + 
-									top_bowler_beststats.get(i).getOpponentTeam().getTeamName3() + "\0", print_writers);
+									top_bowler_beststats.get(i).getOpponentTeam().getTeamName2() + "\0", print_writers);
 							
 							CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$AllGraphics$Side" + WhichSide 
 									+"$Leader_Board$Stats$Stats$" + rowId + containerName + "$txt_Name*GEOM*TEXT SET " + top_bowler_beststats.get(i).getPlayer().getFull_name() + "\0", print_writers);
@@ -36039,7 +36050,7 @@ public class FullFramesGfx
 										+"$Leader_Board$Stats$Stats$" + rowId + containerName + "$txt_ExtraDetails*GEOM*TEXT SET \0", print_writers);
 							}else {
 								CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$AllGraphics$Side" + WhichSide 
-										+"$Leader_Board$Stats$Stats$" + rowId + containerName + "$txt_ExtraDetails*GEOM*TEXT SET v " + top_bowler_beststats.get(i).getOpponentTeam().getTeamName4().toUpperCase() + "\0", print_writers);
+										+"$Leader_Board$Stats$Stats$" + rowId + containerName + "$txt_ExtraDetails*GEOM*TEXT SET v " + top_bowler_beststats.get(i).getOpponentTeam().getTeamName2().toUpperCase() + "\0", print_writers);
 							}
 							
 							CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$AllGraphics$Side" + WhichSide 
@@ -39816,13 +39827,13 @@ public class FullFramesGfx
 								CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$AllGraphics$Side" + WhichSide + "$Profile$Stats$5_Stats"
 										+ "$3$Data$Stat_1" + containerName + "$Justify$txt_Fig*GEOM*TEXT SET " + String.valueOf(top_batsman_beststats.get(j).getBestEquation()/2) + "\0", print_writers);
 								CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$AllGraphics$Side" + WhichSide + "$Profile$Stats$5_Stats"
-										+ "$3$Data$Stat_1" + containerName + "$Justify$txt_VersusTeam*GEOM*TEXT SET v "+top_batsman_beststats.get(j).getOpponentTeam().getTeamName3().toUpperCase()+"\0", print_writers);
+										+ "$3$Data$Stat_1" + containerName + "$Justify$txt_VersusTeam*GEOM*TEXT SET v "+top_batsman_beststats.get(j).getOpponentTeam().getTeamName2().toUpperCase()+"\0", print_writers);
 							}
 						}else {
 							CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$AllGraphics$Side" + WhichSide + "$Profile$Stats$5_Stats"
 									+ "$3$Data$Stat_1" + containerName + "$Justify$txt_Fig*GEOM*TEXT SET " + (top_batsman_beststats.get(j).getBestEquation()-1) / 2 + "*" + "\0", print_writers);
 							CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$AllGraphics$Side" + WhichSide + "$Profile$Stats$5_Stats"
-									+ "$3$Data$Stat_1" + containerName + "$Justify$txt_VersusTeam*GEOM*TEXT SET v "+top_batsman_beststats.get(j).getOpponentTeam().getTeamName3().toUpperCase() + 
+									+ "$3$Data$Stat_1" + containerName + "$Justify$txt_VersusTeam*GEOM*TEXT SET v "+top_batsman_beststats.get(j).getOpponentTeam().getTeamName2().toUpperCase() + 
 									"\0", print_writers);
 						}
 						break;

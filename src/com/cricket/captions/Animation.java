@@ -1389,16 +1389,16 @@ public class Animation
 					case "Control_d": case "Control_e": case "Shift_P": case "Shift_Q":
 						processAnimation(Constants.BACK, print_writers, "Anim_FullFrames$In_Out$Main$Profile", "START");
 						processAnimation(Constants.BACK, print_writers, "BG_Scale", "START");
-						if(Integer.valueOf(whatToProcess.split(",")[4]) > 0) {
-							if(Integer.valueOf(whatToProcess.split(",")[4]) == 5) {
-								processAnimation(Constants.BACK, print_writers, "Profile_Highlight$Side1$7", "START");
-								prevHighlightDirector ="7";
-							}else {
-								processAnimation(Constants.BACK, print_writers, "Profile_Highlight$Side1$"+whatToProcess.split(",")[4], "START");
-								prevHighlightDirector =whatToProcess.split(",")[4];
-							}
-							
-						}
+//						if(Integer.valueOf(whatToProcess.split(",")[4]) > 0) {
+//							if(Integer.valueOf(whatToProcess.split(",")[4]) == 5) {
+//								processAnimation(Constants.BACK, print_writers, "Profile_Highlight$Side1$7", "START");
+//								prevHighlightDirector ="7";
+//							}else {
+//								processAnimation(Constants.BACK, print_writers, "Profile_Highlight$Side1$"+whatToProcess.split(",")[4], "START");
+//								prevHighlightDirector =whatToProcess.split(",")[4];
+//							}
+//							
+//						}
 						break;
 					case "Shift_T":
 						processAnimation(Constants.BACK, print_writers, "Anim_FullFrames$In_Out$Main$LineUp_Image", "START");
@@ -1548,19 +1548,19 @@ public class Animation
 //				processAnimation(Constants.FRONT, print_writers, "Sponsor", "START");
 				TimeUnit.MILLISECONDS.sleep(1700);
 				this.whichGraphicOnScreen = whatToProcess;
-				if(!caption.this_bugsAndMiniGfx.this_data_str.get(caption.this_bugsAndMiniGfx.this_data_str.size()-2).split(",")[0].
-						equalsIgnoreCase(caption.this_bugsAndMiniGfx.this_data_str.get(caption.this_bugsAndMiniGfx.this_data_str.size()-1).split(",")[0])) {
-					processAnimation(Constants.FRONT, print_writers, "PopUps$Change_Sixes$Hundreds", "START");
-					processAnimation(Constants.FRONT, print_writers, "PopUps$Change_Sixes$Tens", "START");
-					processAnimation(Constants.FRONT, print_writers, "PopUps$Change_Sixes$Units", "START");
-				}
-				else if(!caption.this_bugsAndMiniGfx.this_data_str.get(caption.this_bugsAndMiniGfx.this_data_str.size()-2).split(",")[1].
+				if(!caption.this_bugsAndMiniGfx.this_data_str.get(caption.this_bugsAndMiniGfx.this_data_str.size()-2).split(",")[1].
 						equalsIgnoreCase(caption.this_bugsAndMiniGfx.this_data_str.get(caption.this_bugsAndMiniGfx.this_data_str.size()-1).split(",")[1])) {
+					processAnimation(Constants.FRONT, print_writers, "PopUps$Change_Sixes$Hundreds", "START");
 					processAnimation(Constants.FRONT, print_writers, "PopUps$Change_Sixes$Tens", "START");
 					processAnimation(Constants.FRONT, print_writers, "PopUps$Change_Sixes$Units", "START");
 				}
 				else if(!caption.this_bugsAndMiniGfx.this_data_str.get(caption.this_bugsAndMiniGfx.this_data_str.size()-2).split(",")[2].
 						equalsIgnoreCase(caption.this_bugsAndMiniGfx.this_data_str.get(caption.this_bugsAndMiniGfx.this_data_str.size()-1).split(",")[2])) {
+					processAnimation(Constants.FRONT, print_writers, "PopUps$Change_Sixes$Tens", "START");
+					processAnimation(Constants.FRONT, print_writers, "PopUps$Change_Sixes$Units", "START");
+				}
+				else if(!caption.this_bugsAndMiniGfx.this_data_str.get(caption.this_bugsAndMiniGfx.this_data_str.size()-2).split(",")[3].
+						equalsIgnoreCase(caption.this_bugsAndMiniGfx.this_data_str.get(caption.this_bugsAndMiniGfx.this_data_str.size()-1).split(",")[3])) {
 					processAnimation(Constants.FRONT, print_writers, "PopUps$Change_Sixes$Units", "START");
 				}
 				break;
@@ -16450,14 +16450,14 @@ public class Animation
 								+ "Anim_FullFrames$In_Out$Sponsor 3.000 Anim_FullFrames$In_Out$Sponsor$In 2.500";
 						break;
 					case "Control_d": case "Control_e": case "Shift_P": case "Shift_Q":
-						if(Integer.valueOf(whatToProcess.split(",")[4])>0) {
-							if(Integer.valueOf(whatToProcess.split(",")[4]) == 5) {
-								previewCommand = previewCommand + " Profile_Highlight$Side1$7" + " 1.780";
-							}else {
-								previewCommand = previewCommand + " Profile_Highlight$Side1$" + whatToProcess.split(",")[4] + " 1.780";
-							}
-							
-						}
+//						if(Integer.valueOf(whatToProcess.split(",")[4])>0) {
+//							if(Integer.valueOf(whatToProcess.split(",")[4]) == 5) {
+//								previewCommand = previewCommand + " Profile_Highlight$Side1$7" + " 1.780";
+//							}else {
+//								previewCommand = previewCommand + " Profile_Highlight$Side1$" + whatToProcess.split(",")[4] + " 1.780";
+//							}
+//							
+//						}
 						previewCommand = previewCommand + " Anim_FullFrames$In_Out$Main$Profile 3.000 Anim_FullFrames$In_Out$Main$Profile$In 2.680 Anim_FullFrames$In_Out$ExtraData$In 3.000 BG_Scale 0.800";
 						break;
 					case "Shift_L":

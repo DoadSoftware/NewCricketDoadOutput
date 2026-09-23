@@ -8662,7 +8662,7 @@ public class LowerThirdGfx
 				case Constants.BENGAL_T20: case Constants.NPL: case Constants.ISPL: case Constants.LEGENDS: case Constants.ASSAM: case Constants.MPL:
 				case Constants.APL: case Constants.T20_MUMBAI: case Constants.VIDARBHA: case Constants.ODISHA: case Constants.AFG_T20:
 					if(WhichProfile.equalsIgnoreCase("DT20")) {
-						short_name =  "T20 CAREER";
+						short_name =  "T20s CAREER";
 					}else if(WhichProfile.equalsIgnoreCase("IPL")) {
 						short_name =  "IPL CAREER";
 					}else if(WhichProfile.equalsIgnoreCase("WPL")) {
@@ -14597,8 +14597,8 @@ public class LowerThirdGfx
 //					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$LT_NextToBat$Side"+WhichSide+"$Select*FUNCTION*Omo*vis_con SET 0\0", print_writers);
 //				}
 				
-				containerName = "$3Bats";
-				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$LT_NextToBat$Side"+WhichSide+"$Select*FUNCTION*Omo*vis_con SET 2\0", print_writers);
+				containerName = "$4Bats";
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$LT_NextToBat$Side"+WhichSide+"$Select*FUNCTION*Omo*vis_con SET 1\0", print_writers);
 				
 				switch (config.getBroadcaster().toUpperCase()) {
 				case Constants.NPL: case Constants.APL:
