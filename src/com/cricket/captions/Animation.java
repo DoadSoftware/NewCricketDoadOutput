@@ -3124,6 +3124,9 @@ public class Animation
 					} else if(this.infobar.getInfobar_status().equalsIgnoreCase(Constants.SHRUNK_INFOBAR)) {
 						processAnimation(Constants.FRONT, print_writers, "Anim_InfoBar$Small$Out", "START");
 						this.infobar.setInfobar_status(Constants.TWO_LINER_INFOBAR);
+						
+						TimeUnit.MILLISECONDS.sleep(700);
+						processAnimation(Constants.FRONT, print_writers, "Anim_InfoBar$Small$In", "SHOW 0.0");
 					}
 					break;
 				case Constants.MIDDLE + Constants.SHRUNK_INFOBAR:
@@ -3135,6 +3138,9 @@ public class Animation
 					} else if(this.infobar.getInfobar_status().equalsIgnoreCase(Constants.MIDDLE + Constants.SHRUNK_INFOBAR)) {
 						processAnimation(Constants.FRONT, print_writers, "Anim_Infobar$Small$Out", "START");
 						this.infobar.setInfobar_status(Constants.TWO_LINER_INFOBAR);
+						
+						TimeUnit.MILLISECONDS.sleep(700);
+						processAnimation(Constants.FRONT, print_writers, "Anim_InfoBar$Small$In", "SHOW 0.0");
 					}
 					break;
 				}
@@ -14028,7 +14034,7 @@ public class Animation
 	                                break;
 	                            case "F4":
 	                                previewCommand = previewCommand + " Change$Partnership_List 2.200 Change$Partnership_List$Change_Out 0.860 "
-	                                        + "Change$Partnership_List$Change_In 2.200";
+	                                        + "Change$Partnership_List$Change_In 2.200 Change$Partnership_List$Change_In$In 2.200";
 	                                break;
 	                            case "Control_F11":
 	                                previewCommand = previewCommand + " Change$Summary 1.880 Change$Summary$Change_Out 0.760 Change$Summary$Change_In 1.880";
@@ -14071,8 +14077,8 @@ public class Animation
 	                                		+ "Change$Bowling_Card$Change_In$In 2.120";
 	                                break;
 	                            case "F4":
-	                                previewCommand = previewCommand + " Change$Partnership_List 2.200 Change$Partnership_List$Change_Out 0.860 "
-	                                        + "Change$Partnership_List$Change_In 2.200";
+	                            	 previewCommand = previewCommand + " Change$Partnership_List 2.200 Change$Partnership_List$Change_Out 0.860 "
+		                                        + "Change$Partnership_List$Change_In 2.200 Change$Partnership_List$Change_In$In 2.200";
 	                                break;
 	                            case "Control_F11":
 	                                previewCommand = previewCommand + " Change$Summary 1.880 Change$Summary$Change_Out 0.760 Change$Summary$Change_In 1.880";

@@ -40672,7 +40672,9 @@ public class FullFramesGfx
 				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$HeaderGrp$Side" + WhichSide + 
 						"$In_Out$Select_Header$Title$txt_Title*GEOM*TEXT SET " + "MOST RUNS" + "\0", print_writers);
 				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$Header_ILU$Side"+ WhichSide + 
-						"$Select_ILU*FUNCTION*Omo*vis_con SET 0\0", print_writers);
+						"$Select_ILU*FUNCTION*Omo*vis_con SET 1\0", print_writers);
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$Header_ILU$Side" + WhichSide +
+						"$Select_ILU$TLogo*TEXTURE*IMAGE SET " + Constants.VIDARBHA_LOGO_PATH + "TLogo" + "\0", print_writers);
 				break;
 			case "x":
 				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$AllGraphics$Side" + WhichSide + "$LeaderBoard$LeaderBoardData$TitleGrp$" 

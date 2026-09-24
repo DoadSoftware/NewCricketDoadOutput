@@ -1612,8 +1612,8 @@ public class BugsAndMiniGfx
 					summary = CricketFunctions.GetTargetData(matchAllData).getTargetRuns() + " OFF " + (matchAllData.getSetup().getMaxOvers()) + " OVER";
 				}else {
 					if(matchAllData.getSetup().getTargetOvers() != null && !matchAllData.getSetup().getTargetOvers().isEmpty()) {
-						summary = CricketFunctions.GetTargetData(matchAllData).getTargetRuns() + " OFF " + (Integer.valueOf(CricketFunctions.GetTargetData(matchAllData).getTargetOvers())) + " OVERS ("
-								+ (matchAllData.getSetup().getTargetType() != null ? matchAllData.getSetup().getTargetType().toUpperCase() : "") + ")";
+						summary = CricketFunctions.GetTargetData(matchAllData).getTargetRuns() + " OFF " + (Integer.valueOf(CricketFunctions.GetTargetData(matchAllData).getTargetOvers())) + " OVERS"
+								+ (matchAllData.getSetup().getTargetType() != null ? " (" + matchAllData.getSetup().getTargetType().toUpperCase() + ")" : "");
 					}else {
 						summary = CricketFunctions.GetTargetData(matchAllData).getTargetRuns() + " OFF " + 
 								(Integer.valueOf(CricketFunctions.GetTargetData(matchAllData).getTargetOvers())) + " OVERS";
@@ -1622,8 +1622,8 @@ public class BugsAndMiniGfx
 				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Bugs_All$MainTxt_Grp$Side" + WhichSide
                         + "$txt_Name*GEOM*TEXT SET "  + inning.getBatting_team().getTeamName1() + " NEED "+ summary + "\0", print_writers);
 				
-				 CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Bugs_All$MainTxt_Grp$Side" + WhichSide
-	                        + "$txt_Runs*GEOM*TEXT SET " + "\0", print_writers);
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Bugs_All$MainTxt_Grp$Side" + WhichSide
+	                    + "$txt_Runs*GEOM*TEXT SET " + "\0", print_writers);
 	            
 
 	            CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Bugs_All$MainTxt_Grp$Side" + WhichSide

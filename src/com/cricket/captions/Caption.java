@@ -1074,14 +1074,12 @@ public class Caption
 				    	this_infobarGfx.fixtureid = Integer.valueOf(whatToProcess.split(",")[3]);
 				        break;
 				    case "BATSMANTIMELINE": case "BOWLERTIMELINE": case "INNINGSBUILDER": 
-				    case "BATSMANBOUNDARY": case "BOWLERDOTS":
+				    case "BATSMANBOUNDARY": case "BOWLERDOTS": case "BATSMAN_SUMMARY":
 				    	this_infobarGfx.FirstPlayerId = Integer.valueOf(whatToProcess.split(",")[3]);
 				        break;
 				    case "SPLIT":
-				    	System.out.println("whatToProcess = " + whatToProcess);
 				    	this_infobarGfx.whichSplt = Integer.valueOf(whatToProcess.split(",")[3]);
 				    		break;
-				    
 					}
 					
 					this_infobarGfx.infobar.setFull_section(whatToProcess.split(",")[2]);
