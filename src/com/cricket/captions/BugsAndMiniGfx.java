@@ -8500,7 +8500,7 @@ public class BugsAndMiniGfx
 					        CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$minis$Side" + WhichSide + "$Batting$Row" + row_id 
 					        		+ "$Players_Dehighlight$txt_Name*GEOM*TEXT SET v " + (config.getBroadcaster().equalsIgnoreCase(Constants.LEGENDS)
 							        		?match.getOpponentTeam().getTeamName2():match.getOpponentTeam().getTeamName2()) + ", " 
-							        		+ getMatchCode(matchName.replace(".json", "")) + " \0",print_writers);
+							        		+ getMatchCode(matchName.replace(".json", ""),"") + " \0",print_writers);
 					    }
 
 					    //------------------------------------------------
@@ -8601,7 +8601,7 @@ public class BugsAndMiniGfx
 									CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$minis$Side" + WhichSide + "$Batting$Row" + row_id 
 											+ "$Players_Highlight$txt_Name*GEOM*TEXT SET v " + (config.getBroadcaster().equalsIgnoreCase(Constants.LEGENDS)
 							        				?inning.getBowling_team().getTeamName2():inning.getBowling_team().getTeamName2()) + ", " 
-							        					+ getMatchCode(matchAllData.getSetup().getMatchIdent()) + " \0", print_writers);
+							        					+ getMatchCode(matchAllData.getSetup().getMatchIdent(),"") + " \0", print_writers);
 								}
 								
 								switch (config.getBroadcaster().toUpperCase()) {
@@ -8688,7 +8688,7 @@ public class BugsAndMiniGfx
 									CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$minis$Side" + WhichSide + "$Batting$Row" + row_id 
 											+ "$Players_Highlight$txt_Name*GEOM*TEXT SET v " + (config.getBroadcaster().equalsIgnoreCase(Constants.LEGENDS)
 							        				?inning.getBowling_team().getTeamName2():inning.getBowling_team().getTeamName2()) + ", " 
-							        				+ getMatchCode(matchAllData.getSetup().getMatchIdent()) + " \0", print_writers);
+							        				+ getMatchCode(matchAllData.getSetup().getMatchIdent(),"") + " \0", print_writers);
 								}
 								
 								switch (config.getBroadcaster().toUpperCase()) {
@@ -8785,7 +8785,7 @@ public class BugsAndMiniGfx
 							CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$minis$Side" + WhichSide + "$Batting$Row" + row_id 
 									+ "$Players_Highlight$txt_Name*GEOM*TEXT SET v " + (config.getBroadcaster().equalsIgnoreCase(Constants.LEGENDS)
 					        				?inning.getBowling_team().getTeamName2():inning.getBowling_team().getTeamName2()) + ", " 
-					        				+ getMatchCode(matchAllData.getSetup().getMatchIdent()) + " \0", print_writers);
+					        				+ getMatchCode(matchAllData.getSetup().getMatchIdent(),"") + " \0", print_writers);
 						}
 						
 						switch (config.getBroadcaster().toUpperCase()) {
@@ -9466,7 +9466,7 @@ public class BugsAndMiniGfx
 					    } else {
 					    		CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$minis$Side" + WhichSide+ "$Bowling$Row" + row_no1
 									+ "$Players_Dehighlight$txt_Name*GEOM*TEXT SET v " + (config.getBroadcaster().equalsIgnoreCase(Constants.LEGENDS)
-					        				?match.getOpponentTeam().getTeamName2():match.getOpponentTeam().getTeamName2()) + ", " + getMatchCode(matchName.replace(".json", "")) + " \0", print_writers);
+					        				?match.getOpponentTeam().getTeamName2():match.getOpponentTeam().getTeamName2()) + ", " + getMatchCode(matchName.replace(".json", ""),"") + " \0", print_writers);
 					    }
 
 					    //------------------------------------------------
@@ -9555,7 +9555,7 @@ public class BugsAndMiniGfx
 									CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$minis$Side" + WhichSide+ "$Bowling$Row" + row_no1
 											+ "$Players_Highlight$txt_Name*GEOM*TEXT SET v " + (config.getBroadcaster().equalsIgnoreCase(Constants.LEGENDS)
 							        				?inning.getBatting_team().getTeamName2():inning.getBatting_team().getTeamName2()) + ", " 
-											+ getMatchCode(matchAllData.getSetup().getMatchIdent()) + " \0", print_writers);
+											+ getMatchCode(matchAllData.getSetup().getMatchIdent(),"") + " \0", print_writers);
 								}
 								
 								switch (config.getBroadcaster().toUpperCase()) {
@@ -9647,7 +9647,7 @@ public class BugsAndMiniGfx
 							CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$minis$Side" + WhichSide+ "$Bowling$Row" + row_no1
 									+ "$Players_Highlight$txt_Name*GEOM*TEXT SET v " + (config.getBroadcaster().equalsIgnoreCase(Constants.LEGENDS)
 					        				?inning.getBatting_team().getTeamName2():inning.getBatting_team().getTeamName2()) + ", " 
-					        				+ getMatchCode(matchAllData.getSetup().getMatchIdent()) + " \0", print_writers);
+					        				+ getMatchCode(matchAllData.getSetup().getMatchIdent(),"") + " \0", print_writers);
 						}
 						
 						switch (config.getBroadcaster().toUpperCase()) {
