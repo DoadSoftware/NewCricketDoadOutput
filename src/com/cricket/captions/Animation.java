@@ -14596,11 +14596,10 @@ public class Animation
 					case "Alt_F6": case "Shift_A":  case "Shift_R": case "Shift_U": case "Alt_F8": case "F8": case "F10": case "j": case "Alt_a": case "Alt_s":  case "Alt_w": case "Control_j": 
 					case "Alt_i": case "Alt_j": case "b": case "Control_i": case "Alt_Shift_F3": case "Alt_Shift_D":case "Alt_Shift_E":case "Alt_Shift_F":case "Alt_Shift_G":case "Alt_Shift_H":
 					case "Control_u": case "Shift_G": case "Shift_W":case "Control_Shift_X":
-						previewCommands = "Anim_InfoBar$Small$In 0.660 "
-								+ "Anim_LtChange$Top_Header 2.680  Anim_LtChange$Top_Header$In 1.920 "
+						previewCommands = "Anim_LtChange$Top_Header 2.680  Anim_LtChange$Top_Header$In 1.920 "
 								+ "anim_Lower_Third$Essentials 3.200 anim_Lower_Third$Essentials$In 1.900 "
 								+ "anim_Lower_Third$Row 3.000 anim_Lower_Third$Row$In 1.900 "
-								+ "Anim_LtChange$Lt_X_Position 1.140 Anim_LtChange$Lt_X_Position$MoveForShrink 1.820 ";
+								+ "Anim_LtChange$Lt_X_Position 1.140 Anim_LtChange$Lt_X_Position$MoveForShrink 1.820 Anim_InfoBar$Push 0.320";
 						break;
 					 case "Alt_q":
 						 previewCommands = "Anim_Infobar$Push 0.500 anim_POTT$In 1.400";
