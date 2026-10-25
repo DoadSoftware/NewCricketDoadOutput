@@ -446,7 +446,7 @@ public class IndexController
 			throws Exception 
 	{
 
-		String process = whatToProcess.toUpperCase();
+		String process = whatToProcess;
 		//System.out.println("whatToProcess - " + whatToProcess + " | valueToProcess - " + valueToProcess);
 		switch (process) {
 		case "GET-CATEGORY-DATA":
@@ -483,6 +483,7 @@ public class IndexController
 			case Constants.NPL: case Constants.MPL: case Constants.APL: case Constants.VIDARBHA:  case Constants.ODISHA:
 				if(process.split(",")[0].toUpperCase().equalsIgnoreCase("highlightProfile") || 
 						process.split(",")[0].toUpperCase().equalsIgnoreCase("highlightLeader")) {
+					System.out.println("HI-1");
 					this_animation.ChangeOn(process, print_writers, session_configuration);
 				}
 				break;

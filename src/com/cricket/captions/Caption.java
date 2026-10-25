@@ -829,7 +829,7 @@ public class Caption
 						this_fullFramesGfx.whichtype = whatToProcess.split(",")[3];
 						this_fullFramesGfx.whichTeam = Integer.valueOf(whatToProcess.split(",")[2]);
 					}else if(whatToProcess.split(",")[0].equalsIgnoreCase("z") || whatToProcess.split(",")[0].equalsIgnoreCase("x")) {
-						this_fullFramesGfx.which_logo = whatToProcess.split(",")[4];
+						//this_fullFramesGfx.which_logo = whatToProcess.split(",")[4];
 					}
 				}
 				

@@ -814,10 +814,7 @@ public class BugsAndMiniGfx
 					findAny().orElse(null);
 			
 			switch (config.getBroadcaster()) {
-			case Constants.NPL: 
-				team = Teams.stream().filter(tm->tm.getTeamName3().equalsIgnoreCase(whatToProcess.split(",")[2].split("-")[0])).findAny().orElse(null);
-				break;
-			case Constants.LEGENDS: case Constants.ASSAM: case Constants.APL: case Constants.MPL: case Constants.T20_MUMBAI:
+			case Constants.LEGENDS: case Constants.ASSAM: case Constants.APL: case Constants.MPL: case Constants.T20_MUMBAI: case Constants.NPL: 
 				team = Teams.stream().filter(tm->tm.getTeamName1().equalsIgnoreCase(whatToProcess.split(",")[2].split("-")[0])).findAny().orElse(null);
 				break;	
 			default:
@@ -3221,6 +3218,11 @@ public class BugsAndMiniGfx
 				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Bugs_new$Side" + WhichSide 
 						+ "$PowerPlayBug$SelectInfo*FUNCTION*Omo*vis_con SET 0\0", print_writers);
 				
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Sponsors$Side" + WhichSide 
+						+ "$Select*FUNCTION*Omo*vis_con SET 2\0", print_writers);
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Sponsors$Side" + WhichSide 
+						+ "$Bugs$Select_Sponsor*FUNCTION*Omo*vis_con SET 2\0", print_writers);
+				
 				switch (config.getBroadcaster()) {
 				case Constants.NPL: case Constants.APL:
 					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Bugs_new$Side" + WhichSide + "$PowerPlayBug$img_Badges"
@@ -3277,7 +3279,10 @@ public class BugsAndMiniGfx
 					
 				}
 				
-				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$PopUps$Select$Tournament_Sixes$Sponsor$Select*FUNCTION*Omo*vis_con SET 2\0", print_writers);
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Sponsors$Side" + WhichSide + "$Select*FUNCTION*Omo*vis_con SET 1\0", print_writers);
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Sponsors$Side" + WhichSide + "$POP_Ups$Select_Sponsor*FUNCTION*Omo*vis_con SET 2\0", print_writers);
+				
+//				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$PopUps$Select$Tournament_Sixes$Sponsor$Select*FUNCTION*Omo*vis_con SET 2\0", print_writers);
 				
 				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$PopUps$Select*FUNCTION*Omo*vis_con SET 0\0", print_writers);
 				
@@ -3315,8 +3320,10 @@ public class BugsAndMiniGfx
 							+ "FUNCTION*Omo*vis_con SET 2\0", print_writers);
 					
 				}
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Sponsors$Side" + WhichSide + "$Select*FUNCTION*Omo*vis_con SET 1\0", print_writers);
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Sponsors$Side" + WhichSide + "$POP_Ups$Select_Sponsor*FUNCTION*Omo*vis_con SET 1\0", print_writers);
 				
-				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$PopUps$Select$Tournament_Sixes$Sponsor$Select*FUNCTION*Omo*vis_con SET 1\0", print_writers);
+//				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$PopUps$Select$Tournament_Sixes$Sponsor$Select*FUNCTION*Omo*vis_con SET 1\0", print_writers);
 				
 				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$PopUps$Select*FUNCTION*Omo*vis_con SET 0\0", print_writers);
 				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$PopUps$Tournament_Sixes"
@@ -3980,6 +3987,8 @@ public class BugsAndMiniGfx
 					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Bugs_new$Side" + WhichSide + "$Double$img_Badges*TEXTURE*IMAGE SET "
 							+ (config.getBroadcaster().equalsIgnoreCase(Constants.APL)?Constants.APL_LOGO_PATH:Constants.NPL_LOGO_PATH) 
 							+ inning.getBatting_team().getTeamBadge()+"\0", print_writers);
+					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Sponsors$Side" + WhichSide + "$Select*FUNCTION*Omo*vis_con SET 2\0", print_writers);
+					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Sponsors$Side" + WhichSide + "$Bugs$Select_Sponsor*FUNCTION*Omo*vis_con SET 2\0", print_writers);
 					break;
 				case Constants.MPL: 
 					
@@ -4023,6 +4032,8 @@ public class BugsAndMiniGfx
 					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Bugs_new$Side" + WhichSide + "$Double$img_Badges*TEXTURE*IMAGE SET "
 							+ (config.getBroadcaster().equalsIgnoreCase(Constants.APL)?Constants.APL_LOGO_PATH:Constants.NPL_LOGO_PATH) 
 							+ inning.getBatting_team().getTeamBadge()+"\0", print_writers);
+					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Sponsors$Side" + WhichSide + "$Select*FUNCTION*Omo*vis_con SET 2\0", print_writers);
+					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Sponsors$Side" + WhichSide + "$Bugs$Select_Sponsor*FUNCTION*Omo*vis_con SET 2\0", print_writers);
 					break;
 				case Constants.MPL: 
 					
@@ -4142,6 +4153,9 @@ public class BugsAndMiniGfx
 					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Bugs_new$Side" + WhichSide + "$PowerPlayBug$img_Badges*TEXTURE*IMAGE SET "
 							+ (config.getBroadcaster().equalsIgnoreCase(Constants.APL)?Constants.APL_LOGO_PATH:Constants.NPL_LOGO_PATH) 
 							+ inning.getBatting_team().getTeamBadge()+"\0", print_writers);
+					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Sponsors$Side" + WhichSide + "$Select*FUNCTION*Omo*vis_con SET 2\0", print_writers);
+					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Sponsors$Side" + WhichSide + "$Bugs$Select_Sponsor*FUNCTION*Omo*vis_con SET 2\0", print_writers);
+					
 					break;
 				case Constants.MPL: 
 					
@@ -4474,6 +4488,8 @@ public class BugsAndMiniGfx
 				case Constants.NPL: case Constants.APL:
 					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Bugs_new$Side" + WhichSide + "$Single$img_Badges*TEXTURE*IMAGE SET "
 							+(config.getBroadcaster().equalsIgnoreCase(Constants.APL)?Constants.APL_LOGO_PATH:Constants.NPL_LOGO_PATH)+"TLogo"+"\0", print_writers);
+					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Sponsors$Side" + WhichSide + "$Select*FUNCTION*Omo*vis_con SET 2\0", print_writers);
+					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Sponsors$Side" + WhichSide + "$Bugs$Select_Sponsor*FUNCTION*Omo*vis_con SET 1\0", print_writers);
 					break;
 				case Constants.MPL: 
 					if(config.getCategory().equalsIgnoreCase("WOMEN")) {

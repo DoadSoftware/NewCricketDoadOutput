@@ -262,8 +262,9 @@
 			    <label for="select_broadcaster" class="col-sm-4 col-form-label text-left">Select Broadcaster </label>
 			    <div class="col-sm-6 col-md-6">
 			      <select id="select_broadcaster" name="select_broadcaster" class="browser-default custom-select custom-select-sm">
-				      <option value="ODISHA">ODISHA</option>
-				      <option value="APL">WAPL</option>
+			      		<option value="NPL">NPL 2026</option>
+				      	<option value="ODISHA">ODISHA</option>
+				      	<option value="APL">WAPL</option>
 			      		<option value="LEGENDS-90">KCL</option>
 			      		<option value="ASSAM-T20">ASSAM T20</option>
 			      		<option value="MPL">Kerala T20</option>
@@ -273,7 +274,6 @@
 			      		<option value="ISPL">ISPL</option>
 			      		<option value="LEGENDS-90">LEGENDS 90</option>
 			      		<option value="T20_MUMBAI">T20 MUMBAI</option>
-			      		<option value="NPL">NPL 2024</option>
 			      		<option value="DOAD-BILATERAL">AFG v BAN</option>
 			      		<option value="AFG-T20">AFG T20</option>
 			      		<option value="BENGAL-T20">MAHARAJA T20</option>

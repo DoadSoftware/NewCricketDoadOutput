@@ -4198,13 +4198,13 @@ function addItemsToList(whatToProcess,dataToProcess)
 			select.name = select.id;
 			
 			option = document.createElement('option');
-			option.value = 'WITHOUT_SPONSOR';
-			option.text = 'Without Sponsor';
+			option.value = 'WITH_SPONSOR';
+			option.text = 'With Sponsor';
 			select.appendChild(option);
 			
 			option = document.createElement('option');
-			option.value = 'WITH_SPONSOR';
-			option.text = 'With Sponsor';
+			option.value = 'WITHOUT_SPONSOR';
+			option.text = 'Without Sponsor';
 			select.appendChild(option);
 			
 			select.setAttribute('onchange',"setDropdownOptionToSelectOptionArray(this, 0)");
@@ -8218,7 +8218,7 @@ function addItemsToList(whatToProcess,dataToProcess)
 			
 			switch(whatToProcess){
 			case 'z': case 'x':
-				if($('#selected_broadcaster').val() === 'NPL' || $('#selected_broadcaster').val() === 'APL'){
+				if($('#selected_broadcaster').val() === 'APL'){
 					select = document.createElement('select');
 					select.id = 'selectLogo';
 					select.name = select.id;

@@ -77,6 +77,9 @@ public class Constants
 	
 	public final static String NPL = "NPL";
 	public final static String NPL_LOGO_PATH = "IMAGE*/Default/Essentials/Logos/";
+	public final static String NPL_MASCOTS_CENTER_PATH = "IMAGE*/Default/Essentials/Mascots/Center/";
+	public final static String NPL_MASCOTS_LEFT_PATH = "IMAGE*/Default/Essentials/Mascots/Left/";
+	public final static String NPL_MASCOTS_RIGHT_PATH = "IMAGE*/Default/Essentials/Mascots/Right/";
 	public final static String NPL_LOCAL_PHOTO_PATH = "C:\\\\Images\\\\NPL\\\\Photos\\\\";
 	public final static String NPL_PHOTO_PATH = "\\c\\Images\\NPL\\Photos\\";
 	public final static String NPL_SPONSOR_PATH = "IMAGE*/Default/Essentials/Sponsor/";
