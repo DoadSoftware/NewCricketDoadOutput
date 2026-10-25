@@ -9838,11 +9838,6 @@ function addItemsToList(whatToProcess,dataToProcess)
 						select.appendChild(option);	
 					}else if($('#selected_broadcaster').val().toUpperCase()=='NPL'){
 						option = document.createElement('option');
-						option.value = 'NPL S1';
-						option.text = 'NPL S1';
-						select.appendChild(option);
-						
-						option = document.createElement('option');
 						option.value = 'NPL_CAREER';
 						option.text = 'NPL CAREER';
 						select.appendChild(option);
@@ -10129,7 +10124,6 @@ function addItemsToList(whatToProcess,dataToProcess)
 				};
 
 				switch (broadcaster) {
-
 					case 'ICC-U19-2023':
 						[['U19ODI', 'U19 ODI'],
 							['LIST A', 'LIST A'],
@@ -10144,7 +10138,6 @@ function addItemsToList(whatToProcess,dataToProcess)
 						break;
 
 					case 'NPL':
-						addOption('NPL S1');
 						addOption('NPL_CAREER', 'NPL CAREER');
 						addOption('DT20');
 						addOption('IT20');
@@ -10508,7 +10501,6 @@ function addItemsToList(whatToProcess,dataToProcess)
 					};
 
 					switch (broadcaster) {
-
 						case 'ICC-U19-2023':
 							[
 								['U19ODI', 'U19 ODI'],
@@ -10517,7 +10509,6 @@ function addItemsToList(whatToProcess,dataToProcess)
 								['SA TRI-NATION 2023-24', 'SA TRI-NATION']
 							].forEach(([value, text]) => addOption(value, text));
 							break;
-						
 						case 'ODISHA':
 							addOption('THIS_SERIES', 'This Series');
 							addOption('DT20');
@@ -10525,7 +10516,6 @@ function addItemsToList(whatToProcess,dataToProcess)
 							break;		
 
 						case 'NPL':
-							addOption('NPL S1');
 							addOption('NPL_CAREER', 'NPL CAREER');
 							addOption('DT20');
 							addOption('IT20');
@@ -10758,11 +10748,6 @@ function addItemsToList(whatToProcess,dataToProcess)
 						option.text = 'KCL CAREER';
 						select.appendChild(option);	
 					}else if($('#selected_broadcaster').val().toUpperCase()=='NPL'){
-						option = document.createElement('option');
-						option.value = 'NPL S1';
-						option.text = 'NPL S1';
-						select.appendChild(option);
-						
 						option = document.createElement('option');
 						option.value = 'NPL_CAREER';
 						option.text = 'NPL CAREER';

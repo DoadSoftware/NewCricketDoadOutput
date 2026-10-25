@@ -8454,7 +8454,7 @@ public class LowerThirdGfx
 			case Constants.NPL:
 				switch (WhichProfile.toUpperCase()) {
 				case "NPL_CAREER":
-					statsType = statsTypes.stream().filter(st -> st.getStatsShortName().equalsIgnoreCase("NPL S1")).findAny().orElse(null);
+					statsType = statsTypes.stream().filter(st -> st.getStatsShortName().equalsIgnoreCase("NPL_CAREER")).findAny().orElse(null);
 					if(statsType == null) {
 						return "InfoBarPlayerProfile: Stats Type not found for profile [" + WhichProfile + "]";
 					}
@@ -8470,23 +8470,23 @@ public class LowerThirdGfx
 					stat = CricketFunctions.updateTournamentWithH2h(stat, headToHead, matchAllData, CricketUtil.TEAMNAME_3);
 					stat = CricketFunctions.updateStatisticsWithMatchData(stat, matchAllData, CricketUtil.TEAMNAME_3);
 					break;
-				case "DT20":
-					statsType = statsTypes.stream().filter(st -> st.getStatsShortName().equalsIgnoreCase("DT20")).findAny().orElse(null);
-					if(statsType == null) {
-						return "InfoBarPlayerProfile: Stats Type not found for profile [" + WhichProfile + "]";
-					}
-					
-					stat = statistics.stream().filter(st -> st.getPlayerID() == FirstPlayerId && statsType.getStatsId() == st.getStatsTypeId()).findAny().orElse(null);
-					if(stat == null) {
-						return "InfoBarPlayerProfile: Stats not found for Player Id [" + FirstPlayerId + "]";
-					}
-					
-					statsType = statsTypes.stream().filter(st -> st.getStatsShortName().equalsIgnoreCase("DT20")).findAny().orElse(null);
-					stat.setStats_type(statsType);
-					
-					stat = CricketFunctions.updateTournamentWithH2h(stat, headToHead, matchAllData, CricketUtil.TEAMNAME_3);
-					stat = CricketFunctions.updateStatisticsWithMatchData(stat, matchAllData, CricketUtil.TEAMNAME_3);
-					break;
+//				case "DT20":
+//					statsType = statsTypes.stream().filter(st -> st.getStatsShortName().equalsIgnoreCase("DT20")).findAny().orElse(null);
+//					if(statsType == null) {
+//						return "InfoBarPlayerProfile: Stats Type not found for profile [" + WhichProfile + "]";
+//					}
+//					
+//					stat = statistics.stream().filter(st -> st.getPlayerID() == FirstPlayerId && statsType.getStatsId() == st.getStatsTypeId()).findAny().orElse(null);
+//					if(stat == null) {
+//						return "InfoBarPlayerProfile: Stats not found for Player Id [" + FirstPlayerId + "]";
+//					}
+//					
+//					statsType = statsTypes.stream().filter(st -> st.getStatsShortName().equalsIgnoreCase("DT20")).findAny().orElse(null);
+//					stat.setStats_type(statsType);
+//					
+//					stat = CricketFunctions.updateTournamentWithH2h(stat, headToHead, matchAllData, CricketUtil.TEAMNAME_3);
+//					stat = CricketFunctions.updateStatisticsWithMatchData(stat, matchAllData, CricketUtil.TEAMNAME_3);
+//					break;
 				}
 				break;
 			case Constants.AFG_T20:
