@@ -213,6 +213,10 @@ public class Caption
 			case "Control_Shift_B":
 				status = this_lowerThirdGfx.populateNextToBat(whatToProcess,whichSide, matchAllData);
 				break;
+			case "Control_Alt_b":
+				status = this_lowerThirdGfx.populateL3rdBowlingLineUp(whatToProcess,whichSide,matchAllData,Integer.valueOf(whatToProcess.split(",")[1]));
+				break;
+				
 			case "9":
 				this_scene = new Scene();
 				

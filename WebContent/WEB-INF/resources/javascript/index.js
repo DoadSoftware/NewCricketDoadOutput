@@ -598,7 +598,7 @@ function processUserSelectionData(whatToProcess,dataToProcess)
 			case 'Control_Shift_F3': case 'Control_Shift_H': case "Control_Shift_I": case "Alt_Shift_D":case "Alt_Shift_E":case "Alt_Shift_F":case "Alt_Shift_G":
 			case "Alt_Shift_H": case "Control_Shift_A": case 'Control_6': case "Alt_Shift_O": case 'Alt_F5': case 'Control_Alt_F1': case 'Control_Alt_F2': 
 			case 'Control_Shift_K': case "Alt_Shift_F8": case "Alt_k": case 'Alt_Shift_F11': case 'Alt_Shift_F10': case 'Alt_Shift_F12': case 'Alt_Shift_F9':
-			case 'Control_Shift_F12': case 'Alt_Shift_F2': case 'Alt_Shift_F1':
+			case 'Control_Shift_F12': case 'Alt_Shift_F2': case 'Alt_Shift_F1': case 'Control_Alt_b':
 				/*switch(dataToProcess){
 				case 'Shift_F':
 					count++;
@@ -666,7 +666,7 @@ function processUserSelectionData(whatToProcess,dataToProcess)
 									break;
 							}
 							break;
-						case '8':
+						case '8': case '7':
 							dataToProcess = dataToProcess + ',' + document.getElementById('which_inning').value;
 							processCricketProcedures("ANIMATE-IN-GRAPHICS", dataToProcess);
 							break;	

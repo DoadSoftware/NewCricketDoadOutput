@@ -155,7 +155,7 @@ public class Animation
 			case "Shift_F1": case "Shift_F2": case "Alt_F7": case "Alt_F1": case "Alt_F2":  
 				return Constants.MINIS;	
 			
-			case "F8": case "Control_Shift_B": 
+			case "F8": case "Control_Shift_B": case "Control_Alt_b":
 			case "Control_F5": case "Control_F9": case "Alt_F8": case "F5":case "F9": case "d": case "e": case "F7": case "F11": case "Control_h":
 			case "F6": case "F10": case "Control_Shift_Q": case "Control_Shift_O": case "9": case "Alt_Shift_Q":
 			case "Control_a":  case "Control_F3": case "Alt_k": case "Control_Shift_F10":
@@ -1043,48 +1043,69 @@ public class Animation
 				}
 				break;
 			
-			case "5": case ";": case "Shift_)": case "Control_Shift_*":
-				if(whatToProcess.split(",")[0].equalsIgnoreCase("5")) {
-					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Extra_PopUp_New$Select*FUNCTION*Omo*vis_con SET 3\0", print_writers);
+//			case "5": case ";": case "Shift_)": case "Control_Shift_*":
+//				if(whatToProcess.split(",")[0].equalsIgnoreCase("5")) {
+//					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Extra_PopUp_New$Select*FUNCTION*Omo*vis_con SET 3\0", print_writers);
 //					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Extra_PopUp$TextGrp$Select*FUNCTION*Omo*vis_con SET 0\0", print_writers);
-				}else if(whatToProcess.split(",")[0].equalsIgnoreCase(";")) {
-					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Extra_PopUp_New$Select*FUNCTION*Omo*vis_con SET 4\0", print_writers);
+//				}else if(whatToProcess.split(",")[0].equalsIgnoreCase(";")) {
+//					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Extra_PopUp_New$Select*FUNCTION*Omo*vis_con SET 4\0", print_writers);
 //					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Extra_PopUp$TextGrp$Select*FUNCTION*Omo*vis_con SET 1\0", print_writers);
-				}else if(whatToProcess.split(",")[0].equalsIgnoreCase("Shift_)")) {
-					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Extra_PopUp_New$Select*FUNCTION*Omo*vis_con SET 5\0", print_writers);
-				}else if(whatToProcess.split(",")[0].equalsIgnoreCase("Control_Shift_*")) {
-					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Extra_PopUp_New$Select*FUNCTION*Omo*vis_con SET 7\0", print_writers);
-				}
-				
-				if(this.infobar.isInfobar_on_screen() == true && !this.infobar.isInfobar_pushed()) {
-					processAnimation(Constants.FRONT, print_writers, "Extra_PopUp_New", "START");
+//				}else if(whatToProcess.split(",")[0].equalsIgnoreCase("Shift_)")) {
+//					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Extra_PopUp_New$Select*FUNCTION*Omo*vis_con SET 5\0", print_writers);
+//				}else if(whatToProcess.split(",")[0].equalsIgnoreCase("Control_Shift_*")) {
+//					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Extra_PopUp_New$Select*FUNCTION*Omo*vis_con SET 7\0", print_writers);
+//				}
+//				
+//				if(this.infobar.isInfobar_on_screen() == true && !this.infobar.isInfobar_pushed()) {
+//					processAnimation(Constants.FRONT, print_writers, "Extra_PopUp_New", "START");
 //					processAnimation(Constants.FRONT, print_writers, "Extra_PopUpfs", "START");
+//				}
+//				break;
+				
+			case "5":
+				if(this.infobar.isInfobar_on_screen() == true && !this.infobar.isInfobar_pushed()) {
+					processAnimation(Constants.FRONT, print_writers, "Anim_Infobar$Mascots$In_Out", "START");
 				}
 				break;
 				
+			case "7":
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Infobar$Jeet_Signal$Select_Jeet*FUNCTION*Omo*vis_con SET 5 \0", print_writers);
+				
+				if(this.infobar.isInfobar_on_screen() == true && !this.infobar.isInfobar_pushed()) {
+					processAnimation(Constants.FRONT, print_writers, "Anim_Jeet$In_Out", "START");
+				}
+				break;
+				
+				
 			case "w": case "i": case "f": case "s": case "0": case "8": case "Control_F8":
 				if(whatToProcess.split(",")[0].equalsIgnoreCase("w")) {
-					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Extra_PopUp_New$Select*FUNCTION*Omo*vis_con SET 6\0", print_writers);
 					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Infobar$Wipes$Select*FUNCTION*Omo*vis_con SET 2 \0", print_writers);
+					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Infobar$Jeet_Signal$Select_Jeet*FUNCTION*Omo*vis_con SET 4 \0", print_writers);
 					
 					if(this.infobar.isInfobar_on_screen() == true && !this.infobar.isInfobar_pushed()) {
-						processAnimation(Constants.FRONT, print_writers, "Extra_PopUp_New", "START");
+						processAnimation(Constants.FRONT, print_writers, "Anim_Jeet$In_Out", "START");
 					}
 				}else if(whatToProcess.split(",")[0].equalsIgnoreCase("i")) {
 					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Infobar$Wipes$Select*FUNCTION*Omo*vis_con SET 1 \0", print_writers);
-				}else if(whatToProcess.split(",")[0].equalsIgnoreCase("f")) {
-					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Extra_PopUp_New$Select*FUNCTION*Omo*vis_con SET 1\0", print_writers);
-					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Infobar$Wipes$Select*FUNCTION*Omo*vis_con SET 3 \0", print_writers);
+					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Infobar$Jeet_Signal$Select_Jeet*FUNCTION*Omo*vis_con SET 3 \0", print_writers);
 					
 					if(this.infobar.isInfobar_on_screen() == true && !this.infobar.isInfobar_pushed()) {
-						processAnimation(Constants.FRONT, print_writers, "Extra_PopUp_New", "START");
+						processAnimation(Constants.FRONT, print_writers, "Anim_Jeet$In_Out", "START");
+					}
+					
+				}else if(whatToProcess.split(",")[0].equalsIgnoreCase("f")) {
+					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Infobar$Wipes$Select*FUNCTION*Omo*vis_con SET 3 \0", print_writers);
+					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Infobar$Jeet_Signal$Select_Jeet*FUNCTION*Omo*vis_con SET 1 \0", print_writers);
+					
+					if(this.infobar.isInfobar_on_screen() == true && !this.infobar.isInfobar_pushed()) {
+						processAnimation(Constants.FRONT, print_writers, "Anim_Jeet$In_Out", "START");
 					}
 				}else if(whatToProcess.split(",")[0].equalsIgnoreCase("s")) {
-					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Extra_PopUp_New$Select*FUNCTION*Omo*vis_con SET 2\0", print_writers);
 					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Infobar$Wipes$Select*FUNCTION*Omo*vis_con SET 4 \0", print_writers);
+					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Infobar$Jeet_Signal$Select_Jeet*FUNCTION*Omo*vis_con SET 2 \0", print_writers);
 					
 					if(this.infobar.isInfobar_on_screen() == true && !this.infobar.isInfobar_pushed()) {
-						processAnimation(Constants.FRONT, print_writers, "Extra_PopUp_New", "START");
+						processAnimation(Constants.FRONT, print_writers, "Anim_Jeet$In_Out", "START");
 					}
 				}else if(whatToProcess.split(",")[0].equalsIgnoreCase("0")) {
 					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Infobar$Wipes$Select*FUNCTION*Omo*vis_con SET 5 \0", print_writers);
@@ -1524,7 +1545,7 @@ public class Animation
 				this.whichGraphicOnScreen = whatToProcess;
 				break;
 				
-			case "Control_Shift_B":
+			case "Control_Shift_B": case "Control_Alt_b":
 				if(!infobar.getInfobar_status().equalsIgnoreCase(Constants.FORCED+Constants.SHRUNK_INFOBAR)) {
 					AnimateIn("ArrowLeft" + ",", print_writers, config); // Shrink infobar
 					TimeUnit.MILLISECONDS.sleep(1000);
@@ -4030,7 +4051,7 @@ public class Animation
 				this.whichGraphicOnScreen = "";
 				break;
 				
-			case "Control_Shift_B":
+			case "Control_Shift_B": case "Control_Alt_b":
 //				if(audioenabled.equalsIgnoreCase("TRUE")) {
 //					processAnimation(Constants.FRONT, print_writers, "Audio$Out", "START");
 //				}
@@ -14781,7 +14802,7 @@ public class Animation
 						previewCommands = "Anim_Infobar$Push 0.500 LT_Phase_Comp$In_Out 1.400 LT_Phase_Comp$In_Out$In 1.400 LT_Phase_Comp$In_Out$In$BASE 1.200 LT_Phase_Comp$In_Out$In$LOGO 1.100 "
 								+ "LT_Phase_Comp$In_Out$In$HEADER 1.320 LT_Phase_Comp$In_Out$In$BOTTOM_DATA 1.320 LT_Phase_Comp$In_Out$In$SUB_DATA 1.400";
 						break;
-					case "Control_Shift_B":
+					case "Control_Shift_B": case "Control_Alt_b":
 						previewCommands = "Anim_Infobar$Push 0.500 LT_NextToBat$In_Out 1.420 LT_NextToBat$In_Out$In 1.140 LT_NextToBat$In_Out$In$BASE 1.040 LT_NextToBat$In_Out$In$LOGO 1.000"
 								+ " LT_NextToBat$In_Out$In$BOTTOM_DATA 1.140";
 						break;

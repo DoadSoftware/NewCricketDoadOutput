@@ -2571,9 +2571,9 @@ public class InfobarGfx
 				
 				if(config.getBroadcaster().equalsIgnoreCase(Constants.NPL)) {
 					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Infobar$Flag_Left$Mascots_Grp$img_Mascots*TEXTURE*IMAGE SET " + 
-							Constants.NPL_MASCOTS_CENTER_PATH + inning.getBatting_team().getTeamBadge() + "\0", print_writers);
+							Constants.NPL_MASCOTS_LEFT_PATH + inning.getBatting_team().getTeamBadge() + "\0", print_writers);
 					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Infobar$Flag_Right$Mascots_Grp$img_Mascots*TEXTURE*IMAGE SET " + 
-							Constants.NPL_MASCOTS_CENTER_PATH + inning.getBowling_team().getTeamBadge() + "\0", print_writers);
+							Constants.NPL_MASCOTS_RIGHT_PATH + inning.getBowling_team().getTeamBadge() + "\0", print_writers);
 					
 					logoPath = Constants.NPL_LOGO_PATH;
 				}else if(config.getBroadcaster().equalsIgnoreCase(Constants.APL)) {
@@ -4263,24 +4263,24 @@ public class InfobarGfx
 				}
 				break;
 			case Constants.NPL:
-				if(config.getPrimaryIpAddress().equalsIgnoreCase(Constants.LOCALHOST)) {
-					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Infobar$Right$Data_Right_Normal$Side_1" + infobar.getInfobar_photo() + "$Bowl_Part$"
-							+ "Side" + WhichSide + "$With_Image$Bowler$img_Player*TEXTURE*IMAGE SET "+ (config.getBroadcaster().equalsIgnoreCase(Constants.APL) ? 
-							Constants.APL_LOCAL_PHOTO_PATH:Constants.NPL_LOCAL_PHOTO_PATH) + inning.getBowling_team().getTeamName4() 
-							+ "\\\\" + bowlingCard.getPlayer().getPhoto()+CricketUtil.PNG_EXTENSION + "\0", print_writers);
-				}else {
-					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Infobar$Right$Data_Right_Normal$Side_1" + infobar.getInfobar_photo() + "$Bowl_Part$"
-							+ "Side" + WhichSide + "$With_Image$Bowler$img_Player*TEXTURE*IMAGE SET " + "\\\\" + config.getPrimaryIpAddress() + "\\" + 
-							(config.getBroadcaster().equalsIgnoreCase(Constants.APL)?Constants.APL_PHOTO_PATH:Constants.NPL_PHOTO_PATH)
-							+ inning.getBowling_team().getTeamName4() + "\\\\"+ bowlingCard.getPlayer().getPhoto()+CricketUtil.PNG_EXTENSION + "\0", print_writers);
-				}
+//				if(config.getPrimaryIpAddress().equalsIgnoreCase(Constants.LOCALHOST)) {
+//					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Infobar$Right$Data_Right_Normal$Side_1" + infobar.getInfobar_photo() + "$Bowl_Part$"
+//							+ "Side" + WhichSide + "$With_Image$Bowler$img_Player*TEXTURE*IMAGE SET "+ (config.getBroadcaster().equalsIgnoreCase(Constants.APL) ? 
+//							Constants.APL_LOCAL_PHOTO_PATH:Constants.NPL_LOCAL_PHOTO_PATH) + inning.getBowling_team().getTeamName4() 
+//							+ "\\\\" + bowlingCard.getPlayer().getPhoto()+CricketUtil.PNG_EXTENSION + "\0", print_writers);
+//				}else {
+//					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Infobar$Right$Data_Right_Normal$Side_1" + infobar.getInfobar_photo() + "$Bowl_Part$"
+//							+ "Side" + WhichSide + "$With_Image$Bowler$img_Player*TEXTURE*IMAGE SET " + "\\\\" + config.getPrimaryIpAddress() + "\\" + 
+//							(config.getBroadcaster().equalsIgnoreCase(Constants.APL)?Constants.APL_PHOTO_PATH:Constants.NPL_PHOTO_PATH)
+//							+ inning.getBowling_team().getTeamName4() + "\\\\"+ bowlingCard.getPlayer().getPhoto()+CricketUtil.PNG_EXTENSION + "\0", print_writers);
+//				}
 				break;
 			}
 			
 			switch (config.getBroadcaster()) {
 			case Constants.NPL:
-				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Infobar$Data_Right_Normal$Bat_and_Bowl$Style1$Bowl_Part$Bowler_Data$"
-						+ "Side" + WhichSide + "$select_Style*FUNCTION*Omo*vis_con SET 1\0", print_writers);
+//				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Infobar$Data_Right_Normal$Bat_and_Bowl$Style1$Bowl_Part$Bowler_Data$"
+//						+ "Side" + WhichSide + "$select_Style*FUNCTION*Omo*vis_con SET 1\0", print_writers);
 				
 				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Infobar$Right$Data_Right_Normal$Side_1" + infobar.getInfobar_photo() + "$Bowl_Part$Side" 
 						+ WhichSide + (infobar.getOmo_value() == 0 ? "$With_Image" : "") + "$txt_Name*GEOM*TEXT SET "+bowlingCard.getPlayer().getTicker_name()+ "\0", print_writers);
@@ -4310,9 +4310,9 @@ public class InfobarGfx
 						+ WhichSide + "$txt_Balls*GEOM*TEXT SET " + CricketFunctions.OverBalls(bowlingCard.getOvers(), bowlingCard.getBalls()) + "\0", print_writers);
 				break;
 			case Constants.NPL: case Constants.APL:
-				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Infobar$Right$Data_Right_Normal$Side_1" + infobar.getInfobar_photo() 
-				+ "$Bowl_Part$Side" + WhichSide + (infobar.getOmo_value() == 0 ? "$With_Image" : "") + "$txt_Balls*GEOM*TEXT SET " 
-				+ CricketFunctions.OverBalls(bowlingCard.getOvers(), bowlingCard.getBalls()) + "\0", print_writers);
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Infobar$Right$Data_Right_Normal$Side_1" + infobar.getInfobar_photo() + "$Bowl_Part$Side" 
+						+ WhichSide + (infobar.getOmo_value() == 0 ? "$With_Image" : "") + "$txt_Balls*GEOM*TEXT SET " + CricketFunctions.OverBalls(bowlingCard.getOvers(), 
+								bowlingCard.getBalls()) + "\0", print_writers);
 				break;
 			default:
 				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Infobar$Right$Data_Right_Normal$Side_1" + infobar.getInfobar_photo() + "$Bowl_Part$"
