@@ -172,6 +172,7 @@ public class IndexController
 
 	    map.put("Control_Shift_Z", strikeRate);
 	    map.put("Control_Alt_9", strikeRate);
+	    map.put("Control_Alt_z", strikeRate);
 
 	    map.put("Control_Shift_Y", economy);
 	    map.put("Control_Alt_0", economy);
@@ -1416,6 +1417,18 @@ public class IndexController
 			}else {
 				return (List<T>) session_team;
 			}
+			
+		case "Control_Alt_z":
+			List<Tournament> thisMatchStats = new ArrayList<Tournament>();
+			thisMatchStats = CricketFunctions.extractTournamentData("CURRENT_MATCH_DATA",false, null,cricketService,session_match, null);
+			
+			Comparator<Tournament> comparatorThisMatch = SORT_MAP.get(whatToProcess);
+
+			if (comparatorThisMatch != null) {
+				thisMatchStats.sort(comparatorThisMatch);
+			}
+			
+			return (List<T>) thisMatchStats;
 			
 		case "z": case "x": case "c": case "v": case "Control_Shift_Z": case "Control_Shift_Y": case "Shift_@": case "Shift_$": case "Control_Shift_@": case "Control_Alt_5":
 		case "Control_Alt_9": case "Control_Alt_0":	case "Alt_Shift_K": case "Alt_Shift_X": case "Alt_Shift_T": case "Alt_Shift_V":  case "Alt_Shift_U": case "Alt_Shift_I":

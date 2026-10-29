@@ -5529,6 +5529,30 @@ public class InfobarGfx
 								WhichSubSide + "$FreeText$txt_Free*GEOM*TEXT SET " + matchAllData.getSetup().getGround().getSecond_bowling_end() + " END" + "\0", print_writers);
 					}
 					break;
+				case "CRR":
+					isThisOverLimitExceed = true;
+					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Infobar$Right$Data_Right_Normal$Side_1" + infobar.getInfobar_photo() + "$Bottom_Right_Part$Side_" + 
+							WhichSubSide + "$Select_Type*FUNCTION*Omo*vis_con SET 2 \0", print_writers);
+					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Infobar$Right$Data_Right_Normal$Side_1" + infobar.getInfobar_photo() + "$Bottom_Right_Part$Side_" + 
+							WhichSubSide + "$FreeText$txt_Free*GEOM*TEXT SET " + "CURRENT RUN RATE: " + CricketFunctions.generateRunRate(inning.getTotalRuns(), inning.getTotalOvers(), 
+									inning.getTotalBalls(), 2,matchAllData) + "\0", print_writers);
+					break;
+				case "RRR":
+					isThisOverLimitExceed = true;
+					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Infobar$Right$Data_Right_Normal$Side_1" + infobar.getInfobar_photo() + "$Bottom_Right_Part$Side_" + 
+							WhichSubSide + "$Select_Type*FUNCTION*Omo*vis_con SET 2 \0", print_writers);
+					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Infobar$Right$Data_Right_Normal$Side_1" + infobar.getInfobar_photo() + "$Bottom_Right_Part$Side_" + 
+							WhichSubSide + "$FreeText$txt_Free*GEOM*TEXT SET " + "REQUIRED RUN RATE: " + CricketFunctions.generateRunRate(CricketFunctions.GetTargetData(matchAllData).getRemaningRuns(), 
+									0, CricketFunctions.GetTargetData(matchAllData).getRemaningBall(),2,matchAllData) + "\0", print_writers);
+					break;	
+				case "TARGET":
+					isThisOverLimitExceed = true;
+					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Infobar$Right$Data_Right_Normal$Side_1" + infobar.getInfobar_photo() + "$Bottom_Right_Part$Side_" + 
+							WhichSubSide + "$Select_Type*FUNCTION*Omo*vis_con SET 2 \0", print_writers);
+					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Infobar$Right$Data_Right_Normal$Side_1" + infobar.getInfobar_photo() + "$Bottom_Right_Part$Side_" + 
+							WhichSubSide + "$FreeText$txt_Free*GEOM*TEXT SET " + "TARGET: " + CricketFunctions.GetTargetData(matchAllData).getTargetRuns() + (matchAllData.getSetup().getTargetType() != null 
+							&& !matchAllData.getSetup().getTargetType().isEmpty()? " (" + matchAllData.getSetup().getTargetType().toUpperCase()+")":"") + "\0", print_writers);
+					break;
 				case "BOWLING_ECONOMY":
 					isThisOverLimitExceed = true;
 					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Infobar$Right$Data_Right_Normal$Side_1" + infobar.getInfobar_photo() + "$Bottom_Right_Part$Side_" + 
@@ -5537,7 +5561,14 @@ public class InfobarGfx
 					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Infobar$Right$Data_Right_Normal$Side_1" + infobar.getInfobar_photo() + "$Bottom_Right_Part$Side_" + 
 							WhichSubSide + "$FreeText$txt_Free*GEOM*TEXT SET " + "ECONOMY: " + bowlingCard.getEconomyRate() + "\0", print_writers);
 					
-					break;	
+					break;
+				case "BOWLING_STYLE":
+					isThisOverLimitExceed = true;
+					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Infobar$Right$Data_Right_Normal$Side_1" + infobar.getInfobar_photo() + "$Bottom_Right_Part$Side_" + 
+							WhichSubSide + "$Select_Type*FUNCTION*Omo*vis_con SET 2 \0", print_writers);
+					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Infobar$Right$Data_Right_Normal$Side_1" + infobar.getInfobar_photo() + "$Bottom_Right_Part$Side_" + 
+							WhichSubSide + "$FreeText$txt_Free*GEOM*TEXT SET " + CricketFunctions.getbowlingstyle(bowlingCard.getPlayer().getBowlingStyle()).toUpperCase() + "\0", print_writers);
+					break;
 				case CricketUtil.OVER:
 					this_data_str = new ArrayList<String>();
 //					this_data_str.add(CricketFunctions.getEventsText(CricketUtil.OVER,infobar.getLast_bowler().getPlayerId() ,
@@ -10892,7 +10923,7 @@ public class InfobarGfx
 			    		+ "$Projected_Wide$Stat_3$txt_Fig*GEOM*TEXT SET " + this_data_str.get(3) + "\0", print_writers);
 				
 			    switch(config.getBroadcaster()) {
-			    case Constants.APL:
+			    case Constants.APL: case Constants.NPL:
 			    	CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Infobar$Right$Side_" + WhichSide 
 						    	+ "$Projected_Wide$Stat_4$txt_Desig*GEOM*TEXT SET " + this_data_str.get(4) + "/OVER" + "\0", print_writers);
 				    CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Infobar$Right$Side_" + WhichSide 

@@ -804,6 +804,11 @@ public class Caption
 				this_fullFramesGfx.whichtype = whatToProcess.split(",")[2];
 				status = this_fullFramesGfx.populateLeaderBoard(whichSide, whatToProcess, matchAllData, 0);
 				break;
+			case "Control_Alt_z":
+				this_fullFramesGfx.FirstPlayerId = Integer.valueOf((whatToProcess.split(",")[2]).split("_")[1]);
+				status = this_fullFramesGfx.populateLeaderBoard(whichSide, whatToProcess, matchAllData, 0);
+				break;
+				
 			case "z": case "x": case "c": case "v": case "Control_z": case "Control_x": case "Control_c": case "Control_v": case "Shift_V":
 			case "Shift_Z": case "Shift_X": case "Control_Shift_Z": case "Control_Shift_Y": case "Alt_Shift_W": case "Control_Shift_F8":
 			case "Alt_Shift_U":	case "Alt_Shift_I": case "Alt_Shift_<":

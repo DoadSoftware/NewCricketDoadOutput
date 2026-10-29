@@ -1539,7 +1539,7 @@ function addItemsToList(whatToProcess,dataToProcess)
 	case "Shift_@": case "Shift_$": case "Control_Shift_@": case "Control_Alt_5": case "Alt_Shift_@": case "Control_Alt_6": case "Control_Alt_9": case "Control_Alt_0":
 	case "Alt_Shift_N": case "Alt_Shift_M":case 'Alt_Shift_Q': case 'Alt_Shift_P': case 'Alt_Shift_K': case 'Alt_Shift_X': case 'Alt_Shift_T': case 'Alt_Shift_V':
 	case 'Alt_Shift_F4':case "Alt_Shift_F5":case 'Alt_Shift_F6':case 'Alt_Shift_F7': case 'Shift_L': case 'h': case 'Control_Shift_(': case 'Shift_M': case 'Control_Alt_7':
-	case 'Control_Alt_8': case 'Alt_x': case 'Alt_f': case 'Control_F7': case 'm': case 'Alt_Shift_Y': case 'Alt_Shift_!': case 'Alt_Shift_<': case 'Control_Shift_!':
+	case 'Control_Alt_8': case 'Alt_x': case 'Alt_f': case 'Control_F7': case 'm': case 'Alt_Shift_Y': case 'Alt_Shift_!': case 'Alt_Shift_<': case 'Control_Shift_!': case 'Control_Alt_z':
 	//Shift+2 and Shift+4
 	 //InfoBar LeftBottom-Middle-BatPP-BallPP-LastXBalls-Batsman/Sponsor-RightBottom
 	case "Alt_b": 
@@ -6188,11 +6188,49 @@ function addItemsToList(whatToProcess,dataToProcess)
 				select.appendChild(option);
 				
 				switch($('#selected_broadcaster').val().toUpperCase()){
-					case 'MPL':
+				case 'MPL':
 					option = document.createElement('option');
 					option.value = 'BOWLING_ECONOMY';
 					option.text = 'Bowling Economy';
 					select.appendChild(option);
+					break;
+				case 'NPL':
+					option = document.createElement('option');
+					option.value = 'BOWLING_ECONOMY';
+					option.text = 'Bowling Economy';
+					select.appendChild(option);
+					
+					option = document.createElement('option');
+					option.value = 'BOWLING_STYLE';
+					option.text = 'Bowling Style';
+					select.appendChild(option);
+				
+					session_match.match.inning.forEach(function(inn){
+						if(inn.isCurrentInning == 'YES' && session_match.setup.matchType != 'TEST' && session_match.setup.matchType != 'FC'){
+							if(inn.inningNumber == 1){
+								option = document.createElement('option');
+								option.value = 'CRR';
+								option.text = 'Current Run Rate';
+								select.appendChild(option);
+							}
+							else{
+								option = document.createElement('option');
+								option.value = 'TARGET';
+								option.text = 'Target';
+								select.appendChild(option);
+								
+								option = document.createElement('option');
+								option.value = 'CRR';
+								option.text = 'Current Run Rate';
+								select.appendChild(option);
+								
+								option = document.createElement('option');
+								option.value = 'RRR';
+								option.text = 'Required Run Rate';
+								select.appendChild(option);
+							}
+						}
+					});
 					break;
 				}
 				break;	
@@ -8033,7 +8071,31 @@ function addItemsToList(whatToProcess,dataToProcess)
 		    // 🔹 Ensure default (IDENT) shows full list
 		    filterPlayerDropdown('MVP_LB_IDENT');
 		    break;
-
+		case 'Control_Alt_z':
+			header_text.innerHTML = 'LEADERBOARD(THIS MATCH) - BEST STRIKE RATE';
+			let numb = 0;
+			
+			select = document.createElement('select');
+			select.id = 'selectPlayerName';
+			select.name = select.id;
+			numb = 0;
+			for(i=0;i<dataToProcess.length;i++){
+				if(dataToProcess[i].ballsFaced>=15){
+					if(numb<5){
+						option = document.createElement('option');
+			            option.value = (numb+1)+ "_" + dataToProcess[i].playerId;
+			            option.text = dataToProcess[i].player.full_name;
+			            select.appendChild(option);
+			            numb++;
+					}
+				}
+			}
+			select.setAttribute('onchange',"setDropdownOptionToSelectOptionArray(this, 0)");
+			row.insertCell(cellCount).appendChild(select);
+			setDropdownOptionToSelectOptionArray($(select),0);
+			cellCount = cellCount + 1
+			
+			break;
 		
 		case 'z': case 'x': case 'c': case 'v': case 'Control_z': case 'Control_x': case 'Control_c': case 'Control_v': case 'Control_Shift_Z': case 'Control_Shift_Y':
 		case "Shift_@": case "Shift_$": case "Control_Shift_@": case "Control_Alt_5": case "Alt_Shift_@": case "Control_Alt_6": case "Control_Alt_9": case "Control_Alt_0":
@@ -8138,7 +8200,7 @@ function addItemsToList(whatToProcess,dataToProcess)
 					select.name = select.id;
 					num = 0;
 					for(i=0;i<dataToProcess.length;i++){
-						if(dataToProcess[i].ballsFaced>=30){
+						if(dataToProcess[i].ballsFaced>=50){
 							if(num<5){
 								option = document.createElement('option');
 					            option.value = (num+1)+ "_" + dataToProcess[i].playerId;
@@ -11130,7 +11192,7 @@ function addItemsToList(whatToProcess,dataToProcess)
 			
 				if(whatToProcess == 'z' || whatToProcess == 'x' || whatToProcess == 'c' || whatToProcess == 'v' || 
 					whatToProcess == 'Control_z' || whatToProcess == 'Control_x' || whatToProcess == 'Control_Shift_Z' || whatToProcess == 'Control_Shift_Y' || 
-					whatToProcess == 'Control_Shift_F8' || whatToProcess == 'Alt_Shift_U' || whatToProcess == 'Alt_Shift_I'){
+					whatToProcess == 'Control_Shift_F8' || whatToProcess == 'Alt_Shift_U' || whatToProcess == 'Alt_Shift_I' || whatToProcess == 'Control_Alt_z'){
 					option = document.createElement('input');
 					option.type = 'button';
 					option.name = 'highlightLeader';
@@ -11166,7 +11228,7 @@ function addItemsToList(whatToProcess,dataToProcess)
 			case "Control_Alt_9": case "Control_Alt_0":	case 'r': case "Alt_Shift_N": case "Alt_Shift_M":case 'Alt_Shift_Q': case 'Alt_Shift_P': case 'Alt_Shift_K': 
 			case 'Alt_Shift_X': case 'Alt_Shift_T': case 'Alt_Shift_V':case 'Control_Shift_F5':case "Alt_Shift_F5":case 'Alt_Shift_F4':case 'Alt_Shift_F6':case 'Alt_Shift_F7':
 			case 'Shift_L': case 'h': case 'Control_Shift_(': case 'Shift_M': case 'Control_Alt_7': case 'Control_Alt_8': case 'Alt_x': case 'Alt_f': case 'Control_F7': case 'm':
-			case 'Alt_Shift_Y': case 'Alt_Shift_!': case 'Alt_Shift_<': case 'Control_Shift_!':
+			case 'Alt_Shift_Y': case 'Alt_Shift_!': case 'Alt_Shift_<': case 'Control_Shift_!': case 'Control_Alt_z':
 				option = document.createElement('input');
 				option.type = 'button';
 				option.name = 'populate_btn';
