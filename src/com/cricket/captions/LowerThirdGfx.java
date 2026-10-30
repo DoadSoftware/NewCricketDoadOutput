@@ -9654,8 +9654,8 @@ public class LowerThirdGfx
 		case Constants.APL: case Constants.AFG_T20:
 			switch(whatToProcess) {
 			case "F6": case "Control_F6": case "Shift_F6":
-				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Sponsors_LT$Side" + WhichSide + "$LT$ILU*TEXTURE*IMAGE SET " 
-						+ Constants.NPL_SPONSOR_PATH + "RED_BULL" + "\0", print_writers);
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Sponsors_LT$Side" + WhichSide + "$LT$ILU$Image"
+						+ "*TEXTURE*IMAGE SET " + Constants.NPL_SPONSOR_PATH + "RED_BULL" + "\0", print_writers);
 				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Sponsors_LT$Side"+ WhichSide + "$LT$Select_Sponsor"
 						+ "*FUNCTION*Omo*vis_con SET 3\0", print_writers);
 				break;
