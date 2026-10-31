@@ -3612,6 +3612,24 @@ function addItemsToList(whatToProcess,dataToProcess)
 		break;
 		case 'Alt_1':
 			switch($('#selected_broadcaster').val().toUpperCase()){
+				case 'NPL':
+					header_text.innerHTML = 'INFOBAR TOP';
+	
+					select = document.createElement('select');
+					select.id = 'selectMiddleStat';
+					select.name = select.id;
+	
+					option = document.createElement('option');
+					option.value = 'BLANK';
+					option.text = 'OUT TOP SECTION';
+					select.appendChild(option);
+	
+					option = document.createElement('option');
+					option.value = 'EQUATION';
+					option.text = 'EQUATION';
+					select.appendChild(option);
+												
+					break;
 				case 'T20_MUMBAI':
 					header_text.innerHTML = 'INFOBAR LEFT';
 					
@@ -4070,7 +4088,8 @@ function addItemsToList(whatToProcess,dataToProcess)
 				}
 				
 				if($('#selected_broadcaster').val() != 'ISPL' && $('#selected_broadcaster').val() != 'VIDARBHA' && 
-					$('#selected_broadcaster').val() != 'ODISHA' && $('#selected_broadcaster').val() != 'T20_MUMBAI'){
+					$('#selected_broadcaster').val() != 'ODISHA' && $('#selected_broadcaster').val() != 'T20_MUMBAI' && 
+					$('#selected_broadcaster').val() != 'NPL'){
 					option = document.createElement('option');
 					option.value = 'CRR';
 					option.text = 'Run Rate';

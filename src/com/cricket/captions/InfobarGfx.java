@@ -13503,6 +13503,27 @@ public class InfobarGfx
 	public String populateVizInfobarLeftBottom(List<PrintWriter> print_writers, MatchAllData matchAllData,int WhichSide) throws Exception 
 	{
 		switch(config.getBroadcaster()) {
+		case Constants.NPL:
+			switch(infobar.getLeft_bottom().toUpperCase()) {
+			case "EQUATION":
+				inning = matchAllData.getMatch().getInning().stream().filter(inn -> inn.getInningNumber() == 2 && 
+					inn.getIsCurrentInning().equalsIgnoreCase(CricketUtil.YES)).findAny().orElse(null);
+				
+				if(matchAllData.getSetup().getTargetType() != null && !matchAllData.getSetup().getTargetType().isEmpty()) {
+					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Infobar$gfx_Infobar$Right$Top_Stage$Side" + WhichSide + "$txt_Top*GEOM*TEXT SET " 
+							+ inning.getBatting_team().getTeamName2() + " NEED " + CricketFunctions.GetTargetData(matchAllData).getRemaningRuns() + " RUN" + CricketFunctions.Plural(
+								CricketFunctions.GetTargetData(matchAllData).getRemaningRuns()).toUpperCase() + " TO WIN " + CricketFunctions.GetTargetData(matchAllData).getRemaningBall() 
+									+ " BALL" + CricketFunctions.Plural(CricketFunctions.GetTargetData(matchAllData).getRemaningBall()).toUpperCase() + " (" + 
+								matchAllData.getSetup().getTargetType().toUpperCase() + ")"+ "\0", print_writers);
+				}else {
+					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Infobar$gfx_Infobar$Right$Top_Stage$Side" + WhichSide + "$txt_Top*GEOM*TEXT SET " 
+							+ inning.getBatting_team().getTeamName2() + " NEED " + CricketFunctions.GetTargetData(matchAllData).getRemaningRuns() + " RUN" + CricketFunctions.Plural(
+								CricketFunctions.GetTargetData(matchAllData).getRemaningRuns()).toUpperCase() + " TO WIN " + CricketFunctions.GetTargetData(matchAllData).getRemaningBall() 
+									+ " BALL" + CricketFunctions.Plural(CricketFunctions.GetTargetData(matchAllData).getRemaningBall()).toUpperCase() + "\0", print_writers);
+				}
+				break;
+			}
+			break;
 		case Constants.T20_MUMBAI:
 			inning = matchAllData.getMatch().getInning().stream().filter(inn -> inn.getIsCurrentInning().equalsIgnoreCase(CricketUtil.YES)).findAny().orElse(null);
 			

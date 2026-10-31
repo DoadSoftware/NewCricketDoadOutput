@@ -969,7 +969,14 @@ public class IndexController
 				this_animation.VidharbaAnimateOut("Control_F8," + Inn_Number + ",BLANK", print_writers, session_configuration);
 			}
 			
-			
+			if(this_caption.this_infobarGfx.infobar.getLeft_bottom()!= null && 
+					!this_caption.this_infobarGfx.infobar.getLeft_bottom().isEmpty()) {
+				this_caption.PopulateGraphics("Alt_1," + Inn_Number + ",BLANK", session_match);
+				this_animation.caption = this_caption;
+				TimeUnit.MILLISECONDS.sleep(200);
+				processAnimations("ANIMATE-IN-GRAPHICS", session_configuration, "Alt_1," + Inn_Number + ",BLANK", 
+						print_writers, headToHead, session_MasterCricketDirectory);
+			}
 			
 			if(!this_caption.this_infobarGfx.infobar.getMiddle_section().equalsIgnoreCase("BATSMAN") && 
 					!this_caption.this_infobarGfx.infobar.getMiddle_section().equalsIgnoreCase("PHOTO BATSMAN")) {

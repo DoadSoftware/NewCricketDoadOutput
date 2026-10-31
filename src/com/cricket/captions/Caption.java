@@ -583,7 +583,7 @@ public class Caption
 					status = this_lofInfobarGfx.populateInfobar(print_writers,whatToProcess,matchAllData,whichSide);
 				}else {
 					switch(config.getBroadcaster()) {
-					case Constants.NPL: case Constants.LEGENDS: case Constants.ASSAM: case Constants.ISPL:  case Constants.MPL: case Constants.APL:
+					case Constants.LEGENDS: case Constants.ASSAM: case Constants.ISPL:  case Constants.MPL: case Constants.APL:
 						this_infobarGfx.infobar.setLeft_bottom(whatToProcess.split(",")[0]);
 						break;
 					}
@@ -1158,6 +1158,15 @@ public class Caption
 					System.out.println(whatToProcess.split(",")[2]);
 					this_infobarGfx.infobar.setLeft_bottom(whatToProcess.split(",")[2]);
 					status = this_infobarGfx.populateVizInfobarLeftBottom(print_writers, matchAllData, whichSide);
+					break;
+				case Constants.NPL:
+					if(whatToProcess.split(",")[2].equalsIgnoreCase("BLANK")) {
+						this_infobarGfx.infobar.setLeft_bottom("");
+						status = Constants.OK;
+					}else {
+						this_infobarGfx.infobar.setLeft_bottom(whatToProcess.split(",")[2]);
+						status = this_infobarGfx.populateVizInfobarLeftBottom(print_writers, matchAllData, whichSide);
+					}
 					break;
 				}
 				break;

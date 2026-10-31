@@ -5541,6 +5541,8 @@ public class FullFramesGfx
 			case "F1": case "F2": case "Shift_K": case "Control_Shift_I": case "Alt_Shift_J":
 				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$Logo$StartLogoAll$Select_LogoType"
 						+ "*FUNCTION*Omo*vis_con SET 1\0", print_writers);
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$Caps$Side" + WhichSide + "$Select"
+						+ "*FUNCTION*Omo*vis_con SET 0\0", print_writers);
 				
 				switch(whatToProcess) {
 				case "F1": case "Shift_K": case "Control_Shift_I": case "Alt_Shift_J":
@@ -5667,6 +5669,8 @@ public class FullFramesGfx
 						+ "*FUNCTION*Omo*vis_con SET 4\0", print_writers);
 				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$Logo$StartLogoAll$Select_LogoType"
 						+ "*FUNCTION*Omo*vis_con SET 0\0", print_writers);
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$Caps$Side" + WhichSide + "$Select"
+						+ "*FUNCTION*Omo*vis_con SET 0\0", print_writers);
 				
 				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$Logo$StartLogoAll$Start_Logo$img_LogosShadow*TEXTURE*IMAGE SET " 
 						+ (config.getBroadcaster().equalsIgnoreCase(Constants.APL)?Constants.APL_LOGO_PATH:Constants.NPL_LOGO_PATH)+ "TLogo" +"\0", print_writers);
@@ -5715,6 +5719,9 @@ public class FullFramesGfx
 						+ (config.getBroadcaster().equalsIgnoreCase(Constants.APL)?Constants.APL_LOGO_PATH:Constants.NPL_LOGO_PATH)+"TLogo\0", print_writers);
 				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$Logo$StartLogoAll$Start_EventLogo$img_LogosShadow*TEXTURE*IMAGE SET "
 						+ (config.getBroadcaster().equalsIgnoreCase(Constants.APL)?Constants.APL_LOGO_PATH:Constants.NPL_LOGO_PATH)+"TLogo\0", print_writers);
+				
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$Caps$Side" + WhichSide + "$Select"
+						+ "*FUNCTION*Omo*vis_con SET 0\0", print_writers);
 				
 				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$Sponsor$Side" + WhichSide + "$Sponsor_Out$Sponsor_In*ACTIVE SET 0\0", print_writers);
 				
@@ -5930,6 +5937,8 @@ public class FullFramesGfx
 						+ "*GEOM*TEXT SET \0", print_writers);
 				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$All$HeaderGrp$Side" + WhichSide + "$Header_Style2$txt_HeaderText2"
 						+ "*GEOM*TEXT SET TEAMS\0", print_writers);
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$Caps$Side" + WhichSide + "$Select"
+						+ "*FUNCTION*Omo*vis_con SET 0\0", print_writers);
 				
 				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$Logo$StartLogoAll$Select_LogoType"
 						+ "*FUNCTION*Omo*vis_con SET 0\0", print_writers);
@@ -5956,6 +5965,8 @@ public class FullFramesGfx
 								:(fixture.getMatchnumber()<10?"MATCH "+fixture.getMatchnumber() : fixture.getMatchfilename())) + "\0", print_writers);
 				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$All$HeaderGrp$Side" + WhichSide + "$Header_Style2$txt_HeaderText2"
 						+ "*GEOM*TEXT SET SUMMARY\0", print_writers);
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$Caps$Side" + WhichSide + "$Select"
+						+ "*FUNCTION*Omo*vis_con SET 0\0", print_writers);
 				
 				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$Sponsor$Side" + WhichSide + "$Sponsor_Out$Sponsor_In*ACTIVE SET 0\0", print_writers);
 				
@@ -6055,7 +6066,8 @@ public class FullFramesGfx
 //						+ "*FUNCTION*Omo*vis_con SET 1\0", print_writers);
 				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$Logo$StartLogoAll$Select_LogoType"
 						+ "*FUNCTION*Omo*vis_con SET 1\0", print_writers);
-				
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$Caps$Side" + WhichSide + "$Select"
+						+ "*FUNCTION*Omo*vis_con SET 0\0", print_writers);
 				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$ExtraData$Side" + WhichSide + "$Select_DataType"
 						+ "*FUNCTION*Omo*vis_con SET 0\0", print_writers);
 				
@@ -6214,6 +6226,8 @@ public class FullFramesGfx
 						+ "*TEXTURE*IMAGE SET "+(config.getBroadcaster().equalsIgnoreCase(Constants.APL)?Constants.APL_LOGO_PATH:Constants.NPL_LOGO_PATH)+team.getTeamBadge()+"\0", print_writers);
 				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$All$HeaderGrp$Side" + WhichSide + "$Select_HeaderType"
 						+ "*FUNCTION*Omo*vis_con SET 1\0", print_writers);
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$Caps$Side" + WhichSide + "$Select"
+						+ "*FUNCTION*Omo*vis_con SET 0\0", print_writers);
 				
 				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$Sponsor$Side" + WhichSide + "$Sponsor_Out$Sponsor_In$Image*TEXTURE*IMAGE SET "
 						+ (config.getBroadcaster().equalsIgnoreCase(Constants.APL)?Constants.APL_LOGO_PATH:Constants.NPL_LOGO_PATH)+ "TLogo" +"\0", print_writers);
@@ -6245,6 +6259,8 @@ public class FullFramesGfx
 				break;
 			case "Alt_z": case "Shift_F8":
 				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$Logo$StartLogoAll$Select_LogoType"
+						+ "*FUNCTION*Omo*vis_con SET 0\0", print_writers);
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$Caps$Side" + WhichSide + "$Select"
 						+ "*FUNCTION*Omo*vis_con SET 0\0", print_writers);
 				
 				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$Logo$StartLogoAll$Start_EventLogo$MohunbaganShadow"
@@ -6368,6 +6384,8 @@ public class FullFramesGfx
 				}
 				
 				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$Sponsor$Side" + WhichSide + "$Sponsor_Out$Sponsor_In*ACTIVE SET 0\0", print_writers);
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$Caps$Side" + WhichSide + "$Select"
+						+ "*FUNCTION*Omo*vis_con SET 0\0", print_writers);
 				
 				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$HeaderGrp$Side" + WhichSide + "$Select_HeaderType"
 						+ "*FUNCTION*Omo*vis_con SET 1 \0", print_writers);
@@ -6396,6 +6414,8 @@ public class FullFramesGfx
 				break;
 			case "Alt_F11": case "Alt_F5":
 				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$Logo$StartLogoAll$Select_LogoType"
+						+ "*FUNCTION*Omo*vis_con SET 0\0", print_writers);
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$Caps$Side" + WhichSide + "$Select"
 						+ "*FUNCTION*Omo*vis_con SET 0\0", print_writers);
 				
 				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$Sponsor$Side" + WhichSide + "$Sponsor_Out$Sponsor_In*ACTIVE SET 0\0", print_writers);
@@ -6454,6 +6474,8 @@ public class FullFramesGfx
 						+ "*GEOM*TEXT SET THIS SEASON\0", print_writers);
 				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$All$HeaderGrp$Side" + WhichSide + "$Header_Style1$txt_HeaderText1"
 						+ "*GEOM*TEXT SET " + "MOST" + "\0", print_writers);
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$Caps$Side" + WhichSide + "$Select"
+						+ "*FUNCTION*Omo*vis_con SET 0\0", print_writers);
 				
 				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$Sponsor$Side" + WhichSide + "$Sponsor_Out$Sponsor_In*ACTIVE SET 0\0", print_writers);
 				
@@ -6476,6 +6498,8 @@ public class FullFramesGfx
 				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$Logo$StartLogoAll$Select_LogoType"
 						+ "*FUNCTION*Omo*vis_con SET 0\0", print_writers);
 				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$ExtraData$Side" + WhichSide + "$Select_DataType"
+						+ "*FUNCTION*Omo*vis_con SET 0\0", print_writers);
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$Caps$Side" + WhichSide + "$Select"
 						+ "*FUNCTION*Omo*vis_con SET 0\0", print_writers);
 				
 				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$All$HeaderGrp$Side" + WhichSide + "$Select_HeaderType"
@@ -6502,6 +6526,8 @@ public class FullFramesGfx
 						+ "*FUNCTION*Omo*vis_con SET 0\0", print_writers);
 				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$SudheaderGrp$Side" + WhichSide + "$txt_SubHeadText2"
 						+ "*GEOM*TEXT SET " + matchAllData.getSetup().getTournament() + "\0", print_writers);
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$Caps$Side" + WhichSide + "$Select"
+						+ "*FUNCTION*Omo*vis_con SET 0\0", print_writers);
 				
 				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$Sponsor$Side" + WhichSide + "$Sponsor_Out$Sponsor_In*ACTIVE SET 0\0", print_writers);
 				
@@ -6523,6 +6549,8 @@ public class FullFramesGfx
 				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$Logo$StartLogoAll$Start_EventLogo$img_LogosShadow"
 						+ "*TEXTURE*IMAGE SET "+(config.getBroadcaster().equalsIgnoreCase(Constants.APL)?Constants.APL_LOGO_PATH:Constants.NPL_LOGO_PATH)+"TLogo"+"\0", print_writers);
 				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$ExtraData$Side" + WhichSide + "$Select_DataType"
+						+ "*FUNCTION*Omo*vis_con SET 0\0", print_writers);
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$Caps$Side" + WhichSide + "$Select"
 						+ "*FUNCTION*Omo*vis_con SET 0\0", print_writers);
 				
 				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$Sponsor$Side" + WhichSide + "$Sponsor_Out$Sponsor_In*ACTIVE SET 0\0", print_writers);
@@ -6604,21 +6632,29 @@ public class FullFramesGfx
 					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$Sponsor$Side" + WhichSide + "$Sponsor_Out$Sponsor_In$Image*TEXTURE*IMAGE SET "
 							+ Constants.NPL_SPONSOR_PATH + "Neofin" +"\0", print_writers);
 					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$Sponsor$Side" + WhichSide + "$Sponsor_Out$Sponsor_In*ACTIVE SET 1\0", print_writers);
+					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$Caps$Side" + WhichSide + "$Select"
+							+ "*FUNCTION*Omo*vis_con SET 2\0", print_writers);
 					break;
 				case "x":
 					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$Sponsor$Side" + WhichSide + "$Sponsor_Out$Sponsor_In$Image*TEXTURE*IMAGE SET "
 							+ Constants.NPL_SPONSOR_PATH + "Arya" +"\0", print_writers);
 					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$Sponsor$Side" + WhichSide + "$Sponsor_Out$Sponsor_In*ACTIVE SET 1\0", print_writers);
+					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$Caps$Side" + WhichSide + "$Select"
+							+ "*FUNCTION*Omo*vis_con SET 1\0", print_writers);
 					break;
 				case "Control_Shift_Z": case "Control_Alt_z":
 					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$Sponsor$Side" + WhichSide + "$Sponsor_Out$Sponsor_In$Image*TEXTURE*IMAGE SET "
 							+ Constants.NPL_SPONSOR_PATH + "RED_BULL" +"\0", print_writers);
 					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$Sponsor$Side" + WhichSide + "$Sponsor_Out$Sponsor_In*ACTIVE SET 1\0", print_writers);
+					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$Caps$Side" + WhichSide + "$Select"
+							+ "*FUNCTION*Omo*vis_con SET 0\0", print_writers);
 					break;
 				default:
 					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$Sponsor$Side" + WhichSide + "$Sponsor_Out$Sponsor_In*ACTIVE SET 0\0", print_writers);
 					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$SudheaderGrp$Side" + WhichSide +"$txt_SubHeadText2"
 							+ "*GEOM*TEXT SET " + matchAllData.getSetup().getTournament() + "\0", print_writers);
+					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$Caps$Side" + WhichSide + "$Select"
+							+ "*FUNCTION*Omo*vis_con SET 0\0", print_writers);
 					break;
 				}
 				
@@ -6726,6 +6762,8 @@ public class FullFramesGfx
 			case "Control_Shift_K":
 				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$Logo$StartLogoAll$Select_LogoType"
 						+ "*FUNCTION*Omo*vis_con SET 0\0", print_writers);
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$Caps$Side" + WhichSide + "$Select"
+						+ "*FUNCTION*Omo*vis_con SET 0\0", print_writers);
 				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$Logo$StartLogoAll$Start_EventLogo$MohunbaganShadow"
 						+ "*TEXTURE*IMAGE SET "+(config.getBroadcaster().equalsIgnoreCase(Constants.APL)?Constants.APL_LOGO_PATH:Constants.NPL_LOGO_PATH)+"TLogo"+"\0", print_writers);
 				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$Logo$StartLogoAll$Start_EventLogo$img_LogosShadow"
@@ -6754,6 +6792,8 @@ public class FullFramesGfx
 			case "Control_p":
 				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$Logo$StartLogoAll$Select_LogoType"
 						+ "*FUNCTION*Omo*vis_con SET 0\0", print_writers);
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$Caps$Side" + WhichSide + "$Select"
+						+ "*FUNCTION*Omo*vis_con SET 0\0", print_writers);
 				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$Logo$StartLogoAll$Start_EventLogo$MohunbaganShadow"
 						+ "*TEXTURE*IMAGE SET "+(config.getBroadcaster().equalsIgnoreCase(Constants.APL)?Constants.APL_LOGO_PATH:Constants.NPL_LOGO_PATH)+"TLogo"+"\0", print_writers);
 				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$Logo$StartLogoAll$Start_EventLogo$img_LogosShadow"
@@ -6781,6 +6821,8 @@ public class FullFramesGfx
 				break;
 			case "Control_Shift_E": case "Control_Shift_F":
 				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$Logo$StartLogoAll$Select_LogoType"
+						+ "*FUNCTION*Omo*vis_con SET 0\0", print_writers);
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$Caps$Side" + WhichSide + "$Select"
 						+ "*FUNCTION*Omo*vis_con SET 0\0", print_writers);
 				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$Logo$StartLogoAll$Start_EventLogo$MohunbaganShadow"
 						+ "*TEXTURE*IMAGE SET "+(config.getBroadcaster().equalsIgnoreCase(Constants.APL)?Constants.APL_LOGO_PATH:Constants.NPL_LOGO_PATH)+"TLogo"+"\0", print_writers);
