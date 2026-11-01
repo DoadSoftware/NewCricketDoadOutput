@@ -6633,14 +6633,14 @@ public class FullFramesGfx
 							+ Constants.NPL_SPONSOR_PATH + "Neofin" +"\0", print_writers);
 					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$Sponsor$Side" + WhichSide + "$Sponsor_Out$Sponsor_In*ACTIVE SET 1\0", print_writers);
 					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$Caps$Side" + WhichSide + "$Select"
-							+ "*FUNCTION*Omo*vis_con SET 2\0", print_writers);
+							+ "*FUNCTION*Omo*vis_con SET 0\0", print_writers);
 					break;
 				case "x":
 					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$Sponsor$Side" + WhichSide + "$Sponsor_Out$Sponsor_In$Image*TEXTURE*IMAGE SET "
 							+ Constants.NPL_SPONSOR_PATH + "Arya" +"\0", print_writers);
 					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$Sponsor$Side" + WhichSide + "$Sponsor_Out$Sponsor_In*ACTIVE SET 1\0", print_writers);
 					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$Caps$Side" + WhichSide + "$Select"
-							+ "*FUNCTION*Omo*vis_con SET 1\0", print_writers);
+							+ "*FUNCTION*Omo*vis_con SET 0\0", print_writers);
 					break;
 				case "Control_Shift_Z": case "Control_Alt_z":
 					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*BACK_LAYER*TREE*$gfx_Full_Frame$Sponsor$Side" + WhichSide + "$Sponsor_Out$Sponsor_In$Image*TEXTURE*IMAGE SET "

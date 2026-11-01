@@ -3612,7 +3612,7 @@ function addItemsToList(whatToProcess,dataToProcess)
 		break;
 		case 'Alt_1':
 			switch($('#selected_broadcaster').val().toUpperCase()){
-				case 'NPL':
+				/*case 'NPL':
 					header_text.innerHTML = 'INFOBAR TOP';
 	
 					select = document.createElement('select');
@@ -3629,7 +3629,7 @@ function addItemsToList(whatToProcess,dataToProcess)
 					option.text = 'EQUATION';
 					select.appendChild(option);
 												
-					break;
+					break;*/
 				case 'T20_MUMBAI':
 					header_text.innerHTML = 'INFOBAR LEFT';
 					
