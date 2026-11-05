@@ -5282,11 +5282,7 @@ public class Animation
 				case "Alt_1":
 					switch (config.getBroadcaster().toUpperCase()) {
 					case Constants.NPL:
-						if(whatToProcess.split(",")[2].equalsIgnoreCase("EQUATION")){
-							processAnimation(Constants.FRONT, print_writers, "Anim_Infobar$Top_Stage$In_Out", "START");
-						}else {
-							processAnimation(Constants.FRONT, print_writers, "Anim_Infobar$Top_Stage$In_Out", "CONTINUE");
-						}
+						processAnimation(Constants.FRONT, print_writers, "Anim_Infobar$Change_Stage2", "START");
 						break;
 					case Constants.MPL: case Constants.APL:
 						processAnimation(Constants.FRONT, print_writers, "Anim_Infobar$Change_Bottom_Left", "START");
@@ -5296,7 +5292,21 @@ public class Animation
 				case "Alt_2": case "Alt_3": case "Alt_4": case "Alt_5": case "Alt_6": case "Alt_9": case "Alt_0": case "Alt_c":
 				case "Control_Shift_(":	
 					switch (config.getBroadcaster().toUpperCase()) {
-					case Constants.NPL: case Constants.APL:
+					case Constants.NPL:
+						System.out.println("CHANGE ON - " + caption.this_infobarGfx.infobar.getMiddle_section());
+						if(caption.this_infobarGfx.infobar.getMiddle_section().equalsIgnoreCase("BATSMAN")) {
+							processAnimation(Constants.FRONT, print_writers, "Anim_Infobar$Center_Full$In_Out", "CONTINUE");
+							TimeUnit.MILLISECONDS.sleep(1800);
+							processAnimation(Constants.FRONT, print_writers, "Anim_Infobar$Center_Full$In_Out", "SHOW 0.0");
+						}else {
+							if(caption.this_infobarGfx.infobar.getLast_middle_section() != null && !caption.this_infobarGfx.infobar.getLast_middle_section().isEmpty()) {
+								processAnimation(Constants.FRONT, print_writers, "Anim_Infobar$Change_CenterInfo", "START");
+							}else {
+								processAnimation(Constants.FRONT, print_writers, "Anim_Infobar$Center_Full$In_Out", "START");
+							}
+						}
+						break;
+					case Constants.APL:
 						processAnimation(Constants.FRONT, print_writers, "Anim_Infobar$Change_CenterInfo", "START");
 						TimeUnit.MILLISECONDS.sleep(300);
 						processAnimation(Constants.FRONT, print_writers, "Anim_Infobar$Change_Sixes", "SHOW 0.0");
@@ -7430,6 +7440,7 @@ public class Animation
 			case "Alt_1":
 				switch (config.getBroadcaster().toUpperCase()) {
 				case Constants.NPL:
+					processAnimation(Constants.FRONT, print_writers, "Anim_Infobar$Change_Stage2", "SHOW 0.0");
 					break;
 				case Constants.MPL: case Constants.APL:
 					processAnimation(Constants.FRONT, print_writers, "anim_Infobar$Section3_Change", "SHOW 0.0");
@@ -7442,11 +7453,20 @@ public class Animation
 			case "Alt_2": case "Alt_3": case "Alt_4": case "Alt_5": case "Alt_6": case "Alt_9": case "Alt_0": case "Alt_c":
 				TimeUnit.MILLISECONDS.sleep(1000);
 				switch (config.getBroadcaster().toUpperCase()) {
-				case Constants.NPL: case Constants.MPL: case Constants.APL:
+				case Constants.NPL:
+					if(caption.this_infobarGfx.infobar.getMiddle_section().equalsIgnoreCase("BATSMAN")) {
+						caption.this_infobarGfx.infobar.setLast_middle_section("");
+					}else {
+						if(caption.this_infobarGfx.infobar.getLast_middle_section() != null) {
+							processAnimation(Constants.FRONT, print_writers, "Anim_Infobar$Change_CenterInfo", "SHOW 0.0");
+						}
+						caption.this_infobarGfx.infobar.setLast_middle_section(caption.this_infobarGfx.infobar.getMiddle_section());
+					}
+					break;
+				case Constants.MPL: case Constants.APL:
 					processAnimation(Constants.FRONT, print_writers, "Anim_Infobar$Change_CenterInfo", "SHOW 0.0");
 					break;
 				}
-				
 				break;
 			case "Alt_7":
 				switch (config.getBroadcaster().toUpperCase()) {
@@ -13084,6 +13104,7 @@ public class Animation
 				this.infobar.setRight_section_play(false);
 				this.infobar.setInfobar_status("");
 				infobar.setMiddle_section("");
+				infobar.setLast_middle_section("");
 				infobar.setFull_section("");
 				infobar.setRight_bottom("");
 				infobar.setRight_section("");
@@ -14854,7 +14875,7 @@ public class Animation
 							previewCommands = previewCommands + " Lower_Third$In_Out$In$Prize_Head 1.160";
 						}
 						switch(whatToProcess.split(",")[0]) {
-						case "Control_F6": case "Shift_F6": case "F6":
+						case "Control_F6": case "Shift_F6": case "F6": case "F8": case "Alt_F8":
 							previewCommands = previewCommands + " Sponsors_LT$In_Out$In 0.540";
 							break;
 						}

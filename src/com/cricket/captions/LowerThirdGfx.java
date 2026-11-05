@@ -4635,9 +4635,10 @@ public class LowerThirdGfx
 			surName = player.getSurname();
 		}
 		WhichProfile = whatToProcess.split(",")[3].toUpperCase();
+		
+		
 		switch (config.getBroadcaster().toUpperCase()) {
 		 case Constants.T20_MUMBAI:
-			 
 			 CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$gfx_NameSuper$TextAll$Name$Side" + WhichSide + "$Impact" 
 					 + "$select_Impact*FUNCTION*Omo*vis_con SET 0\0", print_writers);
 			 
@@ -4653,9 +4654,18 @@ public class LowerThirdGfx
 			break;
 		}
 		
-		lowerThird = new LowerThird(player.getFull_name(), player.getFirstname(), surName, team.getTeamName1(),
-				team.getTeamName4(), "", 1, "",team.getTeamBadge(),
-				null,null,new String[]{WhichProfile},null,null);
+		switch (config.getBroadcaster().toUpperCase()) {
+		case Constants.NPL:
+			lowerThird = new LowerThird(player.getFull_name(), player.getFirstname(), surName, team.getTeamName1(),
+					team.getTeamName4(), "", 1, (WhichProfile.equalsIgnoreCase("Platinum") || 
+					WhichProfile.equalsIgnoreCase("Golden")?WhichProfile:""), team.getTeamBadge(), 
+					null,null,new String[]{WhichProfile},null,null);
+			break;
+		default:
+			lowerThird = new LowerThird(player.getFull_name(), player.getFirstname(), surName, team.getTeamName1(),
+					team.getTeamName4(), "", 1, "",team.getTeamBadge(),null,null,new String[]{WhichProfile},null,null);
+			break;
+		}
 		
 		status = PopulateL3rdHeader(whatToProcess.split(",")[0],WhichSide);
 		if(status == Constants.OK) {
@@ -8504,23 +8514,13 @@ public class LowerThirdGfx
 					stat = CricketFunctions.updateTournamentWithH2h(stat, headToHead, matchAllData, CricketUtil.TEAMNAME_3);
 					stat = CricketFunctions.updateStatisticsWithMatchData(stat, matchAllData, CricketUtil.TEAMNAME_3);
 					break;
-//				case "DT20":
-//					statsType = statsTypes.stream().filter(st -> st.getStatsShortName().equalsIgnoreCase("DT20")).findAny().orElse(null);
-//					if(statsType == null) {
-//						return "InfoBarPlayerProfile: Stats Type not found for profile [" + WhichProfile + "]";
-//					}
-//					
-//					stat = statistics.stream().filter(st -> st.getPlayerID() == FirstPlayerId && statsType.getStatsId() == st.getStatsTypeId()).findAny().orElse(null);
-//					if(stat == null) {
-//						return "InfoBarPlayerProfile: Stats not found for Player Id [" + FirstPlayerId + "]";
-//					}
-//					
-//					statsType = statsTypes.stream().filter(st -> st.getStatsShortName().equalsIgnoreCase("DT20")).findAny().orElse(null);
-//					stat.setStats_type(statsType);
-//					
-//					stat = CricketFunctions.updateTournamentWithH2h(stat, headToHead, matchAllData, CricketUtil.TEAMNAME_3);
-//					stat = CricketFunctions.updateStatisticsWithMatchData(stat, matchAllData, CricketUtil.TEAMNAME_3);
-//					break;
+				case "DT20":
+					statsType = statsTypes.stream().filter(st -> st.getStatsShortName().equalsIgnoreCase("DT20")).findAny().orElse(null);
+					stat.setStats_type(statsType);
+					
+					stat = CricketFunctions.updateTournamentWithH2h(stat, headToHead, matchAllData, CricketUtil.TEAMNAME_3);
+					stat = CricketFunctions.updateStatisticsWithMatchData(stat, matchAllData, CricketUtil.TEAMNAME_3);
+					break;
 				}
 				break;
 			case Constants.AFG_T20:
@@ -9658,6 +9658,25 @@ public class LowerThirdGfx
 						+ "*TEXTURE*IMAGE SET " + Constants.NPL_SPONSOR_PATH + "RED_BULL" + "\0", print_writers);
 				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Sponsors_LT$Side"+ WhichSide + "$LT$Select_Sponsor"
 						+ "*FUNCTION*Omo*vis_con SET 3\0", print_writers);
+				break;
+			case "F8": case "Alt_F8":
+				switch(lowerThird.getWhichSponsor()) {
+				case "PLATINUM": case "GOLDEN":
+					if(lowerThird.getWhichSponsor().equalsIgnoreCase("PLATINUM")) {
+						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Sponsors_LT$Side" + WhichSide + "$LT$ILU$Image"
+								+ "*TEXTURE*IMAGE SET " + Constants.NPL_SPONSOR_PATH + "Neofin02" + "\0", print_writers);
+					}else if(lowerThird.getWhichSponsor().equalsIgnoreCase("GOLDEN")) {
+						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Sponsors_LT$Side" + WhichSide + "$LT$ILU$Image"
+								+ "*TEXTURE*IMAGE SET " + Constants.NPL_SPONSOR_PATH + "Arya" + "\0", print_writers);
+					}
+					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Sponsors_LT$Side"+ WhichSide + "$LT$Select_Sponsor"
+							+ "*FUNCTION*Omo*vis_con SET 3\0", print_writers);
+					break;
+				default:
+					CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Sponsors_LT$Side"+ WhichSide + "$LT$Select_Sponsor"
+							+ "*FUNCTION*Omo*vis_con SET 0\0", print_writers);
+					break;
+				}
 				break;
 			default:
 				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Sponsors_LT$Side"+ WhichSide + "$LT$Select_Sponsor"
@@ -11462,7 +11481,6 @@ public class LowerThirdGfx
 							+ "*FUNCTION*Omo*vis_con SET 0\0", print_writers);
 					
 					if(lowerThird.getWhichTeamFlag() != null) {
-						
 						switch (config.getBroadcaster().toUpperCase()) {
 						case Constants.NPL: case Constants.APL:
 							logo_data = (config.getBroadcaster().equalsIgnoreCase(Constants.APL)?Constants.APL_LOGO_PATH:Constants.NPL_LOGO_PATH);
@@ -18637,6 +18655,12 @@ public class LowerThirdGfx
 					}else if(lowerThird.getLeftText()[0].equalsIgnoreCase("Team")) {
 						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$LowerThird$Data_Grp$Bottom_Grp$Side" + WhichSide 
 								+ "$FreeText_Small$txt_Info*GEOM*TEXT SET " + lowerThird.getSubTitle() + "\0", print_writers);
+					}else if(lowerThird.getLeftText()[0].equalsIgnoreCase("Platinum")) {
+						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$LowerThird$Data_Grp$Bottom_Grp$Side" + WhichSide 
+								+ "$FreeText_Small$txt_Info*GEOM*TEXT SET " + "NEOFIN PLATINUM CAP - MOST RUNS" + "\0", print_writers);
+					}else if(lowerThird.getLeftText()[0].equalsIgnoreCase("Golden")) {
+						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$LowerThird$Data_Grp$Bottom_Grp$Side" + WhichSide 
+								+ "$FreeText_Small$txt_Info*GEOM*TEXT SET " + "ARYA PHARMA GOLDEN CAP - MOST WICKETS" + "\0", print_writers);
 					}else {
 						CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$LowerThird$Data_Grp$Bottom_Grp$Side" + WhichSide 
 								+ "$FreeText_Small$txt_Info*GEOM*TEXT SET " + lowerThird.getLeftText()[0].toUpperCase() + "\0", print_writers);

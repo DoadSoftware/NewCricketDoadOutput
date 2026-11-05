@@ -3362,7 +3362,63 @@ function addItemsToList(whatToProcess,dataToProcess)
 				setDropdownOptionToSelectOptionArray($(select),0);
 				cellCount = cellCount + 1;
 				break;
-			case 'MPL': case 'NPL': case 'APL': 
+			case 'NPL':
+				select = document.createElement('select');
+				select.id = 'selectMiddleStat';
+				select.name = select.id;
+
+				option = document.createElement('option');
+				option.value = 'BATSMAN';
+				option.text = 'Batsman/Bowler';
+				select.appendChild(option);
+
+				select.setAttribute('onchange',"setDropdownOptionToSelectOptionArray(this, 0)");
+				row.insertCell(cellCount).appendChild(select);
+				setDropdownOptionToSelectOptionArray($(select),0);
+				cellCount = cellCount + 1;
+				
+				select = document.createElement('select');
+				select.id = 'selectLeftBottom';
+				select.name = select.id;
+
+				session_match.match.inning.forEach(function(inn,index,arr){
+					if(inn.isCurrentInning == 'YES'){
+						if(inn.inningNumber == 1){
+							option = document.createElement('option');
+							option.value = 'TOSS';
+							option.text = 'TOSS';
+							select.appendChild(option);
+						}
+						else{
+							option = document.createElement('option');
+							option.value = 'TARGET';
+							option.text = 'TARGET';
+							select.appendChild(option);	
+							
+							option = document.createElement('option');
+							option.value = 'EQUATION';
+							option.text = 'EQUATION';
+							select.appendChild(option);
+						}
+					}
+				});		
+
+				option = document.createElement('option');
+				option.value = 'CURR_PARTNERSHIP';
+				option.text = 'Current Partnership';
+				select.appendChild(option);
+				
+				option = document.createElement('option');
+				option.value = 'SUPER_OVER';
+				option.text = 'Super Over';
+				select.appendChild(option);
+				
+				select.setAttribute('onchange',"setDropdownOptionToSelectOptionArray(this, 1)");
+				row.insertCell(cellCount).appendChild(select);
+				setDropdownOptionToSelectOptionArray($(select),1);
+				cellCount = cellCount + 1;
+				break;
+			case 'MPL': case 'APL': 
 				select = document.createElement('select');
 				select.id = 'selectMiddleStat';
 				select.name = select.id;
@@ -3612,24 +3668,55 @@ function addItemsToList(whatToProcess,dataToProcess)
 		break;
 		case 'Alt_1':
 			switch($('#selected_broadcaster').val().toUpperCase()){
-				/*case 'NPL':
-					header_text.innerHTML = 'INFOBAR TOP';
+				case 'NPL':
+					header_text.innerHTML = 'INFOBAR Batsman Right Section';
 	
 					select = document.createElement('select');
 					select.id = 'selectMiddleStat';
 					select.name = select.id;
-	
+					
+					session_match.match.inning.forEach(function(inn,index,arr){
+						if(inn.isCurrentInning == 'YES'){
+							if(inn.inningNumber == 1){
+								option = document.createElement('option');
+								option.value = 'TOSS';
+								option.text = 'TOSS';
+								select.appendChild(option);
+							}
+							else{
+								option = document.createElement('option');
+								option.value = 'TARGET';
+								option.text = 'TARGET';
+								select.appendChild(option);	
+								
+								option = document.createElement('option');
+								option.value = 'EQUATION';
+								option.text = 'EQUATION';
+								select.appendChild(option);
+								
+								option = document.createElement('option');
+								option.value = 'RRR';
+								option.text = 'Req. Run Rate';
+								select.appendChild(option);
+							}
+						}
+					});		
+					
 					option = document.createElement('option');
-					option.value = 'BLANK';
-					option.text = 'OUT TOP SECTION';
+					option.value = 'CURR_PARTNERSHIP';
+					option.text = 'Current Partnership';
 					select.appendChild(option);
-	
+					
 					option = document.createElement('option');
-					option.value = 'EQUATION';
-					option.text = 'EQUATION';
+					option.value = 'CRR';
+					option.text = 'Current Run Rate';
 					select.appendChild(option);
-												
-					break;*/
+					
+					option = document.createElement('option');
+					option.value = 'SUPER_OVER';
+					option.text = 'Super Over';
+					select.appendChild(option);				
+					break;
 				case 'T20_MUMBAI':
 					header_text.innerHTML = 'INFOBAR LEFT';
 					
@@ -4674,10 +4761,19 @@ function addItemsToList(whatToProcess,dataToProcess)
 								
 							}
 							else{
-								option = document.createElement('option');
-								option.value = 'EQUATION';
-								option.text = 'Equation';
-								select.appendChild(option);
+								switch($('#selected_broadcaster').val().toUpperCase()){
+								case 'MPL': case 'LEGENDS-90': case 'APL': 
+									option = document.createElement('option');
+									option.value = 'EQUATION';
+									option.text = 'Equation';
+									select.appendChild(option);
+									
+									option = document.createElement('option');
+									option.value = 'TARGET';
+									option.text = 'Target';
+									select.appendChild(option);
+									break;
+								}
 								
 								option = document.createElement('option');
 								option.value = 'RRR';
@@ -4689,11 +4785,6 @@ function addItemsToList(whatToProcess,dataToProcess)
 								option.text = 'Current and Required Run Rate';
 								select.appendChild(option);
 					
-								option = document.createElement('option');
-								option.value = 'TARGET';
-								option.text = 'Target';
-								select.appendChild(option);
-								
 								option = document.createElement('option');
 								option.value = 'RESULT';
 								option.text = 'Result';
@@ -8114,6 +8205,24 @@ function addItemsToList(whatToProcess,dataToProcess)
 			setDropdownOptionToSelectOptionArray($(select),0);
 			cellCount = cellCount + 1
 			
+			select = document.createElement('select');
+			select.id = 'selectPhoto';
+			select.name = select.id;
+
+			option = document.createElement('option');
+			option.value = 'withoutphoto';
+			option.text = 'WITHOUT PHOTO';
+			select.appendChild(option);
+
+			option = document.createElement('option');
+			option.value = 'withphoto';
+			option.text = 'WITH PHOTO';
+			select.appendChild(option);
+
+			select.setAttribute('onchange',"setDropdownOptionToSelectOptionArray(this, 2)");
+			row.insertCell(cellCount).appendChild(select);
+			setDropdownOptionToSelectOptionArray($(select),2);
+			cellCount = cellCount + 1;
 			break;
 		
 		case 'z': case 'x': case 'c': case 'v': case 'Control_z': case 'Control_x': case 'Control_c': case 'Control_v': case 'Control_Shift_Z': case 'Control_Shift_Y':
@@ -8235,7 +8344,7 @@ function addItemsToList(whatToProcess,dataToProcess)
 					cellCount = cellCount + 1
 				
 					switch($('#selected_broadcaster').val().toUpperCase()){
-						case 'ICC-U19-2023': case 'NPL':  case 'MPL': case 'APL':
+						case 'ICC-U19-2023': case 'MPL': case 'APL':
 							select = document.createElement('select');
 							select.id = 'selectType';
 							select.name = select.id;
@@ -8328,7 +8437,7 @@ function addItemsToList(whatToProcess,dataToProcess)
 			}
 			
 			switch($('#selected_broadcaster').val().toUpperCase()){
-				case 'BENGAL-T20': case 'AFG-T20': case 'ODISHA':
+				case 'BENGAL-T20': case 'AFG-T20': case 'ODISHA': case 'NPL':
 					select = document.createElement('select');
 					select.id = 'selectPhoto';
 					select.name = select.id;
@@ -10407,6 +10516,16 @@ function addItemsToList(whatToProcess,dataToProcess)
 			select.appendChild(option);
 			
 			option = document.createElement('option');
+			option.value = 'Platinum';
+			option.text = 'Platinum Cap';
+			select.appendChild(option);
+
+			option = document.createElement('option');
+			option.value = 'Golden';
+			option.text = 'Golden Cap';
+			select.appendChild(option);
+			
+			option = document.createElement('option');
 			option.value = 'Player Of The Match';
 			option.text = 'Player Of The Match';
 			select.appendChild(option);
@@ -10475,6 +10594,7 @@ function addItemsToList(whatToProcess,dataToProcess)
 			row.insertCell(cellCount).appendChild(select);
 			setDropdownOptionToSelectOptionArray($(select),1);
 			cellCount = cellCount + 1;
+			
 			break;
 		case 'F10': case 'j': //NameSuperDB
 			switch(whatToProcess){
