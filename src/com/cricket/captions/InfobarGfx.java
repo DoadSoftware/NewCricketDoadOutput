@@ -15569,6 +15569,16 @@ public class InfobarGfx
 				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Infobar$Right$Stage2$Side" + WhichSide + "$Target_Full$txt_Target*GEOM*TEXT SET " 
 					+ CricketFunctions.GetTargetData(matchAllData).getTargetRuns() + "\0", print_writers);
 				break;
+			case "TOURNAMENT":
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Infobar$Right$Stage2$Side" + WhichSide + "$Select_Type*FUNCTION*Omo*vis_con SET 0 \0",print_writers);
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Infobar$Right$Stage2$Side" + WhichSide + "$Free_Text_Wide$txt_LongString*GEOM*TEXT SET " 
+					+ matchAllData.getSetup().getTournament() + "\0", print_writers);
+				break;
+			case "MATCH_IDENT":
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Infobar$Right$Stage2$Side" + WhichSide + "$Select_Type*FUNCTION*Omo*vis_con SET 0 \0",print_writers);
+				CricketFunctions.DoadWriteCommandToAllViz("-1 RENDERER*FRONT_LAYER*TREE*$Infobar$Right$Stage2$Side" + WhichSide + "$Free_Text_Wide$txt_LongString*GEOM*TEXT SET " 
+					+ matchAllData.getSetup().getMatchIdent() + "\0", print_writers);
+				break;
 			case "CURR_PARTNERSHIP":
 				inning = matchAllData.getMatch().getInning().stream().filter(inn -> inn.getIsCurrentInning().equalsIgnoreCase(CricketUtil.YES)).findAny().orElse(null);
 		

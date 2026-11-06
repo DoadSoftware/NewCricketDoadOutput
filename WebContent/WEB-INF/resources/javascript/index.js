@@ -3700,7 +3700,17 @@ function addItemsToList(whatToProcess,dataToProcess)
 								select.appendChild(option);
 							}
 						}
-					});		
+					});
+					
+					option = document.createElement('option');
+					option.value = 'TOURNAMENT';
+					option.text = 'Tournament Name';
+					select.appendChild(option);
+					
+					option = document.createElement('option');
+					option.value = 'MATCH_IDENT';
+					option.text = 'Match Ident';
+					select.appendChild(option);
 					
 					option = document.createElement('option');
 					option.value = 'CURR_PARTNERSHIP';
